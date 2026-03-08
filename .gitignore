@@ -1,0 +1,17 @@
+# Ren'Py output
+**/*.rpyc
+**/*.rpa
+**/*.apk
+**/*.exe
+**/*.ipa
+**/saves/
+**/log.txt
+**/errors.txt
+**/traceback.txt
+**/*.pyc
+**/*.pyo
+__pycache__/
+
+# OS generated files
+.DS_Store
+Thumbs.db
