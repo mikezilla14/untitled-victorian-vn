@@ -11,9 +11,9 @@ Navigate the treacherous balance of your duties, the curiosity surrounding the e
 ## Features
 
 - **Resource Management & Stats**: Balance three core statistics throughout your playthrough:
-  - **Inspiration**: Needed to write your chapters.
-  - **Corruption**: Dictates the boldness and explicitness of your writing and actions.
-  - **Suspicion**: Keep this low! High suspicion risks discovery and dismissal from the hotel.
+  - **Inspiration**: A currency collected through actions and spent to write your chapters. There is no upper limit.
+  - **Corruption**: Earned as Experience Points (XP) during interactions. Accumulate XP to increase your Corruption Level, opening up bolder and more explicit choices.
+  - **Suspicion**: A meter between 0-100. It increases based on risky actions but decays naturally over time.
 - **Narrative Choices**: Your actions during your shifts and off-hours determine your success as a writer and your survival as a maid. Will you play it safe, or embrace the risk for better material?
 - **Multiple Endings**: Experience different outcomes based on your level of corruption, suspicion, and the choices you make.
 

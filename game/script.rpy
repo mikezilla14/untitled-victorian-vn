@@ -16,7 +16,8 @@ default current_day = 1
 default time_of_day = "Morning"
 
 # The three stats
-default corruption = 0
+default corruption_level = 1
+default corruption_xp = 0
 default inspiration = 0
 default suspicion = 0
 
@@ -42,18 +43,25 @@ screen stats_overlay():
         vbox:
             text "Day [current_day] — [time_of_day]" size 16 color "#ffcc00"
             text "Inspiration: [inspiration]" size 14 color "#4fc3f7"
-            text "Corruption: [corruption]" size 14 color "#ef5350"
-            text "Suspicion: [suspicion]" size 14 color "#ffa726"
+            text "Corruption: Lvl [corruption_level] ([corruption_xp] XP)" size 14 color "#ef5350"
+            text "Suspicion: [suspicion]%" size 14 color "#ffa726"
 
 # ── 4. HELPER FUNCTIONS (Python Block) ──────────────────────────
 init python:
-    def clamp_stats():
+    def update_stats():
         # Declare globals so Python knows to modify your Ren'Py variables
-        global suspicion, corruption, inspiration 
+                global suspicion, corruption_level, corruption_xp, inspiration 
         
+        # Natural decay of suspicion each period
+        suspicion -= 5
         suspicion = max(0, min(100, suspicion))
-        corruption = max(0, min(100, corruption))
-        inspiration = max(0, min(100, inspiration))
+        corruption_xp = max(0, corruption_xp)
+        
+        # Level up logic: 20 XP per level
+        while corruption_xp >= 20:
+            corruption_xp -= 20
+            corruption_level += 1
+        inspiration = max(0, inspiration)
 
 # ── 5. HELPER LABELS ──────────────────────────────────────────
 
@@ -157,7 +165,7 @@ label day1_late_night:
 
     cora "I blow out the candle."
 
-    $ clamp_stats()
+    $ update_stats()
     jump day2_morning
 
 
@@ -208,7 +216,7 @@ label day2_morning:
             cora "One letter mentioned a 'midnight arrangement' and 'the usual discretion.'"
             cora "My pulse was racing when I left the room. Not from fear. From something far more dangerous — curiosity."
 
-    $ clamp_stats()
+    $ update_stats()
     call check_suspicion
     jump day2_night
 
@@ -222,13 +230,13 @@ label day2_night:
         "My shift is over. The gas lamps are dimmed in the servant's corridor."
 
         "Stay in my quarters and write a letter home (Pure)":
-            $ corruption -= 5
+            $ corruption_xp -= 5
             cora "I sat at my desk and wrote to my mother. Told her the hotel was grand, the work honest, and Miss Stern fair. All of it lies, except the first."
             cora "I told her I was saving well. That was true, at least."
             cora "The blank manuscript page stared at me from under the letter. I ignored it."
 
         "Explore the hidden servant's passage (Scandalous)" if not read_letters:
-            $ corruption += 10
+            $ corruption_xp += 10
             $ inspiration += 15
             $ suspicion += 10
             cora "The Savoy was built with hidden corridors behind every wall — passages for the staff to move without being seen by guests. Tonight, I moved through them for a different reason."
@@ -236,14 +244,14 @@ label day2_night:
             cora "I saw nothing. But I heard enough to know that Sir Gideon Locke's evenings are not spent reading Keats."
 
         "Sneak to the servant's passage — I know where to listen (Scandalous)" if read_letters:
-            $ corruption += 10
+            $ corruption_xp += 10
             $ inspiration += 20
             $ suspicion += 10
             cora "The letters mentioned a midnight arrangement. The servant's passage runs directly behind the VIP suites."
             cora "I pressed my ear to the wall. The voices were muffled but unmistakable. A woman. Sir Gideon. Laughter, then silence, then sounds I had only ever read about in the penny dreadfuls."
             cora "My face burned in the dark corridor. My mind was already composing sentences."
 
-    $ clamp_stats()
+    $ update_stats()
     call check_suspicion
     jump day2_late_night
 
@@ -272,7 +280,7 @@ label day2_late_night:
         "Blow out the candle and sleep":
             cora "I'm too exhausted. The writing can wait. It has to."
 
-    $ clamp_stats()
+    $ update_stats()
     call check_suspicion
     jump day3_morning
 
@@ -321,7 +329,7 @@ label day3_morning:
             cora "A name. An address in Mayfair. And the words: 'She will be here Thursday. Prepare the adjoining suite.'"
             cora "Thursday is tomorrow."
 
-    $ clamp_stats()
+    $ update_stats()
     call check_suspicion
     jump day3_night
 
@@ -334,14 +342,14 @@ label day3_night:
     menu:
         "The hotel is silent. The gas lamps cast long shadows down the servant's passage."
 
-        "Stay in my quarters tonight (Pure)" if corruption < 30:
-            $ corruption -= 5
+        "Stay in my quarters tonight (Pure)" if corruption_level < 2:
+            $ corruption_xp -= 5
             cora "I can't keep doing this. The risk is too great. If Miss Stern catches me in that corridor..."
             cora "I sat on my bed and stared at the ceiling and tried not to think about the sounds I heard two nights ago."
             cora "I failed."
 
         "Return to the servant's passage (The Voyeur Scene)":
-            $ corruption += 15
+            $ corruption_xp += 15
             $ inspiration += 25
             $ suspicion += 15
             $ saw_voyeur_scene = True
@@ -362,7 +370,7 @@ label day3_night:
 
             cora "My mind was already writing the scene. Every detail. Every sound. Every shadow."
 
-    $ clamp_stats()
+    $ update_stats()
     call check_suspicion
     jump day3_late_night
 
@@ -402,7 +410,7 @@ label day3_late_night:
         cora "I sat at the desk. The candle guttered. I wrote a few lines, crossed them out, wrote a few more."
         cora "It's not enough. I need more. I need to see what happens behind those walls."
 
-    $ clamp_stats()
+    $ update_stats()
     call check_suspicion
 
     # PAYMENT ARRIVES (if manuscript was sent)
@@ -471,11 +479,11 @@ label day4_morning:
         "Linger. Let the silence stretch. (Curious)":
             $ suspicion += 10
             $ inspiration += 10
-            $ corruption += 5
+            $ corruption_xp += 5
             cora "I stayed longer than I should have. Polishing brass that was already clean. He didn't speak again, but he watched me work."
             cora "Being watched by Sir Gideon felt different from being watched by Miss Stern. I'm not sure which is more dangerous."
 
-    $ clamp_stats()
+    $ update_stats()
     call check_suspicion
     jump day4_night
 
@@ -490,13 +498,13 @@ label day4_night:
     menu:
         "Tonight is my last chance to gather material before the deadline."
 
-        "Stay in my quarters. The risk is too great. (Pure)" if corruption < 30:
-            $ corruption -= 5
+        "Stay in my quarters. The risk is too great. (Pure)" if corruption_level < 2:
+            $ corruption_xp -= 5
             cora "I sat on my bed and listened to my own breathing. The pages on my desk felt like an accusation."
             cora "Safe. Invisible. Exactly what I was raised to be."
 
         "Return to the passage — spy from a distance (Risky)":
-            $ corruption += 10
+            $ corruption_xp += 10
             $ inspiration += 20
             $ suspicion += 20
             cora "I crept back to the grate. Tonight was different — more urgent, more reckless. Miss Stern's footsteps had passed this corridor not ten minutes ago."
@@ -504,7 +512,7 @@ label day4_night:
             cora "I saw every detail. My mind catalogued it all like a ruthless, mechanical thing."
 
         "Stay in the passage when I hear footsteps approaching (Bold)":
-            $ corruption += 25
+            $ corruption_xp += 25
             $ inspiration += 10
             $ suspicion += 25
             $ chose_bold_day4 = True
@@ -514,7 +522,7 @@ label day4_night:
             cora "But the thrill of almost being caught — the raw, animal terror of it — was unlike anything I have ever experienced."
             cora "I am no longer the same girl who arrived at this hotel."
 
-    $ clamp_stats()
+    $ update_stats()
     call check_suspicion
     jump day4_late_night
 
@@ -527,7 +535,7 @@ label day4_late_night:
     if inspiration >= 25:
         cora "I wrote the most explicit chapter yet."
 
-        if corruption >= 30:
+        if corruption_level >= 2:
             cora "My prose was sharper tonight. More confident. I didn't flinch at the words anymore. In fact, I chose them with precision — like a surgeon."
             cora "The naive girl who blushed at the word 'bosom' two days ago was gone. In her place sat a woman who understood that the body is just another landscape to describe."
         else:
@@ -542,7 +550,7 @@ label day4_late_night:
         cora "I tried to write but the material wasn't there. I need more inspiration — more life in these pages."
         cora "Time is running out."
 
-    $ clamp_stats()
+    $ update_stats()
     call check_suspicion
     jump day5_morning
 
@@ -588,7 +596,7 @@ label day5_morning:
             stern "See that your correspondence doesn't interfere with your duties."
             cora "She left. I almost vomited."
 
-    $ clamp_stats()
+    $ update_stats()
     call check_suspicion
     jump day5_night
 
@@ -600,7 +608,7 @@ label day5_night:
 
     cora "This is it. The deadline. The publisher on Holywell Street expects the final chapter by morning."
 
-    if corruption >= 40:
+    if corruption_level >= 3:
         cora "I sat at my desk. I dipped the nib in the ink."
 
         cora "And I wrote."
