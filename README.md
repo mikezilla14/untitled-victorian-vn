@@ -35,7 +35,7 @@ untitled-victorian-vn/
 │   ├── options.rpy        # Ren'Py project configuration
 │   ├── screens.rpy        # Custom UI screen definitions
 │   └── script.rpy         # Main narrative script and logic
-├── scripts/               # Utility scripts for development
-│   └── update_stats.py    # Python script used to refactor stat mechanics
+├── utilities/             # Utility scripts for development
+│   └── stats_refactor.py  # Python script used to refactor stat mechanics
 └── .gitignore             # Git ignore rules for Ren'Py
 ```
