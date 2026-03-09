@@ -21,3 +21,21 @@ Navigate the treacherous balance of your duties, the curiosity surrounding the e
 
 - Built using the **Ren'Py Visual Novel Engine**.
 - Current Status: MVP Gray-Box Skeleton v2.0
+
+## Repository Structure
+
+```text
+untitled-victorian-vn/
+├── game/                  # Core game logic and assets
+│   ├── audio/             # Sound effects and music
+│   ├── gui/               # UI graphics and assets
+│   ├── images/            # Character sprites and backgrounds
+│   ├── saves/             # Local save files (ignored in git)
+│   ├── gui.rpy            # UI configuration variables
+│   ├── options.rpy        # Ren'Py project configuration
+│   ├── screens.rpy        # Custom UI screen definitions
+│   └── script.rpy         # Main narrative script and logic
+├── scripts/               # Utility scripts for development
+│   └── update_stats.py    # Python script used to refactor stat mechanics
+└── .gitignore             # Git ignore rules for Ren'Py
+```
