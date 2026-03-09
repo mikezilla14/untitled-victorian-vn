@@ -1,17 +1,45 @@
-# Ren'Py output
+# Compiled scripts
 **/*.rpyc
+**/*.rpymc
+
+# Automatic backups
+**/*.rpyb
+
+# Archive files
 **/*.rpa
-**/*.apk
+
+# Build output / Distribution files
+**/*-source/
+**/*-dists/
+**/*-market/
 **/*.exe
+**/*.zip
+**/*.tar.bz2
+**/*.app/
+**/*.apk
 **/*.ipa
-**/saves/
+**/*.aab
+
+# Save games
+**/saves/*
+!**/saves/.keep
+
+# Ren'Py Logs and state
 **/log.txt
 **/errors.txt
 **/traceback.txt
+**/renpy_dev.log.*
+
+# Python caches
 **/*.pyc
 **/*.pyo
 __pycache__/
 
 # OS generated files
 .DS_Store
+.DS_Store?
+._*
+.Trashes
+ehthumbs.db
 Thumbs.db
+desktop.ini
