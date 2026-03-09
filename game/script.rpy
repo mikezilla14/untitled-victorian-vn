@@ -61,8 +61,9 @@ init python:
         while corruption_xp >= 20:
             corruption_xp -= 20
             corruption_level += 1
-        inspiration = max(0, inspiration)
-
+        # Inspiration cap scales with corruption level (Level 1 = 30 cap)
+        inspiration_cap = 20 + (corruption_level * 10)
+        inspiration = max(0, min(inspiration_cap, inspiration))
 # ── 5. HELPER LABELS ──────────────────────────────────────────
 
 label check_suspicion:

@@ -11,8 +11,8 @@ Navigate the treacherous balance of your duties, the curiosity surrounding the e
 ## Features
 
 - **Resource Management & Stats**: Balance three core statistics throughout your playthrough:
-  - **Inspiration**: A currency collected through actions and spent to write your chapters. There is no upper limit.
-  - **Corruption**: Earned as Experience Points (XP) during interactions. Accumulate XP to increase your Corruption Level, opening up bolder and more explicit choices.
+  - **Inspiration**: A currency collected through actions and spent to write your chapters. Your maximum Inspiration is capped based on your Corruption Level, preventing excessive grinding and encouraging narrative progression.
+  - **Corruption**: Earned as Experience Points (XP) during interactions. Accumulate XP to increase your Corruption Level, opening up bolder and more explicit choices, and raising your Inspiration cap.
   - **Suspicion**: A meter between 0-100. It increases based on risky actions but decays naturally over time.
 - **Narrative Choices**: Your actions during your shifts and off-hours determine your success as a writer and your survival as a maid. Will you play it safe, or embrace the risk for better material?
 - **Multiple Endings**: Experience different outcomes based on your level of corruption, suspicion, and the choices you make.
