@@ -5,5 +5,5 @@
         "**/*.rpymc": true,
         "**/cache/": true
     },
-    "renpyWarp.sdkPath": "c:/Users/mikez/AppData/Roaming/Antigravity/User/globalStorage/paisleysoftworks.renpywarp/file-downloader-downloads/8.5.2"
+    "renpyWarp.sdkPath": "c:\\Users\\mikez\\AppData\\Roaming\\Antigravity\\User\\globalStorage\\paisleysoftworks.renpywarp\\file-downloader-downloads\\8.5.2"
 }
