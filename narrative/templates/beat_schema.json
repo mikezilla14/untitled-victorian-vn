@@ -1,0 +1,63 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Narrative Beat Schema",
+    "type": "object",
+    "required": [
+        "beat_id",
+        "location",
+        "setup",
+        "choices",
+        "end_state"
+    ],
+    "properties": {
+        "beat_id": {
+            "type": "string"
+        },
+        "location": {
+            "type": "string"
+        },
+        "setup": {
+            "type": "string",
+            "description": "Scene description and dialogue leading up to the choice."
+        },
+        "choices": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+                "type": "object",
+                "required": [
+                    "choice_text",
+                    "consequence",
+                    "stat_changes"
+                ],
+                "properties": {
+                    "choice_text": {
+                        "type": "string"
+                    },
+                    "consequence": {
+                        "type": "string",
+                        "description": "What happens immediately after this choice."
+                    },
+                    "stat_changes": {
+                        "type": "object",
+                        "properties": {
+                            "Insp": {
+                                "type": "integer"
+                            },
+                            "Susp": {
+                                "type": "integer"
+                            },
+                            "Corr": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "end_state": {
+            "type": "string",
+            "description": "How the scene transitions to the next beat."
+        }
+    }
+}
