@@ -18,12 +18,16 @@ Navigate the treacherous balance of your duties, the curiosity surrounding the e
 
 ## Features
 
+- **Object-Oriented Architecture**: Game state, time management, and story flags are centralized using custom Python classes (`TimeManager`, `PlayerStats`, `StoryState`).
+- **Dynamic Character Assembly**: Characters utilize Ren'Py's `layeredimage` functionality to dynamically update their appearance based on their internal class properties.
+- **Pseudo-Sandbox Navigation**: Progress is driven by interactive UI screens and imagebuttons for a point-and-click feel within the hub.
+- **Choice Permanence**: Crucial storyline decisions invoke `renpy.block_rollback()`, enforcing consequences.
 - **Resource Management & Stats**: Three core statistics are tracked via a persistent HUD:
   - **Inspiration** — A spendable currency collected through actions and spent to write chapters. The cap scales with your Corruption Level (`20 + level × 10`), preventing grinding and encouraging narrative progression.
   - **Corruption** — Earned as XP during interactions (20 XP = 1 level). Higher levels unlock bolder choices, raise your Inspiration cap, and determine which ending you reach.
   - **Suspicion** — A risk/heat meter (0–100). Rises from risky choices and decays passively by 5 per time slot. Hitting 100 triggers an immediate game over.
-- **Day/Time System**: The story progresses through five days, each divided into time slots (Morning, Afternoon, Evening). The current day and period are always visible in the stat overlay.
-- **Narrative Flags**: Key story beats are tracked as one-way boolean flags (set once, never reset). These gate character moments and branching choices throughout the five days.
+- **Day/Time System**: The story progresses through five days, each divided into time slots (Morning, Afternoon, Evening). The current day and period are managed by the `TimeManager` and visible in the stat overlay.
+- **Narrative Flags**: Key story beats are tracked via `StoryState` booleans. These gate character moments and branching choices throughout the five days.
 - **Multiple Endings**: Your Corruption level and choices determine your fate. Currently implemented endings:
   - **Game Over — Dismissed Without Character**: Suspicion reaches 100. Cora is fired and left with nothing.
   - **Bad Ending — Rejection**: Corruption level too low by Day 5. Cora's manuscript is returned — "We asked for fire. You sent us porridge."
@@ -61,20 +65,22 @@ The story is split across five day files, loaded alphabetically by Ren'Py:
 ## Development
 
 - Built with **Ren'Py Visual Novel Engine**
-- Current status: **MVP Gray-Box Skeleton v2.0** — all five days scripted with placeholder prose, stat systems fully wired
+- Core Architecture: **Object-Oriented State Tracking** migrated from global variables to centralized Python classes.
+- Current status: **MVP Gray-Box Skeleton v2.0** — all five days scripted with placeholder prose, UI overrides fixed, and stat systems fully wired via singletons.
 - Publisher: **Holywell Street Studios** *(working title)*
 
 ## Repository Structure
 
 ```text
-untitled-victorian-vn/
+renpy_project/
 ├── game/                    # Core game logic and assets
 │   ├── audio/               # Sound effects and music
 │   ├── gui/                 # UI graphics and assets
 │   ├── images/              # Character sprites and backgrounds
 │   ├── saves/               # Local save files (git-ignored)
+│   ├── classes.rpy          # Object-Oriented Python classes (TimeManager, PlayerStats, StoryState)
 │   ├── characters.rpy       # All character definitions
-│   ├── variables.rpy        # All default game state (flags & stats)
+│   ├── variables.rpy        # Instantiates singleton objects for persistent state
 │   ├── functions.rpy        # Python-side game logic (stat helpers)
 │   ├── screens.rpy          # UI screen definitions (HUD overlay)
 │   ├── gui.rpy              # Ren'Py UI configuration variables

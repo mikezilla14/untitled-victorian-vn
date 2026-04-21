@@ -1,0 +1,50 @@
+# .guardrails.yml - Enforced by Gatekeeper Orchestrator
+agents:
+  - chief_architect
+  - lead_narrative_editor
+  - writers_room
+  - victorian_consultant
+  - code_agent
+  - gatekeeper_orchestrator
+
+domains:
+  canon_lore:
+    paths:
+      - docs/canon/**
+      - narrative/canon/**
+    mutable_by: [lead_narrative_editor, victorian_consultant, human]
+    agents_read: [all]
+    
+  framework_code:
+    paths:
+      - renpy_project/game/classes.rpy
+      - renpy_project/game/screens.rpy
+      - renpy_project/game/characters.rpy
+      - renpy_project/game/gui.rpy
+      - renpy_project/game/options.rpy
+      - docs/dev_bible.md
+      - docs/game_mechanics_bible.md
+    mutable_by: [chief_architect, human]
+    agents_read: [code_agent, gatekeeper_orchestrator]
+    
+  episodic_code:
+    paths:
+      - renpy_project/game/day*.rpy
+      - renpy_project/game/endings.rpy
+      - renpy_project/game/functions.rpy
+      - renpy_project/game/script.rpy
+    mutable_by: [code_agent, chief_architect, human]
+    agents_read: [code_agent, chief_architect, gatekeeper_orchestrator]
+    
+  production_narrative:
+    paths:
+      - narrative/writers_room/**
+    mutable_by: [writers_room, lead_narrative_editor, human]
+    agents_read: [all]
+    
+  speculative_sandbox:
+    paths:
+      - speculative/**
+    mutable_by: [writers_room, code_agent, human]
+    agents_read: [all]
+    notes: "No gatekeeping enforced here. Free exploration."

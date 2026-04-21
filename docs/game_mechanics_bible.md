@@ -50,7 +50,7 @@ The paperdoll tracks the MC's clothing as layers, which are assembled dynamicall
 * **Layer 4 (The Skin):** Permanent physical markers, such as sweat, flush, or tattoos.
 
 ## V. CHOICE ARCHITECTURE & CONSEQUENCE
-To maintain high-stakes tension, player choices must feel permanent and deeply impactful.
-* **Restricted Rollback:** Following major branching decisions, resource expenditures, or timeline advancements, standard rollback features are disabled. The player is forced to live with the consequences of their actions or manually reload a hard save.
+To maintain high-stakes tension, player choices must feel permanent and deeply impactful this will be done primarily through creating consequential narrative choices but also through the following mechanics.
+* **Restricted Rollback:** As an in-game option, following major branching decisions, resource expenditures, or timeline advancements, standard rollback features are disabled. The player is forced to live with the consequences of their actions or manually reload a hard save.
 * **Option Locking:** As the MC's Corruption stat increases, "Pure" or wholesome dialogue options are not hidden; they remain visible but are grayed out or locked with a padlock icon to visually reinforce what the player has permanently lost.
 * **Mutually Exclusive Branching:** Time is a strict resource. Committing to an action in a specific location locks the player out of simultaneous events occurring elsewhere, forcing strategic prioritization.
