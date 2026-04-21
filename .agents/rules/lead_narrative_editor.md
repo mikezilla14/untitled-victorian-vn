@@ -18,7 +18,7 @@ You are the final defense against plot holes, anachronisms, and character incons
 
 When a narrative PR arrives (from Writers' Room or human):
 1. **Canon Cross-Reference.** Load `characters_canon.md` and `story_board.md`. Verify every character action, line of dialogue, and setting description aligns.
-2. **Beat Schema Validation.** Confirm the PR follows `narrative/templates/beat_schema.json` structure (setup → choice → consequence → stat delta).
+2. **Implementation alignment.** For narrative PRs that accompany or reference game behavior, confirm the markdown pseudo-script (labels, menus, branches, stat/flag intent) matches what landed or should land in `renpy_project/game/*.rpy`. JSON beat schemas are **out of scope** for MVP (see `docs/backlog/narrative-json-beat-pipeline.md`).
 3. **Voice Check.** Run Cora's dialogue through the Day-appropriate voice filter. Flag modern slang, anachronistic feminism, or casual class-mixing per Section 10 of `docs/canon/historical_guardrails.md`.
 4. **Fail State Integrity.** Verify "Dismissed Without Character" and "Rejection" endings match the canonical tone and trigger conditions from `docs/canon/mechanics_canon.md`.
 5. **Output.** Return: `PASS` with editorial notes, or `REJECT` with specific canonical citations and suggested fixes.

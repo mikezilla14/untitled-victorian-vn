@@ -2,57 +2,46 @@
 
 An AI-accelerated, adult pseudo-sandbox RPG visual novel set in a Victorian hotel. This project explores themes of dark gothic corruption, voyeurism, and the loss of purity, utilizing a dynamic "paper doll" visual state system.
 
-## Repository Architecture (Monorepo)
+## Repository architecture (monorepo)
 
-This repository is structured as a Monorepo to maintain all creative, technical, and developmental assets in a single location. It features strict access controls via AI agent guardrails to ensure narrative and code fidelity.
+* **`/docs`**: Studio and mechanics docs. **`docs/narrative_workflow.md`** describes the MVP narrative loop (pseudo-Ren’Py in markdown → implement in `renpy_project/`).
+* **`/docs/backlog`**: Deferred tooling (e.g. optional JSON beat schema), not required for MVP.
+* **`/narrative/writers_room`**: Draft pseudo-scripts, storyboards, and `*_non_canon.md` supporting material.
+* **`/narrative/canon`**: Promoted truth (Lead Narrative Editor), when used.
+* **`/scripts`**: **`historical_linter.py`** (retained) and **`gatekeeper.py`** (domain checks). No beat-JSON pipeline in MVP.
+* **`/.agents`**: AI role rules.
+* **`/art_pipeline`**: Asset tooling (when present).
+* **`/renpy_project`**: The playable game — **core MVP deliverable**.
 
-* **`/docs`**: Production and architecture documentation. Contains the Game Dev Bible, Game Mechanics Bible.
-* **`/narrative/writers_room`**: The rapid-prototyping drafting sandbox. Contains all `*_non_canon.md` episodic drafts, storyboards, and character profiles. Iterative AI generation happens here.
-* **`/narrative/canon`**: The immutable truth folder. Only rigorously validated, canonical files reside here. Files are promoted into this directory by the Lead Narrative Editor only.
-* **`/scripts`**: Python-based CI/CD tooling used for custom linting and validation of narrative schemas. 
-* **`/.agents`**: The behavioral rules logic outlining the personas and strict functions of the AI development team.
-* **`/art_pipeline`**: Asset generation tools (ComfyUI workflows, Stable Diffusion prompts).
-* **`/renpy_project`**: The actual playable game. Contains the standard Ren'Py structure (`classes.rpy`, `screens.rpy`, episodic scripts).
+## Tech stack
 
-## Tech Stack & Tools
+* **Game engine**: Ren'Py (v8+)
+* **Version control**: Git / GitHub
 
-* **Game Engine**: Ren'Py (v8+ for Python 3 support)
-* **IDE**: Anti-gravity / Cursor / VSCode
-* **AI Art Generation**: Stable Diffusion (ComfyUI) using Pony Diffusion V6 XL
-* **Version Control**: Git / GitHub
+## AI roles (short)
 
----
+* **Code agent**: Implements pseudo-scripts as real `.rpy` under guardrails.
+* **Chief architect**: Enforces Ren’Py methodology and reviews code PRs.
+* **Writers' room / you**: Produce markdown pseudo-scripts and design intent.
+* **Victorian consultant / historical linter**: Era-appropriate language checks on writers’ room markdown in CI.
 
-## The AI Agent Framework & Guardrails
+## Narrative → game workflow (MVP)
 
-This project utilizes designated AI agent roles governed by explicit permissions enforced in **`.guardrails.yml`**. Agents are strictly prohibited from touching files outside their domains.
+1. Write a **pseudo Ren’Py script** in markdown (`narrative/writers_room/`).
+2. CI runs **`scripts/historical_linter.py`** on changed `narrative/writers_room/*.md`.
+3. Work with the **coding agent** to land behavior in **`renpy_project/game/`**.
+4. **Chief architect** validates structure and practice on code changes.
 
-1. **Gatekeeper Orchestrator**: Enforces security policies and blocks unauthorized PRs.
-2. **Chief Architect**: The technical gatekeeper. Designs class architecture and ensures Ren'Py code does not leak global states. Restricted to `framework_code` and `episodic_code`.
-3. **Lead Narrative Editor**: The lore gatekeeper. Promotes drafts out of the Writers' Room into Canon. Owns the `canon_lore` domain.
-4. **Writers' Room**: The creative engine. Generates continuous narrative drafts and ideas. Restricted to the `production_narrative` and `speculative_sandbox`.
-5. **Victorian Consultant**: The historical continuity verifier. Flags anachronistic dialogue and dialect issues.
-6. **Code Agent**: Implements validated rules directly into the Ren'Py logic.
+Details: **`docs/narrative_workflow.md`**.
 
-## Narrative Generation & Promotion Pipeline
+## CI
 
-We use a formalized schema to ensure continuous generation remains tight, playable, and highly structured on a granular mechanical level. 
-
-### 1. Authoring in the Writers' Room
-Episodic sequences (Days) are written into discrete files (e.g. `day1_non_canon.md`). All player choices within the game must follow **`narrative/templates/beat_schema.json`**, ensuring that dialogue strictly tracks inline mechanic adjustments (e.g. `[+10 Corruption]`). Variables, choices, and aesthetic requirements are aggregated manually in `story_board.md`.
-
-### 2. Validation & Linting
-Before any file is considered for promotion, the following strict CI scripts are run locally:
-* **Historical Linter** (`historical_linter.py`): Parses markdown to catch forbidden modern terminology (e.g. "okay", "teenager") as defined in `voice_guide.md`.
-* **Beat Validator** (`validate_beats.py`): Extracts embedded JSON schemas in narrative files to verify minimum branching configurations and exact mechanic alignments.
-
-### 3. Canon Promotion
-Once a draft clears linting and the Lead Narrative Editor verifies tone consistency against `canon_lore`, the file is converted into `dayX_canon.md` and moved to `/narrative/canon/`. It becomes permanently immutable without human oversight.
+GitHub Actions (`.github/workflows/gatekeeper.yml`): domain gatekeeper + historical linter on writers’ room markdown. No JSON beat validation.
 
 ---
 
-## Development Philosophy & Scoping
+## Development philosophy & scoping
 
-* **Agentic AI Context**: By structuring the workspace logically, AI assistants rapidly ingest contextual documentation to generate functional logic without unprompted hallucinations.
-* **Consistency > Quality**: The art pipeline prioritizes fixed seeds, control networks, and layer-based "Paperdoll" combinations over isolated generation to maintain narrative immersion. 
-* **The "Rule of 3" Scope Cap**: To ensure rapid episodic releases, each module is strictly capped at 3 primary characters, 6 primary backgrounds, and 5 highly-polished event CGs.
+* **Agentic context**: Clear folders so assistants load the right docs.
+* **Consistency > Quality** for art pipeline where applicable.
+* **Rule of 3 scope cap**: 3 primary characters, 6 backgrounds, 5 polished CGs per module guideline.

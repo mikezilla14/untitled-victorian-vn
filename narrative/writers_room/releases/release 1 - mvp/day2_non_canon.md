@@ -15,35 +15,6 @@
 
 > *Cora sits at her desk, staring at a blank page. The events of the previous evening swirl in her mind—Missy's flushed face, the intimate glimpse of Sir Gideon's undeniable authority—yet the ink remains trapped in the pen. She is missing the narrative thread that elevates common smut into something Mr. Holywell will purchase.*
 
-```json
-{
-  "beat_id": "2-01",
-  "location": "interior/coras_room_morning",
-  "setup": "Cora struggles to find the inciting spark for her manuscript, reflecting on the events that brought her to the Savoy.",
-  "choices": [
-    {
-      "choice_text": "Lean into the memory of Missy's innocent fascination.",
-      "consequence": "Cora finds herself intrigued by the corruption of the pure, drawing dark inspiration.",
-      "stat_changes": {
-        "Insp": 10,
-        "Susp": 0,
-        "Corr": 10
-      }
-    },
-    {
-      "choice_text": "Focus on the raw power dynamic witnessed in the upper suite.",
-      "consequence": "Cora channels the memory of absolute authority into a sharper, more dominant prose style.",
-      "stat_changes": {
-        "Insp": 15,
-        "Susp": 0,
-        "Corr": 5
-      }
-    }
-  ],
-  "end_state": "The writing session is abruptly interrupted by a sharp knock at the door."
-}
-```
-
 ---
 
 **[choice] — "Where does her mind wander?"**
@@ -133,35 +104,6 @@ CORA (internal) "I suppose I am a thief. How very scandalous."
 STERN "The lady in the master suite requires assistance tracing a misplaced article. Frankly, I will not subject Missy to another tirade. Will you attend to it, Miss Hartley, or shall I send Ellen?"
 ```
 
-```json
-{
-  "beat_id": "2-04",
-  "location": "interior/servants_laundry_afternoon",
-  "setup": "Ms. Stern asks for a volunteer to face Ms. Vance's lingering wrath. Cora secretly holds the missing item.",
-  "choices": [
-    {
-      "choice_text": "Volunteer to attend to Ms. Vance.",
-      "consequence": "Cora puts herself in the center of the conflict, bringing the stolen item with her.",
-      "stat_changes": {
-        "Insp": 10,
-        "Susp": 10,
-        "Corr": 5
-      }
-    },
-    {
-      "choice_text": "Allow Ellen to face the wrath.",
-      "consequence": "Cora remains safely in the laundry, missing a crucial encounter but lowering her risk.",
-      "stat_changes": {
-        "Insp": 0,
-        "Susp": -5,
-        "Corr": 0
-      }
-    }
-  ],
-  "end_state": "The path branches based on whether Cora enters the suite or avoids it."
-}
-```
-
 ---
 
 **[choice] — "Does Cora step into the fire?"**
@@ -195,35 +137,6 @@ VANCE "You. You were the one pawing through my quarters yesterday. I know you hi
 ```
 
 > *The item is in Cora's possession. She can resolve this, but the method carries immense risk.*
-
-```json
-{
-  "beat_id": "2-05",
-  "location": "interior/master_suite_afternoon",
-  "setup": "Cora must decide how to 'find' the missing knickers without fully exposing her own theft.",
-  "choices": [
-    {
-      "choice_text": "Produce it from her own person, feigning innocence.",
-      "consequence": "Vance recognizes the impossibility and becomes enraged, but Cora maintains the facade.",
-      "stat_changes": {
-        "Insp": 5,
-        "Susp": 20,
-        "Corr": 15
-      }
-    },
-    {
-      "choice_text": "'Discover' it hidden in the back of the wardrobe.",
-      "consequence": "Cora pretends it was misplaced by another maid, humiliating Vance further.",
-      "stat_changes": {
-        "Insp": 15,
-        "Susp": 5,
-        "Corr": 10
-      }
-    }
-  ],
-  "end_state": "Sir Gideon intervenes to silence Vance's outburst."
-}
-```
 
 ---
 

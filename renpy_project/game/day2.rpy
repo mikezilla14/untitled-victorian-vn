@@ -44,8 +44,8 @@ label day2_morning:
             cora "One letter mentioned a 'midnight arrangement' and 'the usual discretion.'"
             cora "My pulse was racing when I left the room. Not from fear. From something far more dangerous — curiosity."
 
-    $ player.update_stats()
     call check_suspicion
+    $ player.update_stats()
     jump day2_night
 
 
@@ -79,8 +79,8 @@ label day2_night:
             cora "I pressed my ear to the wall. The voices were muffled but unmistakable. A woman. Sir Gideon. Laughter, then silence, then sounds I had only ever read about in the penny dreadfuls."
             cora "My face burned in the dark corridor. My mind was already composing sentences."
 
-    $ player.update_stats()
     call check_suspicion
+    $ player.update_stats()
     jump day2_late_night
 
 
@@ -94,7 +94,7 @@ label day2_late_night:
 
         "Sit at the writing desk (Requires 30 Inspiration)":
             if player.inspiration >= 30:
-                $ player.inspiration -= 20
+                $ player.spend_inspiration(20)
                 $ story.wrote_chapter_1  = True
                 $ story.manuscript_sent  = True
                 cora "I wrote. It was clumsy, overwrought, and naive — a schoolgirl's idea of scandal. But it was something."
@@ -108,6 +108,6 @@ label day2_late_night:
         "Blow out the candle and sleep":
             cora "I'm too exhausted. The writing can wait. It has to."
 
-    $ player.update_stats()
     call check_suspicion
+    $ player.update_stats()
     jump day3_morning

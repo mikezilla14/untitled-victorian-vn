@@ -15,35 +15,6 @@
 
 > *Cora waits outside Ms. Stern’s office. Her traveling clothes still carry the faint scent of coal smoke from the train, a stark contrast to the gleaming mahogany and polished brass of the Savoy. She rehearses her fabricated references in her head.*
 
-```json
-{
-  "beat_id": "1-01",
-  "location": "interior/sterns_office",
-  "setup": "Ms. Stern evaluates Cora's forged references and asks why a girl from the country wishes to serve in London's premier hotel.",
-  "choices": [
-    {
-      "choice_text": "Emphasize an earnest desire to learn the standards of the city.",
-      "consequence": "Stern appreciates the demonstration of duty, though she remains watchful.",
-      "stat_changes": {
-        "Insp": 5,
-        "Susp": 5,
-        "Corr": 0
-      }
-    },
-    {
-      "choice_text": "Play the quiet, invisible chambermaid who asks no questions.",
-      "consequence": "Stern finds the meekness unremarkable but useful, slightly lowering her initial guard.",
-      "stat_changes": {
-        "Insp": 0,
-        "Susp": 0,
-        "Corr": 5
-      }
-    }
-  ],
-  "end_state": "Ms. Stern accepts Cora on probation."
-}
-```
-
 ---
 
 **[choice] — "How to present herself to the exacting Ms. Stern?"**
@@ -112,35 +83,6 @@ GIDEON (muffled) "You will wait until you are told to rise. Is that understood?"
 
 > *Cora stops. She sees Missy's face flush deep red as the younger girl instinctively gravitates toward the door, listening intently.*
 
-```json
-{
-  "beat_id": "1-04",
-  "location": "interior/servants_corridor",
-  "setup": "Cora must decide whether to focus her attention on Missy's reaction or risk a glance into the suite to witness the power dynamic firsthand.",
-  "choices": [
-    {
-      "choice_text": "Observe Missy as she listens at the door.",
-      "consequence": "Cora finds herself fascinated by Missy's vulnerability and suggestibility.",
-      "stat_changes": {
-        "Insp": 5,
-        "Susp": 0,
-        "Corr": 10
-      }
-    },
-    {
-      "choice_text": "Sneak a peek into the room through the access door.",
-      "consequence": "Cora sees Vance kneeling submissively while Gideon asserts dominance. Cora makes a small sound.",
-      "stat_changes": {
-        "Insp": 15,
-        "Susp": 10,
-        "Corr": 15
-      }
-    }
-  ],
-  "end_state": "The encounter seeds Cora's prevailing inclinations moving forward."
-}
-```
-
 ---
 
 **[choice 1] — "Where does her attention linger?" (Seeds `dom_sub_flag`)**
@@ -192,35 +134,6 @@ CORA (internal) "I lack the necessary detail. It feels entirely inadequate."
 `[bg]` `interior/servants_corridor_night`
 
 > *Restless, Cora ventures into the corridor. She encounters Missy, who is nervously wringing her hands near the laundry drop.*
-
-```json
-{
-  "beat_id": "1-06",
-  "location": "interior/master_suite_night",
-  "setup": "Cora convinces Missy to accompany her into the master suite while the guests are dining below.",
-  "choices": [
-    {
-      "choice_text": "Deceive Missy into thinking this is a strict operational duty.",
-      "consequence": "Cora uses her cunning to make Missy search the room.",
-      "stat_changes": {
-        "Insp": 5,
-        "Susp": 5,
-        "Corr": 15
-      }
-    },
-    {
-      "choice_text": "Persuade Missy by appealing to her curiosity.",
-      "consequence": "Cora frames the search as an exciting, slightly improper adventure they share.",
-      "stat_changes": {
-        "Insp": 15,
-        "Susp": 10,
-        "Corr": 5
-      }
-    }
-  ],
-  "end_state": "The explicit garments are found and touched by Missy, setting up the theft arc for the coming days."
-}
-```
 
 ---
 

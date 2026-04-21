@@ -40,8 +40,8 @@ label day3_morning:
             cora "A name. An address in Mayfair. And the words: 'She will be here Thursday. Prepare the adjoining suite.'"
             cora "Thursday is tomorrow."
 
-    $ player.update_stats()
     call check_suspicion
+    $ player.update_stats()
     jump day3_night
 
 
@@ -76,8 +76,8 @@ label day3_night:
             cora "When it was over, I walked back to my room on legs that barely held me. Not from shock — I had read about such things in the penny dreadfuls. But reading about fire and standing in the flames are very different things."
             cora "My mind was already writing the scene. Every detail. Every sound. Every shadow."
 
-    $ player.update_stats()
     call check_suspicion
+    $ player.update_stats()
     jump day3_late_night
 
 
@@ -112,8 +112,8 @@ label day3_late_night:
         cora "I sat at the desk. The candle guttered. I wrote a few lines, crossed them out, wrote a few more."
         cora "It's not enough. I need more. I need to see what happens behind those walls."
 
-    $ player.update_stats()
     call check_suspicion
+    $ player.update_stats()
 
     # ── PAYMENT ARRIVES ────────────────────────────────────────
     # Only triggers if a chapter was dispatched before this point.

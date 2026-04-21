@@ -23,35 +23,6 @@
 
 > *She stands in the study of her previous benefactor, the man who had inexplicably permitted her to learn to read. A strange noise drifts from the adjoining parlour, breaking the quiet. At the very same moment, her eyes fall upon the master's desk, which lies open before her, papers scattered about in need of ordering.*
 
-```json
-{
-  "beat_id": "P-02",
-  "location": "interior/country_estate_study",
-  "setup": "Cora hears a noise from the parlour while tidying the master's study. She must decide whether to investigate or fulfill her duty.",
-  "choices": [
-    {
-      "choice_text": "Investigate the sound from the parlour.",
-      "consequence": "Cora overhears a discussion between her employer and their partner detailing their lewd escapades.",
-      "stat_changes": {
-        "Insp": 0,
-        "Susp": 10,
-        "Corr": 15
-      }
-    },
-    {
-      "choice_text": "Continue with duties and tidy the desk.",
-      "consequence": "Cora uncovers the employer's improper letters and becomes lost in the fantasy of the written words.",
-      "stat_changes": {
-        "Insp": 15,
-        "Susp": 10,
-        "Corr": 10
-      }
-    }
-  ],
-  "end_state": "Both paths lead to Cora being discovered and cast out, cementing her betrayal of their trust."
-}
-```
-
 ---
 
 **[choice] — "A curious sound from the parlour, or the duty of the desk?"**

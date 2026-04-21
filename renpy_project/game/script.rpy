@@ -7,7 +7,7 @@
 #  here.
 #
 #  File load order (Ren'Py loads alphabetically):
-#    characters.rpy → functions.rpy → screens.rpy → variables.rpy
+#    characters.rpy → classes.rpy → functions.rpy → screens.rpy → variables.rpy
 #    → day1.rpy → day2.rpy → day3.rpy → day4.rpy → day5.rpy
 #    → endings.rpy → script.rpy
 # ═══════════════════════════════════════════════════════════════
@@ -27,7 +27,7 @@ label start:
 
 
 # ── GLOBAL GUARD LABEL ─────────────────────────────────────────
-# Called after every stat-modifying choice.
+# Called after stat-modifying choices and before passive decay.
 # If suspicion has hit 100, the run ends immediately.
 label check_suspicion:
     if player.suspicion >= 100:

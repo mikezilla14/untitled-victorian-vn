@@ -1,7 +1,6 @@
 <!--
   FILE: day3_non_canon.md
   STATUS: Writers' Room Draft — awaiting Lead Narrative Editor review
-  BEAT SCHEMA: Setup → Player Choice → Consequence → Stat Delta
   CANON CONFLICTS: None detected. Day 2 Evening resolved Gideon/consort suspicion arc and Cora's first deadline.
   SEEDED FLAGS CONSUMED: dom_sub_flag (Day 1 tease corridor), missy_flag (protect/corrupt), knickers_flag (in Cora's possession)
   SEEDED FLAGS PRODUCED: manuscript_submitted (bool), gideon_trust_flag (low/medium/high), missy_bond_flag (elevated post-confrontation)

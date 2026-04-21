@@ -1,0 +1,69 @@
+name: Enforce Monorepo Guardrails
+
+on:
+  pull_request:
+    branches: [develop, main]
+
+jobs:
+  validate-boundaries:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install validation dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pyyaml
+
+      - name: Collect changed files
+        id: changes
+        shell: bash
+        run: |
+          BASE_REF="origin/${{ github.base_ref }}"
+          git fetch origin "${{ github.base_ref }}" --depth=1
+          CHANGED_FILES="$(git diff --name-only "$BASE_REF"...HEAD)"
+          {
+            echo "files<<EOF"
+            echo "$CHANGED_FILES"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Run Domain Gatekeeper
+        shell: bash
+        run: |
+          FILES="${{ steps.changes.outputs.files }}"
+          if [ -z "$FILES" ]; then
+            echo "No changed files found. Skipping gatekeeper."
+            exit 0
+          fi
+
+          FILES_CSV="$(echo "$FILES" | tr '\n' ',' | sed 's/,$//')"
+          python scripts/gatekeeper.py --agent human --files "$FILES_CSV"
+
+      - name: Check historical anachronisms (writers' room markdown)
+        shell: bash
+        run: |
+          FILES="${{ steps.changes.outputs.files }}"
+          if [ -z "$FILES" ]; then
+            echo "No changed files found. Skipping historical lint."
+            exit 0
+          fi
+
+          FAILED=0
+          while IFS= read -r file; do
+            [ -z "$file" ] && continue
+            case "$file" in
+              narrative/writers_room/*.md)
+                python scripts/historical_linter.py --file "$file" || FAILED=1
+                ;;
+            esac
+          done <<< "$FILES"
+          exit $FAILED

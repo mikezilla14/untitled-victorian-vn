@@ -41,8 +41,8 @@ label day5_morning:
             stern "See that your correspondence doesn't interfere with your duties."
             cora  "She left. I almost vomited."
 
-    $ player.update_stats()
     call check_suspicion
+    $ player.update_stats()
     jump day5_night
 
 

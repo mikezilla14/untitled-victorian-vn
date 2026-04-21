@@ -52,8 +52,8 @@ label day4_morning:
             cora "I stayed longer than I should have. Polishing brass that was already clean. He didn't speak again, but he watched me work."
             cora "Being watched by Sir Gideon felt different from being watched by Miss Stern. I'm not sure which is more dangerous."
 
-    $ player.update_stats()
     call check_suspicion
+    $ player.update_stats()
     jump day4_night
 
 
@@ -91,8 +91,8 @@ label day4_night:
             cora "But the thrill of almost being caught — the raw, animal terror of it — was unlike anything I have ever experienced."
             cora "I am no longer the same girl who arrived at this hotel."
 
-    $ player.update_stats()
     call check_suspicion
+    $ player.update_stats()
     jump day4_late_night
 
 
@@ -118,6 +118,6 @@ label day4_late_night:
         cora "I tried to write but the material wasn't there. I need more inspiration — more life in these pages."
         cora "Time is running out."
 
-    $ player.update_stats()
     call check_suspicion
+    $ player.update_stats()
     jump day5_morning
