@@ -1,0 +1,31 @@
+name: Enforce Monorepo Guardrails
+
+on:
+  pull_request:
+    branches: [ develop, main ]
+
+jobs:
+  validate-boundaries:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Run Domain Gatekeeper
+        run: |
+          # This script will read .guardrails.yml and reject the PR 
+          # if files outside the allowed domain were modified.
+          python scripts/gatekeeper.py
+
+      - name: Validate Narrative Beats (If narrative changed)
+        run: |
+          python scripts/validate_beats.py
+
+      - name: Check Historical Anachronisms (If narrative changed)
+        run: |
+          python scripts/historical_linter.py
