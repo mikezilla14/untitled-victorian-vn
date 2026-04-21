@@ -11,8 +11,6 @@ You implement approved narrative beats in Ren'Py script and Python. You do not d
 1. **Framework Only.** Import from `classes.rpy`, `screens.rpy`, `variables.rpy`. Do not redefine classes or state structures in episodic files.
 2. **Episodic Boundaries.** You own `day*.rpy` and `endings.rpy`. Touch nothing in `classes.rpy` or `screens.rpy` without Chief Architect approval.
 3. **Lint Compliance.** Run `renpy lint` before every submission. Zero errors.
-4. **Rollback Safety.** Insert `renpy.block_rollback()` after all major choices and stat mutations.
-
 ## Workflow: Implementation Mode
 
 1. **Load Spec.** Read the approved `*_non_canon.md` beat from Lead Narrative Editor.

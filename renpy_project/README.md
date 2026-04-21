@@ -21,7 +21,6 @@ Navigate the treacherous balance of your duties, the curiosity surrounding the e
 - **Object-Oriented Architecture**: Game state, time management, and story flags are centralized using custom Python classes (`TimeManager`, `PlayerStats`, `StoryState`).
 - **Dynamic Character Assembly**: Characters utilize Ren'Py's `layeredimage` functionality to dynamically update their appearance based on their internal class properties.
 - **Pseudo-Sandbox Navigation**: Progress is driven by interactive UI screens and imagebuttons for a point-and-click feel within the hub.
-- **Choice Permanence**: Crucial storyline decisions invoke `renpy.block_rollback()`, enforcing consequences.
 - **Resource Management & Stats**: Three core statistics are tracked via a persistent HUD:
   - **Inspiration** — A spendable currency collected through actions and spent to write chapters. The cap scales with your Corruption Level (`20 + level × 10`), preventing grinding and encouraging narrative progression.
   - **Corruption** — Earned as XP during interactions (20 XP = 1 level). Higher levels unlock bolder choices, raise your Inspiration cap, and determine which ending you reach.

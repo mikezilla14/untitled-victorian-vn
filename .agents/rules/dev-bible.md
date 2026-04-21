@@ -29,8 +29,3 @@ To reflect the changing internal state of characters without exponentially incre
 Standard linear text progression is replaced by a "pseudo point-and-click" architecture.
 * Navigation and interaction rely on Ren'Py Screen Language, overlaying `imagebutton` or `imagemap` elements onto 2D background spaces.
 * Completing an event calls the player back to the central sandbox loop rather than advancing to a linear text block.
-
-### 5. Enforcing Choice Permanence
-To maintain high-stakes tension and give weight to state changes, the standard Ren'Py rollback feature (mouse-wheel scrolling to undo a choice) can be restricted as a game option.
-* As an in-game option following major branching decisions or resource expenditure, the `renpy.block_rollback()` function must be executed to force the player to live with the consequences of their actions or manually reload a hard save.
-s

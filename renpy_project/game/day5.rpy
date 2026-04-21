@@ -80,7 +80,6 @@ label day5_night:
 
 
 label day5_cliffhanger:
-    $ renpy.block_rollback()
     $ time_manager.time_of_day = "Late Night"
 
     sys "─── DAY 5: LATE NIGHT — THE CLIFFHANGER ───"
