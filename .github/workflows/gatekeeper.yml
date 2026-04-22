@@ -48,6 +48,18 @@ jobs:
           FILES_CSV="$(echo "$FILES" | tr '\n' ',' | sed 's/,$//')"
           python scripts/gatekeeper.py --agent human --files "$FILES_CSV"
 
+      - name: Run Engineering Compliance Checks
+        shell: bash
+        run: |
+          FILES="${{ steps.changes.outputs.files }}"
+          if [ -z "$FILES" ]; then
+            echo "No changed files found. Skipping engineering compliance."
+            exit 0
+          fi
+
+          FILES_CSV="$(echo "$FILES" | tr '\n' ',' | sed 's/,$//')"
+          python scripts/engineering_compliance.py --files "$FILES_CSV"
+
       - name: Check historical anachronisms (writers' room markdown)
         shell: bash
         run: |
