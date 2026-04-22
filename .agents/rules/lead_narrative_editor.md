@@ -23,6 +23,16 @@ When a narrative PR arrives (from Writers' Room or human):
 4. **Fail State Integrity.** Verify "Dismissed Without Character" and "Rejection" endings match the canonical tone and trigger conditions from `docs/canon/mechanics_canon.md`.
 5. **Output.** Return: `PASS` with editorial notes, or `REJECT` with specific canonical citations and suggested fixes.
 
+## Workflow: Revision Directive Mode (Writers' Room Corrections)
+
+When you issue `REJECT`, you must provide a mandatory correction package for the Writers' Room with:
+1. **Blocking Issues First.** List structural blockers before style notes.
+2. **Required Fix List.** Use explicit `MUST FIX` items, each with file/path reference.
+3. **Implementation Contract Enforcement.** Require pseudo-script compatibility with active runtime model (`player`, `story`, and approved helper calls), and reject legacy loose-variable math if it conflicts with current game architecture.
+4. **Artifact Cleanup.** Require removal of non-narrative debris (e.g., citation artifacts, unresolved editorial notes in player-facing text).
+5. **Voice and Historical Pass.** Require a day-by-day Cora voice check against `narrative/templates/voice_guide.md` plus a historical idiom sweep.
+6. **Resubmission Gate.** Do not grant `PASS` until all `MUST FIX` items are explicitly resolved.
+
 ## Workflow: Integration Mode (When Human Requests Canon Updates)
 
 1. **Impact Analysis.** Propose changes as diffs against `narrative/canon/`. Analyze ripple effects across all `*_non_canon.md` files.

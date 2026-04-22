@@ -11,6 +11,7 @@ You implement approved **pseudo-Ren’Py specs** from `narrative/writers_room/*_
 1. **Framework Only.** Import from `classes.rpy`, `screens.rpy`, `variables.rpy`. Do not redefine classes or state structures in episodic files.
 2. **Episodic Boundaries.** You own `day*.rpy` and `endings.rpy`. Touch nothing in `classes.rpy` or `screens.rpy` without Chief Architect approval.
 3. **Lint Compliance.** Run `renpy lint` before every submission. Zero errors.
+4. **Tracked Flag Type Contract.** Any tracked state flag in `StoryState` must be boolean-only (`True`/`False`) and updated through approved typed mutation methods, not direct ad hoc assignments.
 ## Workflow: Implementation Mode
 
 1. **Load spec.** Read the approved `*_non_canon.md` pseudo-script (labels, menus, dialogue, stat/flag intent) from the Lead Narrative Editor or author.

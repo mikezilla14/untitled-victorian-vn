@@ -1,7 +1,7 @@
 # STUDIO DEVELOPMENT BIBLE
 
 **Project:** [Pending Title]  
-**Version:** 1.1  
+**Version:** 1.2  
 **Scope:** Studio execution, release discipline, and Ren'Py engineering contracts.
 
 This document is split into two parts:
@@ -43,6 +43,7 @@ This document is split into two parts:
 - Core logic uses class-backed state (`TimeManager`, `PlayerStats`, `StoryState`).
 - No ad hoc global `default` variables outside `variables.rpy`.
 - Prefer mutation methods (`gain_*`, `raise_*`, `spend_*`) over direct field edits.
+- Tracked state flags in `StoryState` are boolean-only contracts: each tracked flag must be declared and mutated as `bool` (`True`/`False`) and set through typed mutation methods.
 
 #### Failure and branch safety
 - Suspicion fail checks must run in a deterministic order.

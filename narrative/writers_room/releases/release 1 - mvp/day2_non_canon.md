@@ -1,205 +1,167 @@
-<!--
-  FILE: day2_non_canon.md
-  STATUS: Writers' Room Draft
--->
-
-# Day 2 — "Missing Articles"
-
-## Morning — Scene 2-01: The Dry Pen
-
-**Setup**
-
-`[bg]` `interior/coras_room_morning`
-
-`[mus]` `themes/melancholy`
-
-> *Cora sits at her desk, staring at a blank page. The events of the previous evening swirl in her mind—Missy's flushed face, the intimate glimpse of Sir Gideon's undeniable authority—yet the ink remains trapped in the pen. She is missing the narrative thread that elevates common smut into something Mr. Holywell will purchase.*
-
----
-
-**[choice] — "Where does her mind wander?"**
-
-- **Option A — "Missy's fascination."**
-  → Cora's thoughts drift to the younger girl's trembling hands. The idea of molding such naivety is intoxicating.
-  → `[+10 Corr, +10 Insp]`
-
-- **Option B — "The power of the master suite."**
-  → Cora recalls Gideon's low, commanding tone. That level of absolute assurance is a potent muse.
-  → `[+5 Corr, +15 Insp]`
-
-`[renpy.block_rollback()]`
-
-## Morning — Scene 2-02: The Accusation
-
-**Setup**
-
-`[sfx]` `loud_knocking`
-
-> *A sharp rapping at the door breaks Cora from her reverie. She opens it to find Ms. Stern, her face flushed with uncharacteristic color. Behind her stands Missy, trembling on the verge of tears.*
-
-```
-STERN "Miss Hartley. You and Missy were the only staff operating in the upper corridor last evening. You will accompany me to the master suite at once."
-```
-
-`[bg]` `interior/master_suite_morning`
-
-> *Inside the suite, Ms. Vance is incandescent with rage, though curiously vague about the specifics of her grievance.*
-
-```
-VANCE "I will not tolerate thieves! The item was placed precisely here last night. It is gone. I demand you search them both this instant!"
-
-STERN "Madam, if you would simply describe the missing item, my staff could attempt to locate it. Perhaps it was sent down with the morning linens in error."
-
-VANCE "It was not sent down with the linens! It is... a personal garment of significant worth!"
-```
-
-> *Before the shouting can escalate, the inner door opens. Sir Gideon steps into the room, impeccably dressed. His presence instantly lowers the temperature of the air.*
-
-```
-GIDEON "Enough."
-```
-
-> *He does not raise his voice. He does not need to.*
-
-```
-GIDEON "My dear, you are evidently mistaken. You must have misplaced it yourself. We will speak no more of this triviality. Ms. Stern, I apologize for the disruption. You are dismissed."
-```
-
-> *Vance's face is a portrait of wounded pride, but she remains entirely silent. Stern nods stiffly, though she is visibly displeased with Vance's bullying, and signals her staff to leave.*
-
-## Morning — Scene 2-03: The Revelation
-
-**Setup**
-
-`[bg]` `interior/servants_corridor_morning`
-
-`[mus]` `ambient/servants_corridor`
-
-> *Safely out of earshot, Cora turns to Missy with a conspiratorial glance.*
-
-```
-CORA "Did you truly take them, then? After I expressly told you to leave them be?"
-
-MISSY "No! I swear it, Cora! I dropped them the moment you spoke. I would never—oh, what if they dismiss us?"
-
-CORA "Hush. I believe you. Return to your duties before Ms. Stern's temper flares anew."
-```
-
-> *Cora returns briefly to her own quarters. She reaches into the deep pocket of her apron, and her fingers brush against fine silk and lace.*
-> *She had slipped them away while Missy was recoiling in embarrassment. A necessary souvenir.*
-
-```
-CORA (internal) "I suppose I am a thief. How very scandalous."
-```
-
-## Afternoon — Scene 2-04: The Volunteer
-
-**Setup**
-
-`[bg]` `interior/servants_laundry_afternoon`
-
-> *Cora is sorting the heavy linens when Ms. Stern appears in the doorway.*
-
-```
-STERN "The lady in the master suite requires assistance tracing a misplaced article. Frankly, I will not subject Missy to another tirade. Will you attend to it, Miss Hartley, or shall I send Ellen?"
-```
-
----
-
-**[choice] — "Does Cora step into the fire?"**
-
-- **Option A — "Volunteer."**
-  → Cora nods dutifully. *"I will handle it, Ms. Stern. Do not worry."*
-  → `[+5 Corr, +10 Insp, +10 Susp]`
-  → `[flag]` `volunteered_for_vance = True`
-  → *Transitions to Scene 2-05.*
-
-- **Option B — "Send Ellen."**
-  → Cora keeps her head down. She has the article; producing it now might be far too perilous.
-  → `[+0 Corr, +0 Insp, -5 Susp]`
-  → `[flag]` `volunteered_for_vance = False`
-  → *Transitions directly to Scene 2-06.*
-
-`[renpy.block_rollback()]`
-
-## Afternoon — Scene 2-05: The Discovery (If Volunteered)
-
-**Setup**
-
-`[bg]` `interior/master_suite_afternoon`
-
-`[mus]` `ambient/upper_corridor_tension`
-
-> *Cora enters the suite. Vance spins around, her eyes narrowing as she recognizes Cora from the morning's humiliation.*
-
-```
-VANCE "You. You were the one pawing through my quarters yesterday. I know you hide it to mock me."
-```
-
-> *The item is in Cora's possession. She can resolve this, but the method carries immense risk.*
-
----
-
-**[choice] — "How does Cora produce the missing article?"**
-
-- **Option A — "From her own pocket."**
-  → Cora calmly reaches into her apron and holds it out. *"Is this the item you seek, Madam? It appears it was inadvertently mixed with my dusting cloths."* Vance turns entirely pale; she knows she checked Cora's person earlier. The sheer brazenness leaves her sputtering.
-  → `[+15 Corr, +5 Insp, +20 Susp]`
-
-- **Option B — "From the wardrobe."**
-  → Cora opens the wardrobe and swiftly drops the silk into a dark corner, only to pull it out a second later. *"Madam, it seems to have slipped behind your travel trunks."* Vance explodes, insisting it had no right to be there.
-  → `[+10 Corr, +15 Insp, +5 Susp]`
-
-`[renpy.block_rollback()]`
-
-> *Before Vance can strike her, Gideon appears from the dressing room.*
-
-```
-GIDEON "You will cease this unbecoming display immediately."
-```
-
-> *His voice is like a whip cracking in the quiet room. Vance freezes, instantly brought to heel. The venom drains from her posture, replaced by a rigid, terrified obedience.*
-
-```
-GIDEON "Miss Hartley. You have done quite enough. You are dismissed."
-```
-
-> *Cora bows and steps out into the corridor. As she closes the door, she hears the distinct sound of a sharp slap, followed by Vance's muffled whimper. The discipline has begun.*
-
-```
-CORA (internal) "He commands her completely. What an extraordinarily dangerous man."
-```
-
-## Evening — Scene 2-06: Stern's Warning (Conditional Gate)
-
-**Setup**
-
-`[bg]` `interior/coras_room_evening`
-
-> *If Cora's Suspicion is dangerously high after the day's events, she receives a visitor.*
-
-*Note: This scene only plays if [Suspicion > 30]. Otherwise, skip to Scene 2-07.*
-
-```
-STERN "You walk a very fine line, Miss Hartley. There have been disruptions since your arrival. I run a respectable establishment. Further irregularities will simply not be tolerated."
-```
-
-> *Cora apologizes formally. The warning is clear: she must temper her curiosity, or risk losing her position entirely.*
-
-## Evening — Scene 2-07: The First Chapter
-
-**Setup**
-
-`[bg]` `interior/coras_room_evening`
-
-`[mus]` `themes/temptation_understated`
-
-> *The day's events have provided exactly the fuel Cora required. The arrogance of the consort. The absolute dominion of the master. The trembling fear of the innocent.*
-
-> *She draws her pen to the paper. This time, the ink flows like wine. She writes of power, of surrender, of the thrill of being entirely undone by a superior will. The first chapter of her manuscript is finally taking shape.*
-
-```
-CORA (internal) "It is finished. Tomorrow, I must find a way to submit this to Mr. Holywell. My new life truly begins."
-```
-
-> **End of Day 2**
+# ==========================================
+# DAY 2: MORNING (The Discovery)
+# ==========================================
+label day2_morning:
+    scene bg_master_suite_day
+    with fade
+
+    "The Master Suite. The guests are at breakfast, leaving Missy and me to strip the linens and scrub the hearth."
+    "Missy is humming, blissfully unaware of the dark tension I witnessed through the door yesterday." [cite: 2283]
+
+    show missy_sprite confused at center
+    "Suddenly, there is a clatter from the armoire. Missy has knocked over a hatbox." [cite: 2284]
+    
+    missy "Cora... what kind of lady wears a thing like this?" [cite: 2286]
+    
+    "She holds up a piece of impossibly sheer, un-Victorian lace. A split-crotch undergarment that belongs in a Holywell Street catalogue, not a respectable hotel." [cite: 2285]
+    "My pulse spikes. This is it. Leverage. Material."
+
+    # INFLECTION POINT 1: The Catalyst
+    menu:
+        "What do I do with the contraband?"
+        
+        "The Thief: Claim it for myself. (+Corruption)": [cite: 2287]
+            $ apply_effects(susp=0,insp=0,corr=15)
+            $ day2_outfit_status = "stolen_wearing"
+            cora "Give that to me, Missy. Keep your mouth shut." [cite: 2289]
+            "I snatch the silk from her trembling hands. The deviance is intoxicating."
+            "Before she can stop me, I slip into the washroom. I remove my sensible cotton and pull the scandalous lace up my thighs, right beneath my stiff maid's uniform." [cite: 2216, 2398]
+            "The physical friction against my skin is a constant, thrilling secret." [cite: 2399]
+            
+        "The Saboteur: Frame Vance. (+Influence)": [cite: 2292]
+            $ influence += 15
+            $ day2_outfit_status = "framed_gideon_trunk"
+            cora "It must be Mr. Gideon's. You'd better pack it deep inside his personal travel trunk before they return." [cite: 2293]
+            missy "Oh! Yes, of course."
+            "Missy unwittingly plants the bomb. I am using her as a pawn to test Gideon's reaction without getting my own hands dirty." [cite: 2294, 2295]
+            
+        "The Ghost: Play it safe. (+Inspiration)": [cite: 2296]
+            $ apply_effects(susp=0,insp=10,corr=0)
+            $ day2_outfit_status = "put_back"
+            cora "Put it exactly back where you found it. We see nothing, we know nothing." [cite: 2296, 2297]
+            "Missy frantically stuffs the lace back into the hatbox. I catalogue the visual details of the garment for my manuscript, terrified of the consequences of touching it." [cite: 2298]
+
+    "We finish our duties and slip out before the guests return."
+    
+    jump day2_afternoon
+
+# ==========================================
+# DAY 2: AFTERNOON (The Apology Service)
+# ==========================================
+label day2_afternoon:
+    scene bg_servants_corridor_day
+    with dissolve
+
+    "The fallout was immediate. Vance had a complete meltdown over the missing item, screaming at the staff until Gideon iced her out." [cite: 2300, 2304]
+    
+    show stern_sprite stern at center
+    stern "Cora. Mr. Gideon has requested tea. You will take the silver service up and smooth over the morning's unpleasantness." [cite: 2401]
+    
+    "I nod, taking the heavy tray. The air in the Master Suite is suffocating when I enter."
+    
+    scene bg_master_suite_tea
+    with fade
+    
+    show vance_sprite cowed at left
+    "Vance sits at the vanity in a high-collared day dress, visibly subdued. Gideon has clearly disciplined her for the outburst." [cite: 2403]
+    
+    show gideon_sprite dominant at right
+    "Gideon reads the paper. He doesn't look at Vance. He looks at me."
+    
+    gideon "Ms. Vance regrets her outburst this morning. She was... overtired." [cite: 2439]
+    "He forces the apology, his eyes locked on mine. He is testing me." [cite: 2440]
+    
+    cora "Of course, Sir. I only hope the missing item has been recovered?" [cite: 2441]
+    
+    gideon "Not yet. But I am quite certain it will turn up exactly where it belongs before too long." [cite: 2442]
+
+    # INFLECTION POINT 2: The Subtext Duel
+    menu:
+        "How do I respond to his loaded statement?"
+        
+        "Polite Insolence: Smile at Vance's pain. (+Influence)": [cite: 2444]
+            $ apply_effects(susp=5,insp=10,corr=0)
+            "I keep my eyes on Vance, offering a perfectly polite, entirely weaponized smile." [cite: 2444]
+            cora "I shall be sure to strip the bedding entirely tomorrow, Sir. We must leave no stone unturned." [cite: 2445]
+            "Gideon catches the subtle insolence. He realizes I enjoy holding the whip." [cite: 2408, 2447]
+            $ day2_tea_choice = "predator"
+
+        "Risky Flirtation: Hint at the dark. (+Corruption)": [cite: 2448]
+            $ apply_effects(susp=10,insp=0,corr=10)
+            "I meet Gideon's eyes directly. If I stole the lace, it feels suddenly very tight against my skin." [cite: 2448]
+            cora "I do hope so, Sir. It would be a terrible shame for something so delicate to remain hidden in the dark." [cite: 2449]
+            "Gideon's gaze tracks me, heavy and knowing. I am practically daring him to look under my skirt." [cite: 2413, 2450]
+            $ day2_tea_choice = "prey"
+
+        "Retreat: The Invisible Ghost. (+Inspiration)": [cite: 2452]
+            $ apply_effects(susp=0,insp=10,corr=0)
+            "The reality of what I'm doing crashes down on me. I drop my gaze immediately, retreating behind the mask of a servant." [cite: 2452, 2453]
+            cora "Yes, Sir. I will leave you to your tea." [cite: 2454]
+            "I played with fire for a second, got the psychological details I needed, and got out." [cite: 2455]
+            $ day2_tea_choice = "ghost"
+
+    jump day2_twilight
+
+# ==========================================
+# DAY 2: TWILIGHT (The Ledger)
+# ==========================================
+label day2_twilight:
+    scene bg_servants_quarters_dusk
+    with fade
+
+    "I return to my quarters. My heart is hammering against my ribs."
+    
+    # UI CALL: Show Player Stats
+    $ show_ledger_ui()
+
+    "I must balance the ledger before I can write."
+
+    menu:
+        "Atonement: Scrub boots for Ms. Stern. (-Suspicion)":
+            $ apply_effects(susp=-10,insp=0,corr=0)
+            "I spend an hour in the scullery, blistered hands proving my subservience."
+            
+        "Socialize: Check on Missy. (+Corruption, -Suspicion)":
+            $ apply_effects(susp=10,insp=0,corr=0)
+            "I reassure Missy about the morning's chaos, carefully molding her trust in me."
+            
+        "Indulge: Look in the Mirror. (+Inspiration, +Corruption, +Suspicion)":
+            $ apply_effects(susp=10,insp=0,corr=10)
+            if day2_outfit_status == "stolen_wearing":
+                "I lift my heavy wool skirt and stare at the stolen silk hugging my hips. I have never looked so ruined." [cite: 2079, 2217]
+            else:
+                "I stare at my reflection, adrenaline pumping as I replay the power I held in that room."
+
+    jump day2_night
+
+# ==========================================
+# DAY 2: NIGHT (The Manuscript)
+# ==========================================
+label day2_night:
+    scene bg_cora_desk_night
+    with dissolve
+    
+    "The candle is lit. It's time for Chapter Two."
+
+    if (inspiration + corruption + influence) >= 30:
+        "The words practically tear themselves from my pen."
+        
+        if day2_tea_choice == "predator":
+            "I write from the perspective of a cruel mastermind orchestrating a downfall, watching her rival squirm." [cite: 2145]
+            # Show CG_Writing_Predator_Ch2
+            
+        elif day2_tea_choice == "prey":
+            "I write breathless prose about a desperate maid begging to take the consort's place, thrilled by the danger of exposure." [cite: 2147]
+            # Show CG_Writing_Prey_Ch2
+            
+        else:
+            "I write a tense, observational piece about the agonizing restraint of servitude while surrounded by sin."
+            # Show CG_Writing_Ghost_Ch2
+
+        $ manuscript_progress += 1
+        "Chapter Two is complete. I am one step closer to freedom."
+        
+    else:
+        "My hands are shaking too badly. I am too afraid of Stern, or too uninspired by the day. I have failed to write tonight."
+
+    jump day3_morning

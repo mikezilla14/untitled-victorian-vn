@@ -7,14 +7,14 @@
 # ═══════════════════════════════════════════════════════════════
 
 label day4_morning:
-    $ time_manager.current_day  = 4
+    $ time_manager.set_current_day(4)
     $ set_time_period("Morning")
 
     sys "─── DAY 4: MORNING ───"
 
     cora "Sir Gideon was in the suite again when I arrived."
 
-    if story.saw_voyeur_scene:
+    if story.has_witnessed_voyeur_scene:
         cora "I could barely look at him. The things I had seen. The things I had written about him."
         cora "He didn't know. He couldn't know. But my face burned all the same."
 
@@ -29,7 +29,7 @@ label day4_morning:
 
     gideon "This hotel is very quiet in winter. Very quiet. And quiet places make a man think too much."
 
-    $ story.gideon_showed_depth = True
+    $ story.set_has_gideon_revealed_vulnerability(True)
 
     cora   "For a moment, his face changed. The mask of wealth and confidence slipped, and underneath was something I didn't expect."
     cora   "Loneliness."
@@ -76,7 +76,7 @@ label day4_night:
 
         "Stay in the passage when I hear footsteps approaching (Bold)":
             $ apply_effects(insp=10, corr=25, susp=25)
-            $ story.chose_bold_day4 = True
+            $ story.set_has_chosen_bold_option_day4(True)
             cora "I didn't just watch tonight. I lingered."
             cora "When I heard movement in the passage behind me, I didn't flee. I pressed myself flat against the wall and held my breath."
             cora "It might have been Miss Stern. It might have been a draught. I'll never know."
@@ -103,7 +103,7 @@ label day4_late_night:
 
         sys "[[CG #2 PLACEHOLDER — FANTASY WRITING SCENE: 'Dark Lord' Sir Gideon, filtered/dream background. 2-3 stages. Reuse Sir Gideon sprite with filtered BG-03.]"
 
-        $ story.wrote_chapter_2 = True
+        $ story.set_has_written_second_chapter(True)
         cora "I wrapped the pages. Tomorrow's delivery. My last chapter before the deadline."
     else:
         cora "I tried to write but the material wasn't there. I need more inspiration — more life in these pages."

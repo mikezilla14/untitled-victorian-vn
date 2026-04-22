@@ -6,7 +6,7 @@
 # ═══════════════════════════════════════════════════════════════
 
 label day1_morning:
-    $ time_manager.current_day  = 1
+    $ time_manager.set_current_day(1)
     $ set_time_period("Morning")
 
     sys "─── DAY 1: MORNING ───"

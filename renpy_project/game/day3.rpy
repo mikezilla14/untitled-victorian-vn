@@ -7,7 +7,7 @@
 # ═══════════════════════════════════════════════════════════════
 
 label day3_morning:
-    $ time_manager.current_day  = 3
+    $ time_manager.set_current_day(3)
     $ set_time_period("Morning")
 
     sys "─── DAY 3: MORNING ───"
@@ -17,7 +17,7 @@ label day3_morning:
     cora  "Miss Stern was standing by the window at the end of the hall, holding an envelope. Her eyes were wet."
     cora  "For a single, impossible moment, she looked like a woman. Not the iron-spined tyrant who holds my future in her hands. Just a woman reading a letter that made her cry."
 
-    $ story.heard_stern_humming = True
+    $ story.set_has_heard_stern_humming(True)
 
     stern "Why are you standing there gawping, girl? Those linens won't press themselves."
 
@@ -58,7 +58,7 @@ label day3_night:
 
         "Return to the servant's passage (The Voyeur Scene)":
             $ apply_effects(insp=25, corr=15, susp=15)
-            $ story.saw_voyeur_scene = True
+            $ story.set_has_witnessed_voyeur_scene(True)
 
             cora "I crept back to the passage. This time I knew exactly where to stand."
             cora "There is a ventilation grate — a lattice of iron barely wider than my hand — that looks directly into the VIP suite's private parlour."
@@ -80,16 +80,16 @@ label day3_late_night:
 
     sys "─── DAY 3: LATE NIGHT ───"
 
-    if story.saw_voyeur_scene and player.inspiration >= 25:
-        if not story.wrote_chapter_1:
+    if story.has_witnessed_voyeur_scene and player.inspiration >= 25:
+        if not story.has_written_first_chapter:
             cora "I wrote like a woman possessed."
             cora "The scene poured out of me — but exaggerated, transformed. Sir Gideon became a dark lord in a candlelit chamber. His companion became a duchess in silks that fell away like water."
             cora "It was filth. Absolute, unapologetic filth. And it was the best thing I had ever written."
 
             sys "[[CG #1 FANTASY VARIANT — The screen shifts to a filtered/dream version of BG-03. The player sees Cora's imagination — her manuscript brought to life. 'Early gratification' via Cora's writing, not Cora herself.]"
 
-            $ story.wrote_chapter_1  = True
-            $ story.manuscript_sent  = True
+            $ story.set_has_written_first_chapter(True)
+            $ story.set_has_sent_manuscript(True)
 
             cora "I wrapped the pages and addressed them to Holywell Street. The errand boy would carry them tomorrow."
         else:
@@ -98,8 +98,8 @@ label day3_late_night:
 
             sys "[[CG #1 FANTASY VARIANT — Part 2. Cora expands on the prior chapter's concepts.]"
 
-            $ story.wrote_chapter_2  = True
-            $ story.manuscript_sent  = True
+            $ story.set_has_written_second_chapter(True)
+            $ story.set_has_sent_manuscript(True)
 
             cora "I wrapped the new pages. Another envelope for Holywell Street."
     else:
@@ -110,11 +110,11 @@ label day3_late_night:
 
     # ── PAYMENT ARRIVES ────────────────────────────────────────
     # Only triggers if a chapter was dispatched before this point.
-    if story.manuscript_sent:
+    if story.has_sent_manuscript:
         cora "I woke to find a folded note tucked into a package at the tradesmen's entrance, addressed to 'C. at the Savoy, Servant's Hall.'"
         cora "Inside was money. Real money."
 
-        $ story.payment_received = True
+        $ story.set_has_received_manuscript_payment(True)
 
         cora "Three shillings. For a single chapter."
         cora "Three shillings. I earn seven in a week scrubbing floors for sixteen hours a day."

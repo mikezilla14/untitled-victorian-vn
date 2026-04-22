@@ -6,7 +6,7 @@
 # ═══════════════════════════════════════════════════════════════
 
 label day2_morning:
-    $ time_manager.current_day  = 2
+    $ time_manager.set_current_day(2)
     $ set_time_period("Morning")
 
     sys "─── DAY 2: MORNING ───"
@@ -18,7 +18,7 @@ label day2_morning:
 
     cora   "He knew my name. That was... unusual."
 
-    $ story.gideon_spoke_day2 = True
+    $ story.set_has_gideon_spoken_to_cora_day2(True)
 
     gideon "Don't look so startled. I asked Miss Stern — fearsome woman — who'd been keeping my rooms so spotless."
     cora   "He gestured at a volume of Keats on the mantelpiece."
@@ -37,7 +37,7 @@ label day2_morning:
 
         "Glance at the letters on his writing desk (Risky)":
             $ apply_effects(insp=15, susp=20)
-            $ story.read_letters = True
+            $ story.set_has_read_gideon_letters(True)
             cora "While Sir Gideon had his back turned, I caught a glimpse of the letters on his desk. The handwriting was feminine. The language was... heated."
             cora "One letter mentioned a 'midnight arrangement' and 'the usual discretion.'"
             cora "My pulse was racing when I left the room. Not from fear. From something far more dangerous — curiosity."
@@ -60,13 +60,13 @@ label day2_night:
             cora "I told her I was saving well. That was true, at least."
             cora "The blank manuscript page stared at me from under the letter. I ignored it."
 
-        "Explore the hidden servant's passage (Scandalous)" if not story.read_letters:
+        "Explore the hidden servant's passage (Scandalous)" if not story.has_read_gideon_letters:
             $ apply_effects(insp=15, corr=10, susp=10)
             cora "The Savoy was built with hidden corridors behind every wall — passages for the staff to move without being seen by guests. Tonight, I moved through them for a different reason."
             cora "I pressed my ear to the thin walls of the VIP floor. Voices. A woman laughing. The clink of crystal."
             cora "I saw nothing. But I heard enough to know that Sir Gideon Locke's evenings are not spent reading Keats."
 
-        "Sneak to the servant's passage — I know where to listen (Scandalous)" if story.read_letters:
+        "Sneak to the servant's passage — I know where to listen (Scandalous)" if story.has_read_gideon_letters:
             $ apply_effects(insp=20, corr=10, susp=10)
             cora "The letters mentioned a midnight arrangement. The servant's passage runs directly behind the VIP suites."
             cora "I pressed my ear to the wall. The voices were muffled but unmistakable. A woman. Sir Gideon. Laughter, then silence, then sounds I had only ever read about in the penny dreadfuls."
@@ -86,8 +86,8 @@ label day2_late_night:
 
         "Sit at the writing desk (Requires 30 Inspiration)":
             if attempt_write(required_insp=30, cost=20):
-                $ story.wrote_chapter_1  = True
-                $ story.manuscript_sent  = True
+                $ story.set_has_written_first_chapter(True)
+                $ story.set_has_sent_manuscript(True)
                 cora "I wrote. It was clumsy, overwrought, and naive — a schoolgirl's idea of scandal. But it was something."
                 cora "I wrapped the pages in brown paper and wrote the Holywell Street address on the front."
                 cora "Tomorrow morning, before Miss Stern's rounds, I'll slip it into the outgoing deliveries at the tradesmen's entrance. The errand boys won't question a sealed package."

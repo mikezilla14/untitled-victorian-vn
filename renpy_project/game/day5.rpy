@@ -6,7 +6,7 @@
 # ═══════════════════════════════════════════════════════════════
 
 label day5_morning:
-    $ time_manager.current_day  = 5
+    $ time_manager.set_current_day(5)
     $ set_time_period("Morning")
 
     sys "─── DAY 5: MORNING — THE RECKONING ───"
@@ -63,7 +63,7 @@ label day5_night:
 
         cora "When I finished, I stared at the pages."
 
-        if story.payment_received:
+        if story.has_received_manuscript_payment:
             cora "Three shillings for the first chapter. What would they pay for this?"
             cora "More than I earn in a month scrubbing Sir Gideon's floors. The bitter irony was not lost on me."
 

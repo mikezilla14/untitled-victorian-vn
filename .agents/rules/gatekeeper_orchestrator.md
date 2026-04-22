@@ -13,8 +13,8 @@ When a PR arrives:
 1. **Classify.** Read `.guardrails.yml`. Determine PR domain (writing, code, art).
 2. **Route.**
    - Narrative PRs → Lead Narrative Editor (canon + voice + alignment with pseudo-script / game intent)
-   - Code PRs → Chief Architect (architecture + lint + dependencies)
-   - Art PRs → Victorian Consultant (historical visual accuracy) + Chief Architect (asset pipeline integration)
+   - Code PRs → Chief Architect (architecture + lint + dependencies + boolean-only tracked-state-flag compliance)
+   - Art PRs → Victorian Consultant (historical visual accuracy) + Chief Architect (asset pipeline integration + any code-side boolean tracked-flag compliance)
    - Mixed PRs → Split into sub-reviews per domain
 3. **Collect.** Gather all agent reviews.
 4. **Arbitrate.** If agents conflict (e.g., Victorian Consultant rejects a scene the Narrative Editor approved), flag for human decision with both arguments summarized.

@@ -1,439 +1,164 @@
-<!--
-  FILE: day3_non_canon.md
-  STATUS: Writers' Room Draft — awaiting Lead Narrative Editor review
-  CANON CONFLICTS: None detected. Day 2 Evening resolved Gideon/consort suspicion arc and Cora's first deadline.
-  SEEDED FLAGS CONSUMED: dom_sub_flag (Day 1 tease corridor), missy_flag (protect/corrupt), knickers_flag (in Cora's possession)
-  SEEDED FLAGS PRODUCED: manuscript_submitted (bool), gideon_trust_flag (low/medium/high), missy_bond_flag (elevated post-confrontation)
-  AUTHOR NOTE: The explicit "chapter tease" payoff lives in the Evening beat.
--->
-
-# Day 3 — "The Ink Dries"
-
----
-
-## Morning — Scene 3-01: "The Weight of What Was Written"
-
-**Setup**
-
-`[bg]` `interior/coras_room_morning` — grey London light through thin curtains. Cora's writing desk is a ruin of crumpled pages and one candle stub burned to the brass. She sits at the edge of the bed in her shift, staring at a sealed envelope on the desk.
-
-`[mus]` `themes/quiet_dread`
-
-> *The chapter is finished. She can feel it the way you feel a tooth just pulled — the strange hollow relief that is also just a new kind of ache. She has written one true thing. Whether it is a magnificent or a ruinous thing she cannot yet say.*
-
----
-
-**Scene 3-01a — "The Envelope"**
-
-```
-CORA (internal) "Four pages. Four pages of the most ungodly accurate
-               description of power and want that I have ever—"
-
-               [She stops herself.]
-
-CORA (internal) "Professional. Detached. It is commerce, nothing more."
-
-               [She is lying, of course.]
-```
-
-> *The deadline for the first submission to Mr. Holywell is this afternoon. She had agreed to a drop-box at the back of Sweetings on Cheapside — discreet, impersonal, the kind of arrangement a lady disappears into and surfaces from without explanation.*
-
----
-
-**[choice] — Does Cora read it back before sealing it?**
-
-> `[sfx]` gentle rustle of paper
-
-- **Option A — "She reads it."**
-  → Cora opens the envelope and reads her own work aloud (internal monologue, restrained but vivid).
-  → `[flag]` `manuscript_reread = True`
-  → `[+10 Corruption, +8 Insp]` — she lingers on the corridor scene. The prose is good. She knows it.
-  → Transition: Scene 3-01b (Missy knocks while Cora is mid-sentence)
-
-- **Option B — "She seals it without looking."**
-  → Cold discipline. She is not a woman who second-guesses herself before breakfast.
-  → `[flag]` `manuscript_reread = False`
-  → `[+5 Insp, -5 Corruption]` — professional remove.
-  → Transition: Scene 3-01b
-
-`[renpy.block_rollback()]`
-
----
-
-**Scene 3-01b — "Missy at the Door"**
-
-| Element | Value |
-|---------|-------|
-| `[bg]` | `interior/coras_room_morning` |
-| `[char]` | Cora, Missy (doorway, apron slightly crooked, worried eyes) |
-| `[mus]` | `themes/quiet_dread` fades to `ambient/servants_corridor` |
-
-> *Missy is terrible at keeping things to herself. It is written all over her face from the moment Cora opens the door.*
-
-```
-MISSY  "Cora— I need to— I have to tell you something before we go downstairs."
-
-CORA   "Good morning to you as well."
-
-MISSY  "I'm— yes, sorry— good morning. But Cora, she knows. Ms. Vance.
-       Ellen told me — Ms. Vance told Ms. Stern that she wants it to be
-       us specifically who turns down her room today. Specifically us."
-```
-
-> *Cora feels the envelope in her apron pocket like a live coal.*
-
-```
-CORA (internal) "She wants us in that room. Which means she either knows,
-               or suspects, or—"
-
-               [She looks at Missy properly for the first time this morning.]
-
-CORA (internal) "—or she simply wants an audience for whatever she's
-               planning."
-```
-
----
-
-**[choice] — How does Cora handle Missy?**
-
-*Branched by `missy_flag` from Day 1.*
-
-**If `missy_flag = protect`:**
-
-- **Option A — "Keep her out of it." (soft lock if Corruption > 60)**
-  → Cora tells Missy to volunteer for laundry and claim a headache. Warm, protective, borderline maternal.
-  → `[+10 Insp, +5 Susp]` — Stern will notice the avoidance.
-  → `[flag]` `missy_in_room_day3 = False`
-
-- **Option B — "Tell her the truth — that she probably did take them."**
-  → Honest, not cruel. Missy's fingermarks aren't exactly reassuring evidence.
-  → `[+8 Insp, +10 Susp]` — Missy, rattled, reads as guilty around Stern.
-  → `[flag]` `missy_in_room_day3 = True` (Missy insists on coming to prove innocence)
-
-**If `missy_flag = corrupt`:**
-
-- **Option A — "Use her." (unlocked)**
-  → Cora suggests they go together; if anything goes sideways, Missy should look confused. She's very good at that, after all. A thin smile. Missy stiffens — not entirely sure whether she's being flattered or handled.
-  → `[+15 Corruption, +5 Insp]`
-  → `[flag]` `missy_in_room_day3 = True`
-
-- **Option B — "Send her away."**
-  → No liability needed.
-  → No stat delta.
-  → `[flag]` `missy_in_room_day3 = False`
-
-`[renpy.block_rollback()]`
-
----
-
-## Morning — Scene 3-02: "The Vance Room (Again)"
-
-**Setup**
-
-`[bg]` `interior/master_suite_morning` — Vance at the vanity in a heavy peignoir, appraising Cora in the mirror rather than turning to face her.
-
-`[mus]` `ambient/upper_corridor_tension`
-
-> *The room still smells faintly of Gideon's tobacco and something warmer underneath. Cora has been in this room three times. Each time it gives up something new.*
-
----
-
-**Scene 3-02a — "The Vance Audit"**
-
-```
-VANCE  [via mirror, not turning]
-       "You're the one who found it."
-
-       [Silence.]
-
-CORA   "Ma'am?"
-
-VANCE  "The item. Yesterday. You produced it from thin air while I was
-       ready to have the lot of you dismissed. I find that very interesting.
-       Sir Gideon asked me to leave it as it lay. And yet."
-```
-
----
-
-**[choice] — How does Cora respond?**
-
-*Influenced by `dom_sub_flag`.*
-
-- **Option A — "Deflect with deference."**
-  → *"I simply thought it may have fallen, ma'am."*
-  → `[+5 Susp, +5 Insp]` — neutral. Vance files it.
-
-- **Option B — "Hold her gaze in the mirror." (Unlocked: `dom_sub_flag = dominant`)**
-  → Cora doesn't look away. Doesn't say anything confrontational. Just doesn't flinch. Vance is first to return to her wrists.
-  → `[+10 Insp, +10 Corruption, +15 Susp]`
-  → `[flag]` `vance_noticed_cora = True`
-
-- **Option C — "Sympathise." (Unlocked: `dom_sub_flag = submissive`)**
-  → *"It must have been a frightful morning, ma'am."* Genuine. Unexpected. Vance's eyes flicker with something that isn't contempt.
-  → `[-10 Susp, +8 Insp]`
-  → `[flag]` `vance_thaw = True`
-
-`[renpy.block_rollback()]`
-
----
-
-**Scene 3-02b — "Gideon Enters"**
-
-| Element | Value |
-|---------|-------|
-| `[char]` | Gideon (morning dress, unhurried, cataloguing look) |
-| `[sfx]` | door latch, footsteps on carpet |
-
-> *He is the kind of man who walks into a room without changing his pace to acknowledge its current inhabitants. The room simply adjusts.*
-
-```
-GIDEON [to Vance, barely]
-       "We have a luncheon at two."
-
-       [He glances at Cora. Not unfriendly. Not warm. A cataloguing look.]
-
-GIDEON "Have you been properly settled in, Miss—?"
-
-CORA   "Hartley, sir. Yes, thank you."
-
-GIDEON "Good."
-
-       [He picks up yesterday's newspaper. He has clearly already read it.
-       He is not reading it now either.]
-```
-
----
-
-**[choice] — Does Cora take the opportunity?**
-
-- **Option A — "Keep her head down."**
-  → Finishes work, excuses herself. Clean. Safe.
-  → `[-5 Susp]` — unremarkable.
-
-- **Option B — "Ask after Sir Gideon's requirements for the room."**
-  → Framed as professional diligence. His answer: terse, precise, revealing.
-  → `[+5 Susp, +10 Insp]`
-  → `[flag]` `gideon_spoken_to = True` (expands Gideon dialogue tree, Day 4+)
-
-`[renpy.block_rollback()]`
-
----
-
-## Afternoon — Scene 3-03: "The Drop"
-
-**Setup**
-
-`[bg]` `exterior/cheapside_alley` — narrow, smelling of fish and industry. A lacquered postbox on the wall of Sweetings, partially obscured by a delivery crate.
-
-`[mus]` `themes/threshold`
-
-> *This is the part she did not think about while writing it. The actual giving of it over. The manuscript was hers alone until this moment. Now she is about to hand it to the city and the city is not particularly kind to women who write certain kinds of things.*
-
----
-
-**[choice] — "Does Cora hesitate?"**
-
-- **Option A — "She posts it without ceremony."**
-  → The envelope drops. She does not watch it fall.
-  → `[+15 Insp]`
-  → `[flag]` `manuscript_submitted = True`
-  → `[renpy.block_rollback()]`
-
-- **Option B — "She reads the first line one more time."**
-  → Opens it. Just the first line. Then seals and posts it.
-  → `[+20 Insp, +10 Corruption]` — she is no longer pretending this is commerce.
-  → `[flag]` `manuscript_submitted = True`
-  → `[renpy.block_rollback()]`
-
-> *The slot clicks shut. London continues, entirely indifferent.*
-
-```
-CORA (internal) "Right, then."
-```
-
----
-
-## Afternoon — Scene 3-04: "Stern's Ledger"
-
-**Setup**
-
-`[bg]` `interior/sterns_office` — spare, immaculate, lavender water and ink.
-
-```
-STERN  [not looking up]
-       "You left the premises during your afternoon rest hour."
-
-CORA   "I had an errand, Ms. Stern."
-
-STERN  "I am aware you had an errand, Miss Hartley. I am asking whether
-       you intend to make a habit of it."
-```
-
----
-
-**[choice] — How does Cora handle Stern?**
-
-*Gated by current Suspicion level.*
-
-- **Option A — "Transparency." (Gated: Susp < 40)**
-  → Posted a letter, family matter, won't repeat without prior arrangement.
-  → `[-10 Susp, +5 Insp]`
-  → `[flag]` `stern_trust_medium = True`
-
-- **Option B — "Flattery." (Always available)**
-  → Admires aloud that Stern always knows where everyone is. Then defers on the errand.
-  → `[+5 Susp, -5 Insp]` — Stern is not flattered. She is observed.
-
-- **Option C — "Weather it." (Gated: Susp > 60)**
-  → Can't afford to give Stern more material. One apology. Let her dismiss.
-  → `[+5 Susp]` — the passivity reads as guilt.
-
-`[renpy.block_rollback()]`
-
-```
-STERN  [finally looking up]
-       "I have had word from Sir Gideon's secretary. The party will be
-       extending their stay by four additional days. You'll be working
-       the upper floor assignment through the week."
-```
-
-> *It is not a reward. It is not a punishment. With Ms. Stern, Cora is learning, the two are occasionally identical.*
-
----
-
-## Evening — Scene 3-05: "The Reply" *(Writing Mechanic Payoff Gate)*
-
-**Setup**
-
-`[bg]` `interior/coras_room_evening`
-
-`[mus]` `themes/temptation_understated`
-
-> *A small sealed card. No return. No salutation.*
-
-```
-CORA (internal) [reading, barely audible]
-               "Your material shows promise. The restraint is elegant
-                but costs you in heat. The publisher's market has a
-                particular appetite this season. One more chapter,
-                twelve days. Shock me."
-```
-
----
-
-**⚙️ MECHANIC — WRITING GATE CHECK**
-
-| Resource | Required |
-|----------|----------|
-| Inspiration | ≥ 40 |
-| Corruption | ≥ 30 |
-
-→ **Both met:** unlock Scene 3-05a (Chapter 2 draft)
-→ **Either unmet:** lock to Scene 3-05b (the dry spell)
-
----
-
-**Scene 3-05a — "Chapter Two" (Gate Open)**
-
-| Element | Value |
-|---------|-------|
-| `[char]` | Cora (nightgown, dishevelled, flush layer active) |
-| `[mus]` | `themes/temptation_understated` — build |
-
-> *She writes using names she does not own and perhaps a room she has stood in and a hand she caught only at the corner of her vision. The character she has written — she didn't plan for her. She arrived as an afterthought and wouldn't leave. She has Missy's wide eyes and Vance's arrogance and some quality Cora is carefully not naming yet.*
-
----
-
-**[choice] — Which scene does Cora write?**
-
-*Seeded by `dom_sub_flag`.*
-
-**If `dom_sub_flag = dominant`:**
-- **Option A — "The instructor."** A scene of careful, deliberate instruction. A woman who knows exactly what she wants and the exact, patient way she intends to take it.
-  → `[+25 Corruption, +20 Insp]`
-  → `[flag]` `manuscript_tone = dominant`
-
-**If `dom_sub_flag = submissive` OR free choice:**
-- **Option B — "The penitent."** A scene of surrender that is entirely voluntary — someone walking into a room knowing what is going to happen and going anyway.
-  → `[+20 Corruption, +25 Insp]`
-  → `[flag]` `manuscript_tone = submissive`
-
-`[renpy.block_rollback()]`
-
-> *She seals the new pages without reading them back. She learned that lesson this morning.*
-
-```
-CORA (internal) "Twelve days."
-
-               [The candle gutters.]
-
-CORA (internal) "Right, then."
-```
-
-`[mus]` `themes/temptation_understated` — resolve. Fade to black.
-
----
-
-**Scene 3-05b — "The Dry Spell" (Gate Closed)**
-
-> *She sits for an hour. The page stays white. She knows what she saw. She knows what she felt. But knowing a thing and being able to write it are separate problems entirely.*
-
-```
-CORA (internal) "Tomorrow."
-```
-
-`[mus]` `ambient/room_at_night`
-
-> **📌 PLAYER NOTE:** The writing gate is not cleared. Revisit Day 3 choices or reload to gather more Inspiration/Corruption before attempting again. Eleven days until deadline.
-
-`[flag]` `chapter2_deferred = True`
-
----
-
-## Day 3 — Flags & Stat Summary
-
-| Flag | Set By | Effect Forward |
-|------|--------|---------------|
-| `manuscript_submitted` | Scene 3-03 | Unlocks Holywell contact chain, Day 4+ |
-| `manuscript_reread` | Scene 3-01a | Mild corruption flavour in Day 4 |
-| `missy_in_room_day3` | Scene 3-01b | Determines Missy's Vance encounter, Day 4 |
-| `vance_noticed_cora` | Scene 3-02a Option B | Unlocks Vance private encounter, Day 5+ |
-| `vance_thaw` | Scene 3-02a Option C | Unlocks gentler Vance arc |
-| `gideon_spoken_to` | Scene 3-02b Option B | Expands Gideon dialogue tree |
-| `stern_trust_medium` | Scene 3-04 Option A | Unlocks Stern intel/protection event |
-| `manuscript_tone` | Scene 3-05a | Seeds Chapter 3 framing |
-| `chapter2_deferred` | Scene 3-05b | Forces Day 4 re-attempt gate |
-
-### Stat Deltas (Maximum possible)
-
-| Stat | Max Gain | Max Loss |
-|------|----------|----------|
-| Inspiration | +91 | -5 |
-| Corruption | +75 | -5 |
-| Suspicion | +45 | -25 |
-
----
-
-## Assets Checklist — Day 3
-
-### Backgrounds
-- [ ] `interior/coras_room_morning` (variant: desk_closeup)
-- [ ] `exterior/cheapside_alley`
-- [ ] `interior/sterns_office`
-- [ ] `interior/coras_room_evening` (variant: desk_lamp)
-
-### Music
-- [ ] `themes/quiet_dread`
-- [ ] `themes/threshold`
-- [ ] `themes/temptation_understated`
-- [ ] `ambient/servants_corridor`
-- [ ] `ambient/upper_corridor_tension`
-- [ ] `ambient/office_quiet`
-- [ ] `ambient/room_at_night`
-
-### Character Sprites (new states required)
-- [ ] Cora — shift/tired, nightgown/flush, outdoor dress
-- [ ] Missy — doorway/worried
-- [ ] Vance — peignoir/back-to-camera (mirror reflection variant)
-- [ ] Gideon — morning dress/cataloguing
-- [ ] Stern — at desk/ledger; looking up variant
+# ==========================================
+# DAY 3: MORNING (The Contextual Grind)
+# ==========================================
+label day3_morning:
+    scene bg_servants_corridor_morning
+    with fade
+
+    "The bell rings at 5:00 AM. My muscles ache before my feet even hit the floor."
+    "The tension from yesterday's tea service hangs heavy over the hotel."
+
+    # Branching consequences based on Day 2's choices
+    if day2_tea_choice == "predator":
+        "Vance must have realized I was mocking her."
+        "I am assigned to the scullery. Someone shattered three crystal vases in the Master Suite overnight, and I am the one ordered to pick the shards from the rugs on my hands and knees."
+        "My fingers are bleeding by 9:00 AM. But I am smiling."
+        $ apply_effects(susp=10,insp=0,corr=0)
+        
+    elif day2_tea_choice == "prey":
+        "Gideon's heavy gaze follows me in my memory. Stern is on a warpath."
+        "There is a terrifying, surprise laundry inspection. Stern tears through our footlockers."
+        if day2_outfit_status == "stolen_wearing":
+            "My heart stops. She searches my trunk, but the stolen silk is safe beneath my uniform, pressed against my skin. I survive by a hair's breadth."
+        else:
+            "I stand silently as she tosses my sparse belongings. I have nothing to hide."
+        $ apply_effects(susp=15,insp=0,corr=0)
+        
+    else:
+        "The day is an agonizing stretch of silent labor. Stern has me polishing the brass banisters for six hours straight."
+        "My mind races, trying to process the psychological warfare happening in the Master Suite."
+        $ inspiration += 10
+
+    jump day3_afternoon
+
+# ==========================================
+# DAY 3: AFTERNOON (The Summons)
+# ==========================================
+label day3_afternoon:
+    scene bg_master_suite_day
+    with dissolve
+
+    "At 2:00 PM, the summons arrives. Gideon requests my presence. Alone."
+    "I enter the suite to find Vance seated at the vanity, staring blankly ahead. Gideon stands behind her."
+    
+    show gideon_sprite neutral at right
+    gideon "Ah. Cora. Come here. Vance's maid is indisposed, and her hair requires tending."
+    
+    "He offers me the silver-backed brush. He expects me to serve her, but he orchestrates the room so that we are all looking at each other in the large mirror."
+    
+    show vance_sprite defeated at left
+    "As I begin to brush, Gideon begins to speak. His voice is velvet, but his words are poison."
+    gideon "Vance is losing her edge. She is becoming dull, wouldn't you agree, Cora? Predictable."
+    
+    "Vance flinches with every word. He is breaking her down, and he is using me as his audience."
+
+    # INFLECTION POINT 1: The Test
+    menu:
+        "He is testing my limits. How do I participate?"
+        
+        "The Accomplice: Subtly help him hurt her. (+Influence)":
+            $ influence += 15
+            "I catch a particularly harsh tangle in Vance's hair. Instead of easing it out, I pull. Hard."
+            "Vance gasps, tears pricking her eyes. In the mirror, Gideon smiles. We share a silent, terrible understanding."
+            $ day3_brush_choice = "predator"
+
+        "The Deviant: Make eye contact in the mirror. (+Corruption)":
+            $ apply_effects(susp=0,insp=0,corr=15)
+            "My hands are shaking. The humiliation in the room is a physical weight. I look up, locking eyes with Gideon in the reflection."
+            "My face is flushed. I let him see exactly how this twisted dynamic makes me feel."
+            $ day3_brush_choice = "prey"
+
+        "The Mouse: Panic and drop the brush. (+Suspicion, +Inspiration)":
+            $ apply_effects(susp=15,insp=15,corr=0)
+            "The tension is unbearable. My hands tremble violently until the silver brush slips, clattering loudly against the hardwood floor."
+            gideon "Clumsy."
+            "I scramble to pick it up, retreating into the shell of a terrified servant while mentally recording every detail of his cruelty."
+            $ day3_brush_choice = "ghost"
+
+    "Vance is eventually dismissed to the dressing screen. As I move to leave, Gideon steps into my path."
+    
+    show gideon_sprite dominant at center
+    "The mask is entirely gone. He leans in close, invading my space completely."
+    
+    gideon "You are not like the others, Cora. I want you to bring me tea tonight. 9:00 PM. Unchaperoned."
+    "He doesn't wait for an answer. He knows he doesn't need one."
+
+    jump day3_twilight
+
+# ==========================================
+# DAY 3: TWILIGHT (The Ledger)
+# ==========================================
+label day3_twilight:
+    scene bg_servants_quarters_dusk
+    with fade
+
+    "I am back in my room. My blood is roaring in my ears."
+    
+    # UI CALL: Show Player Stats
+    $ show_ledger_ui()
+
+    "I have to stabilize myself. The ledger demands attention before tonight's ultimatum."
+
+    menu:
+        "Atonement: Prepare uniform for tomorrow. (-Suspicion)":
+            $ apply_effects(susp=-20,insp=0,corr=0)
+            "I rigorously iron my collars and cuffs, projecting an image of the perfect, obedient maid to throw Stern off my scent."
+            
+        "Recon: Eavesdrop on Missy's prayers. (+Corruption, -Suspicion)":
+            $ apply_effects(susp=-10,insp=0,corr=5)
+            "I listen to Missy beg God for forgiveness for wicked thoughts she doesn't even understand. It emboldens me."
+            
+        "Indulge: Write down Gideon's words. (+Inspiration, +Suspicion)":
+            $ apply_effects(susp=10,insp=15,corr=0)
+            "I furiously scribble down the exact phrases Gideon used to break Vance. I am reckless with my ink, staining my cuffs."
+
+    jump day3_night
+
+# ==========================================
+# DAY 3: NIGHT (The Ultimatum)
+# ==========================================
+label day3_night:
+    scene bg_cora_desk_night
+    with dissolve
+    
+    "It is 8:45 PM. The entire hotel is quiet."
+    "I look at my blank manuscript page. I look at the door."
+    "Gideon's order echoes in my head. If I go to him, I forfeit my writing time. If I stay, I cross a man who can destroy me."
+
+    # INFLECTION POINT 2: The Ultimatum
+    menu:
+        "The Choice."
+        
+        "Go to Him. (Massive stat gain, forfeit chapter)":
+            $ apply_effects(susp=15,insp=10,corr=20)
+            $ day3_ultimatum = "surrendered"
+            
+            scene bg_master_suite_night
+            with fade
+            "I abandon my book. I walk down the shadowed corridor with a tray of cold tea."
+            "He is waiting in the dark. He toys with me, asking invasive questions, breaking down my defenses."
+            "I am terrified, but I have never felt so alive. He owns my night."
+            # Show CG_Gideon_Night_Encounter
+            
+            "I return to my room hours later, exhausted and ruined. My manuscript remains untouched."
+            
+        "Barricade the Door. (Write the book, anger the predator)":
+            if (inspiration + corruption + influence) >= 45:
+                $ apply_effects(susp=20,insp=0,corr=0)
+                $ day3_ultimatum = "barricaded"
+                
+                "I lock my door. I shove the heavy washstand against it."
+                "I light my candle and grip my pen. I will not be his plaything tonight."
+                
+                "I write a blistering chapter about a trap set by a cruel lord, and the prey that refuses to bite."
+                $ manuscript_progress += 1
+                # Show CG_Writing_Defiance
+                
+                "At 9:30 PM, I hear heavy footsteps stop outside my door. The handle jiggles once. Slowly."
+                "I hold my breath. A long, terrifying silence stretches out before the footsteps finally retreat."
+                "Chapter Three is complete. But I have declared war."
+            else:
+                "I try to barricade the door, but my resolve fails me. I lack the inspiration or the wicked courage to defy him or go to him."
+                "I cower in my bed, writing nothing, paralyzed by indecision."
+
+    jump day4_morning
