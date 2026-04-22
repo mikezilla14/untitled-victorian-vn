@@ -8,7 +8,7 @@
 
 label day3_morning:
     $ time_manager.current_day  = 3
-    $ time_manager.time_of_day  = "Morning"
+    $ set_time_period("Morning")
 
     sys "─── DAY 3: MORNING ───"
 
@@ -29,24 +29,21 @@ label day3_morning:
         "I clean the VIP suite. Sir Gideon is out."
 
         "Clean thoroughly, nothing more (Safe)":
-            $ player.lower_suspicion(5)
-            $ player.gain_inspiration(5)
+            $ apply_effects(insp=5, susp=-5)
             cora "I was a model maid today. Miss Stern would be proud."
 
         "Search the desk drawers while cleaning (Risky)":
-            $ player.raise_suspicion(15)
-            $ player.gain_inspiration(15)
+            $ apply_effects(insp=15, susp=15)
             cora "I found a journal. Most of it was mundane — appointments, financial notes. But one entry caught my eye."
             cora "A name. An address in Mayfair. And the words: 'She will be here Thursday. Prepare the adjoining suite.'"
             cora "Thursday is tomorrow."
 
-    call check_suspicion
-    $ player.update_stats()
+    $ resolve_turn()
     jump day3_night
 
 
 label day3_night:
-    $ time_manager.time_of_day = "Night"
+    $ set_time_period("Night")
 
     sys "─── DAY 3: NIGHT ───"
 
@@ -54,15 +51,13 @@ label day3_night:
         "The hotel is silent. The gas lamps cast long shadows down the servant's passage."
 
         "Stay in my quarters tonight (Pure)" if player.corruption_level < 2:
-            $ player.gain_corruption_xp(-5)
+            $ apply_effects(corr=-5)
             cora "I can't keep doing this. The risk is too great. If Miss Stern catches me in that corridor..."
             cora "I sat on my bed and stared at the ceiling and tried not to think about the sounds I heard two nights ago."
             cora "I failed."
 
         "Return to the servant's passage (The Voyeur Scene)":
-            $ player.gain_corruption_xp(15)
-            $ player.gain_inspiration(25)
-            $ player.raise_suspicion(15)
+            $ apply_effects(insp=25, corr=15, susp=15)
             $ story.saw_voyeur_scene = True
 
             cora "I crept back to the passage. This time I knew exactly where to stand."
@@ -76,13 +71,12 @@ label day3_night:
             cora "When it was over, I walked back to my room on legs that barely held me. Not from shock — I had read about such things in the penny dreadfuls. But reading about fire and standing in the flames are very different things."
             cora "My mind was already writing the scene. Every detail. Every sound. Every shadow."
 
-    call check_suspicion
-    $ player.update_stats()
+    $ resolve_turn()
     jump day3_late_night
 
 
 label day3_late_night:
-    $ time_manager.time_of_day = "Late Night"
+    $ set_time_period("Late Night")
 
     sys "─── DAY 3: LATE NIGHT ───"
 
@@ -112,8 +106,7 @@ label day3_late_night:
         cora "I sat at the desk. The candle guttered. I wrote a few lines, crossed them out, wrote a few more."
         cora "It's not enough. I need more. I need to see what happens behind those walls."
 
-    call check_suspicion
-    $ player.update_stats()
+    $ resolve_turn()
 
     # ── PAYMENT ARRIVES ────────────────────────────────────────
     # Only triggers if a chapter was dispatched before this point.

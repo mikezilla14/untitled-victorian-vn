@@ -8,7 +8,7 @@
 
 label day4_morning:
     $ time_manager.current_day  = 4
-    $ time_manager.time_of_day  = "Morning"
+    $ set_time_period("Morning")
 
     sys "─── DAY 4: MORNING ───"
 
@@ -41,24 +41,20 @@ label day4_morning:
         "I continue cleaning."
 
         "Finish quickly and leave (Safe)":
-            $ player.lower_suspicion(5)
-            $ player.gain_inspiration(5)
+            $ apply_effects(insp=5, susp=-5)
             cora "I curtseyed and excused myself before anything else could happen."
 
         "Linger. Let the silence stretch. (Curious)":
-            $ player.raise_suspicion(10)
-            $ player.gain_inspiration(10)
-            $ player.gain_corruption_xp(5)
+            $ apply_effects(insp=10, corr=5, susp=10)
             cora "I stayed longer than I should have. Polishing brass that was already clean. He didn't speak again, but he watched me work."
             cora "Being watched by Sir Gideon felt different from being watched by Miss Stern. I'm not sure which is more dangerous."
 
-    call check_suspicion
-    $ player.update_stats()
+    $ resolve_turn()
     jump day4_night
 
 
 label day4_night:
-    $ time_manager.time_of_day = "Night"
+    $ set_time_period("Night")
 
     sys "─── DAY 4: NIGHT ───"
 
@@ -68,22 +64,18 @@ label day4_night:
         "Tonight is my last chance to gather material before the deadline."
 
         "Stay in my quarters. The risk is too great. (Pure)" if player.corruption_level < 2:
-            $ player.gain_corruption_xp(-5)
+            $ apply_effects(corr=-5)
             cora "I sat on my bed and listened to my own breathing. The pages on my desk felt like an accusation."
             cora "Safe. Invisible. Exactly what I was raised to be."
 
         "Return to the passage — spy from a distance (Risky)":
-            $ player.gain_corruption_xp(10)
-            $ player.gain_inspiration(20)
-            $ player.raise_suspicion(20)
+            $ apply_effects(insp=20, corr=10, susp=20)
             cora "I crept back to the grate. Tonight was different — more urgent, more reckless. Miss Stern's footsteps had passed this corridor not ten minutes ago."
             cora "Through the lattice, I saw Sir Gideon with his guest again. This time, they had left a lamp burning."
             cora "I saw every detail. My mind catalogued it all like a ruthless, mechanical thing."
 
         "Stay in the passage when I hear footsteps approaching (Bold)":
-            $ player.gain_corruption_xp(25)
-            $ player.gain_inspiration(10)
-            $ player.raise_suspicion(25)
+            $ apply_effects(insp=10, corr=25, susp=25)
             $ story.chose_bold_day4 = True
             cora "I didn't just watch tonight. I lingered."
             cora "When I heard movement in the passage behind me, I didn't flee. I pressed myself flat against the wall and held my breath."
@@ -91,13 +83,12 @@ label day4_night:
             cora "But the thrill of almost being caught — the raw, animal terror of it — was unlike anything I have ever experienced."
             cora "I am no longer the same girl who arrived at this hotel."
 
-    call check_suspicion
-    $ player.update_stats()
+    $ resolve_turn()
     jump day4_late_night
 
 
 label day4_late_night:
-    $ time_manager.time_of_day = "Late Night"
+    $ set_time_period("Late Night")
 
     sys "─── DAY 4: LATE NIGHT ───"
 
@@ -118,6 +109,5 @@ label day4_late_night:
         cora "I tried to write but the material wasn't there. I need more inspiration — more life in these pages."
         cora "Time is running out."
 
-    call check_suspicion
-    $ player.update_stats()
+    $ resolve_turn()
     jump day5_morning

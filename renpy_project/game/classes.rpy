@@ -6,9 +6,35 @@
 init -1 python:
 
     class TimeManager(object):
+        ALLOWED_PERIODS = (
+            "Early Morning",
+            "Morning",
+            "Afternoon",
+            "Evening",
+            "Night",
+            "Late Night",
+        )
+
         def __init__(self):
             self.current_day = 1
-            self.time_of_day = "Morning"
+            self._time_of_day = "Morning"
+
+        @property
+        def time_of_day(self):
+            return self._time_of_day
+
+        @time_of_day.setter
+        def time_of_day(self, value):
+            if value not in self.ALLOWED_PERIODS:
+                raise ValueError(
+                    "Invalid time_of_day '{}'. Allowed values: {}".format(
+                        value, ", ".join(self.ALLOWED_PERIODS)
+                    )
+                )
+            self._time_of_day = value
+
+        def set_time_of_day(self, value):
+            self.time_of_day = value
 
     class PlayerStats(object):
         def __init__(self):

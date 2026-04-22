@@ -7,7 +7,7 @@
 
 label day5_morning:
     $ time_manager.current_day  = 5
-    $ time_manager.time_of_day  = "Morning"
+    $ set_time_period("Morning")
 
     sys "─── DAY 5: MORNING — THE RECKONING ───"
 
@@ -26,14 +26,14 @@ label day5_morning:
         "She's looking at the desk."
 
         "Hide the manuscript — destroy the draft pages (Costly)":
-            $ player.gain_inspiration(-15)
+            $ apply_effects(insp=-15)
             cora  "While her back was turned checking the wardrobe, I shoved the loose pages under the mattress and crumpled the visible sheet."
             cora  "She found nothing. But I've lost material. Pages I'll have to rewrite from memory."
             stern "Hmm. See that you keep proper hours, Cora. I will not have slovenly behaviour on my floor."
             cora  "She left. My knees buckled."
 
         "Bluff — 'It's a letter to my mother, ma'am' (Dangerous)":
-            $ player.raise_suspicion(20)
+            $ apply_effects(susp=20)
             cora  "'It's a letter to my mother, ma'am. I write to her every week.'"
             stern "Every week, is it. You seem to do a great deal of writing for a chambermaid."
             cora  "She picked up the sheet on top. My heart stopped."
@@ -41,13 +41,12 @@ label day5_morning:
             stern "See that your correspondence doesn't interfere with your duties."
             cora  "She left. I almost vomited."
 
-    call check_suspicion
-    $ player.update_stats()
+    $ resolve_turn()
     jump day5_night
 
 
 label day5_night:
-    $ time_manager.time_of_day = "Night"
+    $ set_time_period("Night")
 
     sys "─── DAY 5: NIGHT — THE CLIMAX ───"
 
@@ -80,7 +79,7 @@ label day5_night:
 
 
 label day5_cliffhanger:
-    $ time_manager.time_of_day = "Late Night"
+    $ set_time_period("Late Night")
 
     sys "─── DAY 5: LATE NIGHT — THE CLIFFHANGER ───"
 

@@ -7,7 +7,7 @@
 
 label day1_morning:
     $ time_manager.current_day  = 1
-    $ time_manager.time_of_day  = "Morning"
+    $ set_time_period("Morning")
 
     sys "─── DAY 1: MORNING ───"
 
@@ -26,7 +26,7 @@ label day1_morning:
 
 
 label day1_night:
-    $ time_manager.time_of_day = "Night"
+    $ set_time_period("Night")
 
     sys "─── DAY 1: NIGHT ───"
 
@@ -49,7 +49,7 @@ label day1_night:
 
 
 label day1_late_night:
-    $ time_manager.time_of_day = "Late Night"
+    $ set_time_period("Late Night")
 
     sys "─── DAY 1: LATE NIGHT ───"
 
@@ -62,5 +62,5 @@ label day1_late_night:
 
     cora "I blow out the candle."
 
-    $ player.update_stats()
+    $ resolve_turn()
     jump day2_morning

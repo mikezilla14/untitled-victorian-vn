@@ -3,6 +3,15 @@ import re
 import sys
 from pathlib import Path
 
+ALLOWED_TIME_PERIODS = {
+    "Early Morning",
+    "Morning",
+    "Afternoon",
+    "Evening",
+    "Night",
+    "Late Night",
+}
+
 
 def read_lines(path):
     with open(path, "r", encoding="utf-8") as f:
@@ -93,6 +102,34 @@ def check_script_thin_if_touched(files):
     return violations
 
 
+def check_time_period_literals(files):
+    """
+    Enforce standardized time-of-day literals.
+    """
+    violations = []
+    direct_assign = re.compile(r'^\s*\$\s*time_manager\.time_of_day\s*=\s*"([^"]+)"')
+    helper_assign = re.compile(r'^\s*\$\s*set_time_period\(\s*"([^"]+)"\s*\)')
+
+    for file in files:
+        if not file.endswith(".rpy"):
+            continue
+        full_path = Path(file)
+        if not full_path.exists():
+            continue
+
+        for idx, line in enumerate(read_lines(full_path), start=1):
+            match = direct_assign.search(line) or helper_assign.search(line)
+            if not match:
+                continue
+            literal = match.group(1)
+            if literal not in ALLOWED_TIME_PERIODS:
+                violations.append(
+                    f"{file}:{idx} invalid time period '{literal}'. "
+                    f"Allowed: {sorted(ALLOWED_TIME_PERIODS)}"
+                )
+    return violations
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -112,6 +149,7 @@ def main():
     all_violations.extend(check_no_direct_player_field_writes(files))
     all_violations.extend(check_suspicion_guard_order(files))
     all_violations.extend(check_script_thin_if_touched(files))
+    all_violations.extend(check_time_period_literals(files))
 
     if all_violations:
         print("❌ ENGINEERING COMPLIANCE VIOLATIONS:")
