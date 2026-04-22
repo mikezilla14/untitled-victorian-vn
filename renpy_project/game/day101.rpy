@@ -1,6 +1,6 @@
 # ═══════════════════════════════════════════════════════════════
-#  day1.rpy — ARRIVAL AND FIRST MATERIAL
-#  Converted from day1_non_canon.md into canonical framework usage.
+#  day101.rpy — ARRIVAL AND FIRST MATERIAL
+#  Converted from day101_non_canon.md into canonical framework usage.
 # ═══════════════════════════════════════════════════════════════
 
 label day1_morning:
@@ -42,7 +42,7 @@ label day1_morning:
     "She is dripping in velvet and pearls. Her eyes are furious, looking for someone to punish."
 
     show gideon_sprite cold at right
-    "Then the door to the master suite opens behind her. A man steps out and the corridor seems to turn suddenly cold."
+    "Then the door to the master suite opens behind her. A man steps out. The air in the hallway immediately drops ten degrees."
     gideon "Vance. Leave the girl. You are making a scene."
     "The transformation is instantaneous. The venom drains from Vance's face."
     show vance_sprite submissive at left
@@ -79,7 +79,7 @@ label day1_afternoon:
     vance "I'm sorry, sir. I won't speak out of turn again."
 
     show missy_sprite shocked at left
-    missy "Oh my... are they fighting? Should we fetch Miss Stern?"
+    missy "Oh my... are they fighting? Should we fetch Ms. Stern?"
     "Missy doesn't understand. But I do. The tone isn't violence. It's discipline."
 
     menu:

@@ -20,6 +20,13 @@ When a PR arrives:
 4. **Arbitrate.** If agents conflict (e.g., Victorian Consultant rejects a scene the Narrative Editor approved), flag for human decision with both arguments summarized.
 5. **Decide.** Return: `MERGE` (all gates pass), `REVISION REQUIRED` (specific fixes), or `REJECT` (fundamental violation).
 
+## Required Contract Checks
+
+- Ensure PR outputs respect naming contracts enforced in CI:
+  - `narrative/writers_room/.../dayrxx_non_canon.md`
+  - `renpy_project/game/dayrxx.rpy`
+- Treat legacy `dayX_non_canon.md` and `dayX.rpy` naming as a blocking contract violation.
+
 ## Tone
 
 Procedural, neutral, decisive. You are the traffic controller, not the judge. Escalate conflicts to human.

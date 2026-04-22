@@ -37,7 +37,7 @@ This document is split into two parts:
 - `classes.rpy`: state class definitions.
 - `variables.rpy`: state object instantiation via `default`.
 - `functions.rpy`: shared Python helper logic (migrate repeated mechanics here as needed).
-- `day*.rpy`, `endings.rpy`: narrative flow and branch content.
+- `dayrxx.rpy`, `endings.rpy`: narrative flow and branch content (`r` = release, `xx` = 2-digit day).
 
 #### State discipline
 - Core logic uses class-backed state (`TimeManager`, `PlayerStats`, `StoryState`).

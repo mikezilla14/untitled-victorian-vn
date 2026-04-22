@@ -1,13 +1,24 @@
 # ==========================================
 # DAY 5: MORNING (The Confrontation)
 # ==========================================
+# FORMAT LEGEND:
+# [ASSET] -> backgrounds, sprites, transitions, CG/UI callouts
+# [STATE] -> variable changes, effects, conditions, jumps
+# [CHOICE] -> menu blocks and inflection points
+# [BEAT] -> narrative intent / scene intent notes
+
 label day5_morning:
+
+    # [ASSET] Visual/staging command
     scene bg_master_suite_day
+
+    # [ASSET] Visual/staging command
     with fade
 
     "I am summoned to the Master Suite. Vance is not here. Only Gideon."
     "He is sitting in the leather armchair, smoking. He does not look up when I enter."
 
+    # [ASSET] Visual/staging command
     show gideon_sprite dominant at center
     gideon "Someone forced the lock on my private box yesterday, Cora."
     
@@ -20,6 +31,8 @@ label day5_morning:
         cora "I don't know what you mean, Sir."
         "He studies me for a long, agonizing moment. He rings the bell for Ms. Stern."
         "I am nothing to him. I am already dead."
+
+        # [STATE] State/progression update
         jump ending_fired_and_ruined
 
     else:
@@ -30,6 +43,7 @@ label day5_morning:
         "Gideon looks at the image. He looks at his own ruin. And then... he laughs."
         "It is a dark, terrible sound."
 
+    # [STATE] State/progression update
     jump day5_afternoon
 
 # ==========================================
@@ -50,11 +64,16 @@ label day5_afternoon:
     gideon "But it took steel to pick that lock. And it took pure, unadulterated venom to stand there and look me in the eye while you handed this over."
     gideon "Why did you do it, Cora?"
 
+    # [CHOICE] Decision point
     menu:
         "The truth. What is my motivation?"
         
         "The Observer (High Inspiration): 'To finish my book.'":
+
+            # [STATE] State/progression update
             $ inspiration += 15
+
+            # [STATE] State/progression update
             $ day5_dynamic = "muse"
             
             cora "I am writing a manuscript. I needed the absolute truth of who you are to write the ending."
@@ -62,7 +81,11 @@ label day5_afternoon:
             gideon "A voyeur. Hiding in a maid's uniform, dissecting us like insects."
             
         "The Deviant (High Corruption): 'To stand where you stand.'":
+
+            # [STATE] State/progression update
             $ corruption += 15
+
+            # [STATE] State/progression update
             $ day5_dynamic = "protege"
             
             cora "Because I am suffocating in this uniform. And I want to know what it feels like to hold the whip."
@@ -77,13 +100,18 @@ label day5_afternoon:
     
     "He walks out of the room, leaving me trembling, funded, and utterly entangled."
 
+    # [STATE] State/progression update
     jump day5_night
 
 # ==========================================
 # DAY 5: NIGHT (The Literary Climax)
 # ==========================================
 label day5_night:
+
+    # [ASSET] Visual/staging command
     scene bg_cora_desk_night
+
+    # [ASSET] Visual/staging command
     with dissolve
 
     "The hotel is silent. The ledger is closed. I have my funding. But I am no longer a ghost. Gideon knows exactly what I am."
@@ -104,19 +132,26 @@ label day5_night:
         "I write a beautiful, haunting piece of voyeurism. The prose is detached but incredibly intimate, capturing the tragic beauty of submission in a gilded cage."
         # Show Explicit H-Scene CG: The Voyeuristic Manuscript Visualization
 
+    # [STATE] State/progression update
     $ manuscript_progress = 100
     "I sign the final page. The MVP is complete."
 
     # THE CLIFFHANGER
+
+    # [ASSET] Visual/staging command
     scene bg_master_suite_day
+
+    # [ASSET] Visual/staging command
     with fade
 
     "The next morning."
     "I enter the Master Suite to clear the breakfast trays."
     
+    # [ASSET] Visual/staging command
     show vance_sprite confused at left
     "Vance is sitting at the vanity. She looks at me, then looks away, as if sensing a shift in the air she doesn't understand."
     
+    # [ASSET] Visual/staging command
     show gideon_sprite dominant at right
     "Gideon is reading the paper. As I reach across the table to take his plate, his hand closes lightly over my wrist."
     
@@ -125,7 +160,11 @@ label day5_night:
     "I look at Gideon. I look at Vance. And I smile."
 
     # HARD CUT TO BLACK
+
+    # [ASSET] Visual/staging command
     scene black
+
+    # [ASSET] Visual/staging command
     with fade
     
     "END OF DEMO. THE BOOK IS WRITTEN. THE GAME HAS JUST BEGUN."

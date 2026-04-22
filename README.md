@@ -6,7 +6,7 @@ An AI-accelerated, adult pseudo-sandbox RPG visual novel set in a Victorian hote
 
 * **`/docs`**: Studio and mechanics docs. **`docs/narrative_workflow.md`** describes the MVP narrative loop (pseudo-Ren’Py in markdown → implement in `renpy_project/`).
 * **`/docs/backlog`**: Deferred tooling (e.g. optional JSON beat schema), not required for MVP.
-* **`/narrative/writers_room`**: Draft pseudo-scripts, storyboards, and `*_non_canon.md` supporting material.
+* **`/narrative/writers_room`**: Draft pseudo-scripts, storyboards, and `dayrxx_non_canon.md` supporting material (`r` = release, `xx` = 2-digit day).
 * **`/narrative/canon`**: Promoted truth (Lead Narrative Editor), when used.
 * **`/scripts`**: **`historical_linter.py`** (retained) and **`gatekeeper.py`** (domain checks). No beat-JSON pipeline in MVP.
 * **`/.agents`**: AI role rules.

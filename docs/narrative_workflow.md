@@ -9,6 +9,14 @@ The product is a **playable Ren’Py MVP** in `renpy_project/`. Narrative design
 3. **Implementation** — hand the pseudo-script to the **coding agent** and iterate until the behavior exists in `renpy_project/game/*.rpy`.
 4. **Architecture** — the **chief architect** reviews Ren’Py changes for methodology (state, structure, no leaky globals, lint), not for markdown format.
 
+## Day file naming contract
+
+- **Non-canon markdown drafts** must be named `dayrxx_non_canon.md`.
+- **Ren'Py episodic files** must be named `dayrxx.rpy`.
+- `r` is the release number, and `xx` is the 2-digit day number (`01`-`99`).
+- Example: release 1 day 1 -> `day101_non_canon.md` and `day101.rpy`.
+- This contract is enforced in CI via `scripts/engineering_compliance.py`.
+
 ## What is *not* in scope for MVP
 
 - No required JSON beat payloads, no markdown→JSON→Ren’Py automation.

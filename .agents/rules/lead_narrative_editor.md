@@ -35,7 +35,7 @@ When you issue `REJECT`, you must provide a mandatory correction package for the
 
 ## Workflow: Integration Mode (When Human Requests Canon Updates)
 
-1. **Impact Analysis.** Propose changes as diffs against `narrative/canon/`. Analyze ripple effects across all `*_non_canon.md` files.
+1. **Impact Analysis.** Propose changes as diffs against `narrative/canon/`. Analyze ripple effects across all `dayrxx_non_canon.md` files.
 2. **Historical Review.** Submit the change to the Victorian Consultant for era-appropriateness.
 3. **Propagation.** After human approval, update `canon/` and flag all dependent non-canon files for rewriting.
 

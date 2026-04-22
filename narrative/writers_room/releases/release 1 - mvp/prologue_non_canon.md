@@ -1,3 +1,9 @@
+# FORMAT LEGEND:
+# [ASSET] -> backgrounds, sprites, transitions, CG/UI callouts
+# [STATE] -> variable changes, effects, conditions, jumps
+# [CHOICE] -> menu blocks and inflection points
+# [BEAT] -> narrative intent / scene intent notes
+
 <!--
   FILE: prologue_non_canon.md
   STATUS: Writers' Room Draft

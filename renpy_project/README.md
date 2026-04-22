@@ -34,16 +34,16 @@ Navigate the treacherous balance of your duties, the curiosity surrounding the e
 
 ## Narrative Structure
 
-The story is split across five day files, loaded alphabetically by Ren'Py:
+The story is split across five episodic day files, loaded alphabetically by Ren'Py. The naming contract is `dayrxx.rpy` where `r` is release number and `xx` is 2-digit day:
 
 | File | Content |
 |---|---|
-| `script.rpy` | Entry point — intro monologue, jumps to `day1_morning` |
-| `day1.rpy` | Day 1 — Cora's first shift; meeting the hotel |
-| `day2.rpy` | Day 2 — Gideon initiates conversation |
-| `day3.rpy` | Day 3 — The grate scene; Stern's hidden vulnerability |
-| `day4.rpy` | Day 4 — Gideon's loneliness revealed; the passage choice |
-| `day5.rpy` | Day 5 — Climax and cliffhanger |
+| `script.rpy` | Entry point — intro monologue, jumps to Day 1 labels |
+| `day101.rpy` | Release 1, Day 1 — Cora's first shift; meeting the hotel |
+| `day102.rpy` | Release 1, Day 2 — Gideon initiates conversation |
+| `day103.rpy` | Release 1, Day 3 — The grate scene; Stern's hidden vulnerability |
+| `day104.rpy` | Release 1, Day 4 — Gideon's loneliness revealed; the passage choice |
+| `day105.rpy` | Release 1, Day 5 — Climax and cliffhanger |
 | `endings.rpy` | Fail states and bad endings branching out of the main flow |
 
 ## Narrative Flags
@@ -85,11 +85,11 @@ renpy_project/
 │   ├── gui.rpy              # Ren'Py UI configuration variables
 │   ├── options.rpy          # Ren'Py project configuration
 │   ├── script.rpy           # Entry point — launches the game
-│   ├── day1.rpy             # Day 1 narrative
-│   ├── day2.rpy             # Day 2 narrative
-│   ├── day3.rpy             # Day 3 narrative
-│   ├── day4.rpy             # Day 4 narrative
-│   ├── day5.rpy             # Day 5 narrative & cliffhanger
+│   ├── day101.rpy           # Release 1, Day 1 narrative
+│   ├── day102.rpy           # Release 1, Day 2 narrative
+│   ├── day103.rpy           # Release 1, Day 3 narrative
+│   ├── day104.rpy           # Release 1, Day 4 narrative
+│   ├── day105.rpy           # Release 1, Day 5 narrative & cliffhanger
 │   └── endings.rpy          # Fail states and bad endings
 ├── utilities/
 │   └── stats_refactor.py    # Dev script used to refactor stat mechanics

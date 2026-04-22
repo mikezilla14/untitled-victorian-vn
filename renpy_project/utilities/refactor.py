@@ -4,7 +4,7 @@ import re
 game_dir = r"c:\Users\mikez\OneDrive\Documents\gh\git\untitled-victorian-vn\renpy_project\game"
 
 target_files = [
-    "script.rpy", "day1.rpy", "day2.rpy", "day3.rpy", "day4.rpy", "day5.rpy", "endings.rpy", "screens.rpy"
+    "script.rpy", "day101.rpy", "day102.rpy", "day103.rpy", "day104.rpy", "day105.rpy", "endings.rpy", "screens.rpy"
 ]
 
 story_flags = [

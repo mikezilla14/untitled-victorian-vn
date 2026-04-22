@@ -2,13 +2,13 @@
 #  script.rpy — ENTRY POINT ONLY
 #
 #  This file should stay thin. Its only job is to launch the
-#  game and hand off to day1.rpy. All other logic lives in its
+#  game and hand off to day101.rpy. All other logic lives in its
 #  own file. Do not add narrative content or stat manipulation
 #  here.
 #
 #  File load order (Ren'Py loads alphabetically):
 #    characters.rpy → classes.rpy → functions.rpy → screens.rpy → variables.rpy
-#    → day1.rpy → day2.rpy → day3.rpy → day4.rpy → day5.rpy
+#    → day101.rpy → day102.rpy → day103.rpy → day104.rpy → day105.rpy
 #    → endings.rpy → script.rpy
 # ═══════════════════════════════════════════════════════════════
 

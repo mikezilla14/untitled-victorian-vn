@@ -1,7 +1,7 @@
 # ═══════════════════════════════════════════════════════════════
 #  endings.rpy — FAIL STATES AND BAD ENDINGS
 #  All non-cliffhanger terminal labels live here.
-#  The cliffhanger (day5_cliffhanger) stays in day5.rpy because
+#  The cliffhanger (day105_cliffhanger) stays in day105.rpy because
 #  it is part of the Day 5 flow. These are branches that break
 #  out of the main flow entirely.
 # ═══════════════════════════════════════════════════════════════

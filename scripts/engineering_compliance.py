@@ -12,6 +12,13 @@ ALLOWED_TIME_PERIODS = {
     "Late Night",
 }
 
+DAYRXX_RPY_RE = re.compile(r"^day([1-9]\d*)(0[1-9]|[1-9]\d)\.rpy$")
+DAYRXX_NON_CANON_RE = re.compile(
+    r"^day([1-9]\d*)(0[1-9]|[1-9]\d)_non_canon\.md$"
+)
+LEGACY_DAY_NON_CANON_RE = re.compile(r"^day\d+_non_canon\.md$")
+LEGACY_DAY_RPY_RE = re.compile(r"^day\d+\.rpy$")
+
 
 def read_lines(path):
     with open(path, "r", encoding="utf-8") as f:
@@ -130,6 +137,44 @@ def check_time_period_literals(files):
     return violations
 
 
+def check_day_file_naming_contract(files):
+    """
+    Enforce day file naming contract:
+    - Narrative drafts: dayrxx_non_canon.md (e.g. day101_non_canon.md)
+    - Runtime files: dayrxx.rpy (e.g. day101.rpy)
+    where r = release number and xx = 2-digit day number.
+    """
+    violations = []
+    for file in files:
+        norm = file.replace("\\", "/")
+        name = Path(norm).name
+        full_path = Path(file)
+        if not full_path.exists():
+            continue
+
+        if norm.startswith("narrative/writers_room/") and name.endswith("_non_canon.md"):
+            if not DAYRXX_NON_CANON_RE.fullmatch(name):
+                violations.append(
+                    f"{file} invalid non-canon day filename. Expected dayrxx_non_canon.md (example: day101_non_canon.md)."
+                )
+            continue
+
+        if norm.startswith("renpy_project/game/") and name.endswith(".rpy"):
+            if LEGACY_DAY_RPY_RE.fullmatch(name) and not DAYRXX_RPY_RE.fullmatch(name):
+                violations.append(
+                    f"{file} uses legacy episodic filename. Expected dayrxx.rpy (example: day101.rpy)."
+                )
+            continue
+
+        # Explicitly guard against legacy narrative naming where applicable.
+        if LEGACY_DAY_NON_CANON_RE.fullmatch(name) and not DAYRXX_NON_CANON_RE.fullmatch(name):
+            violations.append(
+                f"{file} uses legacy non-canon filename. Expected dayrxx_non_canon.md (example: day101_non_canon.md)."
+            )
+
+    return violations
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -150,14 +195,15 @@ def main():
     all_violations.extend(check_suspicion_guard_order(files))
     all_violations.extend(check_script_thin_if_touched(files))
     all_violations.extend(check_time_period_literals(files))
+    all_violations.extend(check_day_file_naming_contract(files))
 
     if all_violations:
-        print("❌ ENGINEERING COMPLIANCE VIOLATIONS:")
+        print("ENGINEERING COMPLIANCE VIOLATIONS:")
         for violation in all_violations:
             print(f" - {violation}")
         sys.exit(1)
 
-    print("✅ Engineering compliance checks passed.")
+    print("Engineering compliance checks passed.")
     sys.exit(0)
 
 
