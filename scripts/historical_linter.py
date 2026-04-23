@@ -25,7 +25,7 @@ def lint_file(filepath):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--file", required=True, help="Markdown file to lint")
+    parser.add_argument("--file", required=True, help="Narrative file to lint (.md or .rpy)")
     args = parser.parse_args()
 
     print(f"🕵️ Victorian Consultant checking {args.file}...")

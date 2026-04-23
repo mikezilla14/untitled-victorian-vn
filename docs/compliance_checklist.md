@@ -14,10 +14,11 @@ Manual-only items remain reviewer responsibilities.
 
 ## B) State architecture
 
-- [ ] Core state remains class-backed in `renpy_project/game/classes.rpy`.
+- [ ] Core state remains class-backed in `renpy_project/game/classes.rpy` (`TimeManager`, `PlayerStats`, `StoryState`); no raw globals for game state in day scripts.
 - [ ] No new global `default` declarations outside `renpy_project/game/variables.rpy`.
-- [ ] Stat/flag mutations are traceable and consistent with existing patterns.
-- [ ] Direct field edits are avoided when a mutation method exists.
+- [ ] Stat/flag mutations are traceable and consistent with existing patterns; binary flags use `bool` + setters; mutually exclusive outcomes use a **single** string + whitelist in Python + a single setter, not several booleans.
+- [ ] Direct field edits are avoided when a mutation method exists. In game scripts, **do not** assign whitelisted string fields (e.g. `story.day1_corridor_state = ...`) or `story.has_*` booleans; use setters (e.g. `story.set_corridor_state("predator")`, `story.set_has_written_first_chapter(True)`).
+- [ ] `scripts/engineering_compliance.py` includes checks for disallowed `story.day1_corridor_state` assignment and unqualified `set_corridor_state(` in `renpy_project/game/`.
 
 ## C) Mechanics integrity
 
@@ -34,7 +35,7 @@ Manual-only items remain reviewer responsibilities.
 
 ## E) Narrative and historical constraints
 
-- [ ] Any changed writers-room markdown passes historical linter checks.
+- [ ] Any changed writers-room narrative draft (`*_non_canon.rpy`) or markdown docs pass historical linter checks.
 - [ ] Dialogue/tone remains consistent with established voice and class context.
 
 ## Optional reviewer notes

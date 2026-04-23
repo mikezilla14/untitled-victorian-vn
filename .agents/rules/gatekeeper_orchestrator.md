@@ -13,7 +13,7 @@ When a PR arrives:
 1. **Classify.** Read `.guardrails.yml`. Determine PR domain (writing, code, art).
 2. **Route.**
    - Narrative PRs → Lead Narrative Editor (canon + voice + alignment with pseudo-script / game intent)
-   - Code PRs → Chief Architect (architecture + lint + dependencies + boolean-only tracked-state-flag compliance)
+   - Code PRs → Chief Architect (architecture + lint + dependencies + `StoryState` contract: boolean flags + whitelisted string branch setters, no direct field assignment in scripts)
    - Art PRs → Victorian Consultant (historical visual accuracy) + Chief Architect (asset pipeline integration + any code-side boolean tracked-flag compliance)
    - Mixed PRs → Split into sub-reviews per domain
 3. **Collect.** Gather all agent reviews.
@@ -23,9 +23,9 @@ When a PR arrives:
 ## Required Contract Checks
 
 - Ensure PR outputs respect naming contracts enforced in CI:
-  - `narrative/writers_room/.../dayrxx_non_canon.md`
-  - `renpy_project/game/dayrxx.rpy`
-- Treat legacy `dayX_non_canon.md` and `dayX.rpy` naming as a blocking contract violation.
+  - `narrative/writers_room/.../dayrdd_non_canon.rpy`
+  - `renpy_project/game/dayrdd.rpy`
+- Treat legacy `dayX_non_canon.*` and `dayX.rpy` naming as a blocking contract violation.
 
 ## Tone
 

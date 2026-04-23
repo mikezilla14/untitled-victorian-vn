@@ -1,6 +1,6 @@
 # GAME MECHANICS BIBLE
 **Project:** [Pending Title]  
-**Version:** 1.1  
+**Version:** 1.2  
 **Scope:** Player-facing mechanics and implementation contracts for MVP.
 
 This document separates:
@@ -39,9 +39,15 @@ This document separates:
 ### 4) Choice architecture contract
 - Choices must produce visible consequence through one or more of:
   - stat deltas,
-  - branch text/state flags,
+  - branch text/state (see **State & stat management** below),
   - ending route pressure.
 - Choices should not be cosmetic-only in critical beats.
+
+#### State & stat management (authoritative in `classes.rpy`)
+- **Class encapsulation:** Tracked state lives on `PlayerStats` and `StoryState` (and time on `TimeManager`); not as loose script globals.
+- **Binary** outcomes: `bool` attributes and typed setters.
+- **Mutually exclusive** outcomes: one `str` per fork with a default (e.g. `"none"`), a **fixed whitelist** in Python, and **only** designated setters in scripts to change it (e.g. `set_corridor_state`). Do not use several booleans for the same choice.
+- **Validation:** String branch updates must be rejected at runtime if not whitelisted; game scripts use `story.set_*(...)` only, not direct `story.<field> =` for those fields. Reading is allowed in `if` / conditions.
 
 ### 5) Fail and ending structure
 - Hard fail: Suspicion overflow -> `game_over_dismissed`.
@@ -54,8 +60,9 @@ This document separates:
 
 - Source of truth is class-backed state in `classes.rpy`.
 - Runtime state instances are declared in `variables.rpy`.
-- Day scripts mutate state through methods when available.
+- Day scripts mutate `StoryState` and stats through setters and helpers that enforce contracts (booleans via `set_has_*` / equivalent; exclusive branches via whitelisted setters such as `set_corridor_state`).
 - Repeated mechanics should be consolidated in `functions.rpy` over time.
+- CI: `scripts/engineering_compliance.py` enforces parts of the above for touched files; pair with `renpy lint`.
 
 ---
 

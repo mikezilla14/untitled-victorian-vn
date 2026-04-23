@@ -53,16 +53,13 @@ init -1 python:
         def update_stats(self):
             self.suspicion -= 5
             self.suspicion = max(0, min(100, self.suspicion))
-
             self.corruption_xp = max(0, self.corruption_xp)
-
             while self.corruption_xp >= 20:
                 self.corruption_xp -= 20
                 self.corruption_level += 1
-
             inspiration_cap = 20 + (self.corruption_level * 10)
             self.inspiration = max(0, min(inspiration_cap, self.inspiration))
-            
+
         def gain_inspiration(self, amount):
             self.inspiration += amount
 
@@ -82,8 +79,12 @@ init -1 python:
             return False
 
     class StoryState(object):
+        # Mutually exclusive branch: whitelist only; use set_corridor_state() in scripts.
+        VALID_CORRIDOR_STATES = ("none", "ghost", "predator", "prey")
+
         def __init__(self):
             self.has_read_gideon_letters = False
+            self.day1_corridor_state = "none"
             self.has_witnessed_voyeur_scene = False
             self.has_heard_stern_humming = False
             self.has_gideon_spoken_to_cora_day2 = False
@@ -98,6 +99,15 @@ init -1 python:
             if not isinstance(value, bool):
                 raise TypeError("{} must be a bool, got {}".format(field_name, type(value).__name__))
             setattr(self, field_name, value)
+
+        def set_corridor_state(self, new_state):
+            if new_state not in self.VALID_CORRIDOR_STATES:
+                raise ValueError(
+                    "Invalid corridor state '{}'. Must be one of: {}".format(
+                        new_state, ", ".join(self.VALID_CORRIDOR_STATES)
+                    )
+                )
+            self.day1_corridor_state = new_state
 
         def set_has_read_gideon_letters(self, value):
             self._set_boolean_flag("has_read_gideon_letters", value)

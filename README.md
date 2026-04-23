@@ -4,9 +4,10 @@ An AI-accelerated, adult pseudo-sandbox RPG visual novel set in a Victorian hote
 
 ## Repository architecture (monorepo)
 
-* **`/docs`**: Studio and mechanics docs. **`docs/narrative_workflow.md`** describes the MVP narrative loop (pseudo-Ren’Py in markdown → implement in `renpy_project/`).
+* **`/docs`**: Studio and mechanics docs. **`docs/narrative_workflow.md`** describes the MVP narrative loop (non-canon Ren'Py draft `.rpy` -> promoted runtime `.rpy` in `renpy_project/`).
 * **`/docs/backlog`**: Deferred tooling (e.g. optional JSON beat schema), not required for MVP.
-* **`/narrative/writers_room`**: Draft pseudo-scripts, storyboards, and `dayrxx_non_canon.md` supporting material (`r` = release, `xx` = 2-digit day).
+* **`/narrative/writers_room`**: Draft non-canon scripts, storyboards, and `dayrdd_non_canon.rpy` supporting material (`r` = release, `dd` = 2-digit day slot `00`-`99`), plus character/location databases (`*_character_non_canon.md`, `characters_non_canon.md`, `locations_non_canon.md`).
+* **`/narrative/templates/Voice_Guides`**: Per-character voice bibles used to enforce consistent dialogue and narration tone.
 * **`/narrative/canon`**: Promoted truth (Lead Narrative Editor), when used.
 * **`/scripts`**: **`historical_linter.py`** (retained) and **`gatekeeper.py`** (domain checks). No beat-JSON pipeline in MVP.
 * **`/.agents`**: AI role rules.
@@ -20,15 +21,15 @@ An AI-accelerated, adult pseudo-sandbox RPG visual novel set in a Victorian hote
 
 ## AI roles (short)
 
-* **Code agent**: Implements pseudo-scripts as real `.rpy` under guardrails.
+* **Code agent**: Promotes non-canon `.rpy` drafts into runtime `.rpy` under guardrails.
 * **Chief architect**: Enforces Ren’Py methodology and reviews code PRs.
-* **Writers' room / you**: Produce markdown pseudo-scripts and design intent.
-* **Victorian consultant / historical linter**: Era-appropriate language checks on writers’ room markdown in CI.
+* **Writers' room / you**: Produce non-canon `.rpy` drafts and design intent.
+* **Victorian consultant / historical linter**: Era-appropriate language checks on writers' room narrative drafts in CI.
 
 ## Narrative → game workflow (MVP)
 
-1. Write a **pseudo Ren’Py script** in markdown (`narrative/writers_room/`).
-2. CI runs **`scripts/historical_linter.py`** on changed `narrative/writers_room/*.md`.
+1. Write a **non-canon Ren'Py draft script** (`dayrdd_non_canon.rpy`) in `narrative/writers_room/`.
+2. CI runs **`scripts/historical_linter.py`** on changed writers-room narrative drafts (`*_non_canon.rpy`, plus narrative markdown docs).
 3. Work with the **coding agent** to land behavior in **`renpy_project/game/`**.
 4. **Chief architect** validates structure and practice on code changes.
 
@@ -36,7 +37,7 @@ Details: **`docs/narrative_workflow.md`**.
 
 ## CI
 
-GitHub Actions (`.github/workflows/gatekeeper.yml`): domain gatekeeper + historical linter on writers’ room markdown. No JSON beat validation.
+GitHub Actions (`.github/workflows/gatekeeper.yml`): domain gatekeeper + historical linter on writers-room narrative drafts/docs. No JSON beat validation.
 
 ---
 

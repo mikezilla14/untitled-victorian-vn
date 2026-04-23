@@ -9,109 +9,146 @@
 
 ```mermaid
 flowchart TD
-    P[Prologue] --> D1[Day 1]
-    D1 --> D2[Day 2]
-    D2 --> D3[Day 3]
-    D3 --> End{End of Release 1}
+    D101M[Day 101 Morning: Interview] --> D101A[Day 101 Afternoon: Corridor Eavesdrop]
+    D101A --> D101T[Day 101 Twilight: The Ledger]
+    D101T --> D101N[Day 101 Night: The Manuscript]
+    D101N --> D102M[Day 102 Morning: The Discovery]
+    D102M --> D102A[Day 102 Afternoon: Apology Service]
+    D102A --> D102T[Day 102 Twilight: The Ledger]
+    D102T --> D102N[Day 102 Night: Chapter Two Gate]
+    D102N --> D103M[Day 103 Morning: Consequences]
+    D103M --> D103A[Day 103 Afternoon: The Summons]
+    D103A --> D103T[Day 103 Twilight: Stabilize]
+    D103T --> D103N[Day 103 Night: Ultimatum]
+    D103N --> D104M[Day 104 Morning: Heist]
+    D104M --> D104A[Day 104 Late Afternoon: Escape]
+    D104A --> D104T[Day 104 Twilight: Ludonarrative Trap]
+    D104T --> D104N[Day 104 Night: Exhaustion or Writing]
+    D104N --> D105M[Day 105 Morning: Confrontation]
+    D105M --> D105A[Day 105 Afternoon: Defusal]
+    D105A --> D105N[Day 105 Night: Literary Climax]
+    D105N --> End[End of MVP Demo]
 ```
 
 ---
 
-## Global State Tracking (Days P–3)
+## Global State Tracking (Day 101-105)
 
 ### 🚩 Key Narrative Flags
 
 | Flag Name | Set In | Function / Forward Impact |
 |-----------|--------|---------------------------|
-| `prologue_found` | Prologue | Overheard vs Read Letters; colors Cora's initial worldview. |
-| `stern_first_impression` | Day 1 | Diligent vs Meek; influences Stern's baseline Suspicion and trust. |
-| `dom_sub_flag` | Day 1 | Dominant vs Submissive; frames Cora's sexual awakening and unlocks specific scenes with Gideon/Vance. |
-| `missy_flag` | Day 1 | Protect vs Corrupt; defines Cora's relationship with her naive co-worker. |
-| `knickers_flag_planted` | Day 1 | True; explicitly sets up the theft arc for Day 2. |
-| `volunteered_for_vance` | Day 2 | True/False; determines if Cora confronts Vance directly over the missing item. |
-| `manuscript_reread` | Day 3 | True/False; adds corruption flavor dialogue in future chapters. |
-| `missy_in_room_day3` | Day 3 | True/False; determines Missy's proximity to the master suite fallout. |
-| `vance_noticed_cora` | Day 3 | True; unlocks private dominant-oriented encounters with Vance in Day 5+. |
-| `vance_thaw` | Day 3 | True; unlocks gentler reconciliation arc with Vance. |
-| `gideon_spoken_to` | Day 3 | True; expands Gideon's dialogue tree moving forward. |
-| `manuscript_submitted` | Day 3 | True; unlocks the Holywell contact/payment chain. |
-| `stern_trust_medium` | Day 3 | True; unlocks Stern providing intel or protection to Cora. |
-| `manuscript_tone` | Day 3 | Dominant/Submissive; seeds the tone and framing for Chapter 3 of the book. |
-| `chapter2_deferred` | Day 3 | True; explicitly forces the player to re-attempt the writing gate on Day 4. |
+| `day1_corridor_choice` (draft) → **`story.day1_corridor_state`** in game | Day 101 Afternoon | Values `"none"` (default) / `"predator"` / `"prey"` / `"ghost"`. In runtime `renpy_project/game/`, set **only** via `story.set_corridor_state(...)` (whitelist in `classes.rpy`); do not assign the field in scripts. Determines Chapter One flavor text and CG branch. |
+| `manuscript_progress` | Day 101 Night | Incremented by 1 on successful writing check; advances manuscript progression. |
+| `day2_outfit_status` | Day 102 Morning | `"stolen_wearing"` / `"framed_gideon_trunk"` / `"put_back"` tracks contraband handling and later risk text. |
+| `day2_tea_choice` | Day 102 Afternoon | `"predator"` / `"prey"` / `"ghost"` drives Day 102 chapter tone and Day 103 consequence framing. |
+| `day3_brush_choice` | Day 103 Afternoon | Records response to Gideon mirror-test; informs characterization momentum. |
+| `day3_ultimatum` | Day 103 Night | `"surrendered"` / `"barricaded"` records response to Gideon's 9 PM demand and chapter progression outcome. |
+| `has_photograph` | Day 104 Escape | Core leverage gate; `False` routes Day 105 directly into fired fail state. |
+| `day4_escape` | Day 104 Late Afternoon | `"fireplace"` / `"bold_lie"` / `"meat_shield"` controls suspicion profile and available twilight atonement text. |
+| `day5_dynamic` | Day 105 Afternoon | `"muse"` / `"protege"` sets post-defusal relational framing with Gideon. |
 
 ### ⚖️ Hard Mechanic Gates
 
-- **Day 3 Evening — "The Reply" Writing Session:**
-  - Requires **Inspiration ≥ 40** and **Corruption ≥ 30** to write Chapter Two.
-  - Failure yields `chapter2_deferred` and forces the player to scrounge for stats on Day 4.
+- **Day 101 Night — "The Manuscript" Writing Session:**
+  - Requires **(Inspiration + Corruption ) ≥ 15** to complete Chapter One.
+  - Success increments `manuscript_progress` and branches by `day1_corridor_state` (draft name `day1_corridor_choice`).
+  - Failure yields a blank-page outcome and pushes risk-taking pressure into Day 2.
+- **Day 102 Night — Chapter Two Writing Gate:**
+  - Requires **(Inspiration + Corruption ) ≥ 30**.
+  - Success increments `manuscript_progress`; prose tone branches by `day2_tea_choice`.
+- **Day 103 Night — Ultimatum Defiance Gate:**
+  - `Go to Him` always resolves with major stat gain but forfeits writing.
+  - `Barricade the Door` requires **(Inspiration + Corruption ) ≥ 45** to produce Chapter Three.
+- **Day 104 Twilight — Suspicion Soft Lock:**
+  - Choosing to write adds **+15 Suspicion**.
+  - If projected Suspicion reaches 100, writing is blocked and the player is looped back to safer choices.
+- **Day 105 Morning — Leverage Hard Gate:**
+  - `has_photograph == False` triggers immediate fail branch (`ending_fired_and_ruined`).
 
 ---
 
 ## Scene Ledger (Generated Non-Canon DB)
 
-### Prologue
-- **P-01**: The Train Journey.
-- **P-02**: The Discovery (Flashback). Player chooses to investigate the noise (`+Corr`) or read the letters at the desk (`+Insp`).
-- **P-03**: Awakening. Gathering the papers on the train.
+### Day 101
+- **101-01**: Morning Interview. Cora meets Stern and chooses meek facade vs visible competence (early Suspicion shaping).
+- **101-02**: Corridor Collision. Vance lashes out; Gideon appears and immediately controls the dynamic.
+- **101-03**: Laundry Introductions. Missy is established as naive ally/pawn.
+- **101-04**: Corridor Eavesdrop Choice. Player secures material via Missy (`predator`), direct peeping risk (`prey`), or strategic withdrawal (`ghost`).
+- **101-05**: Twilight Ledger Economy. One evening action adjusts stat posture before writing (Atonement / Gossip / Indulge).
+- **101-06**: Night Manuscript Check. Chapter One is written if combined creative-moral pressure crosses threshold; prose branch depends on corridor identity.
 
-### Day 1
-- **1-01**: The Interview. Player chooses to be diligent or meek with Stern.
-- **1-02**: A Proper Dressing Down. Vance yells at Cora; Gideon asserts dominance over Vance.
-- **1-03**: The Laundry. Cora meets Missy.
-- **1-04**: The Corridor Tease. Deciding whether to focus on protecting/corrupting Missy (`missy_flag`) or watching the master suite (`dom_sub_flag`).
-- **1-05**: The Nightly Ink. Cora struggles to write.
-- **1-06**: The Snooping Errand. Cora uses Insp or Corr to convince Missy to enter the master suite and find the scandalous undergarments.
+### Day 102
+- **102-01**: The Discovery. Contraband found during suite cleaning; player chooses theft, framing, or denial (`day2_outfit_status`).
+- **102-02**: Apology Service. Stern sends Cora with tea; Gideon stages a loaded social test in front of subdued Vance.
+- **102-03**: Subtext Duel. Response style sets `day2_tea_choice` and stat trajectory.
+- **102-04**: Twilight Regulation. Ledger action rebalances suspicion/corruption before writing.
+- **102-05**: Chapter Two Gate. Threshold check determines whether manuscript advances to Chapter Two.
 
-### Day 2
-- **2-01**: The Dry Pen. Morning reflection and defining sources of inspiration.
-- **2-02**: The Accusation. Vance discovers the theft; Stern defends the staff; Gideon silences Vance.
-- **2-03**: The Revelation. Cora confirms to herself that she kept the item.
-- **2-04**: The Volunteer. Stern asks for an attendant to assist Vance. Player chooses to step up or send Ellen.
-- **2-05**: The Discovery (If Volunteered). Cora "finds" the item via her person (high suspicion) or the wardrobe (Vance humiliated). Gideon disciplines Vance.
-- **2-06**: Stern's Warning. Conditional scene if Suspicion > 30.
-- **2-07**: The First Chapter. Cora successfully finishes writing the scene based on the day's tension.
+### Day 103
+- **103-01**: Contextual Grind. Morning labor punishment shifts based on `day2_tea_choice`.
+- **103-02**: The Summons. Gideon has Cora brush Vance's hair in a coercive mirror tableau.
+- **103-03**: Mirror Test Choice. Accomplice/Deviant/Mouse branch records `day3_brush_choice`.
+- **103-04**: 9 PM Command. Gideon orders unchaperoned tea, forcing a hard night decision.
+- **103-05**: Ultimatum. Player either surrenders (stat gain, no chapter) or barricades for Chapter Three if gate is met.
 
-### Day 3
-- **3-01**: The Weight of What Was Written. Reading the chapter vs. sealing it. Missy warns of Vance's demands.
-- **3-02**: The Vance Room (Again). Deflecting, sympathizing, or holding Vance's gaze. Engaging Gideon.
-- **3-03**: The Drop. Cheapside alley submission of the manuscript.
-- **3-04**: Stern's Ledger. Explaining absence.
-- **3-05**: The Reply. Writing Gate for Chapter 2. Determining tone of the next chapter.
+### Day 104
+- **104-01**: The Heist. Cora breaks Gideon's lockbox and discovers an explicit photograph with legal blackmail weight.
+- **104-02**: The Escape. Return timing forces split-second survival method; sets `has_photograph` and `day4_escape`.
+- **104-03**: Ludonarrative Trap. Twilight menu forces tradeoff between lowering suspicion and preserving writing throughput.
+- **104-04**: Exhaustion Branch. High-risk survival cleanup preserves leverage but consumes writing window.
+- **104-05**: Writing Branch. If chosen and allowed, Chapter Four is completed but with reduced narrative potency.
+
+### Day 105
+- **105-01**: Confrontation. Gideon interrogates Cora about lockbox breach; no-photo path collapses immediately to fail ending.
+- **105-02**: Defusal. Even with leverage, class-power reality check strips legal advantage; motivation confession sets `day5_dynamic`.
+- **105-03**: Funding and Entrapment. Gideon burns the photo, funds the manuscript, and binds Cora into future service.
+- **105-04**: Literary Climax. Final chapter voice branches by dominant stat axis (corruption vs influence vs inspiration).
+- **105-05**: Demo Cliffhanger. Morning tableau with Gideon/Vance ends in hard cut, positioning post-MVP escalation.
 
 ---
 
 ## Assets Checklist
 
 ### Backgrounds
-- `interior/train_carriage_day`
-- `interior/country_estate_study`
-- `interior/savoy_corridor_morning`
-- `interior/sterns_office`
-- `interior/savoy_lobby_stairs`
-- `interior/servants_laundry_afternoon`
-- `interior/servants_corridor` (variants: morning, night)
-- `interior/coras_room_morning` (variants: desk_closeup)
-- `interior/coras_room_evening` (variants: desk_lamp)
-- `interior/master_suite_morning`
-- `interior/master_suite_afternoon`
-- `interior/master_suite_night`
-- `exterior/cheapside_alley`
+- `bg_savoy_corridor_morning`
+- `bg_laundry_room_day`
+- `bg_servants_corridor_dim`
+- `bg_servants_quarters_dusk`
+- `bg_cora_desk_night`
+- `bg_master_suite_day`
+- `bg_master_suite_tea`
+- `bg_servants_corridor_day`
+- `bg_servants_corridor_morning`
+- `bg_master_suite_night`
+- `bg_master_suite_day` (day 5 confrontation/cliffhanger reuse)
 
 ### Music & Sound
-- `themes/melancholy`
-- `themes/threshold`
-- `themes/quiet_dread`
-- `themes/temptation_understated`
-- `ambient/servants_corridor`
-- `ambient/upper_corridor_tension`
-- `ambient/office_quiet`
-- `ambient/room_at_night`
-- `sfx/train_whistle`
-- `sfx/loud_knocking`
+- `themes/savoy_tension` (interview + corridor hierarchy)
+- `themes/servants_floor_unease` (laundry/corridor)
+- `themes/private_ink` (night writing sequence)
+- `ambient/laundry_steam`
+- `ambient/hotel_corridor_muffled`
+- `ambient/servants_quarters_dusk`
+- `sfx/corridor_slap_muffled`
+- `sfx/floorboard_creak`
+- `sfx/ink_scratch`
+- `sfx/washbasin_clatter`
+- `themes/master_suite_pressure`
+- `themes/predator_game`
+- `themes/defiance_and_dread`
+- `ambient/master_suite_quiet`
+- `ambient/fireplace_low`
+- `sfx/lockpick_tension`
+- `sfx/key_in_door`
+- `sfx/brush_drop_clatter`
+- `sfx/door_handle_jiggle`
 
 ### Character Sprites
-- **Cora**: Neutral traveling attire, chambermaid uniform, shift/tired, nightgown/flush, outdoor dress.
-- **Missy**: Chambermaid uniform, doorway/worried.
-- **Vance**: Daywear (angry/indignant), peignoir/vanity, back-to-camera reflection.
-- **Gideon**: Tailored evening wear, morning dress.
-- **Ms. Stern**: Crisp uniform, standing, at desk/ledger.
+- **Cora**: Chambermaid base, guarded, focused, flushed (writing variants).
+- **Missy**: Smiling/naive, shocked, hesitant.
+- **Vance**: Angry/indignant, submissive heel-shift.
+- **Gideon**: Cold authority presence.
+- **Ms. Stern**: Neutral appraising, stern reprimand.
+- **Vance (extended)**: Cowed/defeated, mirror-watch terror.
+- **Gideon (extended)**: Neutral interrogative, dominant proximity, angry confrontation.

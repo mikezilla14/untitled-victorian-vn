@@ -60,7 +60,7 @@ jobs:
           FILES_CSV="$(echo "$FILES" | tr '\n' ',' | sed 's/,$//')"
           python scripts/engineering_compliance.py --files "$FILES_CSV"
 
-      - name: Check historical anachronisms (writers' room markdown)
+      - name: Check historical anachronisms (writers' room drafts)
         shell: bash
         run: |
           FILES="${{ steps.changes.outputs.files }}"
@@ -73,6 +73,9 @@ jobs:
           while IFS= read -r file; do
             [ -z "$file" ] && continue
             case "$file" in
+              narrative/writers_room/*_non_canon.rpy)
+                python scripts/historical_linter.py --file "$file" || FAILED=1
+                ;;
               narrative/writers_room/*.md)
                 python scripts/historical_linter.py --file "$file" || FAILED=1
                 ;;

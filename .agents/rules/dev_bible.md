@@ -1,7 +1,7 @@
 # STUDIO DEVELOPMENT BIBLE
 
 **Project:** [Pending Title]  
-**Version:** 1.2  
+**Version:** 1.3  
 **Scope:** Studio execution, release discipline, and Ren'Py engineering contracts.
 
 This document is split into two parts:
@@ -25,7 +25,7 @@ This document is split into two parts:
 - New mechanics require explicit approval before implementation.
 
 ### 3) Ways of Work
-- Writing/design happens in markdown pseudo-scripts (`narrative/writers_room/`).
+- Writing/design happens in non-canon Ren'Py drafts (`narrative/writers_room/dayrdd_non_canon.rpy`).
 - Historical checks run through `scripts/historical_linter.py`.
 - Code implementation happens in `renpy_project/game/*.rpy`.
 - Chief Architect enforces code methodology and consistency.
@@ -40,17 +40,19 @@ This document is split into two parts:
 - `dayrxx.rpy`, `endings.rpy`: narrative flow and branch content (`r` = release, `xx` = 2-digit day).
 
 #### State discipline
-- Core logic uses class-backed state (`TimeManager`, `PlayerStats`, `StoryState`).
+- Core logic uses class-backed state (`TimeManager`, `PlayerStats`, `StoryState`); all stat tracking, flags, and branch state are encapsulated in these classes.
 - No ad hoc global `default` variables outside `variables.rpy`.
-- Prefer mutation methods (`gain_*`, `raise_*`, `spend_*`) over direct field edits.
-- Tracked state flags in `StoryState` are boolean-only contracts: each tracked flag must be declared and mutated as `bool` (`True`/`False`) and set through typed mutation methods.
+- Prefer mutation methods (`gain_*`, `raise_*`, `spend_*`, `set_*`) over direct field edits in scripts.
+- **Binary** events: `bool` fields with descriptive names, updated only through typed setters.
+- **Mutually exclusive** outcomes: one string field per branch dimension, default value (e.g. `"none"`), **whitelist** in code (e.g. `VALID_CORRIDOR_STATES`), and updates **only** through a setter that validates (e.g. `set_corridor_state`). No parallel booleans for the same fork.
+- In `.rpy` files: do not assign to whitelisted string state fields (or `story.has_*` booleans) directly; use the Python setter methods. Reading those attributes in conditions is fine.
 
 #### Failure and branch safety
 - Suspicion fail checks must run in a deterministic order.
 - Branch flags and stat changes must be traceable in scripts.
 
 ### 5) Release Cadence (Operational Target)
-- Week 1: script lock (pseudo-script + implementation intent).
+- Week 1: script lock (non-canon draft + implementation intent).
 - Week 2: art generation from approved narrative/asset checklist.
 - Week 3: Ren'Py assembly + branch wiring.
 - Week 4: QA and fixes.

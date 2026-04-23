@@ -1,12 +1,12 @@
 # ═══════════════════════════════════════════════════════════════
 #  day101.rpy — ARRIVAL AND FIRST MATERIAL
-#  Converted from day101_non_canon.md into canonical framework usage.
+#  Promoted from day101_non_canon.rpy into canonical framework usage.
 # ═══════════════════════════════════════════════════════════════
 
 label day1_morning:
     $ time_manager.set_current_day(1)
     $ set_time_period("Morning")
-    $ day1_corridor_choice = "ghost"
+    $ story.set_corridor_state("none")
 
     scene bg_savoy_corridor_morning
     with fade
@@ -16,7 +16,9 @@ label day1_morning:
     "The Savoy Hotel. A gilded cage of mahogany and brass."
     "I stand outside the Head of Housekeeping's office. My forged references burn a hole in my apron pocket."
 
-    show stern_sprite neutral at center
+    show stern_sprite neutral at center:
+        zoom 0.35
+    
     stern "You say you have experience in the countryside. The Savoy is not the countryside, Cora. We demand absolute invisibility."
 
     menu:
@@ -37,7 +39,8 @@ label day1_morning:
     hide stern_sprite
 
     "Stern dismisses me. As I step out into the plush corridor, I nearly collide with a guest."
-    show vance_sprite angry at left
+    show vance_sprite angry at left:
+        zoom 0.3
     vance "Watch your step, you clumsy little idiot!"
     "She is dripping in velvet and pearls. Her eyes are furious, looking for someone to punish."
 
@@ -91,7 +94,7 @@ label day1_afternoon:
             missy "Me? Oh... I don't know..."
             "Her curiosity wins. She creeps to the door while I remain in the shadows."
             "If the door opens, she takes the risk. I memorize every detail I can gather."
-            $ day1_corridor_choice = "predator"
+            $ story.set_corridor_state("predator")
 
         "Take the physical risk myself. (+Corruption, +Suspicion)":
             $ apply_effects(corr=5, susp=25, insp=10)
@@ -99,7 +102,7 @@ label day1_afternoon:
             "I creep to the crack in the door."
             "I see Vance on her knees, Gideon's hand gripping her jaw. My breath catches. The floorboard groans beneath my shoe."
             "Gideon's head snaps toward the door. I scramble backward, my heart hammering in my throat."
-            $ day1_corridor_choice = "prey"
+            $ story.set_corridor_state("prey")
             $ story.set_has_witnessed_voyeur_scene(True)
 
         "Pull Missy away and rely on what I heard. (+Inspiration)":
@@ -107,7 +110,7 @@ label day1_afternoon:
             cora "It's none of our business. Keep walking."
             "I grab Missy's arm and pull her down the hall before she can make a sound."
             "I catalogue the wet sound of the slap, the exact pitch of Vance's gasp. Pure observation."
-            $ day1_corridor_choice = "ghost"
+            $ story.set_corridor_state("ghost")
 
     hide missy_sprite
     jump day1_evening
@@ -157,12 +160,14 @@ label day1_night:
     if attempt_write(required_insp=15, cost=0):
         "The ink flows easily tonight. The corridor scene has given me material."
 
-        if day1_corridor_choice == "predator":
+        if story.day1_corridor_state == "predator":
             "I write of a cunning maid who manipulates the desires of her betters."
-        elif day1_corridor_choice == "prey":
+        elif story.day1_corridor_state == "prey":
             "I write of a maid caught spying, then pulled into punishment she never meant to witness."
+        elif story.day1_corridor_state == "ghost":
+            "I write of a maid who observes the private depravity of the wealthy with clinical precision."
         else:
-            "I write with clinical precision about the private depravity of the wealthy."
+            "I write with clinical precision about the private depravity of the wealthy."    
 
         $ story.set_has_written_first_chapter(True)
         "Chapter One is complete. I let the candle gutter low."

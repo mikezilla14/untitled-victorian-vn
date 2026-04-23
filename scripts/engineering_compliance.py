@@ -12,11 +12,11 @@ ALLOWED_TIME_PERIODS = {
     "Late Night",
 }
 
-DAYRXX_RPY_RE = re.compile(r"^day([1-9]\d*)(0[1-9]|[1-9]\d)\.rpy$")
+DAYRXX_RPY_RE = re.compile(r"^day([1-9]\d*)([0-9]\d)\.rpy$")
 DAYRXX_NON_CANON_RE = re.compile(
-    r"^day([1-9]\d*)(0[1-9]|[1-9]\d)_non_canon\.md$"
+    r"^day([1-9]\d*)([0-9]\d)_non_canon\.rpy$"
 )
-LEGACY_DAY_NON_CANON_RE = re.compile(r"^day\d+_non_canon\.md$")
+LEGACY_DAY_NON_CANON_RE = re.compile(r"^day\d+_non_canon\.(md|rpy)$")
 LEGACY_DAY_RPY_RE = re.compile(r"^day\d+\.rpy$")
 
 
@@ -109,6 +109,59 @@ def check_script_thin_if_touched(files):
     return violations
 
 
+def check_no_direct_story_corridor_state_assignment(files):
+    """
+    Mutually exclusive branch strings must be updated only via StoryState.set_corridor_state()
+    in game scripts, never by assigning story.day1_corridor_state.
+    """
+    violations = []
+    # assignment only, not == or other operators
+    pattern = re.compile(r"story\.day1_corridor_state\s*=(?!=)")
+    for file in files:
+        if not file.endswith(".rpy"):
+            continue
+        norm = file.replace("\\", "/")
+        if not norm.startswith("renpy_project/game/"):
+            continue
+        full_path = Path(file)
+        if not full_path.exists():
+            continue
+        for idx, line in enumerate(read_lines(full_path), start=1):
+            if pattern.search(line):
+                violations.append(
+                    f"{file}:{idx} direct `story.day1_corridor_state` assignment; "
+                    f"use `story.set_corridor_state(...)` (whitelist in classes.rpy)"
+                )
+    return violations
+
+
+def check_no_bare_set_corridor_state_call(files):
+    """
+    Disallow unqualified set_corridor_state(...) in game scripts; require story.set_corridor_state(...).
+    """
+    violations = []
+    pattern = re.compile(r"^\s*\$?\s*set_corridor_state\s*\(")
+    for file in files:
+        if not file.endswith(".rpy"):
+            continue
+        norm = file.replace("\\", "/")
+        if not norm.startswith("renpy_project/game/"):
+            continue
+        full_path = Path(file)
+        if not full_path.exists():
+            continue
+        for idx, line in enumerate(read_lines(full_path), start=1):
+            stripped = line.lstrip()
+            if stripped.startswith("#") or stripped.startswith("##"):
+                continue
+            if pattern.search(line) and "story.set_corridor_state" not in line:
+                violations.append(
+                    f"{file}:{idx} use `story.set_corridor_state(...)` — "
+                    f"unqualified set_corridor_state is not a supported pattern"
+                )
+    return violations
+
+
 def check_time_period_literals(files):
     """
     Enforce standardized time-of-day literals.
@@ -140,9 +193,9 @@ def check_time_period_literals(files):
 def check_day_file_naming_contract(files):
     """
     Enforce day file naming contract:
-    - Narrative drafts: dayrxx_non_canon.md (e.g. day101_non_canon.md)
+    - Narrative drafts: dayrdd_non_canon.rpy (e.g. day100_non_canon.rpy)
     - Runtime files: dayrxx.rpy (e.g. day101.rpy)
-    where r = release number and xx = 2-digit day number.
+    where r = release number and dd = 2-digit day slot (00-99).
     """
     violations = []
     for file in files:
@@ -152,10 +205,10 @@ def check_day_file_naming_contract(files):
         if not full_path.exists():
             continue
 
-        if norm.startswith("narrative/writers_room/") and name.endswith("_non_canon.md"):
+        if norm.startswith("narrative/writers_room/") and name.endswith("_non_canon.rpy"):
             if not DAYRXX_NON_CANON_RE.fullmatch(name):
                 violations.append(
-                    f"{file} invalid non-canon day filename. Expected dayrxx_non_canon.md (example: day101_non_canon.md)."
+                    f"{file} invalid non-canon day filename. Expected dayrdd_non_canon.rpy (example: day100_non_canon.rpy)."
                 )
             continue
 
@@ -169,7 +222,7 @@ def check_day_file_naming_contract(files):
         # Explicitly guard against legacy narrative naming where applicable.
         if LEGACY_DAY_NON_CANON_RE.fullmatch(name) and not DAYRXX_NON_CANON_RE.fullmatch(name):
             violations.append(
-                f"{file} uses legacy non-canon filename. Expected dayrxx_non_canon.md (example: day101_non_canon.md)."
+                f"{file} uses legacy non-canon filename. Expected dayrdd_non_canon.rpy (example: day100_non_canon.rpy)."
             )
 
     return violations
@@ -195,6 +248,8 @@ def main():
     all_violations.extend(check_suspicion_guard_order(files))
     all_violations.extend(check_script_thin_if_touched(files))
     all_violations.extend(check_time_period_literals(files))
+    all_violations.extend(check_no_direct_story_corridor_state_assignment(files))
+    all_violations.extend(check_no_bare_set_corridor_state_call(files))
     all_violations.extend(check_day_file_naming_contract(files))
 
     if all_violations:

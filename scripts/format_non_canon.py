@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Standardize formatting for dayrxx_non_canon.md narrative scripts.
+"""Standardize formatting for dayrdd_non_canon.rpy narrative scripts.
 
 Rules:
 - Normalize marker comments to `# [TAG] ...`
@@ -25,7 +25,7 @@ LEGEND_LINES = [
 ]
 
 CANONICAL_TAGS = {"ASSET", "STATE", "CHOICE", "BEAT"}
-DAYRXX_NON_CANON_RE = re.compile(r"^day([1-9]\d*)(0[1-9]|[1-9]\d)_non_canon\.md$")
+DAYRXX_NON_CANON_RE = re.compile(r"^day([1-9]\d*)([0-9]\d)_non_canon\.rpy$")
 
 
 def is_dialogue_or_narration(stripped: str) -> bool:
@@ -202,12 +202,12 @@ def process_file(path: Path, write: bool) -> bool:
 def resolve_targets(root: Path, paths: list[str]) -> list[Path]:
     if paths:
         return [Path(p).resolve() for p in paths]
-    candidates = root.glob("narrative/writers_room/releases/**/day*_non_canon.md")
+    candidates = root.glob("narrative/writers_room/releases/**/day*_non_canon.rpy")
     return sorted(p for p in candidates if DAYRXX_NON_CANON_RE.fullmatch(p.name))
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Format dayrxx_non_canon.md files.")
+    parser = argparse.ArgumentParser(description="Format dayrdd_non_canon.rpy files.")
     parser.add_argument("paths", nargs="*", help="Optional files to format")
     parser.add_argument("--check", action="store_true", help="Check only; do not write")
     args = parser.parse_args()

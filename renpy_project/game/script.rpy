@@ -15,6 +15,9 @@
 label start:
     show screen stats_overlay
 
+    scene bg_savoy_front_facade
+    with fade
+
     sys "Holywell Street Studios — MVP Gray-Box v2.0"
     sys "Setting: The Savoy Hotel, London. Winter 1891."
 
