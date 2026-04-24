@@ -44,56 +44,77 @@ init -1 python:
             self.current_day = value
 
     class PlayerStats(object):
-        def __init__(self):
-            self.corruption_level = 1
-            self.corruption_xp = 0
-            self.inspiration = 0
-            self.suspicion = 0
+    def __init__(self):
+        self.corruption_level = 1
+        self.corruption_xp = 0
+        self.inspiration = 0
+        self.suspicion = 0
 
-        def update_stats(self):
-            self.suspicion -= 5
-            self.suspicion = max(0, min(100, self.suspicion))
-            self.corruption_xp = max(0, self.corruption_xp)
-            while self.corruption_xp >= 20:
-                self.corruption_xp -= 20
-                self.corruption_level += 1
-            inspiration_cap = 20 + (self.corruption_level * 10)
-            self.inspiration = max(0, min(inspiration_cap, self.inspiration))
+    @property
+    def inspiration_cap(self):
+        return 20 + (self.corruption_level * 10)
 
-        def gain_inspiration(self, amount):
-            self.inspiration += amount
+    def update_stats(self):
+        # Suspicion must never be below 0 or above 100.
+        self.suspicion = max(0, min(100, self.suspicion))
 
-        def gain_corruption_xp(self, amount):
-            self.corruption_xp += amount
+        # Corruption XP must never be below 0.
+        self.corruption_xp = max(0, self.corruption_xp)
 
-        def raise_suspicion(self, amount):
-            self.suspicion += amount
+        while self.corruption_xp >= 20:
+            self.corruption_xp -= 20
+            self.corruption_level += 1
 
-        def lower_suspicion(self, amount):
-            self.suspicion -= amount
+        # Inspiration must never be below 0 or above the current cap.
+        self.inspiration = max(0, min(self.inspiration_cap, self.inspiration))
 
-        def spend_inspiration(self, amount):
-            if self.inspiration >= amount:
-                self.inspiration -= amount
-                return True
-            return False
+    def gain_inspiration(self, amount):
+        if amount < 0:
+            raise ValueError("gain_inspiration() cannot receive a negative amount. Use spend_inspiration().")
+
+        self.inspiration += amount
+        self.update_stats()
+
+    def spend_inspiration(self, amount):
+        if amount < 0:
+            raise ValueError("spend_inspiration() cannot receive a negative amount.")
+
+        if self.inspiration >= amount:
+            self.inspiration -= amount
+            self.update_stats()
+            return True
+
+        return False
+
+    def gain_corruption_xp(self, amount):
+        if amount < 0:
+            raise ValueError("Corruption cannot decrease.")
+
+        self.corruption_xp += amount
+        self.update_stats()
+
+    def raise_suspicion(self, amount):
+        if amount < 0:
+            raise ValueError("raise_suspicion() cannot receive a negative amount. Use lower_suspicion().")
+
+        self.suspicion += amount
+        self.update_stats()
+
+    def lower_suspicion(self, amount):
+        if amount < 0:
+            raise ValueError("lower_suspicion() cannot receive a negative amount.")
+
+        self.suspicion -= amount
+        self.update_stats()
 
     class StoryState(object):
         # Mutually exclusive branch: whitelist only; use set_corridor_state() in scripts.
         VALID_CORRIDOR_STATES = ("none", "ghost", "predator", "prey")
 
         def __init__(self):
-            self.has_read_gideon_letters = False
             self.day1_corridor_state = "none"
             self.has_witnessed_voyeur_scene = False
-            self.has_heard_stern_humming = False
-            self.has_gideon_spoken_to_cora_day2 = False
-            self.has_gideon_revealed_vulnerability = False
-            self.has_sent_manuscript = False
-            self.has_received_manuscript_payment = False
             self.has_written_first_chapter = False
-            self.has_written_second_chapter = False
-            self.has_chosen_bold_option_day4 = False
 
         def _set_boolean_flag(self, field_name, value):
             if not isinstance(value, bool):
@@ -109,32 +130,8 @@ init -1 python:
                 )
             self.day1_corridor_state = new_state
 
-        def set_has_read_gideon_letters(self, value):
-            self._set_boolean_flag("has_read_gideon_letters", value)
-
         def set_has_witnessed_voyeur_scene(self, value):
             self._set_boolean_flag("has_witnessed_voyeur_scene", value)
 
-        def set_has_heard_stern_humming(self, value):
-            self._set_boolean_flag("has_heard_stern_humming", value)
-
-        def set_has_gideon_spoken_to_cora_day2(self, value):
-            self._set_boolean_flag("has_gideon_spoken_to_cora_day2", value)
-
-        def set_has_gideon_revealed_vulnerability(self, value):
-            self._set_boolean_flag("has_gideon_revealed_vulnerability", value)
-
-        def set_has_sent_manuscript(self, value):
-            self._set_boolean_flag("has_sent_manuscript", value)
-
-        def set_has_received_manuscript_payment(self, value):
-            self._set_boolean_flag("has_received_manuscript_payment", value)
-
         def set_has_written_first_chapter(self, value):
             self._set_boolean_flag("has_written_first_chapter", value)
-
-        def set_has_written_second_chapter(self, value):
-            self._set_boolean_flag("has_written_second_chapter", value)
-
-        def set_has_chosen_bold_option_day4(self, value):
-            self._set_boolean_flag("has_chosen_bold_option_day4", value)
