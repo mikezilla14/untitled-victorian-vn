@@ -9,33 +9,33 @@
 init python:
 
     def apply_effects(insp=0, corr=0, susp=0):
-    success = True
+        success = True
 
-    # Inspiration:
-    # Positive = gain inspiration.
-    # Negative = spend inspiration.
-    if insp > 0:
-        player_stats.gain_inspiration(insp)
-    elif insp < 0:
-        success = player_stats.spend_inspiration(abs(insp))
+        # Inspiration:
+        # Positive = gain inspiration.
+        # Negative = spend inspiration.
+        if insp > 0:
+            player.gain_inspiration(insp)
+        elif insp < 0:
+            success = player.spend_inspiration(abs(insp))
 
-    # Corruption:
-    # Positive only. Corruption must never decrease.
-    if corr > 0:
-        player_stats.gain_corruption_xp(corr)
-    elif corr < 0:
-        raise ValueError("Corruption cannot be reduced.")
+        # Corruption:
+        # Positive only. Corruption must never decrease.
+        if corr > 0:
+            player.gain_corruption_xp(corr)
+        elif corr < 0:
+            raise ValueError("Corruption cannot be reduced.")
 
-    # Suspicion:
-    # Positive = raise suspicion.
-    # Negative = lower suspicion.
-    if susp > 0:
-        player_stats.raise_suspicion(susp)
-    elif susp < 0:
-        player_stats.lower_suspicion(abs(susp))
+        # Suspicion:
+        # Positive = raise suspicion.
+        # Negative = lower suspicion.
+        if susp > 0:
+            player.raise_suspicion(susp)
+        elif susp < 0:
+            player.lower_suspicion(abs(susp))
 
-    player_stats.update_stats()
-    return successs
+        player.update_stats()
+        return success
 
     def resolve_turn():
         """

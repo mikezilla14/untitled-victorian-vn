@@ -44,68 +44,68 @@ init -1 python:
             self.current_day = value
 
     class PlayerStats(object):
-    def __init__(self):
-        self.corruption_level = 1
-        self.corruption_xp = 0
-        self.inspiration = 0
-        self.suspicion = 0
+        def __init__(self):
+            self.corruption_level = 1
+            self.corruption_xp = 0
+            self.inspiration = 0
+            self.suspicion = 0
 
-    @property
-    def inspiration_cap(self):
-        return 20 + (self.corruption_level * 10)
+        @property
+        def inspiration_cap(self):
+            return 20 + (self.corruption_level * 10)
 
-    def update_stats(self):
-        # Suspicion must never be below 0 or above 100.
-        self.suspicion = max(0, min(100, self.suspicion))
+        def update_stats(self):
+            # Suspicion must never be below 0 or above 100.
+            self.suspicion = max(0, min(100, self.suspicion))
 
-        # Corruption XP must never be below 0.
-        self.corruption_xp = max(0, self.corruption_xp)
+            # Corruption XP must never be below 0.
+            self.corruption_xp = max(0, self.corruption_xp)
 
-        while self.corruption_xp >= 20:
-            self.corruption_xp -= 20
-            self.corruption_level += 1
+            while self.corruption_xp >= 20:
+                self.corruption_xp -= 20
+                self.corruption_level += 1
 
-        # Inspiration must never be below 0 or above the current cap.
-        self.inspiration = max(0, min(self.inspiration_cap, self.inspiration))
+            # Inspiration must never be below 0 or above the current cap.
+            self.inspiration = max(0, min(self.inspiration_cap, self.inspiration))
 
-    def gain_inspiration(self, amount):
-        if amount < 0:
-            raise ValueError("gain_inspiration() cannot receive a negative amount. Use spend_inspiration().")
+        def gain_inspiration(self, amount):
+            if amount < 0:
+                raise ValueError("gain_inspiration() cannot receive a negative amount. Use spend_inspiration().")
 
-        self.inspiration += amount
-        self.update_stats()
-
-    def spend_inspiration(self, amount):
-        if amount < 0:
-            raise ValueError("spend_inspiration() cannot receive a negative amount.")
-
-        if self.inspiration >= amount:
-            self.inspiration -= amount
+            self.inspiration += amount
             self.update_stats()
-            return True
 
-        return False
+        def spend_inspiration(self, amount):
+            if amount < 0:
+                raise ValueError("spend_inspiration() cannot receive a negative amount.")
 
-    def gain_corruption_xp(self, amount):
-        if amount < 0:
-            raise ValueError("Corruption cannot decrease.")
+            if self.inspiration >= amount:
+                self.inspiration -= amount
+                self.update_stats()
+                return True
 
-        self.corruption_xp += amount
-        self.update_stats()
+            return False
 
-    def raise_suspicion(self, amount):
-        if amount < 0:
-            raise ValueError("raise_suspicion() cannot receive a negative amount. Use lower_suspicion().")
+        def gain_corruption_xp(self, amount):
+            if amount < 0:
+                raise ValueError("Corruption cannot decrease.")
 
-        self.suspicion += amount
-        self.update_stats()
+            self.corruption_xp += amount
+            self.update_stats()
 
-    def lower_suspicion(self, amount):
-        if amount < 0:
-            raise ValueError("lower_suspicion() cannot receive a negative amount.")
+        def raise_suspicion(self, amount):
+            if amount < 0:
+                raise ValueError("raise_suspicion() cannot receive a negative amount. Use lower_suspicion().")
 
-        self.suspicion -= amount
-        self.update_stats()
+            self.suspicion += amount
+            self.update_stats()
+
+        def lower_suspicion(self, amount):
+            if amount < 0:
+                raise ValueError("lower_suspicion() cannot receive a negative amount.")
+
+            self.suspicion -= amount
+            self.update_stats()
 
     class StoryState(object):
         # Mutually exclusive branch: whitelist only; use set_corridor_state() in scripts.
