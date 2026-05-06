@@ -9,7 +9,7 @@ An AI-accelerated, adult pseudo-sandbox RPG visual novel set in a Victorian hote
 * **`/narrative/writers_room`**: Draft non-canon scripts, storyboards, and `dayrdd_non_canon.rpy` supporting material (`r` = release, `dd` = 2-digit day slot `00`-`99`), plus character/location databases (`*_character_non_canon.md`, `characters_non_canon.md`, `locations_non_canon.md`).
 * **`/narrative/templates/Voice_Guides`**: Per-character voice bibles used to enforce consistent dialogue and narration tone.
 * **`/narrative/canon`**: Promoted truth (Lead Narrative Editor), when used.
-* **`/scripts`**: **`historical_linter.py`** (retained) and **`gatekeeper.py`** (domain checks). No beat-JSON pipeline in MVP.
+* **`/scripts`**: **`validate.py`** is the standard workflow entry point. It coordinates domain checks, engineering compliance, Ren'Py contract linting, historical linting, and optional non-canon formatting checks. No beat-JSON pipeline in MVP.
 * **`/.agents`**: AI role rules.
 * **`/art_pipeline`**: Asset tooling (when present).
 * **`/renpy_project`**: The playable game — **core MVP deliverable**.
@@ -37,7 +37,7 @@ Details: **`docs/narrative_workflow.md`**.
 
 ## CI
 
-GitHub Actions (`.github/workflows/gatekeeper.yml`): domain gatekeeper + historical linter on writers-room narrative drafts/docs. No JSON beat validation.
+GitHub Actions (`.github/workflows/gatekeeper.yml`): standard changed-file validation via `scripts/validate.py`. No JSON beat validation.
 
 ---
 

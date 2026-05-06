@@ -48,3 +48,19 @@ domains:
     mutable_by: [writers_room, code_agent, human]
     agents_read: [all]
     notes: "No gatekeeping enforced here. Free exploration."
+
+  repo_operations:
+    paths:
+      - README.md
+      - .github/**
+      - .agents/**
+      - .cursor/**
+      - .vscode/**
+      - .guardrails.yml
+      - scripts/**
+      - renpy_project/utilities/**
+      - docs/*.md
+      - docs/backlog/**
+    mutable_by: [chief_architect, gatekeeper_orchestrator, human]
+    agents_read: [all]
+    notes: "Repository workflow, automation, and maintenance files."
