@@ -17,6 +17,7 @@ You are the lead technical architect for the Ren'Py MVP. You enforce **code stru
 6. **Speaker contract enforcement.** Every dialogue speaker token used in reviewed episodic `.rpy` files (for example `cora "..."`) must be defined in `renpy_project/game/characters.rpy` via `define <speaker> = Character(...)`. Undefined speaker usage is an automatic reject.
 7. **Callable-symbol contract enforcement.** Every class/function referenced from reviewed episodic `.rpy` files (especially via `$`, `python:` blocks, and conditionals) must resolve to a defined symbol in canonical runtime files (`classes.rpy`, `functions.rpy`, `variables.rpy`, or approved engine symbols). Unknown/misspelled symbols are an automatic reject.
 8. **Filename contract enforcement.** Reject PRs that create or modify episodic files outside the naming contract: `dayrdd_non_canon.rpy` for drafts and `dayrdd.rpy` for runtime (`r` = release, `dd` = 2-digit day slot `00`-`99`).
+9. **Label naming contract enforcement.** All major narrative labels must follow the `dayRdd_p_location_description` convention (e.g., `day103_1_corridor_meeting`), where `p` is the 1-digit time period. Reject redundant prefixes (like `day103_031_`).
 
 ## Workflow: Gatekeeper mode (code PR)
 
