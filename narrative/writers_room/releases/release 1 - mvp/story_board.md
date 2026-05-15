@@ -103,7 +103,7 @@ flowchart TD
 
 ### Day 103
 *Source: `day103_non_canon.rpy`*
-- **`day103_1`**: Morning consequence of Day 2 choices (Vance's wrath, Stern's inspection, or Missy's silence).
+- **`day103_1_servants_corridor`**: Morning consequence of Day 2 choices (Vance's wrath, Stern's inspection, or Missy's silence).
 - **`day103_2_suite_gideon_tea` & `_cora_vs_gideon`**: Cora is summoned. The Hairbrush Test (`day3_brush_choice`).
 - **`day103_2_suite_gideon_beat`**: Gideon orders her to return at 9 PM alone.
 - **`day103_3_bedroom_cora_frantic_writing_event`**: Twilight action. Frantic write, mask prep, or indulging the words.
@@ -170,7 +170,7 @@ flowchart TD
 - **Missy**: `smiling`, `shocked`, `confused`
 - **Vance**: `angry`, `submissive`, `defeated`, `cowed`, `confused`
 - **Gideon**: `cold`, `neutral`, `dominant`, `angry`
-- **Ms. Stern**: `neutral`, `stern`
+- **Miss Stern**: `neutral`, `stern`
 
 ### CG / UI Callouts
 - `show_ledger_ui()`

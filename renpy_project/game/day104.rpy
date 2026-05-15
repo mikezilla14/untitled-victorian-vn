@@ -1,56 +1,16 @@
-# day104_non_canon.rpy
-# Release 1 / Day 04 non-canon Ren'Py-shaped draft
-# Source intent: parsed from legacy Day 4 heist script and reframed as the false dawn / stress-release day.
-# Conceptual role: Cora survives the monster's house in daylight, finishes the manuscript, and believes she has gained decisive leverage.
-# Day 5 should puncture that belief: Gideon is not the true invulnerable enemy; the society protecting him is.
-# Asset constraint: uses assets already present in the supplied Day 4 draft plus recurring character sprites from earlier Day drafts.
-# Promotion note: delete the temporary day104_041 stub from day103_non_canon.rpy when this file is promoted.
-# Promotion note: replace story/player helper calls with exact runtime method names during implementation.
-
-# ==========================================
-# DAY 4 ANALYSIS / DESIGN INTENT
-# ==========================================
-# Legacy spine:
-#   - Cora enters Gideon's empty suite while he and Vance are out.
-#   - She opens the lockbox and finds compromising evidence.
-#   - Gideon and Vance return early.
-#   - Cora must escape with or without the evidence.
-#   - Twilight becomes a suspicion-management trap.
-#   - Night branches into exhaustion or writing.
-#
-# Structural revision:
-#   - Day 4 should not feel like escalation into the finale. It should feel like relief earned through terror.
-#   - This is the horror-film false dawn: the final girl finds the weapon, escapes the house, finishes the work.
-#   - The player should feel: "I did it. I have the book. I have leverage. Tomorrow I can change everything."
-#   - Day 5 then proves that individual leverage is not enough against class, gender, law, money, and reputation.
-#
-# Key correction:
-#   - The photograph is not truly "ultimate leverage." It is Cora's believed leverage.
-#   - It can ruin Gideon only if the world agrees to treat Cora as credible, safe, and worth hearing.
-#   - Day 4 lets her believe that. Day 5 breaks it.
+# ═══════════════════════════════════════════════════════════════
+#  day104.rpy — RELEASE 1, DAY 04: THE FALSE DAWN
+#  Promoted from day104_non_canon.rpy (Release 1 MVP, revised).
+# ═══════════════════════════════════════════════════════════════
 
 
-# ==========================================
-# DAY 4 NODE MAP
-# ==========================================
-# 4_false_dawn_suite_window
-#   -> 1_lockbox_evidence
-#   -> 2_return_early
-#   -> 2_escape_fireplace / 2_escape_bold_lie / 2_escape_missy_cover
-#   -> 3_stern_pressure
-#   -> 4_twilight_ledger_false_dawn
-#   -> 5_triumphant_chapter
-#   -> 6_false_dawn_ending
-#   -> day105_1_monster_reemerges
+# ── 1: FALSE DAWN / SUITE WINDOW ────────────────────────────────
 
+label day104_1:
 
-# ==========================================
-# 1 - FALSE DAWN / SUITE WINDOW
-# ==========================================
+    $ time_manager.set_current_day(4)
+    $ set_time_period("Morning")
 
-label day104_1_false_dawn_suite_window:
-
-    # [ASSET] Existing Day 4 Master Suite day background.
     scene bg_master_suite_day
     with fade
 
@@ -87,9 +47,7 @@ label day104_1_false_dawn_suite_window:
     jump day104_1_lockbox_evidence
 
 
-# ==========================================
-# 1 - LOCKBOX / EVIDENCE
-# ==========================================
+# ── 1: LOCKBOX / EVIDENCE ───────────────────────────────────────
 
 label day104_1_lockbox_evidence:
 
@@ -103,9 +61,6 @@ label day104_1_lockbox_evidence:
     "Then the lock gives."
 
     "Inside: bank notes, a theatre programme, two folded letters, and an envelope stiff with photographic paper."
-
-    # [ASSET] CG callout retained from legacy draft.
-    # show cg_gideon_photograph
 
     "The photograph is not large."
     "That feels obscene somehow."
@@ -122,7 +77,6 @@ label day104_1_lockbox_evidence:
     "Here is the proof."
     "Here is the thing even Gideon Locke cannot smooth over with a quiet voice and a better coat."
 
-    # [STATE] Cora has discovered the leverage. She has not necessarily escaped with it yet.
     $ story.set_day4_evidence_discovered(True)
     $ apply_effects(susp=15, insp=20, corr=0)
 
@@ -132,9 +86,7 @@ label day104_1_lockbox_evidence:
     jump day104_2_return_early
 
 
-# ==========================================
-# 2 - RETURN EARLY
-# ==========================================
+# ── 2: RETURN EARLY ─────────────────────────────────────────────
 
 label day104_2_return_early:
 
@@ -164,16 +116,13 @@ label day104_2_return_early:
             jump day104_2_escape_missy_cover
 
 
-# ==========================================
-# 2 - ESCAPE: FIREPLACE
-# ==========================================
+# ── 2: ESCAPE — FIREPLACE ───────────────────────────────────────
 
 label day104_2_escape_fireplace:
 
     scene bg_master_suite_day
     with dissolve
 
-    # [STATE] Keeps photograph, but creates visible physical evidence on uniform.
     $ story.set_day4_escape_state("fireplace")
     $ story.set_has_photograph(True)
     $ apply_effects(susp=35, insp=5, corr=0)
@@ -219,16 +168,13 @@ label day104_2_escape_fireplace:
     jump day104_3_stern_pressure
 
 
-# ==========================================
-# 2 - ESCAPE: BOLD LIE
-# ==========================================
+# ── 2: ESCAPE — BOLD LIE ────────────────────────────────────────
 
 label day104_2_escape_bold_lie:
 
     scene bg_master_suite_day
     with dissolve
 
-    # [STATE] Keeps photograph, but Gideon has seen her too near the desk.
     $ story.set_day4_escape_state("bold_lie")
     $ story.set_has_photograph(True)
     $ apply_effects(susp=40, insp=10, corr=5)
@@ -291,16 +237,13 @@ label day104_2_escape_bold_lie:
     jump day104_3_stern_pressure
 
 
-# ==========================================
-# 2 - ESCAPE: MISSY COVER
-# ==========================================
+# ── 2: ESCAPE — MISSY COVER ─────────────────────────────────────
 
 label day104_2_escape_missy_cover:
 
     scene bg_master_suite_day
     with dissolve
 
-    # [STATE] Lowest suspicion path, but Cora extracts the physical leverage and ruthlessly harms Missy.
     $ story.set_day4_escape_state("missy_cover")
     $ story.set_has_photograph(True)
     $ story.set_missy_day4_used_as_cover(True)
@@ -346,13 +289,12 @@ label day104_2_escape_missy_cover:
     jump day104_3_stern_pressure
 
 
-# ==========================================
-# 3 - STERN PRESSURE
-# ==========================================
+# ── 3: STERN PRESSURE ───────────────────────────────────────────
 
 label day104_3_stern_pressure:
 
-    # [ASSET] Existing servants' quarters / corridor-adjacent pressure scene.
+    $ set_time_period("Evening")
+
     scene bg_servants_quarters_dusk
     with fade
 
@@ -439,9 +381,7 @@ label day104_3_stern_pressure:
     jump day104_4_twilight_ledger_false_dawn
 
 
-# ==========================================
-# 4 - TWILIGHT LEDGER / FALSE DAWN
-# ==========================================
+# ── 4: TWILIGHT LEDGER / FALSE DAWN ─────────────────────────────
 
 label day104_4_twilight_ledger_false_dawn:
 
@@ -484,9 +424,7 @@ label day104_4_twilight_ledger_false_dawn:
             jump day104_4_missy_repair
 
 
-# ==========================================
-# 4 - ATONEMENT / SAFETY FIRST
-# ==========================================
+# ── 4: ATONEMENT / SAFETY FIRST ─────────────────────────────────
 
 label day104_4_atonement:
 
@@ -523,9 +461,7 @@ label day104_4_atonement:
     jump day104_6_false_dawn_ending
 
 
-# ==========================================
-# 4 - MISSY REPAIR
-# ==========================================
+# ── 4: MISSY REPAIR ─────────────────────────────────────────────
 
 label day104_4_missy_repair:
 
@@ -598,11 +534,11 @@ label day104_4_missy_repair:
     jump day104_6_false_dawn_ending
 
 
-# ==========================================
-# 5 - TRIUMPHANT CHAPTER
-# ==========================================
+# ── 5: TRIUMPHANT CHAPTER ───────────────────────────────────────
 
 label day104_5_triumphant_chapter:
+
+    $ set_time_period("Night")
 
     scene bg_cora_desk_night
     with fade
@@ -637,11 +573,11 @@ label day104_5_triumphant_chapter:
     jump day104_6_false_dawn_ending
 
 
-# ==========================================
-# 6 - FALSE DAWN ENDING
-# ==========================================
+# ── 6: FALSE DAWN ENDING ────────────────────────────────────────
 
 label day104_6_false_dawn_ending:
+
+    $ set_time_period("Night")
 
     scene bg_cora_desk_night
     with dissolve
@@ -668,4 +604,5 @@ label day104_6_false_dawn_ending:
 
     "I mistake the difference for victory."
 
+    $ resolve_turn()
     jump day105_1_monster_reemerges

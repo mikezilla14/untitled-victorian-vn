@@ -20,6 +20,42 @@ screen stats_overlay():
             text "Corruption: Lvl [player.corruption_level] ([player.corruption_xp] XP)" size 14 color "#ef5350"
             text "Suspicion: [player.suspicion]%"                         size 14 color "#ffa726"
 
+# ── LEDGER UI ──────────────────────────────────────────────────
+# Called via $ show_ledger_ui() at reflection and writing-gate moments.
+# Displays current stats and manuscript progress; player clicks to continue.
+screen ledger_ui():
+    modal True
+    zorder 200
+
+    frame:
+        xalign 0.5 yalign 0.4
+        xpadding 30 ypadding 24
+        background "#0d0d0dcc"
+
+        vbox:
+            spacing 8
+
+            text "― THE LEDGER ―" xalign 0.5 size 18 color "#c8a97e"
+
+            null height 8
+
+            text "Inspiration:  [player.inspiration] / [player.inspiration_cap]" size 14 color "#4fc3f7"
+            text "Corruption:   Lv [player.corruption_level]  ([player.corruption_xp] XP)" size 14 color "#ef5350"
+            text "Suspicion:    [player.suspicion]%" size 14 color "#ffa726"
+
+            null height 8
+
+            text "Chapters written:  [story.manuscript_progress]" size 14 color "#b0bec5"
+
+            null height 16
+
+            textbutton "Close" xalign 0.5 action Return() style "ledger_button"
+
+style ledger_button:
+    background "#2a2a2a"
+    hover_background "#3d3d3d"
+    padding (16, 6)
+
 # ── FUTURE SCREENS ─────────────────────────────────────────────
 # Add new screens here as the project grows:
 #   screen writing_desk():   ...

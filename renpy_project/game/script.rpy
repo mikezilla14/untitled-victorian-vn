@@ -26,7 +26,7 @@ label start:
     cora "I send seven shillings home every month. My parents are so proud I secured a position here. If I lose this place..."
     cora "But I didn't come to London just to scrub floors."
 
-    jump day1_morning
+    jump day101_main
 
 
 # ── GLOBAL GUARD LABEL ─────────────────────────────────────────

@@ -65,6 +65,7 @@ init -40 python:
     declare_image_with_fallback("vance_sprite defeated", "images/sprites/vance/defeated.webp", "#7b3f98")
     declare_image_with_fallback("vance_sprite mirror_watch_terror", "images/sprites/vance/mirror_watch_terror.webp", "#7b3f98")
     declare_image_with_fallback("vance_sprite confused", "images/sprites/vance/confused.webp", "#7b3f98")
+    declare_image_with_fallback("vance_sprite shocked", "images/sprites/vance/shocked.webp", "#7b3f98")
 
     # Sprites: Gideon
     declare_image_with_fallback("gideon_sprite cold", "images/sprites/gideon/cold.webp", "#a30000")
