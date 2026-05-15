@@ -57,3 +57,18 @@ init python:
         if player.inspiration < required_insp:
             return False
         return player.spend_inspiration(cost)
+
+    def show_ledger_ui():
+        """
+        Pause the narrative and show the Ledger screen.
+        Player dismisses it with a click; then the script continues.
+        """
+        renpy.call_screen("ledger_ui")
+
+    def has_story_fuel(required_total=15):
+        """
+        Read-only writing-gate check.
+        Returns True if (Inspiration + Corruption XP) meets the threshold.
+        Does not spend any resources — use attempt_write() for the actual gate.
+        """
+        return (player.inspiration + player.corruption_xp) >= required_total

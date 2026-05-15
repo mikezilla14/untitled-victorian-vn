@@ -47,7 +47,7 @@ label day101_1_cora_waiting:
     scene bg_savoy_corridor_morning
     with dissolve
 
-    "I stand outside Ms. Stern's office with my hands folded and my pulse behaving badly."
+    "I stand outside Miss Stern's office with my hands folded and my pulse behaving badly."
     "Behind the door, a clock ticks with the smug confidence of paid machinery."
     "My references sit in my apron pocket."
     "Good paper. Good ink. Better lies."
@@ -72,7 +72,7 @@ label day101_1_morning_interview:
 
     show stern_sprite neutral at center
 
-    "Ms. Stern stands rather than sits."
+    "Miss Stern stands rather than sits."
     "It is not courtesy. It is measurement."
     "Her eyes move from my cap to my boots, weighing every inch for disobedience."
 
@@ -189,7 +189,7 @@ label day101_1_vance_throws_toy:
 
     cora "Cora, Sir."
 
-    gideon "Then learn quickly, Cora. This house rewards discretion."
+    gideon "Then learn quickly, girl. This house rewards discretion."
 
     "He does not threaten me."
     "That is why it feels like one."
@@ -222,7 +222,7 @@ label day101_2_missy_meets_cora:
     missy "You must be Cora."
     cora "I must be."
 
-    missy "I'm Missy. Ms. Stern said I'm to show you where things go. Not everything, mind. If I showed you everything we'd both be dead before tea."
+    missy "I'm Missy. Miss Stern said I'm to show you where things go. Not everything, mind. If I showed you everything we'd both be dead before tea."
 
     "She says it brightly."
     "That is the alarming part."
@@ -291,7 +291,7 @@ label day101_2_coras_path_choice:
     "Another sound follows. Smaller. Wetter."
     "Missy goes still."
 
-    missy "Should we fetch Ms. Stern?"
+    missy "Should we fetch Miss Stern?"
 
     "This is the moment."
     "Not the sound. Not Vance's voice. Not Mr. Locke's hand, if it was his hand."
@@ -318,7 +318,7 @@ label day101_2_coras_path_choice:
             "I step back."
             "Missy's hand reaches the latch. Her innocence does the work my hunger asks of it."
 
-            "Through the narrow opening, I glimpse only fragments: Vance's white hand on dark carpet; the master's polished shoe; the line of a riding crop against his thigh."
+            "Through the narrow opening, I glimpse only fragments: Vance's white hand on dark carpet; the master's polished shoe; the silver head of his walking stick resting against his knee."
             "Missy gasps."
 
             gideon "The door."
@@ -649,7 +649,7 @@ label day101_4_visit_missy:
 
     elif story.day1_corridor_state == "prey":
 
-        missy "You scared me half to death. What if Mr. Gideon complains?"
+        missy "You scared me half to death. What if Mr. Locke complains?"
         cora "Then Stern dismisses me."
         missy "Or worse, keeps you."
 

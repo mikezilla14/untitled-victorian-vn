@@ -1,31 +1,16 @@
-# day103_non_canon.rpy
-# Release 1 / Day 03 non-canon Ren'Py-shaped draft
-# Source intent: rewritten from Twine node map and existing Day 3 script.
-# Asset constraint: uses only assets already present in the supplied Day 3 Ren'Py draft.
-# Promotion note: delete the temporary day103_morning stub from day102_non_canon.rpy when this file is promoted.
-# Promotion note: replace story/player helper calls with exact runtime method names during implementation.
-
-# ==========================================
-# DAY 3 NODE MAP
-# ==========================================
-# 031
-#   -> 031-corridor-insp-chain
-#   -> 031-corridor-corr-chain
-#   -> 032-suite-gideon-tea
-#   -> 032-suite-cora-vs-gideon
-#   -> 032-suite-gideon-beat
-#   -> 033-bedroom-cora-frantic-writing-event
-#   -> 034-room-stern-suspicion
-#   -> day104_1
+# ═══════════════════════════════════════════════════════════════
+#  day103.rpy — RELEASE 1, DAY 03: THE TEST AND THE SUMMONS
+#  Promoted from day103_non_canon.rpy (Release 1 MVP, revised).
+# ═══════════════════════════════════════════════════════════════
 
 
-# ==========================================
-# 031 - CONTEXTUAL GRIND / CORRIDOR ENTRY
-# ==========================================
+# ── 031: CONTEXTUAL GRIND / CORRIDOR ENTRY ──────────────────────
 
-label day103_1_servants_corridor:
+label day103_morning:
 
-    # [ASSET] Existing Day 3 servants' corridor morning background.
+    $ time_manager.set_current_day(3)
+    $ set_time_period("Morning")
+
     scene bg_servants_corridor_morning
     with fade
 
@@ -36,7 +21,6 @@ label day103_1_servants_corridor:
     "Yesterday has not ended."
     "It has merely put on a clean apron."
 
-    # [BEAT] Consequence texture from Day 2 tea choice.
     if story.day2_tea_choice == "predator":
 
         "The hotel has found unpleasant work for me with suspicious efficiency."
@@ -83,16 +67,13 @@ label day103_1_servants_corridor:
             jump day103_1_corridor_corr_chain
 
 
-# ==========================================
-# 031 - CORRIDOR INSPIRATION CHAIN
-# ==========================================
+# ── 031: CORRIDOR INSPIRATION CHAIN ─────────────────────────────
 
 label day103_1_corridor_insp_chain:
 
     scene bg_servants_corridor_morning
     with dissolve
 
-    # [STATE] Cora chooses craft as stabiliser.
     $ story.set_day3_corridor_chain("inspiration")
     $ apply_effects(susp=-5, insp=15, corr=0)
 
@@ -115,16 +96,13 @@ label day103_1_corridor_insp_chain:
     jump day103_2_suite_gideon_tea
 
 
-# ==========================================
-# 031 - CORRIDOR CORRUPTION CHAIN
-# ==========================================
+# ── 031: CORRIDOR CORRUPTION CHAIN ──────────────────────────────
 
 label day103_1_corridor_corr_chain:
 
     scene bg_servants_corridor_morning
     with dissolve
 
-    # [STATE] Cora chooses appetite as stabiliser.
     $ story.set_day3_corridor_chain("corruption")
     $ apply_effects(susp=10, insp=0, corr=15)
 
@@ -152,13 +130,12 @@ label day103_1_corridor_corr_chain:
     jump day103_2_suite_gideon_tea
 
 
-# ==========================================
-# 032 - SUITE: GIDEON TEA
-# ==========================================
+# ── 032: SUITE — GIDEON TEA ─────────────────────────────────────
 
 label day103_2_suite_gideon_tea:
 
-    # [ASSET] Existing Day 3 Master Suite day background.
+    $ set_time_period("Afternoon")
+
     scene bg_master_suite_day
     with fade
 
@@ -176,7 +153,7 @@ label day103_2_suite_gideon_tea:
     "I set the tea tray down."
     "The cups make a small sound against the table. Too loud."
 
-    gideon "Ms. Vance's maid is indisposed. You will assist her."
+    gideon "Miss Vance's maid is indisposed. You will assist her."
 
     vance "That is not necessary."
 
@@ -196,9 +173,7 @@ label day103_2_suite_gideon_tea:
     jump day103_2_suite_cora_vs_gideon
 
 
-# ==========================================
-# 032 - SUITE: CORA VS GIDEON
-# ==========================================
+# ── 032: SUITE — CORA VS GIDEON ─────────────────────────────────
 
 label day103_2_suite_cora_vs_gideon:
 
@@ -211,7 +186,7 @@ label day103_2_suite_cora_vs_gideon:
     "I draw the brush through Vance's hair."
     "It is heavier than it looks. Softer than she is."
 
-    gideon "Tell me. Do you find Ms. Vance beautiful?"
+    gideon "Tell me. Do you find Miss Vance beautiful?"
 
     "The brush pauses for less than a second."
     "Still enough for him to notice."
@@ -237,9 +212,7 @@ label day103_2_suite_cora_vs_gideon:
             jump day103_2_cora_vs_gideon_ghost
 
 
-# ==========================================
-# 032 - TEST BRANCH: INSPIRATION
-# ==========================================
+# ── 032: TEST BRANCH — INSPIRATION ──────────────────────────────
 
 label day103_2_cora_vs_gideon_insp:
 
@@ -249,7 +222,6 @@ label day103_2_cora_vs_gideon_insp:
     show gideon_sprite neutral at right
     show vance_sprite defeated at left
 
-    # [STATE] Predator/accomplice angle, but framed through craft rather than cartoon cruelty.
     $ story.set_day3_brush_choice("predator")
     $ apply_effects(susp=0, insp=20, corr=5)
 
@@ -283,9 +255,7 @@ label day103_2_cora_vs_gideon_insp:
     jump day103_2_suite_gideon_beat
 
 
-# ==========================================
-# 032 - TEST BRANCH: CORRUPTION
-# ==========================================
+# ── 032: TEST BRANCH — CORRUPTION ───────────────────────────────
 
 label day103_2_cora_vs_gideon_corr:
 
@@ -295,7 +265,6 @@ label day103_2_cora_vs_gideon_corr:
     show gideon_sprite neutral at right
     show vance_sprite defeated at left
 
-    # [STATE] Prey/deviant angle. Cora lets desire show and becomes visible.
     $ story.set_day3_brush_choice("prey")
     $ apply_effects(susp=5, insp=5, corr=20)
 
@@ -334,9 +303,7 @@ label day103_2_cora_vs_gideon_corr:
     jump day103_2_suite_gideon_beat
 
 
-# ==========================================
-# 032 - TEST BRANCH: GHOST
-# ==========================================
+# ── 032: TEST BRANCH — GHOST ─────────────────────────────────────
 
 label day103_2_cora_vs_gideon_ghost:
 
@@ -346,7 +313,6 @@ label day103_2_cora_vs_gideon_ghost:
     show gideon_sprite neutral at right
     show vance_sprite defeated at left
 
-    # [STATE] Ghost/mouse angle. Apparent panic, but Cora still records the scene.
     $ story.set_day3_brush_choice("ghost")
     $ apply_effects(susp=15, insp=15, corr=0)
 
@@ -375,9 +341,7 @@ label day103_2_cora_vs_gideon_ghost:
     jump day103_2_suite_gideon_beat
 
 
-# ==========================================
-# 032 - SUITE: GIDEON BEAT
-# ==========================================
+# ── 032: SUITE — GIDEON BEAT ─────────────────────────────────────
 
 label day103_2_suite_gideon_beat:
 
@@ -444,13 +408,12 @@ label day103_2_suite_gideon_beat:
     jump day103_3_bedroom_cora_frantic_writing_event
 
 
-# ==========================================
-# 033 - BEDROOM: CORA FRANTIC WRITING EVENT
-# ==========================================
+# ── 033: BEDROOM — CORA FRANTIC WRITING EVENT ───────────────────
 
 label day103_3_bedroom_cora_frantic_writing_event:
 
-    # [ASSET] Existing servants' quarters dusk background.
+    $ set_time_period("Evening")
+
     scene bg_servants_quarters_dusk
     with fade
 
@@ -482,9 +445,7 @@ label day103_3_bedroom_cora_frantic_writing_event:
             jump day103_3_indulge_words
 
 
-# ==========================================
-# 033 - FRANTIC WRITE
-# ==========================================
+# ── 033: FRANTIC WRITE ───────────────────────────────────────────
 
 label day103_3_frantic_write:
 
@@ -509,16 +470,12 @@ label day103_3_frantic_write:
     "Good."
     "There will be time to make them respectable later."
 
-    # [PROMOTION NOTE]
-    # This is not automatically a full chapter. It banks progress/material toward the night decision.
     $ story.set_day3_frantic_pages_written(True)
 
     jump day103_4_room_stern_suspicion
 
 
-# ==========================================
-# 033 - PREPARE MASK
-# ==========================================
+# ── 033: PREPARE MASK ────────────────────────────────────────────
 
 label day103_3_prepare_mask:
 
@@ -544,9 +501,7 @@ label day103_3_prepare_mask:
     jump day103_4_room_stern_suspicion
 
 
-# ==========================================
-# 033 - INDULGE WORDS
-# ==========================================
+# ── 033: INDULGE WORDS ───────────────────────────────────────────
 
 label day103_3_indulge_words:
 
@@ -573,9 +528,7 @@ label day103_3_indulge_words:
     jump day103_4_room_stern_suspicion
 
 
-# ==========================================
-# 034 - ROOM: STERN SUSPICION
-# ==========================================
+# ── 034: ROOM — STERN SUSPICION ─────────────────────────────────
 
 label day103_4_room_stern_suspicion:
 
@@ -671,13 +624,12 @@ label day103_4_room_stern_suspicion:
     jump day103_2_suite_night_tea
 
 
-# ==========================================
-# 032 CONTINUATION - NIGHT TEA / ULTIMATUM PAYOFF
-# ==========================================
+# ── 032 CONT: NIGHT TEA — ULTIMATUM PAYOFF ──────────────────────
 
 label day103_2_suite_night_tea:
 
-    # [ASSET] Existing Day 3 Master Suite night background.
+    $ set_time_period("Night")
+
     scene bg_master_suite_night
     with fade
 
@@ -748,9 +700,7 @@ label day103_2_suite_night_tea:
             jump day103_2_night_surrender_gideon
 
 
-# ==========================================
-# NIGHT TEA - DEFY GIDEON
-# ==========================================
+# ── NIGHT TEA — DEFY GIDEON ─────────────────────────────────────
 
 label day103_2_night_defy_gideon:
 
@@ -792,9 +742,7 @@ label day103_2_night_defy_gideon:
     jump day103_3_bedroom_final_write
 
 
-# ==========================================
-# NIGHT TEA - BARGAIN GIDEON
-# ==========================================
+# ── NIGHT TEA — BARGAIN GIDEON ──────────────────────────────────
 
 label day103_2_night_bargain_gideon:
 
@@ -846,9 +794,7 @@ label day103_2_night_bargain_gideon:
     jump day103_3_bedroom_final_write
 
 
-# ==========================================
-# NIGHT TEA - SURRENDER GIDEON
-# ==========================================
+# ── NIGHT TEA — SURRENDER GIDEON ────────────────────────────────
 
 label day103_2_night_surrender_gideon:
 
@@ -891,9 +837,7 @@ label day103_2_night_surrender_gideon:
     jump day103_3_bedroom_final_write
 
 
-# ==========================================
-# 033 CONTINUATION - BEDROOM FINAL WRITE
-# ==========================================
+# ── 033 CONT: BEDROOM FINAL WRITE ───────────────────────────────
 
 label day103_3_bedroom_final_write:
 
@@ -920,9 +864,7 @@ label day103_3_bedroom_final_write:
 
         "Write until the candle dies. [Chapter gate]":
 
-            # [PROMOTION NOTE]
-            # Tune threshold later. Day 3 should be a major writing gate.
-            if player.has_story_fuel(required_total=45) or story.day3_twilight_action == "frantic_write":
+            if has_story_fuel(45) or story.day3_twilight_action == "frantic_write":
 
                 "I write as if the lock is already failing."
 
@@ -977,16 +919,5 @@ label day103_3_bedroom_final_write:
             "In the morning, the page is still blank."
             "But so is the doorway."
 
+    $ resolve_turn()
     jump day104_1
-
-
-# ==========================================
-# HANDOFF STUB
-# ==========================================
-
-label day104_1:
-
-    # [HANDOFF] Day 4 begins here.
-    # Twine map points from 034-room-stern-suspicion toward 041.
-    # Keep as a stub in Day 3 until day104_non_canon.rpy is drafted/promoted.
-    return

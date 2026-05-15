@@ -1,58 +1,16 @@
-# day105_non_canon.rpy
-# Release 1 / Day 05 non-canon Ren'Py-shaped draft
-# Source intent: rewritten from legacy Day 5 confrontation script and aligned to updated Day 4 false-dawn ending.
-# Conceptual role: slam the door back in Cora's face after Day 4's false dawn.
-# Core thesis: Gideon is not the true antagonist; he is the first visible instrument of the structural power protecting men like him.
-# Release function: close the MVP arc while opening the series arc — Cora has written, survived, and been noticed.
-# Promotion note: delete the temporary day105_1_monster_reemerges stub from day104_non_canon.rpy when this file is promoted.
-# Promotion note: replace story/player helper calls with exact runtime method names during implementation.
-
-# ==========================================
-# DAY 5 ANALYSIS / DESIGN INTENT
-# ==========================================
-# Legacy spine:
-#   - Gideon summons Cora after discovering the lockbox breach.
-#   - If Cora has the photograph, she believes she has leverage.
-#   - Gideon laughs it off and explains why society will believe him over her.
-#   - He burns or neutralises the evidence.
-#   - He becomes intrigued by Cora's motive.
-#   - Cora writes / reframes the manuscript climax.
-#   - Demo ends with Gideon marking her as future interest.
-#
-# Structural revision:
-#   - Day 5 should not be a simple villain confrontation.
-#   - It should reveal the machine behind the villain: class, gender, reputation, law, patronage, police, publishers, employers.
-#   - Gideon could end Cora here. He chooses not to because his class position makes him arrogant.
-#   - This is a future hinge moment: in hindsight, this is where he should have crushed the threat.
-#   - His failure is not kindness. It is bravado, curiosity, and structural overconfidence.
-#
-# Branching philosophy:
-#   - Release 1 remains light on immediate branching.
-#   - But Cora's flavour is recorded for future releases: observer / prey / predator / ghost / accomplice.
-#   - Missy betrayals are not cosmetic. They become irreversible moral sediment.
-#   - Gideon does not become the campaign villain. He becomes a recurring pressure line and mirror for Cora's development.
+# ═══════════════════════════════════════════════════════════════
+#  day105.rpy — RELEASE 1, DAY 05: THE DOOR OPENS FROM HIS SIDE
+#  Promoted from day105_non_canon.rpy (Release 1 MVP, revised).
+# ═══════════════════════════════════════════════════════════════
 
 
-# ==========================================
-# DAY 5 NODE MAP
-# ==========================================
-# 1-monster-reemerges
-#   -> 2-the-summons
-#   -> 3-leverage-collapses
-#   -> 4-why-did-you-do-it
-#   -> 5-gideon-marks-cora
-#   -> 6-manuscript-reckoning
-#   -> 7-release-one-ending
-#   -> END OF RELEASE 1
-
-
-# ==========================================
-# 1 - MONSTER RE-EMERGES
-# ==========================================
+# ── 1: MONSTER RE-EMERGES ────────────────────────────────────────
 
 label day105_1_monster_reemerges:
 
-    # [ASSET] Existing Day 5 / recurring Master Suite background.
+    $ time_manager.set_current_day(5)
+    $ set_time_period("Morning")
+
     scene bg_master_suite_day
     with fade
 
@@ -85,9 +43,7 @@ label day105_1_monster_reemerges:
     jump day105_2_the_summons
 
 
-# ==========================================
-# 2 - THE SUMMONS
-# ==========================================
+# ── 2: THE SUMMONS ───────────────────────────────────────────────
 
 label day105_2_the_summons:
 
@@ -132,9 +88,7 @@ label day105_2_the_summons:
     jump day105_3_leverage_collapses
 
 
-# ==========================================
-# 3 - LEVERAGE COLLAPSES
-# ==========================================
+# ── 3: LEVERAGE COLLAPSES ────────────────────────────────────────
 
 label day105_3_leverage_collapses:
 
@@ -148,9 +102,6 @@ label day105_3_leverage_collapses:
         "I reach into my apron."
         "Not because I want to."
         "Because keeping it hidden has already failed."
-
-        # [ASSET] Optional CG callout retained from legacy concept.
-        # show cg_gideon_photograph
 
         "I place the photograph face up on the polished table between us."
 
@@ -220,9 +171,7 @@ label day105_3_leverage_collapses:
     jump day105_4_why_did_you_do_it
 
 
-# ==========================================
-# 4 - WHY DID YOU DO IT?
-# ==========================================
+# ── 4: WHY DID YOU DO IT? ────────────────────────────────────────
 
 label day105_4_why_did_you_do_it:
 
@@ -269,9 +218,7 @@ label day105_4_why_did_you_do_it:
             jump day105_4_motivation_ghost
 
 
-# ==========================================
-# 4 - MOTIVATION: OBSERVER / MUSE
-# ==========================================
+# ── 4: MOTIVATION — OBSERVER / MUSE ─────────────────────────────
 
 label day105_4_motivation_observer:
 
@@ -311,9 +258,7 @@ label day105_4_motivation_observer:
     jump day105_5_gideon_marks_cora
 
 
-# ==========================================
-# 4 - MOTIVATION: PREDATOR / PROTÉGÉ
-# ==========================================
+# ── 4: MOTIVATION — PREDATOR / PROTÉGÉ ──────────────────────────
 
 label day105_4_motivation_predator:
 
@@ -354,9 +299,7 @@ label day105_4_motivation_predator:
     jump day105_5_gideon_marks_cora
 
 
-# ==========================================
-# 4 - MOTIVATION: PREY / ADVERSARY
-# ==========================================
+# ── 4: MOTIVATION — PREY / ADVERSARY ────────────────────────────
 
 label day105_4_motivation_prey:
 
@@ -395,9 +338,7 @@ label day105_4_motivation_prey:
     jump day105_5_gideon_marks_cora
 
 
-# ==========================================
-# 4 - MOTIVATION: GHOST / WITNESS
-# ==========================================
+# ── 4: MOTIVATION — GHOST / WITNESS ─────────────────────────────
 
 label day105_4_motivation_ghost:
 
@@ -434,9 +375,7 @@ label day105_4_motivation_ghost:
     jump day105_5_gideon_marks_cora
 
 
-# ==========================================
-# 5 - GIDEON MARKS CORA
-# ==========================================
+# ── 5: GIDEON MARKS CORA ────────────────────────────────────────
 
 label day105_5_gideon_marks_cora:
 
@@ -451,9 +390,6 @@ label day105_5_gideon_marks_cora:
 
     if story.has_photograph:
         "He carries the photograph to the fireplace."
-
-        # [ASSET] Optional object/CG callout.
-        # show cg_photograph_burning
 
         "He holds it over the grate."
         "A match strikes."
@@ -598,13 +534,12 @@ label day105_5_gideon_marks_cora:
     jump day105_6_manuscript_reckoning
 
 
-# ==========================================
-# 6 - MANUSCRIPT RECKONING
-# ==========================================
+# ── 6: MANUSCRIPT RECKONING ──────────────────────────────────────
 
 label day105_6_manuscript_reckoning:
 
-    # [ASSET] Existing Cora desk night background.
+    $ set_time_period("Night")
+
     scene bg_cora_desk_night
     with fade
 
@@ -670,11 +605,11 @@ label day105_6_manuscript_reckoning:
     jump day105_7_release_one_ending
 
 
-# ==========================================
-# 7 - RELEASE ONE ENDING
-# ==========================================
+# ── 7: RELEASE ONE ENDING ────────────────────────────────────────
 
 label day105_7_release_one_ending:
+
+    $ set_time_period("Morning")
 
     scene bg_master_suite_day
     with fade
@@ -729,6 +664,8 @@ label day105_7_release_one_ending:
 
     "He leaves."
 
+    $ set_time_period("Evening")
+
     scene bg_servants_quarters_dusk
     with dissolve
 
@@ -742,7 +679,6 @@ label day105_7_release_one_ending:
     "It is not a victory."
     "It is a beginning with teeth."
 
-    # [STATE] Carry-forward flags for Release 2.
     $ story.set_gideon_recurring_pressure(True)
     $ story.set_release2_gideon_status("marked_cora")
     $ story.set_release2_guest_cast_pivot(True)

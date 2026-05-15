@@ -1,35 +1,16 @@
-# day102_non_canon.rpy
-# Release 1 / Day 02 non-canon Ren'Py-shaped draft
-# Source intent: rewritten from Twine node map and existing Day 2 script.
-# Asset constraint: uses only assets already present in the supplied Day 2 Ren'Py draft.
-# Promotion note: delete the temporary day102_1_cora_missy_first_shift stub from day101_non_canon.rpy when this file is promoted.
-# Promotion note: replace story/player helper calls with exact runtime method names during implementation.
-
-# ==========================================
-# DAY 2 NODE MAP
-# ==========================================
-# 021-cora-missy-first-shift
-#   -> 021-missy-finds-a-thing
-#   -> 021-cora-takes-the-thing       [if Day 1 corridor state == predator]
-#   -> 021-cora-deceives-missy        [if Day 1 corridor state == prey/ghost]
-#   -> 022-day2-chore-time
-#   -> 022-day2-insp-choice / 022-day2-corr-choice
-#   -> 023-stern-fetches-cora
-#   -> 023-vance-goes-incandescent
-#   -> 023-coras-choice
-#   -> 023-cora-confesses / 023-cora-pretends-to-find-it / 023-cora-frames-missy
-#   -> 023-gideon-interrupts-controls-vance
-#   -> 024-cora-writes-a-chapter / 024-cora-sneaks-a-feel
-#   -> day103_morning
+# ═══════════════════════════════════════════════════════════════
+#  day102.rpy — RELEASE 1, DAY 02: THE CONTRABAND AND THE INQUEST
+#  Promoted from day102_non_canon.rpy (Release 1 MVP, revised).
+# ═══════════════════════════════════════════════════════════════
 
 
-# ==========================================
-# 021 - CORA + MISSY FIRST SHIFT
-# ==========================================
+# ── 021: CORA + MISSY FIRST SHIFT ───────────────────────────────
 
 label day102_1_cora_missy_first_shift:
 
-    # [ASSET] Existing Day 2 Master Suite background.
+    $ time_manager.set_current_day(2)
+    $ set_time_period("Morning")
+
     scene bg_master_suite_day
     with fade
 
@@ -71,9 +52,7 @@ label day102_1_cora_missy_first_shift:
     jump day102_1_missy_finds_a_thing
 
 
-# ==========================================
-# 021 - MISSY FINDS A THING
-# ==========================================
+# ── 021: MISSY FINDS A THING ────────────────────────────────────
 
 label day102_1_missy_finds_a_thing:
 
@@ -113,10 +92,7 @@ label day102_1_missy_finds_a_thing:
         jump day102_1_cora_deceives_missy
 
 
-# ==========================================
-# 021 - CORA TAKES THE THING
-# Predator carry-in from Day 1
-# ==========================================
+# ── 021: CORA TAKES THE THING ───────────────────────────────────
 
 label day102_1_cora_takes_the_thing:
 
@@ -125,8 +101,6 @@ label day102_1_cora_takes_the_thing:
 
     show missy_sprite confused at center
 
-    # [STATE] Mutually exclusive Day 2 contraband state.
-    # Whitelist suggestion: none, stolen_wearing, planted_in_trunk, returned_to_hatbox.
     $ story.set_day2_contraband_state("stolen_wearing")
     $ apply_effects(susp=5, insp=0, corr=15)
 
@@ -169,10 +143,7 @@ label day102_1_cora_takes_the_thing:
     jump day102_2_day2_chore_time
 
 
-# ==========================================
-# 021 - CORA DECEIVES MISSY
-# Prey/Ghost carry-in from Day 1
-# ==========================================
+# ── 021: CORA DECEIVES MISSY ────────────────────────────────────
 
 label day102_1_cora_deceives_missy:
 
@@ -181,7 +152,6 @@ label day102_1_cora_deceives_missy:
 
     show missy_sprite confused at center
 
-    # [STATE] Cora keeps her hands clean by making Missy move the dangerous object.
     $ story.set_day2_contraband_state("planted_in_trunk")
     $ apply_effects(susp=0, insp=5, corr=10)
 
@@ -222,13 +192,12 @@ label day102_1_cora_deceives_missy:
     jump day102_2_day2_chore_time
 
 
-# ==========================================
-# 022 - DAY 2 CHORE TIME
-# ==========================================
+# ── 022: DAY 2 CHORE TIME ───────────────────────────────────────
 
 label day102_2_day2_chore_time:
 
-    # [ASSET] Existing Day 2 servants' corridor morning background.
+    $ set_time_period("Afternoon")
+
     scene bg_servants_corridor_morning
     with dissolve
 
@@ -266,9 +235,7 @@ label day102_2_day2_chore_time:
             jump day102_2_day2_corr_choice
 
 
-# ==========================================
-# 022 - DAY 2 INSPIRATION CHOICE
-# ==========================================
+# ── 022: DAY 2 INSPIRATION CHOICE ──────────────────────────────
 
 label day102_2_day2_insp_choice:
 
@@ -277,7 +244,6 @@ label day102_2_day2_insp_choice:
 
     show missy_sprite smiling at center
 
-    # [STATE] Cora converts danger into craft and lowers operational risk.
     $ story.set_day2_chore_focus("inspiration")
     $ apply_effects(susp=-5, insp=15, corr=0)
 
@@ -304,9 +270,7 @@ label day102_2_day2_insp_choice:
     jump day102_3_stern_fetches_cora
 
 
-# ==========================================
-# 022 - DAY 2 CORRUPTION CHOICE
-# ==========================================
+# ── 022: DAY 2 CORRUPTION CHOICE ───────────────────────────────
 
 label day102_2_day2_corr_choice:
 
@@ -315,7 +279,6 @@ label day102_2_day2_corr_choice:
 
     show missy_sprite confused at center
 
-    # [STATE] Cora keeps herself close to the charge of the secret.
     $ story.set_day2_chore_focus("corruption")
     $ apply_effects(susp=10, insp=0, corr=15)
 
@@ -343,13 +306,10 @@ label day102_2_day2_corr_choice:
     jump day102_3_stern_fetches_cora
 
 
-# ==========================================
-# 023 - STERN FETCHES CORA
-# ==========================================
+# ── 023: STERN FETCHES CORA ─────────────────────────────────────
 
 label day102_3_stern_fetches_cora:
 
-    # [ASSET] Existing Day 2 servants' corridor day background.
     scene bg_servants_corridor_day
     with dissolve
 
@@ -381,13 +341,10 @@ label day102_3_stern_fetches_cora:
     jump day102_3_vance_goes_incandescent
 
 
-# ==========================================
-# 023 - VANCE GOES INCANDESCENT
-# ==========================================
+# ── 023: VANCE GOES INCANDESCENT ────────────────────────────────
 
 label day102_3_vance_goes_incandescent:
 
-    # [ASSET] Existing Day 2 Master Suite tea background.
     scene bg_master_suite_tea
     with fade
 
@@ -436,9 +393,7 @@ label day102_3_vance_goes_incandescent:
     jump day102_3_coras_choice
 
 
-# ==========================================
-# 023 - CORA'S CHOICE
-# ==========================================
+# ── 023: CORA'S CHOICE ──────────────────────────────────────────
 
 label day102_3_coras_choice:
 
@@ -455,9 +410,7 @@ label day102_3_coras_choice:
             jump day102_3_cora_frames_missy
 
 
-# ==========================================
-# 023 - CORA CONFESSES
-# ==========================================
+# ── 023: CORA CONFESSES ─────────────────────────────────────────
 
 label day102_3_cora_confesses:
 
@@ -468,7 +421,6 @@ label day102_3_cora_confesses:
     show stern_sprite stern at center
     show missy_sprite shocked at right
 
-    # [STATE] Day 2 crisis state. Whitelist suggestion: prey, predator, ghost.
     $ story.set_day2_tea_choice("prey")
     $ apply_effects(susp=20, insp=15, corr=0)
 
@@ -506,9 +458,7 @@ label day102_3_cora_confesses:
     jump day102_3_gideon_interrupts_controls_vance
 
 
-# ==========================================
-# 023 - CORA PRETENDS TO FIND IT
-# ==========================================
+# ── 023: CORA PRETENDS TO FIND IT ──────────────────────────────
 
 label day102_3_cora_pretends_to_find_it:
 
@@ -519,7 +469,6 @@ label day102_3_cora_pretends_to_find_it:
     show stern_sprite stern at center
     show missy_sprite shocked at right
 
-    # [STATE] Cora owns the room through a composed false discovery.
     $ story.set_day2_tea_choice("predator")
     $ apply_effects(susp=10, insp=5, corr=15)
 
@@ -569,9 +518,7 @@ label day102_3_cora_pretends_to_find_it:
     jump day102_3_gideon_interrupts_controls_vance
 
 
-# ==========================================
-# 023 - CORA FRAMES MISSY
-# ==========================================
+# ── 023: CORA FRAMES MISSY ──────────────────────────────────────
 
 label day102_3_cora_frames_missy:
 
@@ -582,7 +529,6 @@ label day102_3_cora_frames_missy:
     show stern_sprite stern at center
     show missy_sprite shocked at right
 
-    # [STATE] Cora disappears behind Missy. Strong corruption, relationship damage.
     $ story.set_day2_tea_choice("ghost")
     $ story.set_missy_day2_trust_break(True)
     $ apply_effects(susp=0, insp=0, corr=20)
@@ -624,11 +570,11 @@ label day102_3_cora_frames_missy:
     jump day102_3_gideon_interrupts_controls_vance
 
 
-# ==========================================
-# 023 - GIDEON INTERRUPTS / CONTROLS VANCE
-# ==========================================
+# ── 023: GIDEON INTERRUPTS AND CONTROLS VANCE ──────────────────
 
 label day102_3_gideon_interrupts_controls_vance:
+
+    $ set_time_period("Evening")
 
     scene bg_master_suite_tea
     with dissolve
@@ -735,7 +681,7 @@ label day102_3_gideon_interrupts_controls_vance:
         "She does not cry."
         "That is the worst of it."
 
-        gideon "Send the girl below. Send Cora back to work. I will discuss the rest with Ms. Vance privately."
+        gideon "Send the girl below. Send Cora back to work. I will discuss the rest with Miss Vance privately."
 
         "Privately."
         "Vance hears the word and obeys before any hand moves."
@@ -808,13 +754,12 @@ label day102_3_gideon_interrupts_controls_vance:
     jump day102_4_night
 
 
-# ==========================================
-# 024 - NIGHT: WRITE OR INDULGE
-# ==========================================
+# ── 024: NIGHT — WRITE OR INDULGE ───────────────────────────────
 
 label day102_4_night:
 
-    # [ASSET] Existing Day 2 Cora desk night background.
+    $ set_time_period("Night")
+
     scene bg_cora_desk_night
     with dissolve
 
@@ -836,9 +781,7 @@ label day102_4_night:
             jump day102_4_cora_sneaks_a_feel
 
 
-# ==========================================
-# 024 - CORA WRITES A CHAPTER
-# ==========================================
+# ── 024: CORA WRITES A CHAPTER ──────────────────────────────────
 
 label day102_4_cora_writes_a_chapter:
 
@@ -849,9 +792,7 @@ label day102_4_cora_writes_a_chapter:
 
     if story.manuscript_progress == 0:
 
-        # [PROMOTION NOTE]
-        # Day 1 chapter can still be recovered on Day 2 night at lower threshold.
-        if player.has_story_fuel(required_total=15):
+        if has_story_fuel(15):
 
             "Chapter One comes late, but it comes with teeth."
 
@@ -883,13 +824,9 @@ label day102_4_cora_writes_a_chapter:
             "Or I have too much and no discipline."
             "The page does not care which excuse I prefer."
 
-            $ apply_effects(susp=0, insp=0, corr=0)
-
     else:
 
-        # [PROMOTION NOTE]
-        # Chapter Two should be harder to unlock. Tune threshold later.
-        if player.has_story_fuel(required_total=30):
+        if has_story_fuel(30):
 
             "Chapter Two begins with a hatbox."
             "Not the object inside."
@@ -926,21 +863,17 @@ label day102_4_cora_writes_a_chapter:
             "None of it has become art yet."
             "It remains appetite and consequence."
 
-            $ apply_effects(susp=0, insp=0, corr=0)
-
+    $ resolve_turn()
     jump day103_morning
 
 
-# ==========================================
-# 024 - CORA SNEAKS A FEEL
-# ==========================================
+# ── 024: CORA SNEAKS A FEEL ─────────────────────────────────────
 
 label day102_4_cora_sneaks_a_feel:
 
     scene bg_cora_desk_night
     with dissolve
 
-    # [STATE] Indulgence over craft. No manuscript progress.
     $ story.set_day2_night_action("indulge")
     $ apply_effects(susp=10, insp=5, corr=15)
 
@@ -982,15 +915,5 @@ label day102_4_cora_sneaks_a_feel:
     "When I finally sleep, the candle has burned lower than I meant to allow."
     "Waste has consequences."
 
+    $ resolve_turn()
     jump day103_morning
-
-
-# ==========================================
-# HANDOFF STUB
-# ==========================================
-
-label day103_morning:
-
-    # [HANDOFF] Day 3 begins here.
-    # Keep as a stub in Day 2 until day103_non_canon.rpy is drafted/promoted.
-    return
