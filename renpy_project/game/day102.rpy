@@ -228,10 +228,10 @@ label day102_2_day2_chore_time:
     menu:
         "How do I carry the morning?"
 
-        "Work fast. Catalogue the room, the people, the risk. [Inspiration]":
+        "Work fast. Catalogue the room, the people, the risk. [[Inspiration]]":
             jump day102_2_day2_insp_choice
 
-        "Linger near the danger. Let the secret sharpen itself. [Corruption]":
+        "Linger near the danger. Let the secret sharpen itself. [[Corruption]]":
             jump day102_2_day2_corr_choice
 
 
@@ -777,7 +777,7 @@ label day102_4_night:
         "Write. Turn the suite into fiction before it rots. [Manuscript progress]":
             jump day102_4_cora_writes_a_chapter
 
-        "Do not write. Stay inside the feeling a little longer. [Indulgence]":
+        "Do not write. Stay inside the feeling a little longer. [[Indulgence]]":
             jump day102_4_cora_sneaks_a_feel
 
 

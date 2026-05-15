@@ -49,7 +49,8 @@ label day101_1_morning_interview:
     scene bg_savoy_corridor_morning
     with dissolve
 
-    show stern_sprite neutral at center
+    show stern_sprite neutral at center:
+        zoom 0.25
 
     "Miss Stern stands rather than sits."
     "It is not courtesy. It is measurement."
@@ -116,8 +117,8 @@ label day101_1_vance_throws_toy:
 
     "The corridor outside Stern's office is all gloss and restraint."
     "Then something small and silver strikes the skirting board and spins across the carpet."
-
-    show vance_sprite angry at left
+    show vance_sprite angry at left:
+        zoom 0.25
 
     vance "Useless creature. I said the blue ribbon, not that vulgar little thing."
 

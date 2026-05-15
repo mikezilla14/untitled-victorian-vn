@@ -17,14 +17,16 @@ You implement approved non-canon Ren'Py drafts from `narrative/writers_room/dayr
    - **Binary flags:** Simple yes/no events use `bool` attributes and typed setters (e.g. `story.set_has_read_gideon_letters(True)`), never loose globals.
    - **Mutually exclusive branches:** Do not model one-of-N outcomes with several booleans. Use a **single** string field with a default sentinel (e.g. `day1_corridor_state = "none"`) and a **fixed whitelist** + **setter** in `classes.rpy` (e.g. `VALID_CORRIDOR_STATES` + `set_corridor_state(...)`).
    - **String state updates in scripts:** Never assign a whitelisted branch string in `.rpy` (e.g. do not use `story.day1_corridor_state = "predator"`). Use only the designated setter: `story.set_corridor_state("predator")`. Reading `story.day1_corridor_state` in conditions is allowed.
+5. **Bracket interpolation rule.** Ren'Py evaluates `[Word]` inside **any** string — including menu captions — as a Python variable substitution. Decorative stat labels written in menu choices (e.g. `[Inspiration]`, `[Corruption]`, `[Defiance]`) are **not** runtime variables and will raise a `NameError` when that menu is displayed. Before promotion, scan every menu caption and dialogue string for unescaped `[CamelCaseWord]` patterns and escape them to `[[Word]]`.
 ## Workflow: Implementation Mode
 
 1. **Load spec.** Read the approved `dayrdd_non_canon.rpy` non-canon draft (labels, menus, dialogue, stat/flag intent) from the Lead Narrative Editor or author.
 2. **Load Framework.** Import `PlayerStats`, `TimeManager`, `StoryState` from `classes.rpy`.
 3. **Code.** Write Ren'Py labels, menus, ATL transitions, and Python stat logic.
 4. **Asset Check.** Verify referenced sprites/CGs exist in `images/` per `art_pipeline/inventory.md`. Flag missing assets before submission.
-5. **Test.** Run `renpy lint`. Run a quick playthrough of your label.
-6. **Submit.** PR to `agents/code-lab`. Chief Architect gatekeeps.
+5. **Manifest Update (mandatory).** For every `scene`, `show <sprite>`, or audio alias introduced in your script, add the corresponding `declare_image_with_fallback` or `register_audio` entry to `renpy_project/game/assets_manifest.rpy`. Do not rely on Ren'Py's implicit image resolution — undeclared assets silently degrade to the Solid fallback with no lint error. The PR diff must include `assets_manifest.rpy` if any new asset is referenced.
+6. **Test.** Run `renpy lint`. Run a quick playthrough of your label.
+7. **Submit.** PR to `agents/code-lab`. Chief Architect gatekeeps.
 
 ## Generic Episode Promotion Standard (`dayrdd_non_canon.rpy` -> `dayrdd.rpy`)
 
@@ -45,8 +47,10 @@ Use this exact standard for every episode promotion from non-canon draft to exec
 5. **Playable-script hygiene.**
    - Convert only playable runtime content (labels, dialogue, menus, transitions, stat/flag outcomes).
    - Remove editorial notes, brainstorming comments, and markdown-only artifacts from `.rpy` logic.
+   - **Bracket interpolation check.** Grep the file for `\[[A-Z][a-zA-Z]+\]` before submission. Any match in a string that is not a defined runtime variable must be escaped to `[[Word]]`. This is a mandatory pre-lint step.
 6. **Asset and flow safety.**
    - Validate referenced scene/sprite/CG/audio assets; if unavailable, use safe fallback narration and report the gap.
+   - **Manifest update (mandatory).** Every new background, sprite state, or audio alias introduced in the promoted file must have a corresponding entry in `renpy_project/game/assets_manifest.rpy` using `declare_image_with_fallback` or `register_audio`. Enumerate all `scene` and `show` calls in the promoted file and cross-check against the manifest before submission. Missing entries are not caught by `renpy lint` and will silently render as black/coloured placeholders.
    - Keep day flow coherent (`dayrxx` entry, internal period progression, and handoff to the next day) without breaking entry points.
 7. **Validation evidence.**
    - `renpy lint` must pass with zero errors.

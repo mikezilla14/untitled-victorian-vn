@@ -9,7 +9,9 @@ An AI-accelerated, adult pseudo-sandbox RPG visual novel set in a Victorian hote
 * **`/narrative/writers_room`**: Draft non-canon scripts, storyboards, and `dayrdd_non_canon.rpy` supporting material (`r` = release, `dd` = 2-digit day slot `00`-`99`), plus character/location databases (`*_character_non_canon.md`, `characters_non_canon.md`, `locations_non_canon.md`).
 * **`/narrative/templates/Voice_Guides`**: Per-character voice bibles used to enforce consistent dialogue and narration tone.
 * **`/narrative/canon`**: Promoted truth (Lead Narrative Editor), when used.
-* **`/scripts`**: **`validate.py`** is the standard workflow entry point. It coordinates domain checks, engineering compliance, Ren'Py contract linting, historical linting, and optional non-canon formatting checks. No beat-JSON pipeline in MVP.
+* **`/scripts`**: Tooling and validation scripts.
+  * **`validate.py`**: CI workflow entry point for domain checks, engineering compliance, and linting.
+  * **`orchestrate_review.py`**: Local orchestration tool to run Agent Contracts (historical, engineering, Ren'Py) against your files. Generates AI-ready remediation prompts. Use `py scripts/orchestrate_review.py --files <paths>` before PRs or AI handoffs.
 * **`/.agents`**: AI role rules.
 * **`/art_pipeline`**: Asset tooling (when present).
 * **`/renpy_project`**: The playable game — **core MVP deliverable**.
@@ -31,7 +33,8 @@ An AI-accelerated, adult pseudo-sandbox RPG visual novel set in a Victorian hote
 1. Write a **non-canon Ren'Py draft script** (`dayrdd_non_canon.rpy`) in `narrative/writers_room/`.
 2. CI runs **`scripts/historical_linter.py`** on changed writers-room narrative drafts (`*_non_canon.rpy`, plus narrative markdown docs).
 3. Work with the **coding agent** to land behavior in **`renpy_project/game/`**.
-4. **Chief architect** validates structure and practice on code changes.
+4. Run local orchestration with **`py scripts/orchestrate_review.py --files <path_to_draft>,<path_to_runtime>`** (or `python ...` on non-Windows) to automatically verify all Agent Contracts and generate AI remediation prompts.
+5. **Chief architect** validates structure and practice on code changes.
 
 Details: **`docs/narrative_workflow.md`**.
 

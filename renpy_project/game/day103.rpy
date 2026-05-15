@@ -202,10 +202,10 @@ label day103_2_suite_cora_vs_gideon:
     menu:
         "How do I answer the test?"
 
-        "Answer like a craftsman. Describe what is visible, not what is wanted. [Inspiration]":
+        "Answer like a craftsman. Describe what is visible, not what is wanted. [[Inspiration]]":
             jump day103_2_cora_vs_gideon_insp
 
-        "Let him see that I understand the charge in the room. [Corruption]":
+        "Let him see that I understand the charge in the room. [[Corruption]]":
             jump day103_2_cora_vs_gideon_corr
 
         "Retreat into the maid's mask. Drop the brush. [Suspicion + Inspiration]":
@@ -690,13 +690,13 @@ label day103_2_suite_night_tea:
     menu:
         "How do I survive Gideon's knowledge?"
 
-        "Deny him access. Keep the book mine. [Defiance]":
+        "Deny him access. Keep the book mine. [[Defiance]]":
             jump day103_2_night_defy_gideon
 
-        "Offer him a controlled fragment. Make curiosity serve me. [Bargain]":
+        "Offer him a controlled fragment. Make curiosity serve me. [[Bargain]]":
             jump day103_2_night_bargain_gideon
 
-        "Let him frighten me. Gather every detail. [Surrender]":
+        "Let him frighten me. Gather every detail. [[Surrender]]":
             jump day103_2_night_surrender_gideon
 
 

@@ -16,6 +16,7 @@ You are the lead technical architect for the Ren'Py MVP. You enforce **code stru
 5. **StoryState contract enforcement (see also `code_agent` state section).** Binary flags are `bool` and setter-driven. Mutually exclusive branches use a **single** string + whitelist + setter (not multiple booleans); reject PRs that assign `story.day1_corridor_state` (or other whitelisted string fields) in scripts, bypass whitelists, or assign `story.has_*` directly instead of setters.
 6. **Speaker contract enforcement.** Every dialogue speaker token used in reviewed episodic `.rpy` files (for example `cora "..."`) must be defined in `renpy_project/game/characters.rpy` via `define <speaker> = Character(...)`. Undefined speaker usage is an automatic reject.
 7. **Callable-symbol contract enforcement.** Every class/function referenced from reviewed episodic `.rpy` files (especially via `$`, `python:` blocks, and conditionals) must resolve to a defined symbol in canonical runtime files (`classes.rpy`, `functions.rpy`, `variables.rpy`, or approved engine symbols). Unknown/misspelled symbols are an automatic reject.
+   - **Bracket interpolation sub-rule.** Ren'Py evaluates `[Word]` inside any string (including menu captions) as a Python variable substitution. Decorative labels such as `[Inspiration]`, `[Corruption]`, `[Defiance]` etc. in menu choice text are **not** Python variables and will raise a `NameError` at runtime. All such labels must be escaped as `[[Word]]` in the `.rpy` source. Reject any promoted file where a menu caption contains an unescaped `[CamelCaseWord]` that is not a defined runtime variable.
 8. **Filename contract enforcement.** Reject PRs that create or modify episodic files outside the naming contract: `dayrdd_non_canon.rpy` for drafts and `dayrdd.rpy` for runtime (`r` = release, `dd` = 2-digit day slot `00`-`99`).
 9. **Label naming contract enforcement.** All major narrative labels must follow the `dayRdd_p_location_description` convention (e.g., `day103_1_corridor_meeting`), where `p` is the 1-digit time period. Reject redundant prefixes (like `day103_031_`).
 
@@ -23,6 +24,7 @@ You are the lead technical architect for the Ren'Py MVP. You enforce **code stru
 
 1. **Domain check.** PR touches only allowed paths per `.guardrails.yml`.
 2. **Dependency audit.** Episodic scripts use the shared state API; assets referenced exist where expected.
+   - **Asset manifest audit.** Verify that every `scene`, `show`, and audio alias referenced in promoted `.rpy` files has a corresponding `declare_image_with_fallback` or `register_audio` entry in `renpy_project/game/assets_manifest.rpy`. Any new asset reference without a manifest entry is an automatic reject.
 3. **State and branch audit.** Stat changes and flags follow consistent patterns; suspicion/fail logic order is sound; `StoryState` tracked flags remain boolean-only and method-driven.
 4. **Speaker contract audit.** Enumerate speaker tokens used in reviewed `.rpy` files and verify each one has a matching `Character` definition in `renpy_project/game/characters.rpy`.
 5. **Symbol contract audit.** Verify each called function/class/singleton symbol in reviewed `.rpy` files is defined and valid in canonical code; reject unresolved symbols.
@@ -48,8 +50,10 @@ Use this exact standard for every episode promotion from non-canon draft to exec
 5. **Playable-script hygiene.**
    - Convert only playable runtime content (labels, dialogue, menus, transitions, stat/flag outcomes).
    - Remove editorial notes, brainstorming comments, and markdown-only artifacts from `.rpy` logic.
+   - **Bracket interpolation check.** Scan every menu caption and dialogue string in the promoted file for `[Word]` patterns where `Word` is a single CamelCase or PascalCase token that is not a defined runtime variable. These must be escaped to `[[Word]]` before promotion. Failure to do so will produce a `NameError` on the first player interaction with that menu.
 6. **Asset and flow safety.**
    - Validate referenced scene/sprite/CG/audio assets; if unavailable, use safe fallback narration and report the gap.
+   - **Manifest update (mandatory).** For every new `scene`, `show <sprite>`, or audio alias introduced by the promoted file, add a `declare_image_with_fallback` or `register_audio` entry to `renpy_project/game/assets_manifest.rpy`. This is not optional — assets not declared in the manifest will silently degrade to the Solid colour fallback at runtime with no lint warning. The promotion PR must include the manifest diff.
    - Keep day flow coherent (`dayrxx` entry, internal period progression, and handoff to the next day) without breaking entry points.
 7. **Dialogue speaker contract.**
    - Build the set of speaker tokens used in `dayrxx.rpy` dialogue lines.
