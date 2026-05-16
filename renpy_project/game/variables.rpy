@@ -8,3 +8,6 @@
 default time_manager = TimeManager()
 default player       = PlayerStats()
 default story        = StoryState()
+
+# HUD sidebar visibility (layout in screens.rpy).
+default hud_sidebar_visible = True

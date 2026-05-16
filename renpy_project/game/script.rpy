@@ -1,21 +1,8 @@
-# ═══════════════════════════════════════════════════════════════
-#  script.rpy — ENTRY POINT ONLY
-#
-#  This file should stay thin. Its only job is to launch the
-#  game and hand off to day101.rpy. All other logic lives in its
-#  own file. Do not add narrative content or stat manipulation
-#  here.
-#
-#  File load order (Ren'Py loads alphabetically):
-#    characters.rpy → classes.rpy → functions.rpy → screens.rpy → variables.rpy
-#    → day101.rpy → day102.rpy → day103.rpy → day104.rpy → day105.rpy
-#    → endings.rpy → script.rpy
-# ═══════════════════════════════════════════════════════════════
-
 label start:
     show screen stats_overlay
 
     scene bg_savoy_front_facade
+    $ hud_bind_master_viewport()
     with fade
 
     sys "Holywell Street Studios — MVP Gray-Box v2.0"
@@ -29,9 +16,6 @@ label start:
     jump day101_main
 
 
-# ── GLOBAL GUARD LABEL ─────────────────────────────────────────
-# Called after stat-modifying choices and before passive decay.
-# If suspicion has hit 100, the run ends immediately.
 label check_suspicion:
     if player.suspicion >= 100:
         jump game_over_dismissed

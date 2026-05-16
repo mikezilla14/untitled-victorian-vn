@@ -86,6 +86,13 @@ init -40 python:
     declare_image_with_fallback("cora_sprite focused", "images/sprites/cora/focused.webp", "#d4a574")
     declare_image_with_fallback("cora_sprite flushed", "images/sprites/cora/flushed.webp", "#d4a574")
 
+    # UI: persistent HUD (stats_overlay)
+    declare_image_with_fallback("ui_cora_base", "images/ui/ui_cora_base.webp", "#d4a574")
+    declare_image_with_fallback("ui_cora_corrupted", "images/ui/ui_cora_corrupted.webp", "#8b2942")
+    declare_image_with_fallback("ui_suspicion_vignette", "images/ui/ui_suspicion_vignette.webp", "#3a0000")
+    declare_image_with_fallback("ui_inkwell_empty", "images/ui/ui_inkwell_empty.webp", "#1a1a1a")
+    declare_image_with_fallback("ui_inkwell_full", "images/ui/ui_inkwell_full.webp", "#1e5a8a")
+
     # Audio aliases (None when missing; guard before play)
     audio_themes_savoy_tension = register_audio("themes/savoy_tension", "audio/themes/savoy_tension.ogg")
     audio_themes_servants_floor_unease = register_audio("themes/servants_floor_unease", "audio/themes/servants_floor_unease.ogg")
