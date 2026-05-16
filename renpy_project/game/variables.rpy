@@ -8,3 +8,5 @@
 default time_manager = TimeManager()
 default player       = PlayerStats()
 default story        = StoryState()
+
+default sidebar_open = True
