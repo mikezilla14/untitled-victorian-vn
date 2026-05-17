@@ -4,6 +4,10 @@ The product is a **playable Ren'Py MVP** in `renpy_project/`. Non-canon day scri
 
 ## Your loop
 
+**Automated (recommended):** Use the **Orchestrator** (`.agents/rules/orchestrator.md`) — paste it as your system prompt in any IDE or Claude Code and state your task (e.g., `"Produce day 106: afternoon, Cora finds the ledger discrepancy"`). It runs the full pipeline below automatically, routes each stage to the correct specialist agent, and surfaces any blocking issues for human decision.
+
+**Manual:**
+
 1. **Write a non-canon day draft** in Ren'Py-shaped form under `narrative/writers_room/` using `dayrdd_non_canon.rpy` naming. These drafts can include implementation notes, but should stay promotion-ready for runtime `.rpy`.
 2. **Historical pass** — run `scripts/historical_linter.py` on the draft file (CI runs it when those files change). Fix or justify flagged anachronisms; align with `narrative/templates/Voice_Guides/*_voice_guide.md` where relevant.
 3. **Implementation** — hand the non-canon draft to the **coding agent** and iterate until behavior exists in `renpy_project/game/dayrdd.rpy`.

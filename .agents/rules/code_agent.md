@@ -30,6 +30,8 @@ You implement approved non-canon Ren'Py drafts from `narrative/writers_room/dayr
 
 ## Generic Episode Promotion Standard (`dayrdd_non_canon.rpy` -> `dayrdd.rpy`)
 
+> **Canonical checklist is in `chief_architect.md`.** The steps below are an implementation-focused summary. If this summary and `chief_architect.md` ever diverge, `chief_architect.md` wins. Notably, `chief_architect.md` includes two explicit audit steps (Dialogue Speaker Contract and Callable Symbol Contract) that are covered here under Immutable Rules but are not numbered separately — treat them as mandatory regardless.
+
 Use this exact standard for every episode promotion from non-canon draft to executable Ren'Py:
 
 1. **Intent mapping.**

@@ -5,6 +5,7 @@ Mark each item `pass` or `fail`.
 
 Automated subset in CI: `scripts/engineering_compliance.py` (PR pipeline).
 Local orchestration: Run `py scripts/orchestrate_review.py --files <path/to/files>` (or `python ...` if on macOS/Linux) to automatically check compliance and generate AI remediation prompts.
+Agent pipeline: Use `.agents/rules/orchestrator.md` as your system prompt (any IDE or Claude Code) and invoke the `implement-spec` or `produce-day` pipeline — the orchestrator runs Code Agent + Chief Architect in sequence and surfaces all violations.
 Manual-only items remain reviewer responsibilities.
 
 ## A) Scope and flow

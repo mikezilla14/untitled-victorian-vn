@@ -6,6 +6,7 @@ agents:
   - victorian_consultant
   - code_agent
   - gatekeeper_orchestrator
+  - orchestrator
 
 domains:
   canon_lore:

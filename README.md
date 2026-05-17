@@ -23,13 +23,17 @@ An AI-accelerated, adult pseudo-sandbox RPG visual novel set in a Victorian hote
 
 ## AI roles (short)
 
+* **Orchestrator**: Decomposes a production task into an ordered agent pipeline and manages handoffs. Entry point for cross-IDE use — paste `.agents/rules/orchestrator.md` as system prompt, state your task. Pipelines: `produce-day`, `review-scene`, `implement-spec`, `historical-check`, `canon-update`.
 * **Code agent**: Promotes non-canon `.rpy` drafts into runtime `.rpy` under guardrails.
 * **Chief architect**: Enforces Ren’Py methodology and reviews code PRs.
-* **Writers' room / you**: Produce non-canon `.rpy` drafts and design intent.
-* **Victorian consultant / historical linter**: Era-appropriate language checks on writers' room narrative drafts in CI.
+* **Writers’ room / you**: Produce non-canon `.rpy` drafts and design intent.
+* **Victorian consultant / historical linter**: Era-appropriate language checks on writers’ room narrative drafts in CI.
 
 ## Narrative → game workflow (MVP)
 
+**Automated (recommended):** Paste `.agents/rules/orchestrator.md` as your system prompt in any IDE or Claude Code, then: `"Produce day N: [brief]"`. The orchestrator runs the full pipeline below.
+
+**Manual:**
 1. Write a **non-canon Ren'Py draft script** (`dayrdd_non_canon.rpy`) in `narrative/writers_room/`.
 2. CI runs **`scripts/historical_linter.py`** on changed writers-room narrative drafts (`*_non_canon.rpy`, plus narrative markdown docs).
 3. Work with the **coding agent** to land behavior in **`renpy_project/game/`**.

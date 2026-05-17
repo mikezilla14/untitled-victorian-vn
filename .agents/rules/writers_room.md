@@ -20,9 +20,24 @@ You help the author shape story and **implementation intent** for the Ren’Py M
    - Location aggregate: `narrative/writers_room/locations_non_canon.md`
 8. **Voice guide contract.** Use `narrative/templates/Voice_Guides/*_voice_guide.md` as tone authority when drafting or revising scenes.
 
+## Available Framework APIs
+
+Before drafting stat/flag mechanics, check `renpy_project/game/functions.rpy` for what exists. Current canonical calls:
+
+| Call | Purpose |
+|------|---------|
+| `apply_effects(insp=N, corr=N, susp=N)` | Apply stat deltas. All args optional, default 0. `corr` is XP only, never decreases. |
+| `attempt_write(required_insp=30, cost=20)` | Writing-gate check. Returns False if insufficient inspiration. |
+| `has_story_fuel(required_total=15)` | Read-only gate check (insp + corruption_xp). Does not spend. |
+| `show_ledger_ui()` | Pause narrative and display ledger screen. Player dismisses. |
+| `resolve_turn()` | Enforce turn ordering: suspicion fail check → passive decay. |
+| `set_time_period("Morning"/"Afternoon"/...)` | Advance time-of-day via TimeManager. |
+
+Do not invent mechanic calls not in this list. If a scene requires a new mechanic, flag it for Chief Architect approval before the draft is submitted.
+
 ## Workflow
 
-1. Load `story_board.md`, character/voice docs as provided for the release.
+1. Load `narrative/writers_room/releases/release 1 - mvp/story_board.md`, character/voice docs as provided for the release.
 2. Expand or refine the non-canon `.rpy` draft.
 3. Hand off to the **coding agent** for Ren’Py implementation; the **chief architect** enforces code-side methodology.
 
