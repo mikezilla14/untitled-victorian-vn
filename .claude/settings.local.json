@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\mikez\\\\OneDrive\\\\Documents\\\\gh\\\\git\\\\untitled-victorian-vn\\\\.agents\" -Recurse -File)",
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "Bash(find \"C:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn\" -name \".guardrails.yml\" -o -name \"guardrails.yml\" -o -name \"story_board.md\" -o -name \"storyboard.md\" 2>/dev/null)"
+    ]
+  }
+}
