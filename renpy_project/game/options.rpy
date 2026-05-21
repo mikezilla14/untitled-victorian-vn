@@ -108,6 +108,9 @@ define config.end_game_transition = None
 
 define config.window = "auto"
 
+## Letterbox/pillarbox bars outside the 1920×1080 game canvas (e.g. tall windows).
+define config.gl_clear_color = "#000000"
+
 
 ## Transitions used to show and hide the dialogue window
 

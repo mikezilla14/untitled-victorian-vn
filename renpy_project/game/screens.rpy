@@ -13,42 +13,15 @@ init -100 python:
             return 0, config.screen_width
         return HUD_SIDEBAR_WIDTH, config.screen_width - HUD_SIDEBAR_WIDTH
 
-    def hud_viewport_update(trans, st, at):
-        """ATL function: scale master layer to the story area. Returns pause seconds."""
-        sb, game_w = hud_game_viewport()
-        if sb == 0:
-            trans.xalign = 0.5
-            trans.yalign = 0.5
-            trans.xoffset = 0
-            trans.xzoom = 1.0
-            trans.yzoom = 1.0
-        else:
-            scale = float(game_w) / float(config.screen_width)
-            trans.xalign = 0.0
-            trans.yalign = 0.5
-            trans.xoffset = int(sb)
-            trans.xzoom = scale
-            trans.yzoom = scale
-        trans.subpixel = True
-        return 0
+    def _hud_clear_master_layer_at():
+        renpy.show_layer_at([], layer="master")
 
-    def hud_bind_master_viewport():
-        renpy.show_layer_at(hud_master_viewport, layer="master")
-
-    def hud_scene_callback(layer):
-        if layer == "master":
-            hud_bind_master_viewport()
-
-    config.start_callbacks.append(hud_bind_master_viewport)
-    config.scene_callbacks.append(hud_scene_callback)
-
-
-transform hud_master_viewport:
-    function hud_viewport_update
+    config.start_callbacks.append(_hud_clear_master_layer_at)
 
 
 # ── STAT OVERLAY ───────────────────────────────────────────────
-# Twine-style left sidebar; master layer scales to the story area when visible.
+# Twine-style left sidebar overlays the scene; master layer stays full-frame so
+# sprites and backgrounds keep correct proportions and edge positions.
 # Show at start:  show screen stats_overlay
 # Hide on ending: hide screen stats_overlay
 screen stats_overlay():

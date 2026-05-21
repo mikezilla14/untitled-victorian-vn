@@ -1,6 +1,12 @@
+# FORMAT LEGEND:
+# [ASSET] -> backgrounds, sprites, transitions, CG/UI callouts
+# [STATE] -> variable changes, effects, conditions, jumps
+# [CHOICE] -> menu blocks and inflection points
+# [BEAT] -> narrative intent / scene intent notes
+
 # day104_non_canon.rpy
 # Release 1 / Day 04 non-canon Ren'Py-shaped draft
-# Source intent: parsed from legacy Day 4 heist script and reframed as the false dawn / stress-release day.
+# Source intent: parsed from legacy Day 4 heist script and reframed as the false dawn / tension-release day.
 # Conceptual role: Cora survives the monster's house in daylight, finishes the manuscript, and believes she has gained decisive leverage.
 # Day 5 should puncture that belief: Gideon is not the true invulnerable enemy; the society protecting him is.
 # Asset constraint: uses assets already present in the supplied Day 4 draft plus recurring character sprites from earlier Day drafts.
@@ -50,7 +56,7 @@
 
 label day104_1_false_dawn_suite_window:
 
-    # [ASSET] Existing Day 4 Master Suite day background.
+    # [ASSET] Existing Day 4 Master Suite day background
     scene bg_master_suite_day
     with fade
 
@@ -84,6 +90,7 @@ label day104_1_false_dawn_suite_window:
     "I cross to the heavy oak writing desk."
     "The lockbox waits beneath a stack of correspondence, exactly where a careless man would not hide it and a confident man would."
 
+    # [STATE] State/progression update
     jump day104_1_lockbox_evidence
 
 
@@ -93,6 +100,7 @@ label day104_1_false_dawn_suite_window:
 
 label day104_1_lockbox_evidence:
 
+    # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
@@ -104,7 +112,7 @@ label day104_1_lockbox_evidence:
 
     "Inside: bank notes, a theatre programme, two folded letters, and an envelope stiff with photographic paper."
 
-    # [ASSET] CG callout retained from legacy draft.
+    # [ASSET] CG callout retained from legacy draft
     # show cg_gideon_photograph
 
     "The photograph is not large."
@@ -122,13 +130,14 @@ label day104_1_lockbox_evidence:
     "Here is the proof."
     "Here is the thing even Gideon Locke cannot smooth over with a quiet voice and a better coat."
 
-    # [STATE] Cora has discovered the leverage. She has not necessarily escaped with it yet.
+    # [STATE] Cora has discovered the leverage. She has not necessarily escaped with it yet
     $ story.set_day4_evidence_discovered(True)
-    $ apply_effects(susp=15, insp=20, corr=0)
+    $ apply_effects(vance_susp=15, insp=20, corr=0)
 
     "I slide the photograph beneath my bodice."
     "It scratches once against my skin and becomes real."
 
+    # [STATE] State/progression update
     jump day104_2_return_early
 
 
@@ -138,6 +147,7 @@ label day104_1_lockbox_evidence:
 
 label day104_2_return_early:
 
+    # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
@@ -151,16 +161,23 @@ label day104_2_return_early:
 
     "I am standing beside Gideon's desk with his lockbox open and his ruin pressed against my ribs."
 
+    # [CHOICE] Decision point
     menu:
         "Sixty seconds. How do I survive?"
 
         "Hide in the cold hearth. Keep the evidence. [Ghost escape: high suspicion]":
+
+            # [STATE] State/progression update
             jump day104_2_escape_fireplace
 
         "Stand in the room and lie cleanly. Keep the evidence. [Prey escape: high visibility]":
+
+            # [STATE] State/progression update
             jump day104_2_escape_bold_lie
 
         "Use Missy as cover. Lose the evidence, preserve the alibi. [Predator escape: low suspicion, moral cost]":
+
+            # [STATE] State/progression update
             jump day104_2_escape_missy_cover
 
 
@@ -170,13 +187,14 @@ label day104_2_return_early:
 
 label day104_2_escape_fireplace:
 
+    # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
-    # [STATE] Keeps photograph, but creates visible physical evidence on uniform.
+    # [STATE] Keeps photograph, but creates visible physical evidence on uniform
     $ story.set_day4_escape_state("fireplace")
     $ story.set_has_photograph(True)
-    $ apply_effects(susp=35, insp=5, corr=0)
+    $ apply_effects(vance_susp=35, insp=5, corr=0)
 
     "The hearth is enormous, black, and unlit."
     "A servant could disappear there."
@@ -184,6 +202,7 @@ label day104_2_escape_fireplace:
 
     "I close the lockbox, shove it beneath the correspondence, and crawl into the cold soot with the photograph against my chest."
 
+    # [ASSET] Visual/staging command
     show gideon_sprite angry at right
     show vance_sprite angry at left
 
@@ -209,6 +228,7 @@ label day104_2_escape_fireplace:
     "At last they move into the bedchamber."
     "At last the sitting room is empty."
 
+    # [ASSET] Visual/staging command
     hide gideon_sprite
     hide vance_sprite
 
@@ -216,6 +236,7 @@ label day104_2_escape_fireplace:
     "The photograph is still mine."
     "So is the soot."
 
+    # [STATE] State/progression update
     jump day104_3_stern_pressure
 
 
@@ -225,17 +246,19 @@ label day104_2_escape_fireplace:
 
 label day104_2_escape_bold_lie:
 
+    # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
-    # [STATE] Keeps photograph, but Gideon has seen her too near the desk.
+    # [STATE] Keeps photograph, but Gideon has seen her too near the desk
     $ story.set_day4_escape_state("bold_lie")
     $ story.set_has_photograph(True)
-    $ apply_effects(susp=40, insp=10, corr=5)
+    $ apply_effects(vance_susp=40, insp=10, corr=5)
 
     "I close the lockbox with one hand and seize the dust cloth with the other."
     "By the time the door opens, I am wiping the desk as if mahogany has personally insulted Miss Stern."
 
+    # [ASSET] Visual/staging command
     show vance_sprite angry at left
     show gideon_sprite angry at right
 
@@ -283,11 +306,13 @@ label day104_2_escape_bold_lie:
 
     gideon "Go."
 
+    # [ASSET] Visual/staging command
     hide gideon_sprite
     hide vance_sprite
 
     "I go before my courage notices what it has done."
 
+    # [STATE] State/progression update
     jump day104_3_stern_pressure
 
 
@@ -297,14 +322,15 @@ label day104_2_escape_bold_lie:
 
 label day104_2_escape_missy_cover:
 
+    # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
-    # [STATE] Lowest suspicion path, but Cora extracts the physical leverage and ruthlessly harms Missy.
+    # [STATE] Lowest suspicion path, but Cora extracts the physical leverage and ruthlessly harms Missy
     $ story.set_day4_escape_state("missy_cover")
     $ story.set_has_photograph(True)
     $ story.set_missy_day4_used_as_cover(True)
-    $ apply_effects(susp=-15, insp=5, corr=20)
+    $ apply_effects(vance_susp=-15, missy_susp=20, insp=5, corr=20)
 
     "Panic makes the first decision."
     "Ambition improves it."
@@ -314,6 +340,7 @@ label day104_2_escape_missy_cover:
 
     "I slip through the servants' door as the outer door opens."
 
+    # [ASSET] Visual/staging command
     scene bg_servants_corridor_day
     with fade
 
@@ -343,6 +370,7 @@ label day104_2_escape_missy_cover:
     "I have survived."
     "I have also failed the part of me that came for a weapon."
 
+    # [STATE] State/progression update
     jump day104_3_stern_pressure
 
 
@@ -352,7 +380,10 @@ label day104_2_escape_missy_cover:
 
 label day104_3_stern_pressure:
 
-    # [ASSET] Existing servants' quarters / corridor-adjacent pressure scene.
+    # [STATE] State/progression update
+    $ set_time_period("Evening")
+
+    # [ASSET] Existing servants' quarters / corridor-adjacent pressure scene
     scene bg_servants_quarters_dusk
     with fade
 
@@ -370,6 +401,7 @@ label day104_3_stern_pressure:
         "Vance had found fault. Of course Vance had found fault."
         "I had handed her a target and called it haste."
 
+    # [ASSET] Visual/staging command
     show stern_sprite stern at center
 
     stern "Cora."
@@ -379,13 +411,15 @@ label day104_3_stern_pressure:
 
     stern "You were difficult to locate this afternoon."
 
+    # [CHOICE] Decision point
     menu:
         "How do I handle Stern's pressure?"
 
         "Give her the boring servant answer. [-Suspicion]":
 
+            # [STATE] State/progression update
             $ story.set_day4_stern_response("boring")
-            $ apply_effects(susp=-15, insp=0, corr=0)
+            $ apply_effects(stern_susp=-15, insp=0, corr=0)
 
             cora "Ground-floor silver, Ma'am. Then linens. Then back stairs. I should have reported each change."
 
@@ -397,8 +431,9 @@ label day104_3_stern_pressure:
 
         "Let her see I am frightened, not guilty. [+Inspiration, small suspicion]":
 
+            # [STATE] State/progression update
             $ story.set_day4_stern_response("frightened")
-            $ apply_effects(susp=5, insp=10, corr=0)
+            $ apply_effects(stern_susp=5, insp=10, corr=0)
 
             cora "I am trying not to make mistakes, Ma'am. That is making me slower."
 
@@ -412,8 +447,9 @@ label day104_3_stern_pressure:
 
         "Hide behind Missy if she was used. [Conditional moral cost]" if story.day4_escape_state == "missy_cover":
 
+            # [STATE] State/progression update
             $ story.set_day4_stern_response("missy_cover")
-            $ apply_effects(susp=-10, insp=0, corr=10)
+            $ apply_effects(stern_susp=-10, missy_susp=10, insp=0, corr=10)
 
             cora "Missy was with the suite, Ma'am. I was sent back down after delivering cloth."
 
@@ -431,11 +467,13 @@ label day104_3_stern_pressure:
 
     stern "Do not mistake a guest's notice for fortune. That lesson ruins girls."
 
+    # [ASSET] Visual/staging command
     hide stern_sprite
 
     "She leaves me with the warning and no proof."
     "Tonight, no proof is beginning to feel like grace."
 
+    # [STATE] State/progression update
     jump day104_4_twilight_ledger_false_dawn
 
 
@@ -444,7 +482,9 @@ label day104_3_stern_pressure:
 # ==========================================
 
 label day104_4_twilight_ledger_false_dawn:
+    call check_confrontations
 
+    # [ASSET] Visual/staging command
     scene bg_servants_quarters_dusk
     with dissolve
 
@@ -465,22 +505,28 @@ label day104_4_twilight_ledger_false_dawn:
     "Not for more material."
     "For courage."
 
+    # [CHOICE] Decision point
     menu:
-        "What must I spend the last safe hour on?"
+        "Perform visible penance to lower their guard. [Atonement]":
 
-        "Lower suspicion. Clean the evidence of the day. [Safety first]":
+            # [STATE] State/progression update
             jump day104_4_atonement
 
-        "Write now. Take the suspicion hit and write the triumphant chapter. [Finish pressure]":
-            if player.suspicion >= 85:
-                "I reach for the pen, but the scratch of the nib sounds exactly like the lock giving way upstairs."
-                "Panic closes my throat. I am too visible today. The house is watching."
-                "If I light the candle and write now, Stern will catch me. I have to secure my cover first."
-                jump day104_4_twilight_ledger_false_dawn
-            else:
-                jump day104_5_triumphant_chapter
+        "Risk the dark room to write the triumphant chapter. [Triumphant Write]" if player.suspicion < 85:
 
-        "Find Missy. Repair what can still be repaired. [Relationship / alibi]" if story.day4_escape_state == "missy_cover":
+            # [STATE] State/progression update
+            jump day104_5_triumphant_chapter
+
+        "Risk the dark room to write the triumphant chapter. [Triumphant Write]" if player.suspicion >= 85:
+            "My hand shakes too violently to hold the pen. The hotel feels alive, every creaking floorboard a footstep, every shadow a reaching hand."
+            "At this level of anxiety, my panic blocks the pen."
+
+            # [STATE] State/progression update
+            jump day104_4_twilight_ledger_false_dawn
+
+        "Find Missy and salvage what remains of her trust. [Missy Repair]" if getattr(story, "missy_day4_repair_state", "") == "":
+
+            # [STATE] State/progression update
             jump day104_4_missy_repair
 
 
@@ -490,27 +536,34 @@ label day104_4_twilight_ledger_false_dawn:
 
 label day104_4_atonement:
 
+    # [ASSET] Visual/staging command
     scene bg_servants_quarters_dusk
     with dissolve
 
     $ story.set_day4_twilight_action("atonement")
 
     if story.day4_escape_state == "fireplace":
-        $ apply_effects(susp=-30, insp=0, corr=0)
+
+        # [STATE] State/progression update
+        $ apply_effects(stern_susp=-15, vance_susp=-15, insp=0, corr=0)
 
         "I scrub soot from my apron until the water turns grey, then black, then grey again."
         "My knuckles split."
         "Good. Blood is easier to explain than chimney dust."
 
     elif story.day4_escape_state == "bold_lie":
-        $ apply_effects(susp=-25, insp=0, corr=0)
+
+        # [STATE] State/progression update
+        $ apply_effects(stern_susp=-25, insp=0, corr=0)
 
         "I sit in the laundry corner and mend cuffs with saintly dullness."
         "Anyone watching sees a maid trying very hard to become furniture."
         "That is the point."
 
     else:
-        $ apply_effects(susp=-10, insp=0, corr=0)
+
+        # [STATE] State/progression update
+        $ apply_effects(stern_susp=-10, insp=0, corr=0)
 
         "I fold linens."
         "I carry water."
@@ -520,6 +573,7 @@ label day104_4_atonement:
     "It lowers the heat on my neck."
     "But the manuscript remains untouched. I am too exhausted to write."
 
+    # [STATE] State/progression update
     jump day104_6_false_dawn_ending
 
 
@@ -529,13 +583,14 @@ label day104_4_atonement:
 
 label day104_4_missy_repair:
 
+    # [ASSET] Visual/staging command
     scene bg_servants_quarters_dusk
     with dissolve
 
     show missy_sprite shocked at center
 
     $ story.set_day4_twilight_action("missy_repair")
-    $ apply_effects(susp=-5, insp=5, corr=0)
+    $ apply_effects(missy_susp=-15, insp=5, corr=0)
 
     "Missy sits on the edge of her bed, twisting a handkerchief until it looks strangled."
 
@@ -555,13 +610,15 @@ label day104_4_missy_repair:
 
     missy "Why?"
 
+    # [CHOICE] Decision point
     menu:
         "How much truth do I give her?"
 
         "Enough to keep her from hating me completely.":
 
+            # [STATE] State/progression update
             $ story.set_missy_day4_repair_state("partial_truth")
-            $ apply_effects(susp=5, insp=10, corr=0)
+            $ apply_effects(missy_susp=-10, vance_susp=5, insp=10, corr=0)
 
             cora "Because I found something I should not have found. And I panicked."
 
@@ -577,8 +634,9 @@ label day104_4_missy_repair:
 
         "Keep the truth. Offer comfort instead.":
 
+            # [STATE] State/progression update
             $ story.set_missy_day4_repair_state("comfort_lie")
-            $ apply_effects(susp=-5, insp=0, corr=5)
+            $ apply_effects(missy_susp=-15, insp=0, corr=5)
 
             cora "Because I am a coward when cornered."
 
@@ -590,11 +648,13 @@ label day104_4_missy_repair:
             "Not forgiveness."
             "A pause before judgment."
 
+    # [ASSET] Visual/staging command
     hide missy_sprite
 
     "When I return to my room, the emotional toll weighs heavier than the fear."
     "I am safe, but the pen refuses to move. I cannot write tonight."
 
+    # [STATE] State/progression update
     jump day104_6_false_dawn_ending
 
 
@@ -603,7 +663,9 @@ label day104_4_missy_repair:
 # ==========================================
 
 label day104_5_triumphant_chapter:
+    call check_confrontations
 
+    # [ASSET] Visual/staging command
     scene bg_cora_desk_night
     with fade
 
@@ -626,14 +688,16 @@ label day104_5_triumphant_chapter:
     "It is placed on a table in a sealed envelope and allowed to poison every polite sentence around it."
     "The heroine defeats him completely. She is untouchable. She has won."
 
+    # [STATE] State/progression update
     $ story.complete_manuscript_chapter("day4_triumphant_chapter")
-    $ apply_effects(susp=15, insp=-15, corr=0)
+    $ apply_effects(stern_susp=15, insp=-15, corr=0)
 
     "The final sentence lands just before the candle dies."
     "For a while, I do not move."
     "It feels triumphant. It feels like an ending."
     "I mistake fiction for reality, believing that writing the victory makes it absolute."
 
+    # [STATE] State/progression update
     jump day104_6_false_dawn_ending
 
 
@@ -643,6 +707,7 @@ label day104_5_triumphant_chapter:
 
 label day104_6_false_dawn_ending:
 
+    # [ASSET] Visual/staging command
     scene bg_cora_desk_night
     with dissolve
 
@@ -667,5 +732,11 @@ label day104_6_false_dawn_ending:
     "Only sleeping."
 
     "I mistake the difference for victory."
+
+    # IMPLEMENT DEADLINE GATE CHECK HERE
+    if story.manuscript_progress < 2:
+
+        # [STATE] State/progression update
+        jump game_over_deadline_2
 
     jump day105_1_monster_reemerges

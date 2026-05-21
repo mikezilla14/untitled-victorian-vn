@@ -2,7 +2,6 @@ label start:
     show screen stats_overlay
 
     scene bg_savoy_front_facade
-    $ hud_bind_master_viewport()
     with fade
 
     sys "Holywell Street Studios — MVP Gray-Box v2.0"
