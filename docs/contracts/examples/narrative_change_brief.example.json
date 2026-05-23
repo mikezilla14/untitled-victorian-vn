@@ -1,0 +1,26 @@
+{
+  "contract_version": "1",
+  "day_id": "day103",
+  "release": "release-1-mvp",
+  "status": "OPEN",
+  "scale": "M",
+  "invoked_by": "forensic_psychology_consultant",
+  "affected_labels": [
+    "day103_2_corridor"
+  ],
+  "affected_setters": [
+    "story.set_corridor_state"
+  ],
+  "story_board_rows": [
+    "Day 103 \u2014 corridor fork"
+  ],
+  "personas": [
+    "tension",
+    "class"
+  ],
+  "return_to": {
+    "agent": "non_prod_code_agent",
+    "pipeline": "implement-spec"
+  },
+  "markdown_brief_path": "narrative/draft/releases/release-1-mvp/day103_narrative_change_brief.md"
+}

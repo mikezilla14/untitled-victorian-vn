@@ -1,0 +1,36 @@
+---
+description: Victorian VN production — route tasks through the agent orchestrator
+alwaysApply: true
+---
+
+# Agent orchestration (this repo)
+
+This project uses markdown-defined specialist agents coordinated by a **Production Orchestrator**.
+
+## Default behavior
+
+For production, narrative, promotion, review, spice tuning, or canon tasks:
+
+1. Read [AGENTS.md](AGENTS.md) for the catalog and quick routing table.
+2. Follow [`.agents/rules/orchestrator.md`](.agents/rules/orchestrator.md) to classify the request and select a pipeline.
+3. If the user says "assess", "review", or "compare" without naming a lens (code, canon, psychology, market, prod-vs-draft), ask **one** clarifying question before acting.
+4. When executing a pipeline stage, apply the full rule file for that agent from `.agents/rules/`.
+5. Respect gate order on promotion drafts: lead narrative editor → forensic psychology → Victorian consultant (sequential).
+
+## Do not
+
+- Load `narrative/pipeline/**/ideas/` or `synthesis/` when starting **new** writing assignments unless the user requests archive mining.
+- Let code agents rewrite dialogue; route prose gaps to `revise-narrative` via `dayrdd_narrative_change_brief.md`.
+- Use files under `.claude/worktrees/` — stale mirror; repo root is canonical.
+
+## Tools
+
+- Next agent: `py scripts/agent_next_step.py --pipeline <name> --stage <n>`
+- Validate: `py scripts/validate.py` / `py scripts/orchestrate_review.py`
+- Pre-promotion: `py scripts/validate.py --strict-gates --files "<dayrdd_non_canon.rpy>"`
+
+## Reference docs
+
+- [docs/agents/GETTING_STARTED.md](docs/agents/GETTING_STARTED.md)
+- [docs/agents/PIPELINE_REFERENCE.md](docs/agents/PIPELINE_REFERENCE.md)
+- [docs/agents/CONTRACTS.md](docs/agents/CONTRACTS.md)

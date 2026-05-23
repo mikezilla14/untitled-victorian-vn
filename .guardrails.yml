@@ -10,6 +10,7 @@ agents:
   - non_prod_code_agent
   - gatekeeper_orchestrator
   - orchestrator
+  - adult_market_reviewer
 
 domains:
   canon_lore:
@@ -18,21 +19,21 @@ domains:
       - narrative/canon/**
     mutable_by: [lead_narrative_editor, victorian_consultant, prod_code_agent, human]
     agents_read: [all]
+    notes: "Static promoted lore only. Episodic canon is renpy_project/game/day*.rpy."
 
   character_psychology:
     paths:
       - narrative/canon/characters_canon.md
       - narrative/canon/*_character_canon.md
-      - narrative/writers_room/*_character_non_canon.md
-      - narrative/writers_room/characters_non_canon.md
-      - narrative/templates/Voice_Guides/*_voice_guide.md
-      - speculative/idea_archive/releases/**/day*_gate_forensic_psychology.md
-      - speculative/idea_archive/releases/**/day*_forensic_psychology_profile_report.md
-      - speculative/idea_archive/character_profile_reports/**
+      - narrative/draft/bible/*_character_non_canon.md
+      - narrative/draft/bible/characters_non_canon.md
+      - narrative/canon/voice_guides/*_voice_guide.md
+      - narrative/pipeline/releases/**/days/**/gates/day*_gate_forensic_psychology.md
+      - narrative/pipeline/releases/**/days/**/handoffs/day*_forensic_psychology_profile_report.md
     mutable_by: [forensic_psychology_consultant, lead_narrative_editor, writers_room, human]
     agents_read: [all]
     notes: "Character psychology, player-choice consistency, profile carry-forward, and voice-guide psychology."
-    
+
   framework_code:
     paths:
       - renpy_project/game/classes.rpy
@@ -44,7 +45,7 @@ domains:
       - docs/game_mechanics_bible.md
     mutable_by: [chief_architect, prod_code_agent, human]
     agents_read: [prod_code_agent, non_prod_code_agent, gatekeeper_orchestrator]
-    
+
   episodic_code:
     paths:
       - renpy_project/game/day*.rpy
@@ -53,19 +54,21 @@ domains:
       - renpy_project/game/script.rpy
     mutable_by: [prod_code_agent, chief_architect, human]
     agents_read: [prod_code_agent, non_prod_code_agent, chief_architect, gatekeeper_orchestrator]
-    
-  production_narrative:
+    notes: "Shipped episodic canon — sole runtime source of truth for day content."
+
+  draft_narrative:
     paths:
-      - narrative/writers_room/**
+      - narrative/draft/**
     mutable_by: [writers_room, spiciness_tuning_agent, lead_narrative_editor, forensic_psychology_consultant, non_prod_code_agent, human]
     agents_read: [all]
-    
-  speculative_sandbox:
+    notes: "Non-canon promotion drafts, planning, bible, sandbox .rpy."
+
+  pipeline_artifacts:
     paths:
-      - speculative/**
-    mutable_by: [writers_room, spiciness_tuning_agent, non_prod_code_agent, human]
+      - narrative/pipeline/**
+    mutable_by: [writers_room, spiciness_tuning_agent, lead_narrative_editor, forensic_psychology_consultant, victorian_consultant, non_prod_code_agent, human]
     agents_read: [all]
-    notes: "No gatekeeping enforced here. Free exploration."
+    notes: "Pre-draft exploration. ideas/ and synthesis/ are context-firewalled for new assignments."
 
   repo_operations:
     paths:
@@ -79,6 +82,8 @@ domains:
       - renpy_project/utilities/**
       - docs/*.md
       - docs/backlog/**
+      - narrative/README.md
+      - narrative/pipeline/README.md
     mutable_by: [chief_architect, gatekeeper_orchestrator, human]
     agents_read: [all]
     notes: "Repository workflow, automation, and maintenance files."

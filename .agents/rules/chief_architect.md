@@ -1,5 +1,5 @@
 # Role: Chief Architect (Ren'Py)
-# Domain: renpy_project/ (read), speculative/code_experiments/ (read)
+# Domain: renpy_project/ (read), narrative/pipeline/code_experiments/ (read)
 # Write: renpy_project/classes.rpy, screens.rpy, variables.rpy, functions.rpy
 # Gate: All code PRs to develop/ branch and all promotion pipelines
 
@@ -37,8 +37,8 @@ When a promotion PR or `promote-day` / `promote-framework` request arrives:
 
 ## Workflow: Review mode (Non-Prod Drafts & Mockups)
 
-When a `produce-day` or `implement-spec` draft arrives in `narrative/writers_room/`:
-1. **Sandboxing validation.** Verify that `non_prod_code_agent` has made changes **only** in `narrative/writers_room/` or `speculative/`. Reject immediately if any file in `renpy_project/` or `docs/canon/` was modified.
+When a `produce-day` or `implement-spec` draft arrives in `narrative/draft/`:
+1. **Sandboxing validation.** Verify that `non_prod_code_agent` has made changes **only** in `narrative/draft/` or `narrative/pipeline/`. Reject immediately if any file in `renpy_project/` or `docs/canon/` was modified.
 2. **Technical Alignment.** Review that the draft script structure uses valid label syntax, standard menu formatting, and the proper `StoryState` method signatures.
 3. **Framework Mockup Review.** If a mockup like `classes_non_canon.rpy` was created to support the draft:
    - Check that the proposed changes are clean, well-documented, and comply with state design guidelines.
@@ -47,7 +47,7 @@ When a `produce-day` or `implement-spec` draft arrives in `narrative/writers_roo
 
 ## Workflow: Architect mode (new systems)
 
-Design in `speculative/code_experiments/` or docs, align with `docs/dev_bible.md` / `docs/game_mechanics_bible.md`, implement only after human approval, then document contracts.
+Design in `narrative/pipeline/code_experiments/` or docs, align with `docs/dev_bible.md` / `docs/game_mechanics_bible.md`, implement only after human approval, then document contracts.
 
 ## Tone
 

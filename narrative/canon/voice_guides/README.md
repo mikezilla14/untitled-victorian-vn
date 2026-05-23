@@ -8,4 +8,4 @@ Current scope:
 - `vance_voice_guide.md`
 
 Working-source equivalents remain in:
-- `narrative/templates/Voice_Guides/`
+- `narrative/canon/voice_guides/`

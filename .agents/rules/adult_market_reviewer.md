@@ -21,7 +21,7 @@ Read these first when judging continuity, character intent, and locked project d
 
 - `narrative/canon/`
 - `docs/canon/`
-- `narrative/templates/Voice_Guides/`
+- `narrative/canon/voice_guides/`
 - `docs/game_mechanics_bible.md`
 - `.agents/rules/dev_bible.md`
 
@@ -31,12 +31,12 @@ Canon is not malleable. If market advice conflicts with canon, flag the conflict
 
 Read these as malleable design and writing drafts:
 
-- `narrative/writers_room/`
-- `narrative/writers_room/releases/release 1 - mvp/`
-- `narrative/writers_room/releases/release 1 - mvp/story_board.md`
-- `narrative/writers_room/releases/release 1 - mvp/continuity_handoff.md`
-- `narrative/writers_room/characters_non_canon.md`
-- `narrative/writers_room/locations_non_canon.md`
+- `narrative/draft/`
+- `narrative/draft/releases/release-1-mvp/`
+- `narrative/draft/releases/release-1-mvp/planning/story_board.md`
+- `narrative/draft/releases/release-1-mvp/planning/continuity_handoff.md`
+- `narrative/draft/characters_non_canon.md`
+- `narrative/draft/locations_non_canon.md`
 
 Non-canon files can be criticized aggressively. Treat them as pre-production material that may be restructured, intensified, cut, or rewritten before promotion.
 
@@ -60,7 +60,7 @@ Production is the current player experience. When draft and production disagree,
 Read these for planned systems and deferred ideas:
 
 - `docs/backlog/`
-- `speculative/README.md`
+- `narrative/pipeline/README.md`
 
 Do not treat backlog ideas as shipped content. Evaluate whether they solve current market problems or create scope risk.
 
@@ -93,7 +93,7 @@ Use when the human asks to assess non-canon, planned release content, or the wri
 
 Read:
 
-- `narrative/writers_room/releases/release 1 - mvp/story_board.md`
+- `narrative/draft/releases/release-1-mvp/planning/story_board.md`
 - Affected `dayrdd_non_canon.rpy` files
 - `continuity_handoff.md` as needed
 - `characters_non_canon.md` and `locations_non_canon.md`
@@ -107,7 +107,7 @@ Use when the human asks to compare production against non-canon, evaluate change
 
 Read paired files:
 
-- Draft: `narrative/writers_room/releases/release 1 - mvp/dayrdd_non_canon.rpy`
+- Draft: `narrative/draft/releases/release-1-mvp/dayrdd_non_canon.rpy`
 - Production: `renpy_project/game/dayrdd.rpy`
 - Supporting runtime files when mechanics differ
 - `story_board.md`
@@ -128,7 +128,7 @@ Use when the human asks for an overall project review.
 Read:
 
 - Canon: `narrative/canon/`, `docs/canon/`, voice guides
-- Planned: `narrative/writers_room/releases/release 1 - mvp/`
+- Planned: `narrative/draft/releases/release-1-mvp/`
 - Backlog: `docs/backlog/`
 - Runtime: `renpy_project/`
 - README / development docs as needed

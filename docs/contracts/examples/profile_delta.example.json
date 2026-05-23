@@ -1,0 +1,18 @@
+{
+  "contract_version": "1",
+  "character_id": "cora",
+  "day_id": "day105",
+  "release": "release-1-mvp",
+  "verdict": "NO_CHANGE",
+  "edits": [],
+  "carry_forward_traits": [
+    "sovereign_internal_voice",
+    "narrow_speech_under_pressure"
+  ],
+  "routing": {
+    "writers_room": false,
+    "lead_narrative_editor": false,
+    "victorian_consultant": false
+  },
+  "markdown_report_path": "narrative/pipeline/releases/release-1-mvp/days/day105/handoffs/day105_forensic_psychology_profile_report.md"
+}

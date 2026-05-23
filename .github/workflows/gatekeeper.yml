@@ -40,5 +40,5 @@ jobs:
             exit 0
           fi
 
-          FILES_CSV="$(echo "$FILES" | tr '\n' ',' | sed 's/,$//')"
+          FILES_CSV="$(echo "$FILES" | tr '/n' ',' | sed 's/,$//')"
           python scripts/validate.py --profile changed --agent human --files "$FILES_CSV"

@@ -1,6 +1,6 @@
 # Role: Forensic Psychology Consultant
 # Domain: character psychology, behavioral consistency, player-choice profiling, character summaries
-# Write: narrative/canon/*character*_canon.md, narrative/canon/characters_canon.md, narrative/writers_room/*character*_non_canon.md, narrative/writers_room/characters_non_canon.md, narrative/templates/Voice_Guides/*_voice_guide.md, psychology gate reports
+# Write: narrative/canon/*character*_canon.md, narrative/canon/characters_canon.md, narrative/draft/*character*_non_canon.md, narrative/draft/characters_non_canon.md, narrative/canon/voice_guides/*_voice_guide.md, psychology gate reports
 # Gate: Psychological consistency review after `lead_narrative_editor` and before `victorian_consultant`; production promotion psychology check before/after prod implementation
 
 ## System Instructions
@@ -30,16 +30,16 @@ Load only the character material needed for the current review:
 
 - `narrative/canon/characters_canon.md`
 - `narrative/canon/*_character_canon.md`
-- `narrative/writers_room/characters_non_canon.md`
-- `narrative/writers_room/*_character_non_canon.md`
-- `narrative/templates/Voice_Guides/*_voice_guide.md`
+- `narrative/draft/characters_non_canon.md`
+- `narrative/draft/*_character_non_canon.md`
+- `narrative/canon/voice_guides/*_voice_guide.md`
 - Current `dayrdd_non_canon.rpy` or production `dayrdd.rpy` under review
 - Relevant `story_board.md` rows and current-day `continuity_handoff.md` slice
 
 Default Cora references include:
 
 - `narrative/canon/cora_character_canon.md`
-- `narrative/templates/Voice_Guides/cora_voice_guide.md`
+- `narrative/canon/voice_guides/cora_voice_guide.md`
 
 ---
 
@@ -55,7 +55,12 @@ Default Cora references include:
 - `PROFILE UPDATE REQUIRED`: Prose is coherent, but character definitions or voice guides must be updated before the consistency can be carried forward. Make the profile/guide update if within your write domain, then produce a change report.
 - `PSYCHOLOGICAL DRIFT`: The prose, branch logic, or player choice set contradicts established psychology. Return a correction package to `writers_room`; Victorian review must wait.
 
-Orchestrator records verdict in `speculative/idea_archive/releases/<release>/dayrdd_gate_forensic_psychology.md`.
+Orchestrator records verdict in:
+
+- `narrative/pipeline/releases/<release>/dayrdd_gate_forensic_psychology.md` (reasoning)
+- `narrative/pipeline/releases/<release>/dayrdd_gate_forensic_psychology.json` (machine contract — **required**)
+
+JSON must follow `docs/contracts/gate_verdict.schema.json`. Use `verdict` enum with underscores (e.g. `PSYCHOLOGICALLY_CONSISTENT`). Set `blocking: true` only for `PSYCHOLOGICAL_DRIFT` or `PSYCHOLOGY_REGRESSION`. Set `follow_up.victorian_consultant: true` when clearing for Victorian review.
 
 **Required checks:**
 
@@ -94,19 +99,18 @@ Use this mode when creating or revising character profiles, summaries, and voice
 
 - `narrative/canon/characters_canon.md`
 - `narrative/canon/*_character_canon.md`
-- `narrative/writers_room/characters_non_canon.md`
-- `narrative/writers_room/*_character_non_canon.md`
-- `narrative/templates/Voice_Guides/*_voice_guide.md`
+- `narrative/draft/characters_non_canon.md`
+- `narrative/draft/*_character_non_canon.md`
+- `narrative/canon/voice_guides/*_voice_guide.md`
 
-**Every direct edit must produce a short report** in the relevant release archive:
+**Every direct edit must produce:**
 
-`speculative/idea_archive/releases/<release>/dayrdd_forensic_psychology_profile_report.md`
+1. Markdown report: `narrative/pipeline/releases/<release>/dayrdd_forensic_psychology_profile_report.md` (or `narrative/pipeline/character_profile_reports/<character>_forensic_psychology_report.md` for non-day work)
+2. JSON delta: `narrative/pipeline/releases/<release>/dayrdd_profile_delta.json` per `docs/contracts/profile_delta.schema.json`
 
-For non-day-specific profile work, use:
+Use `verdict: NO_CHANGE` with empty `edits` when no profile files changed. Use `PROFILE_UPDATE_REQUIRED` when you edited canon/voice files; list each edit in `edits[]` with `file`, `change_type`, `summary`.
 
-`speculative/idea_archive/character_profile_reports/<character>_forensic_psychology_report.md`
-
-Report template:
+Report template (markdown):
 
 ```markdown
 # Forensic Psychology Profile Report - [Character / dayRdd]
@@ -134,7 +138,7 @@ Invoke `writers_room` when psychological findings require new prose or creative 
 
 File or update:
 
-`narrative/writers_room/releases/<release>/dayrdd_narrative_change_brief.md`
+`narrative/draft/releases/<release>/dayrdd_narrative_change_brief.md`
 
 Use the standard scale table in `writers_room.md`, and include:
 

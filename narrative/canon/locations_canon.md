@@ -18,5 +18,5 @@
 - Carriage Cabin
 
 ## Notes
-- This file is the canonical counterpart to `narrative/writers_room/locations_non_canon.md`.
+- This file is the canonical counterpart to `narrative/draft/locations_non_canon.md`.
 - Asset generation and scene staging should resolve to this location set unless explicitly expanded by canon update.

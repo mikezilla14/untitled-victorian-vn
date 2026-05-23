@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/untitled-victorian-vn/contracts/profile_delta.schema.json",
+  "title": "ProfileDelta",
+  "type": "object",
+  "required": [
+    "contract_version",
+    "character_id",
+    "day_id",
+    "release",
+    "verdict",
+    "edits"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": { "type": "string", "const": "1" },
+    "character_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$",
+      "description": "e.g. cora, gideon"
+    },
+    "day_id": { "type": "string", "pattern": "^day[0-9]{3}$" },
+    "release": { "type": "string", "minLength": 1 },
+    "verdict": {
+      "type": "string",
+      "enum": ["PROFILE_DOCUMENTED", "PROFILE_UPDATE_REQUIRED", "NO_CHANGE"]
+    },
+    "edits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["file", "change_type", "summary"],
+        "additionalProperties": false,
+        "properties": {
+          "file": { "type": "string", "minLength": 1 },
+          "section": { "type": "string" },
+          "change_type": {
+            "type": "string",
+            "enum": ["add", "refine", "remove", "flag_contradiction"]
+          },
+          "summary": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "carry_forward_traits": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "routing": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "writers_room": { "type": "boolean" },
+        "lead_narrative_editor": { "type": "boolean" },
+        "victorian_consultant": { "type": "boolean" }
+      }
+    },
+    "markdown_report_path": { "type": "string" }
+  }
+}

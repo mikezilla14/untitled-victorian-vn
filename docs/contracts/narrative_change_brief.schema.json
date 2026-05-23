@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/untitled-victorian-vn/contracts/narrative_change_brief.schema.json",
+  "title": "NarrativeChangeBrief",
+  "type": "object",
+  "required": [
+    "contract_version",
+    "day_id",
+    "release",
+    "status",
+    "scale",
+    "invoked_by",
+    "affected_labels"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": { "type": "string", "const": "1" },
+    "day_id": { "type": "string", "pattern": "^day[0-9]{3}$" },
+    "release": { "type": "string", "minLength": 1 },
+    "status": {
+      "type": "string",
+      "enum": ["OPEN", "IN_WRITERS_ROOM", "GATED", "CLOSED"]
+    },
+    "scale": { "type": "string", "enum": ["S", "M", "L"] },
+    "invoked_by": {
+      "type": "string",
+      "enum": [
+        "non_prod_code_agent",
+        "lead_narrative_editor",
+        "forensic_psychology_consultant",
+        "chief_architect",
+        "human"
+      ]
+    },
+    "affected_labels": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "affected_setters": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "story_board_rows": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "personas": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["thematic", "humour", "tension", "erotic", "mystery", "class"]
+      }
+    },
+    "return_to": {
+      "type": "object",
+      "required": ["agent"],
+      "additionalProperties": false,
+      "properties": {
+        "agent": { "type": "string", "minLength": 1 },
+        "pipeline": { "type": "string" }
+      }
+    },
+    "markdown_brief_path": { "type": "string" }
+  }
+}

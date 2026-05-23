@@ -1,7 +1,7 @@
 # GIDEON VOICE GUIDE (CANON LOCK)
 
 Canonical source currently derives from:
-- `narrative/templates/Voice_Guides/gideon_voice_guide.md`
+- `narrative/canon/voice_guides/gideon_voice_guide.md`
 
 Lock points:
 - High-compression authority voice; minimal unnecessary words.

@@ -287,7 +287,7 @@ Desk sessions live in **their own runtime files**, parallel to day episodes, so 
 
 | Layer | Pattern | Example |
 |-------|---------|---------|
-| Writers' Room draft | `desk[rdd]_non_canon.rpy` | `narrative/writers_room/releases/release 1 - mvp/desk101_non_canon.rpy` |
+| Writers' Room draft | `desk[rdd]_non_canon.rpy` | `narrative/draft/releases/release-1-mvp/desk101_non_canon.rpy` |
 | Runtime (promoted) | `desk[rdd].rpy` | `renpy_project/game/desk101.rpy` |
 
 - `r` = release (`1` for MVP), `dd` = day slot (`01`–`05`), same indexing as `day101.rpy`.
@@ -380,7 +380,7 @@ Ren'Py loads all `game/*.rpy` automatically; no `script.rpy` import list require
 
 **Shared helpers** (no narrative labels): `functions.rpy` — e.g. `desk_resolve_crop(day, hook_field)`, ink tier lookup. UI: `screens.rpy` until approved.
 
-Prototype first in `speculative/code_experiments/desk101.rpy` if `game/` merge is gated.
+Prototype first in `narrative/pipeline/code_experiments/desk101.rpy` if `game/` merge is gated.
 
 ---
 
@@ -427,7 +427,7 @@ Prototype first in `speculative/code_experiments/desk101.rpy` if `game/` merge i
 - `narrative/canon/cora_character_canon.md` — manuscript as improper, self-serving record; not activist reform.
 - `narrative/canon/mechanics_canon.md` — Inspiration / Corruption / Suspicion; no conflicting stat awards.
 - `story_board.md` — WRITE gates, deadlines, router outcomes.
-- Voice guides under `narrative/templates/Voice_Guides/`.
+- Voice guides under `narrative/canon/voice_guides/`.
 
 **Reject if:**
 
@@ -485,4 +485,4 @@ Prototype first in `speculative/code_experiments/desk101.rpy` if `game/` merge i
 - Runtime baseline: `renpy_project/game/day101.rpy` (`day101_4_write_the_chapter`), `day102.rpy` (`day102_4_cora_writes_a_chapter`); desk modules **proposed** as `desk101.rpy` … `desk105.rpy`.
 - State: `renpy_project/game/classes.rpy` (`StoryState`, `complete_manuscript_chapter`, `VALID_RELEASE1_FLAVOURS`).
 - Gates: `renpy_project/game/functions.rpy` (`has_story_fuel`).
-- Spine: `narrative/writers_room/releases/release 1 - mvp/story_board.md` WRITE rows and router table.
+- Spine: `narrative/draft/releases/release-1-mvp/planning/story_board.md` WRITE rows and router table.

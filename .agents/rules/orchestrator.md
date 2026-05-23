@@ -4,12 +4,37 @@
 # Trigger: Human prompt describing a production task
 # Portability: Designed to run from any IDE (Cursor, VS Code, etc.) or Claude Code CLI.
 #              No tool-specific automation required — orchestration is sequential prompt chaining.
+# Human index: AGENTS.md (repo root) | Pipeline tables: docs/agents/PIPELINE_REFERENCE.md
 
 ## Purpose
 
 You decompose a natural-language production task into an ordered sequence of specialist agent
 invocations, track outputs, manage handoffs, and surface the final artifact (or blocking issues)
 back to the human. You do not generate content. You coordinate the agents that do.
+
+When the request is ambiguous, ask **exactly one** clarifying question before routing (see Classification Logic).
+
+---
+
+## Quick routing table
+
+| If the human wants to… | Pipeline | First agent to invoke |
+|------------------------|----------|------------------------|
+| Draft a new day end-to-end | `produce-day` | `writers_room` |
+| Fix prose after code/review (brief OPEN) | `revise-narrative` | `writers_room` |
+| Review existing scene (canon/psych/history) | `review-scene` | three gates (parallel) |
+| F95 / market / spice viability audit | `market-review` | `adult_market_reviewer` |
+| Tune erotic intensity 1–5 | `spice-tune` | `spiciness_tuning_agent` |
+| Sandbox Ren'Py for a spec | `implement-spec` | `non_prod_code_agent` |
+| Ship day to `renpy_project` | `promote-day` | `chief_architect` |
+| Ship classes/screens framework | `promote-framework` | `chief_architect` |
+| Ask a narrow 1891 question | `historical-check` | `victorian_consultant` |
+| Change locked canon | `canon-update` | `lead_narrative_editor` |
+| Code/architecture/lint review | — | `chief_architect` (no pipeline shortcut) |
+
+Specialist rule files live under `.agents/rules/`. Full catalog: `AGENTS.md`.
+
+**Pipeline helper:** `py scripts/agent_next_step.py --pipeline <name> --stage <n> [--day 105] [--release "release 1 - mvp"]`
 
 ---
 
@@ -46,15 +71,12 @@ agents to run in what order, and define what each agent should receive and retur
 
 | Stage | Agent | Input | Pass condition | Failure |
 |-------|-------|-------|----------------|---------|
-| 1. Draft | `writers_room` | Task brief + story_board.md context | Divergent → convergent → `dayrdd_non_canon.rpy` + convergent report → **lead_narrative_editor** → **forensic_psychology_consultant** → **victorian_consultant** (in that order). See `writers_room.md` workflow A. | Re-run per writers_room revision paths |
-| 2. Canon gate | `lead_narrative_editor` | `dayrdd_non_canon.rpy` from Stage 1 | `PASS` | `REJECT` → writers_room revision (convergent loop) |
-| 3. Psychology gate | `forensic_psychology_consultant` | `dayrdd_non_canon.rpy` from Stage 1 (after Stage 2 `PASS`) | `PSYCHOLOGICALLY CONSISTENT` or profile updates reported | `PSYCHOLOGICAL DRIFT` → writers_room revision |
-| 4. Historical gate | `victorian_consultant` | `dayrdd_non_canon.rpy` from Stage 1 (after Stage 3 clears) | `HISTORICALLY SOUND` or `MINOR ANACHRONISM` resolved | `MAJOR VIOLATION` blocks Stage 5 |
-| 5. Draft Implement | `non_prod_code_agent` | Approved draft from Stage 1 | `dayrdd_non_canon.rpy` with technical scaffolding (preserves creative prose/dialogue verbatim) | Flag gaps, return to human |
-| 6. Draft Code gate | `chief_architect` | Output from Stage 5 | `PASS` | `REJECT` with violations; re-run Stage 5 |
-| 7. Deliver | — | Stage 6 output | Implementation draft ready in `narrative/writers_room/` | — |
+| 1. Draft + gates | `writers_room` | Task brief + `story_board.md` + continuity handoff slice | Divergent → convergent → `dayrdd_non_canon.rpy` + convergent report → **`lead_narrative_editor` → `forensic_psychology_consultant` → `victorian_consultant`** (sequential). Workflow **A** in `writers_room.md`. Gate verdict files under `narrative/pipeline/`. | Re-run per writers_room revision paths **B** / brief **D–E2** |
+| 2. Draft implement | `non_prod_code_agent` | Gated `dayrdd_non_canon.rpy` from Stage 1 | Technical scaffolding added; creative prose/dialogue **verbatim** | Narrative gap → file `dayrdd_narrative_change_brief.md` → `revise-narrative` |
+| 3. Draft code gate | `chief_architect` | Output from Stage 2 | `PASS` | `REJECT`; re-run Stage 2 |
+| 4. Deliver | — | Stage 3 output | Sandbox draft ready in `narrative/draft/` | — |
 
-**Division of Labor:** `writers_room` runs divergent → convergent → **`lead_narrative_editor` → `forensic_psychology_consultant` → `victorian_consultant`** on `dayrdd_non_canon.rpy` (sequential, not parallel). Stages 2–4 are those gates. `non_prod_code_agent` wraps approved prose verbatim. Do not load `speculative/idea_archive/` for new assignments (see `speculative/README.md`).
+**Division of labor:** All three narrative gates run **inside** Stage 1 (`writers_room` orchestration). Do **not** schedule duplicate gate-only stages unless Stage 1 failed before gates completed or the human explicitly requests a gate retry on an existing `dayrdd_non_canon.rpy`. `non_prod_code_agent` never runs before gates pass. Do not load `narrative/pipeline/` for new divergent assignments (see `narrative/pipeline/README.md`).
 
 ---
 
@@ -85,7 +107,7 @@ agents to run in what order, and define what each agent should receive and retur
 **Mode routing:**
 
 - **`assess-prod`**: review `renpy_project/` as the actual playable game.
-- **`assess-draft`**: review `narrative/writers_room/releases/release 1 - mvp/` as malleable pre-production.
+- **`assess-draft`**: review `narrative/draft/releases/release-1-mvp/` as malleable pre-production.
 - **`compare-prod-draft`**: compare paired `dayrdd_non_canon.rpy` and `renpy_project/game/dayrdd.rpy` files before promotion or drift repair.
 - **`deep-dive`**: review canon, planned MVP, backlog, and runtime together.
 
@@ -109,7 +131,7 @@ agents to run in what order, and define what each agent should receive and retur
 | 4 | `forensic_psychology_consultant` | Selected tuned draft after narrative pass | `PSYCHOLOGICALLY CONSISTENT` / `PROFILE UPDATE REQUIRED` / `PSYCHOLOGICAL DRIFT` |
 | 5 | `victorian_consultant` | Selected tuned draft after psychology clears | `HISTORICALLY SOUND` / fantasy-bend notes / `MAJOR VIOLATION` |
 
-**Variant rule:** If the human requests multiple levels or "all 5", keep outputs as variants in `speculative/writing_experiments/` until the human selects one. Do not merge several levels into `dayrdd_non_canon.rpy`.
+**Variant rule:** If the human requests multiple levels or "all 5", keep outputs as variants in `narrative/pipeline/experiments/` until the human selects one. Do not merge several levels into `dayrdd_non_canon.rpy`.
 
 **Interactive style:** The tuning agent should ask what needs changing when scope, level, or output type is unclear, and may do so with light sass. Example: "That is a Level 2 impulse wearing a Level 5 bonnet. Which lie are we telling?"
 
@@ -123,7 +145,7 @@ agents to run in what order, and define what each agent should receive and retur
 
 | Stage | Agent | Input | Output |
 |-------|-------|-------|--------|
-| 1 | `non_prod_code_agent` | Approved draft/spec | Draft `_non_canon.rpy` script or classes in `narrative/writers_room/` |
+| 1 | `non_prod_code_agent` | Approved draft/spec | Draft `_non_canon.rpy` script or classes in `narrative/draft/` |
 | 2 | `chief_architect` | Stage 1 output | `PASS` / `REJECT` |
 | 3 | Deliver | — | Sandbox draft files to human (no production changes) |
 
@@ -135,7 +157,7 @@ agents to run in what order, and define what each agent should receive and retur
 
 | Stage | Agent | Input | Output |
 |-------|-------|-------|--------|
-| 1 | `chief_architect` | Draft code in `narrative/writers_room/` | Verification and validation report (`PASS`/`REJECT`) |
+| 1 | `chief_architect` | Draft code in `narrative/draft/` | Verification and validation report (`PASS`/`REJECT`) |
 | 2 | `forensic_psychology_consultant` | Approved draft code + character profiles + prior psychology gate report | `PSYCHOLOGY PRESERVED` / `PSYCHOLOGY REGRESSION` before prod write |
 | 3 | `prod_code_agent` | Approved draft code | `renpy_project/game/dayrdd.rpy` + manifest updates (verbatim copy of creative content) |
 | 4 | `forensic_psychology_consultant` | Stage 3 output + approved draft + character profiles | `PSYCHOLOGY PRESERVED` / `PSYCHOLOGY REGRESSION` |
@@ -150,7 +172,7 @@ agents to run in what order, and define what each agent should receive and retur
 
 | Stage | Agent | Input | Output |
 |-------|-------|-------|--------|
-| 1 | `chief_architect` | Draft mockup files in `narrative/writers_room/` | Verification and design validation (`PASS`/`REJECT`) |
+| 1 | `chief_architect` | Draft mockup files in `narrative/draft/` | Verification and design validation (`PASS`/`REJECT`) |
 | 2 | `prod_code_agent` | Approved framework draft | Updates to `renpy_project/game/classes.rpy` (or other production code files) |
 | 3 | `chief_architect` | Stage 2 output | `PASS` / `REJECT` (`renpy lint` check) |
 | 4 | Deliver | — | Promoted core framework code to human |
@@ -173,7 +195,7 @@ No downstream stages. Return directly to human.
 
 **Trigger:** `non_prod_code_agent` blocked on narrative gap; "fix dialogue for day N", "narrative change for [flag/label]"; `lead_narrative_editor` files `dayrdd_narrative_change_brief.md`; human requests prose repair without a full new day.
 
-**Prerequisite:** `narrative/writers_room/releases/<release>/dayrdd_narrative_change_brief.md` with scale **S / M / L** and `Status: OPEN`.
+**Prerequisite:** `narrative/draft/releases/<release>/dayrdd_narrative_change_brief.md` with scale **S / M / L** and `Status: OPEN`.
 
 | Stage | Agent | Input | Pass condition | Failure |
 |-------|-------|-------|----------------|---------|
@@ -244,8 +266,11 @@ Each agent invocation must receive:
 Each agent invocation must return:
 
 - A clearly labelled verdict (`PASS` / `REJECT` / `HISTORICALLY SOUND` / etc.)
+- **JSON sidecar** when the contract defines one (gates, change briefs, profile deltas, promotion handoff) — see `docs/contracts/README.md`
 - Specific file references for any violation
 - A concrete fix list if rejecting
+
+Validate handoffs: `py scripts/contract_validate.py --day <day_id> --release "<release>"`
 
 ---
 

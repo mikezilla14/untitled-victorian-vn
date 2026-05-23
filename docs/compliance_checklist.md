@@ -5,7 +5,7 @@ Mark each item `pass` or `fail`.
 
 Automated subset in CI: `scripts/engineering_compliance.py` (PR pipeline).
 Local orchestration: Run `py scripts/orchestrate_review.py --files <path/to/files>` to automatically check compliance.
-Agent pipeline: Use `.agents/rules/orchestrator.md` as your system prompt and invoke the `implement-spec` or `produce-day` pipeline (non-prod drafting/wrapping) followed by the `promote-day` pipeline (production merging and linting).
+Agent pipeline: See [`AGENTS.md`](../AGENTS.md). Use `.agents/rules/orchestrator.md` as your system prompt and invoke the `implement-spec` or `produce-day` pipeline (non-prod drafting/wrapping) followed by the `promote-day` pipeline (production merging and linting).
 Manual-only items remain reviewer responsibilities.
 
 ## A) Scope and flow
@@ -34,7 +34,7 @@ Manual-only items remain reviewer responsibilities.
 - [ ] `script.rpy` remains thin (entry + guard labels; no heavy logic).
 - [ ] Repeated mechanics are consolidated or explicitly queued for `functions.rpy`.
 - [ ] **Asset manifest updated:** every new `scene`, `show <sprite>`, and audio alias introduced by the promoted file has a matching `declare_image_with_fallback` or `register_audio` entry in `renpy_project/game/assets_manifest.rpy`. Undeclared assets are not caught by `renpy lint` — they silently render as solid-colour placeholders at runtime. PR diff must include `assets_manifest.rpy` if any new asset is referenced.
-- [ ] **Bracket interpolation audit:** grep each promoted `.rpy` file for `\[[A-Z][a-zA-Z]+\]`; any match in a string that is not a defined runtime variable must be escaped to `[[Word]]` before promotion. Unescaped brackets cause a `NameError` at the first player interaction with that menu.
+- [ ] **Bracket interpolation audit:** grep each promoted `.rpy` file for `/[[A-Z][a-zA-Z]+/]`; any match in a string that is not a defined runtime variable must be escaped to `[[Word]]` before promotion. Unescaped brackets cause a `NameError` at the first player interaction with that menu.
 - [ ] `renpy lint` passes with zero errors.
 
 ## E) Narrative and historical constraints

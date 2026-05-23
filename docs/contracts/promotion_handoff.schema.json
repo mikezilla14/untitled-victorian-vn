@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/untitled-victorian-vn/contracts/promotion_handoff.schema.json",
+  "title": "PromotionHandoff",
+  "type": "object",
+  "required": [
+    "contract_version",
+    "day_id",
+    "release",
+    "source_non_canon",
+    "target_prod",
+    "creative_text_preserved"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": { "type": "string", "const": "1" },
+    "day_id": { "type": "string", "pattern": "^day[0-9]{3}$" },
+    "release": { "type": "string", "minLength": 1 },
+    "source_non_canon": { "type": "string", "minLength": 1 },
+    "target_prod": { "type": "string", "minLength": 1 },
+    "creative_text_preserved": { "type": "boolean" },
+    "promoted_by": {
+      "type": "string",
+      "enum": ["prod_code_agent", "human"]
+    },
+    "new_labels": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "new_assets": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "psychology_gate_pre": { "type": "string" },
+    "psychology_gate_post": { "type": "string" }
+  }
+}

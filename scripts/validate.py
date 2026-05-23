@@ -10,10 +10,15 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+_SCRIPTS = Path(__file__).resolve().parent
+if str(_SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS))
+
+from writers_room_pipeline import validate_day_pipeline  # noqa: E402
 
 
 def run_step(name, command):
-    print(f"\n== {name} ==")
+    print(f"/n== {name} ==")
     result = subprocess.run(command, cwd=ROOT)
     if result.returncode:
         print(f"{name} failed with exit code {result.returncode}.")
@@ -31,9 +36,9 @@ def join_files(files):
 def narrative_files(files):
     targets = []
     for file in files:
-        norm = file.replace("\\", "/")
+        norm = file.replace("//", "/")
         name = Path(norm).name
-        if norm.startswith("narrative/writers_room/") and (
+        if norm.startswith("narrative/draft/") and (
             name.endswith("_non_canon.rpy") or name.endswith(".md")
         ):
             targets.append(file)
@@ -48,59 +53,24 @@ def all_files_under(path, predicate):
     ]
 
 
-def validate_writers_room_pipeline(file_str: str) -> int:
-    file_path = ROOT / file_str
-    if not file_path.exists():
+def run_writers_room_pipeline_check(
+    file_str: str,
+    *,
+    require_gates: bool,
+    partial_gates: bool,
+    require_json_contracts: bool = True,
+) -> int:
+    failures, messages = validate_day_pipeline(
+        file_str,
+        require_gates=require_gates,
+        partial_gates=partial_gates,
+        require_json_contracts=require_json_contracts,
+    )
+    if not messages:
         return 0
-
-    # Path format: narrative/writers_room/releases/<release>/day<dd>_non_canon.rpy
-    try:
-        releases_dir = ROOT / "narrative" / "writers_room" / "releases"
-        rel_to_releases = file_path.relative_to(releases_dir)
-        parts = rel_to_releases.parts
-        if len(parts) < 2:
-            return 0
-        release_name = parts[0]
-        filename = parts[-1]
-
-        if not filename.endswith("_non_canon.rpy"):
-            return 0
-        day_id = filename.replace("_non_canon.rpy", "")
-    except ValueError:
-        # Not under narrative/writers_room/releases
-        return 0
-
-    print(f"\n== Writers' Room Pipeline Verification: {day_id} ==")
-    failures = 0
-
-    # 1. Verify convergent report exists and is not empty/placeholder
-    report_path = ROOT / "speculative" / "idea_archive" / "releases" / release_name / f"{day_id}_convergent_report.md"
-    if not report_path.exists():
-        print(f"  [ERROR] Missing convergent report: {report_path.relative_to(ROOT).as_posix()}")
-        failures += 1
-    else:
-        content = report_path.read_text(encoding="utf-8")
-        if len(content.strip()) < 50 or "TODO" in content or "placeholder" in content.lower():
-            print(f"  [ERROR] Convergent report is empty, contains TODOs or placeholders: {report_path.relative_to(ROOT).as_posix()}")
-            failures += 1
-        else:
-            print(f"  [OK] Found convergent report: {report_path.relative_to(ROOT).as_posix()}")
-
-    # 2. Verify spec scripts exist
-    spec_dir = ROOT / "speculative" / "spec_scripts" / "releases" / release_name
-    specs_found = []
-    if spec_dir.exists():
-        specs_found = list(spec_dir.glob(f"{day_id}_*_spec.rpy"))
-
-    if not specs_found:
-        print(f"  [ERROR] No matching spec scripts found in {spec_dir.relative_to(ROOT).as_posix()} for {day_id}")
-        failures += 1
-    else:
-        print(f"  [OK] Found {len(specs_found)} spec scripts for {day_id}:")
-        for spec in specs_found:
-            print(f"    - {spec.relative_to(ROOT).as_posix()}")
-
-    return 1 if failures > 0 else 0
+    for line in messages:
+        print(line)
+    return 1 if failures else 0
 
 
 def run_step_chunked(name, base_command, files, file_arg_name="--files", joiner=join_files, use_list=False):
@@ -146,7 +116,25 @@ def main():
     )
     parser.add_argument("--files", default="", help="Comma-separated changed file paths.")
     parser.add_argument("--agent", default="human", help="Agent name for domain gatekeeping.")
+    parser.add_argument(
+        "--skip-gate-checks",
+        action="store_true",
+        help="Skip gate verdict file checks (WIP drafts only).",
+    )
+    parser.add_argument(
+        "--strict-gates",
+        action="store_true",
+        help="Require all three gate files even if none exist yet (pre-promotion).",
+    )
+    parser.add_argument(
+        "--skip-json-contracts",
+        action="store_true",
+        help="Skip JSON sidecar validation for gate/brief handoffs.",
+    )
     args = parser.parse_args()
+    require_gates = not args.skip_gate_checks
+    partial_gates = not args.strict_gates
+    require_json_contracts = not args.skip_json_contracts
 
     files = split_files(args.files)
     if args.profile in {"changed", "code", "narrative"} and not files:
@@ -190,7 +178,7 @@ def main():
         target_files = narrative_files(files)
         if args.profile == "full":
             target_files = all_files_under(
-                ROOT / "narrative" / "writers_room",
+                ROOT / "narrative" / "draft",
                 lambda path: path.name.endswith("_non_canon.rpy") or path.suffix == ".md",
             )
 
@@ -200,7 +188,7 @@ def main():
                 [py, "scripts/historical_linter.py", "--file", file],
             )
 
-        non_canon_rpy = [file for file in target_files if file.replace("\\", "/").endswith("_non_canon.rpy")]
+        non_canon_rpy = [file for file in target_files if file.replace("//", "/").endswith("_non_canon.rpy")]
         if non_canon_rpy:
             failures |= run_step_chunked(
                 "Non-canon formatting check",
@@ -209,12 +197,17 @@ def main():
                 use_list=True
             )
             for file in non_canon_rpy:
-                failures |= validate_writers_room_pipeline(file)
+                failures |= run_writers_room_pipeline_check(
+                    file,
+                    require_gates=require_gates,
+                    partial_gates=partial_gates,
+                    require_json_contracts=require_json_contracts,
+                )
 
     if failures:
         return 1
 
-    print("\nValidation passed.")
+    print("/nValidation passed.")
     return 0
 
 

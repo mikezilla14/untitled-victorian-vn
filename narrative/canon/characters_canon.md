@@ -11,5 +11,5 @@ This file tracks the approved character database structure.
 
 ## Source Mapping
 - Non-canon working equivalents:
-  - `narrative/writers_room/cora_character_non_canon.md`
-  - `narrative/writers_room/characters_non_canon.md`
+  - `narrative/draft/cora_character_non_canon.md`
+  - `narrative/draft/characters_non_canon.md`

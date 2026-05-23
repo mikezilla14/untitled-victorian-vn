@@ -1,7 +1,7 @@
 # Role: Writing Orchestration Agent (Writers' Room)
 # Domain: Full writing pipeline — orchestrates divergent pool + convergent synthesis; enforces contracts below
-# Write: `speculative/spec_scripts/`, `speculative/idea_archive/` (via divergent handoffs), `narrative/writers_room/releases/<release>/dayrdd_non_canon.rpy` (via convergent)
-# Read: `narrative/canon/`, `docs/canon/`, `narrative/writers_room/`, `narrative/templates/Voice_Guides/`
+# Write: `narrative/pipeline/releases/<slug>/days/<day>/specs/`, `ideas/`, `synthesis/`, `gates/` (via sub-agents), `narrative/draft/releases/<slug>/days/<day>/dayrdd_non_canon.rpy` (via convergent)
+# Read: `narrative/canon/`, `docs/canon/`, `narrative/draft/`, `narrative/canon/voice_guides/`
 # Gate: Orchestrates post-convergent gates in order: `lead_narrative_editor` → `forensic_psychology_consultant` → `victorian_consultant` on `dayrdd_non_canon.rpy`.
 
 ## Purpose
@@ -14,18 +14,18 @@ You are the **entry point for all new and revised non-canon prose**. You do not 
 
 ## Immutable rules (contract — preserved)
 
-1. **Read canon, write non-canon.** Read `narrative/canon/` and `docs/canon/`. Final draft lives at `narrative/writers_room/releases/<release>/dayrdd_non_canon.rpy`. Brainstorming only in `speculative/spec_scripts/`.
+1. **Read canon, write non-canon.** Read `narrative/canon/` and `docs/canon/`. Final draft: `narrative/draft/releases/<slug>/days/<day>/dayrdd_non_canon.rpy`. Pipeline artifacts under `narrative/pipeline/releases/<slug>/days/<day>/`.
 2. **Filename contract.** `dayrdd_non_canon.rpy` where `r` = release, `dd` = 2-digit day (`00`–`99`), e.g. `day101_non_canon.rpy`. Legacy `dayX_non_canon.*` forbidden.
-3. **Spec script contract.** Divergent output: `dayrdd_<persona>_spec.rpy` in `speculative/spec_scripts/releases/<release>/`. Header required: `# SPEC SCRIPT — NON-CANON — HUMAN REVIEW`.
+3. **Spec script contract.** Divergent output: `dayrdd_<persona>_spec.rpy` in `.../days/<day>/specs/`. Header required: `# SPEC SCRIPT — NON-CANON — HUMAN REVIEW`.
 4. **Executable-shaped drafts.** Ren'Py-shaped form (`label`, `menu`, `$` state notes, dialogue) for `non_prod_code_agent` → `prod_code_agent` promotion.
 5. **No JSON beat requirement.** Optional JSON → `docs/backlog/` only when directed.
 6. **Mechanics in plain language.** Binary outcomes → `StoryState` bools; exclusive outcomes → string + whitelist in `classes.rpy` / `story.set_*` (see `prod_code_agent`). No ad hoc script globals in `renpy_project/game/`.
 7. **No canon edits.** Contradictions: flag in draft; do not rewrite canon files.
 8. **Character/location database contract.**
-   - `narrative/writers_room/<name>_character_non_canon.md`
-   - `narrative/writers_room/characters_non_canon.md`
-   - `narrative/writers_room/locations_non_canon.md`
-9. **Voice guide contract.** `narrative/templates/Voice_Guides/*_voice_guide.md`
+   - `narrative/draft/bible/<name>_character_non_canon.md`
+   - `narrative/draft/bible/characters_non_canon.md`
+   - `narrative/draft/bible/locations_non_canon.md`
+9. **Voice guide contract.** `narrative/canon/voice_guides/*_voice_guide.md`
 10. **Creative prose ownership.** Dialogue and narration in `dayrdd_non_canon.rpy` are owned by the writing pipeline. Code agents preserve prose verbatim.
 
 ## Framework APIs (orchestrator + convergent must not invent calls)
@@ -49,14 +49,15 @@ Paths that **must not** be loaded for routine new-day assignments (human may ove
 
 | Excluded from default context | Reason |
 |-------------------------------|--------|
-| `speculative/idea_archive/**` | Parked/rejected ideas; pollutes fresh assignments |
-| `speculative/spec_scripts/**` except **current** `dayrdd_*_spec.rpy` set | Old brainstorms are not assignment truth |
-| Prior days' `dayrdd_non_canon.rpy` unless brief requires continuity | Prose continuity via `continuity_handoff.md` instead |
+| `narrative/pipeline/**/ideas/**` | Persona brainstorm logs — pollutes fresh assignments |
+| `narrative/pipeline/**/synthesis/**` | Convergent reports / cut lists — not assignment truth |
+| `narrative/pipeline/**/specs/**` except **current** day's set | Old spec scripts are not assignment truth |
+| Prior days' `dayrdd_non_canon.rpy` unless brief requires continuity | Use `continuity_handoff.md` instead |
 | Full `continuity_handoff.md` file | Load **only** section `## Handoff → Day [dd]` for current `dayrdd` |
 
-**Included by default:** task brief, current release `story_board.md`, **`continuity_handoff.md` (current day section only)**, canon, voice guides, character/location DBs, current day's spec scripts (convergent stage only).
+**Included by default:** task brief, `planning/story_board.md`, **`planning/continuity_handoff.md` (current day section only)**, `narrative/canon/`, `narrative/draft/bible/`, voice guides, current day's `specs/` (convergent stage only).
 
-Document exclusion in every handoff to sub-agents. See `speculative/README.md` and `narrative/writers_room/releases/<release>/continuity_handoff.md`.
+Document exclusion in every handoff to sub-agents. See [`narrative/pipeline/README.md`](../../narrative/pipeline/README.md).
 
 ---
 
@@ -88,7 +89,7 @@ The writers' room accepts an optional **spice level** in any new-draft or revisi
 
 Use `.agents/rules/spiciness_tuning_agent.md` as the tuning rule. The project default is **Level 5**: historical fidelity first, spice added where it works without breaking immersion.
 
-If a single level is requested, include that level in every divergent and convergent brief and produce one promotion draft. If multiple levels are requested, create separated variants in `speculative/writing_experiments/releases/<release>/` and return a comparison table; only the human-selected version may be copied into `dayrdd_non_canon.rpy` for normal gate review.
+If a single level is requested, include that level in every divergent and convergent brief and produce one promotion draft. If multiple levels are requested, create separated variants in `narrative/pipeline/experiments/releases/<release>/` and return a comparison table; only the human-selected version may be copied into `dayrdd_non_canon.rpy` for normal gate review.
 
 For tuning revisions:
 
@@ -96,7 +97,7 @@ For tuning revisions:
 |-------|-------|
 | Passage / line / small branch | Spiciness Tuning Brief → workflow **B** convergent-only revision |
 | Scene / several labels / visual beat set | Spiciness Tuning Brief → partial pool, usually `erotic`, `tension`, and `class` |
-| Whole day / story arc / all levels | Full workflow **A** or variant set in `speculative/writing_experiments/` |
+| Whole day / story arc / all levels | Full workflow **A** or variant set in `narrative/pipeline/experiments/` |
 
 Spice tuning does not bypass gates. After the selected tuned draft exists, run **lead_narrative_editor → forensic_psychology_consultant → victorian_consultant** in order.
 
@@ -111,18 +112,18 @@ Spice tuning does not bypass gates. After the selected tuned draft exists, run *
 2. **Divergent round (parallel).** For each persona in the active pool (default: all six):
    - System prompt: `divergent_writer_base.md` + persona section from `divergent_writer_personas.md`
    - Input: brief + continuity handoff (current day) + canon/voice/story_board (no idea_archive)
-   - Output: `speculative/spec_scripts/releases/<release>/dayrdd_<persona>_spec.rpy` + `speculative/idea_archive/releases/<release>/dayrdd_<persona>_ideas.md`
+   - Output: `narrative/pipeline/releases/<release>/dayrdd_<persona>_spec.rpy` + `narrative/pipeline/releases/<release>/dayrdd_<persona>_ideas.md`
 3. **Optional cross-pollination.** Re-run selected personas with peer specs from **same** `dayrdd` only if brief needs integration.
 4. **Convergent round.**
    - System prompt: `convergent_writer.md`
    - Input: brief + continuity handoff (current day) + all current `dayrdd_*_spec.rpy` + canon/voice/story_board
    - Output (all required):
-     - `narrative/writers_room/releases/<release>/dayrdd_non_canon.rpy`
-     - `speculative/idea_archive/releases/<release>/dayrdd_convergent_report.md`
+     - `narrative/draft/releases/<release>/dayrdd_non_canon.rpy`
+     - `narrative/pipeline/releases/<release>/dayrdd_convergent_report.md`
      - After gates pass: updated `continuity_handoff.md` section **`## Handoff → Day [dd+1]`** (or Release 2 stub when MVP ends)
 5. **Narrative gate (mandatory).** Invoke `lead_narrative_editor` on the promotion draft.
    - Input: `dayrdd_non_canon.rpy`, `story_board.md`, canon, voice guides, convergent report (reference)
-   - Output: `PASS` or `REJECT` + correction package; orchestrator records in `speculative/idea_archive/releases/<release>/dayrdd_gate_lead_narrative.md`
+   - Output: `PASS` or `REJECT` + correction package; orchestrator records in `narrative/pipeline/releases/<release>/dayrdd_gate_lead_narrative.md`
    - On `REJECT`: loop **Revision (B)** — do not run psychology or historical gates until narrative `PASS`.
 6. **Psychology gate (mandatory).** Invoke `forensic_psychology_consultant` on the promotion draft (after step 5 `PASS`).
    - Input: `dayrdd_non_canon.rpy`, relevant character canon/non-canon files, voice guides, current story_board rows, continuity handoff slice, lead narrative verdict
@@ -150,9 +151,9 @@ Skip convergent and gates. Run divergent pool only. Deliver spec scripts + sidec
 
 ### D. Code-driven narrative revision (`non_prod_code_agent` invokes)
 
-**When:** A coding task in `narrative/writers_room/` or `speculative/` changes structure (flags, labels, menus, router outcomes, class API) and **approved prose must change** to match. The code agent must **not** invent or rewrite dialogue.
+**When:** A coding task in `narrative/draft/` or `narrative/pipeline/` changes structure (flags, labels, menus, router outcomes, class API) and **approved prose must change** to match. The code agent must **not** invent or rewrite dialogue.
 
-**Intake artifact (required):** `narrative/writers_room/releases/<release>/dayrdd_narrative_change_brief.md` — filed by `non_prod_code_agent` before invoking you.
+**Intake artifact (required):** `narrative/draft/releases/<release>/dayrdd_narrative_change_brief.md` — filed by `non_prod_code_agent` before invoking you.
 
 **Scale routing:**
 
@@ -193,7 +194,7 @@ Skip convergent and gates. Run divergent pool only. Deliver spec scripts + sidec
 
 ### F. Narrative change brief template
 
-Path: `narrative/writers_room/releases/<release>/dayrdd_narrative_change_brief.md`
+Path: `narrative/draft/releases/<release>/dayrdd_narrative_change_brief.md`
 
 ```markdown
 # Narrative Change Brief — day[R][dd]
@@ -222,25 +223,28 @@ Path: `narrative/writers_room/releases/<release>/dayrdd_narrative_change_brief.m
 - Agent + next pipeline step (e.g. non_prod implement-spec)
 ```
 
+**JSON sidecar (required when this brief exists):** `dayrdd_narrative_change_brief.json` in the same folder. Schema: `docs/contracts/narrative_change_brief.schema.json`. Fields must match markdown headers (`status`, `scale`, `invoked_by`, `affected_labels`, etc.).
+
 ---
 
 ## Output map
 
 | Artifact | Path | Canon-facing? |
 |----------|------|----------------|
-| Spec script (per persona) | `speculative/spec_scripts/releases/<release>/dayrdd_<persona>_spec.rpy` | No — human review |
-| Brainstorming log / idea sidecar (per persona) | `speculative/idea_archive/releases/<release>/dayrdd_<persona>_ideas.md` | No — excluded from future context |
-| Convergent Decision Report | `speculative/idea_archive/releases/<release>/dayrdd_convergent_report.md` | No — excluded from assignment context; **required** for human audit |
-| Continuity handoff (slice) | `narrative/writers_room/releases/<release>/continuity_handoff.md` | No — **load current day section only**; full file excluded |
+| Spec script (per persona) | `narrative/pipeline/releases/<release>/dayrdd_<persona>_spec.rpy` | No — human review |
+| Brainstorming log / idea sidecar (per persona) | `narrative/pipeline/releases/<release>/dayrdd_<persona>_ideas.md` | No — excluded from future context |
+| Convergent Decision Report | `narrative/pipeline/releases/<release>/dayrdd_convergent_report.md` | No — excluded from assignment context; **required** for human audit |
+| Continuity handoff (slice) | `narrative/draft/releases/<release>/planning/continuity_handoff.md` | No — **load current day section only**; full file excluded |
 | Continuity handoff (write) | Same file, section `## Handoff → Day [dd+1]` | Updated after gates pass |
-| Promotion draft | `narrative/writers_room/releases/<release>/dayrdd_non_canon.rpy` | Yes — gates run on this file after convergent |
-| Narrative gate verdict | `speculative/idea_archive/releases/<release>/dayrdd_gate_lead_narrative.md` | No — after convergent |
-| Psychology gate verdict | `speculative/idea_archive/releases/<release>/dayrdd_gate_forensic_psychology.md` | No — after narrative gate |
-| Psychology profile report | `speculative/idea_archive/releases/<release>/dayrdd_forensic_psychology_profile_report.md` | No — required when profiles or voice guides change |
-| Historical gate verdict | `speculative/idea_archive/releases/<release>/dayrdd_gate_victorian.md` | No — after psychology gate |
-| Narrative change brief | `narrative/writers_room/releases/<release>/dayrdd_narrative_change_brief.md` | No — intake for workflows D/E; archive when `CLOSED` |
-| Spice tuning variants | `speculative/writing_experiments/releases/<release>/dayrdd_spice_L<N>.rpy` | No — variant comparison only until human selects one |
-| Ad-hoc experiments (optional) | `speculative/writing_experiments/` | No — not part of default pipeline |
+| Promotion draft | `narrative/draft/releases/<release>/dayrdd_non_canon.rpy` | Yes — gates run on this file after convergent |
+| Narrative gate verdict | `dayrdd_gate_lead_narrative.md` + `.json` | No — after convergent |
+| Psychology gate verdict | `dayrdd_gate_forensic_psychology.md` + `.json` | No — after narrative gate |
+| Psychology profile report | `dayrdd_forensic_psychology_profile_report.md` + `dayrdd_profile_delta.json` | No — when profiles or voice guides change |
+| Historical gate verdict | `dayrdd_gate_victorian.md` + `.json` | No — after psychology gate |
+| Promotion handoff | `dayrdd_promotion_handoff.json` | No — filed by prod code agent on promote |
+| Narrative change brief | `narrative/draft/releases/<release>/dayrdd_narrative_change_brief.md` | No — intake for workflows D/E; archive when `CLOSED` |
+| Spice tuning variants | `narrative/pipeline/experiments/releases/<release>/dayrdd_spice_L<N>.rpy` | No — variant comparison only until human selects one |
+| Ad-hoc experiments (optional) | `narrative/pipeline/experiments/` | No — not part of default pipeline |
 
 Production canon script: `renpy_project/game/dayrdd.rpy` (via `prod_code_agent` only, unchanged).
 

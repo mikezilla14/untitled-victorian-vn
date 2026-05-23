@@ -205,7 +205,7 @@ def check_day_file_naming_contract(files):
         if not full_path.exists():
             continue
 
-        if norm.startswith("narrative/writers_room/") and name.endswith("_non_canon.rpy"):
+        if norm.startswith("narrative/draft/") and name.endswith("_non_canon.rpy"):
             if name.startswith("day"):
                 if not DAYRXX_NON_CANON_RE.fullmatch(name):
                     violations.append(

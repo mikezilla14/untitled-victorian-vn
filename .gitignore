@@ -1,3 +1,6 @@
 __pycache__/
 *.py[cod]
 *.pyc.*
+
+# Claude Code worktree mirrors (stale copies of the repo — do not edit)
+.claude/worktrees/
