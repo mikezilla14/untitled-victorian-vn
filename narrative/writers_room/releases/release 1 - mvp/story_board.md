@@ -87,6 +87,14 @@ To preserve crucial narrative forks and chapter variants without sacrificing opt
 - **Day 104 Twilight:** If **Anxiety (Suspicion) ≥ 85**, writing is blocked (Cora is too paralyzed by fear). She must choose safety/atonement or Missy repair.
 - **Day 105 Morning:** Leverage defusal is structural. The photograph cannot defeat Gideon's class privilege, but the motivation confessed shapes Cora's arc and ending manuscript reckoning.
 
+#### Adult Payoff Structure: Manuscript Retelling Minigame
+- **Design purpose:** The IRL Savoy scenes may remain restrained, plausible, and socially dangerous; the explicit H-scene payoff is delivered when Cora rewrites those lived experiences into her forbidden manuscript.
+- **Core loop:** On **Day 101 or Day 102**, the first writing minigame recontextualises the corridor eavesdrop / contraband discovery into a spicier prose retelling. On **Day 103 or Day 104**, a second writing minigame recontextualises the brush test, Gideon summons, or false-dawn leverage material into a more charged manuscript version.
+- **Presentation:** The player sees the same scene logic again through Cora's imagination, with heightened sensual detail, altered power emphasis, and CG edits/overlays that make clear this is the book's eroticised version rather than literal hotel action.
+- **Tone rule:** The manuscript layer can be hotter, more symbolic, and more physically explicit than the IRL hotel layer, but it should still reveal Cora's psychology: what she changes, exaggerates, omits, or makes herself enjoy is the point of the scene.
+- **Market role:** These minigame retellings are the MVP's primary adult-game handshake for the F95-style niche. The player should understand that writing is not only progression currency; it is where Cora converts danger into content.
+- **Branch memory:** The prose and CG edit should reflect prior flags (`day1_corridor_state`, `day1_ledger_focus`, `day2_contraband_state`, `day2_tea_choice`, `day3_brush_choice`, `day3_ultimatum`, `day4_escape_state`) so the fantasy payoff feels authored by the player's version of Cora.
+
 ---
 
 ## MVP Spine Router (Single Timetable Contract)
@@ -113,22 +121,22 @@ Penance **consumes the current personal slot** (REFLECT or WRITE) and uses the s
 | 1 | 101 | Morning | WORK | `day101_main` → `day101_1_cora_waiting` → interview → `day101_1_vance_throws_toy` | `day1_interview_state` |
 | 2 | 101 | Afternoon | WORK | `day101_2_missy_meets_cora` → `day101_2_coras_path_choice` | `day1_corridor_state` |
 | 3 | 101 | Evening | REFLECT | `day101_3_taking_stock_day1` | **CHECK** → ledger → insp/corr → chains |
-| 4 | 101 | Night | WRITE | `day101_4_writing_or_visiting` | **CHECK**; Ch1 fuel ≥ 15; write or visit |
+| 4 | 101 | Night | WRITE | `day101_4_writing_or_visiting` | **CHECK**; Ch1 fuel ≥ 15; write or visit; candidate first manuscript retelling minigame |
 | 5 | 102 | Morning | WORK | `day102_1_cora_missy_first_shift` → finds thing → takes/deceives | `day2_contraband_state` |
 | 6 | 102 | Afternoon | REFLECT | `day102_2_day2_chore_time` | **CHECK** → chore insp/corr → chains |
 | 7 | 102 | Evening | WORK | `day102_3_stern_fetches_cora` → vance → `day102_3_coras_choice` → `day102_3_gideon_interrupts_controls_vance` | `day2_tea_choice` |
-| 8 | 102 | Night | WRITE | `day102_4_night` | **CHECK**; Ch1 catch-up / Ch2 or indulge |
+| 8 | 102 | Night | WRITE | `day102_4_night` | **CHECK**; Ch1 catch-up / Ch2 or indulge; candidate first manuscript retelling minigame |
 | — | 103 | Morning | DEADLINE | `day103_morning` | If `manuscript_progress == 0` → `game_over_deadline_1` |
 | 9 | 103 | Morning | REFLECT | `day103_1_servants_corridor` | **CHECK**; D2 consequence; corridor insp/corr → chains |
 | 10 | 103 | Afternoon | WORK | `day103_2_suite_gideon_tea` → vs_gideon → `day103_2_suite_gideon_beat` | `day3_brush_choice`; 9 PM order |
 | 11 | 103 | Evening | WORK | `day103_3_bedroom_cora_frantic_writing_event` | **CHECK**; twilight action; always → Stern |
 | 12 | 103 | Evening | WORK | `day103_4_room_stern_suspicion` | Stern summons |
 | 13 | 103 | Night | WORK | `day103_2_suite_night_tea` → defy/bargain/surrender | `day3_ultimatum` |
-| 14 | 103 | Night | WRITE | `day103_3_bedroom_final_write` | **CHECK**; Ch3 ≥ 45 or frantic write; or barricade |
+| 14 | 103 | Night | WRITE | `day103_3_bedroom_final_write` | **CHECK**; Ch3 ≥ 45 or frantic write; or barricade; candidate second manuscript retelling minigame |
 | 15 | 104 | Morning | WORK | `day104_1_false_dawn_suite_window` → lockbox | `has_photograph` |
 | 16 | 104 | Afternoon | WORK | `day104_2_return_early` → escape_* | `day4_escape_state` |
 | 17 | 104 | Evening | WORK | `day104_3_stern_pressure` → `day104_4_twilight_ledger_false_dawn` | **CHECK**; anxiety ≥ 85 blocks triumphant write |
-| 18 | 104 | Night | WRITE | `day104_5_triumphant_chapter` or atonement/repair → `day104_6_false_dawn_ending` | D4 penance skips triumphant |
+| 18 | 104 | Night | WRITE | `day104_5_triumphant_chapter` or atonement/repair → `day104_6_false_dawn_ending` | D4 penance skips triumphant; candidate second manuscript retelling minigame |
 | — | 105 | Morning | DEADLINE | End `day104_6_false_dawn_ending` | If `manuscript_progress < 2` → `game_over_deadline_2` |
 | 19 | 105 | Day | WORK | `day105_1_monster_reemerges` → summons → leverage → motivation → marks | `day5_dynamic`, money |
 | 20 | 105 | Night | WRITE | `day105_6_manuscript_reckoning` | Final chapter |
@@ -238,7 +246,7 @@ flowchart LR
 - **`day101_1_vance_throws_toy`**: Initial corridor collision with Vance and Gideon.
 - **`day101_2_missy_meets_cora` & `_coras_path_choice`**: Laundry room intro. The eavesdrop event that branches `day1_corridor_state` (`"predator"`, `"prey"`, `"ghost"`).
 - **`day101_3_taking_stock_day1`**: Ledger choice between `"inspiration"` (structural) or `"corruption"` (appetite).
-- **`day101_4_writing_or_visiting`**: Choice to write (Chapter 1) or visit Missy to establish relationship seeds.
+- **`day101_4_writing_or_visiting`**: Choice to write (Chapter 1) or visit Missy to establish relationship seeds. If used as the first manuscript retelling minigame, Cora eroticises the corridor eavesdrop according to `day1_corridor_state` and `day1_ledger_focus`, with CG edits that distinguish imagined manuscript content from literal hotel events.
 
 ### Day 102
 *Source: `day102_non_canon.rpy`*
@@ -248,7 +256,7 @@ flowchart LR
 - **`day102_3_stern_fetches_cora` & `_vance_goes_incandescent`**: The crisis begins over the missing item.
 - **`day102_3_coras_choice`**: The massive three-way branch -> `day2_tea_choice` (`"prey"`, `"predator"`, `"ghost"`).
 - **`day102_3_gideon_interrupts_controls_vance`**: Gideon diffuses the situation to maintain quiet, observing Cora.
-- **`day102_4_cora_writes_a_chapter` / `_sneaks_a_feel`**: Night writing check (Ch1/Ch2) or indulgence.
+- **`day102_4_cora_writes_a_chapter` / `_sneaks_a_feel`**: Night writing check (Ch1/Ch2) or indulgence. If Day 101 did not host the first retelling, this slot should deliver the first manuscript H-scene payoff by transforming the contraband/lace crisis into Cora's spicier authored version.
 
 ### Day 103
 *Source: `day103_non_canon.rpy`*
@@ -258,7 +266,7 @@ flowchart LR
 - **`day103_3_bedroom_cora_frantic_writing_event`**: Twilight action. Frantic write, mask prep, or indulging the words.
 - **`day103_4_room_stern_suspicion`**: Stern questions Cora's summons.
 - **`day103_2_suite_night_tea`**: The 9 PM encounter. Ultimatum choice: `"defied"`, `"bargained"`, `"surrendered"`.
-- **`day103_3_bedroom_final_write`**: Write the chapter (requires high stats) or barricade the door.
+- **`day103_3_bedroom_final_write`**: Write the chapter (requires high stats) or barricade the door. Candidate second manuscript retelling minigame: Cora converts the brush test / 9 PM summons into a heightened erotic manuscript scene shaped by `day3_brush_choice` and `day3_ultimatum`.
 
 ### Day 104
 *Source: `day104_non_canon.rpy`*
@@ -266,7 +274,7 @@ flowchart LR
 - **`day104_2_return_early` & Escape**: Gideon and Vance return. Cora escapes via `"fireplace"` (soot), `"bold_lie"` (visible), or `"missy_cover"` (betrayal).
 - **`day104_3_stern_pressure`**: Dealing with Stern's suspicion.
 - **`day104_4_twilight_ledger_false_dawn`**: The Suspicion soft lock. Atonement or Missy Repair vs Triumphant Write.
-- **`day104_5_triumphant_chapter` / `_false_dawn_ending`**: If safe, Cora completes a triumphant "false dawn" chapter.
+- **`day104_5_triumphant_chapter` / `_false_dawn_ending`**: If safe, Cora completes a triumphant "false dawn" chapter. If Day 103 did not host the second retelling, this slot should make the false-dawn manuscript scene the second adult payoff, with Cora's imagined victory hotter and more absolute than the IRL leverage situation can be.
 
 ### Day 105
 *Source: `day105_non_canon.rpy`*
@@ -323,5 +331,10 @@ flowchart LR
 
 ### CG / UI Callouts
 - `show_ledger_ui()`
+- `writing_minigame_ui` (Day 101/102 and Day 103/104 manuscript retellings)
+- `cg_manuscript_retelling_d1_corridor` (imagined rewrite / edited CG variant)
+- `cg_manuscript_retelling_d2_lace` (imagined rewrite / edited CG variant)
+- `cg_manuscript_retelling_d3_brush` (imagined rewrite / edited CG variant)
+- `cg_manuscript_retelling_d4_false_dawn` (imagined rewrite / edited CG variant)
 - `cg_gideon_photograph` (Day 104/105)
 - `cg_photograph_burning` (Day 105)

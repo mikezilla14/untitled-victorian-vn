@@ -23,22 +23,25 @@ An AI-accelerated, adult pseudo-sandbox RPG visual novel set in a Victorian hote
 
 ## AI roles (short)
 
-* **Orchestrator**: Decomposes a production task into an ordered agent pipeline and manages handoffs. Entry point for cross-IDE use — paste `.agents/rules/orchestrator.md` as system prompt, state your task. Pipelines: `produce-day`, `review-scene`, `implement-spec`, `historical-check`, `canon-update`.
-* **Code agent**: Promotes non-canon `.rpy` drafts into runtime `.rpy` under guardrails.
-* **Chief architect**: Enforces Ren’Py methodology and reviews code PRs.
-* **Writers’ room / you**: Produce non-canon `.rpy` drafts and design intent.
+* **Orchestrator**: Decomposes a production task into ordered agent pipelines (`produce-day`, `review-scene`, `implement-spec`, `promote-day`, `promote-framework`, etc.).
+* **Prod code agent**: Promotes non-canon drafts and framework designs into production (`renpy_project/` and `docs/canon/`) while preserving creative text verbatim.
+* **Non-prod code agent**: Focuses on sandbox/draft implementations strictly in `narrative/writers_room/` preserving dialogue and prose verbatim.
+* **Chief architect**: Enforces Ren’Py methodology, reviews code changes, and checks creative-technical boundaries.
+* **Writers’ room (orchestration)**: Runs divergent spec scripts → convergent synthesis → `dayrdd_non_canon.rpy`; owns 100% of creative prose/dialogue in the promotion draft. Brainstorm archive: `speculative/idea_archive/` (not loaded for new assignments).
+* **Spiciness tuner**: Interactive 1-5 erotic intensity dial for whole-story, day, scene, passage, branch, and visual-brief variants. Level 5 is the default historical-fidelity-first project setting; lower levels progressively prioritize erotic fantasy.
 * **Victorian consultant / historical linter**: Era-appropriate language checks on writers’ room narrative drafts in CI.
 
 ## Narrative → game workflow (MVP)
 
-**Automated (recommended):** Paste `.agents/rules/orchestrator.md` as your system prompt in any IDE or Claude Code, then: `"Produce day N: [brief]"`. The orchestrator runs the full pipeline below.
+**Automated (recommended):** Paste `.agents/rules/orchestrator.md` as your system prompt in any IDE or Claude Code, then state your task (e.g. `"Produce day N: [brief]"` or `"Promote day N"`).
 
 **Manual:**
 1. Write a **non-canon Ren'Py draft script** (`dayrdd_non_canon.rpy`) in `narrative/writers_room/`.
-2. CI runs **`scripts/historical_linter.py`** on changed writers-room narrative drafts (`*_non_canon.rpy`, plus narrative markdown docs).
-3. Work with the **coding agent** to land behavior in **`renpy_project/game/`**.
-4. Run local orchestration with **`py scripts/orchestrate_review.py --files <path_to_draft>,<path_to_runtime>`** (or `python ...` on non-Windows) to automatically verify all Agent Contracts and generate AI remediation prompts.
-5. **Chief architect** validates structure and practice on code changes.
+2. CI runs **`scripts/historical_linter.py`** on changed writers-room narrative drafts (`*_non_canon.rpy`).
+3. Work with the **non-prod code agent** to implement technical wrapping and python logic inside the non-canon draft files under `narrative/writers_room/`.
+4. Work with the **prod code agent** to promote validated drafts to the production **`renpy_project/game/`** folder.
+5. Run local orchestration with **`py scripts/orchestrate_review.py --files <path_to_draft>,<path_to_runtime>`** to automatically verify all Agent Contracts.
+6. **Chief architect** validates structure, state contracts, lint, and strict creative-technical preservation on code changes.
 
 Details: **`docs/narrative_workflow.md`**.
 

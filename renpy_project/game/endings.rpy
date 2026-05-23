@@ -6,33 +6,25 @@
 #  out of the main flow entirely.
 # ═══════════════════════════════════════════════════════════════
 
-# ── GAME OVER: DISMISSED WITHOUT CHARACTER ────────────────────
-# Reached when suspicion hits 100.
-# The authentic historical fail state: no character reference
-# means no future in service — and very few alternatives.
+# ── GAME OVER: DISMISSED (NERVOUS BREAKDOWN) ──────────────────
+# Reached when suspicion/anxiety hits 100.
 label game_over_dismissed:
     hide screen stats_overlay
 
-    sys "═══ GAME OVER: DISMISSED WITHOUT CHARACTER ═══"
+    sys_msg "═══ GAME OVER: NERVOUS BREAKDOWN ═══"
 
-    stern "Pack your things."
+    cora "I could not keep the walls of my mind standing."
+    cora "It was not a single eye that caught me. It was the weight of them all."
+    cora "Vance's sharp contempt, Missy's mounting fear, Stern's cold, measuring gaze... they accumulated in my chest like lead."
+    cora "The weight of their combined eyes cracks my mask."
+    cora "I made a fatal slip in my duties, and Miss Stern found absolute cause to dismiss me."
 
-    cora  "Miss Stern did not raise her voice. She didn't need to."
+    stern "Pack your things. A girl whose nerves are in such tatters cannot be trusted with the Savoy's quiet."
 
-    stern "I trusted you with a position in the finest hotel in London. And you repaid that trust with deception."
+    cora "My hands were shaking too hard to tie my trunk. I stood on the Strand with nothing but a ruined reputation and the memory of electric light."
+    cora "Without a character, London is a very cold, very hungry place."
 
-    cora  "She held up my character reference — the single sheet of paper that represented my entire future — and tore it in half."
-
-    stern "You will leave by the tradesmen's entrance. You will not speak to the other staff. You will not use this hotel as a reference."
-
-    cora  "The Savoy's doors closed behind me. I stood on the Strand with nothing but the clothes on my back and the memory of electric light."
-    cora  "London is very large, and I am very small."
-    cora  "My family will learn of this. They will not understand. The seven shillings will stop. The village cannot take me back — another mouth to feed and no income to justify it."
-    cora  "Without a character, no respectable household will hire me. The registry offices will turn me away. The options that remain are the ones they whisper about in the servant's hall."
-    cora  "The workhouse. The sweatshop. Or the streets."
-    cora  "I had a talent. I had a chance. And I threw it away because I was too careless, too reckless, too hungry for a life that was never meant for a girl like me."
-
-    sys "[[GAME OVER. Suggest: Load a previous save and make different choices. The margin between ambition and ruin is thinner than you think.]"
+    sys_msg "[[GAME OVER. Your accumulated Anxiety reached 100%%, causing a complete breakdown and leading to your dismissal. Manage your internal strain by spreading suspicion across different characters and triggering penances before your nerves fail you.]"
 
     return
 
@@ -43,7 +35,7 @@ label game_over_dismissed:
 label bad_ending_rejection:
     hide screen stats_overlay
 
-    sys "═══ BAD ENDING: REJECTION ═══"
+    sys_msg "═══ BAD ENDING: REJECTION ═══"
 
     cora "I sat at the desk. I wrote. I wrote for hours."
     cora "But the words that came out were... safe. Polite. Bloodless."
@@ -56,6 +48,33 @@ label bad_ending_rejection:
     cora "I will scrub floors until my hands are raw and my stories die inside me. I will send seven shillings home every month. I will be a good girl."
     cora "And no one will ever read a single word I've written."
 
-    sys "[[BAD ENDING. You survived — but at the cost of your dream. The 'Pure' path is safe, but it is a cage. Try again, and this time, look through the grate.]"
+    sys_msg "[[BAD ENDING. You survived — but at the cost of your dream. The 'Pure' path is safe, but it is a cage. Try again, and this time, look through the grate.]"
 
+    return
+
+
+# ── GAME OVER: FIRST DEADLINE FAILED ──────────────────────────
+# Reached when Chapter 1 is not written by Day 2 Night.
+label game_over_deadline_1:
+    hide screen stats_overlay
+    sys_msg "═══ GAME OVER: FIRST DEADLINE FAILED ═══"
+    cora "I stare at the blank page."
+    cora "Day 2 has ended, and I have not even written the first chapter."
+    cora "Without a single page of progress, my ambition is nothing but a childish delusion."
+    cora "I cannot face the publisher. I cannot face the page."
+    cora "I have failed before I even truly began."
+    sys_msg "[[GAME OVER. You failed to write Chapter 1 by Day 2 Night. Manage your time and stats to ensure you have enough inspiration to write.]"
+    return
+
+
+# ── GAME OVER: DRAFT DEADLINE FAILED ──────────────────────────
+# Reached when Chapter 2 is not completed by Day 4 Night.
+label game_over_deadline_2:
+    hide screen stats_overlay
+    sys_msg "═══ GAME OVER: DRAFT DEADLINE FAILED ═══"
+    cora "The night of Day 4 passes into grey dawn."
+    cora "My desk is littered with scraps of paper, but the draft is incomplete. I have only one chapter done."
+    cora "The publisher's courier will arrive tomorrow. I have nothing to give him but excuses."
+    cora "I have lost my chance. The door is closed."
+    sys_msg "[[GAME OVER. You failed to complete a second chapter/draft by Day 4 Night. Balance your stats and avoid confrontations to protect your writing slots!]"
     return

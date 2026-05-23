@@ -79,7 +79,8 @@ label day101_1_morning_interview:
     scene bg_savoy_corridor_morning
     with dissolve
 
-    show stern_sprite neutral at center
+    show stern_sprite neutral at center:
+        zoom 0.35
 
     "Miss Stern stands rather than sits."
     "It is not courtesy. It is measurement."
@@ -104,7 +105,7 @@ label day101_1_morning_interview:
         "Lower my eyes. Let her mistake fear for obedience.":
 
             # [STATE] Low-risk survival posture. Cora hides sharpness, but the performance costs dignity
-            $ apply_effects(stern_susp=5, insp=5, corr=0)
+            $ apply_effects(susp=5, insp=5, corr=0)
             $ story.set_day1_interview_state("meek")
 
             cora "I can, Ma'am. I only wish to work hard."
@@ -117,7 +118,7 @@ label day101_1_morning_interview:
         "Answer cleanly. Let competence do what meekness cannot.":
 
             # [STATE] Efficient but conspicuous. Stern notices a mind behind the apron
-            $ apply_effects(stern_susp=15, insp=10, corr=0)
+            $ apply_effects(susp=15, insp=10, corr=0)
             $ story.set_day1_interview_state("competent")
 
             cora "I can be quiet, quick, and exact. If I err, it will not be from carelessness."
@@ -155,7 +156,8 @@ label day101_1_vance_throws_toy:
     "Then something small and silver strikes the skirting board and spins across the carpet."
 
     # [ASSET] Visual/staging command
-    show vance_sprite angry at left
+    show vance_sprite angry at left:
+        zoom 0.35
 
     vance "Useless creature. I said the blue ribbon, not that vulgar little thing."
 
@@ -324,10 +326,10 @@ label day101_2_coras_path_choice:
     menu:
         "How do I take the material?"
 
-        "Let Missy's concern open the door. [Predator path: +Inspiration, +Corruption]":
+        "Let Missy's concern open the door. [[Predator path: +Inspiration, +Corruption]]":
 
             # [STATE] Cora weaponises plausible concern. Safer physically, morally worse
-            $ apply_effects(missy_susp=10, insp=10, corr=5)
+            $ apply_effects(susp=0, insp=10, corr=5)
             $ story.set_corridor_state("predator")
 
             cora "You may be right. If she's hurt, someone should check."
@@ -356,10 +358,10 @@ label day101_2_coras_path_choice:
             "I say it for her benefit."
             "I have already seen enough."
 
-        "Look for myself. [Prey path: +Inspiration, +Suspicion]":
+        "Look for myself. [[Prey path: +Inspiration, +Suspicion]]":
 
             # [STATE] Cora takes the direct risk. Most dangerous path; strongest sensory material
-            $ apply_effects(vance_susp=35, insp=15, corr=5)
+            $ apply_effects(susp=35, insp=15, corr=5)
             $ story.set_corridor_state("prey")
 
             cora "Stay there."
@@ -389,10 +391,10 @@ label day101_2_coras_path_choice:
             "Possibly."
             "But not the image. Never the image."
 
-        "Pull Missy away. [Ghost path: +Inspiration, -Suspicion]":
+        "Pull Missy away. [[Ghost path: +Inspiration, -Suspicion]]":
 
             # [STATE] Cora refuses exposure, keeps the observation abstract, and preserves cover
-            $ apply_effects(stern_susp=-5, vance_susp=-5, missy_susp=-5, insp=10, corr=0)
+            $ apply_effects(susp=-5, insp=10, corr=0)
             $ story.set_corridor_state("ghost")
 
             cora "No."
@@ -438,7 +440,7 @@ label day101_3_taking_stock_day1:
 
     if story.day1_corridor_state == "predator":
         "Missy's shocked face returns first."
-        "Then Vance's hand on the carpet. Mr. Locke's shoe. The crop."
+        "Then Vance's hand on the carpet. Mr. Locke's shoe. The walking stick."
         "I used the girl because she was available."
         "The sentence looks uglier once written down."
 
@@ -457,10 +459,14 @@ label day101_3_taking_stock_day1:
     menu:
         "Which discipline keeps my hands steady?"
 
-        "Order. Safety in structure. [Inspiration]":
+        "Order. Safety in structure. [[Inspiration]]":
+
+            # [STATE] State/progression update
             jump day101_3_inspiration_choice
 
-        "Exposure. Safety in knowing the threat. [Corruption]":
+        "Exposure. Safety in knowing the threat. [[Corruption]]":
+
+            # [STATE] State/progression update
             jump day101_3_corruption_choice
 
 
@@ -529,23 +535,29 @@ label day101_3_corruption_choice:
 
 label day101_3_optional_character_chain:
 
-    # [CHOICE] Contextual grind gate after ledger reflection; resolver picks chain beat.
+    # [CHOICE] Contextual grind gate after ledger reflection; resolver picks chain beat
     menu:
         "The ledger is closed. One hour remains before the lamp must answer."
 
         "Listen for Miss Stern's keys in the west corridor." if story.chain_available("stern"):
+
+            # [STATE] State/progression update
             $ _chain_label = story.resolve_chain_label("stern")
             jump expression _chain_label
 
         "Find Missy before the laundry goes cold." if story.chain_available("missy"):
+
+            # [STATE] State/progression update
             $ _chain_label = story.resolve_chain_label("missy")
             jump expression _chain_label
 
         "Walk the guest wing where Mr. Locke's shoe still has authority." if story.chain_available("vance"):
+
+            # [STATE] State/progression update
             $ _chain_label = story.resolve_chain_label("vance")
             jump expression _chain_label
 
-        "Stay at the desk and let the ink cool.":
+        "Stay at the desk and let the ink dry.":
             if story.day1_ledger_focus == "corruption":
                 "I fold the page over the worst lines and pretend discipline can be borrowed from neat margins."
             else:
@@ -553,8 +565,8 @@ label day101_3_optional_character_chain:
             "The hotel watches less when I give it nothing to answer."
 
             # [STATE] State/progression update
-            $ apply_effects(insp=10, corr=0)
-            jump advance_after_confrontation
+            $ apply_effects(susp=0, insp=10, corr=0)
+            call end_slot(outcome="d1_reflect_done")
 
 
 # ==========================================
@@ -578,18 +590,18 @@ label day101_4_writing_or_visiting:
     # [PROMOTION NOTE]
     # Replace this with the project-approved threshold helper.
     # The intent: Day 1 writing opens if the player has enough Inspiration/Corruption fuel.
-    if player.has_story_fuel(required_total=15):
+    if has_story_fuel(15):
 
         # [CHOICE] Decision point
         menu:
             "The page is ready. What do I do with the night?"
 
-            "Write the chapter. [Progress manuscript]":
+            "Write the chapter. [[Progress manuscript]]":
 
                 # [STATE] State/progression update
                 jump day101_4_write_the_chapter
 
-            "Visit Missy instead. [Missy relationship seed, miss chapter opportunity]":
+            "Visit Missy instead. [[Missy relationship seed, miss chapter opportunity]]":
 
                 # [STATE] State/progression update
                 jump day101_4_visit_missy
@@ -669,7 +681,7 @@ label day101_4_write_the_chapter:
     "It has acquired a witness instead."
 
     # [STATE] State/progression update
-    jump day102_1_cora_missy_first_shift
+    call end_slot(outcome="d1_write_ch1")
 
 
 # ==========================================
@@ -685,7 +697,7 @@ label day101_4_visit_missy:
     # [STATE] Relationship seed. This should be meaningful: Cora gains Missy context, but loses the Day 1 chapter
     $ story.set_day1_night_action("visit_missy")
     $ story.set_missy_day1_seed(True)
-    $ apply_effects(missy_susp=-5, insp=5, corr=0)
+    $ apply_effects(susp=-5, insp=5, corr=0)
 
     "I leave the candle unlit."
     "A chapter can wait. A person, mishandled, changes shape before morning."
@@ -716,7 +728,7 @@ label day101_4_visit_missy:
             "Soothe her. Keep her close.":
 
                 # [STATE] State/progression update
-                $ apply_effects(missy_susp=-5, insp=5, corr=0)
+                $ apply_effects(susp=-5, insp=5, corr=0)
                 $ story.set_missy_day1_trust_state("soothed")
 
                 cora "And perhaps you were. But the house has rules beneath its rules. We must learn them before we try to mend anything."
@@ -726,7 +738,7 @@ label day101_4_visit_missy:
             "Let the guilt sit between us.":
 
                 # [STATE] State/progression update
-                $ apply_effects(missy_susp=5, insp=0, corr=5)
+                $ apply_effects(susp=0, insp=0, corr=5)
                 $ story.set_missy_day1_trust_state("unsettled")
 
                 cora "I should not have let you go first."
@@ -781,7 +793,7 @@ label day101_4_visit_missy:
     # [ASSET] Visual/staging command
     hide missy_sprite
 
-    jump day102_1_cora_missy_first_shift
+    call end_slot(outcome="d1_visit_missy")
 
 
 # ==========================================

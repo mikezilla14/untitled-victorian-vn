@@ -49,14 +49,29 @@ init -1 python:
             self.corruption_xp = 0
             self.inspiration = 0
             self.suspicion = 0
+            self.anxiety = 0
+            self.stern_suspicion = 0
+            self.vance_suspicion = 0
+            self.missy_suspicion = 0
 
         @property
         def inspiration_cap(self):
             return 20 + (self.corruption_level * 10)
 
+        def recalculate_anxiety(self):
+            # Character suspicions must never be below 0 or above 100.
+            self.stern_suspicion = max(0, min(100, self.stern_suspicion))
+            self.vance_suspicion = max(0, min(100, self.vance_suspicion))
+            self.missy_suspicion = max(0, min(100, self.missy_suspicion))
+
+            # Accumulated Anxiety sum model
+            self.anxiety = self.stern_suspicion + self.vance_suspicion + self.missy_suspicion
+
+            # Total suspicion mirrors the combined anxiety, capped at 100
+            self.suspicion = max(0, min(100, self.anxiety))
+
         def update_stats(self):
-            # Suspicion must never be below 0 or above 100.
-            self.suspicion = max(0, min(100, self.suspicion))
+            self.recalculate_anxiety()
 
             # Corruption XP must never be below 0.
             self.corruption_xp = max(0, self.corruption_xp)
@@ -96,18 +111,38 @@ init -1 python:
         def raise_suspicion(self, amount):
             if amount < 0:
                 raise ValueError("raise_suspicion() cannot receive a negative amount. Use lower_suspicion().")
-
-            self.suspicion += amount
+            self.stern_suspicion += amount
             self.update_stats()
 
         def lower_suspicion(self, amount):
             if amount < 0:
                 raise ValueError("lower_suspicion() cannot receive a negative amount.")
-
-            self.suspicion -= amount
+            self.stern_suspicion -= amount
             self.update_stats()
 
+        def adjust_character_suspicion(self, character, amount):
+            if character == "stern":
+                self.stern_suspicion += amount
+            elif character == "vance":
+                self.vance_suspicion += amount
+            elif character == "missy":
+                self.missy_suspicion += amount
+            else:
+                raise ValueError("Invalid character: {}".format(character))
+            self.update_stats()
+
+        def has_story_fuel(self, required_total=15):
+            """
+            Read-only writing-gate check.
+            Returns True if (Inspiration + Corruption XP) meets the threshold.
+            Does not spend any resources — use attempt_write() for the actual gate.
+            """
+            return (self.inspiration + self.corruption_xp) >= required_total
+
     class StoryState(object):
+
+        # ── Prologue ───────────────────────────────────────────────────
+        VALID_PROLOGUE_FOUND_STATES  = ("none", "overheard", "read_letters")
 
         # ── Day 1 ──────────────────────────────────────────────────────
         VALID_CORRIDOR_STATES        = ("none", "ghost", "predator", "prey")
@@ -148,7 +183,14 @@ init -1 python:
         VALID_RELEASE2_GIDEON_STATUSES = ("none", "marked_cora")
         VALID_RELEASE2_MISSY_STATUSES  = ("none", "wounded_trust", "uncertain_trust")
 
+        # ── PROMOTE: Optional character grind chains (Release 1 REFLECT) ──
+        VALID_CHAIN_CHARACTERS     = ("stern", "missy", "vance")
+        MAX_CHARACTER_CHAIN_LEVEL  = 3
+
         def __init__(self):
+            # ── Prologue ───────────────────────────────────────────────
+            self.prologue_found         = "none"
+
             # ── Day 1 ──────────────────────────────────────────────────
             self.day1_corridor_state    = "none"
             self.day1_interview_state   = "none"
@@ -207,6 +249,12 @@ init -1 python:
             self.release2_guest_cast_pivot  = False
             self.release2_missy_status      = "none"
 
+            # ── PROMOTE: Optional character grind chains ───────────────
+            self.stern_chain_level  = 0
+            self.missy_chain_level  = 0
+            self.vance_chain_level  = 0
+            self.penance_triggered  = False
+
         # ── Internal helpers ───────────────────────────────────────────
 
         def _set_boolean_flag(self, field_name, value):
@@ -222,6 +270,11 @@ init -1 python:
                     )
                 )
             setattr(self, field_name, value)
+
+        # ── Prologue setters ───────────────────────────────────────────
+
+        def set_prologue_found(self, value):
+            self._set_string_state("prologue_found", value, self.VALID_PROLOGUE_FOUND_STATES)
 
         # ── Day 1 setters ──────────────────────────────────────────────
 
@@ -369,3 +422,44 @@ init -1 python:
 
         def set_release2_missy_status(self, value):
             self._set_string_state("release2_missy_status", value, self.VALID_RELEASE2_MISSY_STATUSES)
+
+        # ── PROMOTE: Character grind chain progression ───────────────
+
+        def _set_chain_level(self, field_name, value):
+            if not isinstance(value, int) or value < 0 or value > self.MAX_CHARACTER_CHAIN_LEVEL:
+                raise ValueError(
+                    "Invalid {} '{}'. Must be an int from 0 to {}.".format(
+                        field_name, value, self.MAX_CHARACTER_CHAIN_LEVEL
+                    )
+                )
+            setattr(self, field_name, value)
+
+        def set_stern_chain_level(self, value):
+            self._set_chain_level("stern_chain_level", value)
+
+        def set_missy_chain_level(self, value):
+            self._set_chain_level("missy_chain_level", value)
+
+        def set_vance_chain_level(self, value):
+            self._set_chain_level("vance_chain_level", value)
+
+        def set_penance_triggered(self, value):
+            self._set_boolean_flag("penance_triggered", value)
+
+        def get_character_chain_level(self, character):
+            if character not in self.VALID_CHAIN_CHARACTERS:
+                raise ValueError(
+                    "Invalid chain character '{}'. Must be one of: {}".format(
+                        character, ", ".join(self.VALID_CHAIN_CHARACTERS)
+                    )
+                )
+            return getattr(self, "{}_chain_level".format(character))
+
+        def chain_available(self, character):
+            return self.get_character_chain_level(character) < self.MAX_CHARACTER_CHAIN_LEVEL
+
+        def resolve_chain_label(self, character):
+            level = self.get_character_chain_level(character)
+            if level >= self.MAX_CHARACTER_CHAIN_LEVEL:
+                return None
+            return "{}_chain_{}".format(character, level + 1)

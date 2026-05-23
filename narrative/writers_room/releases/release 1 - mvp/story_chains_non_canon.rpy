@@ -652,3 +652,107 @@ label game_over_dismissed:
     sys "[[GAME OVER. Your accumulated Anxiety reached 100%, causing a complete breakdown and leading to your dismissal. Manage your internal strain by spreading suspicion across different characters and triggering penances before your nerves fail you.]"
 
     return
+
+
+# ==============================================================================
+# 7. CENTRALIZED EXIT ROUTER
+# ==============================================================================
+
+label end_slot(outcome):
+
+    # This centralized router handles ending slots, setting clock time and day, and jumping to next label.
+    if outcome == "d1_reflect_done":
+
+        # [STATE] State/progression update
+        $ set_time_period("Night")
+        jump day101_4_writing_or_visiting
+
+    elif outcome == "d1_write_ch1":
+
+        # [STATE] State/progression update
+        $ time_manager.set_current_day(2)
+        $ set_time_period("Morning")
+        jump day102_1_cora_missy_first_shift
+
+    elif outcome == "d1_visit_missy":
+
+        # [STATE] State/progression update
+        $ time_manager.set_current_day(2)
+        $ set_time_period("Morning")
+        jump day102_1_cora_missy_first_shift
+
+    elif outcome == "d2_reflect_done":
+
+        # [STATE] State/progression update
+        $ set_time_period("Evening")
+        jump day102_3_stern_fetches_cora
+
+    elif outcome == "d2_write_night":
+
+        # [STATE] State/progression update
+        $ time_manager.set_current_day(3)
+        $ set_time_period("Morning")
+        jump day103_morning
+
+    elif outcome == "d3_reflect_done":
+
+        # [STATE] State/progression update
+        $ set_time_period("Afternoon")
+        jump day103_2_suite_gideon_tea
+
+    elif outcome == "d3_twilight_done":
+
+        # [STATE] State/progression update
+        jump day103_4_room_stern_suspicion
+
+    elif outcome == "d3_stern_done":
+
+        # [STATE] State/progression update
+        $ set_time_period("Night")
+        jump day103_2_suite_night_tea
+
+    elif outcome == "d3_ultimatum_done":
+
+        # [STATE] State/progression update
+        jump day103_3_bedroom_final_write
+
+    elif outcome == "d3_write_night":
+
+        # [STATE] State/progression update
+        $ time_manager.set_current_day(4)
+        $ set_time_period("Morning")
+        jump day104_1_false_dawn_suite_window
+
+    elif outcome == "d4_twilight_done":
+
+        # [STATE] State/progression update
+        $ set_time_period("Night")
+        if story.penance_triggered or player.suspicion >= 85:
+
+            # [STATE] State/progression update
+            jump day104_6_false_dawn_ending
+        else:
+
+            # [STATE] State/progression update
+            jump day104_5_triumphant_chapter
+
+    elif outcome == "d4_write_night":
+
+        # [STATE] State/progression update
+        jump day104_6_false_dawn_ending
+
+    elif outcome == "d4_dawn_gate":
+
+        # [STATE] State/progression update
+        $ time_manager.set_current_day(5)
+        $ set_time_period("Morning")
+        jump day105_1_monster_reemerges
+
+    elif outcome == "d5_write_night":
+
+        # [STATE] State/progression update
+        $ set_time_period("Morning")
+        jump day105_7_release_one_ending
+
+    return
+

@@ -1,3 +1,9 @@
+# FORMAT LEGEND:
+# [ASSET] -> backgrounds, sprites, transitions, CG/UI callouts
+# [STATE] -> variable changes, effects, conditions, jumps
+# [CHOICE] -> menu blocks and inflection points
+# [BEAT] -> narrative intent / scene intent notes
+
 # ═══════════════════════════════════════════════════════════════
 #  classes_non_canon.rpy
 #  Writers' Room — promotion source for renpy_project/game/classes.rpy
@@ -53,14 +59,29 @@ init -1 python:
             self.corruption_xp = 0
             self.inspiration = 0
             self.suspicion = 0
+            self.anxiety = 0
+            self.stern_suspicion = 0
+            self.vance_suspicion = 0
+            self.missy_suspicion = 0
 
         @property
         def inspiration_cap(self):
             return 20 + (self.corruption_level * 10)
 
+        def recalculate_anxiety(self):
+            # Character suspicions must never be below 0 or above 100.
+            self.stern_suspicion = max(0, min(100, self.stern_suspicion))
+            self.vance_suspicion = max(0, min(100, self.vance_suspicion))
+            self.missy_suspicion = max(0, min(100, self.missy_suspicion))
+
+            # Accumulated Anxiety sum model
+            self.anxiety = self.stern_suspicion + self.vance_suspicion + self.missy_suspicion
+
+            # Total suspicion mirrors the combined anxiety, capped at 100
+            self.suspicion = max(0, min(100, self.anxiety))
+
         def update_stats(self):
-            # Suspicion must never be below 0 or above 100.
-            self.suspicion = max(0, min(100, self.suspicion))
+            self.recalculate_anxiety()
 
             # Corruption XP must never be below 0.
             self.corruption_xp = max(0, self.corruption_xp)
@@ -97,21 +118,29 @@ init -1 python:
             self.corruption_xp += amount
             self.update_stats()
 
-        def raise_suspicion(self, amount):
-            if amount < 0:
-                raise ValueError("raise_suspicion() cannot receive a negative amount. Use lower_suspicion().")
-
-            self.suspicion += amount
+        def adjust_character_suspicion(self, character, amount):
+            if character == "stern":
+                self.stern_suspicion += amount
+            elif character == "vance":
+                self.vance_suspicion += amount
+            elif character == "missy":
+                self.missy_suspicion += amount
+            else:
+                raise ValueError("Invalid character: {}".format(character))
             self.update_stats()
 
-        def lower_suspicion(self, amount):
-            if amount < 0:
-                raise ValueError("lower_suspicion() cannot receive a negative amount.")
-
-            self.suspicion -= amount
-            self.update_stats()
+        def has_story_fuel(self, required_total=15):
+            """
+            Read-only writing-gate check.
+            Returns True if (Inspiration + Corruption XP) meets the threshold.
+            Does not spend any resources — use attempt_write() for the actual gate.
+            """
+            return (self.inspiration + self.corruption_xp) >= required_total
 
     class StoryState(object):
+
+        # ── Prologue ───────────────────────────────────────────────────
+        VALID_PROLOGUE_FOUND_STATES  = ("none", "overheard", "read_letters")
 
         # ── Day 1 ──────────────────────────────────────────────────────
         VALID_CORRIDOR_STATES        = ("none", "ghost", "predator", "prey")
@@ -157,6 +186,9 @@ init -1 python:
         MAX_CHARACTER_CHAIN_LEVEL  = 3
 
         def __init__(self):
+            # ── Prologue ───────────────────────────────────────────────
+            self.prologue_found         = "none"
+
             # ── Day 1 ──────────────────────────────────────────────────
             self.day1_corridor_state    = "none"
             self.day1_interview_state   = "none"
@@ -236,6 +268,11 @@ init -1 python:
                     )
                 )
             setattr(self, field_name, value)
+
+        # ── Prologue setters ───────────────────────────────────────────
+
+        def set_prologue_found(self, value):
+            self._set_string_state("prologue_found", value, self.VALID_PROLOGUE_FOUND_STATES)
 
         # ── Day 1 setters ──────────────────────────────────────────────
 
@@ -424,3 +461,8 @@ init -1 python:
             if level >= self.MAX_CHARACTER_CHAIN_LEVEL:
                 return None
             return "{}_chain_{}".format(character, level + 1)
+
+    # Instantiate global singletons for non-canon sandbox execution/validation
+    player = PlayerStats()
+    story = StoryState()
+    time_manager = TimeManager()

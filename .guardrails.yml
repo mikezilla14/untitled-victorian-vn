@@ -2,9 +2,12 @@
 agents:
   - chief_architect
   - lead_narrative_editor
+  - forensic_psychology_consultant
   - writers_room
+  - spiciness_tuning_agent
   - victorian_consultant
-  - code_agent
+  - prod_code_agent
+  - non_prod_code_agent
   - gatekeeper_orchestrator
   - orchestrator
 
@@ -13,8 +16,22 @@ domains:
     paths:
       - docs/canon/**
       - narrative/canon/**
-    mutable_by: [lead_narrative_editor, victorian_consultant, human]
+    mutable_by: [lead_narrative_editor, victorian_consultant, prod_code_agent, human]
     agents_read: [all]
+
+  character_psychology:
+    paths:
+      - narrative/canon/characters_canon.md
+      - narrative/canon/*_character_canon.md
+      - narrative/writers_room/*_character_non_canon.md
+      - narrative/writers_room/characters_non_canon.md
+      - narrative/templates/Voice_Guides/*_voice_guide.md
+      - speculative/idea_archive/releases/**/day*_gate_forensic_psychology.md
+      - speculative/idea_archive/releases/**/day*_forensic_psychology_profile_report.md
+      - speculative/idea_archive/character_profile_reports/**
+    mutable_by: [forensic_psychology_consultant, lead_narrative_editor, writers_room, human]
+    agents_read: [all]
+    notes: "Character psychology, player-choice consistency, profile carry-forward, and voice-guide psychology."
     
   framework_code:
     paths:
@@ -25,8 +42,8 @@ domains:
       - renpy_project/game/options.rpy
       - docs/dev_bible.md
       - docs/game_mechanics_bible.md
-    mutable_by: [chief_architect, human]
-    agents_read: [code_agent, gatekeeper_orchestrator]
+    mutable_by: [chief_architect, prod_code_agent, human]
+    agents_read: [prod_code_agent, non_prod_code_agent, gatekeeper_orchestrator]
     
   episodic_code:
     paths:
@@ -34,19 +51,19 @@ domains:
       - renpy_project/game/endings.rpy
       - renpy_project/game/functions.rpy
       - renpy_project/game/script.rpy
-    mutable_by: [code_agent, chief_architect, human]
-    agents_read: [code_agent, chief_architect, gatekeeper_orchestrator]
+    mutable_by: [prod_code_agent, chief_architect, human]
+    agents_read: [prod_code_agent, non_prod_code_agent, chief_architect, gatekeeper_orchestrator]
     
   production_narrative:
     paths:
       - narrative/writers_room/**
-    mutable_by: [writers_room, lead_narrative_editor, human]
+    mutable_by: [writers_room, spiciness_tuning_agent, lead_narrative_editor, forensic_psychology_consultant, non_prod_code_agent, human]
     agents_read: [all]
     
   speculative_sandbox:
     paths:
       - speculative/**
-    mutable_by: [writers_room, code_agent, human]
+    mutable_by: [writers_room, spiciness_tuning_agent, non_prod_code_agent, human]
     agents_read: [all]
     notes: "No gatekeeping enforced here. Free exploration."
 

@@ -145,7 +145,7 @@ def main():
     contracts = [
         FileNamingContract(),
         ScriptWrapperContract(
-            name="Chief Architect & Code Agent (Engineering)",
+            name="Chief Architect & Prod Code Agent (Engineering)",
             description="Enforces state mutations, syntax, and architecture.",
             script_name="engineering_compliance.py"
         ),

@@ -1,3 +1,9 @@
+# FORMAT LEGEND:
+# [ASSET] -> backgrounds, sprites, transitions, CG/UI callouts
+# [STATE] -> variable changes, effects, conditions, jumps
+# [CHOICE] -> menu blocks and inflection points
+# [BEAT] -> narrative intent / scene intent notes
+
 # day105_non_canon.rpy
 # Release 1 / Day 05 non-canon Ren'Py-shaped draft
 # Source intent: rewritten from legacy Day 5 confrontation script and aligned to updated Day 4 false-dawn ending.
@@ -6,6 +12,7 @@
 # Release function: close the MVP arc while opening the series arc — Cora has written, survived, and been noticed.
 # Promotion note: delete the temporary day105_1_monster_reemerges stub from day104_non_canon.rpy when this file is promoted.
 # Promotion note: replace story/player helper calls with exact runtime method names during implementation.
+# Convergent pass: synthesized from day105_*_spec.rpy pool (thematic, humour, tension, erotic, mystery, class). Specs retained in speculative/spec_scripts/.
 
 # ==========================================
 # DAY 5 ANALYSIS / DESIGN INTENT
@@ -52,11 +59,12 @@
 
 label day105_1_monster_reemerges:
 
-    # [ASSET] Existing Day 5 / recurring Master Suite background.
+    # [ASSET] Existing Day 5 / recurring Master Suite background
     scene bg_master_suite_day
     with fade
 
     "Morning arrives too cleanly."
+    "The room simply becomes visible again, as if the hotel turned a key in me."
     "That should have warned me."
 
     if story.day4_night_action == "finish_manuscript":
@@ -68,7 +76,8 @@ label day105_1_monster_reemerges:
 
     if story.has_photograph:
         "The photograph is no longer under the floorboard."
-        "I know this before I touch the loose plank."
+        "The plank is level."
+        "That is how I know something has been taken: the house prefers surfaces without secrets."
         "The room has the wrong silence."
     else:
         "The photograph remains where I left it: in Gideon's lockbox, where powerful men keep the things they trust the world to protect."
@@ -76,12 +85,15 @@ label day105_1_monster_reemerges:
         "At least, I believed it did."
 
     "A message comes before breakfast."
+    "The paper on the tray is folded too crisply for a servant's hand."
     "Mr. Locke requires me in the Master Suite."
     "Alone."
 
+    "The summons is not a threat."
+    "It is an appointment with the machinery."
     "The false dawn ends without thunder."
-    "Only a servant carrying a summons."
 
+    # [STATE] State/progression update
     jump day105_2_the_summons
 
 
@@ -91,25 +103,42 @@ label day105_1_monster_reemerges:
 
 label day105_2_the_summons:
 
+    # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
     show gideon_sprite dominant at center
 
+    "The clock on the mantel has stopped."
+    "Or I have."
+    "I cannot tell which is worse."
+
     "Gideon sits in the leather armchair with one ankle crossed over the other."
     "He is not pacing."
     "He is not furious."
-    "He is reading the morning paper."
+    "He reads the Morning Post as though the headlines owe him money."
 
     "That is the first cruelty."
+
+    "I wait on the threshold until he looks up."
+    "Guests are not kept waiting. Servants are."
 
     gideon "Close the door, Cora."
 
     "I close it."
+    "I do not lean on it."
+
+    "Footsteps pause in the corridor."
+    "Someone is listening who will report whether I flinch."
 
     gideon "Not for privacy. For theatre. You have a taste for theatre, I think."
 
-    "He folds the paper once, neatly, and sets it aside."
+    cora "I have a taste for employment, sir."
+
+    "He folds the paper once, neatly."
+    "The paper was open to departures."
+    "He wanted me to see it without asking."
+    "He sets it aside."
 
     gideon "Someone forced the lock on my private box yesterday."
 
@@ -118,17 +147,29 @@ label day105_2_the_summons:
 
     if story.day4_escape_state == "bold_lie":
         gideon "A girl dusting a locked desk in an already-clean room. Admirably stupid, if it had been stupid."
+        cora "The dust was aspirational, sir."
+        "His mouth twitches."
+        "Not amusement."
+        "Appraisal."
     elif story.day4_escape_state == "fireplace":
-        gideon "There was soot where no soot belonged. You should know that servants leave more evidence when they try to disappear than when they stand still."
+        gideon "There was soot where no soot belonged. You left time on the wall."
     elif story.day4_escape_state == "missy_cover":
         gideon "And poor Missy appeared at precisely the moment she was useful to someone else. A coincidence with your fingerprints on it."
+        "I file the detail."
+        "Someone assigned her route."
     else:
         gideon "Do not trouble yourself with denial. We are past the inexpensive parts of the conversation."
+        cora "Then we are past my favourite part of the interview, sir."
+
+    "I count my breaths."
+    "Four before he speaks again."
+    "He waits for five."
 
     "My mouth has gone dry."
 
     gideon "Where is it?"
 
+    # [STATE] State/progression update
     jump day105_3_leverage_collapses
 
 
@@ -138,10 +179,15 @@ label day105_2_the_summons:
 
 label day105_3_leverage_collapses:
 
+    # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
     show gideon_sprite dominant at center
+
+    "He remains seated."
+    "I remain standing."
+    "The geometry is the argument."
 
     if story.has_photograph:
 
@@ -149,14 +195,18 @@ label day105_3_leverage_collapses:
         "Not because I want to."
         "Because keeping it hidden has already failed."
 
-        # [ASSET] Optional CG callout retained from legacy concept.
+        # [ASSET] Optional CG callout retained from legacy concept
         # show cg_gideon_photograph
 
+        "I should not place anything on his table without permission."
         "I place the photograph face up on the polished table between us."
+        "The way one lays a scalpel: carefully, knowing the cut goes both ways."
+        "The paper is warm from my body."
 
         "Gideon looks at it."
         "At himself."
         "At his supposed ruin."
+        "His eyes move over the image, then over me."
 
         "Something in his face shifts."
         "I do not have a word for it that does not sound like surrender."
@@ -165,6 +215,10 @@ label day105_3_leverage_collapses:
         cora "You think this is funny?"
 
         gideon "No. I think you are."
+
+        gideon "You are not funny."
+
+        cora "No, sir. I am inconvenient."
 
     else:
 
@@ -184,6 +238,15 @@ label day105_3_leverage_collapses:
 
     "He stands."
     "Only then do I understand that the room has been arranged to make standing matter."
+    "He steps closer."
+    "Not touching."
+    "Worse."
+
+    gideon "Shall I teach you the arithmetic of reputation?"
+
+    "He does not raise his voice."
+    "He does not need to."
+    "The room is already full of men who are not here."
 
     gideon "Let us imagine you walk out of this hotel and tell your story."
 
@@ -192,18 +255,21 @@ label day105_3_leverage_collapses:
     "Like a tutor with a dull but promising pupil."
 
     gideon "The police will ask why you were in my private rooms."
+    cora "They will ask you first, sir."
+    gideon "They will ask me last."
     gideon "My solicitor will ask who paid you."
     gideon "Your employer will ask why she should keep a thief."
     gideon "A publisher will ask whether a maid's scandal is worth a libel suit."
     gideon "Every decent woman in London will pretend she does not understand the accusation."
 
-    "He steps closer."
-
     gideon "And every indecent man will understand it perfectly and still dine with me."
+
+    cora "A crowded social calendar, sir."
 
     "There it is."
     "Not his power."
     "The power around him."
+    "None of them need to enter to vote."
     "The hands I cannot see because they have never needed to enter the room."
 
     if story.has_photograph:
@@ -217,6 +283,7 @@ label day105_3_leverage_collapses:
     "I thought I had found a knife."
     "I had found a handle attached to a door that opens only from his side."
 
+    # [STATE] State/progression update
     jump day105_4_why_did_you_do_it
 
 
@@ -226,6 +293,7 @@ label day105_3_leverage_collapses:
 
 label day105_4_why_did_you_do_it:
 
+    # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
@@ -253,19 +321,28 @@ label day105_4_why_did_you_do_it:
 
     gideon "Why?"
 
+    # [CHOICE] Decision point
     menu:
         "Why did I do it?"
 
-        "To finish the book. [Observer / Muse]":
+        "To finish the book. [[Observer / Muse]]":
+
+            # [STATE] State/progression update
             jump day105_4_motivation_observer
 
-        "To stand where you stand. [Predator / Protégé]":
+        "To stand where you stand. [[Predator / Protégé]]":
+
+            # [STATE] State/progression update
             jump day105_4_motivation_predator
 
-        "Because you frightened me, and I needed something that frightened you back. [Prey / Adversary]":
+        "Because you frightened me, and I needed something that frightened you back. [[Prey / Adversary]]":
+
+            # [STATE] State/progression update
             jump day105_4_motivation_prey
 
-        "Because people like you survive by not being seen. [Ghost / Witness]":
+        "Because people like you survive by not being seen. [[Ghost / Witness]]":
+
+            # [STATE] State/progression update
             jump day105_4_motivation_ghost
 
 
@@ -275,6 +352,7 @@ label day105_4_why_did_you_do_it:
 
 label day105_4_motivation_observer:
 
+    # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
@@ -308,6 +386,7 @@ label day105_4_motivation_observer:
 
     gideon "There she is."
 
+    # [STATE] State/progression update
     jump day105_5_gideon_marks_cora
 
 
@@ -317,6 +396,7 @@ label day105_4_motivation_observer:
 
 label day105_4_motivation_predator:
 
+    # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
@@ -351,6 +431,7 @@ label day105_4_motivation_predator:
 
     gideon "No. An inventory."
 
+    # [STATE] State/progression update
     jump day105_5_gideon_marks_cora
 
 
@@ -360,6 +441,7 @@ label day105_4_motivation_predator:
 
 label day105_4_motivation_prey:
 
+    # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
@@ -392,6 +474,7 @@ label day105_4_motivation_prey:
     "He says it lightly."
     "He should not have said it at all."
 
+    # [STATE] State/progression update
     jump day105_5_gideon_marks_cora
 
 
@@ -401,6 +484,7 @@ label day105_4_motivation_prey:
 
 label day105_4_motivation_ghost:
 
+    # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
@@ -410,11 +494,11 @@ label day105_4_motivation_ghost:
     $ story.set_cora_release1_flavour("ghost")
     $ apply_effects(susp=-5, insp=15, corr=5)
 
-    cora "Because people like you survive by not being seen."
+    cora "Because people like you survive by not being seen, sir."
 
     gideon "People like me are seen constantly."
 
-    cora "No. You are looked at. That is not the same."
+    cora "No. You are looked at, sir. That is not the same."
 
     "The room goes still."
 
@@ -431,6 +515,7 @@ label day105_4_motivation_ghost:
 
     gideon "How unfortunate for you. Witnesses are useful only when someone with authority calls them."
 
+    # [STATE] State/progression update
     jump day105_5_gideon_marks_cora
 
 
@@ -440,6 +525,7 @@ label day105_4_motivation_ghost:
 
 label day105_5_gideon_marks_cora:
 
+    # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
@@ -452,18 +538,21 @@ label day105_5_gideon_marks_cora:
     if story.has_photograph:
         "He carries the photograph to the fireplace."
 
-        # [ASSET] Optional object/CG callout.
+        # [ASSET] Optional object/CG callout
         # show cg_photograph_burning
 
-        "He holds it over the grate."
-        "A match strikes."
-        "The paper curls."
+        "He holds the match near my face before he strikes it."
+        "I feel the heat on my cheek before the paper curls."
+        "The flame is small."
+        "It eats the face first."
 
         "I expect panic."
         "Instead, I feel the strangest grief."
         "Not for the image."
         "For the version of myself who believed the image was enough."
+        "Absurdly, I mourn my belief that evidence was the same as sight."
 
+        # [STATE] State/progression update
         $ story.set_has_photograph(False)
         $ story.set_day5_evidence_destroyed(True)
 
@@ -473,6 +562,7 @@ label day105_5_gideon_marks_cora:
         "That is worse."
         "He simply places it back inside and turns the key."
 
+        # [STATE] State/progression update
         $ story.set_day5_evidence_destroyed(False)
 
     gideon "There."
@@ -485,12 +575,14 @@ label day105_5_gideon_marks_cora:
 
     gideon "Also yes."
 
-    "He returns to the table and picks up his newspaper."
-    "The conversation, to him, has become light enough to read beside."
-
     cora "Then why not?"
 
     gideon "Because ending a thing too early teaches one nothing."
+
+    "He returns to the table and picks up his newspaper."
+    "The crease is perfect."
+    "He has done this before to someone."
+    "The conversation, to him, has become light enough to read beside."
 
     "There it is."
     "The mistake."
@@ -518,36 +610,45 @@ label day105_5_gideon_marks_cora:
     "He opens a drawer and removes an envelope."
     "Money."
     "Of course money."
+    "The envelope is heavier than travel money should be."
 
     gideon "For printing. Or passage. Or a better pair of lies. Spend it as your genre requires."
 
     "He places it on the table."
     "Not into my hand."
     "He will not allow the gesture to look like payment unless I choose to take it that way."
+    "I do not touch it until he turns away."
+    "Even then, I wait one breath."
+    "Servants who reach too quickly are thieves twice."
 
+    # [CHOICE] Decision point
     menu:
         "Do I take Gideon's money?"
 
-        "Take it. Survival first. [Pragmatic entanglement]":
+        "Take it. Survival first. [[Pragmatic entanglement]]":
 
+            # [STATE] State/progression update
             $ story.set_day5_money_choice("taken")
             $ story.set_gideon_entanglement_level("accepted_money")
             $ apply_effects(susp=0, insp=5, corr=10)
 
             "I take the envelope."
             "My hand does not shake."
+            "Our skin touches once."
+            "He notes whether I look at the denomination."
             "That may be growth."
             "It may be damage."
 
             gideon "Good. Pride is most useful after one has eaten."
 
-        "Refuse it. Keep one clean line. [Defiant poverty]":
+        "Refuse it. Keep one clean line. [[Defiant poverty]]":
 
+            # [STATE] State/progression update
             $ story.set_day5_money_choice("refused")
             $ story.set_gideon_entanglement_level("refused_money")
             $ apply_effects(susp=5, insp=10, corr=0)
 
-            cora "I will not take your money."
+            cora "I will not take your money, sir."
 
             gideon "You already took my photograph."
 
@@ -558,25 +659,28 @@ label day105_5_gideon_marks_cora:
             "The envelope remains on the table between us."
             "A third object I cannot make mean only one thing."
 
-        "Leave it untouched, but remember where he placed it. [Ghost option]":
+        "Leave it untouched, but remember where he placed it. [[Ghost option]]":
 
+            # [STATE] State/progression update
             $ story.set_day5_money_choice("deferred")
             $ story.set_gideon_entanglement_level("deferred_money")
             $ apply_effects(susp=-5, insp=5, corr=5)
 
             "I do not touch the envelope."
+            "I step back three paces."
             "I also do not refuse it."
+            "I do not look away."
 
             gideon "Careful. That almost resembles strategy."
 
-            cora "Almost is sometimes enough."
+            cora "Almost is sometimes enough, sir."
 
             "He smiles at that."
             "I wish he had not."
 
     gideon "Go back downstairs."
 
-    cora "And tomorrow?"
+    cora "And tomorrow, sir?"
 
     gideon "Tomorrow, I leave the Savoy."
 
@@ -589,12 +693,18 @@ label day105_5_gideon_marks_cora:
 
     gideon "We will meet again when it is interesting to do so. In the meantime, write. It seems to make you troublesome."
 
+    cora "I shall inform the dust, sir."
+
+    "He almost smiles."
+    "Almost is a wage increase in this hotel."
+
     "He picks up the paper."
     "Dismissed."
     "Not defeated."
     "Not spared."
     "Marked and released."
 
+    # [STATE] State/progression update
     jump day105_6_manuscript_reckoning
 
 
@@ -604,7 +714,7 @@ label day105_5_gideon_marks_cora:
 
 label day105_6_manuscript_reckoning:
 
-    # [ASSET] Existing Cora desk night background.
+    # [ASSET] Existing Cora desk night background
     scene bg_cora_desk_night
     with fade
 
@@ -622,12 +732,14 @@ label day105_6_manuscript_reckoning:
         "Yesterday I thought survival might be enough."
         "Today survival feels like a room with the lock on the outside."
 
+    "The desk is an altar I built for a god who does not answer."
+
     "I open the manuscript."
     "I do not know whether I am correcting art or confessing defeat."
 
     if story.day5_dynamic == "muse":
         "I write the machine around the man."
-        "The carriage waiting outside. The solicitor's letterhead. The policeman's lowered eyes. The publisher's careful refusal."
+        "The carriage waiting outside. The solicitor's letterhead. The policeman's lowered eyes. The publisher's careful refusal dressed as taste."
         "Gideon becomes smaller on the page because the world behind him becomes vast."
     elif story.day5_dynamic == "protege":
         "I write the hunger honestly."
@@ -647,6 +759,7 @@ label day105_6_manuscript_reckoning:
         "As debt."
         "There are things I did to survive that the book cannot turn noble."
 
+        # [STATE] State/progression update
         $ story.set_missy_debt_carried_forward(True)
 
     if story.day4_night_action == "finish_manuscript":
@@ -659,6 +772,7 @@ label day105_6_manuscript_reckoning:
         "Not triumphant."
         "Useful."
 
+    # [STATE] State/progression update
     $ story.complete_manuscript_chapter("day5_reckoning_chapter")
     $ story.complete_release1_manuscript(True)
     $ story.set_release1_completed(True)
@@ -666,7 +780,10 @@ label day105_6_manuscript_reckoning:
     "When the candle dies, the manuscript is complete."
     "Not because I won."
     "Because I finally understand the shape of the thing I lost to."
+    "The ending is not victory."
+    "It is diagnosis."
 
+    # [STATE] State/progression update
     jump day105_7_release_one_ending
 
 
@@ -676,11 +793,13 @@ label day105_6_manuscript_reckoning:
 
 label day105_7_release_one_ending:
 
+    # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with fade
 
     "The next morning, Gideon Locke leaves the Savoy."
 
+    # [ASSET] Visual/staging command
     show vance_sprite confused at left
 
     "Vance travels with him, dressed beautifully enough to convince strangers of almost anything."
@@ -694,6 +813,7 @@ label day105_7_release_one_ending:
         "Missy stands beside me, close enough that our sleeves almost touch."
         "Almost."
 
+    # [ASSET] Visual/staging command
     show gideon_sprite dominant at right
 
     "Gideon pauses at the foot of the stairs."
@@ -724,11 +844,13 @@ label day105_7_release_one_ending:
     "No threat. No promise."
     "Only a man with every exit open marking a servant as a future amusement, problem, instrument, or wound."
 
+    # [ASSET] Visual/staging command
     hide gideon_sprite
     hide vance_sprite
 
     "He leaves."
 
+    # [ASSET] Visual/staging command
     scene bg_servants_quarters_dusk
     with dissolve
 
@@ -742,14 +864,18 @@ label day105_7_release_one_ending:
     "It is not a victory."
     "It is a beginning with teeth."
 
-    # [STATE] Carry-forward flags for Release 2.
+    # [STATE] Carry-forward flags for Release 2
     $ story.set_gideon_recurring_pressure(True)
     $ story.set_release2_gideon_status("marked_cora")
     $ story.set_release2_guest_cast_pivot(True)
 
     if story.missy_debt_carried_forward:
+
+        # [STATE] State/progression update
         $ story.set_release2_missy_status("wounded_trust")
     else:
+
+        # [STATE] State/progression update
         $ story.set_release2_missy_status("uncertain_trust")
 
     scene black

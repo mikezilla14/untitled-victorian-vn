@@ -206,10 +206,11 @@ def check_day_file_naming_contract(files):
             continue
 
         if norm.startswith("narrative/writers_room/") and name.endswith("_non_canon.rpy"):
-            if not DAYRXX_NON_CANON_RE.fullmatch(name):
-                violations.append(
-                    f"{file} invalid non-canon day filename. Expected dayrdd_non_canon.rpy (example: day100_non_canon.rpy)."
-                )
+            if name.startswith("day"):
+                if not DAYRXX_NON_CANON_RE.fullmatch(name):
+                    violations.append(
+                        f"{file} invalid non-canon day filename. Expected dayrdd_non_canon.rpy (example: day100_non_canon.rpy)."
+                    )
             continue
 
         if norm.startswith("renpy_project/game/") and name.endswith(".rpy"):

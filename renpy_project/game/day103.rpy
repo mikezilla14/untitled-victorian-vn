@@ -8,6 +8,9 @@
 
 label day103_morning:
 
+    if story.manuscript_progress == 0:
+        jump game_over_deadline_1
+
     $ time_manager.set_current_day(3)
     $ set_time_period("Morning")
 

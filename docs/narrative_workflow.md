@@ -8,10 +8,13 @@ The product is a **playable Ren'Py MVP** in `renpy_project/`. Non-canon day scri
 
 **Manual:**
 
-1. **Write a non-canon day draft** in Ren'Py-shaped form under `narrative/writers_room/` using `dayrdd_non_canon.rpy` naming. These drafts can include implementation notes, but should stay promotion-ready for runtime `.rpy`.
-2. **Historical pass** — run `scripts/historical_linter.py` on the draft file (CI runs it when those files change). Fix or justify flagged anachronisms; align with `narrative/templates/Voice_Guides/*_voice_guide.md` where relevant.
-3. **Implementation** — hand the non-canon draft to the **coding agent** and iterate until behavior exists in `renpy_project/game/dayrdd.rpy`.
-4. **Architecture** — the **chief architect** reviews Ren'Py changes for methodology (class-backed `StoryState` / stats, whitelisted setters for exclusive branches, no direct field assignment in scripts, no leaky globals, lint), not prose formatting preferences.
+1. **Write a non-canon day draft** via the Writing Orchestration Agent (`writers_room`): load **`continuity_handoff.md`** (current day section only) + `story_board.md`; divergent personas → `speculative/spec_scripts/`; **convergent** synthesizes `dayrdd_non_canon.rpy` and publishes `dayrdd_convergent_report.md`; then **`lead_narrative_editor`**, then **`forensic_psychology_consultant`**, then **`victorian_consultant`** (in that order). After gates pass, convergent updates the **next** day's handoff section in `continuity_handoff.md`. Gate verdicts live under `speculative/idea_archive/` (excluded from future assignment context).
+2. **Revise narrative when code or review requires it** (`revise-narrative`): `non_prod_code_agent`, `lead_narrative_editor`, or `forensic_psychology_consultant` files `dayrdd_narrative_change_brief.md` (scale S/M/L); `writers_room` runs convergent-only, partial divergent pool, or full day pass; gates; then the requester resumes technical implementation with **verbatim** prose. Code agents must not invent dialogue.
+3. **Psychology pass** — the **forensic psychology consultant** confirms player choices, branches, profile traits, and voice-guide psychology are consistent. If profiles or voice guides change, the consultant files a short change report explaining what changed, why, and future writing implications.
+4. **Historical pass** — run `scripts/historical_linter.py` on the draft file. Fix or justify flagged anachronisms.
+5. **Sandbox Implementation** — hand the non-canon draft to the **non-prod code agent** to wrap it in structural Ren'Py/Python logic inside the `narrative/writers_room/` folder. All creative text from the draft must be copied verbatim.
+6. **Validation & Promotion** — hand the sandbox draft through **forensic psychology promotion review** and then to the **prod code agent** to promote the code into `renpy_project/game/dayrdd.rpy` and update the assets manifest.
+7. **Architecture & Review** — the **chief architect** reviews Ren'Py production changes for technical methodology and ensures no creative drift (making sure dialogue and prose were preserved 100% verbatim from the Writers' Room).
 
 ## Day file naming contract
 
@@ -35,7 +38,7 @@ These are suggestions, not rules:
 - **State:** `$ player.raise_suspicion(10)` or plain English: “after choice: +Susp, flag read_letters”.
 - **Characters:** `cora "..."` / `gideon "..."` matching how you expect sprites to be defined in the game.
 
-The coding agent promotes this into runtime Ren'Py that matches `classes.rpy` / `variables.rpy` patterns.
+The prod code agent promotes this into runtime Ren'Py that matches `classes.rpy` / `variables.rpy` patterns, ensuring all prose remains identical to the approved writers' room script.
 
 ## Supporting narrative databases
 
@@ -44,3 +47,4 @@ The coding agent promotes this into runtime Ren'Py that matches `classes.rpy` / 
 - **Locations (non-canon):** `narrative/writers_room/locations_non_canon.md`
 - **Voice guides:** `narrative/templates/Voice_Guides/*_voice_guide.md`
 - Canon mirrors should live in `narrative/canon/` using `_canon.md` equivalents.
+- **Psychology reports:** `speculative/idea_archive/releases/<release>/dayrdd_forensic_psychology_profile_report.md` or `speculative/idea_archive/character_profile_reports/`

@@ -85,12 +85,12 @@ label day103_1_servants_corridor:
     menu:
         "Which discipline keeps my hands steady?"
 
-        "Order. Safety in structure. [Inspiration]":
+        "Order. Safety in structure. [[Inspiration]]":
 
             # [STATE] State/progression update
             jump day103_1_corridor_insp_chain
 
-        "Exposure. Safety in knowing the threat. [Corruption]":
+        "Exposure. Safety in knowing the threat. [[Corruption]]":
 
             # [STATE] State/progression update
             jump day103_1_corridor_corr_chain
@@ -175,19 +175,25 @@ label day103_1_corridor_corr_chain:
 
 label day103_1_optional_character_chain:
 
-    # [CHOICE] Contextual grind gate after corridor reflection; resolver picks chain beat.
+    # [CHOICE] Contextual grind gate after corridor reflection; resolver picks chain beat
     menu:
         "The corridor is still deciding what kind of morning this will be."
 
         "Follow Stern's discipline before the guest wing wakes." if story.chain_available("stern"):
+
+            # [STATE] State/progression update
             $ _chain_label = story.resolve_chain_label("stern")
             jump expression _chain_label
 
         "Find Missy while the house is still bruised from yesterday." if story.chain_available("missy"):
+
+            # [STATE] State/progression update
             $ _chain_label = story.resolve_chain_label("missy")
             jump expression _chain_label
 
         "Watch the Locke Suite door before the tea order becomes a summons." if story.chain_available("vance"):
+
+            # [STATE] State/progression update
             $ _chain_label = story.resolve_chain_label("vance")
             jump expression _chain_label
 
@@ -283,17 +289,17 @@ label day103_2_suite_cora_vs_gideon:
     menu:
         "How do I answer the test?"
 
-        "Answer like a craftsman. Describe what is visible, not what is wanted. [Inspiration]":
+        "Answer like a craftsman. Describe what is visible, not what is wanted. [[Inspiration]]":
 
             # [STATE] State/progression update
             jump day103_2_cora_vs_gideon_insp
 
-        "Let him see that I understand the charge in the room. [Corruption]":
+        "Let him see that I understand the charge in the room. [[Corruption]]":
 
             # [STATE] State/progression update
             jump day103_2_cora_vs_gideon_corr
 
-        "Retreat into the maid's mask. Drop the brush. [Suspicion + Inspiration]":
+        "Retreat into the maid's mask. Drop the brush. [[Suspicion + Inspiration]]":
 
             # [STATE] State/progression update
             jump day103_2_cora_vs_gideon_ghost
@@ -543,17 +549,17 @@ label day103_3_bedroom_cora_frantic_writing_event:
 
     # [CHOICE] Decision point
     menu:
-        "Write with whatever time is left. [Frantic Write]":
+        "Write with whatever time is left. [[Frantic Write]]":
 
             # [STATE] State/progression update
             jump day103_3_frantic_write
 
-        "Prepare my uniform and mask. [Prepare Mask]":
+        "Prepare my uniform and mask. [[Prepare Mask]]":
 
             # [STATE] State/progression update
             jump day103_3_prepare_mask
 
-        "Re-read the dangerous words. [Indulge Words]":
+        "Re-read the dangerous words. [[Indulge Words]]":
 
             # [STATE] State/progression update
             jump day103_3_indulge_words
@@ -690,7 +696,7 @@ label day103_4_room_stern_suspicion:
     menu:
         "How do I answer Stern?"
 
-        "Be boring. Make the summons sound like ordinary service. [-Suspicion]":
+        "Be boring. Make the summons sound like ordinary service. [[-Suspicion]]":
 
             # [STATE] State/progression update
             $ story.set_day3_stern_response("boring")
@@ -709,7 +715,7 @@ label day103_4_room_stern_suspicion:
 
             cora "Yes, Ma'am."
 
-        "Tell a partial truth. Admit he unsettles me. [+Inspiration, mixed risk]":
+        "Tell a partial truth. Admit he unsettles me. [[+Inspiration, mixed risk]]":
 
             # [STATE] State/progression update
             $ story.set_day3_stern_response("partial_truth")
@@ -729,7 +735,7 @@ label day103_4_room_stern_suspicion:
 
             cora "Yes, Ma'am."
 
-        "Play stupid. Make her underestimate me. [+Suspicion if she sees through it]":
+        "Play stupid. Make her underestimate me. [[+Suspicion if she sees through it]]":
 
             # [STATE] State/progression update
             $ story.set_day3_stern_response("stupid")
@@ -832,17 +838,17 @@ label day103_2_suite_night_tea:
     menu:
         "How do I survive Gideon's knowledge?"
 
-        "Deny him access. Keep the book mine. [Defiance]":
+        "Deny him access. Keep the book mine. [[Defiance]]":
 
             # [STATE] State/progression update
             jump day103_2_night_defy_gideon
 
-        "Offer him a controlled fragment. Make curiosity serve me. [Bargain]":
+        "Offer him a controlled fragment. Make curiosity serve me. [[Bargain]]":
 
             # [STATE] State/progression update
             jump day103_2_night_bargain_gideon
 
-        "Let him frighten me. Gather every detail. [Surrender]":
+        "Let him frighten me. Gather every detail. [[Surrender]]":
 
             # [STATE] State/progression update
             jump day103_2_night_surrender_gideon
@@ -1027,7 +1033,7 @@ label day103_3_bedroom_final_write:
     menu:
         "Can I turn the night into a chapter?"
 
-        "Write until the candle dies. [Chapter gate]":
+        "Write until the candle dies. [[Chapter gate]]":
 
             # [PROMOTION NOTE]
             # Tune threshold later. Day 3 should be a major writing gate.
@@ -1072,7 +1078,7 @@ label day103_3_bedroom_final_write:
                 $ story.set_day3_failed_write(True)
                 $ apply_effects(stern_susp=0, insp=5, corr=5)
 
-        "Do not write. Barricade the door and wait for morning. [Safety over progress]":
+        "Do not write. Barricade the door and wait for morning. [[Safety over progress]]":
 
             # [STATE] State/progression update
             $ story.set_day3_night_action("barricade")

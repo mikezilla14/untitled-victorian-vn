@@ -58,6 +58,7 @@ init -40 python:
     declare_image_with_fallback("stern_sprite stern", "images/sprites/stern/stern.webp", "#555555")
 
     # Sprites: Vance
+    declare_image_with_fallback("vance_sprite neutral", "images/sprites/vance/neutral.png", "#7b3f98")
     declare_image_with_fallback("vance_sprite angry", "images/sprites/vance/angry.png", "#7b3f98")
     declare_image_with_fallback("vance_sprite indignant", "images/sprites/vance/indignant.webp", "#7b3f98")
     declare_image_with_fallback("vance_sprite submissive", "images/sprites/vance/submissive.png", "#7b3f98")
@@ -74,6 +75,7 @@ init -40 python:
     declare_image_with_fallback("gideon_sprite angry", "images/sprites/gideon/angry.webp", "#a30000")
 
     # Sprites: Missy
+    declare_image_with_fallback("missy_sprite neutral", "images/sprites/missy/neutral.webp", "#5fa8d3")
     declare_image_with_fallback("missy_sprite smiling", "images/sprites/missy/smiling.webp", "#5fa8d3")
     declare_image_with_fallback("missy_sprite naive", "images/sprites/missy/naive.webp", "#5fa8d3")
     declare_image_with_fallback("missy_sprite shocked", "images/sprites/missy/shocked.webp", "#5fa8d3")

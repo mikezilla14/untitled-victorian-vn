@@ -165,17 +165,17 @@ label day104_2_return_early:
     menu:
         "Sixty seconds. How do I survive?"
 
-        "Hide in the cold hearth. Keep the evidence. [Ghost escape: high suspicion]":
+        "Hide in the cold hearth. Keep the evidence. [[Ghost escape: high suspicion]]":
 
             # [STATE] State/progression update
             jump day104_2_escape_fireplace
 
-        "Stand in the room and lie cleanly. Keep the evidence. [Prey escape: high visibility]":
+        "Stand in the room and lie cleanly. Keep the evidence. [[Prey escape: high visibility]]":
 
             # [STATE] State/progression update
             jump day104_2_escape_bold_lie
 
-        "Use Missy as cover. Lose the evidence, preserve the alibi. [Predator escape: low suspicion, moral cost]":
+        "Use Missy as cover. Lose the evidence, preserve the alibi. [[Predator escape: low suspicion, moral cost]]":
 
             # [STATE] State/progression update
             jump day104_2_escape_missy_cover
@@ -415,7 +415,7 @@ label day104_3_stern_pressure:
     menu:
         "How do I handle Stern's pressure?"
 
-        "Give her the boring servant answer. [-Suspicion]":
+        "Give her the boring servant answer. [[-Suspicion]]":
 
             # [STATE] State/progression update
             $ story.set_day4_stern_response("boring")
@@ -429,7 +429,7 @@ label day104_3_stern_pressure:
             "Negligence is punishable."
             "It is also ordinary."
 
-        "Let her see I am frightened, not guilty. [+Inspiration, small suspicion]":
+        "Let her see I am frightened, not guilty. [[+Inspiration, small suspicion]]":
 
             # [STATE] State/progression update
             $ story.set_day4_stern_response("frightened")
@@ -445,7 +445,7 @@ label day104_3_stern_pressure:
 
             stern "Clean it up."
 
-        "Hide behind Missy if she was used. [Conditional moral cost]" if story.day4_escape_state == "missy_cover":
+        "Hide behind Missy if she was used. [[Conditional moral cost]]" if story.day4_escape_state == "missy_cover":
 
             # [STATE] State/progression update
             $ story.set_day4_stern_response("missy_cover")
@@ -507,24 +507,24 @@ label day104_4_twilight_ledger_false_dawn:
 
     # [CHOICE] Decision point
     menu:
-        "Perform visible penance to lower their guard. [Atonement]":
+        "Perform visible penance to lower their guard. [[Atonement]]":
 
             # [STATE] State/progression update
             jump day104_4_atonement
 
-        "Risk the dark room to write the triumphant chapter. [Triumphant Write]" if player.suspicion < 85:
+        "Risk the dark room to write the triumphant chapter. [[Triumphant Write]]" if player.suspicion < 85:
 
             # [STATE] State/progression update
             jump day104_5_triumphant_chapter
 
-        "Risk the dark room to write the triumphant chapter. [Triumphant Write]" if player.suspicion >= 85:
+        "Risk the dark room to write the triumphant chapter. [[Triumphant Write]]" if player.suspicion >= 85:
             "My hand shakes too violently to hold the pen. The hotel feels alive, every creaking floorboard a footstep, every shadow a reaching hand."
             "At this level of anxiety, my panic blocks the pen."
 
             # [STATE] State/progression update
             jump day104_4_twilight_ledger_false_dawn
 
-        "Find Missy and salvage what remains of her trust. [Missy Repair]" if getattr(story, "missy_day4_repair_state", "") == "":
+        "Find Missy and salvage what remains of her trust. [[Missy Repair]]" if getattr(story, "missy_day4_repair_state", "") == "":
 
             # [STATE] State/progression update
             jump day104_4_missy_repair

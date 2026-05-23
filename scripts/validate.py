@@ -48,6 +48,95 @@ def all_files_under(path, predicate):
     ]
 
 
+def validate_writers_room_pipeline(file_str: str) -> int:
+    file_path = ROOT / file_str
+    if not file_path.exists():
+        return 0
+
+    # Path format: narrative/writers_room/releases/<release>/day<dd>_non_canon.rpy
+    try:
+        releases_dir = ROOT / "narrative" / "writers_room" / "releases"
+        rel_to_releases = file_path.relative_to(releases_dir)
+        parts = rel_to_releases.parts
+        if len(parts) < 2:
+            return 0
+        release_name = parts[0]
+        filename = parts[-1]
+
+        if not filename.endswith("_non_canon.rpy"):
+            return 0
+        day_id = filename.replace("_non_canon.rpy", "")
+    except ValueError:
+        # Not under narrative/writers_room/releases
+        return 0
+
+    print(f"\n== Writers' Room Pipeline Verification: {day_id} ==")
+    failures = 0
+
+    # 1. Verify convergent report exists and is not empty/placeholder
+    report_path = ROOT / "speculative" / "idea_archive" / "releases" / release_name / f"{day_id}_convergent_report.md"
+    if not report_path.exists():
+        print(f"  [ERROR] Missing convergent report: {report_path.relative_to(ROOT).as_posix()}")
+        failures += 1
+    else:
+        content = report_path.read_text(encoding="utf-8")
+        if len(content.strip()) < 50 or "TODO" in content or "placeholder" in content.lower():
+            print(f"  [ERROR] Convergent report is empty, contains TODOs or placeholders: {report_path.relative_to(ROOT).as_posix()}")
+            failures += 1
+        else:
+            print(f"  [OK] Found convergent report: {report_path.relative_to(ROOT).as_posix()}")
+
+    # 2. Verify spec scripts exist
+    spec_dir = ROOT / "speculative" / "spec_scripts" / "releases" / release_name
+    specs_found = []
+    if spec_dir.exists():
+        specs_found = list(spec_dir.glob(f"{day_id}_*_spec.rpy"))
+
+    if not specs_found:
+        print(f"  [ERROR] No matching spec scripts found in {spec_dir.relative_to(ROOT).as_posix()} for {day_id}")
+        failures += 1
+    else:
+        print(f"  [OK] Found {len(specs_found)} spec scripts for {day_id}:")
+        for spec in specs_found:
+            print(f"    - {spec.relative_to(ROOT).as_posix()}")
+
+    return 1 if failures > 0 else 0
+
+
+def run_step_chunked(name, base_command, files, file_arg_name="--files", joiner=join_files, use_list=False):
+    if not files:
+        return 0
+    chunk = []
+    current_len = sum(len(str(x)) for x in base_command) + len(name) + 100
+    exit_code = 0
+    
+    for file in files:
+        file_len = len(file) + 1
+        if current_len + file_len > 7000 and chunk:
+            if use_list:
+                cmd = base_command + chunk
+            else:
+                cmd = base_command + [file_arg_name, joiner(chunk)]
+            res = run_step(f"{name} (chunk)", cmd)
+            if res:
+                exit_code = res
+            chunk = []
+            current_len = sum(len(str(x)) for x in base_command) + len(name) + 100
+        chunk.append(file)
+        current_len += file_len
+        
+    if chunk:
+        if use_list:
+            cmd = base_command + chunk
+        else:
+            cmd = base_command + [file_arg_name, joiner(chunk)]
+        res = run_step(name, cmd)
+        if res:
+            exit_code = res
+            
+    return exit_code
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -72,9 +161,11 @@ def main():
             ROOT,
             lambda path: ".git" not in path.parts and "__pycache__" not in path.parts,
         )
-        failures |= run_step(
+        failures |= run_step_chunked(
             "Domain gatekeeper",
-            [py, "scripts/gatekeeper.py", "--agent", args.agent, "--files", join_files(target_files)],
+            [py, "scripts/gatekeeper.py", "--agent", args.agent],
+            target_files,
+            file_arg_name="--files"
         )
 
     if args.profile in {"changed", "code", "full"}:
@@ -82,13 +173,17 @@ def main():
             ROOT / "renpy_project" / "game",
             lambda path: path.suffix == ".rpy",
         )
-        failures |= run_step(
+        failures |= run_step_chunked(
             "Engineering compliance",
-            [py, "scripts/engineering_compliance.py", "--files", join_files(target_files)],
+            [py, "scripts/engineering_compliance.py"],
+            target_files,
+            file_arg_name="--files"
         )
-        failures |= run_step(
+        failures |= run_step_chunked(
             "Ren'Py contract lint",
-            [py, "scripts/renpy_contract_linter.py", "--files", join_files(target_files)],
+            [py, "scripts/renpy_contract_linter.py"],
+            target_files,
+            file_arg_name="--files"
         )
 
     if args.profile in {"changed", "narrative", "full"}:
@@ -107,10 +202,14 @@ def main():
 
         non_canon_rpy = [file for file in target_files if file.replace("\\", "/").endswith("_non_canon.rpy")]
         if non_canon_rpy:
-            failures |= run_step(
+            failures |= run_step_chunked(
                 "Non-canon formatting check",
-                [py, "scripts/format_non_canon.py", "--check", *non_canon_rpy],
+                [py, "scripts/format_non_canon.py", "--check"],
+                non_canon_rpy,
+                use_list=True
             )
+            for file in non_canon_rpy:
+                failures |= validate_writers_room_pipeline(file)
 
     if failures:
         return 1

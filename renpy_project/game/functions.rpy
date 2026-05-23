@@ -8,7 +8,7 @@
 
 init python:
 
-    def apply_effects(insp=0, corr=0, susp=0):
+    def apply_effects(insp=0, corr=0, susp=0, stern_susp=0, vance_susp=0, missy_susp=0):
         success = True
 
         # Inspiration:
@@ -26,13 +26,17 @@ init python:
         elif corr < 0:
             raise ValueError("Corruption cannot be reduced.")
 
-        # Suspicion:
-        # Positive = raise suspicion.
-        # Negative = lower suspicion.
-        if susp > 0:
-            player.raise_suspicion(susp)
-        elif susp < 0:
-            player.lower_suspicion(abs(susp))
+        # Legacy susp != 0 mapping to stern_susp:
+        if susp != 0:
+            stern_susp += susp
+
+        # Character-specific suspicions:
+        if stern_susp != 0:
+            player.adjust_character_suspicion("stern", stern_susp)
+        if vance_susp != 0:
+            player.adjust_character_suspicion("vance", vance_susp)
+        if missy_susp != 0:
+            player.adjust_character_suspicion("missy", missy_susp)
 
         player.update_stats()
         return success

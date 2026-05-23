@@ -4,8 +4,8 @@ label start:
     scene bg_savoy_front_facade
     with fade
 
-    sys "Holywell Street Studios — MVP Gray-Box v2.0"
-    sys "Setting: The Savoy Hotel, London. Winter 1891."
+    sys_msg "Holywell Street Studios — MVP Gray-Box v2.0"
+    sys_msg "Setting: The Savoy Hotel, London. Winter 1891."
 
     cora "The Savoy. Two years old and already the most famous hotel in London. Electric lights in the corridors. Hot water in the suites. And me — Cora, village girl, board school graduate, chambermaid."
     cora "The hotel is quiet this time of year. A skeleton staff. Miss Stern runs the floor like a prison warden, and we have exactly one guest on the VIP floor — a Sir Gideon Locke."

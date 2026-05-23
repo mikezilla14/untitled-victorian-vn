@@ -1,11 +1,11 @@
 # MVP Compliance Checklist
 
-Use this checklist for PR review by Code Agent + Chief Architect.
+Use this checklist for PR review by Prod Code Agent + Chief Architect.
 Mark each item `pass` or `fail`.
 
 Automated subset in CI: `scripts/engineering_compliance.py` (PR pipeline).
-Local orchestration: Run `py scripts/orchestrate_review.py --files <path/to/files>` (or `python ...` if on macOS/Linux) to automatically check compliance and generate AI remediation prompts.
-Agent pipeline: Use `.agents/rules/orchestrator.md` as your system prompt (any IDE or Claude Code) and invoke the `implement-spec` or `produce-day` pipeline — the orchestrator runs Code Agent + Chief Architect in sequence and surfaces all violations.
+Local orchestration: Run `py scripts/orchestrate_review.py --files <path/to/files>` to automatically check compliance.
+Agent pipeline: Use `.agents/rules/orchestrator.md` as your system prompt and invoke the `implement-spec` or `produce-day` pipeline (non-prod drafting/wrapping) followed by the `promote-day` pipeline (production merging and linting).
 Manual-only items remain reviewer responsibilities.
 
 ## A) Scope and flow
@@ -41,6 +41,9 @@ Manual-only items remain reviewer responsibilities.
 
 - [ ] Any changed writers-room narrative draft (`*_non_canon.rpy`) or markdown docs pass historical linter checks.
 - [ ] Dialogue/tone remains consistent with established voice and class context.
+- [ ] Forensic psychology gate passed: player choices, character decisions, branch outcomes, and profile/voice-guide traits remain psychologically consistent.
+- [ ] Any character profile or voice-guide psychology updates include a short forensic psychology report describing what changed, why, and future writing implications.
+- [ ] **Strict Creative Handoff Enforced:** Checked that neither the non-prod nor prod code agent edited or rewrote character dialogue or narrator prose from the approved Writers' Room draft. All creative text remains exactly verbatim. (Reject immediately on creative drift).
 
 ## Optional reviewer notes
 

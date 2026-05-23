@@ -1,7 +1,22 @@
-# ═══════════════════════════════════════════════════════════════
-#  day102.rpy — RELEASE 1, DAY 02: THE CONTRABAND AND THE INQUEST
-#  Promoted from day102_non_canon.rpy (Release 1 MVP, revised).
-# ═══════════════════════════════════════════════════════════════
+# FORMAT LEGEND:
+# [ASSET] -> backgrounds, sprites, transitions, CG/UI callouts
+# [STATE] -> variable changes, effects, conditions, jumps
+# [CHOICE] -> menu blocks and inflection points
+# [BEAT] -> narrative intent / scene intent notes
+
+# day102.rpy
+# Release 1 / Day 02: THE CONTRABAND AND THE INQUEST
+# Promoted from day102_non_canon.rpy (Release 1 MVP, writers' room pass 2026-05-22).
+# Spine: story_board.md Day 102; router via end_slot / advance_after_confrontation
+
+# ==========================================
+# DAY 2 NODE MAP
+# ==========================================
+# day102_1_cora_missy_first_shift -> missy_finds_a_thing
+#   -> takes_the_thing [predator] / deceives_missy [prey|ghost]
+# day102_2_day2_chore_time -> insp/corr -> optional chains -> evening crisis
+# day102_3 stern -> vance -> coras_choice -> gideon
+# day102_4_night -> write / indulge -> day103_morning
 
 
 # ── 021: CORA + MISSY FIRST SHIFT ───────────────────────────────
@@ -17,6 +32,8 @@ label day102_1_cora_missy_first_shift:
     "The Master Suite is larger in daylight and less honest for it."
     "Breakfast has emptied the room of its occupants, but not of them."
     "Vance is in the perfume lingering over the dressing table. Mr. Locke is in the chair angled toward the hearth, as if the room itself has learned to obey him."
+    "The rich do not only leave crumbs."
+    "They leave proof that someone lived loudly while pretending not to."
 
     show missy_sprite smiling at center
 
@@ -52,8 +69,6 @@ label day102_1_cora_missy_first_shift:
     jump day102_1_missy_finds_a_thing
 
 
-# ── 021: MISSY FINDS A THING ────────────────────────────────────
-
 label day102_1_missy_finds_a_thing:
 
     scene bg_master_suite_day
@@ -76,6 +91,8 @@ label day102_1_missy_finds_a_thing:
 
     "She holds it up with two fingers."
     "Sheer lace. Expensive, intimate, and designed with no interest whatsoever in modesty."
+    "The lace is lighter than it has any right to be."
+    "Intimate things argue with a room's pretence of respectability."
 
     "The room seems to narrow around the thing."
     "Vance's fury from yesterday. Gideon's quiet command. The service door. The sound through plaster."
@@ -86,13 +103,16 @@ label day102_1_missy_finds_a_thing:
     "The correct answer is: more ladies than Missy has been permitted to imagine."
     "The useful answer depends on what I am becoming."
 
+    cora "The sort who does not expect a maid to find it before luncheon."
+
+    "Missy considers this."
+    "It does not help."
+
     if story.day1_corridor_state == "predator":
         jump day102_1_cora_takes_the_thing
     else:
         jump day102_1_cora_deceives_missy
 
-
-# ── 021: CORA TAKES THE THING ───────────────────────────────────
 
 label day102_1_cora_takes_the_thing:
 
@@ -121,6 +141,8 @@ label day102_1_cora_takes_the_thing:
     cora "Keep folding."
 
     "Behind the half-closed door, I remove my plain cotton and step into the stolen thing."
+    "Every breath is a wager."
+    "The uniform still looks obedient from the outside."
     "It sits beneath the uniform like a second, secret sentence."
     "The maid above. The witness below."
 
@@ -143,8 +165,6 @@ label day102_1_cora_takes_the_thing:
     jump day102_2_day2_chore_time
 
 
-# ── 021: CORA DECEIVES MISSY ────────────────────────────────────
-
 label day102_1_cora_deceives_missy:
 
     scene bg_master_suite_day
@@ -161,6 +181,8 @@ label day102_1_cora_deceives_missy:
 
     "The hatbox is the obvious place."
     "Obvious things are where blame waits."
+    "A trunk is not a hiding place."
+    "It is a question addressed to the man who owns it."
 
     cora "No. In the travel trunk. Deep enough that no one sees it by accident."
 
@@ -196,6 +218,8 @@ label day102_1_cora_deceives_missy:
 
 label day102_2_day2_chore_time:
 
+    call check_confrontations
+
     $ set_time_period("Afternoon")
 
     scene bg_servants_corridor_morning
@@ -208,6 +232,7 @@ label day102_2_day2_chore_time:
 
     if story.day2_contraband_state == "stolen_wearing":
         "The lace moves beneath my uniform with each step."
+        "Heat and fear share the same pulse."
         "Every stair, every turn, every nod to passing staff becomes a private dare."
         "No one knows what I am carrying because I am carrying it as myself."
     else:
@@ -234,8 +259,6 @@ label day102_2_day2_chore_time:
         "Linger near the danger. Let the secret sharpen itself. [[Corruption]]":
             jump day102_2_day2_corr_choice
 
-
-# ── 022: DAY 2 INSPIRATION CHOICE ──────────────────────────────
 
 label day102_2_day2_insp_choice:
 
@@ -267,10 +290,8 @@ label day102_2_day2_insp_choice:
     "Missy notices."
     "For one small second, the house loses."
 
-    jump day102_3_stern_fetches_cora
+    jump day102_2_optional_character_chain
 
-
-# ── 022: DAY 2 CORRUPTION CHOICE ───────────────────────────────
 
 label day102_2_day2_corr_choice:
 
@@ -287,6 +308,7 @@ label day102_2_day2_corr_choice:
 
     if story.day2_contraband_state == "stolen_wearing":
         "The stolen lace answers every step."
+        "One wrong glance and the day becomes a different kind of day."
         "I should feel foolish. Instead, the uniform feels less like a prison and more like a disguise I have finally learned to use."
     else:
         "Upstairs, the lace waits where it should not be."
@@ -303,7 +325,35 @@ label day102_2_day2_corr_choice:
     "Or not good."
     "Useful, at least."
 
-    jump day102_3_stern_fetches_cora
+    jump day102_2_optional_character_chain
+
+
+label day102_2_optional_character_chain:
+
+    menu:
+        "The cart is still. The corridor has not forgotten yesterday."
+
+        "Let Miss Stern find me near the linen closet." if story.chain_available("stern"):
+            $ _chain_label = story.resolve_chain_label("stern")
+            jump expression _chain_label
+
+        "Steal an hour with Missy before Stern counts the sheets." if story.chain_available("missy"):
+            $ _chain_label = story.resolve_chain_label("missy")
+            jump expression _chain_label
+
+        "Drift toward the Locke Suite and watch who performs for whom." if story.chain_available("vance"):
+            $ _chain_label = story.resolve_chain_label("vance")
+            jump expression _chain_label
+
+        "Push the cart on and keep my hands honest.":
+            if story.day2_chore_focus == "corruption":
+                "Honesty is a word for people who are not wearing stolen lace."
+                "I work in silence and call it restraint."
+            else:
+                "I count boards, hinges, and the distance between stairs."
+                "Craft is safer when it has no audience."
+            "The house loses interest when I stop offering it a face."
+            call end_slot(outcome="d2_reflect_done")
 
 
 # ── 023: STERN FETCHES CORA ─────────────────────────────────────
@@ -318,6 +368,7 @@ label day102_3_stern_fetches_cora:
     "Stern finds me at the foot of the servants' stair."
     "She does not raise her voice."
     "That is how I know the matter is already dangerous."
+    "Somewhere above us, a clock marks the interval between discovery and punishment."
 
     stern "Cora. Upstairs."
 
@@ -340,8 +391,6 @@ label day102_3_stern_fetches_cora:
 
     jump day102_3_vance_goes_incandescent
 
-
-# ── 023: VANCE GOES INCANDESCENT ────────────────────────────────
 
 label day102_3_vance_goes_incandescent:
 
@@ -386,14 +435,15 @@ label day102_3_vance_goes_incandescent:
     vance "I will not have servants pawing through my private things."
 
     "Private."
-    "The word enters the room wearing gloves."
+    "The word enters the room wearing gloves and entirely the wrong shoes."
 
     stern "Cora. Missy. If either of you has any knowledge of this matter, speak now."
 
+    "Speak now."
+    "As if truth from below stairs were ever heard before the floor above it decided."
+
     jump day102_3_coras_choice
 
-
-# ── 023: CORA'S CHOICE ──────────────────────────────────────────
 
 label day102_3_coras_choice:
 
@@ -409,8 +459,6 @@ label day102_3_coras_choice:
         "Let Missy take the shape of the blame. [Ghost: clean hands, dirty outcome]":
             jump day102_3_cora_frames_missy
 
-
-# ── 023: CORA CONFESSES ─────────────────────────────────────────
 
 label day102_3_cora_confesses:
 
@@ -443,6 +491,7 @@ label day102_3_cora_confesses:
         "The lace remains beneath my uniform."
         "My confession is therefore not truth, but a smaller lie dressed as truth."
         "Still, it stands closer to honesty than anything else I have available."
+        "My pulse does not agree with my mouth."
     else:
         "I do not look at the trunk."
         "Looking would condemn Missy before I choose whether I mean to."
@@ -457,8 +506,6 @@ label day102_3_cora_confesses:
 
     jump day102_3_gideon_interrupts_controls_vance
 
-
-# ── 023: CORA PRETENDS TO FIND IT ──────────────────────────────
 
 label day102_3_cora_pretends_to_find_it:
 
@@ -483,6 +530,8 @@ label day102_3_cora_pretends_to_find_it:
     cora "No, Madam. Only that servants often look in servant ways."
 
     "Stern's eyes sharpen."
+    "Stern's mouth tightens by a fraction."
+    "That is the Savoy equivalent of laughter."
     "Too much intelligence. But the door is already open."
 
     if story.day2_contraband_state == "planted_in_trunk":
@@ -498,7 +547,9 @@ label day102_3_cora_pretends_to_find_it:
     elif story.day2_contraband_state == "stolen_wearing":
         "I cross to the armoire and open the hatbox."
         "My body is a locked drawer. The room must not know it."
-        "A second small lace ribbon lies caught under the hatbox lining. Not the garment itself, but enough to redirect the search."
+        "A second small lace ribbon lies caught under the hatbox lining."
+        "Not the garment itself."
+        "Enough to teach the room the wrong lesson."
 
         cora "There is a loose piece here, Madam. Perhaps the rest was misplaced while packing."
 
@@ -517,8 +568,6 @@ label day102_3_cora_pretends_to_find_it:
 
     jump day102_3_gideon_interrupts_controls_vance
 
-
-# ── 023: CORA FRAMES MISSY ──────────────────────────────────────
 
 label day102_3_cora_frames_missy:
 
@@ -558,7 +607,7 @@ label day102_3_cora_frames_missy:
     cora "I told her not to leave private garments exposed, Madam. I did not instruct her to hide anything."
 
     "Every word is shaped to be defensible."
-    "That is how cowards build knives."
+    "That is how cowards build knives with ivory handles."
 
     missy "That's not—"
 
@@ -569,8 +618,6 @@ label day102_3_cora_frames_missy:
 
     jump day102_3_gideon_interrupts_controls_vance
 
-
-# ── 023: GIDEON INTERRUPTS AND CONTROLS VANCE ──────────────────
 
 label day102_3_gideon_interrupts_controls_vance:
 
@@ -627,9 +674,12 @@ label day102_3_gideon_interrupts_controls_vance:
 
         gideon "A dismissal makes noise. We are finished with noise for today."
 
+        "He does not spare me."
+        "He spares the hotel's reputation, which is the same thing with better upholstery."
+
         "His eyes remain on me one beat too long."
         "I have not escaped notice."
-        "I have earned it."
+        "I have been filed."
 
     elif story.day2_tea_choice == "predator":
 
@@ -648,6 +698,8 @@ label day102_3_gideon_interrupts_controls_vance:
         vance "Thank her? She—"
 
         gideon "Found what you misplaced."
+
+        "He has chosen which story the afternoon will believe."
 
         "Vance goes still."
         "The correction is mild enough to be polite and sharp enough to draw blood."
@@ -689,6 +741,7 @@ label day102_3_gideon_interrupts_controls_vance:
         "His eyes touch mine for the smallest fraction of time."
         "He has not believed me."
         "He has not exposed me."
+        "He is keeping a note."
         "This is not mercy."
         "It is investment."
 
@@ -758,6 +811,8 @@ label day102_3_gideon_interrupts_controls_vance:
 
 label day102_4_night:
 
+    call check_confrontations
+
     $ set_time_period("Night")
 
     scene bg_cora_desk_night
@@ -768,6 +823,7 @@ label day102_4_night:
 
     "My ledger lies open."
     "My page waits beside it."
+    "One records appetite. The other pretends to tame it."
 
     $ show_ledger_ui()
 
@@ -780,8 +836,6 @@ label day102_4_night:
         "Do not write. Stay inside the feeling a little longer. [[Indulgence]]":
             jump day102_4_cora_sneaks_a_feel
 
-
-# ── 024: CORA WRITES A CHAPTER ──────────────────────────────────
 
 label day102_4_cora_writes_a_chapter:
 
@@ -863,11 +917,8 @@ label day102_4_cora_writes_a_chapter:
             "None of it has become art yet."
             "It remains appetite and consequence."
 
-    $ resolve_turn()
-    jump day103_morning
+    call end_slot(outcome="d2_write_night")
 
-
-# ── 024: CORA SNEAKS A FEEL ─────────────────────────────────────
 
 label day102_4_cora_sneaks_a_feel:
 
@@ -890,6 +941,9 @@ label day102_4_cora_sneaks_a_feel:
         "The lace is ridiculous."
         "That is part of its power."
 
+        "The mirror gives back a maid."
+        "The skin beneath disagrees."
+
         "A woman can scrub ash from a stranger's hearth while carrying a private scandal beneath her skirt."
         "A woman can be unseen and still not be innocent."
 
@@ -909,11 +963,10 @@ label day102_4_cora_sneaks_a_feel:
         "And me, small enough to be overlooked until I was not."
 
         "No chapter comes."
-        "Only heat."
+        "Only heat stored where ink should have gone."
         "Only the knowledge that I could have written and chose instead to keep feeling."
 
     "When I finally sleep, the candle has burned lower than I meant to allow."
     "Waste has consequences."
 
-    $ resolve_turn()
-    jump day103_morning
+    call end_slot(outcome="d2_write_night")
