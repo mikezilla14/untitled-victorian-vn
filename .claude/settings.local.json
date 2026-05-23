@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\mikez\\\\OneDrive\\\\Documents\\\\gh\\\\git\\\\untitled-victorian-vn\\\\.claude\\\\worktrees\\\\vigilant-yonath-b21349\\\\.agents\" -Recurse -Force)",
+      "Bash(Select-Object -Property FullName, PSIsContainer)",
+      "Bash(Sort-Object FullName)"
+    ]
+  }
+}
