@@ -1044,10 +1044,16 @@ label day103_3_bedroom_final_write:
 
                 if story.day3_brush_choice == "predator":
                     "The mirror scene gives it teeth."
+                    "She answered his question like a craftsman: Vance's beauty was in her bones, not her obedience, and her weakness was letting wounds show."
+                    "On the page, that answer is the chapter's real edge. The maid already understood the room before the gentleman arranged it."
                 elif story.day3_brush_choice == "prey":
-                    "The mirror scene gives it heat."
+                    "The mirror scene gives it heat and a specific peril."
+                    "She looked at him when she should have looked at the lady. He saw her looking."
+                    "On the page, that visibility is the chapter's fulcrum: the maid is most dangerous precisely when she is most readable, because readability assumes the reader knows what to do with her."
                 else:
-                    "The fallen brush gives it an angle no gentleman would think to check."
+                    "The fallen brush gives it the angle no gentleman thinks to check."
+                    "From the floor she saw the polished boot, the clenched slipper, the hem of her own uniform trembling against the carpet."
+                    "On the page, the maid's clumsiness is her method. The view from below has its own authority and he never looked down long enough to claim it."
 
                 # [STATE] State/progression update
                 $ story.complete_manuscript_chapter("day3_chapter")
