@@ -1,0 +1,35 @@
+{
+  "contract_version": "1",
+  "character_id": "missy",
+  "day_id": "day105",
+  "release": "release-1-mvp",
+  "verdict": "PROFILE_DOCUMENTED",
+  "edits": [
+    {
+      "file": "narrative/canon/missy_character_canon.md",
+      "change_type": "add",
+      "summary": "Created a dedicated locked canon character profile file for Missy, defining her role as the Mirror Self and horror-mirror psychological dynamic."
+    },
+    {
+      "file": "narrative/canon/voice_guides/missy_voice_guide.md",
+      "change_type": "add",
+      "summary": "Created a voice guide lock file for Missy detailing naive country register and breathy suggestive Level 3 spice curiosity shift."
+    },
+    {
+      "file": "narrative/canon/characters_canon.md",
+      "change_type": "refine",
+      "summary": "Updated canon index to register Missy as a main character with dedicated file."
+    }
+  ],
+  "carry_forward_traits": [
+    "mirror_self",
+    "naive_curiosity",
+    "mischievous_grin"
+  ],
+  "routing": {
+    "writers_room": true,
+    "lead_narrative_editor": true,
+    "victorian_consultant": true
+  },
+  "markdown_report_path": "narrative/pipeline/character_profile_reports/missy_forensic_psychology_report.md"
+}

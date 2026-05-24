@@ -49,7 +49,7 @@ def check_no_direct_player_field_writes(files):
     """
     violations = []
     pattern = re.compile(
-        r"^\s*\$\s*player\.(inspiration|suspicion|corruption_xp|corruption_level)\s*[-+*/]?="
+        r"^\s*\$\s*player\.(inspiration|anxiety|suspicion|corruption_xp|corruption_level)\s*[-+*/]?="
     )
     for file in files:
         if not file.endswith(".rpy"):

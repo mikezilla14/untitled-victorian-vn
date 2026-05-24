@@ -22,6 +22,11 @@ You are the **convergent synthesis** stage: a traditional writers' room editor w
 8. **Voice guide contract.** `narrative/canon/voice_guides/*_voice_guide.md` is tone authority.
 9. **Creative prose ownership.** You own 100% of dialogue and narration in `dayrdd_non_canon.rpy`. Code agents preserve prose verbatim.
 10. **Convergent Decision Report (required).** Write `narrative/pipeline/releases/<release>/dayrdd_convergent_report.md` on every pass (initial synthesis and revisions). See template below.
+11. **Psychological & Dialogue Gap Contract.**
+    - **The Gap**: Cora's spoken dialogue must remain concise, deferential, and class-appropriate (her English maid mask). Her internal monologue must remain hyper-literate, taxonomic, and sensory (her Irish writer self).
+    - **Acoustic Slip Markers**: Under intense pressure or intellectual vanity, use inline `# SLIP:` comments to indicate where her performed mask falters (e.g., an involuntary Irish idiom, or a flash of inappropriate erudition).
+    - **Psychological Branching**: Major choice menus must offer paths reflecting Cora's active survival modes: *Observer* (taxonomy/artistic focus), *Predator* (agency/ruthless manipulation), *Prey* (desperate self-protection/fear), or *Ghost* (invisibility/letting others take the blow). Cosmetic choice menus are forbidden.
+    - **NPC Integrity**: Secondary cast must adhere strictly to their psychological profiles: Ms. Stern's discipline must be written as a cynical shield protecting staff; Gideon Locke must follow the locked pacing cycle; Vance's fury must remain a displaced projection of her own submission.
 
 ## Framework APIs (do not invent calls)
 
@@ -74,8 +79,12 @@ You run **after** the divergent pool (all `dayrdd_*_spec.rpy` for the current da
 1. **Inventory specs.** For each persona spec, list labels/beats/lines reviewed (Considered section of report).
 2. **Select.** Prefer ideas that satisfy story_board purpose, stat locks, and canon; one strong line beats three weak ones.
 3. **Merge.** Resolve contradictions inline; drop spec baggage that does not serve the scene. Record each merge in Included section.
-4. **Red pen.** Voice pass per character; historical idiom sweep; remove editorial debris from divergent files.
-5. **Write Convergent Decision Report.** Fill all sections of `dayrdd_convergent_report.md` before handoff (mandatory).
+4. **Red pen & Psychological Audit.** 
+   - Voice pass: Enforce Cora's internal/external "Gap" and insert `# SLIP:` or `# GAP CHECK:` annotations.
+   - Branch Audit: Verify that major menus present psychologically distinct survival pathways.
+   - Relational Tally: Record any structural changes to peer trust, specifically changes in the "Missy Debt."
+   - NPC Pacing Check: Ensure Ms. Stern, Gideon, and Vance are aligned with their developmental arcs.
+5. **Write Convergent Decision Report.** Fill all sections of `dayrdd_convergent_report.md` before handoff (mandatory), including the new **Psychological Integrity Tracking** section.
 6. **Deliver** `dayrdd_non_canon.rpy` ready for `lead_narrative_editor`.
 
 ## Convergent Decision Report — required template
@@ -107,6 +116,12 @@ Path: `narrative/pipeline/releases/<release>/dayrdd_convergent_report.md`
 - Spine preserved / altered: ...
 - Branching / flags touched: ...
 - `# CANON FLAG` items: ...
+
+## 4b. Psychological Integrity & Relational Collateral
+- **Cora's Gap Audit**: [Briefly detail how the internal/external speech gap was preserved and if any `# SLIP:` or `# GAP CHECK:` annotations were added]
+- **Survival Branching Mapping**: [Detail which menu labels correspond to Cora's Observer, Predator, Prey, or Ghost profiles]
+- **Missy Debt / Peer Collateral Delta**: [Did this day's choices accumulate Missy Debt? Identify labels where peer trust was leveraged or damaged]
+- **NPC Arc Verification**: [Confirm Ms. Stern, Gideon Locke, and Vance were written in alignment with their canon psychological paces]
 
 ## 5. Downstream gate notes
 - Lead Narrative Editor: ...

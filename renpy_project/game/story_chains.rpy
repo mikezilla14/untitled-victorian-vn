@@ -13,8 +13,8 @@
 # ==============================================================================
 
 label check_confrontations:
-    # Game Over Dismissal check (Suspicion >= 100)
-    if player.suspicion >= 100:
+    # Game Over Dismissal check (Anxiety >= 100)
+    if player.anxiety >= 100:
 
         # [STATE] State/progression update
         jump game_over_dismissed
@@ -674,7 +674,7 @@ label end_slot(outcome):
 
         # [STATE] State/progression update
         $ set_time_period("Night")
-        if story.penance_triggered or player.suspicion >= 85:
+        if story.penance_triggered or player.anxiety >= 85:
 
             # [STATE] State/progression update
             jump day104_6_false_dawn_ending

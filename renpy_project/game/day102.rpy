@@ -122,7 +122,7 @@ label day102_1_cora_takes_the_thing:
     show missy_sprite confused at center
 
     $ story.set_day2_contraband_state("stolen_wearing")
-    $ apply_effects(susp=5, insp=0, corr=15)
+    $ apply_effects(vance_susp=5, insp=0, corr=15)
 
     cora "Give it here."
 
@@ -173,7 +173,7 @@ label day102_1_cora_deceives_missy:
     show missy_sprite confused at center
 
     $ story.set_day2_contraband_state("planted_in_trunk")
-    $ apply_effects(susp=0, insp=5, corr=10)
+    $ apply_effects(vance_susp=0, insp=5, corr=10)
 
     cora "Put it away. Quickly."
 
@@ -268,7 +268,7 @@ label day102_2_day2_insp_choice:
     show missy_sprite smiling at center
 
     $ story.set_day2_chore_focus("inspiration")
-    $ apply_effects(susp=-5, insp=15, corr=0)
+    $ apply_effects(stern_susp=-5, insp=15, corr=0)
 
     "I make the morning into inventory."
     "The direction of the light in the suite. The scent of Vance's powder. The exact stiffness in Missy's shoulders when she lies badly to herself."
@@ -301,7 +301,7 @@ label day102_2_day2_corr_choice:
     show missy_sprite confused at center
 
     $ story.set_day2_chore_focus("corruption")
-    $ apply_effects(susp=10, insp=0, corr=15)
+    $ apply_effects(vance_susp=10, insp=0, corr=15)
 
     "I slow the cart near the guest wing."
     "There are always reasons. A folded towel not square enough. A dropped pin. A scuff on polished wood that may or may not exist."
@@ -470,7 +470,7 @@ label day102_3_cora_confesses:
     show missy_sprite shocked at right
 
     $ story.set_day2_tea_choice("prey")
-    $ apply_effects(susp=20, insp=15, corr=0)
+    $ apply_effects(stern_susp=20, insp=15, corr=0)
 
     "The truth is not safe."
     "That does not make the lie safer."
@@ -517,7 +517,7 @@ label day102_3_cora_pretends_to_find_it:
     show missy_sprite shocked at right
 
     $ story.set_day2_tea_choice("predator")
-    $ apply_effects(susp=10, insp=5, corr=15)
+    $ apply_effects(stern_susp=10, insp=5, corr=15)
 
     "Helpful."
     "That is the mask."
@@ -580,7 +580,7 @@ label day102_3_cora_frames_missy:
 
     $ story.set_day2_tea_choice("ghost")
     $ story.set_missy_day2_trust_break(True)
-    $ apply_effects(susp=0, insp=0, corr=20)
+    $ apply_effects(vance_susp=0, insp=0, corr=20)
 
     "There is a version of me that protects Missy."
     "She exists."
@@ -861,7 +861,7 @@ label day102_4_cora_writes_a_chapter:
             "Good. Raw things bleed honestly."
 
             $ story.complete_manuscript_chapter("day1_chapter")
-            $ apply_effects(susp=0, insp=-10, corr=0)
+            $ apply_effects(vance_susp=0, insp=-10, corr=0)
 
             "Chapter One is done."
             "Late is not failure."
@@ -903,7 +903,7 @@ label day102_4_cora_writes_a_chapter:
                 "Only a girl in the corridor learning what betrayal sounds like when it does not raise its voice."
 
             $ story.complete_manuscript_chapter("day2_chapter")
-            $ apply_effects(susp=0, insp=-15, corr=0)
+            $ apply_effects(vance_susp=0, insp=-15, corr=0)
 
             "By the time the candle shortens, the second chapter exists."
             "It is better than the first."
@@ -926,7 +926,7 @@ label day102_4_cora_sneaks_a_feel:
     with dissolve
 
     $ story.set_day2_night_action("indulge")
-    $ apply_effects(susp=10, insp=5, corr=15)
+    $ apply_effects(stern_susp=10, insp=5, corr=15)
 
     "I close the notebook."
     "The page has asked for discipline."

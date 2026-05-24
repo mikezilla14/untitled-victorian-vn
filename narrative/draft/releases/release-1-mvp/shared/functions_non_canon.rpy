@@ -33,9 +33,9 @@ init python:
         elif corr < 0:
             raise ValueError("Corruption cannot be reduced.")
 
-        # Legacy susp != 0 mapping to stern_susp:
+        # Legacy susp deprecation:
         if susp != 0:
-            stern_susp += susp
+            raise ValueError("Legacy general 'susp' is deprecated. Suspicion must target a specific witness (stern_susp, vance_susp, missy_susp).")
 
         # Character-specific suspicions:
         if stern_susp != 0:

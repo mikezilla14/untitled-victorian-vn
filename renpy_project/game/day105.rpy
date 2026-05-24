@@ -229,7 +229,7 @@ label day105_4_motivation_observer:
 
     $ story.set_day5_dynamic("muse")
     $ story.set_cora_release1_flavour("observer")
-    $ apply_effects(susp=0, insp=20, corr=0)
+    $ apply_effects(insp=20, corr=0)
 
     cora "To finish my book."
 
@@ -269,7 +269,7 @@ label day105_4_motivation_predator:
 
     $ story.set_day5_dynamic("protege")
     $ story.set_cora_release1_flavour("predator")
-    $ apply_effects(susp=0, insp=5, corr=20)
+    $ apply_effects(insp=5, corr=20)
 
     cora "Because I wanted to know what it felt like."
 
@@ -310,7 +310,7 @@ label day105_4_motivation_prey:
 
     $ story.set_day5_dynamic("adversary")
     $ story.set_cora_release1_flavour("prey")
-    $ apply_effects(susp=5, insp=10, corr=10)
+    $ apply_effects(vance_susp=5, insp=10, corr=10)
 
     cora "Because you frightened me."
 
@@ -349,7 +349,7 @@ label day105_4_motivation_ghost:
 
     $ story.set_day5_dynamic("witness")
     $ story.set_cora_release1_flavour("ghost")
-    $ apply_effects(susp=-5, insp=15, corr=5)
+    $ apply_effects(vance_susp=-5, insp=15, corr=5)
 
     cora "Because people like you survive by not being seen."
 
@@ -468,7 +468,7 @@ label day105_5_gideon_marks_cora:
 
             $ story.set_day5_money_choice("taken")
             $ story.set_gideon_entanglement_level("accepted_money")
-            $ apply_effects(susp=0, insp=5, corr=10)
+            $ apply_effects(insp=5, corr=10)
 
             "I take the envelope."
             "My hand does not shake."
@@ -481,7 +481,7 @@ label day105_5_gideon_marks_cora:
 
             $ story.set_day5_money_choice("refused")
             $ story.set_gideon_entanglement_level("refused_money")
-            $ apply_effects(susp=5, insp=10, corr=0)
+            $ apply_effects(vance_susp=5, insp=10, corr=0)
 
             cora "I will not take your money."
 
@@ -498,7 +498,7 @@ label day105_5_gideon_marks_cora:
 
             $ story.set_day5_money_choice("deferred")
             $ story.set_gideon_entanglement_level("deferred_money")
-            $ apply_effects(susp=-5, insp=5, corr=5)
+            $ apply_effects(vance_susp=-5, insp=5, corr=5)
 
             "I do not touch the envelope."
             "I also do not refuse it."

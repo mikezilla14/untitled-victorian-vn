@@ -78,7 +78,7 @@ label day104_1_lockbox_evidence:
     "Here is the thing even Gideon Locke cannot smooth over with a quiet voice and a better coat."
 
     $ story.set_day4_evidence_discovered(True)
-    $ apply_effects(susp=15, insp=20, corr=0)
+    $ apply_effects(vance_susp=15, insp=20, corr=0)
 
     "I slide the photograph beneath my bodice."
     "It scratches once against my skin and becomes real."
@@ -125,7 +125,7 @@ label day104_2_escape_fireplace:
 
     $ story.set_day4_escape_state("fireplace")
     $ story.set_has_photograph(True)
-    $ apply_effects(susp=35, insp=5, corr=0)
+    $ apply_effects(stern_susp=35, insp=5, corr=0)
 
     "The hearth is enormous, black, and unlit."
     "A servant could disappear there."
@@ -177,7 +177,7 @@ label day104_2_escape_bold_lie:
 
     $ story.set_day4_escape_state("bold_lie")
     $ story.set_has_photograph(True)
-    $ apply_effects(susp=40, insp=10, corr=5)
+    $ apply_effects(vance_susp=40, insp=10, corr=5)
 
     "I close the lockbox with one hand and seize the dust cloth with the other."
     "By the time the door opens, I am wiping the desk as if mahogany has personally insulted Miss Stern."
@@ -247,7 +247,7 @@ label day104_2_escape_missy_cover:
     $ story.set_day4_escape_state("missy_cover")
     $ story.set_has_photograph(True)
     $ story.set_missy_day4_used_as_cover(True)
-    $ apply_effects(susp=-15, insp=5, corr=20)
+    $ apply_effects(vance_susp=-15, insp=5, corr=20)
 
     "Panic makes the first decision."
     "Ambition improves it."
@@ -327,7 +327,7 @@ label day104_3_stern_pressure:
         "Give her the boring servant answer. [-Suspicion]":
 
             $ story.set_day4_stern_response("boring")
-            $ apply_effects(susp=-15, insp=0, corr=0)
+            $ apply_effects(stern_susp=-15, insp=0, corr=0)
 
             cora "Ground-floor silver, Ma'am. Then linens. Then back stairs. I should have reported each change."
 
@@ -340,7 +340,7 @@ label day104_3_stern_pressure:
         "Let her see I am frightened, not guilty. [+Inspiration, small suspicion]":
 
             $ story.set_day4_stern_response("frightened")
-            $ apply_effects(susp=5, insp=10, corr=0)
+            $ apply_effects(stern_susp=5, insp=10, corr=0)
 
             cora "I am trying not to make mistakes, Ma'am. That is making me slower."
 
@@ -355,7 +355,7 @@ label day104_3_stern_pressure:
         "Hide behind Missy if she was used. [Conditional moral cost]" if story.day4_escape_state == "missy_cover":
 
             $ story.set_day4_stern_response("missy_cover")
-            $ apply_effects(susp=-10, insp=0, corr=10)
+            $ apply_effects(stern_susp=-10, insp=0, corr=10)
 
             cora "Missy was with the suite, Ma'am. I was sent back down after delivering cloth."
 
@@ -412,7 +412,7 @@ label day104_4_twilight_ledger_false_dawn:
             jump day104_4_atonement
 
         "Write now. Take the suspicion hit and write the triumphant chapter. [Finish pressure]":
-            if player.suspicion >= 85:
+            if player.anxiety >= 85:
                 "I reach for the pen, but the scratch of the nib sounds exactly like the lock giving way upstairs."
                 "Panic closes my throat. I am too visible today. The house is watching."
                 "If I light the candle and write now, Stern will catch me. I have to secure my cover first."
@@ -434,21 +434,21 @@ label day104_4_atonement:
     $ story.set_day4_twilight_action("atonement")
 
     if story.day4_escape_state == "fireplace":
-        $ apply_effects(susp=-30, insp=0, corr=0)
+        $ apply_effects(stern_susp=-30, insp=0, corr=0)
 
         "I scrub soot from my apron until the water turns grey, then black, then grey again."
         "My knuckles split."
         "Good. Blood is easier to explain than chimney dust."
 
     elif story.day4_escape_state == "bold_lie":
-        $ apply_effects(susp=-25, insp=0, corr=0)
+        $ apply_effects(stern_susp=-25, insp=0, corr=0)
 
         "I sit in the laundry corner and mend cuffs with saintly dullness."
         "Anyone watching sees a maid trying very hard to become furniture."
         "That is the point."
 
     else:
-        $ apply_effects(susp=-10, insp=0, corr=0)
+        $ apply_effects(stern_susp=-10, insp=0, corr=0)
 
         "I fold linens."
         "I carry water."
@@ -471,7 +471,7 @@ label day104_4_missy_repair:
     show missy_sprite shocked at center
 
     $ story.set_day4_twilight_action("missy_repair")
-    $ apply_effects(susp=-5, insp=5, corr=0)
+    $ apply_effects(missy_susp=-5, insp=5, corr=0)
 
     "Missy sits on the edge of her bed, twisting a handkerchief until it looks strangled."
 
@@ -497,7 +497,7 @@ label day104_4_missy_repair:
         "Enough to keep her from hating me completely.":
 
             $ story.set_missy_day4_repair_state("partial_truth")
-            $ apply_effects(susp=5, insp=10, corr=0)
+            $ apply_effects(missy_susp=5, insp=10, corr=0)
 
             cora "Because I found something I should not have found. And I panicked."
 
@@ -514,7 +514,7 @@ label day104_4_missy_repair:
         "Keep the truth. Offer comfort instead.":
 
             $ story.set_missy_day4_repair_state("comfort_lie")
-            $ apply_effects(susp=-5, insp=0, corr=5)
+            $ apply_effects(missy_susp=-5, insp=0, corr=5)
 
             cora "Because I am a coward when cornered."
 
@@ -563,7 +563,7 @@ label day104_5_triumphant_chapter:
     "The heroine defeats him completely. She is untouchable. She has won."
 
     $ story.complete_manuscript_chapter("day4_triumphant_chapter")
-    $ apply_effects(susp=15, insp=-15, corr=0)
+    $ apply_effects(stern_susp=15, insp=-15, corr=0)
 
     "The final sentence lands just before the candle dies."
     "For a while, I do not move."

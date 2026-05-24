@@ -1,7 +1,8 @@
 label start:
     show screen stats_overlay
 
-    scene bg_savoy_front_facade
+    scene bg_savoy_front_facade:
+        zoom 1.75
     with fade
 
     sys_msg "Holywell Street Studios — MVP Gray-Box v2.0"
@@ -16,6 +17,6 @@ label start:
 
 
 label check_suspicion:
-    if player.suspicion >= 100:
+    if player.anxiety >= 100:
         jump game_over_dismissed
     return

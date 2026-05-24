@@ -31,7 +31,7 @@ label day103_morning:
         "Vance did not accuse me aloud."
         "She did not need to."
 
-        $ apply_effects(susp=10, insp=0, corr=0)
+        $ apply_effects(vance_susp=10, insp=0, corr=0)
 
     elif story.day2_tea_choice == "prey":
 
@@ -46,7 +46,7 @@ label day103_morning:
             "My belongings are too sparse to betray me."
             "Stern finds nothing and resents the failure."
 
-        $ apply_effects(susp=15, insp=0, corr=0)
+        $ apply_effects(stern_susp=15, insp=0, corr=0)
 
     else:
 
@@ -54,7 +54,7 @@ label day103_morning:
         "Not in the laundry. Not by the stair. Not when Stern sets us both to six hours of brass and silence."
         "Betrayal, I learn, is noisy only in plays. In life it polishes banisters until its wrists ache."
 
-        $ apply_effects(susp=5, insp=10, corr=0)
+        $ apply_effects(missy_susp=5, insp=10, corr=0)
 
     "By late morning, the corridor outside the guest wing feels less like architecture and more like a decision waiting to happen."
 
@@ -78,7 +78,7 @@ label day103_1_corridor_insp_chain:
     with dissolve
 
     $ story.set_day3_corridor_chain("inspiration")
-    $ apply_effects(susp=-5, insp=15, corr=0)
+    $ apply_effects(stern_susp=-5, insp=15, corr=0)
 
     "I count what can be counted."
     "The bell-pull rhythm. The servant stair's turn. The distance between Stern's office and the Master Suite."
@@ -107,7 +107,7 @@ label day103_1_corridor_corr_chain:
     with dissolve
 
     $ story.set_day3_corridor_chain("corruption")
-    $ apply_effects(susp=10, insp=0, corr=15)
+    $ apply_effects(vance_susp=10, insp=0, corr=15)
 
     "I should keep away from the guest wing."
     "Instead, I find errands."
@@ -226,7 +226,7 @@ label day103_2_cora_vs_gideon_insp:
     show vance_sprite defeated at left
 
     $ story.set_day3_brush_choice("predator")
-    $ apply_effects(susp=0, insp=20, corr=5)
+    $ apply_effects(insp=20, corr=5)
 
     cora "Yes, Sir."
 
@@ -269,7 +269,7 @@ label day103_2_cora_vs_gideon_corr:
     show vance_sprite defeated at left
 
     $ story.set_day3_brush_choice("prey")
-    $ apply_effects(susp=5, insp=5, corr=20)
+    $ apply_effects(vance_susp=5, insp=5, corr=20)
 
     "I look up into the mirror."
     "Not at Vance."
@@ -317,7 +317,7 @@ label day103_2_cora_vs_gideon_ghost:
     show vance_sprite defeated at left
 
     $ story.set_day3_brush_choice("ghost")
-    $ apply_effects(susp=15, insp=15, corr=0)
+    $ apply_effects(vance_susp=15, insp=15, corr=0)
 
     "The brush catches in a knot."
     "Vance flinches."
@@ -456,7 +456,7 @@ label day103_3_frantic_write:
     with dissolve
 
     $ story.set_day3_twilight_action("frantic_write")
-    $ apply_effects(susp=10, insp=20, corr=0)
+    $ apply_effects(stern_susp=10, insp=20, corr=0)
 
     "I light the candle too early and waste wax with both hands."
     "No time for neatness. No time for the ledger's polite categories."
@@ -486,7 +486,7 @@ label day103_3_prepare_mask:
     with dissolve
 
     $ story.set_day3_twilight_action("prepare_mask")
-    $ apply_effects(susp=-20, insp=0, corr=0)
+    $ apply_effects(stern_susp=-20, insp=0, corr=0)
 
     "I force my hands into useful work."
     "Collar pressed. Cuffs scrubbed. Apron inspected for ink, ash, and evidence of having a mind."
@@ -512,7 +512,7 @@ label day103_3_indulge_words:
     with dissolve
 
     $ story.set_day3_twilight_action("indulge_words")
-    $ apply_effects(susp=5, insp=5, corr=20)
+    $ apply_effects(stern_susp=5, insp=5, corr=20)
 
     "I do not write the chapter."
     "I write only what he said."
@@ -562,7 +562,7 @@ label day103_4_room_stern_suspicion:
         "Be boring. Make the summons sound like ordinary service. [-Suspicion]":
 
             $ story.set_day3_stern_response("boring")
-            $ apply_effects(susp=-10, insp=0, corr=0)
+            $ apply_effects(stern_susp=-10, insp=0, corr=0)
 
             cora "Mr. Locke requested tea, Ma'am. I assumed the kitchen was short-handed."
 
@@ -580,7 +580,7 @@ label day103_4_room_stern_suspicion:
         "Tell a partial truth. Admit he unsettles me. [+Inspiration, mixed risk]":
 
             $ story.set_day3_stern_response("partial_truth")
-            $ apply_effects(susp=5, insp=10, corr=0)
+            $ apply_effects(stern_susp=5, insp=10, corr=0)
 
             cora "I don't know, Ma'am. He asks questions in a way that makes answers feel unsafe."
 
@@ -599,7 +599,7 @@ label day103_4_room_stern_suspicion:
         "Play stupid. Make her underestimate me. [+Suspicion if she sees through it]":
 
             $ story.set_day3_stern_response("stupid")
-            $ apply_effects(susp=10, insp=0, corr=5)
+            $ apply_effects(stern_susp=10, insp=0, corr=5)
 
             cora "I thought gentlemen often wanted tea, Ma'am."
 
@@ -713,7 +713,7 @@ label day103_2_night_defy_gideon:
     show gideon_sprite dominant at center
 
     $ story.set_day3_ultimatum("defied")
-    $ apply_effects(susp=20, insp=20, corr=0)
+    $ apply_effects(vance_susp=20, insp=20, corr=0)
 
     cora "My writing is not part of my service, Sir."
 
@@ -755,7 +755,7 @@ label day103_2_night_bargain_gideon:
     show gideon_sprite dominant at center
 
     $ story.set_day3_ultimatum("bargained")
-    $ apply_effects(susp=10, insp=15, corr=10)
+    $ apply_effects(vance_susp=10, insp=15, corr=10)
 
     cora "A fragment, perhaps. If it keeps you from imagining worse."
 
@@ -807,7 +807,7 @@ label day103_2_night_surrender_gideon:
     show gideon_sprite dominant at center
 
     $ story.set_day3_ultimatum("surrendered")
-    $ apply_effects(susp=15, insp=10, corr=25)
+    $ apply_effects(vance_susp=15, insp=10, corr=25)
 
     "I could deny him."
     "I could lie better."
@@ -886,7 +886,7 @@ label day103_3_bedroom_final_write:
                     "The fallen brush gives it an angle no gentleman would think to check."
 
                 $ story.complete_manuscript_chapter("day3_chapter")
-                $ apply_effects(susp=5, insp=-20, corr=0)
+                $ apply_effects(stern_susp=5, insp=-20, corr=0)
 
                 "Chapter Three is complete."
                 "I do not feel safer."
@@ -904,12 +904,12 @@ label day103_3_bedroom_final_write:
                 "Only fragments."
 
                 $ story.set_day3_failed_write(True)
-                $ apply_effects(susp=0, insp=5, corr=5)
+                $ apply_effects(insp=5, corr=5)
 
         "Do not write. Barricade the door and wait for morning. [Safety over progress]":
 
             $ story.set_day3_night_action("barricade")
-            $ apply_effects(susp=10, insp=0, corr=0)
+            $ apply_effects(stern_susp=10, insp=0, corr=0)
 
             "I push the washstand against the door."
             "It is not heavy enough to stop a determined man."

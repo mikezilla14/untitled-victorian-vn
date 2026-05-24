@@ -27,7 +27,7 @@ init -100 python:
 screen stats_overlay():
     zorder 100
 
-    $ _susp_alpha = player.suspicion / 100.0
+    $ _susp_alpha = player.anxiety / 100.0
     $ _insp_cap = max(player.inspiration_cap, 1)
     $ _insp_fill = min(1.0, player.inspiration / float(_insp_cap))
     $ _ink_w = 56
@@ -82,8 +82,8 @@ screen stats_overlay():
                     text "Corruption" size 12 color "#ef535099" xalign 0.5
                     text "Lv [player.corruption_level]  ([player.corruption_xp] XP)" size 15 color "#ef5350" xalign 0.5
 
-                    text "Suspicion" size 12 color "#ffa72699" xalign 0.5
-                    text "[player.suspicion]%" size 15 color "#ffa726" xalign 0.5
+                    text "Anxiety" size 12 color "#ffa72699" xalign 0.5
+                    text "[player.anxiety]%" size 15 color "#ffa726" xalign 0.5
 
                     text "Manuscript" size 12 color "#b0bec599" xalign 0.5
                     text "[story.manuscript_progress] chapters" size 15 color "#b0bec5" xalign 0.5
@@ -141,7 +141,7 @@ screen ledger_ui():
 
             text "Inspiration:  [player.inspiration] / [player.inspiration_cap]" size 14 color "#4fc3f7"
             text "Corruption:   Lv [player.corruption_level]  ([player.corruption_xp] XP)" size 14 color "#ef5350"
-            text "Suspicion:    [player.suspicion]%" size 14 color "#ffa726"
+            text "Anxiety:      [player.anxiety]%" size 14 color "#ffa726"
 
             null height 8
 

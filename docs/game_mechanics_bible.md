@@ -28,9 +28,11 @@ This document separates:
 - Represents boundary crossing intensity and unlock pressure.
 - Gates late content/outcomes.
 
-#### Suspicion
-- Risk/fail-state meter.
-- If threshold is reached, route to dismissal game over.
+#### Anxiety (Consolidated Risk)
+- Consolidated psychological pressure computed modularly from character-specific suspicions.
+- Formula: $\text{player.anxiety} = \lfloor \text{total\_susp} + \frac{\text{total\_susp}}{N} \rfloor$ where $N$ is the number of active tracked characters (e.g. Stern, Vance, Missy) listed in `player.tracked_characters`.
+- Legacy general suspicion is completely deprecated; suspicion is inherently extrinsic and must target a specific witness (`stern_susp`, `vance_susp`, or `missy_susp`).
+- If Anxiety reaches 100, the narrative routes to the `game_over_dismissed` fail-state.
 
 ### 3) Writing gate mechanic
 - Player must gather enough narrative resource (primarily Inspiration; with Corruption pressure) to progress chapter-writing beats.
@@ -50,7 +52,7 @@ This document separates:
 - **Validation:** String branch updates must be rejected at runtime if not whitelisted; game scripts use `story.set_*(...)` only, not direct `story.<field> =` for those fields. Reading is allowed in `if` / conditions.
 
 ### 5) Fail and ending structure
-- Hard fail: Suspicion overflow -> `game_over_dismissed`.
+- Hard fail: Anxiety overflow (100) -> `game_over_dismissed`.
 - Soft fail: insufficient corruption trajectory by Day 5 -> `bad_ending_rejection`.
 - Success path: Day 5 climax -> cliffhanger continuation.
 

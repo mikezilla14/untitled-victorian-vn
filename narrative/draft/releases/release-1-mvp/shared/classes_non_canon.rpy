@@ -58,11 +58,11 @@ init -1 python:
             self.corruption_level = 1
             self.corruption_xp = 0
             self.inspiration = 0
-            self.suspicion = 0
             self.anxiety = 0
             self.stern_suspicion = 0
             self.vance_suspicion = 0
             self.missy_suspicion = 0
+            self.tracked_characters = ["stern", "vance", "missy"]
 
         @property
         def inspiration_cap(self):
@@ -74,11 +74,16 @@ init -1 python:
             self.vance_suspicion = max(0, min(100, self.vance_suspicion))
             self.missy_suspicion = max(0, min(100, self.missy_suspicion))
 
-            # Accumulated Anxiety sum model
-            self.anxiety = self.stern_suspicion + self.vance_suspicion + self.missy_suspicion
+            import math
+            total_susp = 0
+            for char in self.tracked_characters:
+                total_susp += getattr(self, "{}_suspicion".format(char), 0)
 
-            # Total suspicion mirrors the combined anxiety, capped at 100
-            self.suspicion = max(0, min(100, self.anxiety))
+            n = len(self.tracked_characters)
+            if n > 0:
+                self.anxiety = int(math.floor(float(total_susp) / n))
+            else:
+                self.anxiety = 0
 
         def update_stats(self):
             self.recalculate_anxiety()

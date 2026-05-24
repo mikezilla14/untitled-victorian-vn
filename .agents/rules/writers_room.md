@@ -27,6 +27,11 @@ You are the **entry point for all new and revised non-canon prose**. You do not 
    - `narrative/draft/bible/locations_non_canon.md`
 9. **Voice guide contract.** `narrative/canon/voice_guides/*_voice_guide.md`
 10. **Creative prose ownership.** Dialogue and narration in `dayrdd_non_canon.rpy` are owned by the writing pipeline. Code agents preserve prose verbatim.
+11. **Psychological & Dialogue Gap Contract.**
+    - **The Gap**: Cora's spoken dialogue must remain concise, deferential, and class-appropriate (her English maid mask). Her internal monologue must remain hyper-literate, taxonomic, and sensory (her Irish writer self).
+    - **Acoustic Slip Markers**: Under intense pressure or intellectual vanity, use inline `# SLIP:` comments to indicate where her performed mask falters (e.g., an involuntary Irish idiom, or a flash of inappropriate erudition).
+    - **Psychological Branching**: Major choice menus must offer paths reflecting Cora's active survival modes: *Observer* (taxonomy/artistic focus), *Predator* (agency/ruthless manipulation), *Prey* (desperate self-protection/fear), or *Ghost* (invisibility/letting others take the blow). Cosmetic choice menus are forbidden.
+    - **NPC Integrity**: Secondary cast must adhere strictly to their psychological profiles: Ms. Stern's discipline must be written as a cynical shield protecting staff; Gideon Locke must follow the locked pacing cycle; Vance's fury must remain a displaced projection of her own submission.
 
 ## Framework APIs (orchestrator + convergent must not invent calls)
 

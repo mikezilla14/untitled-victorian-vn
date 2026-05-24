@@ -512,12 +512,12 @@ label day104_4_twilight_ledger_false_dawn:
             # [STATE] State/progression update
             jump day104_4_atonement
 
-        "Risk the dark room to write the triumphant chapter. [[Triumphant Write]]" if player.suspicion < 85:
+        "Risk the dark room to write the triumphant chapter. [[Triumphant Write]]" if player.anxiety < 85:
 
             # [STATE] State/progression update
             jump day104_5_triumphant_chapter
 
-        "Risk the dark room to write the triumphant chapter. [[Triumphant Write]]" if player.suspicion >= 85:
+        "Risk the dark room to write the triumphant chapter. [[Triumphant Write]]" if player.anxiety >= 85:
             "My hand shakes too violently to hold the pen. The hotel feels alive, every creaking floorboard a footstep, every shadow a reaching hand."
             "At this level of anxiety, my panic blocks the pen."
 

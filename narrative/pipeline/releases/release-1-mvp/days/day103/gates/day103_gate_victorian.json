@@ -1,0 +1,20 @@
+{
+  "contract_version": "1",
+  "day_id": "day103",
+  "release": "release-1-mvp",
+  "gate": "victorian",
+  "verdict": "HISTORICALLY_SOUND",
+  "blocking": false,
+  "reviewed_at": "2026-05-24",
+  "reviewed_files": [
+    "narrative/draft/releases/release-1-mvp/days/day103/day103_non_canon.rpy"
+  ],
+  "markdown_verdict_path": "narrative/pipeline/releases/release-1-mvp/days/day103/gates/day103_gate_victorian.md",
+  "follow_up": {
+    "writers_room": false,
+    "lead_narrative_editor": false,
+    "forensic_psychology_consultant": false,
+    "victorian_consultant": false,
+    "profile_update": false
+  }
+}

@@ -32,7 +32,8 @@
 label day101_main:
 
     # [BEAT] Narrator's intro. Keep brief; the horror pressure comes from Cora being trapped in procedure
-    scene bg_savoy_corridor_morning
+    scene bg_savoy_corridor_morning:
+        zoom 2.0
     with fade
 
     "The Savoy Hotel did not welcome girls like me."
@@ -104,7 +105,7 @@ label day101_1_morning_interview:
         "Lower my eyes. Let her mistake fear for obedience.":
 
             # [STATE] Low-risk survival posture. Cora hides sharpness, but the performance costs dignity
-            $ apply_effects(susp=5, insp=5, corr=0)
+            $ apply_effects(stern_susp=5, insp=5, corr=0)
             $ story.set_day1_interview_state("meek")
 
             cora "I can, Ma'am. I only wish to work hard."
@@ -117,7 +118,7 @@ label day101_1_morning_interview:
         "Answer cleanly. Let competence do what meekness cannot.":
 
             # [STATE] Efficient but conspicuous. Stern notices a mind behind the apron
-            $ apply_effects(susp=15, insp=10, corr=0)
+            $ apply_effects(stern_susp=15, insp=10, corr=0)
             $ story.set_day1_interview_state("competent")
 
             cora "I can be quiet, quick, and exact. If I err, it will not be from carelessness."
@@ -328,7 +329,7 @@ label day101_2_coras_path_choice:
         "Let Missy's concern open the door. [[Predator path: +Inspiration, +Corruption]]":
 
             # [STATE] Cora weaponises plausible concern. Safer physically, morally worse
-            $ apply_effects(susp=0, insp=10, corr=5)
+            $ apply_effects(insp=10, corr=5)
             $ story.set_corridor_state("predator")
 
             cora "You may be right. If she's hurt, someone should check."
@@ -360,7 +361,7 @@ label day101_2_coras_path_choice:
         "Look for myself. [[Prey path: +Inspiration, +Suspicion]]":
 
             # [STATE] Cora takes the direct risk. Most dangerous path; strongest sensory material
-            $ apply_effects(susp=35, insp=15, corr=5)
+            $ apply_effects(vance_susp=35, insp=15, corr=5)
             $ story.set_corridor_state("prey")
 
             cora "Stay there."
@@ -393,7 +394,7 @@ label day101_2_coras_path_choice:
         "Pull Missy away. [[Ghost path: +Inspiration, -Suspicion]]":
 
             # [STATE] Cora refuses exposure, keeps the observation abstract, and preserves cover
-            $ apply_effects(susp=-5, insp=10, corr=0)
+            $ apply_effects(stern_susp=-5, vance_susp=-5, missy_susp=-5, insp=10, corr=0)
             $ story.set_corridor_state("ghost")
 
             cora "No."
@@ -482,7 +483,7 @@ label day101_3_inspiration_choice:
     with dissolve
 
     # [STATE] Cora processes the event as craft first. Cleaner path; supports writing
-    $ apply_effects(susp=0, insp=15, corr=0)
+    $ apply_effects(insp=15, corr=0)
     $ story.set_day1_ledger_focus("inspiration")
 
     "I draw three columns in the ledger."
@@ -510,7 +511,7 @@ label day101_3_corruption_choice:
     with dissolve
 
     # [STATE] Cora accepts appetite as fuel. Higher future risk, stronger thematic contamination
-    $ apply_effects(susp=5, insp=5, corr=10)
+    $ apply_effects(vance_susp=5, insp=5, corr=10)
     $ story.set_day1_ledger_focus("corruption")
 
     "I try to write command, witness, consequence."
@@ -566,7 +567,7 @@ label day101_3_optional_character_chain:
             "The hotel watches less when I give it nothing to answer."
 
             # [STATE] State/progression update
-            $ apply_effects(susp=0, insp=10, corr=0)
+            $ apply_effects(insp=10, corr=0)
             call end_slot(outcome="d1_reflect_done")
 
 
@@ -672,7 +673,7 @@ label day101_4_write_the_chapter:
 
     # [STATE] Increment manuscript through encapsulated story method, not raw global variable
     $ story.complete_manuscript_chapter("day1_chapter")
-    $ apply_effects(susp=0, insp=-10, corr=0)
+    $ apply_effects(insp=-10, corr=0)
 
     "I press the pages flat beneath the ledger."
     "Tomorrow the house will expect a maid."
@@ -695,7 +696,7 @@ label day101_4_visit_missy:
     # [STATE] Relationship seed. This should be meaningful: Cora gains Missy context, but loses the Day 1 chapter
     $ story.set_day1_night_action("visit_missy")
     $ story.set_missy_day1_seed(True)
-    $ apply_effects(susp=-5, insp=5, corr=0)
+    $ apply_effects(missy_susp=-5, insp=5, corr=0)
 
     "I leave the candle unlit."
     "A chapter can wait. A person, mishandled, changes shape before morning."
@@ -726,7 +727,7 @@ label day101_4_visit_missy:
             "Soothe her. Keep her close.":
 
                 # [STATE] State/progression update
-                $ apply_effects(susp=-5, insp=5, corr=0)
+                $ apply_effects(missy_susp=-5, insp=5, corr=0)
                 $ story.set_missy_day1_trust_state("soothed")
 
                 cora "And perhaps you were. But the house has rules beneath its rules. We must learn them before we try to mend anything."
@@ -736,7 +737,7 @@ label day101_4_visit_missy:
             "Let the guilt sit between us.":
 
                 # [STATE] State/progression update
-                $ apply_effects(susp=0, insp=0, corr=5)
+                $ apply_effects(corr=5)
                 $ story.set_missy_day1_trust_state("unsettled")
 
                 cora "I should not have let you go first."
