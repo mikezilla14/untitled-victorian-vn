@@ -1,0 +1,9 @@
+{
+  "contract_version": "1",
+  "day_id": "day104",
+  "release": "release-1-mvp",
+  "source_non_canon": "narrative/draft/releases/release-1-mvp/days/day104/day104_non_canon.rpy",
+  "target_prod": "renpy_project/game/day104.rpy",
+  "creative_text_preserved": true,
+  "promoted_by": "prod_code_agent"
+}

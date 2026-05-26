@@ -5,6 +5,7 @@
 # ═══════════════════════════════════════════════════════════════
 
 define cora    = Character("Cora",      color="#d4a574")
+define cora_inner = Character(None, what_italic=True, what_color="#dfcbb5")
 define gideon  = Character("Sir Gideon", color="#a30000")
 define stern   = Character("Miss Stern", color="#555555")
 define vance   = Character("Vance",      color="#7b3f98")

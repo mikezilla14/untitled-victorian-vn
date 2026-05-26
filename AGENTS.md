@@ -87,12 +87,15 @@ Skills under [`.agents/skills/`](.agents/skills/) wrap common workflows for Curs
 | [`promote_day`](.agents/skills/promote_day/SKILL.md) | Move approved draft to `renpy_project/` |
 | [`review_scene`](.agents/skills/review_scene/SKILL.md) | Canon + psychology + history review |
 | [`revise_narrative`](.agents/skills/revise_narrative/SKILL.md) | Code/editor-driven prose repair |
+| [`rewrite_narrative`](.agents/skills/rewrite_narrative/SKILL.md) | Full rewrite of a file, day, time period, or story chain event |
 | [`implement_spec`](.agents/skills/implement_spec/SKILL.md) | Sandbox Ren'Py wrap |
 | [`market_review`](.agents/skills/market_review/SKILL.md) | F95 / market read-only review |
 | [`historical_check`](.agents/skills/historical_check/SKILL.md) | Narrow 1891 question |
 | [`divergent_writer`](.agents/skills/divergent_writer/SKILL.md) | Single persona spec script |
 | [`convergent_writer`](.agents/skills/convergent_writer/SKILL.md) | Synthesis pass |
 | [`spiciness_tuner`](.agents/skills/spiciness_tuner/SKILL.md) | Spice levels 1–5 |
+| [`check_assets`](.agents/skills/check_assets/SKILL.md) | Validate asset manifest sync |
+
 
 ## Pipeline helper (manual chaining)
 

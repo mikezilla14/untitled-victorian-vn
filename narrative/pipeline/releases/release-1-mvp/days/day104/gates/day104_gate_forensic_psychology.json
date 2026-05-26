@@ -1,0 +1,20 @@
+{
+  "contract_version": "1",
+  "day_id": "day104",
+  "release": "release-1-mvp",
+  "gate": "forensic_psychology",
+  "verdict": "PSYCHOLOGICALLY_CONSISTENT",
+  "blocking": false,
+  "reviewed_at": "2026-05-25",
+  "reviewed_files": [
+    "narrative/draft/releases/release-1-mvp/days/day104/day104_non_canon.rpy"
+  ],
+  "markdown_verdict_path": "narrative/pipeline/releases/release-1-mvp/days/day104/gates/day104_gate_forensic_psychology.md",
+  "follow_up": {
+    "writers_room": false,
+    "lead_narrative_editor": false,
+    "forensic_psychology_consultant": false,
+    "victorian_consultant": true,
+    "profile_update": false
+  }
+}

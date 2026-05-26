@@ -32,8 +32,7 @@
 label day101_main:
 
     # [BEAT] Narrator's intro. Keep brief; the horror pressure comes from Cora being trapped in procedure
-    scene bg_savoy_corridor_morning:
-        zoom 2.0
+    scene bg_savoy_corridor_morning
     with fade
 
     "The Savoy Hotel did not welcome girls like me."
@@ -421,8 +420,6 @@ label day101_2_coras_path_choice:
 
 label day101_3_taking_stock_day1:
 
-    $ set_time_period("Evening")
-
     call check_confrontations
 
     # [ASSET] Visual/staging command
@@ -589,6 +586,9 @@ label day101_4_writing_or_visiting:
     "The candle waits on my desk."
     "So does the page."
 
+    # [PROMOTION NOTE]
+    # Replace this with the project-approved threshold helper.
+    # The intent: Day 1 writing opens if the player has enough Inspiration/Corruption fuel.
     if has_story_fuel(15):
 
         # [CHOICE] Decision point

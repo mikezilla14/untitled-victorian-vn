@@ -194,7 +194,7 @@ label day104_2_escape_fireplace:
     # [STATE] Keeps photograph, but creates visible physical evidence on uniform
     $ story.set_day4_escape_state("fireplace")
     $ story.set_has_photograph(True)
-    $ apply_effects(vance_susp=35, insp=5, corr=0)
+    $ apply_effects(stern_susp=35, insp=5, corr=0)
 
     "The hearth is enormous, black, and unlit."
     "A servant could disappear there."
@@ -545,7 +545,7 @@ label day104_4_atonement:
     if story.day4_escape_state == "fireplace":
 
         # [STATE] State/progression update
-        $ apply_effects(stern_susp=-15, vance_susp=-15, insp=0, corr=0)
+        $ apply_effects(stern_susp=-30, insp=0, corr=0)
 
         "I scrub soot from my apron until the water turns grey, then black, then grey again."
         "My knuckles split."

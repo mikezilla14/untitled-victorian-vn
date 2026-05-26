@@ -15,7 +15,11 @@
 
 init python:
 
-    def apply_effects(insp=0, corr=0, susp=0, stern_susp=0, vance_susp=0, missy_susp=0):
+    def apply_effects(insp=0, corr=0, susp=0, 
+                      stern_susp=0, stern_base=0, 
+                      vance_susp=0, vance_base=0, 
+                      missy_susp=0, missy_base=0,
+                      gideon_susp=0, gideon_base=0):
         success = True
 
         # Inspiration:
@@ -35,15 +39,17 @@ init python:
 
         # Legacy susp deprecation:
         if susp != 0:
-            raise ValueError("Legacy general 'susp' is deprecated. Suspicion must target a specific witness (stern_susp, vance_susp, missy_susp).")
+            raise ValueError("Legacy general 'susp' is deprecated. Suspicion must target a specific witness (stern_susp, vance_susp, missy_susp, gideon_susp).")
 
-        # Character-specific suspicions:
-        if stern_susp != 0:
-            player.adjust_character_suspicion("stern", stern_susp)
-        if vance_susp != 0:
-            player.adjust_character_suspicion("vance", vance_susp)
-        if missy_susp != 0:
-            player.adjust_character_suspicion("missy", missy_susp)
+        # Character-specific suspicions (acute & base):
+        if stern_susp != 0 or stern_base != 0:
+            player.add_suspicion("stern", acute_amount=stern_susp, base_amount=stern_base)
+        if vance_susp != 0 or vance_base != 0:
+            player.add_suspicion("vance", acute_amount=vance_susp, base_amount=vance_base)
+        if missy_susp != 0 or missy_base != 0:
+            player.add_suspicion("missy", acute_amount=missy_susp, base_amount=missy_base)
+        if gideon_susp != 0 or gideon_base != 0:
+            player.add_suspicion("gideon", acute_amount=gideon_susp, base_amount=gideon_base)
 
         player.update_stats()
         return success

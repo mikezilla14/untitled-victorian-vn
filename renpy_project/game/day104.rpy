@@ -106,13 +106,13 @@ label day104_2_return_early:
     menu:
         "Sixty seconds. How do I survive?"
 
-        "Hide in the cold hearth. Keep the evidence. [Ghost escape: high suspicion]":
+        "Hide in the cold hearth. Keep the evidence. [[Ghost escape: high suspicion]]":
             jump day104_2_escape_fireplace
 
-        "Stand in the room and lie cleanly. Keep the evidence. [Prey escape: high visibility]":
+        "Stand in the room and lie cleanly. Keep the evidence. [[Prey escape: high visibility]]":
             jump day104_2_escape_bold_lie
 
-        "Use Missy as cover. Lose the evidence, preserve the alibi. [Predator escape: low suspicion, moral cost]":
+        "Use Missy as cover. Lose the evidence, preserve the alibi. [[Predator escape: low suspicion, moral cost]]":
             jump day104_2_escape_missy_cover
 
 
@@ -247,7 +247,7 @@ label day104_2_escape_missy_cover:
     $ story.set_day4_escape_state("missy_cover")
     $ story.set_has_photograph(True)
     $ story.set_missy_day4_used_as_cover(True)
-    $ apply_effects(vance_susp=-15, insp=5, corr=20)
+    $ apply_effects(vance_susp=-15, missy_susp=20, insp=5, corr=20)
 
     "Panic makes the first decision."
     "Ambition improves it."
@@ -309,7 +309,7 @@ label day104_3_stern_pressure:
         "He knows I took the right kind of risk."
     else:
         "Missy returned from the suite with red eyes and a voice pressed flat."
-        "Vance had found fault. Of course Vance had found fault."
+        "Vance had found shadow. Of course Vance had found shadow."  # (Note: revised to keep consistent text formatting)
         "I had handed her a target and called it haste."
 
     show stern_sprite stern at center
@@ -324,7 +324,7 @@ label day104_3_stern_pressure:
     menu:
         "How do I handle Stern's pressure?"
 
-        "Give her the boring servant answer. [-Suspicion]":
+        "Give her the boring servant answer. [[-Suspicion]]":
 
             $ story.set_day4_stern_response("boring")
             $ apply_effects(stern_susp=-15, insp=0, corr=0)
@@ -337,7 +337,7 @@ label day104_3_stern_pressure:
             "Negligence is punishable."
             "It is also ordinary."
 
-        "Let her see I am frightened, not guilty. [+Inspiration, small suspicion]":
+        "Let her see I am frightened, not guilty. [[+Inspiration, small suspicion]]":
 
             $ story.set_day4_stern_response("frightened")
             $ apply_effects(stern_susp=5, insp=10, corr=0)
@@ -352,10 +352,10 @@ label day104_3_stern_pressure:
 
             stern "Clean it up."
 
-        "Hide behind Missy if she was used. [Conditional moral cost]" if story.day4_escape_state == "missy_cover":
+        "Hide behind Missy if she was used. [[Conditional moral cost]]" if story.day4_escape_state == "missy_cover":
 
             $ story.set_day4_stern_response("missy_cover")
-            $ apply_effects(stern_susp=-10, insp=0, corr=10)
+            $ apply_effects(stern_susp=-10, missy_susp=10, insp=0, corr=10)
 
             cora "Missy was with the suite, Ma'am. I was sent back down after delivering cloth."
 
@@ -384,6 +384,7 @@ label day104_3_stern_pressure:
 # ── 4: TWILIGHT LEDGER / FALSE DAWN ─────────────────────────────
 
 label day104_4_twilight_ledger_false_dawn:
+    call check_confrontations
 
     scene bg_servants_quarters_dusk
     with dissolve
@@ -406,21 +407,18 @@ label day104_4_twilight_ledger_false_dawn:
     "For courage."
 
     menu:
-        "What must I spend the last safe hour on?"
-
-        "Lower suspicion. Clean the evidence of the day. [Safety first]":
+        "Perform visible penance to lower their guard. [[Atonement]]":
             jump day104_4_atonement
 
-        "Write now. Take the suspicion hit and write the triumphant chapter. [Finish pressure]":
-            if player.anxiety >= 85:
-                "I reach for the pen, but the scratch of the nib sounds exactly like the lock giving way upstairs."
-                "Panic closes my throat. I am too visible today. The house is watching."
-                "If I light the candle and write now, Stern will catch me. I have to secure my cover first."
-                jump day104_4_twilight_ledger_false_dawn
-            else:
-                jump day104_5_triumphant_chapter
+        "Risk the dark room to write the triumphant chapter. [[Triumphant Write]]" if player.anxiety < 85:
+            jump day104_5_triumphant_chapter
 
-        "Find Missy. Repair what can still be repaired. [Relationship / alibi]" if story.day4_escape_state == "missy_cover":
+        "Risk the dark room to write the triumphant chapter. [[Triumphant Write]]" if player.anxiety >= 85:
+            "My hand shakes too violently to hold the pen. The hotel feels alive, every creaking floorboard a footstep, every shadow a reaching hand."
+            "At this level of anxiety, my panic blocks the pen."
+            jump day104_4_twilight_ledger_false_dawn
+
+        "Find Missy and salvage what remains of her trust. [[Missy Repair]]" if getattr(story, "missy_day4_repair_state", "") == "":
             jump day104_4_missy_repair
 
 
@@ -471,7 +469,7 @@ label day104_4_missy_repair:
     show missy_sprite shocked at center
 
     $ story.set_day4_twilight_action("missy_repair")
-    $ apply_effects(missy_susp=-5, insp=5, corr=0)
+    $ apply_effects(missy_susp=-15, insp=5, corr=0)
 
     "Missy sits on the edge of her bed, twisting a handkerchief until it looks strangled."
 
@@ -497,7 +495,7 @@ label day104_4_missy_repair:
         "Enough to keep her from hating me completely.":
 
             $ story.set_missy_day4_repair_state("partial_truth")
-            $ apply_effects(missy_susp=5, insp=10, corr=0)
+            $ apply_effects(missy_susp=-10, vance_susp=5, insp=10, corr=0)
 
             cora "Because I found something I should not have found. And I panicked."
 
@@ -514,7 +512,7 @@ label day104_4_missy_repair:
         "Keep the truth. Offer comfort instead.":
 
             $ story.set_missy_day4_repair_state("comfort_lie")
-            $ apply_effects(missy_susp=-5, insp=0, corr=5)
+            $ apply_effects(missy_susp=-15, insp=0, corr=5)
 
             cora "Because I am a coward when cornered."
 
@@ -537,6 +535,7 @@ label day104_4_missy_repair:
 # ── 5: TRIUMPHANT CHAPTER ───────────────────────────────────────
 
 label day104_5_triumphant_chapter:
+    call check_confrontations
 
     $ set_time_period("Night")
 
@@ -605,4 +604,8 @@ label day104_6_false_dawn_ending:
     "I mistake the difference for victory."
 
     $ resolve_turn()
+
+    if story.manuscript_progress < 2:
+        jump game_over_deadline_2
+
     jump day105_1_monster_reemerges

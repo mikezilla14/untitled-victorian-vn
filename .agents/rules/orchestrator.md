@@ -22,6 +22,7 @@ When the request is ambiguous, ask **exactly one** clarifying question before ro
 |------------------------|----------|------------------------|
 | Draft a new day end-to-end | `produce-day` | `writers_room` |
 | Fix prose after code/review (brief OPEN) | `revise-narrative` | `writers_room` |
+| Rewrite a file, day, time period, or story chain event | `rewrite-narrative` | `writers_room` |
 | Review existing scene (canon/psych/history) | `review-scene` | three gates (parallel) |
 | F95 / market / spice viability audit | `market-review` | `adult_market_reviewer` |
 | Tune erotic intensity 1–5 | `spice-tune` | `spiciness_tuning_agent` |
@@ -216,6 +217,21 @@ No downstream stages. Return directly to human.
 
 ---
 
+### 8A. `rewrite-narrative` — Full rewrite of a file, day, time period, or story chain event
+
+**Trigger:** "Rewrite [file/day/time period/story chain event]", "Full rewrite for [X]", "Do a complete rewrite of [Y]"
+
+| Stage | Agent | Input | Pass condition | Failure |
+|-------|-------|-------|----------------|---------|
+| 1. Draft + gates | `writers_room` | Rewrite brief detailing targeted file/day/time/event + story_board rows + continuity handoff slice | Divergent → convergent → `dayrdd_non_canon.rpy` (or targeted file) + convergent report → **`lead_narrative_editor` → `forensic_psychology_consultant` → `victorian_consultant`** (sequential). Workflow **A** in `writers_room.md`. Gate verdict files under `narrative/pipeline/`. | Re-run per writers_room revision paths **B** / brief **D–E2** |
+| 2. Draft implement | `non_prod_code_agent` | Gated draft file from Stage 1 | Technical scaffolding added; creative prose/dialogue **verbatim** | Narrative gap → file `dayrdd_narrative_change_brief.md` → `revise-narrative` |
+| 3. Draft code gate | `chief_architect` | Output from Stage 2 | `PASS` | `REJECT`; re-run Stage 2 |
+| 4. Deliver | — | Stage 3 output | Sandbox draft ready in `narrative/draft/` | — |
+
+**Division of labor:** Stage 1 runs the full divergent pool, convergent synthesis, and sequential specialist gates. `non_prod_code_agent` never runs before gates pass.
+
+---
+
 ### 9. `canon-update` — Modify a locked canon document
 
 **Trigger:** "Update [character/location/mechanics] canon to reflect [change]"
@@ -238,20 +254,21 @@ When a task arrives, classify it before routing:
 
 1. Does it produce new story content / draft implementations? → `produce-day`
 2. Does it require **prose changes** because code/structure/review changed (brief filed)? → `revise-narrative`
-3. Does it ask whether choices, motives, traits, profiles, or emotional behavior are psychologically consistent? → `forensic_psychology_consultant` (or `revise-narrative` if prose must change)
-4. Does it use bare "assess", "compare", "review changes", or "evaluate before promotion" without naming a lens? → Ask one follow-up question: code/architecture, canon/narrative, psychology/character consistency, market/spice, or prod-vs-draft implementation drift.
-5. Does it explicitly ask for adult VN/F95 market viability, spice, tone, fetish clarity, or whole-project market review? → `market-review`
-6. Does it ask to tune erotic intensity to level 1-5, make content hotter/milder, or generate spice variants? → `spice-tune`
-7. Does it review existing content for canon/historical accuracy without market focus? → `review-scene`
-8. Does it ask for code, architecture, Ren'Py, state, routing, lint, or implementation quality review? → `chief_architect`
-9. Does it ask for prod-vs-draft implementation drift before promotion? → `chief_architect` + `lead_narrative_editor` + `forensic_psychology_consultant` as needed; use `adult_market_reviewer` only if market/spice lens is explicitly requested too.
-10. Does it draft code for a spec in the writers' room sandbox? → `implement-spec` (if blocked on prose → `revise-narrative` first)
-11. Does it promote episodic drafts to production `renpy_project`? → `promote-day` (if prose drift → `revise-narrative` first)
-12. Does it promote class/framework drafts to production? → `promote-framework` (if prose drift → `revise-narrative` first)
-13. Is it a narrow historical question? → `historical-check`
-14. Does it modify a locked canon document? → `canon-update`
-15. Does it touch `.agents/`, `.guardrails.yml`, or system files? → Route to `chief_architect` + human. No pipeline shortcut.
-16. Unclear? → Ask the human one clarifying question before routing.
+3. Does it ask to rewrite a file, day, time period, or story chain event? → `rewrite-narrative`
+4. Does it ask whether choices, motives, traits, profiles, or emotional behavior are psychologically consistent? → `forensic_psychology_consultant` (or `revise-narrative` if prose must change)
+5. Does it use bare "assess", "compare", "review changes", or "evaluate before promotion" without naming a lens? → Ask one follow-up question: code/architecture, canon/narrative, psychology/character consistency, market/spice, or prod-vs-draft implementation drift.
+6. Does it explicitly ask for adult VN/F95 market viability, spice, tone, fetish clarity, or whole-project market review? → `market-review`
+7. Does it ask to tune erotic intensity to level 1-5, make content hotter/milder, or generate spice variants? → `spice-tune`
+8. Does it review existing content for canon/historical accuracy without market focus? → `review-scene`
+9. Does it ask for code, architecture, Ren'Py, state, routing, lint, or implementation quality review? → `chief_architect`
+10. Does it ask for prod-vs-draft implementation drift before promotion? → `chief_architect` + `lead_narrative_editor` + `forensic_psychology_consultant` as needed; use `adult_market_reviewer` only if market/spice lens is explicitly requested too.
+11. Does it draft code for a spec in the writers' room sandbox? → `implement-spec` (if blocked on prose → `revise-narrative` first)
+12. Does it promote episodic drafts to production `renpy_project`? → `promote-day` (if prose drift → `revise-narrative` first)
+13. Does it promote class/framework drafts to production? → `promote-framework` (if prose drift → `revise-narrative` first)
+14. Is it a narrow historical question? → `historical-check`
+15. Does it modify a locked canon document? → `canon-update`
+16. Does it touch `.agents/`, `.guardrails.yml`, or system files? → Route to `chief_architect` + human. No pipeline shortcut.
+17. Unclear? → Ask the human one clarifying question before routing.
 
 ---
 

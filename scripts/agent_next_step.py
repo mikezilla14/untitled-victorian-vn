@@ -20,7 +20,7 @@ RULES = ROOT / ".agents" / "rules"
 
 PIPELINES: dict[str, list[dict]] = {
     "produce-day": [
-        {"stage": 1, "agent": "writers_room", "note": "Workflow A: divergent → convergent → 3 gates (sequential)"},
+        {"stage": 1, "agent": "writers_room", "note": "Workflow A: divergent -> convergent -> 3 gates (sequential)"},
         {"stage": 2, "agent": "non_prod_code_agent", "note": "After all gates pass; verbatim prose"},
         {"stage": 3, "agent": "chief_architect", "note": "Sandbox code validation"},
     ],
@@ -62,12 +62,17 @@ PIPELINES: dict[str, list[dict]] = {
         {"stage": 1, "agent": "victorian_consultant"},
     ],
     "revise-narrative": [
-        {"stage": 1, "agent": "writers_room", "note": "Brief scale S/M/L → workflows B / partial / A"},
+        {"stage": 1, "agent": "writers_room", "note": "Brief scale S/M/L -> workflows B / partial / A"},
         {"stage": 2, "agent": "lead_narrative_editor"},
         {"stage": 3, "agent": "forensic_psychology_consultant"},
         {"stage": 4, "agent": "victorian_consultant"},
         {"stage": 5, "agent": "writers_room", "note": "Close brief; handoff to requester"},
         {"stage": 6, "agent": "non_prod_code_agent", "note": "Typical resume target"},
+    ],
+    "rewrite-narrative": [
+        {"stage": 1, "agent": "writers_room", "note": "Workflow A: full divergent pool -> convergent -> 3 gates (sequential)"},
+        {"stage": 2, "agent": "non_prod_code_agent", "note": "After all gates pass; verbatim prose"},
+        {"stage": 3, "agent": "chief_architect", "note": "Sandbox code validation"},
     ],
     "canon-update": [
         {"stage": 1, "agent": "lead_narrative_editor"},
@@ -109,7 +114,7 @@ def rule_path(agent: str) -> Path | None:
 def print_stage(pipeline: str, step: dict, day: str | None, release: str | None) -> None:
     stage = step["stage"]
     agent = step["agent"]
-    print(f"/n## {pipeline} — stage {stage}")
+    print(f"\n## {pipeline} — stage {stage}")
     if step.get("parallel"):
         print("Run in parallel:")
         for p in step["parallel"]:
@@ -126,7 +131,7 @@ def print_stage(pipeline: str, step: dict, day: str | None, release: str | None)
     if day and release:
         dd = day.replace("day", "") if day.startswith("day") else day
         rid = day if day.startswith("day") else f"day{dd}"
-        print("/nArtifacts:")
+        print("\nArtifacts:")
         print(
             f"  Draft: narrative/draft/releases/{release}/days/{rid}/{rid}_non_canon.rpy"
         )
@@ -139,8 +144,8 @@ def print_stage(pipeline: str, step: dict, day: str | None, release: str | None)
         print(
             f"  Report: narrative/pipeline/releases/{release}/days/{rid}/synthesis/{rid}_convergent_report.md"
         )
-    print("/nHandoff: paste the full rule file as system prompt + prior stage verdicts.")
-    print("Validate: py scripts/validate.py --profile changed --agent <name> --files /"<paths>/"")
+    print("\nHandoff: paste the full rule file as system prompt + prior stage verdicts.")
+    print('Validate: py scripts/validate.py --profile changed --agent <name> --files "<paths>"')
 
 
 def main() -> int:
@@ -190,14 +195,14 @@ def main() -> int:
     next_stage = args.stage + 1
     nxt = next((s for s in steps if s["stage"] == next_stage), None)
     if nxt:
-        print(f"/nNext: py scripts/agent_next_step.py --pipeline {pipeline} --stage {next_stage}", end="")
+        print(f"\nNext: py scripts/agent_next_step.py --pipeline {pipeline} --stage {next_stage}", end="")
         if args.day:
             print(f" --day {args.day}", end="")
         if args.release:
             print(f' --release "{args.release}"', end="")
         print()
     else:
-        print("/nFinal stage of pipeline. Run validate.py / orchestrate_review.py before PR.")
+        print("\nFinal stage of pipeline. Run validate.py / orchestrate_review.py before PR.")
 
     return 0
 

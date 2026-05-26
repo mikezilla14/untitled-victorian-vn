@@ -25,8 +25,8 @@ This folder holds **agent role definitions** (markdown) and **Cursor skills** (t
     dev_bible.md            ← pointer → docs/dev_bible.md
   skills/                   ← Cursor skill discovery (see AGENTS.md table)
     orchestrator/, produce_day/, promote_day/, review_scene/
-    revise_narrative/, implement_spec/, market_review/, historical_check/
-    divergent_writer/, convergent_writer/, spiciness_tuner/
+    revise_narrative/, rewrite_narrative/, implement_spec/, market_review/
+    historical_check/, divergent_writer/, convergent_writer/, spiciness_tuner/
 ```
 
 ## How invocation works
@@ -43,7 +43,7 @@ This folder holds **agent role definitions** (markdown) and **Cursor skills** (t
 | ID | Rule file | Pipeline roles |
 |----|-----------|----------------|
 | `orchestrator` | `orchestrator.md` | All pipelines (coordinator) |
-| `writers_room` | `writers_room.md` | `produce-day`, `revise-narrative`, `spice-tune` |
+| `writers_room` | `writers_room.md` | `produce-day`, `revise-narrative`, `rewrite-narrative`, `spice-tune` |
 | `divergent_writer` | `divergent_writer_base.md` + `divergent_writer_personas.md` | Sub-agent of writers_room |
 | `convergent_writer` | `convergent_writer.md` | Sub-agent of writers_room |
 | `lead_narrative_editor` | `lead_narrative_editor.md` | Gates, `canon-update`, `review-scene` |

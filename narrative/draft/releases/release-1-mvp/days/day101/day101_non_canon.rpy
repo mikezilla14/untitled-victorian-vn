@@ -36,9 +36,9 @@ label day101_main:
     scene bg_savoy_corridor_morning
     with fade
 
-    "The Savoy Hotel did not welcome girls like me."
-    "It consumed them quietly, polished the brass after, and called the result service."
-    "I had forged my references with a steady hand. I had not accounted for the waiting."
+    cora_inner "The Savoy Hotel did not welcome girls like me."
+    cora_inner "It consumed them quietly, polished the brass after, and called the result service."
+    cora_inner "I had forged my references with a steady hand. I had not accounted for the waiting."
 
     # [STATE] State/progression update
     jump day101_1_cora_waiting
@@ -54,14 +54,17 @@ label day101_1_cora_waiting:
     scene bg_savoy_corridor_morning
     with dissolve
 
-    "I stand outside Miss Stern's office with my hands folded and my pulse behaving badly."
-    "Behind the door, a clock ticks with the smug confidence of paid machinery."
-    "My references sit in my apron pocket."
-    "Good paper. Good ink. Better lies."
+    cora_inner "I stand outside Miss Stern's office with my hands folded and my pulse behaving badly."
+    
+    "Behind the heavy mahogany door, a clock ticks with paid machinery."
+    
+    cora_inner "My references sit in my apron pocket."
+    cora_inner "Good paper. Good ink. Better lies."
 
-    "A maid passes without looking at me. Then a footman. Then another maid carrying towels white enough to make sin feel visible."
-    "No one asks who I am."
-    "That is the first rule of this place, then: be useful enough to ignore."
+    "A maid passes carrying towels white enough to blind. A footman steps past with a silver tray."
+
+    cora_inner "No one asks who I am."
+    cora_inner "That is the first rule of this place, then: be useful enough to ignore."
 
     stern "Enter."
 
@@ -83,14 +86,15 @@ label day101_1_morning_interview:
         zoom 0.35
 
     "Miss Stern stands rather than sits."
-    "It is not courtesy. It is measurement."
-    "Her eyes move from my cap to my boots, weighing every inch for disobedience."
+    cora_inner "It is not courtesy. It is measurement."
+    "Her eyes move from my cap to my boots."
+    cora_inner "Weighing every inch for disobedience."
 
     stern "Cora Vale."
     cora "Yes, Ma'am."
     stern "You have worked in service before."
 
-    "The lie is waiting for me, neat as a folded sheet."
+    cora_inner "The lie is waiting for me, neat as a folded sheet."
 
     cora "Yes, Ma'am. In the country."
 

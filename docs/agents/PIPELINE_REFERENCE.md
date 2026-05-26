@@ -8,7 +8,9 @@ Canonical routing logic lives in [`.agents/rules/orchestrator.md`](../../.agents
 flowchart TD
   Start[Task arrives] --> Q1{New story / day draft?}
   Q1 -->|yes| PD[produce-day]
-  Q1 -->|no| Q2{Prose change brief OPEN?}
+  Q1 -->|no| Q1A{Rewrite file, day, time, or event?}
+  Q1A -->|yes| RW[rewrite-narrative]
+  Q1A -->|no| Q2{Prose change brief OPEN?}
   Q2 -->|yes| RN[revise-narrative]
   Q2 -->|no| Q3{Ambiguous assess/review?}
   Q3 -->|yes| Ask[Ask one clarifying question]
@@ -116,6 +118,15 @@ If blocked on prose → `revise-narrative` first.
 | **2–4** | Three gates sequential |
 | **5** | Close brief |
 | **6** | Resume requester (usually `non_prod_code_agent`) |
+
+### `rewrite-narrative`
+
+| Trigger | Rewrite file, day, time period, or story chain event |
+|---------|------------------------------------------------------|
+| **1** | `writers_room` — Workflow A (full divergent pool → convergent → three gates sequential) |
+| **2** | `non_prod_code_agent` — technical wrap, verbatim prose |
+| **3** | `chief_architect` — sandbox code validation |
+| **4** | Deliver to human |
 
 ### `canon-update`
 

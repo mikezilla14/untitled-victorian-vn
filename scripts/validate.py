@@ -173,6 +173,11 @@ def main():
             target_files,
             file_arg_name="--files"
         )
+        failures |= run_step(
+            "Asset manifest sync audit",
+            [py, "scripts/check_assets.py"]
+        )
+
 
     if args.profile in {"changed", "narrative", "full"}:
         target_files = narrative_files(files)

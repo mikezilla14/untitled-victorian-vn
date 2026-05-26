@@ -55,35 +55,95 @@ init -1 python:
 
     class PlayerStats(object):
         def __init__(self):
+            # Core Stats
             self.corruption_level = 1
             self.corruption_xp = 0
             self.inspiration = 0
             self.anxiety = 0
-            self.stern_suspicion = 0
-            self.vance_suspicion = 0
-            self.missy_suspicion = 0
-            self.tracked_characters = ["stern", "vance", "missy"]
+            
+            # TWO-TIERED SUSPICION: Base (Permanent) + Acute (Temporary Heat)
+            self.stern_base_susp = 0
+            self.stern_acute_susp = 0
+            
+            self.vance_base_susp = 0
+            self.vance_acute_susp = 0
+            
+            self.gideon_base_susp = 0
+            self.gideon_acute_susp = 0
+            
+            # Chapter 2 Future-proofing
+            self.missy_base_susp = 0
+            self.missy_acute_susp = 0
+            
+            # The Tracking List
+            self.tracked_characters = ["stern", "vance", "gideon", "missy"]
+            
+            # ASYMPTOTIC DECAY RATES (d)
+            self.decay_rates = {
+                "stern": 0.15,   # Slow decay: Requires grueling labor
+                "vance": 0.60,   # Rapid reset: Oblivious to 'furniture'
+                "gideon": 0.50,  # Shifting equation: High initially, drops to 0.0 later
+                "missy": 0.90    # Instant decay: The Teflon Slate, eager for a friend
+            }
 
         @property
         def inspiration_cap(self):
             return 20 + (self.corruption_level * 10)
 
+        # ── Backward-compatible properties for existing .rpy script checks ──
+        @property
+        def stern_suspicion(self):
+            return self.get_total_suspicion("stern")
+
+        @property
+        def vance_suspicion(self):
+            return self.get_total_suspicion("vance")
+
+        @property
+        def missy_suspicion(self):
+            return self.get_total_suspicion("missy")
+
+        @property
+        def gideon_suspicion(self):
+            return self.get_total_suspicion("gideon")
+
+        def get_total_suspicion(self, char):
+            """Calculates Total Suspicion (Base + Acute) for a character, strictly capped at 100."""
+            base = getattr(self, "{}_base_susp".format(char), 0)
+            acute = getattr(self, "{}_acute_susp".format(char), 0)
+            return max(0, min(100, base + acute))
+
         def recalculate_anxiety(self):
-            # Character suspicions must never be below 0 or above 100.
-            self.stern_suspicion = max(0, min(100, self.stern_suspicion))
-            self.vance_suspicion = max(0, min(100, self.vance_suspicion))
-            self.missy_suspicion = max(0, min(100, self.missy_suspicion))
-
-            import math
-            total_susp = 0
+            """
+            Calculates Anxiety using Independent Probability.
+            Anxiety = 100 * (1 - product_of(1 - (Suspicion_i / 100)))
+            Enforces strict clamping at every stage.
+            """
+            # Strict Clamping Safeguard: Cap the sum of Base and Acute suspicion at 100
             for char in self.tracked_characters:
-                total_susp += getattr(self, "{}_suspicion".format(char), 0)
+                base_attr = "{}_base_susp".format(char)
+                acute_attr = "{}_acute_susp".format(char)
+                
+                if hasattr(self, base_attr) and hasattr(self, acute_attr):
+                    # Clamp permanent base suspicion first to [0, 100]
+                    base_val = max(0, min(100, getattr(self, base_attr)))
+                    setattr(self, base_attr, base_val)
+                    
+                    # Clamp acute suspicion to the remaining headroom [0, 100 - base]
+                    acute_val = max(0, min(100 - base_val, getattr(self, acute_attr)))
+                    setattr(self, acute_attr, acute_val)
 
-            n = len(self.tracked_characters)
-            if n > 0:
-                self.anxiety = int(math.floor(float(total_susp) / n))
-            else:
-                self.anxiety = 0
+            probability_of_safety = 1.0
+            
+            for char in self.tracked_characters:
+                susp_val = self.get_total_suspicion(char)
+                # Probability that this specific character does NOT catch Cora
+                char_safety = 1.0 - (susp_val / 100.0)
+                probability_of_safety *= char_safety
+                
+            # Anxiety is the probability of getting caught by ANYONE, capped at 100
+            raw_anxiety = 100.0 * (1.0 - probability_of_safety)
+            self.anxiety = max(0, min(100, int(round(raw_anxiety))))
 
         def update_stats(self):
             self.recalculate_anxiety()
@@ -123,16 +183,46 @@ init -1 python:
             self.corruption_xp += amount
             self.update_stats()
 
-        def adjust_character_suspicion(self, character, amount):
-            if character == "stern":
-                self.stern_suspicion += amount
-            elif character == "vance":
-                self.vance_suspicion += amount
-            elif character == "missy":
-                self.missy_suspicion += amount
-            else:
-                raise ValueError("Invalid character: {}".format(character))
+        def add_suspicion(self, char, acute_amount=0, base_amount=0):
+            """Helper function to add heat/permanent suspicion and instantly update Anxiety."""
+            if char in self.tracked_characters:
+                current_acute = getattr(self, "{}_acute_susp".format(char), 0)
+                current_base = getattr(self, "{}_base_susp".format(char), 0)
+                
+                # Apply changes and clamp individually between 0 and 100
+                new_acute = max(0, min(100, current_acute + acute_amount))
+                new_base = max(0, min(100, current_base + base_amount))
+                
+                setattr(self, "{}_acute_susp".format(char), new_acute)
+                setattr(self, "{}_base_susp".format(char), new_base)
+                
+                self.update_stats()
+
+        def appease_character(self, char, custom_rate=None):
+            """
+            Burns off Acute Suspicion using the Asymptotic Decay formula.
+            S_t = S_0 * (1 - d)
+            """
+            if char not in self.tracked_characters:
+                return
+
+            # Use custom rate if provided (e.g., Gideon's trap), otherwise use character default
+            rate = custom_rate if custom_rate is not None else self.decay_rates.get(char, 0.0)
+            current_acute = getattr(self, "{}_acute_susp".format(char), 0)
+            
+            # Apply asymptotic decay and clamp individually to [0, 100]
+            new_acute = max(0, min(100, current_acute * (1.0 - rate)))
+            
+            # If the ghost value drops below 1%, we snap it to 0 for clean UI
+            if new_acute < 1.0:
+                 new_acute = 0
+                 
+            setattr(self, "{}_acute_susp".format(char), new_acute)
             self.update_stats()
+
+        def adjust_character_suspicion(self, character, amount):
+            """Backwards-compatible helper mapping standard modifications to acute suspicion."""
+            self.add_suspicion(character, acute_amount=amount)
 
         def has_story_fuel(self, required_total=15):
             """
