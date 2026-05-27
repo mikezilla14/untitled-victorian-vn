@@ -28,7 +28,7 @@ Examples: [`examples/`](examples/)
 
 ```powershell
 py scripts/contract_validate.py --day day105 --release "release 1 - mvp"
-py scripts/validate.py --files "narrative/draft/releases/release-1-mvp/days/day105/day105_non_canon.rpy"
+py scripts/validate.py --files "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day105_non_canon.rpy"
 ```
 
 `validate.py` includes JSON contract checks when gate markdown files exist.

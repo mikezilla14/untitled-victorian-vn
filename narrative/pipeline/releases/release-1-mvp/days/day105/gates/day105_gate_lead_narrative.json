@@ -7,7 +7,7 @@
   "blocking": false,
   "reviewed_at": "2026-05-22",
   "reviewed_files": [
-    "narrative/draft/releases/release-1-mvp/days/day105/day105_non_canon.rpy"
+    "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day105_non_canon.rpy"
   ],
   "markdown_verdict_path": "narrative/pipeline/releases/release-1-mvp/days/day105/gates/day105_gate_lead_narrative.md",
   "follow_up": {

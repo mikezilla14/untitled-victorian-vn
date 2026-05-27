@@ -133,7 +133,7 @@ def print_stage(pipeline: str, step: dict, day: str | None, release: str | None)
         rid = day if day.startswith("day") else f"day{dd}"
         print("\nArtifacts:")
         print(
-            f"  Draft: narrative/draft/releases/{release}/days/{rid}/{rid}_non_canon.rpy"
+            f"  Draft: narrative/draft/releases/{release}/non_prod_renpy_project/game/days/{rid}_non_canon.rpy"
         )
         print(
             f"  Specs: narrative/pipeline/releases/{release}/days/{rid}/specs/"

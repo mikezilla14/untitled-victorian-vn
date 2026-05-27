@@ -2,7 +2,7 @@
   "contract_version": "1",
   "day_id": "day103",
   "release": "release-1-mvp",
-  "source_non_canon": "narrative/draft/releases/release-1-mvp/days/day103/day103_non_canon.rpy",
+  "source_non_canon": "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy",
   "target_prod": "renpy_project/game/day103.rpy",
   "creative_text_preserved": true,
   "promoted_by": "prod_code_agent"

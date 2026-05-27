@@ -1,7 +1,7 @@
 # Narrative Gate — Lead Narrative Editor
 # dayrdd: day105
 # Release: release 1 - mvp
-# Draft: narrative/draft/releases/release-1-mvp/days/day105/day105_non_canon.rpy
+# Draft: narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day105_non_canon.rpy
 # Reviewed: 2026-05-22
 # Reference: day105_convergent_report.md, story_board.md, renpy_project/game/day105.rpy
 

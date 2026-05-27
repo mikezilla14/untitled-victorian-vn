@@ -1,7 +1,7 @@
 # Psychology Gate — Forensic Psychology Consultant
 # dayrdd: day101
 # Release: release 1 - mvp
-# Draft: narrative/draft/releases/release-1-mvp/days/day101/day101_non_canon.rpy
+# Draft: narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day101_non_canon.rpy
 # Reviewed: 2026-05-23
 # Prerequisite: day101_gate_lead_narrative.md — **PASS**
 # Reference: cora_character_canon.md, narrative/canon/voice_guides/cora_voice_guide.md

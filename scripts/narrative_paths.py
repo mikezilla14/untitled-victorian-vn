@@ -54,7 +54,7 @@ def draft_release_root(release_slug: str) -> Path:
 
 
 def draft_day_dir(ctx: DayContext) -> Path:
-    return draft_release_root(ctx.release_slug) / "days" / ctx.day_id
+    return draft_release_root(ctx.release_slug) / "non_prod_renpy_project" / "game" / "days"
 
 
 def draft_non_canon_path(ctx: DayContext) -> Path:
@@ -90,13 +90,13 @@ def pipeline_handoffs_dir(ctx: DayContext) -> Path:
 
 
 def parse_non_canon_path(file_path: Path) -> DayContext | None:
-    """Parse narrative/draft/releases/<slug>/days/<day>/dayNNN_non_canon.rpy."""
+    """Parse narrative/draft/releases/<slug>/non_prod_renpy_project/game/days/dayNNN_non_canon.rpy."""
     try:
         rel = file_path.relative_to(ROOT / "narrative" / "draft" / "releases")
     except ValueError:
         return None
     parts = rel.parts
-    if len(parts) < 4 or parts[1] != "days":
+    if len(parts) < 5 or parts[1] != "non_prod_renpy_project" or parts[2] != "game" or parts[3] != "days":
         return None
     filename = parts[-1]
     if not filename.endswith("_non_canon.rpy"):

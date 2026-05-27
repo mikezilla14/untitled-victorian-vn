@@ -1,7 +1,7 @@
 # Historical Gate — The Victorian Consultant
 # dayrdd: day104
 # Release: release 1 - mvp
-# Draft: narrative/draft/releases/release-1-mvp/days/day104/day104_non_canon.rpy
+# Draft: narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day104_non_canon.rpy
 # Reviewed: 2026-05-25
 # Reference: day104_gate_forensic_psychology.md, docs/canon/historical_guardrails.md
 

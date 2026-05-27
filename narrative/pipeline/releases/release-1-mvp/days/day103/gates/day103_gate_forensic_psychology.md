@@ -1,7 +1,7 @@
 # Forensic Psychology Gate — Forensic Psychology Consultant
 # dayrdd: day103
 # Release: release 1 - mvp
-# Draft: narrative/draft/releases/release-1-mvp/days/day103/day103_non_canon.rpy
+# Draft: narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy
 # Reviewed: 2026-05-24
 # Reference: day103_gate_lead_narrative.md, dayrdd_convergent_report.md, gideon_character_canon.md, missy_forensic_psychology_report.md
 

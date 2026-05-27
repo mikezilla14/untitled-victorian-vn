@@ -37,7 +37,7 @@ Tasks are pre-formatted for direct allocation to human developers or specific sp
 * **Assignee:** `lead_narrative_editor` + `forensic_psychology_consultant` + `victorian_consultant`
 * **Verification Command:**
   ```powershell
-  py scripts/validate.py --profile changed --agent human --files "narrative/draft/releases/release-1-mvp/days/day100/day100_non_canon.rpy"
+  py scripts/validate.py --profile changed --agent human --files "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day100_non_canon.rpy"
   ```
 
 ---
@@ -76,7 +76,7 @@ Tasks are pre-formatted for direct allocation to human developers or specific sp
 
 ### 🟡 [N-5] Prose Formatting Repair for Day 102 Draft
 * **Description:** The non-canon formatting check failed for the Day 102 draft file. Standardize its indentation and structure to ensure clean linter compliance.
-* **Affected File:** [day102_non_canon.rpy](file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/narrative/draft/releases/release-1-mvp/days/day102/day102_non_canon.rpy)
+* **Affected File:** [day102_non_canon.rpy](file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy)
 * **Assignee:** `convergent_writer` or Script Tool
 * **Action Command:**
   ```powershell
@@ -102,7 +102,7 @@ Tasks are pre-formatted for direct allocation to human developers or specific sp
 
 ### 🔴 [C-1] Day 100 Prologue Production Promotion
 * **Description:** Once Day 100 clears its specialist narrative gates (Task `[N-2]`), promote the draft script verbatim into production.
-* **Source File:** [day100_non_canon.rpy](file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/narrative/draft/releases/release-1-mvp/days/day100/day100_non_canon.rpy)
+* **Source File:** [day100_non_canon.rpy](file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day100_non_canon.rpy)
 * **Target File:** `[NEW]` [day100.rpy](file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/renpy_project/game/day100.rpy)
 * **Assignee:** `prod_code_agent`
 * **Verification Command:**

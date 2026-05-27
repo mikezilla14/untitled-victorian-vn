@@ -2,7 +2,7 @@
 # Release: release 1 - mvp
 # Pass: initial
 # Personas considered: thematic, humour, tension, erotic, mystery, class
-# Draft output: narrative/draft/releases/release-1-mvp/days/day105/day105_non_canon.rpy
+# Draft output: narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day105_non_canon.rpy
 # Spec inputs: narrative/pipeline/releases/release-1-mvp/day105_{thematic,humour,tension,erotic,mystery,class}_spec.rpy
 
 ## 1. Considered (inventory)

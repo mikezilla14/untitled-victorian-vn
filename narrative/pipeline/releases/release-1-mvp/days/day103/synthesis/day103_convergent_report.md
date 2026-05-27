@@ -2,7 +2,7 @@
 # Release: Release 1 - MVP
 # Pass: initial (Writers' Room synthesis)
 # Personas considered: thematic, erotic, tension
-# Draft output: narrative/draft/releases/release-1-mvp/days/day103/day103_non_canon.rpy
+# Draft output: narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy
 # Spec inputs: narrative/pipeline/releases/release-1-mvp/days/day103/specs/day103_*_spec.rpy
 # Prose baseline: renpy_project/game/day103.rpy (promoted)
 # Target spice level: 3.5ish (Dramatic Middle Ground + Restrained Heat)

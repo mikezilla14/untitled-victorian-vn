@@ -7,7 +7,7 @@
   "blocking": false,
   "reviewed_at": "2026-05-24",
   "reviewed_files": [
-    "narrative/draft/releases/release-1-mvp/days/day103/day103_non_canon.rpy"
+    "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy"
   ],
   "markdown_verdict_path": "narrative/pipeline/releases/release-1-mvp/days/day103/gates/day103_gate_forensic_psychology.md",
   "follow_up": {
