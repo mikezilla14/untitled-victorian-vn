@@ -38,7 +38,7 @@ label check_confrontations:
 label advance_after_confrontation:
     # Router to advance time after penance, skipping the current personal/ledger/writing slot.
     if time_manager.current_day == 1:
-        if time_manager.time_of_day == "Evening":
+        if time_manager.time_of_day == "Evening" or time_manager.time_of_day == "Morning":
 
             # [STATE] State/progression update
             $ set_time_period("Night")
@@ -51,7 +51,7 @@ label advance_after_confrontation:
             jump day102_1_cora_missy_first_shift
 
     elif time_manager.current_day == 2:
-        if time_manager.time_of_day == "Afternoon":
+        if time_manager.time_of_day == "Afternoon" or time_manager.time_of_day == "Morning":
 
             # [STATE] State/progression update
             $ set_time_period("Evening")
@@ -69,7 +69,7 @@ label advance_after_confrontation:
             # [STATE] State/progression update
             $ set_time_period("Afternoon")
             jump day103_2_suite_gideon_tea
-        elif time_manager.time_of_day == "Evening":
+        elif time_manager.time_of_day == "Evening" or time_manager.time_of_day == "Afternoon":
 
             # [STATE] State/progression update
             $ set_time_period("Night")
