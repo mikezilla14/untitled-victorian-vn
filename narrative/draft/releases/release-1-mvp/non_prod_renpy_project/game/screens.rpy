@@ -90,7 +90,8 @@ screen stats_overlay():
                 # ── Divider ────────────────────────────────────────────
                 null height 10
                 add "ui_sidebar_divider":
-                    xfill True
+                    xalign 0.5
+                    xsize _bar_w
                     ysize 10
                 null height 10
 
@@ -113,7 +114,7 @@ screen stats_overlay():
                             xfill True
                             ysize 10
                             add Solid("#1e150a"):
-                                xfill True
+                                xsize _bar_w
                                 ysize 10
                             if player.anxiety > 0:
                                 add Solid("#7a4a10"):
@@ -133,7 +134,7 @@ screen stats_overlay():
                             xfill True
                             ysize 6
                             add Solid("#150808"):
-                                xfill True
+                                xsize _bar_w
                                 ysize 6
                             if _xp_frac > 0:
                                 add Solid("#5a1818"):
@@ -156,7 +157,8 @@ screen stats_overlay():
                 # ── Divider ────────────────────────────────────────────
                 null height 10
                 add "ui_sidebar_divider":
-                    xfill True
+                    xalign 0.5
+                    xsize _bar_w
                     ysize 10
                 null height 10
 
