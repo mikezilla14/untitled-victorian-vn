@@ -12,7 +12,7 @@ Usage:
 Will run all agent contracts on the specified files and generate a remediation report.
 
 Example:
-    py scripts/orchestrate_review.py --files "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,renpy_project/game/day103.rpy"
+    py scripts/orchestrate_review.py --files "narrative/draft/releases/release-1-mvp/days/day105/day105_non_canon.rpy"
 """
 
 import argparse

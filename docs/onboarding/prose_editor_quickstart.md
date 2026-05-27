@@ -73,7 +73,7 @@ py scripts/validate.py --profile narrative --agent writers_room --skip-gate-chec
 2. Stage your changes: `git add narrative/draft/releases/release-1-mvp/days/day101/`
 3. Commit: `git commit -m "revise day 101 parlour confrontation"`
 4. Push: `git push -u origin prose/day101-parlour-scene`
-5. Open a pull request on GitHub targeting `develop`
+5. Open a pull request targeting the branch Michael tells you to use. For now, use `main` unless told otherwise.
 
 In the PR description, note what you changed and why (e.g. "softened Cora's line in the parlour scene — felt too aggressive for her characterisation at this point").
 

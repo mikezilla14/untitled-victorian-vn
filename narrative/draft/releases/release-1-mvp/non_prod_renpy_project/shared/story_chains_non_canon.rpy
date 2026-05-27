@@ -1,0 +1,927 @@
+# FORMAT LEGEND:
+# [ASSET] -> backgrounds, sprites, transitions, CG/UI callouts
+# [STATE] -> variable changes, effects, conditions, jumps
+# [CHOICE] -> menu blocks and inflection points
+# [BEAT] -> narrative intent / scene intent notes
+
+# story_chains_non_canon.rpy
+# Writers' Room - Release 1 / Dynamic Narrative Story Chains & Confrontations Draft
+# Enforces character-specific suspicion thresholds, deferred penance routing, and deadlines.
+
+# ==============================================================================
+# 1. DEFERRED CONFRONTATIONS CHECKPOINT & TIME-ADVANCEMENT ROUTER
+# ==============================================================================
+
+label check_confrontations:
+    # Game Over Dismissal check (Anxiety >= 100)
+    if player.anxiety >= 100:
+
+        # [STATE] State/progression update
+        jump game_over_dismissed
+
+    # Confrontation gates checked at the start of non-work personal slots (50%)
+    if player.stern_suspicion >= 50:
+
+        # [STATE] State/progression update
+        jump confrontation_stern
+    elif player.vance_suspicion >= 50:
+
+        # [STATE] State/progression update
+        jump confrontation_vance
+    elif player.missy_suspicion >= 50:
+
+        # [STATE] State/progression update
+        jump confrontation_missy
+    return
+
+
+label advance_after_confrontation:
+    # Router to advance time after penance, skipping the current personal/ledger/writing slot.
+    if time_manager.current_day == 1:
+        if time_manager.time_of_day == "Evening":
+
+            # [STATE] State/progression update
+            $ set_time_period("Night")
+            jump day101_4_writing_or_visiting
+        elif time_manager.time_of_day == "Night":
+
+            # [STATE] State/progression update
+            $ time_manager.set_current_day(2)
+            $ set_time_period("Morning")
+            jump day102_1_cora_missy_first_shift
+
+    elif time_manager.current_day == 2:
+        if time_manager.time_of_day == "Afternoon":
+
+            # [STATE] State/progression update
+            $ set_time_period("Evening")
+            jump day102_3_stern_fetches_cora
+        elif time_manager.time_of_day == "Night":
+
+            # [STATE] State/progression update
+            $ time_manager.set_current_day(3)
+            $ set_time_period("Morning")
+            jump day103_morning
+
+    elif time_manager.current_day == 3:
+        if time_manager.time_of_day == "Morning":
+
+            # [STATE] State/progression update
+            $ set_time_period("Afternoon")
+            jump day103_2_suite_gideon_tea
+        elif time_manager.time_of_day == "Evening":
+
+            # [STATE] State/progression update
+            $ set_time_period("Night")
+            jump day103_4_room_stern_suspicion
+        elif time_manager.time_of_day == "Night":
+
+            # [STATE] State/progression update
+            $ time_manager.set_current_day(4)
+            $ set_time_period("Morning")
+            jump day104_1_false_dawn_suite_window
+
+    elif time_manager.current_day == 4:
+        # Day 4 penance consumes writing time before bed, resulting in a draft failure at dawn.
+        if story.penance_triggered:
+
+            # [STATE] State/progression update
+            $ story.set_penance_triggered(False)
+            $ set_time_period("Night")
+            jump day104_6_false_dawn_ending
+        else:
+            if time_manager.time_of_day == "Evening":
+
+                # [STATE] State/progression update
+                $ set_time_period("Night")
+                jump day104_5_triumphant_chapter
+            elif time_manager.time_of_day == "Night":
+
+                # [STATE] State/progression update
+                $ time_manager.set_current_day(5)
+                $ set_time_period("Morning")
+                jump day105_1_monster_reemerges
+
+    return
+
+
+# ==============================================================================
+# 2. DYNAMIC NARRATIVE CHAIN: MISS STERN ("The Sovereign Disciplines")
+# ==============================================================================
+
+label stern_chain_1:
+
+    # [ASSET] Visual/staging command
+    scene bg_savoy_corridor_morning
+    with fade
+
+    show stern_sprite neutral at center
+
+    # [BEAT] Step 1: The Linen Closet Audit. Narrow space, tight inspection
+
+    "The west wing linen closet is narrower than a confessional and smells of starch and cold lye."
+    
+    if time_manager.time_of_day == "Morning":
+        "Outside, the busy morning rush of the second-floor shift carries a muffled, mechanical hum."
+    elif time_manager.time_of_day == "Evening":
+        "The gas wall-sconces outside are already unlit, casting long, dim shadows across the threshold."
+    else:
+        "The quiet of the late-night corridor is absolute, making every rustle of cotton sound like a warning."
+
+    "Miss Stern stands inside, her keys clutched in her hand like a small iron crop."
+    "Her eyes move from my collar to the folded sheets, measuring the precision of my service."
+
+    stern "Cora. The sheets for suite 402. Did you fold them with the lock-stitch hem outward, or did you simply tumble them in the country fashion?"
+    
+    # [CHOICE] Decision point
+    menu:
+        "Lower my head and act like a simple, stupid country girl. [Shed Suspicion / Break Chain]":
+
+            # [STATE] Safe path: closes loop, drops suspicion
+            $ apply_effects(stern_susp=-10, insp=5, corr=0)
+            $ story.set_stern_chain_level(1)
+            
+            cora "Outward, Ma'am. Missy showed me, and I made sure to repeat it exactly so as not to offend."
+            stern "Exactly is a large word for a small mind. Keep to that simple standard, Cora, and the Strand will remain a distant worry."
+            
+            "She dismisses me with a slight twitch of her chin."
+            "My safety costs nothing but my pride. The door to her private ledger is shut."
+
+        "Explain the geometry of the fold, meeting her gaze. [Lean Into Tension / Progress Chain]":
+
+            # [STATE] Charged path: locks in progression, spikes stats
+            $ apply_effects(stern_susp=15, insp=15, corr=5)
+            $ story.set_stern_chain_level(1)
+            
+            cora "The outward stitch preserves the line of the silk, Ma'am. It prevents friction against the mahogany frame, keeping the fabric warm to the touch."
+            
+            "Miss Stern goes still."
+            "Her chest rises once, her keys clicking softly in the quiet cupboard."
+            
+            stern "Touch? A girl who knows the grain of the guest's bed is a girl who spends too much time looking at what does not belong to her."
+            
+            "She steps closer. The heavy, warm scent of wool and lavender soap surrounds me."
+            "Slowly, she raises the cold iron ring of her keys, placing the flat metal against the side of my neck to correct my posture, forcing my chin upward."
+            
+            stern "Keep that chin high, Cora Vale. But do not let me find you looking down at the silk again."
+            
+            "Her touch is brief, cold, and utterly improper."
+            "I have shown too much edge, and she has marked the place where it sits."
+
+    # [ASSET] Visual/staging command
+    hide stern_sprite
+    jump advance_after_confrontation
+
+
+label stern_chain_2:
+
+    # [ASSET] Visual/staging command
+    scene bg_servants_quarters_dusk
+    with fade
+
+    show stern_sprite neutral at center
+
+    # [BEAT] Step 2: The Notebook Extraction. High-tension boundary crossing
+    if time_manager.time_of_day == "Evening":
+        "The servants' quarters are thick with the grey London twilight, the copper steam pipes muttering behind the wall."
+    else:
+        "A cold late-night draft rattles the small windowpane, casting flickering candle-shadows across the narrow floor."
+
+    "I am resting on the edge of the narrow bed when the door handles jiggles. Miss Stern enters before the latch can sound."
+    "I scramble to slide the cheap notebook under my uniform apron, but her hand descends."
+    "She does not snatch it. She merely presses her thumb onto the leather cover, keeping it pinned against my lap."
+
+    stern "A ledger of kitchen weights, Cora? Or does a chambermaid believe she has thoughts worth preserving in ink?"
+    
+    # [CHOICE] Decision point
+    menu:
+        "Apologize and call it a spelling exercise. [Shed Suspicion / Break Chain]":
+
+            # [STATE] Safe path: closes loop
+            $ apply_effects(stern_susp=-10, insp=5, corr=0)
+            $ story.set_stern_chain_level(2)
+            
+            cora "Only my letters, Ma'am. My mother said a maid who cannot spell the inventory is of no use to a fine house."
+            stern "Your mother was sensible. Keep to spelling 'apron' and 'lye', Cora. Leave the long words to those who do not have to wash them."
+            
+            "She draws her hand back and leaves. The notebook is safe, but the ink in my veins feels cold."
+
+        "Hold the notebook tight. Read her a scandalous anonymous passage. [Progress Chain]":
+
+            # [STATE] Charged path: Level 3/4 tension, high suspicion spike
+            $ apply_effects(stern_susp=20, insp=20, corr=10)
+            $ story.set_stern_chain_level(2)
+            
+            cora "I was writing about the west corridor, Ma'am."
+            stern "Speak plainly, girl."
+            cora "I wrote: 'The warden of the floor has a voice like iron, but her keys shake when she touches the maid's collar. She has a secret appetite for the dust she pretends to clean.'"
+            
+            "Miss Stern's keys slip from her fingers, striking the floor with a bright, silver clatter."
+            "She does not bend to retrieve them."
+            "Instead, she steps forward, pinning me flat against the small wooden desk."
+            "Her breathing is ragged, her face inches from mine, her fingers sliding beneath my coarse uniform apron to press directly against my corset, checking my pulse."
+            
+            stern "You are a monstrous creature, Cora Vale. A thief who steals the thoughts of her betters."
+            cora "Is it theft if it is true, Ma'am?"
+            stern "If I find this notebook again... I will burn it. And then I will write a reference for you that will make the Strand look inviting."
+            
+            "Her hand remains pressed against my chest for one second longer than warning requires."
+            "Her touch is hot, trembling, and full of dread."
+            "She leaves me with a threat that reads exactly like an invitation."
+
+    # [ASSET] Visual/staging command
+    hide stern_sprite
+    jump advance_after_confrontation
+
+
+label stern_chain_3:
+
+    # [ASSET] Visual/staging command
+    scene bg_master_suite_day
+    with fade
+
+    show stern_sprite neutral at center
+
+    # [BEAT] Step 3: The Vacant Room Corrective. Level 4 tease, intimate submission
+    if time_manager.time_of_day == "Afternoon":
+        "The afternoon sun filters through the velvet drapes of the vacant Master Suite, casting a dusty, golden glare across the carpet."
+    else:
+        "The evening drapes are drawn tight, the electric wall-sconces deactivated; only a single wax candle burns on the dressing table."
+
+    "Miss Stern stands beside the vanity. She has pulled out a drawer and dumped its contents onto the floor: a Dry rose, banker's stubs, and three scraps of paper."
+    "Her keys hang from her belt, clicking as she turns her head to study me."
+
+    stern "A guest leaves many things. The young maid sees them as souvenirs. I see them as evidence of character."
+    stern "Tell me, Cora. What do you see?"
+    
+    # [CHOICE] Decision point
+    menu:
+        "Pretend to see only rubbish. [Shed Suspicion / Break Chain]":
+
+            # [STATE] Safe path: closes loop
+            $ apply_effects(stern_susp=-15, insp=5, corr=0)
+            $ story.set_stern_chain_level(3)
+            
+            cora "Dust, Ma'am. And scraps that should have been swept before the second floor shift."
+            stern "Correct. A drawer is a box for linens, not a confessional."
+            
+            "She nods, satisfied with my simple maid's mask."
+            "I remain a ghost in her hotel, safe but starved for the book's ending."
+
+        "Audit the stubs, stepping into her personal space. [Progress Chain / Level 4 Tease]":
+
+            # [STATE] Charged path: Level 4 tease, triggers Penance checkpoint
+            $ apply_effects(stern_susp=20, insp=20, corr=20)
+            $ story.set_stern_chain_level(3)
+            
+            cora "I see a banker's draft stub, Ma'am. And a dry rose from a florist on the Strand that closed last month."
+            cora "The guest was spending money he did not yet have, on a woman who did not want to wait for it."
+            
+            "Miss Stern turns on me so quickly the hem of her black dress brushes my boots."
+            
+            stern "Enough!"
+            stern "Your cleverness is a disease, Cora. You look through the guests' pockets with your eyes."
+            
+            "She grabs me by the wrists, her grip iron-tight, forcing me down onto my knees onto the carpet before the vanity."
+            "Her face is flushed, her cap slightly askew."
+            
+            stern "Since you are so fond of this floor, you will remain here. On your knees. I will inspect your uniform's inner seams to ensure you have stolen nothing else."
+            
+            "She bends over me, her hands tracing the coarse cotton of my skirt, unhooking the rear hem to check the linings."
+            "Her fingers are warm, lingering against my legs through the stockings under the guise of inspection."
+            "I tremble, not from cold, but from the raw heat of her touch."
+            
+            stern "A maid who cannot be trusted must be thoroughly occupied, Cora Vale."
+            
+            "She leaves me flushed and ruined on the floor."
+            "The raw material I have gathered is pure fire, but my name is now safely written in her private book."
+
+    # [ASSET] Visual/staging command
+    hide stern_sprite
+    jump advance_after_confrontation
+
+
+# ==============================================================================
+# 3. DYNAMIC NARRATIVE CHAIN: MISSY ("The Laundry Quarters Erotics")
+# ==============================================================================
+
+label missy_chain_1:
+
+    # [ASSET] Visual/staging command
+    scene bg_laundry_room_day
+    with fade
+
+    show missy_sprite smiling at center
+
+    # [BEAT] Step 1: The Lye-Steam French Seam. Damp, close contact
+
+    "The laundry room is a thick, humid fog of lye and boiling starch."
+    
+    if time_manager.time_of_day == "Morning":
+        "The copper boilers are shrieking under full morning pressure, turning every face soft at the edges."
+    elif time_manager.time_of_day == "Afternoon":
+        "The afternoon heat is suffocating, steam dripping down the grey slate walls like grease."
+    else:
+        "The late-night tubs are cooling, the quiet hum of the boilers sounding like a sleeping beast."
+
+    "Missy is sitting on a wicker laundry hamper, her fingers red and raw from the coarse soap."
+    "A torn lace collar lies in her lap, and she is trying to sew it with trembling hands."
+
+    missy "If Stern sees this tear, she'll dock my pay three shillings. It was that beast in room 301. He threw his boots at the door while I was changing the water."
+    
+    # [CHOICE] Decision point
+    menu:
+        "Help her stitch it silently. Comfort her. [Shed Suspicion / Break Chain]":
+
+            # [STATE] Safe path: closes loop
+            $ apply_effects(missy_susp=-10, insp=10, corr=0)
+            $ story.set_missy_chain_level(1)
+            
+            cora "Give it here. My mother taught me the French seam. It hides the raw edge completely."
+            "I take the needle. We sit together in the steam, our shoulders touching."
+            
+            missy "You're a good friend, Cora. Most girls here would have told Stern to get the credit."
+            
+            "Her trust feels heavy. But it keeps my cover secure."
+
+        "Stroke her cheek, questioning her for sensory details. [Progress Chain]":
+
+            # [STATE] Charged path: Level 3/4 tactile intimacy
+            $ apply_effects(missy_susp=10, insp=10, corr=5)
+            $ story.set_missy_chain_level(1)
+            
+            cora "Did he shout? What did his voice sound like when he threw them? Was it the wine, or something else?"
+            
+            "I reach out, my fingers tracing the damp, flushed skin of her cheek, brushing a wet curl of hair behind her ear."
+            "Missy flinches, then goes still, her breathing turning shallow."
+            
+            missy "Cora... your hands are so soft. Not like mine. You don't belong in the tubs."
+            cora "We belong where the secrets are, Missy."
+            missy "Why are you asking about the boots? It isn't a play. It's my wages."
+            
+            "She pulls the lace back, her face flushed with a mix of confusion and need."
+            "I have treated her pain as copy, but the physical heat between us is real."
+
+    # [ASSET] Visual/staging command
+    hide missy_sprite
+    jump advance_after_confrontation
+
+
+label missy_chain_2:
+
+    # [ASSET] Visual/staging command
+    scene bg_servants_corridor_dim
+    with fade
+
+    show missy_sprite neutral at center
+
+    # [BEAT] Step 2: The Broom Closet Hiding. Pressed chest-to-chest
+    if time_manager.time_of_day == "Evening":
+        "The corridor gas jets are turned low, casting long, dark shadows along the service lift."
+    else:
+        "The late-night quarters are silent, the faint sound of footsteps echoing on the stairs above."
+
+    "Missy leans in close, her breath smelling of cheap peppermint and lye."
+    
+    missy "I saw Mr. Locke's valet carrying a leather case down the back stairs. It had brass hinges and a double lock."
+    missy "He looked at me like he wanted to choke me for being there."
+    
+    "Suddenly, footsteps echo at the end of the hall. The shadow of Miss Stern's keys appears on the wall."
+    "Before I can think, I grab Missy by the wrist and drag her into the narrow cedar broom closet, closing the door behind us."
+
+    # [CHOICE] Decision point
+    menu:
+        "Tell her to keep quiet for her own safety. [Shed Suspicion / Break Chain]":
+
+            # [STATE] Safe path: closes loop
+            $ apply_effects(missy_susp=-15, insp=10, corr=0)
+            $ story.set_missy_chain_level(2)
+            
+            cora "Don't look at it again, Missy. Valets keep secrets because they are paid to. We are paid only to wash the sheets."
+            missy "You're right. I'll forget I ever saw it."
+            
+            "She smiles, relieved by my caution. The secret stays safe."
+
+        "Press her chest-to-chest in the dark, whispering. [Progress Chain]":
+
+            # [STATE] Charged path: High intimacy, Level 3/4 tension
+            $ apply_effects(missy_susp=15, insp=15, corr=10)
+            $ story.set_missy_chain_level(2)
+            
+            "The broom closet is tiny, smelling of cedar oil and damp aprons."
+            "We are pressed chest-to-chest, our breathing echoing in the small enclosure."
+            "I slide my hand over Missy's narrow waist to steady her, my fingers sinking into the soft cloth of her corset."
+            "Missy does not pull away. Her face is inches from mine, her lips parted, her eyes wide in the dark."
+            
+            cora "Double locks? Was it a Chubb patent?"
+            missy "Cora... please. We are too close. If Miss Stern opens this door..."
+            cora "Then let her find us. Your skin is too warm for locks."
+            
+            "Missy gasps softly, her hands clutching my shoulders, her chest rising against mine."
+            "In the dark, the opportunity cost is clear: safety is outside, but the heat is here."
+
+    # [ASSET] Visual/staging command
+    hide missy_sprite
+    jump advance_after_confrontation
+
+
+label missy_chain_3:
+
+    # [ASSET] Visual/staging command
+    scene bg_laundry_room_day
+    with fade
+
+    show missy_sprite shocked at center
+
+    # [BEAT] Step 3: The Untouched Silk. Level 4 tease, unlacing
+    if time_manager.time_of_day == "Afternoon":
+        "The laundry boilers are silent, the late-afternoon steam settling in damp layers over the floor."
+    else:
+        "The late-night laundry is completely vacant, the only light coming from the red embers of the boiler furnace."
+
+    "Missy stops me near the wash-tubs, holding a discarded scrap of my manuscript."
+    "Her face is pale under the electric light, her fingers shaking."
+
+    missy "Is this... me, Cora? 'The laundry girl with raw fingers who believed every promise she found in a pocket'?"
+    missy "Did you write this? Have you been using my words to make a story?"
+    
+    # [CHOICE] Decision point
+    menu:
+        "Apologize. Tear the page. Beg her forgiveness. [Shed Suspicion / Break Chain]":
+
+            # [STATE] Safe path: closes loop
+            $ apply_effects(missy_susp=-20, insp=5, corr=0)
+            $ story.set_missy_chain_level(3)
+            
+            cora "It was a draft, Missy. A stupid, cruel exercise. I was trying to find the words, and I used what was closest."
+            "I take the page and tear it into four pieces before her."
+            cora "I am sorry. Truly."
+            
+            "She looks at the torn paper, then at me. The wound remains, but the suspicion is broken."
+
+        "Defend the writing, unlacing her outer maid apron. [Progress Chain / Level 4 Tease]":
+
+            # [STATE] Charged path: Level 4 tease, triggers Penance checkpoint
+            $ apply_effects(missy_susp=20, insp=20, corr=20)
+            $ story.set_missy_chain_level(3)
+            
+            cora "It is a story, Missy. A beautiful one. It shows how much better you are than the sheets you wash."
+            
+            "I step closer, my hands reaching behind her back to untie her outer uniform apron."
+            "She flinches but does not step back, her eyes fixed on mine."
+            
+            cora "You don't belong in coarse cotton."
+            
+            "I slide the apron from her shoulders, letting it pool on the floor."
+            "Underneath, she is wearing the stolen silk chemise from suite 402."
+            "The white silk catches the red light of the furnace, soft and improper against her damp skin."
+            "I trace the lace collar with my fingers, my hand sliding down to her collarbone."
+            
+            missy "Cora... you'll get us both dismissed."
+            cora "Then we will leave together. But not before we see the ending."
+            
+            "Missy leans her forehead against my shoulder, trembling as my fingers trace the silk."
+            "The trust is fractured, but the physical entanglement is complete."
+
+    # [ASSET] Visual/staging command
+    hide missy_sprite
+    jump advance_after_confrontation
+
+
+# ==============================================================================
+# 4. DYNAMIC NARRATIVE CHAIN: MISS VANCE ("The Blackmail Collusion")
+# ==============================================================================
+
+label vance_chain_1:
+
+    # [ASSET] Visual/staging command
+    scene bg_savoy_corridor_morning
+    with fade
+
+    show vance_sprite neutral at center
+
+    # [BEAT] Step 1: The Dropped Silk Handkerchief. Class voyeurism
+
+    "The grand guest corridor is silent, the red carpet absorbing every sound."
+    
+    if time_manager.time_of_day == "Morning":
+        "The morning sun filters through the leaded glass, making the brass fixtures shine."
+    elif time_manager.time_of_day == "Evening":
+        "The evening wall-sconces cast a warm, dim light across the mahogany panels."
+    else:
+        "The late-night corridor is cold, the electric bulbs hum in the silent hall."
+
+    "Miss Vance walks down the corridor. As she turns the corner, a silk handkerchief slips from her sleeve."
+    "It lies on the red carpet like a dropped petal."
+    
+    # [CHOICE] Decision point
+    menu:
+        "Return it silently with a perfect maid's bow. [Shed Suspicion / Break Chain]":
+
+            # [STATE] Safe path: closes loop
+            $ apply_effects(vance_susp=-10, insp=5, corr=0)
+            $ story.set_vance_chain_level(1)
+            
+            cora "Your handkerchief, Miss."
+            "I offer it on my flat palm, my eyes fixed on her hem."
+            
+            vance "Ah. Useless little thing. Keep it or burn it, girl."
+            
+            "She sweeps past. Low risk, minimal reward."
+
+        "Cover it with my shoe, sliding it into my apron. [Progress Chain]":
+
+            # [STATE] Charged path: Level 3 voyeurism
+            $ apply_effects(vance_susp=15, insp=15, corr=5)
+            $ story.set_vance_chain_level(1)
+            
+            "I step forward, cover the silk with my shoe, and slide it into my apron pocket."
+            "Later, from the end of the hall, I watch her search her sleeve, her face tightening with a petulant panic."
+            "She catches my eye and realizes what I did, her mouth opening in a silent, scandalized gasp."
+            "The way she uses her hands when she is thwarted is a perfect detail for my manuscript."
+
+    # [ASSET] Visual/staging command
+    hide vance_sprite
+    jump advance_after_confrontation
+
+
+label vance_chain_2:
+
+    # [ASSET] Visual/staging command
+    scene bg_servants_corridor_dim
+    with fade
+
+    show vance_sprite angry at center
+
+    # [BEAT] Step 2: The Staircase Grief. Power reversal
+    if time_manager.time_of_day == "Evening":
+        "The back staircase is dark with the evening shadows, the damp scent of the cellars rising through the boards."
+    else:
+        "The late-night staircase is cold, a single flickering candle casting long shadows on the brick wall."
+
+    "I find Miss Vance sitting on the bottom step of the back staircase."
+    "She has her face in her hands, her shoulders shaking with a dry, tearless grief after Gideon's harsh correction."
+    "The electric bulb makes her red hair look like spun copper."
+
+    # [CHOICE] Decision point
+    menu:
+        "Slip past silently in the shadows. [Shed Suspicion / Break Chain]":
+
+            # [STATE] Safe path: closes loop
+            $ apply_effects(vance_susp=-15, insp=5, corr=0)
+            $ story.set_vance_chain_level(2)
+            
+            "I step back into the shadow of the doorway. I do not breathe."
+            "She does not see me. My cover is safe."
+
+        "Confront her. Wipe a tear with my rough thumb. [Progress Chain]":
+
+            # [STATE] Charged path: Level 3/4 dominance play
+            $ apply_effects(vance_susp=15, insp=20, corr=10)
+            $ story.set_vance_chain_level(2)
+            
+            "I step out of the shadow, standing directly before her."
+            "I watch the way she catches her breath, the petulance of her grief."
+            "Vance looks up, her eyes wide with fury."
+            
+            vance "What are you staring at, you vulgar creature? Get back to the cellars!"
+            
+            "Instead of bowing, I bend down, my rough, lye-stained thumb wiping a wet tear from her cheek."
+            "My touch is coarse, deliberate, and holding her chin steady."
+            
+            cora "I see a lady who is trying not to look like she has been corrected."
+            vance "You... you dare touch me?"
+            cora "The maid who watches, Miss, is the one holding the door. Remember that when you return to his suite."
+            
+            "She shakes with a mix of fury and submission, unable to look away."
+            "I have made a dangerous enemy, but I have unlocked the heart of the book."
+
+    # [ASSET] Visual/staging command
+    hide vance_sprite
+    jump advance_after_confrontation
+
+
+label vance_chain_3:
+
+    # [ASSET] Visual/staging command
+    scene bg_master_suite_day
+    with fade
+
+    show vance_sprite angry at center
+
+    # [BEAT] Step 3: The Desk Blackmail. Level 4 tease, Gideon shadow
+    if time_manager.time_of_day == "Afternoon":
+        "The Master Suite is bright with the afternoon sun, the writing desk lying open."
+    else:
+        "The late-night suite is silent, only the faint embers of the fireplace lighting the room."
+
+    "Miss Vance catches me inside the suite bedroom. She is holding a brass desk key she must have stolen from Mr. Locke's cabinet."
+    "She looks at me with a wild, cornered intensity."
+
+    vance "You. You've been watching me. You were outside the door when he... when we..."
+    vance "What do you want, girl? Speak, or I will tell Stern you stole my pearl pin."
+    
+    # [CHOICE] Decision point
+    menu:
+        "Play the simple country potato maid. [Shed Suspicion / Break Chain]":
+
+            # [STATE] Safe path: closes loop
+            $ apply_effects(vance_susp=-20, insp=5, corr=0)
+            $ story.set_vance_chain_level(3)
+            
+            cora "I saw nothing, Miss. I only came to turn down the blankets. I am very simple and do not know the guests' business."
+            vance "Simple. Yes. You look like a potato."
+            
+            "She turns away, dismissed by my performance. My cover is safe."
+
+        "Audit her collar marks, cornering her against the vanity. [Progress Chain / Level 4 Tease]":
+
+            # [STATE] Charged path: Level 4 tease, triggers Penance checkpoint
+            $ apply_effects(vance_susp=20, insp=20, corr=20)
+            $ story.set_vance_chain_level(3)
+            
+            cora "I see a lady who is afraid of a key, Miss."
+            cora "And a master who does not need to raise his voice to make her kneel."
+            
+            "I step forward, forcing her back until her hips strike the mahogany vanity."
+            "I reach out, my fingers tracing the faint red collar marks Gideon left on her throat."
+            "Vance trembles, her chest rising and falling, her hands clutching the edges of the dressing table."
+            
+            vance "Gideon... he will kill you if he finds you here."
+            cora "Then he will have to find us first. Let us write the next chapter together in the closet."
+            
+            "I pull the brass key from her fingers, letting my hand linger against her palm."
+            "She looks down, her submission complete, the shadow of Gideon's power wrapping around both of us."
+
+    # [ASSET] Visual/staging command
+    hide vance_sprite
+    jump advance_after_confrontation
+
+
+# ==============================================================================
+# 5. CONFRONTATIONS AND PENANCE (STAT RECOVERY VEHICLES)
+# ==============================================================================
+
+label confrontation_stern:
+
+    # [ASSET] Visual/staging command
+    scene bg_savoy_corridor_morning
+    with fade
+
+    show stern_sprite neutral at center
+
+    "Miss Stern stands before me, her hands folded over her keys."
+
+    stern "You have been seen, Cora Vale. In the west wing. In the laundry room. Spying. Whispering."
+    stern "A maid with an opinion is a maid who belongs on the Strand."
+
+    cora "Ma'am—"
+
+    stern "Quiet. You will spend your night scrubbing the grand marble steps of the entrance hall."
+    stern "On your knees. With the coarse soap."
+    stern "And if I find a single speck of dirt before dawn, you will leave without a character."
+
+    # [ASSET] Visual/staging command
+    hide stern_sprite
+
+    "The penance is brutal."
+    "My hands are raw, my back is ruined, and I have had no time to look at the manuscript tonight."
+    "The night is completely lost to stone and lye."
+
+    # Penance effects: reduces Stern suspicion by 35, but advances time, consuming the slot.
+
+    # [STATE] State/progression update
+    $ apply_effects(stern_susp=-35, insp=0, corr=5)
+    $ story.set_penance_triggered(True)
+    jump advance_after_confrontation
+
+
+label confrontation_vance:
+
+    # [ASSET] Visual/staging command
+    scene bg_savoy_corridor_morning
+    with fade
+
+    show vance_sprite angry at center
+
+    "Miss Vance corners me near the service elevator."
+
+    vance "You insolent, spying creature. I told Gideon you were looking through the grates."
+    vance "He said you were too small to kill. I disagreed."
+
+    cora "Miss Vance, I was only—"
+
+    vance "You will wash my silk chemises again. Every one of them. By hand."
+    vance "In the cold water. Until your knuckles bleed."
+    vance "And if they do not smell of lavender by morning, I will tell Stern you touched my purse."
+
+    # [ASSET] Visual/staging command
+    hide vance_sprite
+
+    "I spend the night over the cold laundry tubs, my fingers numb and my mind empty of words."
+    "The manuscript waits, untouched, while I wash the sweat of my betters out of silk."
+    "The night is lost."
+
+    # Penance effects: reduces Vance suspicion by 35, but advances time, consuming the slot.
+
+    # [STATE] State/progression update
+    $ apply_effects(vance_susp=-35, insp=0, corr=5)
+    $ story.set_penance_triggered(True)
+    jump advance_after_confrontation
+
+
+label confrontation_missy:
+
+    # [ASSET] Visual/staging command
+    scene bg_laundry_room_day
+    with fade
+
+    show missy_sprite shocked at center
+
+    "Missy stands in my doorway, her eyes swollen from crying."
+
+    missy "I know what you are, Cora. You're a spy. You've been using me. You've been watching Vance and Locke and writing it down."
+    missy "I won't let you ruin me. If Stern asks, I'll tell her everything."
+
+    # [CHOICE] Decision point
+    menu:
+        "Plead with her. Offer to help her finish her extra shifts tonight.":
+
+            # [STATE] State/progression update
+            $ apply_effects(missy_susp=-35, insp=5, corr=0)
+            $ story.set_penance_triggered(True)
+            
+            cora "Missy, please. If you tell her, I am ruined. Let me help you. I'll do the night tubs for you."
+            
+            missy "You'll... you'll do my shifts?"
+            
+            cora "Yes. Every sheet."
+            
+            "She stares at me, then nods slowly, her face hardened by my betrayal."
+            
+            missy "Then get to the boilers. And don't speak to me again."
+
+            # [ASSET] Visual/staging command
+            hide missy_sprite
+
+            "I spend the night in the steam and lye, carrying the weight of both our shifts."
+            "My ambition is buried under wet cotton. I cannot write a single line."
+
+            # [STATE] State/progression update
+            jump advance_after_confrontation
+
+
+# ==============================================================================
+# 6. DEADLINE FAIL STATE LABELS (SPEC SPECIFICATION)
+# ==============================================================================
+
+label game_over_deadline_1:
+
+    # [ASSET] Visual/staging command
+    hide screen stats_overlay
+    sys "═══ GAME OVER: FIRST DEADLINE FAILED ═══"
+    cora "I stare at the blank page."
+    cora "Day 2 has ended, and I have not even written the first chapter."
+    cora "Without a single page of progress, my ambition is nothing but a childish delusion."
+    cora "I cannot face the publisher. I cannot face the page."
+    cora "I have failed before I even truly began."
+    sys "[[GAME OVER. You failed to write Chapter 1 by Day 2 Night. Manage your time and stats to ensure you have enough inspiration to write.]"
+    return
+
+label game_over_deadline_2:
+
+    # [ASSET] Visual/staging command
+    hide screen stats_overlay
+    sys "═══ GAME OVER: DRAFT DEADLINE FAILED ═══"
+    cora "The night of Day 4 passes into grey dawn."
+    cora "My desk is littered with scraps of paper, but the draft is incomplete. I have only one chapter done."
+    cora "The publisher's courier will arrive tomorrow. I have nothing to give him but excuses."
+    cora "I have lost my chance. The door is closed."
+    sys "[[GAME OVER. You failed to complete a second chapter/draft by Day 4 Night. Balance your stats and avoid confrontations to protect your writing slots!]"
+    return
+
+
+label game_over_dismissed:
+
+    # [ASSET] Visual/staging command
+    hide screen stats_overlay
+
+    sys "═══ GAME OVER: NERVOUS BREAKDOWN ═══"
+
+    cora "I could not keep the walls of my mind standing."
+    cora "It was not a single eye that caught me. It was the weight of them all."
+    cora "Vance's sharp contempt, Missy's mounting fear, Stern's cold, measuring gaze... they accumulated in my chest like lead."
+    cora "The weight of their combined eyes cracks my mask."
+    cora "I made a fatal slip in my duties, and Miss Stern found absolute cause to dismiss me."
+    
+    stern "Pack your things. A girl whose nerves are in such tatters cannot be trusted with the Savoy's quiet."
+    
+    cora "My hands were shaking too hard to tie my trunk. I stood on the Strand with nothing but a ruined reputation and the memory of electric light."
+    cora "Without a character, London is a very cold, very hungry place."
+
+    sys "[[GAME OVER. Your accumulated Anxiety reached 100%, causing a complete breakdown and leading to your dismissal. Manage your internal strain by spreading suspicion across different characters and triggering penances before your nerves fail you.]"
+
+    return
+
+
+# ==============================================================================
+# 7. CENTRALIZED EXIT ROUTER
+# ==============================================================================
+
+label end_slot(outcome):
+
+    # This centralized router handles ending slots, setting clock time and day, and jumping to next label.
+    if outcome == "d1_reflect_done":
+
+        # [STATE] State/progression update
+        $ set_time_period("Night")
+        jump day101_4_writing_or_visiting
+
+    elif outcome == "d1_write_ch1":
+
+        # [STATE] State/progression update
+        $ time_manager.set_current_day(2)
+        $ set_time_period("Morning")
+        jump day102_1_cora_missy_first_shift
+
+    elif outcome == "d1_visit_missy":
+
+        # [STATE] State/progression update
+        $ time_manager.set_current_day(2)
+        $ set_time_period("Morning")
+        jump day102_1_cora_missy_first_shift
+
+    elif outcome == "d2_reflect_done":
+
+        # [STATE] State/progression update
+        $ set_time_period("Evening")
+        jump day102_3_stern_fetches_cora
+
+    elif outcome == "d2_write_night":
+
+        # [STATE] State/progression update
+        $ time_manager.set_current_day(3)
+        $ set_time_period("Morning")
+        jump day103_morning
+
+    elif outcome == "d3_reflect_done":
+
+        # [STATE] State/progression update
+        $ set_time_period("Afternoon")
+        jump day103_2_suite_gideon_tea
+
+    elif outcome == "d3_twilight_done":
+
+        # [STATE] State/progression update
+        jump day103_4_room_stern_suspicion
+
+    elif outcome == "d3_stern_done":
+
+        # [STATE] State/progression update
+        $ set_time_period("Night")
+        jump day103_2_suite_night_tea
+
+    elif outcome == "d3_ultimatum_done":
+
+        # [STATE] State/progression update
+        jump day103_3_bedroom_final_write
+
+    elif outcome == "d3_write_night":
+
+        # [STATE] State/progression update
+        $ time_manager.set_current_day(4)
+        $ set_time_period("Morning")
+        jump day104_1_false_dawn_suite_window
+
+    elif outcome == "d4_twilight_done":
+
+        # [STATE] State/progression update
+        $ set_time_period("Night")
+        if story.penance_triggered or player.anxiety >= 85:
+
+            # [STATE] State/progression update
+            jump day104_6_false_dawn_ending
+        else:
+
+            # [STATE] State/progression update
+            jump day104_5_triumphant_chapter
+
+    elif outcome == "d4_write_night":
+
+        # [STATE] State/progression update
+        jump day104_6_false_dawn_ending
+
+    elif outcome == "d4_dawn_gate":
+
+        # [STATE] State/progression update
+        $ time_manager.set_current_day(5)
+        $ set_time_period("Morning")
+        jump day105_1_monster_reemerges
+
+    elif outcome == "d5_write_night":
+
+        # [STATE] State/progression update
+        $ set_time_period("Morning")
+        jump day105_7_release_one_ending
+
+    return

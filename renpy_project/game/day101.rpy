@@ -52,13 +52,15 @@ label day101_1_cora_waiting:
     # [ASSET] Existing Day 1 corridor background
     scene bg_savoy_corridor_morning
     with dissolve
-
+    # full body standing sprite of Cora would be ideal here, but we can use the cap sprite and describe the rest in text for now
     "I stand outside Miss Stern's office with my hands folded and my pulse behaving badly."
-    "Behind the door, a clock ticks with the smug confidence of paid machinery."
-    "My references sit in my apron pocket."
-    "Good paper. Good ink. Better lies."
+    "Behind the door, a clock ticks with the smug confidence of paid machinery." #add sound effect?
+    "My references sit in my apron pocket." #camera pan to apron pocket?
+    "Good paper. Good ink. Better lies." #pan up to face?
 
-    "A maid passes without looking at me. Then a footman. Then another maid carrying towels white enough to make sin feel visible."
+    "A maid passes without looking at me. Then a footman. Then another maid carrying towels white enough to make sin feel visible." 
+    #show sprite silhouettes of passing servants, but keep them indistinct to preserve the focus on Cora's internal experience
+    # The point of this beat is to establish the social invisibility of maids in the hotel, and to contrast it with Cora's heightened self-awareness and anxiety. The passing servants should feel like a blur of activity that Cora is hyper-aware of, but that they are oblivious to her.
     "No one asks who I am."
     "That is the first rule of this place, then: be useful enough to ignore."
 
