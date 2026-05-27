@@ -75,26 +75,35 @@ py scripts/contract_validate.py --day day105 --release "release 1 - mvp"
 
 ## Step 7 — Validate before you PR
 
+Pick the mode that matches where you are in the pipeline:
+
+| You are... | Use this flag | Typical agent |
+|------------|--------------|---------------|
+| Drafting / exploring, gates not written yet | `--skip-gate-checks` | `writers_room` |
+| Preparing for promotion, all gates must pass | `--strict-gates` | `human` |
+
+**While drafting:**
+
 ```powershell
-py scripts/orchestrate_review.py --files "narrative/draft/releases/release-1-mvp/days/day105/day105_non_canon.rpy"
+py scripts/validate.py --profile changed --agent writers_room --skip-gate-checks --files "..."
+```
+
+**Before promotion** (requires all gate files):
+
+```powershell
+py scripts/validate.py --profile changed --agent human --strict-gates --files "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day105_non_canon.rpy"
+```
+
+**Full orchestrated review:**
+
+```powershell
+py scripts/orchestrate_review.py --files "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day105_non_canon.rpy"
 ```
 
 For promotion pairs:
 
 ```powershell
-py scripts/orchestrate_review.py --files "narrative/draft/releases/release-1-mvp/days/day105/day105_non_canon.rpy,renpy_project/game/day105.rpy"
-```
-
-Before promotion, require all gate files:
-
-```powershell
-py scripts/validate.py --profile changed --agent human --strict-gates --files "narrative/draft/releases/release-1-mvp/days/day105/day105_non_canon.rpy"
-```
-
-While drafting (gates not written yet):
-
-```powershell
-py scripts/validate.py --profile changed --agent writers_room --skip-gate-checks --files "..."
+py scripts/orchestrate_review.py --files "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day105_non_canon.rpy,renpy_project/game/day105.rpy"
 ```
 
 CI runs `scripts/validate.py` on changed paths (see [`.github/workflows/gatekeeper.yml`](../../.github/workflows/gatekeeper.yml)).

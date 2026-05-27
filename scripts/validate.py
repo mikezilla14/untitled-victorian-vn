@@ -18,7 +18,7 @@ from writers_room_pipeline import validate_day_pipeline  # noqa: E402
 
 
 def run_step(name, command):
-    print(f"/n== {name} ==")
+    print(f"\n== {name} ==")
     result = subprocess.run(command, cwd=ROOT)
     if result.returncode:
         print(f"{name} failed with exit code {result.returncode}.")
@@ -212,7 +212,7 @@ def main():
     if failures:
         return 1
 
-    print("/nValidation passed.")
+    print("\nValidation passed.")
     return 0
 
 

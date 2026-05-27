@@ -40,7 +40,7 @@ def validate_day(day_id: str, release: str) -> int:
     failures = 0
     gates = pipeline_gates_dir(ctx)
 
-    print(f"Validating contracts for {day_id} ({release})/n")
+    print(f"Validating contracts for {day_id} ({release})\n")
 
     for gate_slug in GATE_VERDICTS:
         md = gates / f"{day_id}_gate_{gate_slug}.md"
@@ -102,9 +102,9 @@ def validate_day(day_id: str, release: str) -> int:
         failures += count
 
     if failures:
-        print(f"/n{failures} contract error(s).")
+        print(f"\n{failures} contract error(s).")
         return 1
-    print("/nAll contracts valid.")
+    print("\nAll contracts valid.")
     return 0
 
 

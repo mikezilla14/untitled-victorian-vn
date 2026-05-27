@@ -32,6 +32,12 @@ narrative/pipeline/releases/release-1-mvp/days/day105/
   handoffs/          profile_delta, promotion_handoff JSON
 ```
 
+## Prose ownership rules
+
+- Prose edits go in `draft/` unless the change is explicitly a runtime patch.
+- If you fix prose directly in `renpy_project/game/dayNNN.rpy`, mirror that change back to the matching `_non_canon.rpy` draft, or note the change in the promotion handoff JSON.
+- When `draft/` and `renpy_project/game/` diverge on prose, `draft/` is source of truth for future promotion.
+
 ## Context firewall (agents)
 
 | Load by default | Do **not** load for new day assignments |

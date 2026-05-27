@@ -12,7 +12,7 @@ Usage:
 Will run all agent contracts on the specified files and generate a remediation report.
 
 Example:
-    py scripts/orchestrate_review.py --files "narrative/draft/releases/release-1-mvp/days/day103/day103_non_canon.rpy,renpy_project/game/day103.rpy"
+    py scripts/orchestrate_review.py --files "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,renpy_project/game/day103.rpy"
 """
 
 import argparse
@@ -48,10 +48,10 @@ class ScriptWrapperContract(AgentContract):
         script_path = ROOT / "scripts" / self.script_name
         if not script_path.exists():
             return False, f"Error: {self.script_name} not found."
-        
+
         all_success = True
         all_output = []
-        
+
         if self.args_flag == "--file":
             # Run once per file
             for file in files:
@@ -62,15 +62,15 @@ class ScriptWrapperContract(AgentContract):
                         all_success = False
                         out = result.stdout.strip()
                         if result.stderr.strip():
-                            out += "/n" + result.stderr.strip()
-                        all_output.append(f"[{file}]/n{out}")
+                            out += "\n" + result.stderr.strip()
+                        all_output.append(f"[{file}]\n{out}")
                 except Exception as e:
                     all_success = False
                     all_output.append(f"[{file}] Failed to execute: {e}")
-            
+
             if all_success:
                 return True, ""
-            return False, "/n/n".join(all_output)
+            return False, "\n\n".join(all_output)
         else:
             # Run once with comma-separated list
             cmd = [sys.executable, str(script_path), self.args_flag, ",".join(files)]
@@ -79,7 +79,7 @@ class ScriptWrapperContract(AgentContract):
                 success = result.returncode == 0
                 output = result.stdout.strip()
                 if result.stderr.strip():
-                    output += "/n" + result.stderr.strip()
+                    output += "\n" + result.stderr.strip()
                 return success, output
             except Exception as e:
                 return False, f"Failed to execute {self.script_name}: {e}"
@@ -115,7 +115,7 @@ class WritersRoomPipelineContract(AgentContract):
             lines.extend(messages)
 
         if failures:
-            return False, "/n".join(lines)
+            return False, "\n".join(lines)
         return True, "Writers' room pipeline artifacts OK."
 
 
@@ -129,45 +129,45 @@ class FileNamingContract(AgentContract):
             path = Path(f)
             name = path.name
             norm = path.as_posix()
-            
+
             # Legacy naming checks
             if "day" in name and "non_canon" in name and not name.endswith("_non_canon.rpy"):
                 if name.endswith(".md"):
                     violations.append(f"{f}: Legacy .md narrative drafts are no longer supported. Use .rpy.")
-            
+
         if violations:
-            return False, "/n".join(violations)
+            return False, "\n".join(violations)
         return True, "File naming conventions passed."
 
 
 def generate_report(results: Dict[str, Tuple[bool, str]]) -> str:
     report = []
-    report.append("# Agent Contract Remediation Report/n")
-    
+    report.append("# Agent Contract Remediation Report\n")
+
     all_passed = all(success for success, _ in results.values())
-    
+
     if all_passed:
-        report.append("✅ **All Agent Contracts Passed!** The code is ready for promotion/merge./n")
-        return "/n".join(report)
-    
-    report.append("❌ **Action Required:** One or more agent contracts failed. Please review the issues below and provide this report to your AI assistant for remediation./n")
-    
+        report.append("✅ **All Agent Contracts Passed!** The code is ready for promotion/merge.\n")
+        return "\n".join(report)
+
+    report.append("❌ **Action Required:** One or more agent contracts failed. Please review the issues below and provide this report to your AI assistant for remediation.\n")
+
     for agent_name, (success, output) in results.items():
         if not success:
             report.append(f"## 🛑 {agent_name} Violations")
             report.append("```text")
             report.append(output)
-            report.append("```/n")
-            
-    report.append("---/n")
+            report.append("```\n")
+
+    report.append("---\n")
     report.append("### 🤖 Prompt for AI Assistant")
-    report.append("Copy and paste the following into your chat:/n")
+    report.append("Copy and paste the following into your chat:\n")
     report.append("> **Please fix the following agent contract violations in my files:**")
     for agent_name, (success, output) in results.items():
         if not success:
-            report.append(f"> /n> **{agent_name}:**/n> {output.replace(chr(10), chr(10)+'> ')}")
-            
-    return "/n".join(report)
+            report.append(f"> \n> **{agent_name}:**\n> {output.replace(chr(10), chr(10)+'> ')}")
+
+    return "\n".join(report)
 
 def main():
     parser = argparse.ArgumentParser(description="Orchestrate agent contract reviews.")
@@ -202,16 +202,16 @@ def main():
     ]
 
     results = {}
-    print("Running Agent Contract Checks.../n")
+    print("Running Agent Contract Checks...\n")
     for contract in contracts:
         print(f"[{contract.name}] checking...")
         success, output = contract.run_check(files)
         results[contract.name] = (success, output)
 
-    print("/n" + "="*50 + "/n")
+    print("\n" + "="*50 + "\n")
     report = generate_report(results)
     print(report)
-    
+
     all_passed = all(success for success, _ in results.values())
     return 0 if all_passed else 1
 
