@@ -66,18 +66,18 @@ label day100_2_discovery_flashback:
     menu:
         "The parlour's raw breath, or the desk's quiet ink?"
 
-        "Investigate the parlour door. [Overhear dismissal: +15 Corruption]":
+        "Investigate the parlour door. [[Overhear dismissal: +15 Corruption]]":
 
             # [STATE] State/progression update
-            $ apply_effects(insp=0, corr=15, susp=0)
+            $ apply_effects(corr=15)
             $ story.set_prologue_found("overheard")
 
             jump day100_2_parlour_branch
 
-        "Continue with duties at the desk. [Read letters: +15 Inspiration, +10 Corruption]":
+        "Continue with duties at the desk. [[Read letters: +15 Inspiration, +10 Corruption]]":
 
             # [STATE] State/progression update
-            $ apply_effects(insp=15, corr=10, susp=0)
+            $ apply_effects(insp=15, corr=10)
             $ story.set_prologue_found("read_letters")
 
             jump day100_2_desk_branch

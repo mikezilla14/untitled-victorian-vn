@@ -76,6 +76,8 @@ init -1 python:
                 "missy": 0.90    # Instant decay: The Teflon Slate, eager for a friend
             }
 
+        CONFRONTATION_THRESHOLD = 50
+
         @property
         def inspiration_cap(self):
             return 20 + (self.corruption_level * 10)
@@ -214,6 +216,10 @@ init -1 python:
             """Backwards-compatible helper mapping standard modifications to acute suspicion."""
             self.add_suspicion(character, acute_amount=amount)
 
+        def is_confrontation_ready(self, char):
+            """Returns True if char's total suspicion has reached the confrontation threshold."""
+            return self.get_total_suspicion(char) >= self.CONFRONTATION_THRESHOLD
+
         def has_story_fuel(self, required_total=15):
             """
             Read-only writing-gate check.
@@ -269,6 +275,42 @@ init -1 python:
         # ── PROMOTE: Optional character grind chains (Release 1 REFLECT) ──
         VALID_CHAIN_CHARACTERS     = ("stern", "missy", "vance")
         MAX_CHARACTER_CHAIN_LEVEL  = 3
+
+        # Maps (day, time_of_day) → (next_day, next_time, next_label).
+        # Used by advance_after_confrontation. Add one entry per new day/slot.
+        POST_PENANCE_ROUTES = {
+            (1, "Morning"):   (1, "Night",     "day101_4_writing_or_visiting"),
+            (1, "Evening"):   (1, "Night",     "day101_4_writing_or_visiting"),
+            (1, "Night"):     (2, "Morning",   "day102_1_cora_missy_first_shift"),
+            (2, "Morning"):   (2, "Evening",   "day102_3_stern_fetches_cora"),
+            (2, "Afternoon"): (2, "Evening",   "day102_3_stern_fetches_cora"),
+            (2, "Night"):     (3, "Morning",   "day103_morning"),
+            (3, "Morning"):   (3, "Afternoon", "day103_2_suite_gideon_tea"),
+            (3, "Afternoon"): (3, "Night",     "day103_4_room_stern_suspicion"),
+            (3, "Evening"):   (3, "Night",     "day103_4_room_stern_suspicion"),
+            (3, "Night"):     (4, "Morning",   "day104_1"),
+            (4, "Evening"):   (4, "Night",     "day104_5_triumphant_chapter"),
+            (4, "Night"):     (5, "Morning",   "day105_1_monster_reemerges"),
+        }
+
+        # Maps outcome string → (next_day_or_None, next_time_or_None, next_label).
+        # Used by end_slot. None values mean "leave day/time unchanged".
+        # d4_twilight_done is handled in get_slot_exit_target() due to conditional label.
+        SLOT_EXIT_ROUTES = {
+            "d1_reflect_done":   (1, "Night",      "day101_4_writing_or_visiting"),
+            "d1_write_ch1":      (2, "Morning",    "day102_1_cora_missy_first_shift"),
+            "d1_visit_missy":    (2, "Morning",    "day102_1_cora_missy_first_shift"),
+            "d2_reflect_done":   (2, "Evening",    "day102_3_stern_fetches_cora"),
+            "d2_write_night":    (3, "Morning",    "day103_morning"),
+            "d3_reflect_done":   (3, "Afternoon",  "day103_2_suite_gideon_tea"),
+            "d3_twilight_done":  (None, None,      "day103_4_room_stern_suspicion"),
+            "d3_stern_done":     (3, "Night",      "day103_2_suite_night_tea"),
+            "d3_ultimatum_done": (None, None,      "day103_3_bedroom_final_write"),
+            "d3_write_night":    (4, "Morning",    "day104_1"),
+            "d4_write_night":    (None, None,      "day104_6_false_dawn_ending"),
+            "d4_dawn_gate":      (5, "Morning",    "day105_1_monster_reemerges"),
+            "d5_write_night":    (5, "Morning",    "day105_7_release_one_ending"),
+        }
 
         def __init__(self):
             # ── Prologue ───────────────────────────────────────────────
@@ -546,3 +588,25 @@ init -1 python:
             if level >= self.MAX_CHARACTER_CHAIN_LEVEL:
                 return None
             return "{}_chain_{}".format(character, level + 1)
+
+        def complete_chain_beat(self, character):
+            """Advance a character's chain level by one. Call once at the end of any chain scene."""
+            current = self.get_character_chain_level(character)
+            if current < self.MAX_CHARACTER_CHAIN_LEVEL:
+                self._set_chain_level("{}_chain_level".format(character), current + 1)
+
+        def get_post_penance_target(self, current_day, time_of_day):
+            """Pure query — returns (next_day, next_time, next_label). No side effects."""
+            if current_day == 4 and self.penance_triggered:
+                return (4, "Night", "day104_6_false_dawn_ending")
+            return self.POST_PENANCE_ROUTES.get((current_day, time_of_day))
+
+        def consume_penance(self):
+            """Command — clears penance_triggered. Always call explicitly after routing."""
+            self.set_penance_triggered(False)
+
+        def get_slot_exit_target(self, outcome):
+            """Return (next_day_or_None, next_time_or_None, next_label) for end_slot."""
+            if outcome == "d4_twilight_done":
+                return None  # handled in end_slot label (requires player.anxiety check)
+            return self.SLOT_EXIT_ROUTES.get(outcome)

@@ -19,90 +19,26 @@ label check_confrontations:
         # [STATE] State/progression update
         jump game_over_dismissed
 
-    # Confrontation gates checked at the start of non-work personal slots (50%)
-    if player.stern_suspicion >= 50:
-
-        # [STATE] State/progression update
+    # Confrontation gates checked at the start of non-work personal slots.
+    # Threshold is PlayerStats.CONFRONTATION_THRESHOLD — do not hardcode here.
+    if player.is_confrontation_ready("stern"):
         jump confrontation_stern
-    elif player.vance_suspicion >= 50:
-
-        # [STATE] State/progression update
+    elif player.is_confrontation_ready("vance"):
         jump confrontation_vance
-    elif player.missy_suspicion >= 50:
-
-        # [STATE] State/progression update
+    elif player.is_confrontation_ready("missy"):
         jump confrontation_missy
     return
 
 
 label advance_after_confrontation:
-    # Router to advance time after penance, skipping the current personal/ledger/writing slot.
-    if time_manager.current_day == 1:
-        if time_manager.time_of_day == "Evening" or time_manager.time_of_day == "Morning":
-
-            # [STATE] State/progression update
-            $ set_time_period("Night")
-            jump day101_4_writing_or_visiting
-        elif time_manager.time_of_day == "Night":
-
-            # [STATE] State/progression update
-            $ time_manager.set_current_day(2)
-            $ set_time_period("Morning")
-            jump day102_1_cora_missy_first_shift
-
-    elif time_manager.current_day == 2:
-        if time_manager.time_of_day == "Afternoon" or time_manager.time_of_day == "Morning":
-
-            # [STATE] State/progression update
-            $ set_time_period("Evening")
-            jump day102_3_stern_fetches_cora
-        elif time_manager.time_of_day == "Night":
-
-            # [STATE] State/progression update
-            $ time_manager.set_current_day(3)
-            $ set_time_period("Morning")
-            jump day103_morning
-
-    elif time_manager.current_day == 3:
-        if time_manager.time_of_day == "Morning":
-
-            # [STATE] State/progression update
-            $ set_time_period("Afternoon")
-            jump day103_2_suite_gideon_tea
-        elif time_manager.time_of_day == "Evening" or time_manager.time_of_day == "Afternoon":
-
-            # [STATE] State/progression update
-            $ set_time_period("Night")
-            jump day103_4_room_stern_suspicion
-        elif time_manager.time_of_day == "Night":
-
-            # [STATE] State/progression update
-            $ time_manager.set_current_day(4)
-            $ set_time_period("Morning")
-            jump day104_1_false_dawn_suite_window
-
-    elif time_manager.current_day == 4:
-        # Day 4 penance consumes writing time before bed, resulting in a draft failure at dawn.
-        if story.penance_triggered:
-
-            # [STATE] State/progression update
-            $ story.set_penance_triggered(False)
-            $ set_time_period("Night")
-            jump day104_6_false_dawn_ending
-        else:
-            if time_manager.time_of_day == "Evening":
-
-                # [STATE] State/progression update
-                $ set_time_period("Night")
-                jump day104_5_triumphant_chapter
-            elif time_manager.time_of_day == "Night":
-
-                # [STATE] State/progression update
-                $ time_manager.set_current_day(5)
-                $ set_time_period("Morning")
-                jump day105_1_monster_reemerges
-
-    return
+    # [STATE] Route lookup — add new days in StoryState.POST_PENANCE_ROUTES (classes_non_canon.rpy)
+    $ _target = story.get_post_penance_target(time_manager.current_day, time_manager.time_of_day)
+    $ story.consume_penance()
+    if _target is None:
+        return
+    $ time_manager.set_current_day(_target[0])
+    $ set_time_period(_target[1])
+    jump expression _target[2]
 
 
 # ==============================================================================
@@ -135,11 +71,11 @@ label stern_chain_1:
     
     # [CHOICE] Decision point
     menu:
-        "Lower my head and act like a simple, stupid country girl. [Shed Suspicion / Break Chain]":
+        "Lower my head and act like a simple, stupid country girl. [[Shed Suspicion / Break Chain]]":
 
             # [STATE] Safe path: closes loop, drops suspicion
             $ apply_effects(stern_susp=-10, insp=5, corr=0)
-            $ story.set_stern_chain_level(1)
+            $ story.complete_chain_beat("stern")
             
             cora "Outward, Ma'am. Missy showed me, and I made sure to repeat it exactly so as not to offend."
             stern "Exactly is a large word for a small mind. Keep to that simple standard, Cora, and the Strand will remain a distant worry."
@@ -147,11 +83,11 @@ label stern_chain_1:
             "She dismisses me with a slight twitch of her chin."
             "My safety costs nothing but my pride. The door to her private ledger is shut."
 
-        "Explain the geometry of the fold, meeting her gaze. [Lean Into Tension / Progress Chain]":
+        "Explain the geometry of the fold, meeting her gaze. [[Lean Into Tension / Progress Chain]]":
 
             # [STATE] Charged path: locks in progression, spikes stats
             $ apply_effects(stern_susp=15, insp=15, corr=5)
-            $ story.set_stern_chain_level(1)
+            $ story.complete_chain_beat("stern")
             
             cora "The outward stitch preserves the line of the silk, Ma'am. It prevents friction against the mahogany frame, keeping the fabric warm to the touch."
             
@@ -195,22 +131,22 @@ label stern_chain_2:
     
     # [CHOICE] Decision point
     menu:
-        "Apologize and call it a spelling exercise. [Shed Suspicion / Break Chain]":
+        "Apologize and call it a spelling exercise. [[Shed Suspicion / Break Chain]]":
 
             # [STATE] Safe path: closes loop
             $ apply_effects(stern_susp=-10, insp=5, corr=0)
-            $ story.set_stern_chain_level(2)
+            $ story.complete_chain_beat("stern")
             
             cora "Only my letters, Ma'am. My mother said a maid who cannot spell the inventory is of no use to a fine house."
             stern "Your mother was sensible. Keep to spelling 'apron' and 'lye', Cora. Leave the long words to those who do not have to wash them."
             
             "She draws her hand back and leaves. The notebook is safe, but the ink in my veins feels cold."
 
-        "Hold the notebook tight. Read her a scandalous anonymous passage. [Progress Chain]":
+        "Hold the notebook tight. Read her a scandalous anonymous passage. [[Progress Chain]]":
 
             # [STATE] Charged path: Level 3/4 tension, high suspicion spike
             $ apply_effects(stern_susp=20, insp=20, corr=10)
-            $ story.set_stern_chain_level(2)
+            $ story.complete_chain_beat("stern")
             
             cora "I was writing about the west corridor, Ma'am."
             stern "Speak plainly, girl."
@@ -256,11 +192,11 @@ label stern_chain_3:
     
     # [CHOICE] Decision point
     menu:
-        "Pretend to see only rubbish. [Shed Suspicion / Break Chain]":
+        "Pretend to see only rubbish. [[Shed Suspicion / Break Chain]]":
 
             # [STATE] Safe path: closes loop
             $ apply_effects(stern_susp=-15, insp=5, corr=0)
-            $ story.set_stern_chain_level(3)
+            $ story.complete_chain_beat("stern")
             
             cora "Dust, Ma'am. And scraps that should have been swept before the second floor shift."
             stern "Correct. A drawer is a box for linens, not a confessional."
@@ -268,11 +204,11 @@ label stern_chain_3:
             "She nods, satisfied with my simple maid's mask."
             "I remain a ghost in her hotel, safe but starved for the book's ending."
 
-        "Audit the stubs, stepping into her personal space. [Progress Chain / Level 4 Tease]":
+        "Audit the stubs, stepping into her personal space. [[Progress Chain / Level 4 Tease]]":
 
             # [STATE] Charged path: Level 4 tease, triggers Penance checkpoint
             $ apply_effects(stern_susp=20, insp=20, corr=20)
-            $ story.set_stern_chain_level(3)
+            $ story.complete_chain_beat("stern")
             
             cora "I see a banker's draft stub, Ma'am. And a dry rose from a florist on the Strand that closed last month."
             cora "The guest was spending money he did not yet have, on a woman who did not want to wait for it."
@@ -331,11 +267,11 @@ label missy_chain_1:
     
     # [CHOICE] Decision point
     menu:
-        "Help her stitch it silently. Comfort her. [Shed Suspicion / Break Chain]":
+        "Help her stitch it silently. Comfort her. [[Shed Suspicion / Break Chain]]":
 
             # [STATE] Safe path: closes loop
             $ apply_effects(missy_susp=-10, insp=10, corr=0)
-            $ story.set_missy_chain_level(1)
+            $ story.complete_chain_beat("missy")
             
             cora "Give it here. My mother taught me the French seam. It hides the raw edge completely."
             "I take the needle. We sit together in the steam, our shoulders touching."
@@ -344,11 +280,11 @@ label missy_chain_1:
             
             "Her trust feels heavy. But it keeps my cover secure."
 
-        "Stroke her cheek, questioning her for sensory details. [Progress Chain]":
+        "Stroke her cheek, questioning her for sensory details. [[Progress Chain]]":
 
             # [STATE] Charged path: Level 3/4 tactile intimacy
             $ apply_effects(missy_susp=10, insp=10, corr=5)
-            $ story.set_missy_chain_level(1)
+            $ story.complete_chain_beat("missy")
             
             cora "Did he shout? What did his voice sound like when he threw them? Was it the wine, or something else?"
             
@@ -391,22 +327,22 @@ label missy_chain_2:
 
     # [CHOICE] Decision point
     menu:
-        "Tell her to keep quiet for her own safety. [Shed Suspicion / Break Chain]":
+        "Tell her to keep quiet for her own safety. [[Shed Suspicion / Break Chain]]":
 
             # [STATE] Safe path: closes loop
             $ apply_effects(missy_susp=-15, insp=10, corr=0)
-            $ story.set_missy_chain_level(2)
+            $ story.complete_chain_beat("missy")
             
             cora "Don't look at it again, Missy. Valets keep secrets because they are paid to. We are paid only to wash the sheets."
             missy "You're right. I'll forget I ever saw it."
             
             "She smiles, relieved by my caution. The secret stays safe."
 
-        "Press her chest-to-chest in the dark, whispering. [Progress Chain]":
+        "Press her chest-to-chest in the dark, whispering. [[Progress Chain]]":
 
             # [STATE] Charged path: High intimacy, Level 3/4 tension
             $ apply_effects(missy_susp=15, insp=15, corr=10)
-            $ story.set_missy_chain_level(2)
+            $ story.complete_chain_beat("missy")
             
             "The broom closet is tiny, smelling of cedar oil and damp aprons."
             "We are pressed chest-to-chest, our breathing echoing in the small enclosure."
@@ -447,11 +383,11 @@ label missy_chain_3:
     
     # [CHOICE] Decision point
     menu:
-        "Apologize. Tear the page. Beg her forgiveness. [Shed Suspicion / Break Chain]":
+        "Apologize. Tear the page. Beg her forgiveness. [[Shed Suspicion / Break Chain]]":
 
             # [STATE] Safe path: closes loop
             $ apply_effects(missy_susp=-20, insp=5, corr=0)
-            $ story.set_missy_chain_level(3)
+            $ story.complete_chain_beat("missy")
             
             cora "It was a draft, Missy. A stupid, cruel exercise. I was trying to find the words, and I used what was closest."
             "I take the page and tear it into four pieces before her."
@@ -459,11 +395,11 @@ label missy_chain_3:
             
             "She looks at the torn paper, then at me. The wound remains, but the suspicion is broken."
 
-        "Defend the writing, unlacing her outer maid apron. [Progress Chain / Level 4 Tease]":
+        "Defend the writing, unlacing her outer maid apron. [[Progress Chain / Level 4 Tease]]":
 
             # [STATE] Charged path: Level 4 tease, triggers Penance checkpoint
             $ apply_effects(missy_susp=20, insp=20, corr=20)
-            $ story.set_missy_chain_level(3)
+            $ story.complete_chain_beat("missy")
             
             cora "It is a story, Missy. A beautiful one. It shows how much better you are than the sheets you wash."
             
@@ -516,11 +452,11 @@ label vance_chain_1:
     
     # [CHOICE] Decision point
     menu:
-        "Return it silently with a perfect maid's bow. [Shed Suspicion / Break Chain]":
+        "Return it silently with a perfect maid's bow. [[Shed Suspicion / Break Chain]]":
 
             # [STATE] Safe path: closes loop
             $ apply_effects(vance_susp=-10, insp=5, corr=0)
-            $ story.set_vance_chain_level(1)
+            $ story.complete_chain_beat("vance")
             
             cora "Your handkerchief, Miss."
             "I offer it on my flat palm, my eyes fixed on her hem."
@@ -529,11 +465,11 @@ label vance_chain_1:
             
             "She sweeps past. Low risk, minimal reward."
 
-        "Cover it with my shoe, sliding it into my apron. [Progress Chain]":
+        "Cover it with my shoe, sliding it into my apron. [[Progress Chain]]":
 
             # [STATE] Charged path: Level 3 voyeurism
             $ apply_effects(vance_susp=15, insp=15, corr=5)
-            $ story.set_vance_chain_level(1)
+            $ story.complete_chain_beat("vance")
             
             "I step forward, cover the silk with my shoe, and slide it into my apron pocket."
             "Later, from the end of the hall, I watch her search her sleeve, her face tightening with a petulant panic."
@@ -565,20 +501,20 @@ label vance_chain_2:
 
     # [CHOICE] Decision point
     menu:
-        "Slip past silently in the shadows. [Shed Suspicion / Break Chain]":
+        "Slip past silently in the shadows. [[Shed Suspicion / Break Chain]]":
 
             # [STATE] Safe path: closes loop
             $ apply_effects(vance_susp=-15, insp=5, corr=0)
-            $ story.set_vance_chain_level(2)
+            $ story.complete_chain_beat("vance")
             
             "I step back into the shadow of the doorway. I do not breathe."
             "She does not see me. My cover is safe."
 
-        "Confront her. Wipe a tear with my rough thumb. [Progress Chain]":
+        "Confront her. Wipe a tear with my rough thumb. [[Progress Chain]]":
 
             # [STATE] Charged path: Level 3/4 dominance play
             $ apply_effects(vance_susp=15, insp=20, corr=10)
-            $ story.set_vance_chain_level(2)
+            $ story.complete_chain_beat("vance")
             
             "I step out of the shadow, standing directly before her."
             "I watch the way she catches her breath, the petulance of her grief."
@@ -623,22 +559,22 @@ label vance_chain_3:
     
     # [CHOICE] Decision point
     menu:
-        "Play the simple country potato maid. [Shed Suspicion / Break Chain]":
+        "Play the simple country potato maid. [[Shed Suspicion / Break Chain]]":
 
             # [STATE] Safe path: closes loop
             $ apply_effects(vance_susp=-20, insp=5, corr=0)
-            $ story.set_vance_chain_level(3)
+            $ story.complete_chain_beat("vance")
             
             cora "I saw nothing, Miss. I only came to turn down the blankets. I am very simple and do not know the guests' business."
             vance "Simple. Yes. You look like a potato."
             
             "She turns away, dismissed by my performance. My cover is safe."
 
-        "Audit her collar marks, cornering her against the vanity. [Progress Chain / Level 4 Tease]":
+        "Audit her collar marks, cornering her against the vanity. [[Progress Chain / Level 4 Tease]]":
 
             # [STATE] Charged path: Level 4 tease, triggers Penance checkpoint
             $ apply_effects(vance_susp=20, insp=20, corr=20)
-            $ story.set_vance_chain_level(3)
+            $ story.complete_chain_beat("vance")
             
             cora "I see a lady who is afraid of a key, Miss."
             cora "And a master who does not need to raise his voice to make her kneel."
@@ -743,85 +679,35 @@ label confrontation_missy:
     missy "I know what you are, Cora. You're a spy. You've been using me. You've been watching Vance and Locke and writing it down."
     missy "I won't let you ruin me. If Stern asks, I'll tell her everything."
 
-    # [CHOICE] Decision point
-    menu:
-        "Plead with her. Offer to help her finish her extra shifts tonight.":
+    # [STATE] State/progression update
+    $ apply_effects(missy_susp=-35, insp=5)
+    $ story.set_penance_triggered(True)
 
-            # [STATE] State/progression update
-            $ apply_effects(missy_susp=-35, insp=5, corr=0)
-            $ story.set_penance_triggered(True)
-            
-            cora "Missy, please. If you tell her, I am ruined. Let me help you. I'll do the night tubs for you."
-            
-            missy "You'll... you'll do my shifts?"
-            
-            cora "Yes. Every sheet."
-            
-            "She stares at me, then nods slowly, her face hardened by my betrayal."
-            
-            missy "Then get to the boilers. And don't speak to me again."
+    cora "Missy, please. If you tell her, I am ruined. Let me help you. I'll do the night tubs for you."
 
-            # [ASSET] Visual/staging command
-            hide missy_sprite
+    missy "You'll... you'll do my shifts?"
 
-            "I spend the night in the steam and lye, carrying the weight of both our shifts."
-            "My ambition is buried under wet cotton. I cannot write a single line."
+    cora "Yes. Every sheet."
 
-            # [STATE] State/progression update
-            jump advance_after_confrontation
+    "She stares at me, then nods slowly, her face hardened by my betrayal."
+
+    missy "Then get to the boilers. And don't speak to me again."
+
+    # [ASSET] Visual/staging command
+    hide missy_sprite
+
+    "I spend the night in the steam and lye, carrying the weight of both our shifts."
+    "My ambition is buried under wet cotton. I cannot write a single line."
+
+    # [STATE] State/progression update
+    jump advance_after_confrontation
 
 
 # ==============================================================================
-# 6. DEADLINE FAIL STATE LABELS (SPEC SPECIFICATION)
+# 6. DEADLINE FAIL STATE LABELS (DELEGATED TO ENDINGS.RPY)
 # ==============================================================================
-
-label game_over_deadline_1:
-
-    # [ASSET] Visual/staging command
-    hide screen stats_overlay
-    sys "═══ GAME OVER: FIRST DEADLINE FAILED ═══"
-    cora "I stare at the blank page."
-    cora "Day 2 has ended, and I have not even written the first chapter."
-    cora "Without a single page of progress, my ambition is nothing but a childish delusion."
-    cora "I cannot face the publisher. I cannot face the page."
-    cora "I have failed before I even truly began."
-    sys "[[GAME OVER. You failed to write Chapter 1 by Day 2 Night. Manage your time and stats to ensure you have enough inspiration to write.]"
-    return
-
-label game_over_deadline_2:
-
-    # [ASSET] Visual/staging command
-    hide screen stats_overlay
-    sys "═══ GAME OVER: DRAFT DEADLINE FAILED ═══"
-    cora "The night of Day 4 passes into grey dawn."
-    cora "My desk is littered with scraps of paper, but the draft is incomplete. I have only one chapter done."
-    cora "The publisher's courier will arrive tomorrow. I have nothing to give him but excuses."
-    cora "I have lost my chance. The door is closed."
-    sys "[[GAME OVER. You failed to complete a second chapter/draft by Day 4 Night. Balance your stats and avoid confrontations to protect your writing slots!]"
-    return
-
-
-label game_over_dismissed:
-
-    # [ASSET] Visual/staging command
-    hide screen stats_overlay
-
-    sys "═══ GAME OVER: NERVOUS BREAKDOWN ═══"
-
-    cora "I could not keep the walls of my mind standing."
-    cora "It was not a single eye that caught me. It was the weight of them all."
-    cora "Vance's sharp contempt, Missy's mounting fear, Stern's cold, measuring gaze... they accumulated in my chest like lead."
-    cora "The weight of their combined eyes cracks my mask."
-    cora "I made a fatal slip in my duties, and Miss Stern found absolute cause to dismiss me."
-    
-    stern "Pack your things. A girl whose nerves are in such tatters cannot be trusted with the Savoy's quiet."
-    
-    cora "My hands were shaking too hard to tie my trunk. I stood on the Strand with nothing but a ruined reputation and the memory of electric light."
-    cora "Without a character, London is a very cold, very hungry place."
-
-    sys "[[GAME OVER. Your accumulated Anxiety reached 100%, causing a complete breakdown and leading to your dismissal. Manage your internal strain by spreading suspicion across different characters and triggering penances before your nerves fail you.]"
-
-    return
+# The game over labels (game_over_deadline_1, game_over_deadline_2, game_over_dismissed)
+# are defined in game/endings.rpy to prevent duplicate definitions in Ren'Py.
 
 
 # ==============================================================================
@@ -830,98 +716,25 @@ label game_over_dismissed:
 
 label end_slot(outcome):
 
-    # This centralized router handles ending slots, setting clock time and day, and jumping to next label.
-    if outcome == "d1_reflect_done":
-
-        # [STATE] State/progression update
-        $ set_time_period("Night")
-        jump day101_4_writing_or_visiting
-
-    elif outcome == "d1_write_ch1":
-
-        # [STATE] State/progression update
-        $ time_manager.set_current_day(2)
-        $ set_time_period("Morning")
-        jump day102_1_cora_missy_first_shift
-
-    elif outcome == "d1_visit_missy":
-
-        # [STATE] State/progression update
-        $ time_manager.set_current_day(2)
-        $ set_time_period("Morning")
-        jump day102_1_cora_missy_first_shift
-
-    elif outcome == "d2_reflect_done":
-
-        # [STATE] State/progression update
-        $ set_time_period("Evening")
-        jump day102_3_stern_fetches_cora
-
-    elif outcome == "d2_write_night":
-
-        # [STATE] State/progression update
-        $ time_manager.set_current_day(3)
-        $ set_time_period("Morning")
-        jump day103_morning
-
-    elif outcome == "d3_reflect_done":
-
-        # [STATE] State/progression update
-        $ set_time_period("Afternoon")
-        jump day103_2_suite_gideon_tea
-
-    elif outcome == "d3_twilight_done":
-
-        # [STATE] State/progression update
-        jump day103_4_room_stern_suspicion
-
-    elif outcome == "d3_stern_done":
-
-        # [STATE] State/progression update
-        $ set_time_period("Night")
-        jump day103_2_suite_night_tea
-
-    elif outcome == "d3_ultimatum_done":
-
-        # [STATE] State/progression update
-        jump day103_3_bedroom_final_write
-
-    elif outcome == "d3_write_night":
+    # d4_twilight_done requires player.anxiety — handled here; all others via SLOT_EXIT_ROUTES.
+    if outcome == "d4_twilight_done":
 
         # [STATE] State/progression update
         $ time_manager.set_current_day(4)
-        $ set_time_period("Morning")
-        jump day104_1_false_dawn_suite_window
-
-    elif outcome == "d4_twilight_done":
-
-        # [STATE] State/progression update
         $ set_time_period("Night")
-        if story.penance_triggered or player.anxiety >= 85:
-
-            # [STATE] State/progression update
+        $ _penance_flag = story.penance_triggered
+        $ story.consume_penance()
+        if _penance_flag or player.anxiety >= 85:
             jump day104_6_false_dawn_ending
         else:
-
-            # [STATE] State/progression update
             jump day104_5_triumphant_chapter
 
-    elif outcome == "d4_write_night":
-
-        # [STATE] State/progression update
-        jump day104_6_false_dawn_ending
-
-    elif outcome == "d4_dawn_gate":
-
-        # [STATE] State/progression update
-        $ time_manager.set_current_day(5)
-        $ set_time_period("Morning")
-        jump day105_1_monster_reemerges
-
-    elif outcome == "d5_write_night":
-
-        # [STATE] State/progression update
-        $ set_time_period("Morning")
-        jump day105_7_release_one_ending
-
-    return
+    # [STATE] Route lookup — add new slots in StoryState.SLOT_EXIT_ROUTES (classes_non_canon.rpy)
+    $ _target = story.get_slot_exit_target(outcome)
+    if _target is None:
+        return
+    if _target[0] is not None:
+        $ time_manager.set_current_day(_target[0])
+    if _target[1] is not None:
+        $ set_time_period(_target[1])
+    jump expression _target[2]

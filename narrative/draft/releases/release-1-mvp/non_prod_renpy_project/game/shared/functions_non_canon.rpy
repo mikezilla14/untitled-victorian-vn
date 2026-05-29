@@ -67,11 +67,11 @@ init python:
         """
         time_manager.set_time_of_day(period)
 
-    def attempt_write(required_insp=30, cost=20):
+    def attempt_write(required_insp=30, cost=20, required_corr=30):
         """
         Shared writing-gate helper.
         """
-        if player.inspiration < required_insp:
+        if player.inspiration < required_insp or player.corruption_level < required_corr:
             return False
         return player.spend_inspiration(cost)
 
@@ -81,3 +81,12 @@ init python:
         Player dismisses it with a click; then the script continues.
         """
         renpy.call_screen("ledger_ui")
+
+    def has_story_fuel(required_insp=30, required_corr=30):
+        """
+        Read-only writing-gate check.
+        Returns True if:
+        1. Inspiration available is >= required_insp (defaults to 30).
+        2. Corruption level is >= required_corr (defaults to 30).
+        """
+        return player.has_story_fuel(required_insp, required_corr)
