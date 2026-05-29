@@ -1,0 +1,85 @@
+{
+  "policyVersion": 1,
+  "mode": "solo",
+  "template": "solo_recommended",
+  "rules": {
+    "ai": {
+      "enabled": false,
+      "allowExternalProviders": false,
+      "allowModelDownloads": false
+    },
+    "repos": {
+      "allowExternalRepositories": false
+    },
+    "fs": {
+      "allowReadOutsideProject": {
+        "value": false,
+        "severity": "enforce"
+      },
+      "allowSymlinksOutsideProject": {
+        "value": false,
+        "severity": "enforce"
+      }
+    },
+    "media": {
+      "maxImageSizeMB": {
+        "value": 2,
+        "severity": "warn"
+      },
+      "maxAudioSizeMB": {
+        "value": 10,
+        "severity": "warn"
+      },
+      "maxVideoSizeMB": {
+        "value": 50,
+        "severity": "warn"
+      },
+      "maxTotalMediaMB": {
+        "value": 500,
+        "severity": "warn"
+      },
+      "allowedFormats": {
+        "image": [
+          "png",
+          "webp",
+          "jpg",
+          "jpeg"
+        ],
+        "audio": [
+          "ogg",
+          "wav",
+          "mp3"
+        ],
+        "video": [
+          "webm",
+          "mp4"
+        ]
+      }
+    },
+    "telemetry": {
+      "enabled": true,
+      "retentionDays": {
+        "value": 90,
+        "severity": "enforce"
+      },
+      "allowUpload": false
+    }
+  },
+  "roleCaps": {
+    "owner": {
+      "canEditBQF": true,
+      "canUseAI": true,
+      "canUseExternalRepos": true
+    },
+    "admin": {
+      "canEditBQF": true,
+      "canUseAI": true,
+      "canUseExternalRepos": false
+    },
+    "user": {
+      "canEditBQF": false,
+      "canUseAI": false,
+      "canUseExternalRepos": false
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /c/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn diff HEAD -- \"narrative/draft/releases/release-1-mvp/non_prod_renpy_project/shared/story_chains_non_canon.rpy\")",
+      "Bash(git -C /c/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn diff HEAD -- \"renpy_project/game/story_chains.rpy\")",
+      "Bash(git -C /c/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn status)"
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+config_version = "1.0"
+
+[project]
+engine = "renpy"
+
+[paths]
+source = "game"
+reports = ".branchpy/reports"
+
+[version]
+branchpy = ">=0.6.95"
+created_with = "VSCode Addon Wizard"
+
+[project]
+name = "untitled-victorian-vn"
+root = "."
+engine = "renpy"
+language = "en"
+
+[serve]
+port = 8765
+open_browser = false
+token_mode = "per_boot"
+bind = "127.0.0.1"
+
+[git]
+
+install_hooks = false

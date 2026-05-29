@@ -132,7 +132,7 @@ label day102_1_cora_takes_the_thing:
     show missy_sprite confused at center
 
     $ story.set_day2_contraband_state("stolen_wearing")
-    $ apply_effects(susp=5, insp=0, corr=15)
+    $ apply_effects(vance_susp=5, insp=0, corr=15)
 
     cora "Give it here."
 
@@ -185,7 +185,7 @@ label day102_1_cora_deceives_missy:
     show missy_sprite confused at center
 
     $ story.set_day2_contraband_state("planted_in_trunk")
-    $ apply_effects(susp=0, insp=5, corr=10)
+    $ apply_effects(vance_susp=0, insp=5, corr=10)
 
     cora "Put it away. Quickly."
 
@@ -231,11 +231,12 @@ label day102_1_cora_deceives_missy:
 
 label day102_2_day2_chore_time:
 
-    call check_confrontations
-
     # [STATE] State/progression update
     $ set_time_period("Afternoon")
 
+    call check_confrontations
+
+    # [ASSET] Visual/staging command
     scene bg_servants_corridor_morning
     with dissolve
 
@@ -289,7 +290,7 @@ label day102_2_day2_insp_choice:
     show missy_sprite smiling at center
 
     $ story.set_day2_chore_focus("inspiration")
-    $ apply_effects(susp=-5, insp=15, corr=0)
+    $ apply_effects(stern_susp=-5, insp=15, corr=0)
 
     "I make the morning into inventory."
     "The direction of the light in the suite. The scent of Vance's powder. The exact stiffness in Missy's shoulders when she lies badly to herself."
@@ -324,7 +325,7 @@ label day102_2_day2_corr_choice:
     show missy_sprite confused at center
 
     $ story.set_day2_chore_focus("corruption")
-    $ apply_effects(susp=10, insp=0, corr=15)
+    $ apply_effects(vance_susp=10, insp=0, corr=15)
 
     "I slow the cart near the guest wing."
     "There are always reasons. A folded towel not square enough. A dropped pin. A scuff on polished wood that may or may not exist."
@@ -486,17 +487,17 @@ label day102_3_coras_choice:
     menu:
         "What do I do?"
 
-        "Confess enough to control the damage. [Prey: visible risk, cleanest conscience]":
+        "Confess enough to control the damage. [[Prey: visible risk, cleanest conscience]]":
 
             # [STATE] State/progression update
             jump day102_3_cora_confesses
 
-        "Produce it as if discovering it now. [Predator: controlled lie]":
+        "Produce it as if discovering it now. [[Predator: controlled lie]]":
 
             # [STATE] State/progression update
             jump day102_3_cora_pretends_to_find_it
 
-        "Let Missy take the shape of the blame. [Ghost: clean hands, dirty outcome]":
+        "Let Missy take the shape of the blame. [[Ghost: clean hands, dirty outcome]]":
 
             # [STATE] State/progression update
             jump day102_3_cora_frames_missy
@@ -513,7 +514,7 @@ label day102_3_cora_confesses:
     show missy_sprite shocked at right
 
     $ story.set_day2_tea_choice("prey")
-    $ apply_effects(susp=20, insp=15, corr=0)
+    $ apply_effects(stern_susp=20, insp=15, corr=0)
 
     "The truth is not safe."
     "That does not make the lie safer."
@@ -562,7 +563,7 @@ label day102_3_cora_pretends_to_find_it:
     show missy_sprite shocked at right
 
     $ story.set_day2_tea_choice("predator")
-    $ apply_effects(susp=10, insp=5, corr=15)
+    $ apply_effects(stern_susp=10, insp=5, corr=15)
 
     "Helpful."
     "That is the mask."
@@ -627,7 +628,7 @@ label day102_3_cora_frames_missy:
 
     $ story.set_day2_tea_choice("ghost")
     $ story.set_missy_day2_trust_break(True)
-    $ apply_effects(susp=0, insp=0, corr=20)
+    $ apply_effects(vance_susp=0, insp=0, corr=20)
 
     "There is a version of me that protects Missy."
     "She exists."
@@ -866,11 +867,12 @@ label day102_3_gideon_interrupts_controls_vance:
 
 label day102_4_night:
 
-    call check_confrontations
-
     # [STATE] State/progression update
     $ set_time_period("Night")
 
+    call check_confrontations
+
+    # [ASSET] Visual/staging command
     scene bg_cora_desk_night
     with dissolve
 
@@ -887,7 +889,7 @@ label day102_4_night:
     menu:
         "What do I do with the night?"
 
-        "Write. Turn the suite into fiction before it rots. [Manuscript progress]":
+        "Write. Turn the suite into fiction before it rots. [[Manuscript progress]]":
 
             # [STATE] State/progression update
             jump day102_4_cora_writes_a_chapter
@@ -924,7 +926,7 @@ label day102_4_cora_writes_a_chapter:
 
             # [STATE] State/progression update
             $ story.complete_manuscript_chapter("day1_chapter")
-            $ apply_effects(susp=0, insp=-10, corr=0)
+            $ apply_effects(vance_susp=0, insp=-10, corr=0)
 
             "Chapter One is done."
             "Late is not failure."
@@ -967,7 +969,7 @@ label day102_4_cora_writes_a_chapter:
 
             # [STATE] State/progression update
             $ story.complete_manuscript_chapter("day2_chapter")
-            $ apply_effects(susp=0, insp=-15, corr=0)
+            $ apply_effects(vance_susp=0, insp=-15, corr=0)
 
             "By the time the candle shortens, the second chapter exists."
             "It is better than the first."

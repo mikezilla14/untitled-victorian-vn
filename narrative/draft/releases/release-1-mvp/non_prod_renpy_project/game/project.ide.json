@@ -1,0 +1,803 @@
+{
+  "draftingMode": false,
+  "storyCanvasLayoutMode": "flow-lr",
+  "storyCanvasGroupingMode": "none",
+  "storyCanvasLayoutVersion": 2,
+  "storyCanvasLayoutWasUserAdjusted": true,
+  "routeCanvasLayoutMode": "flow-lr",
+  "routeCanvasGroupingMode": "none",
+  "routeCanvasLayoutVersion": 2,
+  "routeCanvasLayoutWasUserAdjusted": false,
+  "storyElementsTabState": {
+    "activeSubTab": "characters"
+  },
+  "storyCanvasLayoutFingerprint": "v2;mode=flow-lr;group=none;blocks=game/assets_manifest.rpy:320x200|game/characters.rpy:320x200|game/days/day100_non_canon.rpy:320x200|game/days/day101_non_canon.rpy:320x200|game/days/day102_non_canon.rpy:320x200|game/days/day103_non_canon.rpy:320x200|game/days/day104_non_canon.rpy:320x200|game/days/day105_non_canon.rpy:320x200|game/endings.rpy:320x200|game/gui.rpy:320x200|game/options.rpy:320x200|game/screens.rpy:320x200|game/script.rpy:320x200|game/variables.rpy:320x200|shared/classes_non_canon.rpy:320x200|shared/functions_non_canon.rpy:320x200|shared/story_chains_non_canon.rpy:320x200;links=block-12-1779916681690->block-16-1779916681690:jump|block-12-1779916681690->block-3-1779916681690:jump|block-16-1779916681690->block-3-1779916681690:jump|block-16-1779916681690->block-4-1779916681690:jump|block-16-1779916681690->block-5-1779916681690:jump|block-16-1779916681690->block-6-1779916681690:jump|block-16-1779916681690->block-7-1779916681690:jump|block-2-1779916681690->block-3-1779916681690:jump|block-3-1779916681690->block-16-1779916681690:call|block-4-1779916681690->block-16-1779916681690:call|block-5-1779916681690->block-16-1779916681690:call|block-5-1779916681690->block-6-1779916681690:jump|block-6-1779916681690->block-16-1779916681690:call|block-6-1779916681690->block-7-1779916681690:jump",
+  "storyCanvasHasAutocentered": false,
+  "routeCanvasLayoutFingerprint": "v2;mode=flow-lr;group=none;nodes=block-12-1779916681690:check_suspicion:script.rpy:180x40|block-12-1779916681690:start:script.rpy:180x40|block-16-1779916681690:advance_after_confrontation:story_chains_non_canon.rpy:180x40|block-16-1779916681690:check_confrontations:story_chains_non_canon.rpy:180x40|block-16-1779916681690:confrontation_missy:story_chains_non_canon.rpy:180x40|block-16-1779916681690:confrontation_stern:story_chains_non_canon.rpy:180x40|block-16-1779916681690:confrontation_vance:story_chains_non_canon.rpy:180x40|block-16-1779916681690:game_over_deadline_1:story_chains_non_canon.rpy:180x40|block-16-1779916681690:game_over_deadline_2:story_chains_non_canon.rpy:180x40|block-16-1779916681690:game_over_dismissed:story_chains_non_canon.rpy:180x40|block-16-1779916681690:missy_chain_1:story_chains_non_canon.rpy:180x40|block-16-1779916681690:missy_chain_2:story_chains_non_canon.rpy:180x40|block-16-1779916681690:missy_chain_3:story_chains_non_canon.rpy:180x40|block-16-1779916681690:stern_chain_1:story_chains_non_canon.rpy:180x40|block-16-1779916681690:stern_chain_2:story_chains_non_canon.rpy:180x40|block-16-1779916681690:stern_chain_3:story_chains_non_canon.rpy:180x40|block-16-1779916681690:vance_chain_1:story_chains_non_canon.rpy:180x40|block-16-1779916681690:vance_chain_2:story_chains_non_canon.rpy:180x40|block-16-1779916681690:vance_chain_3:story_chains_non_canon.rpy:180x40|block-2-1779916681690:day100_2_desk_branch:day100_non_canon.rpy:180x40|block-2-1779916681690:day100_2_discovery_flashback:day100_non_canon.rpy:180x40|block-2-1779916681690:day100_2_parlour_branch:day100_non_canon.rpy:180x40|block-2-1779916681690:day100_2_reconvergence:day100_non_canon.rpy:180x40|block-2-1779916681690:day100_3_awakening:day100_non_canon.rpy:180x40|block-2-1779916681690:day100_main:day100_non_canon.rpy:180x40|block-3-1779916681690:day101_1_cora_waiting:day101_non_canon.rpy:180x40|block-3-1779916681690:day101_1_morning_interview:day101_non_canon.rpy:180x40|block-3-1779916681690:day101_1_vance_throws_toy:day101_non_canon.rpy:180x40|block-3-1779916681690:day101_2_coras_path_choice:day101_non_canon.rpy:180x40|block-3-1779916681690:day101_2_missy_meets_cora:day101_non_canon.rpy:180x40|block-3-1779916681690:day101_3_corruption_choice:day101_non_canon.rpy:180x40|block-3-1779916681690:day101_3_inspiration_choice:day101_non_canon.rpy:180x40|block-3-1779916681690:day101_3_optional_character_chain:day101_non_canon.rpy:180x40|block-3-1779916681690:day101_3_taking_stock_day1:day101_non_canon.rpy:180x40|block-3-1779916681690:day101_4_visit_missy:day101_non_canon.rpy:180x40|block-3-1779916681690:day101_4_write_the_chapter:day101_non_canon.rpy:180x40|block-3-1779916681690:day101_4_writing_or_visiting:day101_non_canon.rpy:180x40|block-3-1779916681690:day101_main:day101_non_canon.rpy:180x40|block-4-1779916681690:day102_1_cora_deceives_missy:day102_non_canon.rpy:180x40|block-4-1779916681690:day102_1_cora_missy_first_shift:day102_non_canon.rpy:180x40|block-4-1779916681690:day102_1_cora_takes_the_thing:day102_non_canon.rpy:180x40|block-4-1779916681690:day102_1_missy_finds_a_thing:day102_non_canon.rpy:180x40|block-4-1779916681690:day102_2_day2_chore_time:day102_non_canon.rpy:180x40|block-4-1779916681690:day102_2_day2_corr_choice:day102_non_canon.rpy:180x40|block-4-1779916681690:day102_2_day2_insp_choice:day102_non_canon.rpy:180x40|block-4-1779916681690:day102_2_optional_character_chain:day102_non_canon.rpy:180x40|block-4-1779916681690:day102_3_cora_confesses:day102_non_canon.rpy:180x40|block-4-1779916681690:day102_3_cora_frames_missy:day102_non_canon.rpy:180x40|block-4-1779916681690:day102_3_cora_pretends_to_find_it:day102_non_canon.rpy:180x40|block-4-1779916681690:day102_3_coras_choice:day102_non_canon.rpy:180x40|block-4-1779916681690:day102_3_gideon_interrupts_controls_vance:day102_non_canon.rpy:180x40|block-4-1779916681690:day102_3_stern_fetches_cora:day102_non_canon.rpy:180x40|block-4-1779916681690:day102_3_vance_goes_incandescent:day102_non_canon.rpy:180x40|block-4-1779916681690:day102_4_cora_sneaks_a_feel:day102_non_canon.rpy:180x40|block-4-1779916681690:day102_4_cora_writes_a_chapter:day102_non_canon.rpy:180x40|block-4-1779916681690:day102_4_night:day102_non_canon.rpy:180x40|block-5-1779916681690:day103_1_corridor_corr_chain:day103_non_canon.rpy:180x40|block-5-1779916681690:day103_1_corridor_insp_chain:day103_non_canon.rpy:180x40|block-5-1779916681690:day103_1_optional_character_chain:day103_non_canon.rpy:180x40|block-5-1779916681690:day103_1_servants_corridor:day103_non_canon.rpy:180x40|block-5-1779916681690:day103_2_cora_vs_gideon_corr:day103_non_canon.rpy:180x40|block-5-1779916681690:day103_2_cora_vs_gideon_ghost:day103_non_canon.rpy:180x40|block-5-1779916681690:day103_2_cora_vs_gideon_insp:day103_non_canon.rpy:180x40|block-5-1779916681690:day103_2_night_bargain_gideon:day103_non_canon.rpy:180x40|block-5-1779916681690:day103_2_night_defy_gideon:day103_non_canon.rpy:180x40|block-5-1779916681690:day103_2_night_surrender_gideon:day103_non_canon.rpy:180x40|block-5-1779916681690:day103_2_suite_cora_vs_gideon:day103_non_canon.rpy:180x40|block-5-1779916681690:day103_2_suite_gideon_beat:day103_non_canon.rpy:180x40|block-5-1779916681690:day103_2_suite_gideon_tea:day103_non_canon.rpy:180x40|block-5-1779916681690:day103_2_suite_night_tea:day103_non_canon.rpy:180x40|block-5-1779916681690:day103_3_bedroom_cora_frantic_writing_event:day103_non_canon.rpy:180x40|block-5-1779916681690:day103_3_bedroom_final_write:day103_non_canon.rpy:180x40|block-5-1779916681690:day103_3_frantic_write:day103_non_canon.rpy:180x40|block-5-1779916681690:day103_3_indulge_words:day103_non_canon.rpy:180x40|block-5-1779916681690:day103_3_prepare_mask:day103_non_canon.rpy:180x40|block-5-1779916681690:day103_4_room_stern_suspicion:day103_non_canon.rpy:180x40|block-5-1779916681690:day103_morning:day103_non_canon.rpy:180x40|block-5-1779916681690:day104_1:day103_non_canon.rpy:180x40|block-6-1779916681690:day104_1_false_dawn_suite_window:day104_non_canon.rpy:180x40|block-6-1779916681690:day104_1_lockbox_evidence:day104_non_canon.rpy:180x40|block-6-1779916681690:day104_2_escape_bold_lie:day104_non_canon.rpy:180x40|block-6-1779916681690:day104_2_escape_fireplace:day104_non_canon.rpy:180x40|block-6-1779916681690:day104_2_escape_missy_cover:day104_non_canon.rpy:180x40|block-6-1779916681690:day104_2_return_early:day104_non_canon.rpy:180x40|block-6-1779916681690:day104_3_stern_pressure:day104_non_canon.rpy:180x40|block-6-1779916681690:day104_4_atonement:day104_non_canon.rpy:180x40|block-6-1779916681690:day104_4_missy_repair:day104_non_canon.rpy:180x40|block-6-1779916681690:day104_4_twilight_ledger_false_dawn:day104_non_canon.rpy:180x40|block-6-1779916681690:day104_5_triumphant_chapter:day104_non_canon.rpy:180x40|block-6-1779916681690:day104_6_false_dawn_ending:day104_non_canon.rpy:180x40|block-7-1779916681690:day105_1_monster_reemerges:day105_non_canon.rpy:180x40|block-7-1779916681690:day105_2_the_summons:day105_non_canon.rpy:180x40|block-7-1779916681690:day105_3_leverage_collapses:day105_non_canon.rpy:180x40|block-7-1779916681690:day105_4_motivation_ghost:day105_non_canon.rpy:180x40|block-7-1779916681690:day105_4_motivation_observer:day105_non_canon.rpy:180x40|block-7-1779916681690:day105_4_motivation_predator:day105_non_canon.rpy:180x40|block-7-1779916681690:day105_4_motivation_prey:day105_non_canon.rpy:180x40|block-7-1779916681690:day105_4_why_did_you_do_it:day105_non_canon.rpy:180x40|block-7-1779916681690:day105_5_gideon_marks_cora:day105_non_canon.rpy:180x40|block-7-1779916681690:day105_6_manuscript_reckoning:day105_non_canon.rpy:180x40|block-7-1779916681690:day105_7_release_one_ending:day105_non_canon.rpy:180x40|block-8-1779916681690:bad_ending_rejection:endings.rpy:180x40;edges=block-12-1779916681690:check_suspicion->block-16-1779916681690:game_over_dismissed:jump|block-12-1779916681690:start->block-3-1779916681690:day101_main:jump|block-16-1779916681690:advance_after_confrontation->block-3-1779916681690:day101_4_writing_or_visiting:jump|block-16-1779916681690:advance_after_confrontation->block-4-1779916681690:day102_1_cora_missy_first_shift:jump|block-16-1779916681690:advance_after_confrontation->block-4-1779916681690:day102_3_stern_fetches_cora:jump|block-16-1779916681690:advance_after_confrontation->block-5-1779916681690:day103_2_suite_gideon_tea:jump|block-16-1779916681690:advance_after_confrontation->block-5-1779916681690:day103_4_room_stern_suspicion:jump|block-16-1779916681690:advance_after_confrontation->block-5-1779916681690:day103_morning:jump|block-16-1779916681690:advance_after_confrontation->block-6-1779916681690:day104_1_false_dawn_suite_window:jump|block-16-1779916681690:advance_after_confrontation->block-6-1779916681690:day104_5_triumphant_chapter:jump|block-16-1779916681690:advance_after_confrontation->block-6-1779916681690:day104_6_false_dawn_ending:jump|block-16-1779916681690:advance_after_confrontation->block-7-1779916681690:day105_1_monster_reemerges:jump|block-16-1779916681690:check_confrontations->block-16-1779916681690:confrontation_missy:jump|block-16-1779916681690:check_confrontations->block-16-1779916681690:confrontation_stern:jump|block-16-1779916681690:check_confrontations->block-16-1779916681690:confrontation_vance:jump|block-16-1779916681690:check_confrontations->block-16-1779916681690:game_over_dismissed:jump|block-16-1779916681690:confrontation_missy->block-16-1779916681690:advance_after_confrontation:jump|block-16-1779916681690:confrontation_missy->block-16-1779916681690:game_over_deadline_1:implicit|block-16-1779916681690:confrontation_stern->block-16-1779916681690:advance_after_confrontation:jump|block-16-1779916681690:confrontation_vance->block-16-1779916681690:advance_after_confrontation:jump|block-16-1779916681690:game_over_dismissed->block-3-1779916681690:day101_4_writing_or_visiting:jump|block-16-1779916681690:game_over_dismissed->block-4-1779916681690:day102_1_cora_missy_first_shift:jump|block-16-1779916681690:game_over_dismissed->block-4-1779916681690:day102_1_cora_missy_first_shift:jump|block-16-1779916681690:game_over_dismissed->block-4-1779916681690:day102_3_stern_fetches_cora:jump|block-16-1779916681690:game_over_dismissed->block-5-1779916681690:day103_2_suite_gideon_tea:jump|block-16-1779916681690:game_over_dismissed->block-5-1779916681690:day103_2_suite_night_tea:jump|block-16-1779916681690:game_over_dismissed->block-5-1779916681690:day103_3_bedroom_final_write:jump|block-16-1779916681690:game_over_dismissed->block-5-1779916681690:day103_4_room_stern_suspicion:jump|block-16-1779916681690:game_over_dismissed->block-5-1779916681690:day103_morning:jump|block-16-1779916681690:game_over_dismissed->block-6-1779916681690:day104_1_false_dawn_suite_window:jump|block-16-1779916681690:game_over_dismissed->block-6-1779916681690:day104_5_triumphant_chapter:jump|block-16-1779916681690:game_over_dismissed->block-6-1779916681690:day104_6_false_dawn_ending:jump|block-16-1779916681690:game_over_dismissed->block-6-1779916681690:day104_6_false_dawn_ending:jump|block-16-1779916681690:game_over_dismissed->block-7-1779916681690:day105_1_monster_reemerges:jump|block-16-1779916681690:game_over_dismissed->block-7-1779916681690:day105_7_release_one_ending:jump|block-16-1779916681690:missy_chain_1->block-16-1779916681690:advance_after_confrontation:jump|block-16-1779916681690:missy_chain_2->block-16-1779916681690:advance_after_confrontation:jump|block-16-1779916681690:missy_chain_3->block-16-1779916681690:advance_after_confrontation:jump|block-16-1779916681690:stern_chain_1->block-16-1779916681690:advance_after_confrontation:jump|block-16-1779916681690:stern_chain_2->block-16-1779916681690:advance_after_confrontation:jump|block-16-1779916681690:stern_chain_3->block-16-1779916681690:advance_after_confrontation:jump|block-16-1779916681690:vance_chain_1->block-16-1779916681690:advance_after_confrontation:jump|block-16-1779916681690:vance_chain_2->block-16-1779916681690:advance_after_confrontation:jump|block-16-1779916681690:vance_chain_3->block-16-1779916681690:advance_after_confrontation:jump|block-2-1779916681690:day100_2_desk_branch->block-2-1779916681690:day100_2_reconvergence:jump|block-2-1779916681690:day100_2_discovery_flashback->block-2-1779916681690:day100_2_desk_branch:jump|block-2-1779916681690:day100_2_discovery_flashback->block-2-1779916681690:day100_2_parlour_branch:implicit|block-2-1779916681690:day100_2_discovery_flashback->block-2-1779916681690:day100_2_parlour_branch:jump|block-2-1779916681690:day100_2_parlour_branch->block-2-1779916681690:day100_2_reconvergence:jump|block-2-1779916681690:day100_2_reconvergence->block-2-1779916681690:day100_3_awakening:jump|block-2-1779916681690:day100_3_awakening->block-3-1779916681690:day101_main:jump|block-2-1779916681690:day100_main->block-2-1779916681690:day100_2_discovery_flashback:jump|block-3-1779916681690:day101_1_cora_waiting->block-3-1779916681690:day101_1_morning_interview:jump|block-3-1779916681690:day101_1_morning_interview->block-3-1779916681690:day101_1_vance_throws_toy:jump|block-3-1779916681690:day101_1_vance_throws_toy->block-3-1779916681690:day101_2_missy_meets_cora:jump|block-3-1779916681690:day101_2_coras_path_choice->block-3-1779916681690:day101_3_taking_stock_day1:jump|block-3-1779916681690:day101_2_missy_meets_cora->block-3-1779916681690:day101_2_coras_path_choice:jump|block-3-1779916681690:day101_3_corruption_choice->block-3-1779916681690:day101_3_optional_character_chain:jump|block-3-1779916681690:day101_3_inspiration_choice->block-3-1779916681690:day101_3_optional_character_chain:jump|block-3-1779916681690:day101_3_optional_character_chain->block-3-1779916681690:day101_4_writing_or_visiting:implicit|block-3-1779916681690:day101_3_taking_stock_day1->block-16-1779916681690:check_confrontations:call|block-3-1779916681690:day101_3_taking_stock_day1->block-3-1779916681690:day101_3_corruption_choice:jump|block-3-1779916681690:day101_3_taking_stock_day1->block-3-1779916681690:day101_3_inspiration_choice:jump|block-3-1779916681690:day101_4_writing_or_visiting->block-16-1779916681690:check_confrontations:call|block-3-1779916681690:day101_4_writing_or_visiting->block-3-1779916681690:day101_4_visit_missy:jump|block-3-1779916681690:day101_4_writing_or_visiting->block-3-1779916681690:day101_4_visit_missy:jump|block-3-1779916681690:day101_4_writing_or_visiting->block-3-1779916681690:day101_4_write_the_chapter:jump|block-3-1779916681690:day101_main->block-3-1779916681690:day101_1_cora_waiting:jump|block-4-1779916681690:day102_1_cora_deceives_missy->block-4-1779916681690:day102_2_day2_chore_time:jump|block-4-1779916681690:day102_1_cora_missy_first_shift->block-4-1779916681690:day102_1_missy_finds_a_thing:jump|block-4-1779916681690:day102_1_cora_takes_the_thing->block-4-1779916681690:day102_2_day2_chore_time:jump|block-4-1779916681690:day102_1_missy_finds_a_thing->block-4-1779916681690:day102_1_cora_deceives_missy:jump|block-4-1779916681690:day102_1_missy_finds_a_thing->block-4-1779916681690:day102_1_cora_takes_the_thing:implicit|block-4-1779916681690:day102_1_missy_finds_a_thing->block-4-1779916681690:day102_1_cora_takes_the_thing:jump|block-4-1779916681690:day102_2_day2_chore_time->block-16-1779916681690:check_confrontations:call|block-4-1779916681690:day102_2_day2_chore_time->block-4-1779916681690:day102_2_day2_corr_choice:jump|block-4-1779916681690:day102_2_day2_chore_time->block-4-1779916681690:day102_2_day2_insp_choice:jump|block-4-1779916681690:day102_2_day2_corr_choice->block-4-1779916681690:day102_2_optional_character_chain:jump|block-4-1779916681690:day102_2_day2_insp_choice->block-4-1779916681690:day102_2_optional_character_chain:jump|block-4-1779916681690:day102_2_optional_character_chain->block-4-1779916681690:day102_3_stern_fetches_cora:implicit|block-4-1779916681690:day102_3_cora_confesses->block-4-1779916681690:day102_3_gideon_interrupts_controls_vance:jump|block-4-1779916681690:day102_3_cora_frames_missy->block-4-1779916681690:day102_3_gideon_interrupts_controls_vance:jump|block-4-1779916681690:day102_3_cora_pretends_to_find_it->block-4-1779916681690:day102_3_gideon_interrupts_controls_vance:jump|block-4-1779916681690:day102_3_coras_choice->block-4-1779916681690:day102_3_cora_confesses:implicit|block-4-1779916681690:day102_3_coras_choice->block-4-1779916681690:day102_3_cora_confesses:jump|block-4-1779916681690:day102_3_coras_choice->block-4-1779916681690:day102_3_cora_frames_missy:jump|block-4-1779916681690:day102_3_coras_choice->block-4-1779916681690:day102_3_cora_pretends_to_find_it:jump|block-4-1779916681690:day102_3_gideon_interrupts_controls_vance->block-4-1779916681690:day102_4_night:jump|block-4-1779916681690:day102_3_stern_fetches_cora->block-4-1779916681690:day102_3_vance_goes_incandescent:jump|block-4-1779916681690:day102_3_vance_goes_incandescent->block-4-1779916681690:day102_3_coras_choice:jump|block-4-1779916681690:day102_4_night->block-16-1779916681690:check_confrontations:call|block-4-1779916681690:day102_4_night->block-4-1779916681690:day102_4_cora_sneaks_a_feel:jump|block-4-1779916681690:day102_4_night->block-4-1779916681690:day102_4_cora_writes_a_chapter:jump|block-5-1779916681690:day103_1_corridor_corr_chain->block-5-1779916681690:day103_1_optional_character_chain:jump|block-5-1779916681690:day103_1_corridor_insp_chain->block-5-1779916681690:day103_1_optional_character_chain:jump|block-5-1779916681690:day103_1_optional_character_chain->block-5-1779916681690:day103_2_suite_gideon_tea:implicit|block-5-1779916681690:day103_1_optional_character_chain->block-5-1779916681690:day103_2_suite_gideon_tea:jump|block-5-1779916681690:day103_1_servants_corridor->block-5-1779916681690:day103_1_corridor_corr_chain:jump|block-5-1779916681690:day103_1_servants_corridor->block-5-1779916681690:day103_1_corridor_insp_chain:implicit|block-5-1779916681690:day103_1_servants_corridor->block-5-1779916681690:day103_1_corridor_insp_chain:jump|block-5-1779916681690:day103_2_cora_vs_gideon_corr->block-5-1779916681690:day103_2_suite_gideon_beat:jump|block-5-1779916681690:day103_2_cora_vs_gideon_ghost->block-5-1779916681690:day103_2_suite_gideon_beat:jump|block-5-1779916681690:day103_2_cora_vs_gideon_insp->block-5-1779916681690:day103_2_suite_gideon_beat:jump|block-5-1779916681690:day103_2_night_bargain_gideon->block-5-1779916681690:day103_3_bedroom_final_write:jump|block-5-1779916681690:day103_2_night_defy_gideon->block-5-1779916681690:day103_3_bedroom_final_write:jump|block-5-1779916681690:day103_2_night_surrender_gideon->block-5-1779916681690:day103_3_bedroom_final_write:jump|block-5-1779916681690:day103_2_suite_cora_vs_gideon->block-5-1779916681690:day103_2_cora_vs_gideon_corr:jump|block-5-1779916681690:day103_2_suite_cora_vs_gideon->block-5-1779916681690:day103_2_cora_vs_gideon_ghost:jump|block-5-1779916681690:day103_2_suite_cora_vs_gideon->block-5-1779916681690:day103_2_cora_vs_gideon_insp:implicit|block-5-1779916681690:day103_2_suite_cora_vs_gideon->block-5-1779916681690:day103_2_cora_vs_gideon_insp:jump|block-5-1779916681690:day103_2_suite_gideon_beat->block-5-1779916681690:day103_3_bedroom_cora_frantic_writing_event:jump|block-5-1779916681690:day103_2_suite_gideon_tea->block-5-1779916681690:day103_2_suite_cora_vs_gideon:jump|block-5-1779916681690:day103_2_suite_night_tea->block-5-1779916681690:day103_2_night_bargain_gideon:jump|block-5-1779916681690:day103_2_suite_night_tea->block-5-1779916681690:day103_2_night_defy_gideon:implicit|block-5-1779916681690:day103_2_suite_night_tea->block-5-1779916681690:day103_2_night_defy_gideon:jump|block-5-1779916681690:day103_2_suite_night_tea->block-5-1779916681690:day103_2_night_surrender_gideon:jump|block-5-1779916681690:day103_3_bedroom_cora_frantic_writing_event->block-16-1779916681690:check_confrontations:call|block-5-1779916681690:day103_3_bedroom_cora_frantic_writing_event->block-5-1779916681690:day103_3_frantic_write:jump|block-5-1779916681690:day103_3_bedroom_cora_frantic_writing_event->block-5-1779916681690:day103_3_indulge_words:jump|block-5-1779916681690:day103_3_bedroom_cora_frantic_writing_event->block-5-1779916681690:day103_3_prepare_mask:jump|block-5-1779916681690:day103_3_bedroom_final_write->block-16-1779916681690:check_confrontations:call|block-5-1779916681690:day103_3_bedroom_final_write->block-5-1779916681690:day104_1:jump|block-5-1779916681690:day103_3_frantic_write->block-5-1779916681690:day103_4_room_stern_suspicion:jump|block-5-1779916681690:day103_3_indulge_words->block-5-1779916681690:day103_4_room_stern_suspicion:jump|block-5-1779916681690:day103_3_prepare_mask->block-5-1779916681690:day103_4_room_stern_suspicion:jump|block-5-1779916681690:day103_4_room_stern_suspicion->block-5-1779916681690:day103_2_suite_night_tea:jump|block-5-1779916681690:day103_morning->block-16-1779916681690:check_confrontations:call|block-5-1779916681690:day103_morning->block-16-1779916681690:game_over_deadline_1:jump|block-5-1779916681690:day103_morning->block-5-1779916681690:day103_1_servants_corridor:jump|block-5-1779916681690:day104_1->block-6-1779916681690:day104_1_false_dawn_suite_window:jump|block-6-1779916681690:day104_1_false_dawn_suite_window->block-6-1779916681690:day104_1_lockbox_evidence:jump|block-6-1779916681690:day104_1_lockbox_evidence->block-6-1779916681690:day104_2_return_early:jump|block-6-1779916681690:day104_2_escape_bold_lie->block-6-1779916681690:day104_3_stern_pressure:jump|block-6-1779916681690:day104_2_escape_fireplace->block-6-1779916681690:day104_3_stern_pressure:jump|block-6-1779916681690:day104_2_escape_missy_cover->block-6-1779916681690:day104_3_stern_pressure:jump|block-6-1779916681690:day104_2_return_early->block-6-1779916681690:day104_2_escape_bold_lie:jump|block-6-1779916681690:day104_2_return_early->block-6-1779916681690:day104_2_escape_fireplace:implicit|block-6-1779916681690:day104_2_return_early->block-6-1779916681690:day104_2_escape_fireplace:jump|block-6-1779916681690:day104_2_return_early->block-6-1779916681690:day104_2_escape_missy_cover:jump|block-6-1779916681690:day104_3_stern_pressure->block-6-1779916681690:day104_4_twilight_ledger_false_dawn:jump|block-6-1779916681690:day104_4_atonement->block-6-1779916681690:day104_6_false_dawn_ending:jump|block-6-1779916681690:day104_4_missy_repair->block-6-1779916681690:day104_6_false_dawn_ending:jump|block-6-1779916681690:day104_4_twilight_ledger_false_dawn->block-16-1779916681690:check_confrontations:call|block-6-1779916681690:day104_4_twilight_ledger_false_dawn->block-6-1779916681690:day104_4_atonement:jump|block-6-1779916681690:day104_4_twilight_ledger_false_dawn->block-6-1779916681690:day104_4_missy_repair:jump|block-6-1779916681690:day104_4_twilight_ledger_false_dawn->block-6-1779916681690:day104_4_twilight_ledger_false_dawn:jump|block-6-1779916681690:day104_4_twilight_ledger_false_dawn->block-6-1779916681690:day104_5_triumphant_chapter:jump|block-6-1779916681690:day104_5_triumphant_chapter->block-16-1779916681690:check_confrontations:call|block-6-1779916681690:day104_5_triumphant_chapter->block-6-1779916681690:day104_6_false_dawn_ending:jump|block-6-1779916681690:day104_6_false_dawn_ending->block-16-1779916681690:game_over_deadline_2:jump|block-6-1779916681690:day104_6_false_dawn_ending->block-7-1779916681690:day105_1_monster_reemerges:jump|block-7-1779916681690:day105_1_monster_reemerges->block-7-1779916681690:day105_2_the_summons:jump|block-7-1779916681690:day105_2_the_summons->block-7-1779916681690:day105_3_leverage_collapses:jump|block-7-1779916681690:day105_3_leverage_collapses->block-7-1779916681690:day105_4_why_did_you_do_it:jump|block-7-1779916681690:day105_4_motivation_ghost->block-7-1779916681690:day105_5_gideon_marks_cora:jump|block-7-1779916681690:day105_4_motivation_observer->block-7-1779916681690:day105_5_gideon_marks_cora:jump|block-7-1779916681690:day105_4_motivation_predator->block-7-1779916681690:day105_5_gideon_marks_cora:jump|block-7-1779916681690:day105_4_motivation_prey->block-7-1779916681690:day105_5_gideon_marks_cora:jump|block-7-1779916681690:day105_4_why_did_you_do_it->block-7-1779916681690:day105_4_motivation_ghost:jump|block-7-1779916681690:day105_4_why_did_you_do_it->block-7-1779916681690:day105_4_motivation_observer:implicit|block-7-1779916681690:day105_4_why_did_you_do_it->block-7-1779916681690:day105_4_motivation_observer:jump|block-7-1779916681690:day105_4_why_did_you_do_it->block-7-1779916681690:day105_4_motivation_predator:jump|block-7-1779916681690:day105_4_why_did_you_do_it->block-7-1779916681690:day105_4_motivation_prey:jump|block-7-1779916681690:day105_5_gideon_marks_cora->block-7-1779916681690:day105_6_manuscript_reckoning:jump|block-7-1779916681690:day105_6_manuscript_reckoning->block-7-1779916681690:day105_7_release_one_ending:jump",
+  "routeCanvasHasAutocentered": false,
+  "choiceCanvasHasAutocentered": false,
+  "storyBlockLayouts": {
+    "game/assets_manifest.rpy": {
+      "position": {
+        "x": 0,
+        "y": 225
+      },
+      "width": 320,
+      "height": 200
+    },
+    "game/characters.rpy": {
+      "position": {
+        "x": 520,
+        "y": 225
+      },
+      "width": 320,
+      "height": 200
+    },
+    "game/days/day100_non_canon.rpy": {
+      "position": {
+        "x": 397.4354383680556,
+        "y": -233.99793836805557
+      },
+      "width": 320,
+      "height": 200
+    },
+    "game/days/day101_non_canon.rpy": {
+      "position": {
+        "x": 942.0339626736111,
+        "y": -54.74446614583337
+      },
+      "width": 320,
+      "height": 200
+    },
+    "game/days/day102_non_canon.rpy": {
+      "position": {
+        "x": 1441.9612630208337,
+        "y": -42.41536458333337
+      },
+      "width": 320,
+      "height": 200
+    },
+    "game/days/day103_non_canon.rpy": {
+      "position": {
+        "x": 1886.7518446180554,
+        "y": -29.31315104166663
+      },
+      "width": 320,
+      "height": 200
+    },
+    "game/days/day104_non_canon.rpy": {
+      "position": {
+        "x": 2322.8434244791665,
+        "y": -27.617730034722115
+      },
+      "width": 320,
+      "height": 200
+    },
+    "game/days/day105_non_canon.rpy": {
+      "position": {
+        "x": 2783.0392795138882,
+        "y": -19.60177951388897
+      },
+      "width": 320,
+      "height": 200
+    },
+    "game/endings.rpy": {
+      "position": {
+        "x": 2438.374565972222,
+        "y": 352.15657552083337
+      },
+      "width": 320,
+      "height": 200
+    },
+    "game/gui.rpy": {
+      "position": {
+        "x": 4430,
+        "y": 225
+      },
+      "width": 320,
+      "height": 200
+    },
+    "game/options.rpy": {
+      "position": {
+        "x": 4950,
+        "y": 225
+      },
+      "width": 320,
+      "height": 200
+    },
+    "game/screens.rpy": {
+      "position": {
+        "x": 2774.2805989583326,
+        "y": 340.2886284722223
+      },
+      "width": 320,
+      "height": 200
+    },
+    "game/script.rpy": {
+      "position": {
+        "x": 385.56749131944434,
+        "y": 472.07031250000006
+      },
+      "width": 320,
+      "height": 200
+    },
+    "game/variables.rpy": {
+      "position": {
+        "x": 3119.652235243055,
+        "y": 330.11610243055566
+      },
+      "width": 320,
+      "height": 200
+    },
+    "shared/classes_non_canon.rpy": {
+      "position": {
+        "x": 6510,
+        "y": 225
+      },
+      "width": 320,
+      "height": 200
+    },
+    "shared/functions_non_canon.rpy": {
+      "position": {
+        "x": 7030,
+        "y": 225
+      },
+      "width": 320,
+      "height": 200
+    },
+    "shared/story_chains_non_canon.rpy": {
+      "position": {
+        "x": 999.0879991319443,
+        "y": -490.46766493055554
+      },
+      "width": 320,
+      "height": 200
+    }
+  },
+  "routeNodeLayouts": {
+    "block-2-1779916681690:day100_main": {
+      "position": {
+        "x": 0,
+        "y": 100
+      }
+    },
+    "block-2-1779916681690:day100_2_discovery_flashback": {
+      "position": {
+        "x": 320,
+        "y": 705
+      }
+    },
+    "block-2-1779916681690:day100_2_parlour_branch": {
+      "position": {
+        "x": 640,
+        "y": 650
+      }
+    },
+    "block-2-1779916681690:day100_2_desk_branch": {
+      "position": {
+        "x": 640,
+        "y": 760
+      }
+    },
+    "block-2-1779916681690:day100_2_reconvergence": {
+      "position": {
+        "x": 960,
+        "y": 705
+      }
+    },
+    "block-2-1779916681690:day100_3_awakening": {
+      "position": {
+        "x": 1280,
+        "y": 705
+      }
+    },
+    "block-3-1779916681690:day101_main": {
+      "position": {
+        "x": 1600,
+        "y": 705
+      }
+    },
+    "block-3-1779916681690:day101_1_cora_waiting": {
+      "position": {
+        "x": 1920,
+        "y": 705
+      }
+    },
+    "block-3-1779916681690:day101_1_morning_interview": {
+      "position": {
+        "x": 2240,
+        "y": 705
+      }
+    },
+    "block-3-1779916681690:day101_1_vance_throws_toy": {
+      "position": {
+        "x": 2560,
+        "y": 705
+      }
+    },
+    "block-3-1779916681690:day101_2_missy_meets_cora": {
+      "position": {
+        "x": 2880,
+        "y": 705
+      }
+    },
+    "block-3-1779916681690:day101_2_coras_path_choice": {
+      "position": {
+        "x": 3200,
+        "y": 705
+      }
+    },
+    "block-3-1779916681690:day101_3_taking_stock_day1": {
+      "position": {
+        "x": 3520,
+        "y": 705
+      }
+    },
+    "block-3-1779916681690:day101_3_inspiration_choice": {
+      "position": {
+        "x": 3840,
+        "y": 650
+      }
+    },
+    "block-3-1779916681690:day101_3_corruption_choice": {
+      "position": {
+        "x": 3840,
+        "y": 760
+      }
+    },
+    "block-3-1779916681690:day101_3_optional_character_chain": {
+      "position": {
+        "x": 4160,
+        "y": 705
+      }
+    },
+    "block-3-1779916681690:day101_4_writing_or_visiting": {
+      "position": {
+        "x": 5440,
+        "y": 705
+      }
+    },
+    "block-3-1779916681690:day101_4_write_the_chapter": {
+      "position": {
+        "x": 4800,
+        "y": 705
+      }
+    },
+    "block-3-1779916681690:day101_4_visit_missy": {
+      "position": {
+        "x": 4480,
+        "y": 705
+      }
+    },
+    "block-4-1779916681690:day102_1_cora_missy_first_shift": {
+      "position": {
+        "x": 24000,
+        "y": 705
+      }
+    },
+    "block-4-1779916681690:day102_1_missy_finds_a_thing": {
+      "position": {
+        "x": 24320,
+        "y": 705
+      }
+    },
+    "block-4-1779916681690:day102_1_cora_takes_the_thing": {
+      "position": {
+        "x": 24640,
+        "y": 705
+      }
+    },
+    "block-4-1779916681690:day102_1_cora_deceives_missy": {
+      "position": {
+        "x": 22400,
+        "y": 705
+      }
+    },
+    "block-4-1779916681690:day102_2_day2_chore_time": {
+      "position": {
+        "x": 22720,
+        "y": 705
+      }
+    },
+    "block-4-1779916681690:day102_2_day2_insp_choice": {
+      "position": {
+        "x": 23040,
+        "y": 760
+      }
+    },
+    "block-4-1779916681690:day102_2_day2_corr_choice": {
+      "position": {
+        "x": 21440,
+        "y": 705
+      }
+    },
+    "block-4-1779916681690:day102_2_optional_character_chain": {
+      "position": {
+        "x": 21760,
+        "y": 705
+      }
+    },
+    "block-4-1779916681690:day102_3_stern_fetches_cora": {
+      "position": {
+        "x": 22080,
+        "y": 705
+      }
+    },
+    "block-4-1779916681690:day102_3_vance_goes_incandescent": {
+      "position": {
+        "x": 19520,
+        "y": 705
+      }
+    },
+    "block-4-1779916681690:day102_3_coras_choice": {
+      "position": {
+        "x": 19840,
+        "y": 705
+      }
+    },
+    "block-4-1779916681690:day102_3_cora_confesses": {
+      "position": {
+        "x": 20160,
+        "y": 595
+      }
+    },
+    "block-4-1779916681690:day102_3_cora_pretends_to_find_it": {
+      "position": {
+        "x": 20160,
+        "y": 705
+      }
+    },
+    "block-4-1779916681690:day102_3_cora_frames_missy": {
+      "position": {
+        "x": 20160,
+        "y": 815
+      }
+    },
+    "block-4-1779916681690:day102_3_gideon_interrupts_controls_vance": {
+      "position": {
+        "x": 20480,
+        "y": 705
+      }
+    },
+    "block-4-1779916681690:day102_4_night": {
+      "position": {
+        "x": 20800,
+        "y": 705
+      }
+    },
+    "block-4-1779916681690:day102_4_cora_writes_a_chapter": {
+      "position": {
+        "x": 21120,
+        "y": 650
+      }
+    },
+    "block-4-1779916681690:day102_4_cora_sneaks_a_feel": {
+      "position": {
+        "x": 21120,
+        "y": 760
+      }
+    },
+    "block-5-1779916681690:day103_morning": {
+      "position": {
+        "x": 18560,
+        "y": 705
+      }
+    },
+    "block-5-1779916681690:day103_1_servants_corridor": {
+      "position": {
+        "x": 17920,
+        "y": 705
+      }
+    },
+    "block-5-1779916681690:day103_1_corridor_insp_chain": {
+      "position": {
+        "x": 18240,
+        "y": 705
+      }
+    },
+    "block-5-1779916681690:day103_1_corridor_corr_chain": {
+      "position": {
+        "x": 16960,
+        "y": 705
+      }
+    },
+    "block-5-1779916681690:day103_1_optional_character_chain": {
+      "position": {
+        "x": 17280,
+        "y": 705
+      }
+    },
+    "block-5-1779916681690:day103_2_suite_gideon_tea": {
+      "position": {
+        "x": 17600,
+        "y": 705
+      }
+    },
+    "block-5-1779916681690:day103_2_suite_cora_vs_gideon": {
+      "position": {
+        "x": 16000,
+        "y": 705
+      }
+    },
+    "block-5-1779916681690:day103_2_cora_vs_gideon_insp": {
+      "position": {
+        "x": 16320,
+        "y": 650
+      }
+    },
+    "block-5-1779916681690:day103_2_cora_vs_gideon_corr": {
+      "position": {
+        "x": 16320,
+        "y": 760
+      }
+    },
+    "block-5-1779916681690:day103_2_cora_vs_gideon_ghost": {
+      "position": {
+        "x": 15680,
+        "y": 705
+      }
+    },
+    "block-5-1779916681690:day103_2_suite_gideon_beat": {
+      "position": {
+        "x": 16640,
+        "y": 705
+      }
+    },
+    "block-5-1779916681690:day103_3_bedroom_cora_frantic_writing_event": {
+      "position": {
+        "x": 14720,
+        "y": 705
+      }
+    },
+    "block-5-1779916681690:day103_3_frantic_write": {
+      "position": {
+        "x": 15040,
+        "y": 650
+      }
+    },
+    "block-5-1779916681690:day103_3_prepare_mask": {
+      "position": {
+        "x": 15040,
+        "y": 760
+      }
+    },
+    "block-5-1779916681690:day103_3_indulge_words": {
+      "position": {
+        "x": 14400,
+        "y": 705
+      }
+    },
+    "block-5-1779916681690:day103_4_room_stern_suspicion": {
+      "position": {
+        "x": 15360,
+        "y": 705
+      }
+    },
+    "block-5-1779916681690:day103_2_suite_night_tea": {
+      "position": {
+        "x": 14080,
+        "y": 705
+      }
+    },
+    "block-5-1779916681690:day103_2_night_defy_gideon": {
+      "position": {
+        "x": 13760,
+        "y": 705
+      }
+    },
+    "block-5-1779916681690:day103_2_night_bargain_gideon": {
+      "position": {
+        "x": 13120,
+        "y": 705
+      }
+    },
+    "block-5-1779916681690:day103_2_night_surrender_gideon": {
+      "position": {
+        "x": 12800,
+        "y": 705
+      }
+    },
+    "block-5-1779916681690:day103_3_bedroom_final_write": {
+      "position": {
+        "x": 13440,
+        "y": 705
+      }
+    },
+    "block-5-1779916681690:day104_1": {
+      "position": {
+        "x": 12160,
+        "y": 705
+      }
+    },
+    "block-6-1779916681690:day104_1_false_dawn_suite_window": {
+      "position": {
+        "x": 12480,
+        "y": 705
+      }
+    },
+    "block-6-1779916681690:day104_1_lockbox_evidence": {
+      "position": {
+        "x": 10880,
+        "y": 705
+      }
+    },
+    "block-6-1779916681690:day104_2_return_early": {
+      "position": {
+        "x": 9280,
+        "y": 705
+      }
+    },
+    "block-6-1779916681690:day104_2_escape_fireplace": {
+      "position": {
+        "x": 9600,
+        "y": 650
+      }
+    },
+    "block-6-1779916681690:day104_2_escape_bold_lie": {
+      "position": {
+        "x": 9600,
+        "y": 760
+      }
+    },
+    "block-6-1779916681690:day104_2_escape_missy_cover": {
+      "position": {
+        "x": 8960,
+        "y": 705
+      }
+    },
+    "block-6-1779916681690:day104_3_stern_pressure": {
+      "position": {
+        "x": 9920,
+        "y": 705
+      }
+    },
+    "block-6-1779916681690:day104_4_twilight_ledger_false_dawn": {
+      "position": {
+        "x": 10240,
+        "y": 705
+      }
+    },
+    "block-6-1779916681690:day104_4_atonement": {
+      "position": {
+        "x": 8640,
+        "y": 705
+      }
+    },
+    "block-6-1779916681690:day104_4_missy_repair": {
+      "position": {
+        "x": 8320,
+        "y": 705
+      }
+    },
+    "block-6-1779916681690:day104_5_triumphant_chapter": {
+      "position": {
+        "x": 10560,
+        "y": 705
+      }
+    },
+    "block-6-1779916681690:day104_6_false_dawn_ending": {
+      "position": {
+        "x": 11200,
+        "y": 705
+      }
+    },
+    "block-7-1779916681690:day105_1_monster_reemerges": {
+      "position": {
+        "x": 11840,
+        "y": 705
+      }
+    },
+    "block-7-1779916681690:day105_2_the_summons": {
+      "position": {
+        "x": 8000,
+        "y": 705
+      }
+    },
+    "block-7-1779916681690:day105_3_leverage_collapses": {
+      "position": {
+        "x": 7680,
+        "y": 705
+      }
+    },
+    "block-7-1779916681690:day105_4_why_did_you_do_it": {
+      "position": {
+        "x": 6720,
+        "y": 705
+      }
+    },
+    "block-7-1779916681690:day105_4_motivation_observer": {
+      "position": {
+        "x": 7040,
+        "y": 595
+      }
+    },
+    "block-7-1779916681690:day105_4_motivation_predator": {
+      "position": {
+        "x": 7040,
+        "y": 705
+      }
+    },
+    "block-7-1779916681690:day105_4_motivation_prey": {
+      "position": {
+        "x": 7040,
+        "y": 815
+      }
+    },
+    "block-7-1779916681690:day105_4_motivation_ghost": {
+      "position": {
+        "x": 6400,
+        "y": 705
+      }
+    },
+    "block-7-1779916681690:day105_5_gideon_marks_cora": {
+      "position": {
+        "x": 7360,
+        "y": 705
+      }
+    },
+    "block-7-1779916681690:day105_6_manuscript_reckoning": {
+      "position": {
+        "x": 6080,
+        "y": 705
+      }
+    },
+    "block-7-1779916681690:day105_7_release_one_ending": {
+      "position": {
+        "x": 5760,
+        "y": 705
+      }
+    },
+    "block-8-1779916681690:bad_ending_rejection": {
+      "position": {
+        "x": 25040,
+        "y": 705
+      }
+    },
+    "block-12-1779916681690:start": {
+      "position": {
+        "x": 0,
+        "y": 1310
+      }
+    },
+    "block-12-1779916681690:check_suspicion": {
+      "position": {
+        "x": 0,
+        "y": 210
+      }
+    },
+    "block-16-1779916681690:check_confrontations": {
+      "position": {
+        "x": 23040,
+        "y": 650
+      }
+    },
+    "block-16-1779916681690:advance_after_confrontation": {
+      "position": {
+        "x": 23680,
+        "y": 705
+      }
+    },
+    "block-16-1779916681690:stern_chain_1": {
+      "position": {
+        "x": 0,
+        "y": 1200
+      }
+    },
+    "block-16-1779916681690:stern_chain_2": {
+      "position": {
+        "x": 0,
+        "y": 1090
+      }
+    },
+    "block-16-1779916681690:stern_chain_3": {
+      "position": {
+        "x": 0,
+        "y": 980
+      }
+    },
+    "block-16-1779916681690:missy_chain_1": {
+      "position": {
+        "x": 0,
+        "y": 870
+      }
+    },
+    "block-16-1779916681690:missy_chain_2": {
+      "position": {
+        "x": 0,
+        "y": 760
+      }
+    },
+    "block-16-1779916681690:missy_chain_3": {
+      "position": {
+        "x": 0,
+        "y": 650
+      }
+    },
+    "block-16-1779916681690:vance_chain_1": {
+      "position": {
+        "x": 0,
+        "y": 540
+      }
+    },
+    "block-16-1779916681690:vance_chain_2": {
+      "position": {
+        "x": 0,
+        "y": 430
+      }
+    },
+    "block-16-1779916681690:vance_chain_3": {
+      "position": {
+        "x": 0,
+        "y": 320
+      }
+    },
+    "block-16-1779916681690:confrontation_stern": {
+      "position": {
+        "x": 23360,
+        "y": 650
+      }
+    },
+    "block-16-1779916681690:confrontation_vance": {
+      "position": {
+        "x": 23360,
+        "y": 760
+      }
+    },
+    "block-16-1779916681690:confrontation_missy": {
+      "position": {
+        "x": 19200,
+        "y": 705
+      }
+    },
+    "block-16-1779916681690:game_over_deadline_1": {
+      "position": {
+        "x": 18880,
+        "y": 705
+      }
+    },
+    "block-16-1779916681690:game_over_deadline_2": {
+      "position": {
+        "x": 11520,
+        "y": 705
+      }
+    },
+    "block-16-1779916681690:game_over_dismissed": {
+      "position": {
+        "x": 5120,
+        "y": 705
+      }
+    }
+  },
+  "openTabs": [
+    {
+      "id": "canvas",
+      "type": "canvas"
+    },
+    {
+      "id": "route-canvas",
+      "type": "route-canvas"
+    },
+    {
+      "id": "stats",
+      "type": "stats"
+    }
+  ],
+  "activeTabId": "stats",
+  "splitLayout": "none",
+  "splitPrimarySize": 600,
+  "secondaryOpenTabs": [],
+  "secondaryActiveTabId": "",
+  "stickyNotes": [],
+  "routeStickyNotes": [],
+  "choiceStickyNotes": [],
+  "characterProfiles": {},
+  "punchlistMetadata": {},
+  "diagnosticsTasks": [],
+  "ignoredDiagnostics": [],
+  "sceneCompositions": {},
+  "sceneNames": {},
+  "imagemapCompositions": {},
+  "screenLayoutCompositions": {},
+  "scannedImagePaths": [],
+  "scannedAudioPaths": []
+}

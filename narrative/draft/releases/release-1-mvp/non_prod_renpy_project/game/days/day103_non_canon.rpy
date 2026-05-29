@@ -552,10 +552,10 @@ label day103_2_suite_gideon_beat:
 # ==========================================
 
 label day103_3_bedroom_cora_frantic_writing_event:
-    call check_confrontations
-
     # [STATE] TimeManager transition to Evening
     $ set_time_period("Evening")
+
+    call check_confrontations
 
     # [ASSET] Existing servants' quarters dusk background
     scene bg_servants_quarters_dusk

@@ -16,10 +16,10 @@
 init python:
 
     def apply_effects(insp=0, corr=0, susp=0, 
-                      stern_susp=0, stern_base=0, 
-                      vance_susp=0, vance_base=0, 
-                      missy_susp=0, missy_base=0,
-                      gideon_susp=0, gideon_base=0):
+                        stern_susp=0, stern_base=0, 
+                        vance_susp=0, vance_base=0, 
+                        missy_susp=0, missy_base=0,
+                        gideon_susp=0, gideon_base=0):
         success = True
 
         # Inspiration:

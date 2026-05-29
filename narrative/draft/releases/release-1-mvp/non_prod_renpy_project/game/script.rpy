@@ -18,7 +18,7 @@ label start:
 
 
 label thought_overlay_test:
-    show screen stats_overlay
+show screen stats_overlay
     # Writer contract verification for the dual-layer thought overlay system.
     # This label is sandbox-only and must not be promoted to production.
     scene bg_savoy_corridor_morning with dissolve

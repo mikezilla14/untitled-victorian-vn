@@ -33,7 +33,10 @@
 label day101_main:
 
     # [BEAT] Narrator's intro. Keep brief; the horror pressure comes from Cora being trapped in procedure
-    scene bg_savoy_corridor_morning
+    scene bg_savoy_corridor_morning:
+        zoom 1.0
+        xysize (1920,1080)
+
     with fade
 
     cora_inner "The Savoy Hotel did not welcome girls like me."
@@ -52,18 +55,20 @@ label day101_1_cora_waiting:
 
     # [ASSET] Existing Day 1 corridor background
     scene bg_savoy_corridor_morning:
-        zoom 1.25
+        zoom 1.0
         xysize (1920,1080)
+
+    # [ASSET] Visual/staging command
     with dissolve
 
     cora_inner "I stand outside Miss Stern's office with my hands folded and my pulse behaving badly."
     
-    "Behind the heavy mahogany door, a clock ticks with paid machinery."
+    "Behind the heavy mahogany door, a clock ticks with paid machinery." # sound effect?
     
-    cora_inner "My references sit in my apron pocket."
+    cora_inner "My references sit in my apron pocket." # camera?
     cora_inner "Good paper. Good ink. Better lies."
 
-    "A maid passes carrying towels white enough to blind. A footman steps past with a silver tray."
+    "A maid passes carrying towels white enough to blind. A footman steps past with a silver tray." # silohuette image? 
 
     cora_inner "No one asks who I am."
     cora_inner "That is the first rule of this place, then. Be useful enough to ignore."
@@ -82,16 +87,18 @@ label day101_1_morning_interview:
 
     # [ASSET] Visual/staging command
     scene bg_savoy_corridor_morning:
-        zoom 1.25
+        zoom 1.0
         xysize (1920,1080)
+
+    # [ASSET] Visual/staging command
     with dissolve
 
     show stern_sprite neutral at center:
         zoom 0.35
 
-    "Miss Stern stands rather than sits."
+    "Miss Stern stands rather than sits." 
     cora_inner "It is not courtesy. It is measurement."
-    "Her eyes move from my cap to my boots."
+    "Her eyes move from my cap to my boots." # camera?
     cora_inner "Weighing every inch for disobedience."
 
     stern "Cora Vale."
@@ -107,8 +114,9 @@ label day101_1_morning_interview:
     stern "Can you be that?"
 
     # [CHOICE] Decision point
+    # This choice currently does not affect story progress there should be tie in to a future narrative flow or remove the flag and ekep the stat changes
     menu:
-        "How do I survive Stern's inspection?"
+        "How do I survive Stern's inspection?" 
 
         "Lower my eyes. Let her mistake fear for obedience.":
 
@@ -160,6 +168,8 @@ label day101_1_vance_throws_toy:
     scene bg_savoy_corridor_morning:
         zoom 1.25
         xysize (1920,1080)
+
+    # [ASSET] Visual/staging command
     with dissolve
 
     "The corridor outside Stern's office is all gloss and restraint."
@@ -169,22 +179,22 @@ label day101_1_vance_throws_toy:
     show vance_sprite angry at left:
         zoom 0.35
 
-    vance "Useless creature. I said the blue ribbon, not that vulgar little thing."
+    vance "Useless creature. I said the blue ribbon, not that vulgar little thing." # this needs rewriting this would be in the lobby it currently makes no sense for her to be standing around shouting about a ribbon.
 
-    "The object stops near my shoe. A lady's trinket. Too expensive to be called a toy, too childish to be called anything else."
-
-    vance "You. Girl. Pick it up."
+    "The object stops near my shoe. A lady's trinket. Too expensive to be called a toy, too childish to be called anything else." # change or cut this, this is vestigial dialogue from a previous draft where the llm used the prompt of throwing toys literally
+    
+    vance "You. Girl. Pick it up." # like this performative cruelty but needs better context
 
     "Her voice lands on me before her eyes do."
     "Velvet. Pearls. A face arranged for admiration and currently sharpened for harm."
 
     cora "Yes, Miss."
 
-    "I bend. I retrieve the little silver thing. I do not let my fingers tremble."
+    "I bend. I retrieve the little silver thing. I do not let my fingers tremble." # take a beat during this to allow the moment to breath and build suspense
 
-    vance "Not like that. Have you never handled anything delicate?"
+    vance "Not like that. Have you never handled anything delicate?" # tone is great but detail needs to be polished with the new context.
 
-    "I have handled hunger. Debt. Ink. Men's hands where they were not invited."
+    "I have handled hunger. Debt. Ink. Men's hands where they were not invited." # take a beat here to let it land
     "I decide not to list them."
 
     # [ASSET] Visual/staging command
@@ -192,25 +202,25 @@ label day101_1_vance_throws_toy:
 
     gideon "Vance."
 
-    "One word."
-    "The corridor changes temperature."
+    cora_inner "One word." # maybe show cora sprite with speech bubble here
+    cora_inner "The corridor changes temperature."
 
-    vance "I was only correcting her."
+    vance "I was only correcting her..."
 
     gideon "You were making yourself visible."
 
     # [ASSET] Visual/staging command
     show vance_sprite submissive at left
 
-    "Vance's mouth closes."
+    "Vance's mouth closes." # hopefully the sprite change can tell this story and we can cut some of this narration
     "The fury does not vanish. It folds itself away, obedient and practiced."
 
     gideon "The girl is new. Do not teach her bad habits before luncheon."
 
     vance "Of course."
 
-    "Of course. Not yes. Not sorry. Of course."
-    "As if obedience were not surrender, but etiquette."
+    cora_inner "Of course. Not yes. Not sorry. Of course." # this should be stronger or cut
+    cora_inner "As if obedience were not surrender, but etiquette."
 
     gideon "Your name?"
 
@@ -218,17 +228,17 @@ label day101_1_vance_throws_toy:
 
     gideon "Then learn quickly, girl. This house rewards discretion."
 
-    "He does not threaten me."
-    "That is why it feels like one."
+    cora_inner "He does not threaten me." # meh
+    cora_inner "That is why it feels like one."
 
     # [ASSET] Visual/staging command
     hide gideon_sprite
     hide vance_sprite
 
-    "Vance follows him down the corridor, all silk and swallowed rage."
-    "I watch only long enough to know the shape of it."
-    "A command. A yielding. A room full of people pretending not to notice."
-    "There is a chapter in that."
+    cora_inner "Vance follows him down the corridor, all silk and swallowed rage."
+    cora_inner "I watch only long enough to know the shape of it." # meh maybe?
+    cora_inner "A command. A yielding. A room full of people pretending not to notice."
+    cora_inner "There is a chapter in that."
 
     # [STATE] State/progression update
     jump day101_2_missy_meets_cora
@@ -431,6 +441,9 @@ label day101_2_coras_path_choice:
 
 label day101_3_taking_stock_day1:
 
+    # [STATE] State/progression update
+    $ set_time_period("Evening")
+
     call check_confrontations
 
     # [ASSET] Visual/staging command
@@ -465,89 +478,14 @@ label day101_3_taking_stock_day1:
         "A voice can kneel."
         "I had not known that before today."
 
-    # [CHOICE] Decision point
+    # [CHOICE] Decision point - combined Evening / Night choice
     menu:
-        "Which discipline keeps my hands steady?"
+        "I look at my journal, the ink drying on the page. The lay of the land is clear. How do I spend the night?"
 
-        "Order. Safety in structure. [[Inspiration]]":
+        "Write the first chapter of my manuscript. [[Progress manuscript]]" if has_story_fuel(15):
 
             # [STATE] State/progression update
-            jump day101_3_inspiration_choice
-
-        "Exposure. Safety in knowing the threat. [[Corruption]]":
-
-            # [STATE] State/progression update
-            jump day101_3_corruption_choice
-
-
-# ==========================================
-# 013 - INSPIRATION CHOICE
-# ==========================================
-
-label day101_3_inspiration_choice:
-
-    # [ASSET] Visual/staging command
-    scene bg_servants_quarters_dusk
-    with dissolve
-
-    # [STATE] Cora processes the event as craft first. Cleaner path; supports writing
-    $ apply_effects(insp=15, corr=0)
-    $ story.set_day1_ledger_focus("inspiration")
-
-    "I draw three columns in the ledger."
-    "Command. Witness. Consequence."
-
-    "The shape of the scene matters more than the appetite of it."
-    "A woman attacks downward because she cannot attack upward. A man corrects her, not from kindness, but ownership. A servant sees and becomes dangerous."
-
-    "That is a story."
-    "Not a confession."
-    "Not yet."
-
-    # [STATE] State/progression update
-    jump day101_3_optional_character_chain
-
-
-# ==========================================
-# 013 - CORRUPTION CHOICE
-# ==========================================
-
-label day101_3_corruption_choice:
-
-    # [ASSET] Visual/staging command
-    scene bg_servants_quarters_dusk
-    with dissolve
-
-    # [STATE] Cora accepts appetite as fuel. Higher future risk, stronger thematic contamination
-    $ apply_effects(vance_susp=5, insp=5, corr=10)
-    $ story.set_day1_ledger_focus("corruption")
-
-    "I try to write command, witness, consequence."
-    "My hand writes want."
-
-    "Not simply Vance's."
-    "That would be easier. Cleaner."
-
-    "I think of the way she yielded and hated him for making her yield."
-    "I think of Missy reaching for the latch because I placed fear in her hand and called it concern."
-    "I think of myself outside the door, starved for the next sound."
-
-    "The ledger does not forgive me."
-    "It records beautifully."
-
-    # [STATE] State/progression update
-    jump day101_3_optional_character_chain
-
-
-# ==========================================
-# 013 - OPTIONAL CHARACTER CHAIN (DAY 1 EVENING)
-# ==========================================
-
-label day101_3_optional_character_chain:
-
-    # [CHOICE] Contextual grind gate after ledger reflection; resolver picks chain beat
-    menu:
-        "The ledger is closed. One hour remains before the lamp must answer."
+            jump day101_4_write_the_chapter
 
         "Listen for Miss Stern's keys in the west corridor." if story.chain_available("stern"):
 
@@ -567,66 +505,50 @@ label day101_3_optional_character_chain:
             $ _chain_label = story.resolve_chain_label("vance")
             jump expression _chain_label
 
-        "Stay at the desk and let the ink dry.":
-            if story.day1_ledger_focus == "corruption":
-                "I fold the page over the worst lines and pretend discipline can be borrowed from neat margins."
-            else:
-                "I copy the three columns again until my hand stops shaking."
-            "The hotel watches less when I give it nothing to answer."
+        "Stay at the desk and let the ink dry. [[Rest and reflect]]":
 
-            # [STATE] State/progression update
+            # [CHOICE] Choose reflection discipline
+            menu:
+                "Which discipline keeps my hands steady?"
+
+                "Order. Safety in structure. [[Inspiration]]":
+
+                    # [STATE] Inspiration focus
+                    $ apply_effects(insp=15, corr=0)
+                    $ story.set_day1_ledger_focus("inspiration")
+
+                    "I draw three columns in the ledger."
+                    "Command. Witness. Consequence."
+
+                    "The shape of the scene matters more than the appetite of it."
+                    "A woman attacks downward because she cannot attack upward. A man corrects her, not from kindness, but ownership. A servant sees and becomes dangerous."
+
+                    "That is a story."
+                    "Not a confession."
+                    "Not yet."
+
+                "Exposure. Safety in knowing the threat. [[Corruption]]":
+
+                    # [STATE] Corruption focus
+                    $ apply_effects(vance_susp=5, insp=5, corr=10)
+                    $ story.set_day1_ledger_focus("corruption")
+
+                    "I try to write command, witness, consequence."
+                    "My hand writes want."
+
+                    "Not simply Vance's."
+                    "That would be easier. Cleaner."
+
+                    "I think of the way she yielded and hated him for making her yield."
+                    "I think of Missy reaching for the latch because I placed fear in her hand and called it concern."
+                    "I think of myself outside the door, starved for the next sound."
+
+                    "The ledger does not forgive me."
+                    "It records beautifully."
+
+            # [STATE] Apply final reflection effects and end the slot
             $ apply_effects(insp=10, corr=0)
             call end_slot(outcome="d1_reflect_done")
-
-
-# ==========================================
-# 014 - WRITING OR VISITING
-# ==========================================
-
-label day101_4_writing_or_visiting:
-
-    call check_confrontations
-
-    # [ASSET] Visual/staging command
-    scene bg_cora_desk_night
-    with dissolve
-
-    "Night settles over the servants' quarters in layers."
-    "Footsteps thin. Pipes mutter. Somewhere, a girl cries once and decides not to be heard again."
-
-    "The candle waits on my desk."
-    "So does the page."
-
-    # [PROMOTION NOTE]
-    # Replace this with the project-approved threshold helper.
-    # The intent: Day 1 writing opens if the player has enough Inspiration/Corruption fuel.
-    if has_story_fuel(15):
-
-        # [CHOICE] Decision point
-        menu:
-            "The page is ready. What do I do with the night?"
-
-            "Write the chapter. [[Progress manuscript]]":
-
-                # [STATE] State/progression update
-                jump day101_4_write_the_chapter
-
-            "Visit Missy instead. [[Missy relationship seed, miss chapter opportunity]]":
-
-                # [STATE] State/progression update
-                jump day101_4_visit_missy
-
-    else:
-
-        "I dip the pen."
-        "Nothing comes."
-        "Not because the day was empty. Because I have not yet learned how to steal from it cleanly."
-
-        "Missy is still awake in the next room. I can hear her turning over on the narrow bed."
-        "If I cannot write, I can at least learn what the house has already done to her."
-
-        # [STATE] State/progression update
-        jump day101_4_visit_missy
 
 
 # ==========================================
@@ -641,6 +563,30 @@ label day101_4_write_the_chapter:
 
     # [STATE] This is the main Day 1 manuscript progression route
     $ story.set_day1_night_action("write")
+
+    # [CHOICE] Choose writing framing
+    menu:
+        "How do I frame the first chapter of my novel?"
+
+        "Frame it with order and structure. I must write what is safe. [[Inspiration]]":
+
+            # [STATE] Inspiration choice
+            $ apply_effects(insp=15, corr=0)
+            $ story.set_day1_ledger_focus("inspiration")
+
+            "I draw three columns in the ledger and let the structure guide my hand."
+            "The shape of the scene matters more than the appetite of it."
+            "A woman attacks downward because she cannot attack upward. A man corrects her, not from kindness, but ownership."
+
+        "Frame it with exposure and appetite. I must write the truth. [[Corruption]]":
+
+            # [STATE] Corruption choice
+            $ apply_effects(vance_susp=5, insp=5, corr=10)
+            $ story.set_day1_ledger_focus("corruption")
+
+            "I try to write command, witness, consequence, but my hand writes want."
+            "I think of the way she yielded and hated him for making her yield."
+            "I think of Missy reaching for the latch because I placed fear in her hand."
 
     "The first sentence arrives like a servant entering the wrong room: terrified, necessary, unable to retreat."
 
@@ -692,117 +638,5 @@ label day101_4_write_the_chapter:
 
     # [STATE] State/progression update
     call end_slot(outcome="d1_write_ch1")
-
-
-# ==========================================
-# 014 - VISIT MISSY
-# ==========================================
-
-label day101_4_visit_missy:
-
-    # [ASSET] Visual/staging command
-    scene bg_servants_quarters_dusk
-    with fade
-
-    # [STATE] Relationship seed. This should be meaningful: Cora gains Missy context, but loses the Day 1 chapter
-    $ story.set_day1_night_action("visit_missy")
-    $ story.set_missy_day1_seed(True)
-    $ apply_effects(missy_susp=-5, insp=5, corr=0)
-
-    "I leave the candle unlit."
-    "A chapter can wait. A person, mishandled, changes shape before morning."
-
-    # [ASSET] Visual/staging command
-    show missy_sprite smiling at center
-
-    missy "Cora?"
-    cora "I couldn't sleep."
-
-    missy "No one sleeps properly their first night. The pipes knock like ghosts and the mattresses are stuffed with old grudges."
-
-    "She shifts to make room on the edge of the bed."
-    "Trusting, then. Or lonely. There is often very little difference."
-
-    if story.day1_corridor_state == "predator":
-
-        missy "About earlier... I shouldn't have opened that door."
-        cora "You were worried."
-        missy "You said I was right to be."
-
-        "There it is. A small bruise in the conversation."
-
-        # [CHOICE] Decision point
-        menu:
-            "How do I handle Missy's doubt?"
-
-            "Soothe her. Keep her close.":
-
-                # [STATE] State/progression update
-                $ apply_effects(missy_susp=-5, insp=5, corr=0)
-                $ story.set_missy_day1_trust_state("soothed")
-
-                cora "And perhaps you were. But the house has rules beneath its rules. We must learn them before we try to mend anything."
-                missy "I suppose."
-                "She wants that to be wisdom. I let it be."
-
-            "Let the guilt sit between us.":
-
-                # [STATE] State/progression update
-                $ apply_effects(corr=5)
-                $ story.set_missy_day1_trust_state("unsettled")
-
-                cora "I should not have let you go first."
-                missy "No."
-                "She looks at me properly then. Not as a friend. Not yet as an enemy. As a question."
-
-    elif story.day1_corridor_state == "prey":
-
-        missy "You scared me half to death. What if Mr. Locke complains?"
-        cora "Then Stern dismisses me."
-        missy "Or worse, keeps you."
-
-        "That is the first intelligent thing anyone has said to me all day."
-
-        cora "Does he often visit that room?"
-        missy "I don't know. I try not to know things with men's names attached."
-
-        # [STATE] State/progression update
-        $ story.set_missy_day1_trust_state("warned_cora")
-
-    else:
-
-        missy "You were right to walk away."
-        cora "Was I?"
-        missy "I think so. I don't know. This place makes right and wrong feel like stairs in the dark."
-
-        "I sit with that."
-        "Missy is not stupid. She is merely undefended."
-
-        # [STATE] State/progression update
-        $ story.set_missy_day1_trust_state("shared_caution")
-
-    missy "Do you miss home?"
-
-    "Home."
-    "A word people use when they have not had to manufacture one out of locked doors and private plans."
-
-    cora "Sometimes."
-    missy "I miss my mother's kitchen. The ceiling leaked, but only in one place. Here everything shines and still feels damp."
-
-    "She laughs quietly."
-    "I could use this."
-    "I could also simply sit beside her for a minute and not turn her into material."
-
-    cora "Tell me about the kitchen."
-
-    "So she does."
-    "The candle remains unlit in my room."
-    "The page remains blank."
-    "The choice costs me exactly what it should."
-
-    # [ASSET] Visual/staging command
-    hide missy_sprite
-
-    call end_slot(outcome="d1_visit_missy")
 
 
