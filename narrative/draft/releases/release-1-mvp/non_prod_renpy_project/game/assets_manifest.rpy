@@ -119,7 +119,7 @@ init -40 python:
     #   [300 × 1080 px]  Full sidebar at canvas height.
     #   Aged dark-leather or near-black parchment texture. Warm near-black with subtle
     #   grain/wear. Semi-opaque (~95%) so the scene bleeds through faintly.
-    declare_image_with_fallback("ui_sidebar_bg", "images/ui/ui_sidebar_bg.webp", "#1a120af2")
+    declare_image_with_fallback("ui_sidebar_bg", "images/ui/ui_sidebar_bg.png", "#1a120af2")
     #
     # ui_sidebar_divider:
     #   [268 × 10 px]  Exact display size (HUD_SIDEBAR_WIDTH - 32 × 10).
@@ -174,5 +174,8 @@ init -40 python:
     audio_sfx_key_in_door = register_audio("sfx/key_in_door", "audio/sfx/key_in_door.ogg")
     audio_sfx_brush_drop_clatter = register_audio("sfx/brush_drop_clatter", "audio/sfx/brush_drop_clatter.ogg")
     audio_sfx_door_handle_jiggle = register_audio("sfx/door_handle_jiggle", "audio/sfx/door_handle_jiggle.ogg")
+
+    # Thought overlay UI — mc_sprite_thought_icon is a placeholder until final art is created.
+    declare_image_with_fallback("mc_sprite_thought_icon", "images/sprites/ui/mc_sprite_thought_icon.png", "#d4a574")
 
     report_missing_assets()

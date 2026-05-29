@@ -311,3 +311,70 @@ screen choice(items):
                 background Solid("#000000aa")
                 hover_background Solid("#222222ee")
                 xpadding 20 ypadding 10
+
+
+# ── THOUGHT OVERLAY ────────────────────────────────────────────
+# Dual-layer dialogue + internal monologue system.
+# Usage: cora_inner has screen="thought_overlay" wired in characters.rpy
+# Writer contract: cora_inner "text"  — freezes last speaker on screen.
+# Assets required (not yet created): images/sprites/ui/mc_sprite_thought_icon.png
+#   Fallback: solid colour block registered in assets_manifest.rpy.
+
+init python:
+    def get_anchor_dialogue():
+        """Returns the line immediately before this thought if it was a named speaker.
+        _history_list[-1] is the current cora_inner entry (already appended before
+        the screen renders), so we check [-2] for the preceding line."""
+        if len(_history_list) >= 2 and _history_list[-2].who is not None:
+            return _history_list[-2]
+        return None
+
+transform thought_fade:
+    alpha 0.0
+    linear 0.5 alpha 1.0
+
+style thought_text:
+    font "DejaVuSans.ttf"
+    size 28
+    color "#f5f0e8"
+    line_leading 6
+
+screen thought_overlay(who, what):
+    # LAYER 1: Freeze the last external speaker's line on screen.
+    # Only rendered when a named character preceded this thought.
+    $ anchor_line = get_anchor_dialogue()
+    if anchor_line:
+        frame:
+            xpos HUD_SIDEBAR_WIDTH
+            xsize config.screen_width - HUD_SIDEBAR_WIDTH
+            yalign 1.0
+            background Solid("#000000cc")
+            padding (60, 20, 60, 30)
+            vbox:
+                spacing 8
+                if anchor_line.who:
+                    text anchor_line.who style "say_label"
+                text anchor_line.what style "say_dialogue"
+
+    # LAYER 2: Isolated thought UI — locked to story viewport (xpos 300).
+    fixed:
+        xpos 300
+        xysize (1620, 1080)
+
+        # Icon — left anchor for the thought bubble row
+        add "mc_sprite_thought_icon":
+            at thought_fade
+            xysize (80, 80)
+            xpos 60
+            ypos 20
+
+        # Bubble — explicit position and size so xsize is honoured
+        frame:
+            at thought_fade
+            xpos 160
+            ypos 0
+            xmaximum 1380
+            background Frame("gui/thoughtbubble.png", 30, 30)
+            padding (40, 30)
+
+            text what style "thought_text" id "what"
