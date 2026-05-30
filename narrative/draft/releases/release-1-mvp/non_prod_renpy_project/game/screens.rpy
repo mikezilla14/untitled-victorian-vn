@@ -359,6 +359,7 @@ screen thought_overlay(who, what):
     # LAYER 2: Isolated thought UI — locked to story viewport (xpos 300).
     fixed:
         xpos 300
+        ypos 100
         xysize (1620, 1080)
 
         # Icon — left anchor for the thought bubble row

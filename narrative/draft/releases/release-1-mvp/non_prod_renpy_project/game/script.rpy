@@ -16,25 +16,6 @@ label start:
 
     jump day101_main
 
-
-label thought_overlay_test:
-show screen stats_overlay
-    # Writer contract verification for the dual-layer thought overlay system.
-    # This label is sandbox-only and must not be promoted to production.
-    scene bg_savoy_corridor_morning with dissolve
-    show stern_sprite neutral:
-        zoom 0.25 
-        xpos 0.66
-        ypos 0.25
-
-    stern "It's a most fascinating structure."
-    cora_inner "She's not looking at the building."
-    cora_inner "She's watching him."
-    stern "Don't you agree?"
-
-    return
-
-
 label check_suspicion:
     if player.anxiety >= 100:
         jump game_over_dismissed

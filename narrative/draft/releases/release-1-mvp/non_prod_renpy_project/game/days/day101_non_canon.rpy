@@ -94,7 +94,7 @@ label day101_1_morning_interview:
     with dissolve
 
     show stern_sprite neutral at center:
-        zoom 0.35
+        zoom 0.25
 
     "Miss Stern stands rather than sits." 
     cora_inner "It is not courtesy. It is measurement."
@@ -166,7 +166,7 @@ label day101_1_vance_throws_toy:
 
     # [ASSET] Visual/staging command
     scene bg_savoy_corridor_morning:
-        zoom 1.25
+        zoom 1.00
         xysize (1920,1080)
 
     # [ASSET] Visual/staging command
@@ -177,7 +177,8 @@ label day101_1_vance_throws_toy:
 
     # [ASSET] Visual/staging command
     show vance_sprite angry at left:
-        zoom 0.35
+        zoom 0.25
+        xpos 350
 
     vance "Useless creature. I said the blue ribbon, not that vulgar little thing." # this needs rewriting this would be in the lobby it currently makes no sense for her to be standing around shouting about a ribbon.
 
