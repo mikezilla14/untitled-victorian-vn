@@ -51,7 +51,7 @@ label stern_chain_1:
     scene bg_savoy_corridor_morning
     with fade
 
-    show stern_sprite neutral at center
+    show stern_sprite neutral at centre_bust
 
     # [BEAT] Step 1: The Linen Closet Audit. Narrow space, tight inspection
 
@@ -115,7 +115,7 @@ label stern_chain_2:
     scene bg_servants_quarters_dusk
     with fade
 
-    show stern_sprite neutral at center
+    show stern_sprite neutral at centre_bust
 
     # [BEAT] Step 2: The Notebook Extraction. High-tension boundary crossing
     if time_manager.time_of_day == "Evening":
@@ -176,7 +176,7 @@ label stern_chain_3:
     scene bg_master_suite_day
     with fade
 
-    show stern_sprite neutral at center
+    show stern_sprite neutral at centre_bust
 
     # [BEAT] Step 3: The Vacant Room Corrective. Level 4 tease, intimate submission
     if time_manager.time_of_day == "Afternoon":
@@ -247,7 +247,7 @@ label missy_chain_1:
     scene bg_laundry_room_day
     with fade
 
-    show missy_sprite smiling at center
+    show missy_sprite smiling at centre_bust
 
     # [BEAT] Step 1: The Lye-Steam French Seam. Damp, close contact
 
@@ -309,7 +309,7 @@ label missy_chain_2:
     scene bg_servants_corridor_dim
     with fade
 
-    show missy_sprite neutral at center
+    show missy_sprite neutral at centre_bust
 
     # [BEAT] Step 2: The Broom Closet Hiding. Pressed chest-to-chest
     if time_manager.time_of_day == "Evening":
@@ -367,7 +367,7 @@ label missy_chain_3:
     scene bg_laundry_room_day
     with fade
 
-    show missy_sprite shocked at center
+    show missy_sprite shocked at centre_bust
 
     # [BEAT] Step 3: The Untouched Silk. Level 4 tease, unlacing
     if time_manager.time_of_day == "Afternoon":
@@ -434,7 +434,7 @@ label vance_chain_1:
     scene bg_savoy_corridor_morning
     with fade
 
-    show vance_sprite neutral at center
+    show vance_sprite neutral at centre_bust
 
     # [BEAT] Step 1: The Dropped Silk Handkerchief. Class voyeurism
 
@@ -487,7 +487,7 @@ label vance_chain_2:
     scene bg_servants_corridor_dim
     with fade
 
-    show vance_sprite angry at center
+    show vance_sprite angry at centre_bust
 
     # [BEAT] Step 2: The Staircase Grief. Power reversal
     if time_manager.time_of_day == "Evening":
@@ -543,7 +543,7 @@ label vance_chain_3:
     scene bg_master_suite_day
     with fade
 
-    show vance_sprite angry at center
+    show vance_sprite angry at centre_bust
 
     # [BEAT] Step 3: The Desk Blackmail. Level 4 tease, Gideon shadow
     if time_manager.time_of_day == "Afternoon":
@@ -604,7 +604,7 @@ label confrontation_stern:
     scene bg_savoy_corridor_morning
     with fade
 
-    show stern_sprite neutral at center
+    show stern_sprite neutral at centre_bust
 
     "Miss Stern stands before me, her hands folded over her keys."
 
@@ -638,7 +638,7 @@ label confrontation_vance:
     scene bg_savoy_corridor_morning
     with fade
 
-    show vance_sprite angry at center
+    show vance_sprite angry at centre_bust
 
     "Miss Vance corners me near the service elevator."
 
@@ -672,7 +672,7 @@ label confrontation_missy:
     scene bg_laundry_room_day
     with fade
 
-    show missy_sprite shocked at center
+    show missy_sprite shocked at centre_bust
 
     "Missy stands in my doorway, her eyes swollen from crying."
 

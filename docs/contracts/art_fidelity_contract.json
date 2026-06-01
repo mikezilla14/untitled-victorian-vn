@@ -1,0 +1,149 @@
+{
+  "cora": {
+    "hair": [
+      "dark",
+      "black",
+      "black irish"
+    ],
+    "eyes": [
+      "dark",
+      "piercing"
+    ],
+    "skin": [
+      "pale",
+      "porcelain"
+    ],
+    "clothing": [
+      "chambermaid",
+      "apron",
+      "starched collar",
+      "gray dress"
+    ],
+    "forbidden_contradictions": [
+      "blonde",
+      "blue eyes",
+      "green eyes",
+      "red hair",
+      "golden hair",
+      "blue gown",
+      "silk robe"
+    ]
+  },
+  "gideon": {
+    "hair": [
+      "dark",
+      "grey",
+      "graying"
+    ],
+    "eyes": [
+      "cold",
+      "sharp",
+      "dominant"
+    ],
+    "skin": [
+      "pale"
+    ],
+    "clothing": [
+      "premium suit",
+      "cravat",
+      "waistcoat",
+      "coat"
+    ],
+    "forbidden_contradictions": [
+      "blonde",
+      "golden hair",
+      "blue eyes",
+      "rags",
+      "maid cap",
+      "apron",
+      "submissive dress"
+    ]
+  },
+  "vance": {
+    "hair": [
+      "dark"
+    ],
+    "eyes": [
+      "shadowed",
+      "terrified",
+      "watch"
+    ],
+    "skin": [
+      "pale",
+      "desaturated"
+    ],
+    "clothing": [
+      "gown",
+      "purple velvet",
+      "silk",
+      "companion"
+    ],
+    "forbidden_contradictions": [
+      "blonde",
+      "maid cap",
+      "apron",
+      "stiff starched collar",
+      "cheerful",
+      "ruddy skin"
+    ]
+  },
+  "stern": {
+    "hair": [
+      "black-grey",
+      "black-gray",
+      "neat bun",
+      "pulled back"
+    ],
+    "eyes": [
+      "icy",
+      "severe"
+    ],
+    "skin": [
+      "pale"
+    ],
+    "clothing": [
+      "housekeeper",
+      "keys",
+      "stiff",
+      "high collar"
+    ],
+    "forbidden_contradictions": [
+      "blonde",
+      "red hair",
+      "aproned maid",
+      "submissive",
+      "revealing gown",
+      "rosy skin"
+    ]
+  },
+  "missy": {
+    "hair": [
+      "brown",
+      "light"
+    ],
+    "eyes": [
+      "wide",
+      "naive",
+      "curious",
+      "shocked"
+    ],
+    "skin": [
+      "flush",
+      "rosy",
+      "blushing"
+    ],
+    "clothing": [
+      "maid dress",
+      "apron",
+      "cap",
+      "plain"
+    ],
+    "forbidden_contradictions": [
+      "black irish",
+      "cold eyes",
+      "dominant suit",
+      "premium silk",
+      "porcelain skin"
+    ]
+  }
+}

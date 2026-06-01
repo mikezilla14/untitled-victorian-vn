@@ -76,7 +76,7 @@ screen stats_overlay():
                         add _cora_ui:
                             xalign 0.5
                             yalign 0.5
-                            xysize (HUD_SIDEBAR_WIDTH - 32, 190)
+                            xysize (HUD_SIDEBAR_WIDTH - 190, 190)
 
                     text "Cora" size 14 color "#c8a97e" xalign 0.5 bold True
 
@@ -379,3 +379,5 @@ screen thought_overlay(who, what):
             padding (40, 30)
 
             text what style "thought_text" id "what"
+
+            

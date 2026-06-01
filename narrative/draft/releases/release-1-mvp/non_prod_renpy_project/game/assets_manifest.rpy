@@ -19,11 +19,19 @@ init -50 python:
         return os.path.join(config.basedir, "game", rel_path)
 
     def declare_image_with_fallback(image_id, rel_path, color="#222222"):
+        is_sprite = "_sprite" in image_id
+        
         if os.path.exists(_abs(rel_path)):
-            renpy.image(image_id, rel_path)
+            displayable = renpy.display.im.Image(rel_path)
         else:
-            renpy.image(image_id, Solid(color))
+            displayable = Solid(color)
             _missing_image_assets.append((image_id, rel_path))
+            
+        if is_sprite:
+            char_name = image_id.split("_sprite")[0]
+            displayable = At(displayable, sprite_highlight(char_name))
+            
+        renpy.image(image_id, displayable)
 
     def register_audio(name, rel_path):
         if os.path.exists(_abs(rel_path)):
@@ -48,58 +56,62 @@ init -40 python:
     # Full canvas. The sidebar covers the leftmost 300 px at runtime; keep
     # focal content within the right 1620 px. WebP preferred for file size.
     declare_image_with_fallback("bg_savoy_corridor_morning", "images/backgrounds/bg_savoy_corridor_morning.png")
-    declare_image_with_fallback("bg_laundry_room_day", "images/backgrounds/bg_laundry_room_day.webp")
-    declare_image_with_fallback("bg_servants_corridor_dim", "images/backgrounds/bg_servants_corridor_dim.webp")
-    declare_image_with_fallback("bg_servants_quarters_dusk", "images/backgrounds/bg_servants_quarters_dusk.webp")
-    declare_image_with_fallback("bg_cora_desk_night", "images/backgrounds/bg_cora_desk_night.webp")
-    declare_image_with_fallback("bg_master_suite_day", "images/backgrounds/bg_master_suite_day.webp")
-    declare_image_with_fallback("bg_master_suite_tea", "images/backgrounds/bg_master_suite_tea.webp")
-    declare_image_with_fallback("bg_servants_corridor_day", "images/backgrounds/bg_servants_corridor_day.webp")
-    declare_image_with_fallback("bg_servants_corridor_morning", "images/backgrounds/bg_servants_corridor_morning.webp")
-    declare_image_with_fallback("bg_master_suite_night", "images/backgrounds/bg_master_suite_night.webp")
+    declare_image_with_fallback("bg_laundry_room_day", "images/backgrounds/bg_laundry_room_day.png")
+    declare_image_with_fallback("bg_servants_corridor_dim", "images/backgrounds/bg_servants_corridor_dim.png")
+    declare_image_with_fallback("bg_servants_quarters_dusk", "images/backgrounds/bg_servants_quarters_dusk.png")
+    declare_image_with_fallback("bg_cora_desk_night", "images/backgrounds/bg_cora_desk_night.png")
+    declare_image_with_fallback("bg_master_suite_day", "images/backgrounds/bg_master_suite_day.png")
+    declare_image_with_fallback("bg_master_suite_tea", "images/backgrounds/bg_master_suite_tea.png")
+    declare_image_with_fallback("bg_servants_corridor_day", "images/backgrounds/bg_servants_corridor_day.png")
+    declare_image_with_fallback("bg_servants_corridor_morning", "images/backgrounds/bg_servants_corridor_morning.png")
+    declare_image_with_fallback("bg_master_suite_night", "images/backgrounds/bg_master_suite_night.png")
     declare_image_with_fallback("bg_savoy_front_facade", "images/backgrounds/bg_savoy_front_facade.png")
+    declare_image_with_fallback("bg_stern_office_entrance", "images/backgrounds/bg_stern_office_entrance.png")
+    declare_image_with_fallback("bg_stern_office_reverse", "images/backgrounds/bg_stern_office_reverse.png")
 
     # ── Sprites: Stern ────────────────────────────────────────────
     # [~700 × 1080 px, transparent background]
     # Full-height sprite sized for the 1920 × 1080 canvas. Transparent PNG or
     # lossless WebP. Width will vary with pose but should not exceed ~800 px.
     declare_image_with_fallback("stern_sprite neutral", "images/sprites/stern/neutral.png", "#555555")
-    declare_image_with_fallback("stern_sprite stern", "images/sprites/stern/stern.webp", "#555555")
+    declare_image_with_fallback("stern_sprite stern", "images/sprites/stern/stern.png", "#555555")
 
     # ── Sprites: Vance ────────────────────────────────────────────
     # [~700 × 1080 px, transparent background]  (same spec as Stern above)
     declare_image_with_fallback("vance_sprite neutral", "images/sprites/vance/neutral.png", "#7b3f98")
     declare_image_with_fallback("vance_sprite angry", "images/sprites/vance/angry.png", "#7b3f98")
-    declare_image_with_fallback("vance_sprite indignant", "images/sprites/vance/indignant.webp", "#7b3f98")
+    declare_image_with_fallback("vance_sprite indignant", "images/sprites/vance/indignant.png", "#7b3f98")
     declare_image_with_fallback("vance_sprite submissive", "images/sprites/vance/submissive.png", "#7b3f98")
     declare_image_with_fallback("vance_sprite cowed", "images/sprites/vance/cowed.png", "#7b3f98")
-    declare_image_with_fallback("vance_sprite defeated", "images/sprites/vance/defeated.webp", "#7b3f98")
-    declare_image_with_fallback("vance_sprite mirror_watch_terror", "images/sprites/vance/mirror_watch_terror.webp", "#7b3f98")
-    declare_image_with_fallback("vance_sprite confused", "images/sprites/vance/confused.webp", "#7b3f98")
-    declare_image_with_fallback("vance_sprite shocked", "images/sprites/vance/shocked.webp", "#7b3f98")
+    declare_image_with_fallback("vance_sprite defeated", "images/sprites/vance/defeated.png", "#7b3f98")
+    declare_image_with_fallback("vance_sprite mirror_watch_terror", "images/sprites/vance/mirror_watch_terror.png", "#7b3f98")
+    declare_image_with_fallback("vance_sprite confused", "images/sprites/vance/confused.png", "#7b3f98")
+    declare_image_with_fallback("vance_sprite shocked", "images/sprites/vance/shocked.png", "#7b3f98")
 
     # ── Sprites: Gideon ───────────────────────────────────────────
     # [~700 × 1080 px, transparent background]  (same spec as Stern above)
-    declare_image_with_fallback("gideon_sprite cold", "images/sprites/gideon/cold.webp", "#a30000")
-    declare_image_with_fallback("gideon_sprite neutral", "images/sprites/gideon/neutral.webp", "#a30000")
-    declare_image_with_fallback("gideon_sprite dominant", "images/sprites/gideon/dominant.webp", "#a30000")
-    declare_image_with_fallback("gideon_sprite angry", "images/sprites/gideon/angry.webp", "#a30000")
+    declare_image_with_fallback("gideon_sprite cold", "images/sprites/gideon/cold.png", "#a30000")
+    declare_image_with_fallback("gideon_sprite neutral", "images/sprites/gideon/neutral.png", "#a30000")
+    declare_image_with_fallback("gideon_sprite dominant", "images/sprites/gideon/dominant.png", "#a30000")
+    declare_image_with_fallback("gideon_sprite angry", "images/sprites/gideon/angry.png", "#a30000")
 
     # ── Sprites: Missy ────────────────────────────────────────────
     # [~700 × 1080 px, transparent background]  (same spec as Stern above)
-    declare_image_with_fallback("missy_sprite neutral", "images/sprites/missy/neutral.webp", "#5fa8d3")
-    declare_image_with_fallback("missy_sprite smiling", "images/sprites/missy/smiling.webp", "#5fa8d3")
-    declare_image_with_fallback("missy_sprite naive", "images/sprites/missy/naive.webp", "#5fa8d3")
-    declare_image_with_fallback("missy_sprite shocked", "images/sprites/missy/shocked.webp", "#5fa8d3")
-    declare_image_with_fallback("missy_sprite hesitant", "images/sprites/missy/hesitant.webp", "#5fa8d3")
-    declare_image_with_fallback("missy_sprite confused", "images/sprites/missy/confused.webp", "#5fa8d3")
+    declare_image_with_fallback("missy_sprite neutral", "images/sprites/missy/neutral.png", "#5fa8d3")
+    declare_image_with_fallback("missy_sprite smiling", "images/sprites/missy/smiling.png", "#5fa8d3")
+    declare_image_with_fallback("missy_sprite naive", "images/sprites/missy/naive.png", "#5fa8d3")
+    declare_image_with_fallback("missy_sprite shocked", "images/sprites/missy/shocked.png", "#5fa8d3")
+    declare_image_with_fallback("missy_sprite hesitant", "images/sprites/missy/hesitant.png", "#5fa8d3")
+    declare_image_with_fallback("missy_sprite confused", "images/sprites/missy/confused.png", "#5fa8d3")
 
     # ── Sprites: Cora (scene-dependent) ──────────────────────────
     # [~700 × 1080 px, transparent background]  (same spec as Stern above)
-    declare_image_with_fallback("cora_sprite base", "images/sprites/cora/base.webp", "#d4a574")
-    declare_image_with_fallback("cora_sprite guarded", "images/sprites/cora/guarded.webp", "#d4a574")
-    declare_image_with_fallback("cora_sprite focused", "images/sprites/cora/focused.webp", "#d4a574")
-    declare_image_with_fallback("cora_sprite flushed", "images/sprites/cora/flushed.webp", "#d4a574")
+    declare_image_with_fallback("cora_sprite base", "images/sprites/cora/base.png", "#d4a574")
+    declare_image_with_fallback("cora_sprite base_travel", "images/sprites/cora/base_travel.png", "#d4a574")
+    declare_image_with_fallback("cora_sprite guarded", "images/sprites/cora/guarded.png", "#d4a574")
+    declare_image_with_fallback("cora_sprite guarded_travel", "images/sprites/cora/guarded_travel.png", "#d4a574")
+    declare_image_with_fallback("cora_sprite focused", "images/sprites/cora/focused.png", "#d4a574")
+    declare_image_with_fallback("cora_sprite flushed", "images/sprites/cora/flushed.png", "#d4a574")
 
     # ── UI: persistent HUD (stats_overlay) ───────────────────────
     #
@@ -107,13 +119,13 @@ init -40 python:
     #   [268 × 190 px]  Exact display size in sidebar (HUD_SIDEBAR_WIDTH - 32 × 190).
     #   Design at 2× (536 × 380 px) and let Ren'Py scale down for sharpness.
     #   Cora portrait, framed bust shot. Used at corruption_level 1–2.
-    declare_image_with_fallback("ui_cora_base", "images/ui/ui_cora_base.webp", "#d4a574")
+    declare_image_with_fallback("ui_cora_base", "images/ui/ui_cora_base.png", "#d4a574")
     #
     # ui_cora_corrupted:
     #   [268 × 190 px]  Same dimensions as ui_cora_base (design at 2×: 536 × 380 px).
     #   Swapped in at corruption_level >= 3. Should read as visibly changed — colder,
     #   more controlled, slight desaturation or shadow shift.
-    declare_image_with_fallback("ui_cora_corrupted", "images/ui/ui_cora_corrupted.webp", "#8b2942")
+    declare_image_with_fallback("ui_cora_corrupted", "images/ui/ui_cora_corrupted.png", "#8b2942")
     #
     # ui_sidebar_bg:
     #   [300 × 1080 px]  Full sidebar at canvas height.
@@ -125,20 +137,20 @@ init -40 python:
     #   [268 × 10 px]  Exact display size (HUD_SIDEBAR_WIDTH - 32 × 10).
     #   Design at 2× (536 × 20 px) for sharpness. Victorian ornamental styling —
     #   ink smear, ruled-ledger line, or aged parchment crease. Subtle, not overwrought.
-    declare_image_with_fallback("ui_sidebar_divider", "images/ui/ui_sidebar_divider.webp", "#2a1e0f")
+    declare_image_with_fallback("ui_sidebar_divider", "images/ui/ui_sidebar_divider.png", "#2a1e0f")
     #
     # ui_vignette_ambient:
     #   [1920 × 1080 px]  Full canvas. Displayed scaled to the story viewport
     #   (1620 × 1080 px at runtime). Radial darkening at edges, ~20–30% max opacity.
     #   Provides constant cinematic framing, independent of the anxiety vignette.
     #   Fallback is transparent — missing asset produces no visible effect.
-    declare_image_with_fallback("ui_vignette_ambient", "images/ui/ui_vignette_ambient.webp", "#00000000")
+    declare_image_with_fallback("ui_vignette_ambient", "images/ui/ui_vignette_ambient.png", "#00000000")
     #
     # ui_suspicion_vignette:
     #   [1920 × 1080 px]  Full canvas. Displayed scaled to story viewport (1620 × 1080 px).
     #   Rendered at alpha = player.anxiety / 100; fully opaque at anxiety 100.
     #   Deep red/crimson radial burn at edges — should feel oppressive at full intensity.
-    declare_image_with_fallback("ui_suspicion_vignette", "images/ui/ui_suspicion_vignette.webp", "#3a0000")
+    declare_image_with_fallback("ui_suspicion_vignette", "images/ui/ui_suspicion_vignette.png", "#3a0000")
     #
     # ui_inkwell_empty / ui_inkwell_full:
     #   [64 × 110 px]  Exact display size in sidebar.
@@ -149,8 +161,8 @@ init -40 python:
     #                     The fill level is a crop from the bottom up proportional to
     #                     inspiration / inspiration_cap — the ink surface must align with
     #                     the vessel's interior top edge at 100% fill.
-    declare_image_with_fallback("ui_inkwell_empty", "images/ui/ui_inkwell_empty.webp", "#1a1a1a")
-    declare_image_with_fallback("ui_inkwell_full", "images/ui/ui_inkwell_full.webp", "#1e5a8a")
+    declare_image_with_fallback("ui_inkwell_empty", "images/ui/ui_inkwell_empty.png", "#1a1a1a")
+    declare_image_with_fallback("ui_inkwell_full", "images/ui/ui_inkwell_full.png", "#1e5a8a")
 
     # ── Audio aliases (None when missing; guard before play) ──────
     audio_themes_savoy_tension = register_audio("themes/savoy_tension", "audio/themes/savoy_tension.ogg")
