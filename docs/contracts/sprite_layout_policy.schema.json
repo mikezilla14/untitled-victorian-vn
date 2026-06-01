@@ -1,0 +1,149 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/untitled-victorian-vn/contracts/sprite_layout_policy.schema.json",
+  "title": "SpriteLayoutPolicy",
+  "description": "Canonical layout policy consumed by scripts/scene_direction.py. See docs/specs/scene-direction-agent.md.",
+  "type": "object",
+  "required": ["sprite_scene_direction_agent"],
+  "additionalProperties": false,
+  "properties": {
+    "sprite_scene_direction_agent": {
+      "type": "object",
+      "required": [
+        "scene_boundary",
+        "lock_tags",
+        "enter_exit_tags",
+        "slot_sets",
+        "slot_aliases",
+        "universal_rules",
+        "rule_priority",
+        "overflow_policy"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "purpose": { "type": "string" },
+        "grammar": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "sprite_tag_derivation": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "source": { "type": "string" },
+                "suffix": { "type": "string" },
+                "skip_if_undeclared": { "type": "boolean" }
+              }
+            },
+            "block_form_show_is_locked": { "type": "boolean" },
+            "default_expressions": {
+              "type": "object",
+              "additionalProperties": { "type": "string" }
+            }
+          }
+        },
+        "transitions": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "new_appearance_left": { "type": "string" },
+            "new_appearance_right": { "type": "string" },
+            "reposition_existing": { "type": "string" }
+          }
+        },
+        "scene_boundary": {
+          "type": "object",
+          "required": ["start_pattern", "ends_at_next_scene"],
+          "additionalProperties": false,
+          "properties": {
+            "start_pattern": { "type": "string" },
+            "ends_at_next_scene": { "type": "boolean" }
+          }
+        },
+        "lock_tags": {
+          "type": "object",
+          "required": ["scene_lock", "line_keep", "auto", "pin_pattern"],
+          "additionalProperties": false,
+          "properties": {
+            "scene_lock": { "type": "string" },
+            "line_keep": { "type": "string" },
+            "auto": { "type": "string" },
+            "pin_pattern": { "type": "string" }
+          }
+        },
+        "enter_exit_tags": {
+          "type": "object",
+          "required": ["enter_pattern", "exit_pattern", "infer_enter_from_dialogue", "infer_exit_from_silence"],
+          "additionalProperties": false,
+          "properties": {
+            "enter_pattern": { "type": "string" },
+            "exit_pattern": { "type": "string" },
+            "infer_enter_from_dialogue": { "type": "boolean" },
+            "infer_exit_from_silence": { "type": "boolean" }
+          }
+        },
+        "excluded_files": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "slot_sets": {
+          "type": "object",
+          "required": ["1", "2", "3", "4"],
+          "additionalProperties": false,
+          "patternProperties": {
+            "^[1-4]$": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "type": "string", "minLength": 1 }
+            }
+          }
+        },
+        "slot_aliases": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        },
+        "universal_rules": {
+          "type": "object",
+          "additionalProperties": { "type": "boolean" }
+        },
+        "rule_priority": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "hard_rules": {
+          "type": "object",
+          "additionalProperties": { "type": "object" }
+        },
+        "character_preferences": {
+          "type": "object",
+          "additionalProperties": { "type": "object" }
+        },
+        "canonical_layouts": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": { "type": "string" }
+          }
+        },
+        "overflow_policy": {
+          "type": "object",
+          "required": ["max_visible_characters", "if_more_than_4"],
+          "additionalProperties": false,
+          "properties": {
+            "max_visible_characters": { "type": "integer", "minimum": 1 },
+            "if_more_than_4": {
+              "type": "object",
+              "required": ["action", "warning_comment"],
+              "additionalProperties": false,
+              "properties": {
+                "action": { "type": "string" },
+                "warning_comment": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -3,6 +3,14 @@
 # [STATE] -> variable changes, effects, conditions, jumps
 # [CHOICE] -> menu blocks and inflection points
 # [BEAT] -> narrative intent / scene intent notes
+#
+# SPRITE DIRECTION (managed by scripts/scene_direction.py — how to preserve manual staging):
+# [asset auto]              -> auto-placed sprite line; the agent may rewrite/replace it on re-run
+# [asset keep]              -> on a show line: lock THAT line so the agent never edits it
+# [asset lock:scene]        -> before/after a `scene`: the agent skips the entire scene block
+# [asset pin:Name=slot]     -> force Name into slot for the rest of the scene block
+# [enter:Name] / [exit:Name] -> declare cast changes so auto placement stays correct
+# Full policy: docs/contracts/sprite_layout_policy.yaml | spec: docs/specs/scene-direction-agent.md
 
 # day105_non_canon.rpy
 # Release 1 / Day 05 non-canon Ren'Py-shaped draft
@@ -133,6 +141,9 @@ label day105_2_the_summons:
 
     gideon "Not for privacy. For theatre. You have a taste for theatre, I think."
 
+    # [ASSET] Visual/staging command
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show gideon_sprite dominant at right_bust with move # [asset auto]
     cora "I have a taste for employment, sir."
 
     "He folds the paper once, neatly."
@@ -212,6 +223,9 @@ label day105_3_leverage_collapses:
         "I do not have a word for it that does not sound like surrender."
         "It is genuine. That is the worst of it."
 
+        # [ASSET] Visual/staging command
+        show cora_sprite base at left_bust with moveinleft # [asset auto]
+        show gideon_sprite dominant at right_bust with move # [asset auto]
         cora "You think this is funny?"
 
         gideon "No. I think you are."
@@ -362,6 +376,8 @@ label day105_4_motivation_observer:
     $ story.set_cora_release1_flavour("observer")
     $ apply_effects(insp=20, corr=0)
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show gideon_sprite dominant at right_bust with move # [asset auto]
     cora "To finish my book."
 
     "For the first time, Gideon does not answer immediately."
@@ -406,6 +422,8 @@ label day105_4_motivation_predator:
     $ story.set_cora_release1_flavour("predator")
     $ apply_effects(insp=5, corr=20)
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show gideon_sprite dominant at right_bust with move # [asset auto]
     cora "Because I wanted to know what it felt like."
 
     gideon "What?"
@@ -451,6 +469,8 @@ label day105_4_motivation_prey:
     $ story.set_cora_release1_flavour("prey")
     $ apply_effects(vance_susp=5, insp=10, corr=10)
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show gideon_sprite dominant at right_bust with move # [asset auto]
     cora "Because you frightened me."
 
     gideon "Sensible."
@@ -494,6 +514,8 @@ label day105_4_motivation_ghost:
     $ story.set_cora_release1_flavour("ghost")
     $ apply_effects(vance_susp=-5, insp=15, corr=5)
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show gideon_sprite dominant at right_bust with move # [asset auto]
     cora "Because people like you survive by not being seen, sir."
 
     gideon "People like me are seen constantly."
@@ -567,6 +589,9 @@ label day105_5_gideon_marks_cora:
 
     gideon "There."
 
+    # [ASSET] Visual/staging command
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show gideon_sprite dominant at right_bust with move # [asset auto]
     cora "You could dismiss me."
 
     gideon "Yes."
@@ -836,6 +861,10 @@ label day105_7_release_one_ending:
     "There is calculation there. Fear too."
     "For once, she and I understand the same danger from different sides of the carpet."
 
+    # [ASSET] Visual/staging command
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show vance_sprite confused at centre_bust with move # [asset auto]
+    show gideon_sprite dominant at right_bust with move # [asset auto]
     cora "Sir."
 
     gideon "Do not become dull."

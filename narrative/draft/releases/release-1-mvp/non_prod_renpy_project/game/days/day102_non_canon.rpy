@@ -3,6 +3,14 @@
 # [STATE] -> variable changes, effects, conditions, jumps
 # [CHOICE] -> menu blocks and inflection points
 # [BEAT] -> narrative intent / scene intent notes
+#
+# SPRITE DIRECTION (managed by scripts/scene_direction.py — how to preserve manual staging):
+# [asset auto]              -> auto-placed sprite line; the agent may rewrite/replace it on re-run
+# [asset keep]              -> on a show line: lock THAT line so the agent never edits it
+# [asset lock:scene]        -> before/after a `scene`: the agent skips the entire scene block
+# [asset pin:Name=slot]     -> force Name into slot for the rest of the scene block
+# [enter:Name] / [exit:Name] -> declare cast changes so auto placement stays correct
+# Full policy: docs/contracts/sprite_layout_policy.yaml | spec: docs/specs/scene-direction-agent.md
 
 # day102_non_canon.rpy
 # Release 1 / Day 02 non-canon Ren'Py-shaped draft
@@ -37,10 +45,13 @@ label day102_1_cora_missy_first_shift:
     "They leave proof that someone lived loudly while pretending not to."
 
     # [ASSET] Visual/staging command
-    show missy_sprite smiling at center
+    show missy_sprite smiling at centre_bust
 
     missy "Best room in the hotel, this one. Best view, best rugs, best chance of being shouted at for breathing wrong."
 
+    # [ASSET] Visual/staging command
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show missy_sprite smiling at right_bust with move # [asset auto]
     cora "You make it sound almost desirable."
 
     missy "Oh, it is. You should see the breakfast trays. Kippers. Proper marmalade. Eggs with little hats on."
@@ -78,18 +89,21 @@ label day102_1_missy_finds_a_thing:
     scene bg_master_suite_day
     with dissolve
 
-    show missy_sprite smiling at center
+    show missy_sprite smiling at centre_bust
 
     "There is a soft clatter behind me."
     "Not porcelain. Not metal. Something lighter. A hatbox giving up its secret."
 
     # [ASSET] Visual/staging command
-    show missy_sprite confused at center
+    show missy_sprite confused at centre_bust
 
     missy "Cora?"
 
     "Missy's voice has lost its shine."
 
+    # [ASSET] Visual/staging command
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show missy_sprite confused at right_bust with move # [asset auto]
     cora "What is it?"
 
     missy "I don't know. I mean, I know it's clothing. I think."
@@ -129,11 +143,13 @@ label day102_1_cora_takes_the_thing:
     scene bg_master_suite_day
     with dissolve
 
-    show missy_sprite confused at center
+    show missy_sprite confused at centre_bust
 
     $ story.set_day2_contraband_state("stolen_wearing")
     $ apply_effects(vance_susp=5, insp=0, corr=15)
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show missy_sprite confused at right_bust with move # [asset auto]
     cora "Give it here."
 
     missy "Shouldn't we put it back?"
@@ -182,11 +198,13 @@ label day102_1_cora_deceives_missy:
     scene bg_master_suite_day
     with dissolve
 
-    show missy_sprite confused at center
+    show missy_sprite confused at centre_bust
 
     $ story.set_day2_contraband_state("planted_in_trunk")
     $ apply_effects(vance_susp=0, insp=5, corr=10)
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show missy_sprite confused at right_bust with move # [asset auto]
     cora "Put it away. Quickly."
 
     missy "Back in the hatbox?"
@@ -244,7 +262,7 @@ label day102_2_day2_chore_time:
     "The corridor is narrower than it was yesterday."
 
     # [ASSET] Visual/staging command
-    show missy_sprite smiling at center
+    show missy_sprite smiling at centre_bust
 
     if story.day2_contraband_state == "stolen_wearing":
         "The lace moves beneath my uniform with each step."
@@ -257,6 +275,9 @@ label day102_2_day2_chore_time:
 
     missy "You are quiet."
 
+    # [ASSET] Visual/staging command
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show missy_sprite smiling at right_bust with move # [asset auto]
     cora "I am working."
 
     missy "That's never stopped anyone from talking before."
@@ -287,7 +308,7 @@ label day102_2_day2_insp_choice:
     scene bg_servants_corridor_morning
     with dissolve
 
-    show missy_sprite smiling at center
+    show missy_sprite smiling at centre_bust
 
     $ story.set_day2_chore_focus("inspiration")
     $ apply_effects(stern_susp=-5, insp=15, corr=0)
@@ -300,6 +321,9 @@ label day102_2_day2_insp_choice:
 
     missy "You look like you're counting things."
 
+    # [ASSET] Visual/staging command
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show missy_sprite smiling at right_bust with move # [asset auto]
     cora "I am."
 
     missy "What things?"
@@ -322,7 +346,7 @@ label day102_2_day2_corr_choice:
     scene bg_servants_corridor_morning
     with dissolve
 
-    show missy_sprite confused at center
+    show missy_sprite smiling at centre_bust
 
     $ story.set_day2_chore_focus("corruption")
     $ apply_effects(vance_susp=10, insp=0, corr=15)
@@ -340,6 +364,9 @@ label day102_2_day2_corr_choice:
 
     missy "Cora, we'll be missed."
 
+    # [ASSET] Visual/staging command
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show missy_sprite smiling at right_bust with move # [asset auto]
     cora "Then push faster."
 
     missy "You were the one who slowed down."
@@ -396,7 +423,7 @@ label day102_3_stern_fetches_cora:
     scene bg_servants_corridor_day
     with dissolve
 
-    show stern_sprite stern at center
+    show stern_sprite stern at centre_bust
 
     "Stern finds me at the foot of the servants' stair."
     "She does not raise her voice."
@@ -405,6 +432,9 @@ label day102_3_stern_fetches_cora:
 
     stern "Cora. Upstairs."
 
+    # [ASSET] Visual/staging command
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show stern_sprite stern at right_bust with move # [asset auto]
     cora "Ma'am?"
 
     stern "Do not make me repeat myself."
@@ -432,9 +462,9 @@ label day102_3_vance_goes_incandescent:
     scene bg_master_suite_tea
     with fade
 
-    show vance_sprite angry at left
-    show stern_sprite stern at center
-    show missy_sprite shocked at right
+    show missy_sprite shocked at left_bust
+    show stern_sprite stern at centre_bust
+    show vance_sprite angry at right_bust
 
     "The Master Suite has become a courtroom without chairs."
 
@@ -509,9 +539,9 @@ label day102_3_cora_confesses:
     scene bg_master_suite_tea
     with dissolve
 
-    show vance_sprite angry at left
-    show stern_sprite stern at center
-    show missy_sprite shocked at right
+    show missy_sprite shocked at left_bust
+    show stern_sprite stern at centre_bust
+    show vance_sprite angry at right_bust
 
     $ story.set_day2_tea_choice("prey")
     $ apply_effects(stern_susp=20, insp=15, corr=0)
@@ -519,6 +549,11 @@ label day102_3_cora_confesses:
     "The truth is not safe."
     "That does not make the lie safer."
 
+    # [ASSET] Visual/staging command
+    show cora_sprite base at left_bust4 with moveinleft # [asset auto]
+    show stern_sprite stern at centre_left_bust4 with move # [asset auto]
+    show missy_sprite shocked at centre_right_bust4 with move # [asset auto]
+    show vance_sprite angry at right_bust4 with move # [asset auto]
     cora "Ma'am. I saw the item this morning."
 
     "Missy's head turns toward me."
@@ -558,9 +593,9 @@ label day102_3_cora_pretends_to_find_it:
     scene bg_master_suite_tea
     with dissolve
 
-    show vance_sprite angry at left
-    show stern_sprite stern at center
-    show missy_sprite shocked at right
+    show missy_sprite shocked at left_bust
+    show stern_sprite stern at centre_bust
+    show vance_sprite angry at right_bust
 
     $ story.set_day2_tea_choice("predator")
     $ apply_effects(stern_susp=10, insp=5, corr=15)
@@ -569,6 +604,11 @@ label day102_3_cora_pretends_to_find_it:
     "That is the mask."
     "Helpful girls are allowed to cross rooms that guilty girls are not."
 
+    # [ASSET] Visual/staging command
+    show cora_sprite base at left_bust4 with moveinleft # [asset auto]
+    show stern_sprite stern at centre_left_bust4 with move # [asset auto]
+    show missy_sprite shocked at centre_right_bust4 with move # [asset auto]
+    show vance_sprite angry at right_bust4 with move # [asset auto]
     cora "Pardon me, Madam. May I check where the morning things were placed?"
 
     vance "Do you imagine I have not looked?"
@@ -622,9 +662,9 @@ label day102_3_cora_frames_missy:
     scene bg_master_suite_tea
     with dissolve
 
-    show vance_sprite angry at left
-    show stern_sprite stern at center
-    show missy_sprite shocked at right
+    show missy_sprite shocked at left_bust   
+    show stern_sprite stern at centre_bust
+    show vance_sprite angry at right_bust
 
     $ story.set_day2_tea_choice("ghost")
     $ story.set_missy_day2_trust_break(True)
@@ -634,6 +674,11 @@ label day102_3_cora_frames_missy:
     "She exists."
     "She is simply not the one who speaks first."
 
+    # [ASSET] Visual/staging command
+    show cora_sprite base at left_bust4 with moveinleft # [asset auto]
+    show stern_sprite stern at centre_left_bust4 with move # [asset auto]
+    show missy_sprite shocked at centre_right_bust4 with move # [asset auto]
+    show vance_sprite angry at right_bust4 with move # [asset auto]
     cora "Missy handled it this morning, Ma'am."
 
     missy "Cora—"
@@ -676,9 +721,9 @@ label day102_3_gideon_interrupts_controls_vance:
     scene bg_master_suite_tea
     with dissolve
 
-    show vance_sprite angry at left
-    show stern_sprite stern at center
-    show gideon_sprite cold at right
+    show gideon_sprite cold at right_bust
+    show stern_sprite stern at centre_bust
+    show vance_sprite angry at left_bust
 
     "The door opens without a knock."
     "Mr. Locke enters as if the argument has been waiting for his permission to exist."
@@ -689,7 +734,7 @@ label day102_3_gideon_interrupts_controls_vance:
     "It is enough."
 
     # [ASSET] Visual/staging command
-    show vance_sprite cowed at left
+    show vance_sprite cowed at left_bust
 
     vance "Something was taken from my things."
 
@@ -702,6 +747,11 @@ label day102_3_gideon_interrupts_controls_vance:
 
         gideon "You."
 
+        # [ASSET] Visual/staging command
+        show cora_sprite base at left_bust4 with moveinleft # [asset auto]
+        show stern_sprite stern at centre_left_bust4 with move # [asset auto]
+        show vance_sprite cowed at centre_right_bust4 with move # [asset auto]
+        show gideon_sprite cold at right_bust4 with move # [asset auto]
         cora "Yes, Sir."
 
         gideon "You saw the item and failed to report it."
@@ -806,7 +856,7 @@ label day102_3_gideon_interrupts_controls_vance:
     scene bg_servants_corridor_day
     with fade
 
-    show missy_sprite shocked at center
+    show missy_sprite shocked at centre_bust
 
     "The corridor receives us like a throat swallowing something sharp."
 
@@ -816,6 +866,9 @@ label day102_3_gideon_interrupts_controls_vance:
         "There are many possible answers."
         "None are small enough to fit in the corridor."
 
+        # [ASSET] Visual/staging command
+        show cora_sprite base at left_bust with moveinleft # [asset auto]
+        show missy_sprite shocked at right_bust with move # [asset auto]
         cora "Not here."
 
         missy "No. Not anywhere."

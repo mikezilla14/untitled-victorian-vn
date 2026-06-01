@@ -3,6 +3,14 @@
 # [STATE] -> variable changes, effects, conditions, jumps
 # [CHOICE] -> menu blocks and inflection points
 # [BEAT] -> narrative intent / scene intent notes
+#
+# SPRITE DIRECTION (managed by scripts/scene_direction.py — how to preserve manual staging):
+# [asset auto]              -> auto-placed sprite line; the agent may rewrite/replace it on re-run
+# [asset keep]              -> on a show line: lock THAT line so the agent never edits it
+# [asset lock:scene]        -> before/after a `scene`: the agent skips the entire scene block
+# [asset pin:Name=slot]     -> force Name into slot for the rest of the scene block
+# [enter:Name] / [exit:Name] -> declare cast changes so auto placement stays correct
+# Full policy: docs/contracts/sprite_layout_policy.yaml | spec: docs/specs/scene-direction-agent.md
 
 # day104_non_canon.rpy
 # Release 1 / Day 04 non-canon Ren'Py-shaped draft
@@ -153,6 +161,8 @@ label day104_2_return_early:
 
     "A key turns in the outer door."
 
+    # [ASSET] Visual/staging command
+    show vance_sprite neutral at centre_bust with moveinright # [asset auto]
     vance "—and I will not tolerate that tone from her again. Not from a dresser, not from a maid, not from anyone."
 
     "They are early."
@@ -270,6 +280,10 @@ label day104_2_escape_bold_lie:
 
     gideon "That is my question."
 
+    # [ASSET] Visual/staging command
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show vance_sprite angry at centre_bust with move # [asset auto]
+    show gideon_sprite angry at right_bust with move # [asset auto]
     cora "Checking the desk for dust, Sir. Miss Stern's orders."
 
     "The lie stands up."
@@ -350,6 +364,9 @@ label day104_2_escape_missy_cover:
     "Wrong place. Right time."
     "For me."
 
+    # [ASSET] Visual/staging command
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show missy_sprite shocked at right_bust with move # [asset auto]
     cora "They need you in the suite. Now. Take this."
 
     "I push the dust cloth into her hands."
@@ -421,6 +438,8 @@ label day104_3_stern_pressure:
             $ story.set_day4_stern_response("boring")
             $ apply_effects(stern_susp=-15, insp=0, corr=0)
 
+            show cora_sprite base at left_bust with moveinleft # [asset auto]
+            show stern_sprite stern at right_bust with move # [asset auto]
             cora "Ground-floor silver, Ma'am. Then linens. Then back stairs. I should have reported each change."
 
             stern "Yes. You should have."
@@ -596,6 +615,9 @@ label day104_4_missy_repair:
 
     missy "You sent me in there."
 
+    # [ASSET] Visual/staging command
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show missy_sprite shocked at right_bust with move # [asset auto]
     cora "Yes."
 
     "The word is smaller than the harm."

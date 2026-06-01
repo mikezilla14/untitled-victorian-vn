@@ -37,6 +37,22 @@ Each `_non_canon.rpy` file is a day's worth of scenes. Inside, comments mark wha
 
 ---
 
+## Sprite placement is automatic (but you can override it)
+
+Where each character sprite stands on screen is handled for you by an automatic tool, so most `show ... at ...` lines are tagged `# [asset auto]` — **don't hand-tune those, they get regenerated.** The full list of these tags is printed at the top of every day file under `SPRITE DIRECTION`.
+
+If you *do* want a specific staging command kept exactly as you wrote it:
+
+| You want to… | Add this |
+|--------------|----------|
+| Keep one `show` line exactly as written | append ` # [asset keep]` to that line |
+| Hand-direct a whole scene (tool leaves it alone) | put `# [asset lock:scene]` on its own line just before the `scene` line |
+| Note who enters/leaves a scene | `# [enter:Cora]` / `# [exit:Missy]` on their own line |
+
+Full reference: [`docs/narrative_workflow.md`](../narrative_workflow.md#sprite-direction--asset-lock-tags).
+
+---
+
 ## What you do not touch
 
 | Path | Why |

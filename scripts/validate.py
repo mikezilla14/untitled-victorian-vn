@@ -195,6 +195,14 @@ def main():
 
         non_canon_rpy = [file for file in target_files if file.replace("//", "/").endswith("_non_canon.rpy")]
         if non_canon_rpy:
+            # Scene direction runs (logically) before formatting: it generates the
+            # `[asset auto]` staging lines that the formatter then marks.
+            failures |= run_step_chunked(
+                "Scene direction check",
+                [py, "scripts/scene_direction.py", "--check"],
+                non_canon_rpy,
+                file_arg_name="--files"
+            )
             failures |= run_step_chunked(
                 "Non-canon formatting check",
                 [py, "scripts/format_non_canon.py", "--check"],

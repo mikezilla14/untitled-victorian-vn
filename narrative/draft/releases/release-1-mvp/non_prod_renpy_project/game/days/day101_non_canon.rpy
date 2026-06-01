@@ -3,6 +3,14 @@
 # [STATE] -> variable changes, effects, conditions, jumps
 # [CHOICE] -> menu blocks and inflection points
 # [BEAT] -> narrative intent / scene intent notes
+#
+# SPRITE DIRECTION (managed by scripts/scene_direction.py — how to preserve manual staging):
+# [asset auto]              -> auto-placed sprite line; the agent may rewrite/replace it on re-run
+# [asset keep]              -> on a show line: lock THAT line so the agent never edits it
+# [asset lock:scene]        -> before/after a `scene`: the agent skips the entire scene block
+# [asset pin:Name=slot]     -> force Name into slot for the rest of the scene block
+# [enter:Name] / [exit:Name] -> declare cast changes so auto placement stays correct
+# Full policy: docs/contracts/sprite_layout_policy.yaml | spec: docs/specs/scene-direction-agent.md
 
 # day101_non_canon.rpy
 # Release 1 / Day 01 non-canon Ren'Py-shaped draft
@@ -37,6 +45,7 @@ label day101_main:
         zoom 1.0
         xysize (1920,1080)
 
+    # [ASSET] Visual/staging command
     with fade
 
     cora_inner "The Savoy Hotel did not welcome girls like me."
@@ -61,6 +70,16 @@ label day101_1_cora_waiting:
     # [ASSET] Visual/staging command
     with dissolve
 
+    # [ASSET] Visual/staging command
+    show cora_sprite guarded_travel at left:
+        zoom 0.5
+        xpos 350
+        ypos 1.05
+        xzoom -1.0
+
+    # [ASSET] Visual/staging command
+    with dissolve
+
     cora_inner "I stand outside Miss Stern's office with my hands folded and my pulse behaving badly."
     
     "Behind the heavy mahogany door, a clock ticks with paid machinery." # sound effect?
@@ -73,7 +92,7 @@ label day101_1_cora_waiting:
     cora_inner "No one asks who I am."
     cora_inner "That is the first rule of this place, then. Be useful enough to ignore."
 
-    stern "Enter."
+    stern "Enter." 
 
     # [STATE] State/progression update
     jump day101_1_morning_interview
@@ -86,22 +105,47 @@ label day101_1_cora_waiting:
 label day101_1_morning_interview:
 
     # [ASSET] Visual/staging command
-    scene bg_savoy_corridor_morning:
+    scene bg_stern_office_entrance:
         zoom 1.0
         xysize (1920,1080)
 
     # [ASSET] Visual/staging command
     with dissolve
 
-    show stern_sprite neutral at center:
-        zoom 0.25
+    # [ASSET] Visual/staging command
+    show stern_sprite neutral at right:
+        zoom 0.6
+        xpos 0.85
 
     "Miss Stern stands rather than sits." 
     cora_inner "It is not courtesy. It is measurement."
+
+    # [ASSET] Visual/staging command
+    scene bg_stern_office_reverse:
+        zoom 1.0
+        xysize (1920,1080)
+
+    # [ASSET] Visual/staging command
+    with dissolve
+
+    # [ASSET] Visual/staging command
+    hide bg_stern_office_entrance
+    hide stern_sprite neutral
+    show stern_sprite neutral at right_full_body
+    # [ASSET] Visual/staging command
+    show cora_sprite base_travel at left_full_body
+    with dissolve
+
     "Her eyes move from my cap to my boots." # camera?
     cora_inner "Weighing every inch for disobedience."
-
     stern "Cora Vale."
+    
+    # [ASSET] Visual/staging command
+    show stern_sprite neutral at right_reframe
+    # [ASSET] Visual/staging command
+    show cora_sprite base_travel at left_reframe_mirror
+    with moveinleft
+
     cora "Yes, Ma'am."
     stern "You have worked in service before."
 
@@ -115,6 +159,8 @@ label day101_1_morning_interview:
 
     # [CHOICE] Decision point
     # This choice currently does not affect story progress there should be tie in to a future narrative flow or remove the flag and ekep the stat changes
+
+    # [CHOICE] Decision point
     menu:
         "How do I survive Stern's inspection?" 
 
@@ -123,6 +169,12 @@ label day101_1_morning_interview:
             # [STATE] Low-risk survival posture. Cora hides sharpness, but the performance costs dignity
             $ apply_effects(stern_susp=5, insp=5, corr=0)
             $ story.set_day1_interview_state("meek")
+
+            # [ASSET] Visual/staging command
+            show cora_sprite guarded_travel at left_reframe
+            # [ASSET] Visual/staging command
+            show stern_sprite neutral at right_reframe
+            with dissolve
 
             cora "I can, Ma'am. I only wish to work hard."
             stern "Wishing is for girls with leisure. You will work because you are told."
@@ -136,6 +188,13 @@ label day101_1_morning_interview:
             # [STATE] Efficient but conspicuous. Stern notices a mind behind the apron
             $ apply_effects(stern_susp=15, insp=10, corr=0)
             $ story.set_day1_interview_state("competent")
+
+            # [ASSET] Visual/staging command
+            show cora_sprite base_travel at left_reframe
+            # [ASSET] Visual/staging command
+            show stern_sprite neutral at right_reframe
+            # [ASSET] Visual/staging command
+            with dissolve            
 
             cora "I can be quiet, quick, and exact. If I err, it will not be from carelessness."
             stern "Exact?"
@@ -176,15 +235,25 @@ label day101_1_vance_throws_toy:
     "Then something small and silver strikes the skirting board and spins across the carpet."
 
     # [ASSET] Visual/staging command
-    show vance_sprite angry at left:
-        zoom 0.25
-        xpos 350
+    show vance_sprite angry at right_full_body:
+        xalign 0.6
+        yalign 1.1
+        zoom 0.8
 
     vance "Useless creature. I said the blue ribbon, not that vulgar little thing." # this needs rewriting this would be in the lobby it currently makes no sense for her to be standing around shouting about a ribbon.
 
     "The object stops near my shoe. A lady's trinket. Too expensive to be called a toy, too childish to be called anything else." # change or cut this, this is vestigial dialogue from a previous draft where the llm used the prompt of throwing toys literally
     
     vance "You. Girl. Pick it up." # like this performative cruelty but needs better context
+
+    # [ASSET] Visual/staging command
+    show cora_sprite base_travel at left_full_body:
+        yalign 1.0
+        xalign 0.2
+        zoom 0.75
+
+    # [ASSET] Visual/staging command
+    with moveinleft
 
     "Her voice lands on me before her eyes do."
     "Velvet. Pearls. A face arranged for admiration and currently sharpened for harm."
@@ -199,9 +268,40 @@ label day101_1_vance_throws_toy:
     "I decide not to list them."
 
     # [ASSET] Visual/staging command
-    show gideon_sprite cold at right
+    show gideon_sprite cold at right_full_body:
+        xalign 0.8
+        yalign 1.0
+        zoom 0.8
+        
 
     gideon "Vance."
+
+    # [ASSET] Visual/staging command
+    hide vance_sprite angry
+    # [ASSET] Visual/staging command
+    hide cora_sprite base_travel
+    # [ASSET] Visual/staging command
+    show cora_sprite base_travel at left_bust:
+        yalign 1.0
+        xalign 0.2
+
+    # [ASSET] Visual/staging command
+    with dissolve
+    # [ASSET] Visual/staging command
+    show vance_sprite submissive at left_bust:
+        xalign 0.5
+        xzoom -1.0
+
+    # [ASSET] Visual/staging command
+    with dissolve
+    # [ASSET] Visual/staging command
+    show gideon_sprite at right_bust:
+        zoom 1
+        xalign 0.75
+
+    # [ASSET] Visual/staging command
+    with dissolve
+            
 
     cora_inner "One word." # maybe show cora sprite with speech bubble here
     cora_inner "The corridor changes temperature."
@@ -210,8 +310,6 @@ label day101_1_vance_throws_toy:
 
     gideon "You were making yourself visible."
 
-    # [ASSET] Visual/staging command
-    show vance_sprite submissive at left
 
     "Vance's mouth closes." # hopefully the sprite change can tell this story and we can cut some of this narration
     "The fury does not vanish. It folds itself away, obedient and practiced."
@@ -234,6 +332,7 @@ label day101_1_vance_throws_toy:
 
     # [ASSET] Visual/staging command
     hide gideon_sprite
+    # [ASSET] Visual/staging command
     hide vance_sprite
 
     cora_inner "Vance follows him down the corridor, all silk and swallowed rage."
@@ -252,16 +351,23 @@ label day101_1_vance_throws_toy:
 label day101_2_missy_meets_cora:
 
     # [ASSET] Visual/staging command
-    scene bg_laundry_room_day
+    scene bg_laundry_room_day:
+        zoom 1.2
+
+    # [ASSET] Visual/staging command
     with fade
 
     "The laundry room is heat, lye, damp cotton, and women trying not to cough."
     "Steam beads on the walls. It turns every face soft at the edges."
 
     # [ASSET] Visual/staging command
-    show missy_sprite smiling at center
+    show missy_sprite smiling at right_full_body
 
     missy "You must be Cora."
+    # [ASSET] Visual/staging command
+    show cora_sprite base_travel at left_full_body
+    with moveinleft
+
     cora "I must be."
 
     missy "I'm Missy. Miss Stern said I'm to show you where things go. Not everything, mind. If I showed you everything we'd both be dead before tea."
@@ -318,7 +424,7 @@ label day101_2_coras_path_choice:
     "The walls carry sound the way a body carries fever."
 
     # [ASSET] Visual/staging command
-    show missy_sprite smiling at center
+    show missy_sprite smiling at centre_bust
 
     missy "This way. Mind the third board. It complains."
 
@@ -330,7 +436,7 @@ label day101_2_coras_path_choice:
     vance "Please. I understand. I do."
 
     # [ASSET] Visual/staging command
-    show missy_sprite shocked at left
+    show missy_sprite shocked at left_bust
 
     missy "Was that Miss Vance?"
 
