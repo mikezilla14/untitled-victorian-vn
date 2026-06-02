@@ -3,6 +3,14 @@
 # [STATE] -> variable changes, effects, conditions, jumps
 # [CHOICE] -> menu blocks and inflection points
 # [BEAT] -> narrative intent / scene intent notes
+#
+# SPRITE DIRECTION (managed by scripts/scene_direction.py — how to preserve manual staging):
+# [asset auto]              -> auto-placed sprite line; the agent may rewrite/replace it on re-run
+# [asset keep]              -> on a show line: lock THAT line so the agent never edits it
+# [asset lock:scene]        -> before/after a `scene`: the agent skips the entire scene block
+# [asset pin:Name=slot]     -> force Name into slot for the rest of the scene block
+# [enter:Name] / [exit:Name] -> declare cast changes so auto placement stays correct
+# Full policy: docs/contracts/sprite_layout_policy.yaml | spec: docs/specs/scene-direction-agent.md
 
 # story_chains_non_canon.rpy
 # Writers' Room - Release 1 / Dynamic Narrative Story Chains & Confrontations Draft
@@ -22,10 +30,16 @@ label check_confrontations:
     # Confrontation gates checked at the start of non-work personal slots.
     # Threshold is PlayerStats.CONFRONTATION_THRESHOLD — do not hardcode here.
     if player.is_confrontation_ready("stern"):
+
+        # [STATE] State/progression update
         jump confrontation_stern
     elif player.is_confrontation_ready("vance"):
+
+        # [STATE] State/progression update
         jump confrontation_vance
     elif player.is_confrontation_ready("missy"):
+
+        # [STATE] State/progression update
         jump confrontation_missy
     return
 
@@ -36,6 +50,8 @@ label advance_after_confrontation:
     $ story.consume_penance()
     if _target is None:
         return
+
+    # [STATE] State/progression update
     $ time_manager.set_current_day(_target[0])
     $ set_time_period(_target[1])
     jump expression _target[2]
@@ -77,6 +93,8 @@ label stern_chain_1:
             $ apply_effects(stern_susp=-10, insp=5, corr=0)
             $ story.complete_chain_beat("stern")
             
+            show cora_sprite base at left_bust with moveinleft # [asset auto]
+            show stern_sprite neutral at right_bust with move # [asset auto]
             cora "Outward, Ma'am. Missy showed me, and I made sure to repeat it exactly so as not to offend."
             stern "Exactly is a large word for a small mind. Keep to that simple standard, Cora, and the Strand will remain a distant worry."
             
@@ -137,6 +155,8 @@ label stern_chain_2:
             $ apply_effects(stern_susp=-10, insp=5, corr=0)
             $ story.complete_chain_beat("stern")
             
+            show cora_sprite base at left_bust with moveinleft # [asset auto]
+            show stern_sprite neutral at right_bust with move # [asset auto]
             cora "Only my letters, Ma'am. My mother said a maid who cannot spell the inventory is of no use to a fine house."
             stern "Your mother was sensible. Keep to spelling 'apron' and 'lye', Cora. Leave the long words to those who do not have to wash them."
             
@@ -198,6 +218,8 @@ label stern_chain_3:
             $ apply_effects(stern_susp=-15, insp=5, corr=0)
             $ story.complete_chain_beat("stern")
             
+            show cora_sprite base at left_bust with moveinleft # [asset auto]
+            show stern_sprite neutral at right_bust with move # [asset auto]
             cora "Dust, Ma'am. And scraps that should have been swept before the second floor shift."
             stern "Correct. A drawer is a box for linens, not a confessional."
             
@@ -263,7 +285,7 @@ label missy_chain_1:
     "Missy is sitting on a wicker laundry hamper, her fingers red and raw from the coarse soap."
     "A torn lace collar lies in her lap, and she is trying to sew it with trembling hands."
 
-    missy "If Stern sees this tear, she'll dock my pay three shillings. It was that beast in room 301. He threw his boots at the door while I was changing the water."
+    missy "If Miss Stern sees this tear, she'll dock my pay three shillings. It was that gentleman in room 301. He threw his boots at the door while I was changing the wash-water. He has no right, Cora. None at all."
     
     # [CHOICE] Decision point
     menu:
@@ -273,30 +295,31 @@ label missy_chain_1:
             $ apply_effects(missy_susp=-10, insp=10, corr=0)
             $ story.complete_chain_beat("missy")
             
-            cora "Give it here. My mother taught me the French seam. It hides the raw edge completely."
-            "I take the needle. We sit together in the steam, our shoulders touching."
+            show cora_sprite base at left_bust with moveinleft # [asset auto]
+            show missy_sprite smiling at right_bust with move # [asset auto]
+            cora "Give it here. My mother taught me the French seam. It hides the raw edge completely, so even Stern's glass won't find it."
+            "I take the needle. We sit together on the wicker hamper, our shoulders touching in the warm steam."
             
-            missy "You're a good friend, Cora. Most girls here would have told Stern to get the credit."
+            missy "You're a good friend, Cora. Most girls here would have carried the tale to Miss Stern to get the credit."
             
             "Her trust feels heavy. But it keeps my cover secure."
 
-        "Stroke her cheek, questioning her for sensory details. [[Progress Chain]]":
+        "Stroke her cheek, questioning her with tender, quiet romance. [[Progress Chain]]":
 
-            # [STATE] Charged path: Level 3/4 tactile intimacy
+            # [STATE] Charged path: Level 3 tactile intimacy, builds romantic trust
             $ apply_effects(missy_susp=10, insp=10, corr=5)
             $ story.complete_chain_beat("missy")
             
-            cora "Did he shout? What did his voice sound like when he threw them? Was it the wine, or something else?"
+            cora "You shouldn't have to bear his cruelty, Missy. Was it the wine, or is he always that monstrous when the door is closed?"
             
-            "I reach out, my fingers tracing the damp, flushed skin of her cheek, brushing a wet curl of hair behind her ear."
-            "Missy flinches, then goes still, her breathing turning shallow."
+            "I reach out, my fingers tracing the damp, flushed skin of her cheek, brushing a wet curl of hair behind her ear with lingering, safe tenderness."
+            "Missy flinches, her breath catching, but she does not retreat. Her defensive moral shield falters under the unexpected warmth."
             
-            missy "Cora... your hands are so soft. Not like mine. You don't belong in the tubs."
-            cora "We belong where the secrets are, Missy."
-            missy "Why are you asking about the boots? It isn't a play. It's my wages."
+            missy "Cora... your hands are so soft. Not like mine. You don't belong over the lye-tubs."
+            cora "We belong where we can protect each other, Missy."
             
-            "She pulls the lace back, her face flushed with a mix of confusion and need."
-            "I have treated her pain as copy, but the physical heat between us is real."
+            "She looks up, her eyes wide, quiet, and exceptionally focused in the steam."
+            "I have treated her pain with tenderness, and the physical heat between us has become real, rooted in the beginning of trust."
 
     # [ASSET] Visual/staging command
     hide missy_sprite
@@ -317,13 +340,13 @@ label missy_chain_2:
     else:
         "The late-night quarters are silent, the faint sound of footsteps echoing on the stairs above."
 
-    "Missy leans in close, her breath smelling of cheap peppermint and lye."
+    "Missy leans in close, her breath smelling faintly of lye and the peppermint she keeps to mask it."
     
     missy "I saw Mr. Locke's valet carrying a leather case down the back stairs. It had brass hinges and a double lock."
-    missy "He looked at me like he wanted to choke me for being there."
+    missy "He looked at me like he wanted to choke me for being there. They hide things, Cora. Terrible things."
     
-    "Suddenly, footsteps echo at the end of the hall. The shadow of Miss Stern's keys appears on the wall."
-    "Before I can think, I grab Missy by the wrist and drag her into the narrow cedar broom closet, closing the door behind us."
+    "Suddenly, heavy footsteps echo at the end of the hall. The shadow of Miss Stern's keys appears on the wall."
+    "Before I can think, I grab Missy by the wrist and drag her into the narrow cedar broom closet, closing the door behind us into pitch blackness."
 
     # [CHOICE] Decision point
     menu:
@@ -333,28 +356,31 @@ label missy_chain_2:
             $ apply_effects(missy_susp=-15, insp=10, corr=0)
             $ story.complete_chain_beat("missy")
             
+            show cora_sprite base at left_bust with moveinleft # [asset auto]
+            show missy_sprite neutral at right_bust with move # [asset auto]
             cora "Don't look at it again, Missy. Valets keep secrets because they are paid to. We are paid only to wash the sheets."
-            missy "You're right. I'll forget I ever saw it."
+            missy "You're right. I'll forget I ever saw it. God keep us quiet."
             
             "She smiles, relieved by my caution. The secret stays safe."
 
-        "Press her chest-to-chest in the dark, whispering. [[Progress Chain]]":
+        "Press her chest-to-chest in the dark, whispering with sensual agency. [[Progress Chain]]":
 
-            # [STATE] Charged path: High intimacy, Level 3/4 tension
+            # [STATE] Charged path: High intimacy, Level 3 tension, active desire
             $ apply_effects(missy_susp=15, insp=15, corr=10)
             $ story.complete_chain_beat("missy")
             
             "The broom closet is tiny, smelling of cedar oil and damp aprons."
             "We are pressed chest-to-chest, our breathing echoing in the small enclosure."
             "I slide my hand over Missy's narrow waist to steady her, my fingers sinking into the soft cloth of her corset."
-            "Missy does not pull away. Her face is inches from mine, her lips parted, her eyes wide in the dark."
+            "Missy does not pull away. In the dark, her face is inches from mine, her lips parted, her eyes reflecting the sliver of gas-lamp light under the door."
             
             cora "Double locks? Was it a Chubb patent?"
             missy "Cora... please. We are too close. If Miss Stern opens this door..."
-            cora "Then let her find us. Your skin is too warm for locks."
+            cora "Then let her find us. Your skin is too warm for locks, Missy."
             
-            "Missy gasps softly, her hands clutching my shoulders, her chest rising against mine."
-            "In the dark, the opportunity cost is clear: safety is outside, but the heat is here."
+            "Missy gasps softly, her hands clutching my shoulders, her chest rising against mine as she actively chooses to lean into the touch."
+            "The social danger of Miss Stern's keys outside becomes the structural frame that heightens our physical proximity."
+            "We are not prying; we are catching fire in the dark, and her yield is a conscious, sovereign choice."
 
     # [ASSET] Visual/staging command
     hide missy_sprite
@@ -369,7 +395,7 @@ label missy_chain_3:
 
     show missy_sprite shocked at centre_bust
 
-    # [BEAT] Step 3: The Untouched Silk. Level 4 tease, unlacing
+    # [BEAT] Step 3: The Untouched Silk. Level 3 erotic climax, unlacing
     if time_manager.time_of_day == "Afternoon":
         "The laundry boilers are silent, the late-afternoon steam settling in damp layers over the floor."
     else:
@@ -379,7 +405,7 @@ label missy_chain_3:
     "Her face is pale under the electric light, her fingers shaking."
 
     missy "Is this... me, Cora? 'The laundry girl with raw fingers who believed every promise she found in a pocket'?"
-    missy "Did you write this? Have you been using my words to make a story?"
+    missy "Did you write this? Have you been prying into my soul to make a story?"
     
     # [CHOICE] Decision point
     menu:
@@ -389,35 +415,39 @@ label missy_chain_3:
             $ apply_effects(missy_susp=-20, insp=5, corr=0)
             $ story.complete_chain_beat("missy")
             
+            show cora_sprite base at left_bust with moveinleft # [asset auto]
+            show missy_sprite shocked at right_bust with move # [asset auto]
             cora "It was a draft, Missy. A stupid, cruel exercise. I was trying to find the words, and I used what was closest."
             "I take the page and tear it into four pieces before her."
             cora "I am sorry. Truly."
             
             "She looks at the torn paper, then at me. The wound remains, but the suspicion is broken."
 
-        "Defend the writing, unlacing her outer maid apron. [[Progress Chain / Level 4 Tease]]":
+        "Defend the writing, unlacing her outer maid apron with deep romantic trust. [[Progress Chain / Level 3 Climax]]":
 
-            # [STATE] Charged path: Level 4 tease, triggers Penance checkpoint
+            # [STATE] Charged path: Level 3 Erotic Climax, sovereign submission/intimacy
             $ apply_effects(missy_susp=20, insp=20, corr=20)
             $ story.complete_chain_beat("missy")
             
-            cora "It is a story, Missy. A beautiful one. It shows how much better you are than the sheets you wash."
+            cora "It is a story, Missy. A beautiful one. It shows how much better you are than the sheets you wash. And I want to write the ending with you."
             
             "I step closer, my hands reaching behind her back to untie her outer uniform apron."
-            "She flinches but does not step back, her eyes fixed on mine."
+            "She flinches, then squares her shoulders, her eyes fixed on mine in absolute, earned trust."
             
-            cora "You don't belong in coarse cotton."
+            cora "You don't belong in coarse cotton, Missy."
             
             "I slide the apron from her shoulders, letting it pool on the floor."
-            "Underneath, she is wearing the stolen silk chemise from suite 402."
+            "Underneath, she is wearing the stolen silk chemise from suite 402—an active, sovereign choice she made to explore her desires with me."
             "The white silk catches the red light of the furnace, soft and improper against her damp skin."
-            "I trace the lace collar with my fingers, my hand sliding down to her collarbone."
+            "I trace the lace collar with my fingers, my hand sliding down to her collarbone with breathtaking, romantic tenderness."
             
-            missy "Cora... you'll get us both dismissed."
+            missy "Cora... if Miss Stern catches us... we'll be dismissed. Ruined."
             cora "Then we will leave together. But not before we see the ending."
             
-            "Missy leans her forehead against my shoulder, trembling as my fingers trace the silk."
-            "The trust is fractured, but the physical entanglement is complete."
+            "Missy leans her forehead against my shoulder, her body trembling with desire. She drops the naive servant register entirely, speaking her own passion."
+            "Missy \"Then show me the ending, Cora. I want to see it with you.\""
+            
+            "The trust is absolute, and the physical entanglement is complete—a dramatic middle ground of pure, mutual, and sovereign passion."
 
     # [ASSET] Visual/staging command
     hide missy_sprite
@@ -458,6 +488,8 @@ label vance_chain_1:
             $ apply_effects(vance_susp=-10, insp=5, corr=0)
             $ story.complete_chain_beat("vance")
             
+            show cora_sprite base at left_bust with moveinleft # [asset auto]
+            show vance_sprite neutral at right_bust with move # [asset auto]
             cora "Your handkerchief, Miss."
             "I offer it on my flat palm, my eyes fixed on her hem."
             
@@ -525,6 +557,9 @@ label vance_chain_2:
             "Instead of bowing, I bend down, my rough, lye-stained thumb wiping a wet tear from her cheek."
             "My touch is coarse, deliberate, and holding her chin steady."
             
+            # [ASSET] Visual/staging command
+            show cora_sprite base at left_bust with moveinleft # [asset auto]
+            show vance_sprite angry at right_bust with move # [asset auto]
             cora "I see a lady who is trying not to look like she has been corrected."
             vance "You... you dare touch me?"
             cora "The maid who watches, Miss, is the one holding the door. Remember that when you return to his suite."
@@ -565,6 +600,8 @@ label vance_chain_3:
             $ apply_effects(vance_susp=-20, insp=5, corr=0)
             $ story.complete_chain_beat("vance")
             
+            show cora_sprite base at left_bust with moveinleft # [asset auto]
+            show vance_sprite angry at right_bust with move # [asset auto]
             cora "I saw nothing, Miss. I only came to turn down the blankets. I am very simple and do not know the guests' business."
             vance "Simple. Yes. You look like a potato."
             
@@ -611,6 +648,9 @@ label confrontation_stern:
     stern "You have been seen, Cora Vale. In the west wing. In the laundry room. Spying. Whispering."
     stern "A maid with an opinion is a maid who belongs on the Strand."
 
+    # [ASSET] Visual/staging command
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show stern_sprite neutral at right_bust with move # [asset auto]
     cora "Ma'am—"
 
     stern "Quiet. You will spend your night scrubbing the grand marble steps of the entrance hall."
@@ -645,6 +685,9 @@ label confrontation_vance:
     vance "You insolent, spying creature. I told Gideon you were looking through the grates."
     vance "He said you were too small to kill. I disagreed."
 
+    # [ASSET] Visual/staging command
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show vance_sprite angry at right_bust with move # [asset auto]
     cora "Miss Vance, I was only—"
 
     vance "You will wash my silk chemises again. Every one of them. By hand."
@@ -683,6 +726,8 @@ label confrontation_missy:
     $ apply_effects(missy_susp=-35, insp=5)
     $ story.set_penance_triggered(True)
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show missy_sprite shocked at right_bust with move # [asset auto]
     cora "Missy, please. If you tell her, I am ruined. Let me help you. I'll do the night tubs for you."
 
     missy "You'll... you'll do my shifts?"
@@ -725,8 +770,12 @@ label end_slot(outcome):
         $ _penance_flag = story.penance_triggered
         $ story.consume_penance()
         if _penance_flag or player.anxiety >= 85:
+
+            # [STATE] State/progression update
             jump day104_6_false_dawn_ending
         else:
+
+            # [STATE] State/progression update
             jump day104_5_triumphant_chapter
 
     # [STATE] Route lookup — add new slots in StoryState.SLOT_EXIT_ROUTES (classes_non_canon.rpy)
@@ -734,7 +783,11 @@ label end_slot(outcome):
     if _target is None:
         return
     if _target[0] is not None:
+
+        # [STATE] State/progression update
         $ time_manager.set_current_day(_target[0])
     if _target[1] is not None:
+
+        # [STATE] State/progression update
         $ set_time_period(_target[1])
     jump expression _target[2]

@@ -181,8 +181,8 @@ label day101_1_morning_interview:
             stern "Wishing is for girls with leisure. You will work because you are told."
             cora "Yes, Ma'am."
 
-            "She hears a dull country girl."
-            "Good. Let the woman keep that version of me."
+            cora_inner "She hears a dull country girl."
+            cora_inner "Good. Let the woman keep that version of me."
 
         "Answer cleanly. Let competence do what meekness cannot.":
 
@@ -202,13 +202,13 @@ label day101_1_morning_interview:
             cora "Yes, Ma'am."
             stern "A dangerous word from a girl in a borrowed apron."
 
-            "There."
-            "She sees it. Not all of it, but enough to dislike me."
+            cora_inner "There."
+            cora_inner "She sees it. Not all of it, but enough to dislike me."
 
     stern "You will report to the laundry first. Missy will show you the necessary route."
     stern "You will not wander. You will not question guests. You will not cultivate opinions."
 
-    "Too late for that."
+    cora_inner "Too late for that."
 
     stern "And if a guest drops something, breaks something, or throws something, you will retrieve it without expression."
 
@@ -265,8 +265,8 @@ label day101_1_vance_throws_toy:
 
     vance "Not like that. Have you never handled anything delicate?" # tone is great but detail needs to be polished with the new context.
 
-    "I have handled hunger. Debt. Ink. Men's hands where they were not invited." # take a beat here to let it land
-    "I decide not to list them."
+    cora_inner "I have handled hunger. Debt. Ink. Men's hands where they were not invited." # take a beat here to let it land
+    cora_inner "I decide not to list them."
 
     # [ASSET] Visual/staging command
     show gideon_sprite cold at right_full_body:
@@ -348,7 +348,6 @@ label day101_1_vance_throws_toy:
 # ==========================================
 # 012 - MISSY MEETS CORA
 # ==========================================
-
 label day101_2_missy_meets_cora:
 
     # [ASSET] Visual/staging command
@@ -364,48 +363,48 @@ label day101_2_missy_meets_cora:
     # [ASSET] Visual/staging command
     show missy_sprite smiling at right_full_body
 
-    missy "You must be Cora."
+    missy "You must be Cora. The new girl Miss Stern was sorting out."
     # [ASSET] Visual/staging command
     show cora_sprite base_travel at left_full_body
     with moveinleft
 
-    cora "I must be."
+    cora "I must be. Cora Vale."
 
-    missy "I'm Missy. Miss Stern said I'm to show you where things go. Not everything, mind. If I showed you everything we'd both be dead before tea."
+    missy "I'm Missy. Miss Stern said I'm to show you where things go. Not everything, mind. If I showed you everything we'd both be dismissed and out on the Strand before tea. This place has more rules than the Bible, and twice as many ways to fall."
 
-    "She says it brightly."
-    "That is the alarming part."
+    cora_inner "She says it brightly, but there is a sharp, quiet calculation in the way she eyes the door."
+    cora_inner "Not simple chatter. A junior maid who has calculated the cost of a single slip."
 
     cora "Is the work always this warm?"
-    missy "Oh, this is a pleasant day. Wait until the boilers sulk."
+    missy "Oh, this is a pleasant day. Wait until the boilers sulk and the head laundress starts counting the soap-bars like they're gold sovereigns."
 
-    "Missy laughs at her own warning and presses a folded stack of garments into my arms."
+    "Missy laughs at her own warning, though her eyes remain alert, and she presses a folded stack of garments into my arms."
 
-    missy "These go up by the guest corridor. Not the grand staircase, obviously. Servants' passage only."
-    missy "And don't look too closely at anything left outside a room. Guests hate being known."
+    missy "These go up by the guest corridor. Not the grand staircase, obviously. Servants' passage only. We're to be like ghosts, Cora. Hands without noise."
+    missy "And don't look too closely at anything left outside a door. Guests hate being known. And what they hate, they punish."
 
-    "Guests hate being known."
-    "Writers have built whole careers on less."
+    cora_inner "Guests hate being known."
+    cora_inner "A remarkably sharp decoding of the hotel's lethal hierarchy."
 
-    cora "I'll remember."
+    cora "I'll remember. Discretion first."
 
-    "Missy studies me for a second longer than comfort allows."
+    "Missy studies me for a second longer than comfort allows, her gaze parsing my apron, my cap, and the country stiffness I haven't quite washed off."
 
-    missy "You looked pale out there. Stern does that. She makes everyone feel like they've stolen spoons."
+    missy "You looked pale out there. Miss Stern does that to a girl. She makes everyone feel as if they've violated the commandments just by breathing the air."
 
     cora "Have you?"
 
     missy "What?"
 
-    cora "Stolen spoons."
+    cora "Violated the commandments. Or stolen spoons."
 
-    missy "No."
+    missy "Certainly not. A girl's virtue and her honesty are the only shields she has in London. Lose either, and you're under the carriage wheels."
 
-    "She hesitates."
+    "She hesitates, a small, knowing crease appearing between her brows."
 
-    missy "Well. One, once. But it was bent."
+    missy "Well. There was a silver spoon Miss Stern threw out because the silver-plate was peeling and it looked improper for the suites. I kept it to stir my tea. But that's salvage, not sin."
 
-    "I almost like her immediately. That is inconvenient."
+    cora_inner "I almost like her immediately. Her country armor is thicker than mine, but she knows exactly where the joints are."
 
     # [STATE] State/progression update
     jump day101_2_coras_path_choice
@@ -427,28 +426,29 @@ label day101_2_coras_path_choice:
     # [ASSET] Visual/staging command
     show missy_sprite smiling at centre_bust
 
-    missy "This way. Mind the third board. It complains."
+    missy "This way. Mind the third board. It complains, and Miss Stern hears every creak."
 
     "We pass a service door near the Master Suite."
     "Beyond it: a sharp sound."
     "Not a dropped tray."
     "Not a broken glass."
+    "A voice pressed low, carrying a rhythmic, trembling weight."
 
     vance "Please. I understand. I do."
 
     # [ASSET] Visual/staging command
     show missy_sprite shocked at left_bust
 
-    missy "Was that Miss Vance?"
+    missy "Was that Miss Vance? She sounds... she doesn't sound proper."
 
-    "Another sound follows. Smaller. Wetter."
-    "Missy goes still."
+    "Another sound follows. Smaller. A wet gasp."
+    "Missy goes absolutely still, her fingers tightening around the wicker hamper."
 
-    missy "Should we fetch Miss Stern?"
+    missy "If she's in distress... we ought to fetch Miss Stern. Or is it improper for us to interfere?"
 
-    "This is the moment."
-    "Not the sound. Not Vance's voice. Not Mr. Locke's hand, if it was his hand."
-    "The moment is the choice of what I become in order to use it."
+    cora_inner "This is the moment."
+    cora_inner "Not the sound. Not Vance's voice. Not Mr. Locke's hand, if it was his hand."
+    cora_inner "The moment is the choice of what I become in order to use it."
 
     # [CHOICE] Decision point
     menu:
@@ -460,31 +460,30 @@ label day101_2_coras_path_choice:
             $ apply_effects(insp=10, corr=5)
             $ story.set_corridor_state("predator")
 
-            cora "You may be right. If she's hurt, someone should check."
-            missy "Me?"
-            cora "You know the house. If I open the wrong door on my first day, Stern will skin me."
+            cora "You may be right. If she's hurt, someone should check. But you know the house, Missy—if I open the wrong door on my first day, Miss Stern will have my references."
+            
+            cora_inner "I use her genuine moral concern as a shield."
+            cora_inner "It is a calculated argument, and her sharp, protective instinct for other maids makes her accept the risk."
 
-            "It is a filthy argument because it is true."
+            missy "Only a little look, then. Only to ensure she isn't in peril."
 
-            missy "Only a little look, then. Only to be sure."
+            "She steps toward the service door, her posture cautious, her movements deliberate."
+            "I step back into the shadow."
+            cora_inner "Missy's hand reaches the latch. Her decency does the work my hunger asks of it."
 
-            "She steps toward the service door."
-            "I step back."
-            "Missy's hand reaches the latch. Her innocence does the work my hunger asks of it."
-
-            "Through the narrow opening, I glimpse only fragments: Vance's white hand on dark carpet; the master's polished shoe; the silver head of his walking stick resting against his knee."
-            "Missy gasps."
+            "Through the narrow opening, the room is revealed in fragments: Vance's white hand on dark carpet; the master's polished shoe; the silver head of his walking stick resting against his knee."
+            "Missy gasps, her observant eyes taking in the transgressive tableau before her."
 
             gideon "The door."
 
-            "Missy pulls it shut so fast the latch bites."
+            "Missy pulls it shut so fast the latch bites, her face white with immediate self-defense."
 
-            missy "Oh. Oh, Cora."
+            missy "Oh. Oh, Cora. That was... he was holding her. Like she was a dog."
 
             cora "We saw nothing."
 
-            "I say it for her benefit."
-            "I have already seen enough."
+            "I say it to soothe her, but she is already retreating, her defensive propriety locking down like iron."
+            cora_inner "I have seen enough. And I have used her to get it."
 
         "Look for myself. [[Prey path: +Inspiration, +Suspicion]]":
 
@@ -492,32 +491,32 @@ label day101_2_coras_path_choice:
             $ apply_effects(vance_susp=35, insp=15, corr=5)
             $ story.set_corridor_state("prey")
 
-            cora "Stay there."
-            missy "Cora—"
+            cora "Stay there. Let me see."
+            missy "Cora, no—it's sin to pry into the suites."
             cora "Quiet."
 
             "I move before caution can catch me."
             "The third board complains exactly as promised."
 
-            "Through the crack I see Vance kneeling, face lifted in fury and need."
-            "Mr. Locke holds her chin between two fingers, almost gently."
+            "Through the crack I see Vance kneeling, face lifted in a desperate mix of fury and submission."
+            "Mr. Locke holds her chin between two fingers, his grip light but absolute."
 
             gideon "Again."
 
             vance "I forgot myself, Sir."
 
             "My breath catches."
-            "His eyes move to the door."
+            "His eyes move toward the door with terrifying speed."
 
             gideon "Do we have an audience?"
 
-            "I stumble back."
-            "Missy grabs my sleeve and drags me into the bend of the corridor."
+            "I stumble back, my pulse hammering."
+            "Missy's hand is already on my sleeve, her sharp instincts dragging me into the bend of the corridor before the latch can turn."
 
-            missy "Have you lost your senses?"
+            missy "Have you lost your senses? If Mr. Locke sees us prying, we'll be ruined!"
 
-            "Possibly."
-            "But not the image. Never the image."
+            "She is terrified, but her rescue was swift and observant."
+            cora_inner "I have the image. The terrible, beautiful image."
 
         "Pull Missy away. [[Ghost path: +Inspiration, -Suspicion]]":
 
@@ -525,17 +524,17 @@ label day101_2_coras_path_choice:
             $ apply_effects(stern_susp=-5, vance_susp=-5, missy_susp=-5, insp=10, corr=0)
             $ story.set_corridor_state("ghost")
 
-            cora "No."
-            missy "But if she's hurt—"
-            cora "Then Stern already knows, or Stern has chosen not to know. Either way, we are not the cure."
+            cora "No. We walk on."
+            missy "But if she's in peril—"
+            cora "If she is, Miss Stern already knows, or she has chosen to look away. Either way, simple maids are not the cure. We only get crushed in the door."
 
-            "That silences her."
-            "I take her by the wrist and keep walking."
+            "That silences her. Her sharp intellect recognizes the brutal logic."
+            "I take her by the wrist and keep walking, our pace quick and quiet."
 
-            "Behind us, Vance says something too low to catch. The master answers with a quietness worse than anger."
-            "I collect the rhythm. The pause. The obedience."
-            "A writer does not always need the picture."
-            "Sometimes the keyhole is less useful than the wall."
+            "Behind us, Vance says something too low to catch. Mr. Locke answers with a quietness worse than anger."
+            cora_inner "I collect the rhythm. The pause. The absolute yielding."
+            cora_inner "A writer does not always need the picture."
+            cora_inner "Sometimes the wall tells the truer story."
 
     # [ASSET] Visual/staging command
     hide missy_sprite
@@ -567,24 +566,24 @@ label day101_3_taking_stock_day1:
     # [STATE] State/progression update
     $ show_ledger_ui()
 
-    "I open the ledger and set down the day's useful damages."
+    cora_inner "I open the ledger and set down the day's useful damages."
 
     if story.day1_corridor_state == "predator":
-        "Missy's shocked face returns first."
-        "Then Vance's hand on the carpet. Mr. Locke's shoe. The walking stick."
-        "I used the girl because she was available."
-        "The sentence looks uglier once written down."
+        cora_inner "Missy's shocked face returns first."
+        cora_inner "Then Vance's hand on the carpet. Mr. Locke's shoe. The walking stick."
+        cora_inner "I used the girl because she was available."
+        cora_inner "The sentence looks uglier once written down."
 
     elif story.day1_corridor_state == "prey":
-        "I can still feel the corridor board shift beneath my shoe."
-        "Mr. Locke had almost seen me."
-        "No. Not almost."
-        "He saw enough to wonder."
+        cora_inner "I can still feel the corridor board shift beneath my shoe."
+        cora_inner "Mr. Locke had almost seen me."
+        cora_inner "No. Not almost."
+        cora_inner "He saw enough to wonder."
 
     else:
-        "The wall gave me less than my hunger wanted and more than my safety deserved."
-        "A voice can kneel."
-        "I had not known that before today."
+        cora_inner "The wall gave me less than my hunger wanted and more than my safety deserved."
+        cora_inner "A voice can kneel."
+        cora_inner "I had not known that before today."
 
     # [CHOICE] Decision point - combined Evening / Night choice
     menu:
@@ -625,15 +624,15 @@ label day101_3_taking_stock_day1:
                     $ apply_effects(insp=15, corr=0)
                     $ story.set_day1_ledger_focus("inspiration")
 
-                    "I draw three columns in the ledger."
-                    "Command. Witness. Consequence."
+                    cora_inner "I draw three columns in the ledger."
+                    cora_inner "Command. Witness. Consequence."
 
-                    "The shape of the scene matters more than the appetite of it."
-                    "A woman attacks downward because she cannot attack upward. A man corrects her, not from kindness, but ownership. A servant sees and becomes dangerous."
+                    cora_inner "The shape of the scene matters more than the appetite of it."
+                    cora_inner "A woman attacks downward because she cannot attack upward. A man corrects her, not from kindness, but ownership. A servant sees and becomes dangerous."
 
-                    "That is a story."
-                    "Not a confession."
-                    "Not yet."
+                    cora_inner "That is a story."
+                    cora_inner "Not a confession."
+                    cora_inner "Not yet."
 
                 "Exposure. Safety in knowing the threat. [[Corruption]]":
 
@@ -641,18 +640,18 @@ label day101_3_taking_stock_day1:
                     $ apply_effects(vance_susp=5, insp=5, corr=10)
                     $ story.set_day1_ledger_focus("corruption")
 
-                    "I try to write command, witness, consequence."
-                    "My hand writes want."
+                    cora_inner "I try to write command, witness, consequence."
+                    cora_inner "My hand writes want."
 
-                    "Not simply Vance's."
-                    "That would be easier. Cleaner."
+                    cora_inner "Not simply Vance's."
+                    cora_inner "That would be easier. Cleaner."
 
-                    "I think of the way she yielded and hated him for making her yield."
-                    "I think of Missy reaching for the latch because I placed fear in her hand and called it concern."
-                    "I think of myself outside the door, starved for the next sound."
+                    cora_inner "I think of the way she yielded and hated him for making her yield."
+                    cora_inner "I think of Missy reaching for the latch because I placed fear in her hand and called it concern."
+                    cora_inner "I think of myself outside the door, starved for the next sound."
 
-                    "The ledger does not forgive me."
-                    "It records beautifully."
+                    cora_inner "The ledger does not forgive me."
+                    cora_inner "It records beautifully."
 
             # [STATE] Apply final reflection effects and end the slot
             $ apply_effects(insp=10, corr=0)
@@ -682,9 +681,9 @@ label day101_4_write_the_chapter:
             $ apply_effects(insp=15, corr=0)
             $ story.set_day1_ledger_focus("inspiration")
 
-            "I draw three columns in the ledger and let the structure guide my hand."
-            "The shape of the scene matters more than the appetite of it."
-            "A woman attacks downward because she cannot attack upward. A man corrects her, not from kindness, but ownership."
+            cora_inner "I draw three columns in the ledger and let the structure guide my hand."
+            cora_inner "The shape of the scene matters more than the appetite of it."
+            cora_inner "A woman attacks downward because she cannot attack upward. A man corrects her, not from kindness, but ownership."
 
         "Frame it with exposure and appetite. I must write the truth. [[Corruption]]":
 
@@ -692,57 +691,58 @@ label day101_4_write_the_chapter:
             $ apply_effects(vance_susp=5, insp=5, corr=10)
             $ story.set_day1_ledger_focus("corruption")
 
-            "I try to write command, witness, consequence, but my hand writes want."
-            "I think of the way she yielded and hated him for making her yield."
-            "I think of Missy reaching for the latch because I placed fear in her hand."
+            cora_inner "I try to write command, witness, consequence, but my hand writes want."
+            cora_inner "I think of the way she yielded and hated him for making her yield."
+            cora_inner "I think of Missy reaching for the latch because I placed fear in her hand."
 
-    "The first sentence arrives like a servant entering the wrong room: terrified, necessary, unable to retreat."
+    cora_inner "The first sentence arrives like a servant entering the wrong room: terrified, necessary, unable to retreat."
 
     if story.day1_corridor_state == "predator":
 
-        "I write a maid who learns that innocence is not a virtue."
-        "It is a tool left unattended."
-        "She places a sweeter girl before a dangerous door and discovers that guilt has a taste."
+        cora_inner "I write a maid who learns that innocence is not a virtue."
+        cora_inner "It is a tool left unattended."
+        cora_inner "She places a sweeter girl before a dangerous door and discovers that guilt has a taste."
 
         if story.day1_ledger_focus == "corruption":
-            "In the chapter, the maid does not apologise."
-            "She improves."
+            cora_inner "In the chapter, the maid does not apologise."
+            cora_inner "She improves."
         else:
-            "In the chapter, the maid understands the cost and writes it down anyway."
+            cora_inner "In the chapter, the maid understands the cost and writes it down anyway."
 
     elif story.day1_corridor_state == "prey":
 
-        "I write a maid who looks through a forbidden crack and is seen looking."
-        "The gentleman does not shout. He invites her closer."
-        "That is worse."
+        cora_inner "I write a maid who looks through a forbidden crack and is seen looking."
+        cora_inner "The gentleman does not shout. He invites her closer."
+        cora_inner "That is worse."
 
         if story.day1_ledger_focus == "corruption":
-            "On the page, fear and invitation become difficult to separate."
+            cora_inner "On the page, fear and invitation become difficult to separate."
         else:
-            "On the page, the danger remains danger. The heat is only evidence."
+            cora_inner "On the page, the danger remains danger. The heat is only evidence."
 
     else:
 
-        "I write a maid who never sees the room."
-        "Only the wall. Only the voice. Only the terrible grammar of command and reply."
-        "Her ignorance becomes precision."
+        cora_inner "I write a maid who never sees the room."
+        cora_inner "Only the wall. Only the voice. Only the terrible grammar of command and reply."
+        cora_inner "Her ignorance becomes precision."
 
         if story.day1_ledger_focus == "corruption":
-            "She imagines too much and tells herself imagination is not participation."
+            cora_inner "She imagines too much and tells herself imagination is not participation."
         else:
-            "She understands that distance can sharpen a knife."
+            cora_inner "She understands that distance can sharpen a knife."
 
-    "By the time the candle gutters, the chapter exists."
-    "Not finished. Nothing true is finished on the first night."
-    "But real enough to accuse me."
+    cora_inner "By the time the candle gutters, the chapter exists."
+    cora_inner "Not finished. Nothing true is finished on the first night."
+    cora_inner "But real enough to accuse me."
 
     # [STATE] Increment manuscript through encapsulated story method, not raw global variable
     $ story.complete_manuscript_chapter("day1_chapter")
+    call book1_write_chapter(chapter_key="day1_chapter", current_day=101)
     $ apply_effects(insp=-10, corr=0)
 
-    "I press the pages flat beneath the ledger."
-    "Tomorrow the house will expect a maid."
-    "It has acquired a witness instead."
+    cora_inner "I press the pages flat beneath the ledger."
+    cora_inner "Tomorrow the house will expect a maid."
+    cora_inner "It has acquired a witness instead."
 
     # [STATE] State/progression update
     call end_slot(outcome="d1_write_ch1")
