@@ -100,6 +100,7 @@ init -40 python:
     declare_image_with_fallback("cora_sprite guarded", "images/sprites/cora/guarded.webp", "#d4a574")
     declare_image_with_fallback("cora_sprite focused", "images/sprites/cora/focused.webp", "#d4a574")
     declare_image_with_fallback("cora_sprite flushed", "images/sprites/cora/flushed.webp", "#d4a574")
+    declare_image_with_fallback("cora_sprite neutral", "images/sprites/cora/neutral.webp", "#d4a574")
 
     # ── UI: persistent HUD (stats_overlay) ───────────────────────
     #

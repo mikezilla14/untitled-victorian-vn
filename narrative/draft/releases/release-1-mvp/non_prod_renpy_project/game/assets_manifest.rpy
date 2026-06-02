@@ -68,6 +68,10 @@ init -40 python:
     declare_image_with_fallback("bg_savoy_front_facade", "images/backgrounds/bg_savoy_front_facade.png")
     declare_image_with_fallback("bg_stern_office_entrance", "images/backgrounds/bg_stern_office_entrance.png")
     declare_image_with_fallback("bg_stern_office_reverse", "images/backgrounds/bg_stern_office_reverse.png")
+    declare_image_with_fallback("bg_savoy_corridor_right_morning", "images/backgrounds/bg_savoy_corridor_right_morning.png")
+    declare_image_with_fallback("bg_servants_corridor_dusk", "images/backgrounds/bg_servants_corridor_dusk.png")
+    declare_image_with_fallback("bg_savoy_corridor_morning_", "images/backgrounds/bg_savoy_corridor_morning_.png")
+    declare_image_with_fallback("bg_savoy_front_facade_", "images/backgrounds/bg_savoy_front_facade_.png")
 
     # ── Sprites: Stern ────────────────────────────────────────────
     # [~700 × 1080 px, transparent background]
@@ -75,6 +79,8 @@ init -40 python:
     # lossless WebP. Width will vary with pose but should not exceed ~800 px.
     declare_image_with_fallback("stern_sprite neutral", "images/sprites/stern/neutral.png", "#555555")
     declare_image_with_fallback("stern_sprite stern", "images/sprites/stern/stern.png", "#555555")
+    declare_image_with_fallback("stern_sprite angry", "images/sprites/stern/angry.png", "#555555")
+    declare_image_with_fallback("stern_sprite accusing", "images/sprites/stern/accusing.png", "#555555")
 
     # ── Sprites: Vance ────────────────────────────────────────────
     # [~700 × 1080 px, transparent background]  (same spec as Stern above)
@@ -87,6 +93,21 @@ init -40 python:
     declare_image_with_fallback("vance_sprite mirror_watch_terror", "images/sprites/vance/mirror_watch_terror.png", "#7b3f98")
     declare_image_with_fallback("vance_sprite confused", "images/sprites/vance/confused.png", "#7b3f98")
     declare_image_with_fallback("vance_sprite shocked", "images/sprites/vance/shocked.png", "#7b3f98")
+    declare_image_with_fallback("vance_sprite angry_cowed_dressing_gown", "images/sprites/vance/angry_cowed_dressing_gown.png", "#7b3f98")
+    declare_image_with_fallback("vance_sprite angry_dressing_gown", "images/sprites/vance/angry_dressing_gown.png", "#7b3f98")
+    declare_image_with_fallback("vance_sprite angry_dressing_gown_hair_down", "images/sprites/vance/angry_dressing_gown_hair_down.png", "#7b3f98")
+    declare_image_with_fallback("vance_sprite angry_dressing_gown_hair_down_front", "images/sprites/vance/angry_dressing_gown_hair_down_front.png", "#7b3f98")
+    declare_image_with_fallback("vance_sprite angry_pointing", "images/sprites/vance/angry_pointing.png", "#7b3f98")
+    declare_image_with_fallback("vance_sprite kneeling_cowed_dressing_gown", "images/sprites/vance/kneeling_cowed_dressing_gown.png", "#7b3f98")
+    declare_image_with_fallback("vance_sprite kneeling_dressing_gown_modern", "images/sprites/vance/kneeling_dressing_gown_modern.png", "#7b3f98")
+    declare_image_with_fallback("vance_sprite kneeling_dressing_ground_skin", "images/sprites/vance/kneeling_dressing_ground_skin.png", "#7b3f98")
+    declare_image_with_fallback("vance_sprite lounging_dressing_gown", "images/sprites/vance/lounging_dressing_gown.png", "#7b3f98")
+    declare_image_with_fallback("vance_sprite neutral_dressing_gown", "images/sprites/vance/neutral_dressing_gown.png", "#7b3f98")
+    declare_image_with_fallback("vance_sprite neutral_dressing_gown_dark", "images/sprites/vance/neutral_dressing_gown_dark.png", "#7b3f98")
+    declare_image_with_fallback("vance_sprite neutral_kneeling_dressing_gown", "images/sprites/vance/neutral_kneeling_dressing_gown.png", "#7b3f98")
+    declare_image_with_fallback("vance_sprite reaching_dressing_gown", "images/sprites/vance/reaching_dressing_gown.png", "#7b3f98")
+    declare_image_with_fallback("vance_sprite smiling", "images/sprites/vance/smiling.png", "#7b3f98")
+    declare_image_with_fallback("vance_sprite snide", "images/sprites/vance/snide.png", "#7b3f98")
 
     # ── Sprites: Gideon ───────────────────────────────────────────
     # [~700 × 1080 px, transparent background]  (same spec as Stern above)
@@ -94,6 +115,7 @@ init -40 python:
     declare_image_with_fallback("gideon_sprite neutral", "images/sprites/gideon/neutral.png", "#a30000")
     declare_image_with_fallback("gideon_sprite dominant", "images/sprites/gideon/dominant.png", "#a30000")
     declare_image_with_fallback("gideon_sprite angry", "images/sprites/gideon/angry.png", "#a30000")
+    declare_image_with_fallback("gideon_sprite neutralf", "images/sprites/gideon/neutralf.png", "#a30000")
 
     # ── Sprites: Missy ────────────────────────────────────────────
     # [~700 × 1080 px, transparent background]  (same spec as Stern above)
