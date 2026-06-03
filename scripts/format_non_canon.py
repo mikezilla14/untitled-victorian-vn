@@ -22,6 +22,14 @@ LEGEND_LINES = [
     "# [STATE]  -> variable changes, effects, conditions, jumps",
     "# [CHOICE] -> menu blocks and inflection points",
     "# [BEAT]   -> narrative intent / scene intent notes",
+    "#",
+    "# SPRITE DIRECTION (managed by scripts/scene_direction.py — how to preserve manual staging):",
+    "# [asset auto]              -> auto-placed sprite line; the agent may rewrite/replace it on re-run",
+    "# [asset keep]              -> on a show line: lock THAT line so the agent never edits it",
+    "# [asset lock:scene]        -> before/after a `scene`: the agent skips the entire scene block",
+    "# [asset pin:Name=slot]     -> force Name into slot for the rest of the scene block",
+    "# [enter:Name] / [exit:Name] -> declare cast changes so auto placement stays correct",
+    "# Full policy: docs/contracts/sprite_layout_policy.yaml | spec: docs/specs/scene-direction-agent.md",
 ]
 
 CANONICAL_TAGS = {"ASSET", "STATE", "CHOICE", "BEAT"}
@@ -105,8 +113,16 @@ def needs_marker_before(lines: list[str], idx: int) -> str | None:
 
 
 def add_legend(lines: list[str]) -> list[str]:
-    if any(l.strip() == "# FORMAT LEGEND:" for l in lines):
-        return lines
+    # If a legend already exists, refresh it in place so the documented tag set
+    # (including the sprite-direction lock tags) stays current across all files.
+    idx = next((i for i, l in enumerate(lines) if l.strip() == "# FORMAT LEGEND:"), None)
+    if idx is not None:
+        end = idx
+        while end < len(lines) and lines[end].strip() != "":
+            end += 1
+        if lines[idx:end] == LEGEND_LINES:
+            return lines
+        return lines[:idx] + LEGEND_LINES + lines[end:]
 
     # Insert after initial 3-line title banner if present.
     if len(lines) >= 3 and lines[0].startswith("# ===") and lines[2].startswith("# ==="):

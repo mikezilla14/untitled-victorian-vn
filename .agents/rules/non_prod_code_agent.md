@@ -23,12 +23,14 @@ You implement approved drafts and explore new mechanics strictly inside the non-
    - **Mutually exclusive branches:** Do not model one-of-N outcomes with several booleans. Use a single string field with a default sentinel (e.g. `day1_corridor_state = "none"`) and a designated whitelist + setter (e.g. `VALID_CORRIDOR_STATES` + `set_corridor_state(...)`).
    - **String state updates in scripts:** Never assign a whitelisted branch string directly (e.g. `story.day1_corridor_state = "predator"`). Use only the designated setter: `story.set_corridor_state("predator")`.
 5. **Bracket Interpolation Check.** Scan every menu caption and dialogue string in your draft files for `[Word]` patterns where `Word` is a single CamelCase or PascalCase token that is not a defined runtime variable. These must be escaped to `[[Word]]` to prevent runtime `NameError` exceptions.
+6. **Book Writing Flag Compilation.** When the Writers' Room requests or works on new `book1` manuscript chapters (such as Day 2 chapters) or rewrites, you must compile a comprehensive list of all active story flags, stats, and gameplay states up to that point in the story. Supply this list directly to the Writers' Room to enable conditional branching in the inline macro system. Refer to the [Book Writing Contract](../../docs/contracts/book_writing_contract.md) for usage.
+   - **LLM Safety Guardrails Fallback**: If the Writers' Room output contains SFW summaries tagged as `[HUMAN WRITE: SFW summary of suggestive scene details]`, preserve this tag verbatim in the implemented `.rpy` draft structure so it can be identified for human intervention.
 
 ---
 
 ## Workflow: Non-Prod Implementation Mode
 
-1. **Load Spec & Dialogue:** Read the task brief and the approved draft text (`dayrdd_non_canon.rpy`) from `narrative/draft/` or lead narrative editor.
+1. **Load Spec & Dialogue:** Read the task brief and the approved draft text (`dayrdd_non_canon.rpy`) from `narrative/draft/` or lead narrative editor. If working on `book1` chapter prose, compile all active story flags and pass them to the Writers' Room per the [Book Writing Contract](../../docs/contracts/book_writing_contract.md) contract.
 2. **Draft Code Structure:** Write clean Ren'Py labels, menus, and Python blocks. Copy dialogue and prose verbatim into the code blocks.
 3. **Handle Custom Class Mockups:** If the draft requires new properties or methods:
    - Copy `classes.rpy` to `narrative/draft/classes_non_canon.rpy` if it doesn't already exist.

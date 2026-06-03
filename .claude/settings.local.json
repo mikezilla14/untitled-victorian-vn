@@ -3,7 +3,21 @@
     "allow": [
       "Bash(git -C /c/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn diff HEAD -- \"narrative/draft/releases/release-1-mvp/non_prod_renpy_project/shared/story_chains_non_canon.rpy\")",
       "Bash(git -C /c/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn diff HEAD -- \"renpy_project/game/story_chains.rpy\")",
-      "Bash(git -C /c/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn status)"
+      "Bash(git -C /c/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn status)",
+      "Bash(py -c ' *)",
+      "Bash(py -c \"import pytest; print\\('pytest', pytest.__version__\\)\")",
+      "Bash(py -c \"import yaml; print\\('yaml ok'\\)\")",
+      "Bash(py scripts/tests/test_scene_direction.py)",
+      "Bash(py -c \"import sys; sys.path.insert\\(0,'scripts'\\); import scene_direction as sd; print\\(sd.load_character_registry\\(\\)\\)\")",
+      "Bash(py scripts/scene_direction.py --check --files \"narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day100_non_canon.rpy,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day101_non_canon.rpy,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day104_non_canon.rpy,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day105_non_canon.rpy\")",
+      "Bash(echo \"exit code: $?\")",
+      "Bash(py scripts/gatekeeper.py --agent scene_direction --files \"narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy\")",
+      "Bash(echo \"exit: $?\")",
+      "Bash(py scripts/gatekeeper.py --agent scene_direction --files \"renpy_project/game/classes.rpy\")",
+      "Bash(py scripts/scene_direction.py --files \"narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day104_non_canon.rpy,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day105_non_canon.rpy\")",
+      "Bash(py scripts/format_non_canon.py --check narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day104_non_canon.rpy narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day105_non_canon.rpy)",
+      "Bash(sed -n '153,158p' narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day104_non_canon.rpy)",
+      "Bash(py scripts/format_non_canon.py --check /tmp/d104.head)"
     ]
   }
 }

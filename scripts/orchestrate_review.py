@@ -39,10 +39,12 @@ class AgentContract:
         raise NotImplementedError
 
 class ScriptWrapperContract(AgentContract):
-    def __init__(self, name: str, description: str, script_name: str, args_flag: str = "--files"):
+    def __init__(self, name: str, description: str, script_name: str, args_flag: str = "--files",
+                 extra_args: List[str] = None):
         super().__init__(name, description)
         self.script_name = script_name
         self.args_flag = args_flag
+        self.extra_args = extra_args or []
 
     def run_check(self, files: List[str]) -> Tuple[bool, str]:
         script_path = ROOT / "scripts" / self.script_name
@@ -55,7 +57,7 @@ class ScriptWrapperContract(AgentContract):
         if self.args_flag == "--file":
             # Run once per file
             for file in files:
-                cmd = [sys.executable, str(script_path), self.args_flag, file]
+                cmd = [sys.executable, str(script_path), *self.extra_args, self.args_flag, file]
                 try:
                     result = subprocess.run(cmd, capture_output=True, text=True, cwd=str(ROOT))
                     if result.returncode != 0:
@@ -73,7 +75,7 @@ class ScriptWrapperContract(AgentContract):
             return False, "\n\n".join(all_output)
         else:
             # Run once with comma-separated list
-            cmd = [sys.executable, str(script_path), self.args_flag, ",".join(files)]
+            cmd = [sys.executable, str(script_path), *self.extra_args, self.args_flag, ",".join(files)]
             try:
                 result = subprocess.run(cmd, capture_output=True, text=True, cwd=str(ROOT))
                 success = result.returncode == 0
@@ -198,6 +200,12 @@ def main():
             description="Checks for anachronisms in narrative drafts.",
             script_name="historical_linter.py",
             args_flag="--file" # Note: historical_linter.py might only take one file, but we'll try passing comma sep or adapt it.
+        ),
+        ScriptWrapperContract(
+            name="Scene Direction Agent (Sprite Placement)",
+            description="Sprite-direction `[asset auto]` lines are current and idempotent.",
+            script_name="scene_direction.py",
+            extra_args=["--check"]
         )
     ]
 

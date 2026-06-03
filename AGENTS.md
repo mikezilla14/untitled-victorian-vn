@@ -70,6 +70,7 @@ Load the linked `.md` file as the **full system prompt** when the orchestrator n
 | Spiciness tuning agent | [`.agents/rules/spiciness_tuning_agent.md`](.agents/rules/spiciness_tuning_agent.md) | Variants / briefs |
 | Adult market reviewer | [`.agents/rules/adult_market_reviewer.md`](.agents/rules/adult_market_reviewer.md) | **Read-only** |
 | Non-prod code agent | [`.agents/rules/non_prod_code_agent.md`](.agents/rules/non_prod_code_agent.md) | Sandbox `.rpy` |
+| Scene direction agent | [`.agents/rules/scene_direction_agent.md`](.agents/rules/scene_direction_agent.md) | Sandbox `.rpy` (`[asset auto]` lines only) |
 | Prod code agent | [`.agents/rules/prod_code_agent.md`](.agents/rules/prod_code_agent.md) | `renpy_project/` |
 | Chief architect | [`.agents/rules/chief_architect.md`](.agents/rules/chief_architect.md) | Architecture / review |
 | Gatekeeper orchestrator | [`.agents/rules/gatekeeper_orchestrator.md`](.agents/rules/gatekeeper_orchestrator.md) | PR / domain checks |
@@ -95,6 +96,7 @@ Skills under [`.agents/skills/`](.agents/skills/) wrap common workflows for Curs
 | [`convergent_writer`](.agents/skills/convergent_writer/SKILL.md) | Synthesis pass |
 | [`spiciness_tuner`](.agents/skills/spiciness_tuner/SKILL.md) | Spice levels 1–5 |
 | [`check_assets`](.agents/skills/check_assets/SKILL.md) | Validate asset manifest sync |
+| [`scene_direction`](.agents/skills/scene_direction/SKILL.md) | Deterministic sprite placement post-process |
 
 
 ## Pipeline helper (manual chaining)

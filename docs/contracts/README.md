@@ -21,8 +21,15 @@ When a markdown gate file exists, the matching `.json` **must** exist and `verdi
 | Narrative change brief | [`narrative_change_brief.schema.json`](narrative_change_brief.schema.json) |
 | Profile delta | [`profile_delta.schema.json`](profile_delta.schema.json) |
 | Promotion handoff | [`promotion_handoff.schema.json`](promotion_handoff.schema.json) |
+| Sprite layout policy | [`sprite_layout_policy.schema.json`](sprite_layout_policy.schema.json) |
 
 Examples: [`examples/`](examples/)
+
+The **sprite layout policy** ([`sprite_layout_policy.yaml`](sprite_layout_policy.yaml)) is a static
+data contract — not a per-day handoff. It drives the Scene Direction Agent
+(`scripts/scene_direction.py`); see [`docs/specs/scene-direction-agent.md`](../specs/scene-direction-agent.md).
+Programmatic validation against the schema is added to `contract_schemas.py` in a later phase; for now
+the schema is the reference artifact.
 
 ## Validation
 

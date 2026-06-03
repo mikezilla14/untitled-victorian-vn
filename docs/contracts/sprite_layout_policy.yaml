@@ -1,0 +1,214 @@
+# Sprite Layout Policy — canonical data for the Scene Direction Agent.
+#
+# This file is DATA, not code. scripts/scene_direction.py reads it; the layout
+# rules can be tuned here without touching the engine.
+#
+# Spec: docs/specs/scene-direction-agent.md
+# Schema: docs/contracts/sprite_layout_policy.schema.json
+# Source brief §15 (Canonical Policy YAML), reconciled with this repo's grammar.
+
+sprite_scene_direction_agent:
+  purpose: >
+    Apply deterministic sprite placement to Ren'Py scenes after script generation
+    or rewrite, while preserving manual direction.
+
+  # ── Repo-specific reconciliation (see spec "Critical reconciliation findings") ──
+  grammar:
+    # Speaker name -> sprite image tag. Derived at runtime from characters.rpy;
+    # NOT hardcoded here. Each Character with a cb_name maps to "<cb_name>_sprite"
+    # when that image tag is declared in assets_manifest.rpy.
+    sprite_tag_derivation:
+      source: game/characters.rpy
+      suffix: _sprite
+      skip_if_undeclared: true   # unknown/undeclared speaker -> warn, do not place
+    # A "show <tag> <expr> at <slot>:" line with a trailing colon + indented ATL
+    # block is treated as implicitly locked (never rewritten).
+    block_form_show_is_locked: true
+    # Per-character safe default expression when none is present to preserve.
+    default_expressions:
+      Cora: base        # Cora has no "neutral" sprite; base is her safe default
+      Gideon: neutral
+      Stern: neutral
+      Vance: neutral
+      Missy: neutral
+
+  # ── Transitions (resolves brief §11) ──
+  transitions:
+    new_appearance_left: moveinleft    # slot is left-of-centre
+    new_appearance_right: moveinright  # slot is centre or right
+    reposition_existing: move          # already-visible character changes slot
+
+  scene_boundary:
+    start_pattern: "^scene\\s+"
+    ends_at_next_scene: true
+
+  lock_tags:
+    scene_lock: "# [asset lock:scene]"
+    line_keep: "# [asset keep]"
+    auto: "# [asset auto]"
+    pin_pattern: "# [asset pin:{character}={slot}]"
+
+  enter_exit_tags:
+    enter_pattern: "# [enter:{character}]"
+    exit_pattern: "# [exit:{character}]"
+    infer_enter_from_dialogue: true
+    infer_exit_from_silence: false
+
+  # Files the agent must never auto-direct (hand-directed; left as-is).
+  excluded_files:
+    - days/day100_non_canon.rpy
+    - days/day101_non_canon.rpy
+
+  slot_sets:
+    1:
+      - centre_bust
+    2:
+      - left_bust
+      - right_bust
+    3:
+      - left_bust
+      - centre_bust
+      - right_bust
+    4:
+      - left_bust4
+      - centre_left_bust4
+      - centre_right_bust4
+      - right_bust4
+
+  slot_aliases:
+    left_centre_bust4: centre_left_bust4
+    right_centre_bust4: centre_right_bust4
+
+  universal_rules:
+    all_characters_may_use_centre: true
+    recalculate_when_visible_cast_changes: true
+    preserve_scene_locks: true
+    preserve_line_keep_tags: true
+    replace_only_auto_lines: true
+    preserve_dialogue: true
+    preserve_backgrounds: true
+    preserve_expressions_where_possible: true
+    mark_generated_lines_with_auto_tag: true
+    must_be_idempotent: true
+
+  rule_priority:
+    - scene_lock
+    - line_keep
+    - explicit_pin
+    - hard_relationship_rule
+    - strong_character_preference
+    - default_ordering
+
+  hard_rules:
+    cora_missy_alone:
+      when_visible_cast_exactly:
+        - Cora
+        - Missy
+      positions:
+        Cora: left_bust
+        Missy: right_bust
+
+    vance_gideon:
+      when_visible_cast_contains:
+        - Vance
+        - Gideon
+      rule: "Vance must be immediately left of Gideon if possible"
+      constraint: "Vance must never be to the right of Gideon"
+
+    cora_stern:
+      when_visible_cast_contains:
+        - Cora
+        - Stern
+      rule: "Cora must be positioned to the left of Stern"
+      constraint: "Cora is never to the right of Stern (1-4 character scenes)"
+
+  character_preferences:
+    Gideon:
+      general: "prefer rightmost available slot"
+      preferred_slots:
+        1: centre_bust
+        2: right_bust
+        3: right_bust
+        4: right_bust4
+
+    Vance:
+      general: "prefer rightmost available slot unless Gideon is present"
+      without_gideon:
+        1: centre_bust
+        2: right_bust
+        3: right_bust
+        4: right_bust4
+      with_gideon:
+        rule: "place immediately left of Gideon"
+
+    Stern:
+      general: "prefer centre or left-side slots, but always to the right of Cora when both present"
+      preferred_slots:
+        - centre_bust
+        - left_bust
+        - centre_left_bust4
+
+    Missy:
+      alone_with_cora:
+        Cora: left_bust
+        Missy: right_bust
+      when_others_present:
+        preferred_slots:
+          - centre_bust
+          - centre_left_bust4
+
+  canonical_layouts:
+    Cora_Missy:
+      Cora: left_bust
+      Missy: right_bust
+
+    Cora_Gideon:
+      Cora: left_bust
+      Gideon: right_bust
+
+    Cora_Vance:
+      Cora: left_bust
+      Vance: right_bust
+
+    Vance_Gideon:
+      Vance: left_bust
+      Gideon: right_bust
+
+    Cora_Stern_Vance:
+      Cora: left_bust
+      Stern: centre_bust
+      Vance: right_bust
+
+    Cora_Stern_Gideon:
+      Cora: left_bust
+      Stern: centre_bust
+      Gideon: right_bust
+
+    Cora_Vance_Gideon:
+      Cora: left_bust
+      Vance: centre_bust
+      Gideon: right_bust
+
+    Cora_Stern_Vance_Gideon:
+      Cora: left_bust4
+      Stern: centre_left_bust4
+      Vance: centre_right_bust4
+      Gideon: right_bust4
+
+    Cora_Missy_Vance_Gideon:
+      Cora: left_bust4
+      Missy: centre_left_bust4
+      Vance: centre_right_bust4
+      Gideon: right_bust4
+
+    Missy_Stern_Vance_Gideon:
+      Stern: left_bust4
+      Missy: centre_left_bust4
+      Vance: centre_right_bust4
+      Gideon: right_bust4
+
+  overflow_policy:
+    max_visible_characters: 4
+    if_more_than_4:
+      action: "emit warning comment and require manual review"
+      warning_comment: "# [asset warning: more than 4 visible characters; manual sprite layout required]"

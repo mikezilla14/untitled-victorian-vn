@@ -3,6 +3,14 @@
 # [STATE] -> variable changes, effects, conditions, jumps
 # [CHOICE] -> menu blocks and inflection points
 # [BEAT] -> narrative intent / scene intent notes
+#
+# SPRITE DIRECTION (managed by scripts/scene_direction.py — how to preserve manual staging):
+# [asset auto]              -> auto-placed sprite line; the agent may rewrite/replace it on re-run
+# [asset keep]              -> on a show line: lock THAT line so the agent never edits it
+# [asset lock:scene]        -> before/after a `scene`: the agent skips the entire scene block
+# [asset pin:Name=slot]     -> force Name into slot for the rest of the scene block
+# [enter:Name] / [exit:Name] -> declare cast changes so auto placement stays correct
+# Full policy: docs/contracts/sprite_layout_policy.yaml | spec: docs/specs/scene-direction-agent.md
 
 # ═══════════════════════════════════════════════════════════════
 #  classes_non_canon.rpy
@@ -242,7 +250,9 @@ init -1 python:
     class StoryState(object):
 
         # ── Prologue ───────────────────────────────────────────────────
-        VALID_PROLOGUE_FOUND_STATES  = ("none", "overheard", "read_letters")
+        VALID_PROLOGUE_FOUND_STATES      = ("none", "overheard", "read_letters")
+        VALID_PROLOGUE_WHY_WRITE_STATES  = ("none", "money_home", "cataloguer", "scandal_hungry")
+        VALID_PROLOGUE_HOLYWELL_STATES   = ("none", "careful", "eager", "desperate")
 
         # ── Day 1 ──────────────────────────────────────────────────────
         VALID_CORRIDOR_STATES        = ("none", "ghost", "predator", "prey")
@@ -325,7 +335,9 @@ init -1 python:
 
         def __init__(self):
             # ── Prologue ───────────────────────────────────────────────
-            self.prologue_found         = "none"
+            self.prologue_found             = "none"
+            self.prologue_why_write         = "none"
+            self.prologue_holywell_posture  = "none"
 
             # ── Day 1 ──────────────────────────────────────────────────
             self.day1_corridor_state    = "none"
@@ -411,6 +423,12 @@ init -1 python:
 
         def set_prologue_found(self, value):
             self._set_string_state("prologue_found", value, self.VALID_PROLOGUE_FOUND_STATES)
+
+        def set_prologue_why_write(self, value):
+            self._set_string_state("prologue_why_write", value, self.VALID_PROLOGUE_WHY_WRITE_STATES)
+
+        def set_prologue_holywell_posture(self, value):
+            self._set_string_state("prologue_holywell_posture", value, self.VALID_PROLOGUE_HOLYWELL_STATES)
 
         # ── Day 1 setters ──────────────────────────────────────────────
 

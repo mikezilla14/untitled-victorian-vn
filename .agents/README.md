@@ -52,6 +52,7 @@ This folder holds **agent role definitions** (markdown) and **Cursor skills** (t
 | `spiciness_tuning_agent` | `spiciness_tuning_agent.md` | `spice-tune` |
 | `adult_market_reviewer` | `adult_market_reviewer.md` | `market-review` (read-only) |
 | `non_prod_code_agent` | `non_prod_code_agent.md` | `produce-day`, `implement-spec` |
+| `scene_direction` | `scene_direction_agent.md` | `produce-day`, `rewrite-narrative`, `revise-narrative`, `spice-tune` (sprite-placement post-process) |
 | `prod_code_agent` | `prod_code_agent.md` | `promote-day`, `promote-framework` |
 | `chief_architect` | `chief_architect.md` | Code review, promotion validation |
 | `gatekeeper_orchestrator` | `gatekeeper_orchestrator.md` | PR / `scripts/gatekeeper.py` |

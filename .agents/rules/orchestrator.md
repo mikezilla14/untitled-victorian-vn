@@ -73,11 +73,12 @@ agents to run in what order, and define what each agent should receive and retur
 | Stage | Agent | Input | Pass condition | Failure |
 |-------|-------|-------|----------------|---------|
 | 1. Draft + gates | `writers_room` | Task brief + `story_board.md` + continuity handoff slice | Divergent → convergent → `dayrdd_non_canon.rpy` + convergent report → **`lead_narrative_editor` → `forensic_psychology_consultant` → `victorian_consultant`** (sequential). Workflow **A** in `writers_room.md`. Gate verdict files under `narrative/pipeline/`. | Re-run per writers_room revision paths **B** / brief **D–E2** |
-| 2. Draft implement | `non_prod_code_agent` | Gated `dayrdd_non_canon.rpy` from Stage 1 | Technical scaffolding added; creative prose/dialogue **verbatim** | Narrative gap → file `dayrdd_narrative_change_brief.md` → `revise-narrative` |
+| 1.5. Sprite direction | `scene_direction` | Gated `dayrdd_non_canon.rpy` from Stage 1 | `py scripts/scene_direction.py --files <draft>` adds/updates `[asset auto]` lines; dialogue untouched; idempotent | `# [asset warning]` (>4 cast) → manual staging / human |
+| 2. Draft implement | `non_prod_code_agent` | Directed `dayrdd_non_canon.rpy` from Stage 1.5 | Technical scaffolding added; creative prose/dialogue **verbatim** | Narrative gap → file `dayrdd_narrative_change_brief.md` → `revise-narrative` |
 | 3. Draft code gate | `chief_architect` | Output from Stage 2 | `PASS` | `REJECT`; re-run Stage 2 |
 | 4. Deliver | — | Stage 3 output | Sandbox draft ready in `narrative/draft/` | — |
 
-**Division of labor:** All three narrative gates run **inside** Stage 1 (`writers_room` orchestration). Do **not** schedule duplicate gate-only stages unless Stage 1 failed before gates completed or the human explicitly requests a gate retry on an existing `dayrdd_non_canon.rpy`. `non_prod_code_agent` never runs before gates pass. Do not load `narrative/pipeline/` for new divergent assignments (see `narrative/pipeline/README.md`).
+**Division of labor:** All three narrative gates run **inside** Stage 1 (`writers_room` orchestration). Stage 1.5 is a deterministic post-process (`scripts/scene_direction.py`) that runs **after** gates pass and **before** `non_prod_code_agent` — it only ever touches `[asset auto]` sprite lines, never gated dialogue. Skip it only if the draft has no scenes. Do **not** schedule duplicate gate-only stages unless Stage 1 failed before gates completed or the human explicitly requests a gate retry on an existing `dayrdd_non_canon.rpy`. `non_prod_code_agent` never runs before gates pass. Do not load `narrative/pipeline/` for new divergent assignments (see `narrative/pipeline/README.md`).
 
 ---
 
@@ -131,6 +132,7 @@ agents to run in what order, and define what each agent should receive and retur
 | 3 | `lead_narrative_editor` | Selected tuned draft | `PASS` / `REJECT` |
 | 4 | `forensic_psychology_consultant` | Selected tuned draft after narrative pass | `PSYCHOLOGICALLY CONSISTENT` / `PROFILE UPDATE REQUIRED` / `PSYCHOLOGICAL DRIFT` |
 | 5 | `victorian_consultant` | Selected tuned draft after psychology clears | `HISTORICALLY SOUND` / fantasy-bend notes / `MAJOR VIOLATION` |
+| 6 | `scene_direction` | Selected tuned draft after all gates clear | `[asset auto]` sprite lines refreshed if the tuned prose changed who is on screen; idempotent |
 
 **Variant rule:** If the human requests multiple levels or "all 5", keep outputs as variants in `narrative/pipeline/experiments/` until the human selects one. Do not merge several levels into `dayrdd_non_canon.rpy`.
 
@@ -205,7 +207,8 @@ No downstream stages. Return directly to human.
 | 3. Psychology gate | `forensic_psychology_consultant` | After stage 2 `PASS` | `PSYCHOLOGICALLY CONSISTENT` or profile updates reported | `PSYCHOLOGICAL DRIFT` → revision loop |
 | 4. Historical gate | `victorian_consultant` | After stage 3 clears | `HISTORICALLY SOUND` or resolved `MINOR` | `MAJOR VIOLATION` → revision loop |
 | 5. Close brief | `writers_room` or orchestrator | Gate verdicts | Set brief `Status: CLOSED`; handoff note to requester | — |
-| 6. Resume requester | `non_prod_code_agent` (typical) | Gated draft + implementation note | Technical wrap with verbatim prose | Escalate if still blocked |
+| 5.5. Sprite direction | `scene_direction` | Gated draft (scoped to touched labels) | `scripts/scene_direction.py` refreshes `[asset auto]` lines for any scene whose cast changed; idempotent | `# [asset warning]` → manual staging |
+| 6. Resume requester | `non_prod_code_agent` (typical) | Directed draft + implementation note | Technical wrap with verbatim prose | Escalate if still blocked |
 
 **Scale routing (from brief):**
 
@@ -224,7 +227,8 @@ No downstream stages. Return directly to human.
 | Stage | Agent | Input | Pass condition | Failure |
 |-------|-------|-------|----------------|---------|
 | 1. Draft + gates | `writers_room` | Rewrite brief detailing targeted file/day/time/event + story_board rows + continuity handoff slice | Divergent → convergent → `dayrdd_non_canon.rpy` (or targeted file) + convergent report → **`lead_narrative_editor` → `forensic_psychology_consultant` → `victorian_consultant`** (sequential). Workflow **A** in `writers_room.md`. Gate verdict files under `narrative/pipeline/`. | Re-run per writers_room revision paths **B** / brief **D–E2** |
-| 2. Draft implement | `non_prod_code_agent` | Gated draft file from Stage 1 | Technical scaffolding added; creative prose/dialogue **verbatim** | Narrative gap → file `dayrdd_narrative_change_brief.md` → `revise-narrative` |
+| 1.5. Sprite direction | `scene_direction` | Gated draft file from Stage 1 | `scripts/scene_direction.py` updates `[asset auto]` lines; idempotent | `# [asset warning]` → manual staging |
+| 2. Draft implement | `non_prod_code_agent` | Directed draft file from Stage 1.5 | Technical scaffolding added; creative prose/dialogue **verbatim** | Narrative gap → file `dayrdd_narrative_change_brief.md` → `revise-narrative` |
 | 3. Draft code gate | `chief_architect` | Output from Stage 2 | `PASS` | `REJECT`; re-run Stage 2 |
 | 4. Deliver | — | Stage 3 output | Sandbox draft ready in `narrative/draft/` | — |
 

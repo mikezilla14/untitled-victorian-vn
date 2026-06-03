@@ -44,11 +44,12 @@ flowchart TD
 | Trigger | "Produce day N", "Write day N", "Draft day N" |
 |---------|-----------------------------------------------|
 | **1** | `writers_room` — divergent → convergent → **three gates** (sequential) |
+| **1.5** | `scene_direction` — deterministic sprite placement (`scripts/scene_direction.py`), `[asset auto]` lines only |
 | **2** | `non_prod_code_agent` — technical wrap, **verbatim** prose |
 | **3** | `chief_architect` — sandbox code validation |
 | **4** | Deliver to human |
 
-Gates run **inside** stage 1 only. Do not re-run gates as separate orchestrator stages unless stage 1 failed mid-pipeline and human requests a gate-only retry.
+Gates run **inside** stage 1 only. Stage 1.5 post-processes sprite direction after gates pass. Do not re-run gates as separate orchestrator stages unless stage 1 failed mid-pipeline and human requests a gate-only retry.
 
 ### `review-scene`
 
@@ -73,6 +74,7 @@ Modes: `assess-prod`, `assess-draft`, `compare-prod-draft`, `deep-dive`.
 | **1** | `spiciness_tuning_agent` |
 | **2** | `writers_room` if prose must change |
 | **3–5** | Three gates (sequential) on selected variant |
+| **6** | `scene_direction` — refresh `[asset auto]` lines if the tuned prose changed who is on screen |
 
 Multi-level outputs stay in `narrative/pipeline/experiments/` until human picks one.
 
@@ -117,6 +119,7 @@ If blocked on prose → `revise-narrative` first.
 | **1** | `writers_room` (scale S/M/L → workflows B, partial pool, or A) |
 | **2–4** | Three gates sequential |
 | **5** | Close brief |
+| **5.5** | `scene_direction` — refresh `[asset auto]` lines for touched scenes |
 | **6** | Resume requester (usually `non_prod_code_agent`) |
 
 ### `rewrite-narrative`
@@ -124,6 +127,7 @@ If blocked on prose → `revise-narrative` first.
 | Trigger | Rewrite file, day, time period, or story chain event |
 |---------|------------------------------------------------------|
 | **1** | `writers_room` — Workflow A (full divergent pool → convergent → three gates sequential) |
+| **1.5** | `scene_direction` — deterministic sprite placement, `[asset auto]` lines only |
 | **2** | `non_prod_code_agent` — technical wrap, verbatim prose |
 | **3** | `chief_architect` — sandbox code validation |
 | **4** | Deliver to human |

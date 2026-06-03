@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/untitled-victorian-vn/contracts/art_fidelity_contract.schema.json",
+  "title": "ArtFidelityContract",
+  "type": "object",
+  "additionalProperties": {
+    "type": "object",
+    "required": ["hair", "eyes", "skin", "clothing", "forbidden_contradictions"],
+    "additionalProperties": false,
+    "properties": {
+      "hair": {
+        "type": "array",
+        "items": { "type": "string", "minLength": 1 },
+        "description": "Required tokens in visual card descriptions."
+      },
+      "eyes": {
+        "type": "array",
+        "items": { "type": "string", "minLength": 1 },
+        "description": "Required tokens in visual card descriptions."
+      },
+      "skin": {
+        "type": "array",
+        "items": { "type": "string", "minLength": 1 },
+        "description": "Required tokens in visual card descriptions."
+      },
+      "clothing": {
+        "type": "array",
+        "items": { "type": "string", "minLength": 1 },
+        "description": "Required tokens in visual card descriptions."
+      },
+      "forbidden_contradictions": {
+        "type": "array",
+        "items": { "type": "string", "minLength": 1 },
+        "description": "Regex or string tokens that MUST NOT appear in character visual descriptions or scripts for this character."
+      }
+    }
+  }
+}

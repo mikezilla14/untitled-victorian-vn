@@ -11,6 +11,7 @@ agents:
   - gatekeeper_orchestrator
   - orchestrator
   - adult_market_reviewer
+  - scene_direction
 
 domains:
   canon_lore:
@@ -59,9 +60,9 @@ domains:
   draft_narrative:
     paths:
       - narrative/draft/**
-    mutable_by: [writers_room, spiciness_tuning_agent, lead_narrative_editor, forensic_psychology_consultant, non_prod_code_agent, human]
+    mutable_by: [writers_room, spiciness_tuning_agent, lead_narrative_editor, forensic_psychology_consultant, non_prod_code_agent, scene_direction, human]
     agents_read: [all]
-    notes: "Non-canon promotion drafts, planning, bible, sandbox .rpy."
+    notes: "Non-canon promotion drafts, planning, bible, sandbox .rpy. scene_direction writes only `[asset auto]` show/hide lines."
 
   pipeline_artifacts:
     paths:

@@ -11,3 +11,6 @@ default story        = StoryState()
 
 # HUD sidebar visibility (layout in screens.rpy).
 default hud_sidebar_visible = True
+
+# Auto-Highlight speaker tracking
+default speaking_char = None

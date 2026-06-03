@@ -50,6 +50,8 @@ flowchart TD
 | Flag Name | Set In | Function / Forward Impact |
 |-----------|--------|---------------------------|
 | `prologue_found` | Day 100 | `"overheard"` or `"read_letters"` — seeds Cora's initial thematic inclination. |
+| `prologue_why_write` | Day 100 | `"money_home"` / `"cataloguer"` / `"scandal_hungry"` — seeds manuscript motive for book1. |
+| `prologue_holywell_posture` | Day 100 | `"careful"` / `"eager"` / `"desperate"` — seeds illicit-publisher risk appetite. |
 | `story.day1_interview_state` | Day 101 | `"meek"` / `"competent"` — early suspicion shaping with Stern. |
 | `story.day1_corridor_state` | Day 101 | `"predator"` / `"prey"` / `"ghost"` — determines Chapter 1 prose and Day 2's contraband branch. |
 | `story.day1_ledger_focus` | Day 101 | `"inspiration"` / `"corruption"` — dictates the framing of the writing or indulgence. |
@@ -252,11 +254,13 @@ flowchart LR
 
 ## Scene Ledger & Passage Flow
 
-### Day 100 (Prologue)
+### Day 100 (Prologue / Tutorial)
 *Source: `day100_non_canon.rpy`*
-- **`day100_main`**: Train journey to London.
-- **Flashback**: Cora's dismissal from the country estate after a discovery (`prologue_found`).
-- **Awakening**: Cora arriving in London with a forbidden manuscript and forged references.
+- **`day100_main` (Morning)**: Third-class train; voice tutorial (narrator / `cora_inner` / `cora`); stat sidebar intro.
+- **`day100_1_afternoon_boredom`**: Boredom reading; Holywell handbill; `prologue_why_write` + `prologue_holywell_posture`.
+- **`day100_2_evening_flashback`**: Wiltshire discovery (`prologue_found`: overheard / read_letters).
+- **`day100_3_night_daydream`**: Daydream-framed spice (~2.8) toward Holywell / authorship.
+- **`day100_3_arrival`**: Waterloo; handoff to Day 101.
 
 ### Day 101
 *Source: `day101_non_canon.rpy`*

@@ -3,6 +3,14 @@
 # [STATE] -> variable changes, effects, conditions, jumps
 # [CHOICE] -> menu blocks and inflection points
 # [BEAT] -> narrative intent / scene intent notes
+#
+# SPRITE DIRECTION (managed by scripts/scene_direction.py — how to preserve manual staging):
+# [asset auto]              -> auto-placed sprite line; the agent may rewrite/replace it on re-run
+# [asset keep]              -> on a show line: lock THAT line so the agent never edits it
+# [asset lock:scene]        -> before/after a `scene`: the agent skips the entire scene block
+# [asset pin:Name=slot]     -> force Name into slot for the rest of the scene block
+# [enter:Name] / [exit:Name] -> declare cast changes so auto placement stays correct
+# Full policy: docs/contracts/sprite_layout_policy.yaml | spec: docs/specs/scene-direction-agent.md
 
 # day104_non_canon.rpy
 # Release 1 / Day 04 non-canon Ren'Py-shaped draft
@@ -61,14 +69,14 @@ label day104_1_false_dawn_suite_window:
     with fade
 
     "Morning enters the Master Suite as if nothing terrible has ever happened there."
-    "That is the talent of expensive rooms."
-    "They reset themselves."
+    cora_inner "That is the talent of expensive rooms."
+    cora_inner "They reset themselves."
 
     "Gideon and Vance have gone to a matinee in the West End."
-    "Stern believes I am polishing silver on the ground floor."
-    "Missy believes I am avoiding her because guilt has finally made me decent."
+    cora_inner "Stern believes I am polishing silver on the ground floor."
+    cora_inner "Missy believes I am avoiding her because guilt has finally made me decent."
 
-    "Everyone is wrong in a useful direction."
+    cora_inner "Everyone is wrong in a useful direction."
 
     if story.day3_ultimatum == "defied":
         "Last night I told Gideon that my writing was not part of my service."
@@ -83,12 +91,12 @@ label day104_1_false_dawn_suite_window:
         "Last night left me with too many questions and not enough power."
         "Today I come looking for the thing powerful men hide from one another."
 
-    "The manuscript needs an ending."
-    "Not a pretty one. Not a moral one."
-    "An ending with enough truth inside it to bite."
+    cora_inner "The manuscript needs an ending."
+    cora_inner "Not a pretty one. Not a moral one."
+    cora_inner "An ending with enough truth inside it to bite."
 
     "I cross to the heavy oak writing desk."
-    "The lockbox waits beneath a stack of correspondence, exactly where a careless man would not hide it and a confident man would."
+    cora_inner "The lockbox waits beneath a stack of correspondence, exactly where a careless man would not hide it and a confident man would."
 
     # [STATE] State/progression update
     jump day104_1_lockbox_evidence
@@ -105,8 +113,8 @@ label day104_1_lockbox_evidence:
     with dissolve
 
     "The hairpin bends before the lock does."
-    "My hands are slick. My breath is too loud."
-    "Every sound in the room becomes Stern's footstep, Gideon's voice, Vance's laugh returning early down the hall."
+    cora_inner "My hands are slick. My breath is too loud."
+    cora_inner "Every sound in the room becomes Stern's footstep, Gideon's voice, Vance's laugh returning early down the hall."
 
     "Then the lock gives."
 
@@ -115,20 +123,20 @@ label day104_1_lockbox_evidence:
     # [ASSET] CG callout retained from legacy draft
     # show cg_gideon_photograph
 
-    "The photograph is not large."
-    "That feels obscene somehow."
-    "A life can fit on paper smaller than a prayer book."
+    cora_inner "The photograph is not large."
+    cora_inner "That feels obscene somehow."
+    cora_inner "A life can fit on paper smaller than a prayer book."
 
     "Gideon. Another gentleman."
     "Not merely friendly. Not deniable in any honest room."
 
-    "My first feeling is triumph."
-    "My second is fear."
-    "My third is the writer's monstrous little gratitude."
+    cora_inner "My first feeling is triumph."
+    cora_inner "My second is fear."
+    cora_inner "My third is the writer's monstrous little gratitude."
 
-    "Here is the ending."
-    "Here is the proof."
-    "Here is the thing even Gideon Locke cannot smooth over with a quiet voice and a better coat."
+    cora_inner "Here is the ending."
+    cora_inner "Here is the proof."
+    cora_inner "Here is the thing even Gideon Locke cannot smooth over with a quiet voice and a better coat."
 
     # [STATE] Cora has discovered the leverage. She has not necessarily escaped with it yet
     $ story.set_day4_evidence_discovered(True)
@@ -153,13 +161,15 @@ label day104_2_return_early:
 
     "A key turns in the outer door."
 
+    # [ASSET] Visual/staging command
+    show vance_sprite neutral at centre_bust with moveinright # [asset auto]
     vance "—and I will not tolerate that tone from her again. Not from a dresser, not from a maid, not from anyone."
 
-    "They are early."
-    "Of course they are early."
-    "False dawns do not announce the trap. They simply let the sun in first."
+    cora_inner "They are early."
+    cora_inner "Of course they are early."
+    cora_inner "False dawns do not announce the trap. They simply let the sun in first."
 
-    "I am standing beside Gideon's desk with his lockbox open and his ruin pressed against my ribs."
+    cora_inner "I am standing beside Gideon's desk with his lockbox open and his ruin pressed against my ribs."
 
     # [CHOICE] Decision point
     menu:
@@ -270,6 +280,10 @@ label day104_2_escape_bold_lie:
 
     gideon "That is my question."
 
+    # [ASSET] Visual/staging command
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show vance_sprite angry at centre_bust with move # [asset auto]
+    show gideon_sprite angry at right_bust with move # [asset auto]
     cora "Checking the desk for dust, Sir. Miss Stern's orders."
 
     "The lie stands up."
@@ -332,8 +346,8 @@ label day104_2_escape_missy_cover:
     $ story.set_missy_day4_used_as_cover(True)
     $ apply_effects(vance_susp=-15, missy_susp=20, insp=5, corr=20)
 
-    "Panic makes the first decision."
-    "Ambition improves it."
+    cora_inner "Panic makes the first decision."
+    cora_inner "Ambition improves it."
 
     "I slide the photograph into my bodice and close the lockbox, leaving everything else exactly as I found it."
     "I have the proof."
@@ -344,31 +358,74 @@ label day104_2_escape_missy_cover:
     scene bg_servants_corridor_day
     with fade
 
+
     show missy_sprite shocked at center
 
     "Missy is in the corridor with a stack of towels."
-    "Wrong place. Right time."
-    "For me."
+    cora_inner "Wrong place. Right time."
+    cora_inner "For me."
 
+    # [ASSET] Visual/staging command
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show missy_sprite shocked at right_bust with move # [asset auto]
     cora "They need you in the suite. Now. Take this."
 
     "I push the dust cloth into her hands."
 
-    missy "What? Who?"
+    missy "What? Cora... why are you so pale? Is there..."
 
-    cora "Vance. She's asking for the room to be checked again. Hurry before she comes looking."
+    cora "Vance is asking for the room to be checked again. Hurry before she comes looking and Miss Stern hears the noise."
 
-    "Missy looks toward the door."
-    "She believes me because she still wants the world to contain fewer traps than it does."
+    "Missy's eyes flick to my hands, then to the heavy master suite door. Her sharp observancy senses the transgressive panic in my chest."
+    "She hesitates, her defensive moral guard up, but the threat of Stern and the sheer habit of class-duty make her step forward."
 
-    missy "All right."
+    missy "All right. But don't you wander off, Cora. It isn't proper."
 
-    "She goes in."
+    "She goes in, her shoulders squared against the impending storm."
     "The door closes."
 
-    "I stand in the corridor with empty hands and a perfect alibi."
-    "I have survived."
-    "I have also failed the part of me that came for a weapon."
+    "Instead of running, I find myself frozen against the mahogany paneling."
+    "The wood is cold, but the keyhole is a hot eye, a direct conduit to the danger inside."
+    "I press my ear to the crack of the service door, holding my breath."
+
+    "Within the Master Suite, the air is thick and heavy. I hear the slow, rhythmic click of Mr. Locke's walking stick against the polished floorboards."
+    "He is circling her."
+
+    # [ASSET] Visual/staging command
+    show missy_sprite shocked at centre_bust with move # [asset auto]
+    show gideon_sprite neutral at right_bust with moveinright # [asset auto]
+    gideon "And what, pray tell, are you doing in my quarters, girl? Miss Stern was quite specific about who was to clear these rooms."
+
+    "His voice is a low, silk-wrapped growl, vibrating through the wood. Missy's reply is barely a whisper, yet steady, carrying that active, unyielding moral shield."
+
+    missy "The towels, Mr. Locke. They were reported damp. I was sent to change them."
+
+    "The click of the walking stick stops. Through the gap, I can see Gideon step directly into her space, his towering frame casting a shadow that completely swallows her."
+    "He raises his silver-headed walking stick, the polished wood gliding slowly, suggestively up the front of her uniform. The tip rests beneath her chin, tilting it upward, forcing her head back."
+    "Missy's breath catches. Her hands clench the damp towels against her chest as if they are a shield."
+
+    gideon "Damp, you say? And who, Missy, gave you that report? A maid does not walk into a gentleman's study without a very specific command."
+
+    "He steps closer, his boots almost touching the hem of her skirt. He leans down, his face inches from hers, his free hand rising to trail the starched edge of her collar, his fingers brushing the sensitive skin of her jaw. The class terror is absolute, yet the physical proximity burns with a dark, forbidden heat."
+
+    gideon "Is there someone else here? Someone who sent you to find what does not belong to you?"
+
+    "For a terrible second, I am sure she will speak my name. My pulse beats like a trapped bird in my ears."
+    "But Missy does not flinch from his touch. Her chin remains high against the silver tip of his cane, her dark eyes locking onto his with a quiet, sovereign courage that defies the terror of his touch."
+
+    missy "I was sent by the service board, Sir. No one else."
+
+    "Gideon's thumb traces the edge of her jaw, his eyes narrowing as he studies her flushed face, her parted lips. The silence between them is taut, charged with a heavy, dangerous intimacy."
+
+    gideon "You are either very loyal, or very foolish, Missy. Both are expensive qualities in this house."
+
+    "He slowly lowers the cane, his fingers sliding off her jaw with a lingering touch that leaves Missy trembling yet unbowed."
+
+    gideon "Change the towels. Then leave. Before I decide to charge you for the privilege of your presence."
+
+    "I step back from the door, my hands trembling, my chest tight with a sudden, devastating wave of shame."
+    cora_inner "I have survived."
+    cora_inner "But Missy has paid for my survival in currency I did not have the courage to spend."
 
     # [STATE] State/progression update
     jump day104_3_stern_pressure
@@ -387,7 +444,7 @@ label day104_3_stern_pressure:
     scene bg_servants_quarters_dusk
     with fade
 
-    "By twilight, survival has begun charging interest."
+    cora_inner "By twilight, survival has begun charging interest."
 
     if story.day4_escape_state == "fireplace":
         "Soot sits beneath my nails, in the seams of my cuffs, along the hem where the apron should be clean."
@@ -421,6 +478,8 @@ label day104_3_stern_pressure:
             $ story.set_day4_stern_response("boring")
             $ apply_effects(stern_susp=-15, insp=0, corr=0)
 
+            show cora_sprite base at left_bust with moveinleft # [asset auto]
+            show stern_sprite stern at right_bust with move # [asset auto]
             cora "Ground-floor silver, Ma'am. Then linens. Then back stairs. I should have reported each change."
 
             stern "Yes. You should have."
@@ -471,7 +530,7 @@ label day104_3_stern_pressure:
     hide stern_sprite
 
     "She leaves me with the warning and no proof."
-    "Tonight, no proof is beginning to feel like grace."
+    cora_inner "Tonight, no proof is beginning to feel like grace."
 
     # [STATE] State/progression update
     jump day104_4_twilight_ledger_false_dawn
@@ -492,18 +551,18 @@ label day104_4_twilight_ledger_false_dawn:
 
     "The ledger sits open on my desk."
     "My hands have stopped shaking."
-    "This feels like improvement until I realise they have only gone numb."
+    cora_inner "This feels like improvement until I realise they have only gone numb."
 
     "The photograph is hidden beneath the loose board under my bed."
     "Not safe."
     "Safer than my skin."
-    "I have evidence."
-    "I have leverage."
-    "I have, for the first time since arriving, something Gideon Locke does not want me to have."
+    cora_inner "I have evidence."
+    cora_inner "I have leverage."
+    cora_inner "I have, for the first time since arriving, something Gideon Locke does not want me to have."
 
-    "The manuscript waits."
-    "Not for more material."
-    "For courage."
+    cora_inner "The manuscript waits."
+    cora_inner "Not for more material."
+    cora_inner "For courage."
 
     # [CHOICE] Decision point
     menu:
@@ -592,61 +651,68 @@ label day104_4_missy_repair:
     $ story.set_day4_twilight_action("missy_repair")
     $ apply_effects(missy_susp=-15, insp=5, corr=0)
 
-    "Missy sits on the edge of her bed, twisting a handkerchief until it looks strangled."
+    "Missy sits on the edge of her narrow iron bed, twisting her linen handkerchief until her knuckles are as white as the cloth."
+    "She doesn't look like a simple country girl caught in a mistake tonight. Her eyes are quiet, exceptionally focused, and dangerous with what they have resolved."
 
-    missy "You sent me in there."
+    missy "You sent me in there, Cora Vale."
 
-    cora "Yes."
+    # [ASSET] Visual/staging command
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show missy_sprite shocked at right_bust with move # [asset auto]
+    cora "I did."
 
-    "The word is smaller than the harm."
+    "The word is smaller than the betrayal. It hangs in the narrow space between us, smelling of cedar oil and grey twilight."
 
-    missy "You knew they were angry."
+    missy "You knew they were returning. You knew Mr. Locke was angry. You were standing by his open desk, your hands clean, while I was sent into the suite to take the blow."
 
-    cora "Yes."
+    "She rises, her posture rigid, her voice losing every trace of its deferential junior maid register."
 
-    "No lie comes."
-    "That may be decency."
-    "It may be exhaustion."
+    missy "You're a spy, aren't you? Prying into the suites, stealing Mr. Locke's letters... and you used me as a shield because you thought I was too stupid to see the joints in your performance."
 
-    missy "Why?"
+    cora_inner "She has decoded it. Not with empty-headed curiosity, but with a sharp, sovereign intellect."
+
+    missy "Why, Cora? I trusted you. I thought... I thought you were the only righteous thing in this terrible hotel."
 
     # [CHOICE] Decision point
     menu:
-        "How much truth do I give her?"
+        "Give her the raw, romantic truth. Offer my vulnerability. [[Tender Romance / Path B Intimacy]]":
 
-        "Enough to keep her from hating me completely.":
-
-            # [STATE] State/progression update
+            # [STATE] Rebuilds trust, progresses Path B romantic intimacy
             $ story.set_missy_day4_repair_state("partial_truth")
-            $ apply_effects(missy_susp=-10, vance_susp=5, insp=10, corr=0)
+            $ apply_effects(missy_susp=-25, vance_susp=5, insp=15, corr=10)
 
-            cora "Because I found something I should not have found. And I panicked."
+            cora "Because I was cornered, and I was terrified of losing the only thing that keeps me alive in this place. My writing. My book."
+            cora "And because when I am terrified, I am a monster. But I would rather be dismissed a hundred times than see you look at me with that wall between us."
 
-            missy "Something of his?"
+            "I step closer, crossing the narrow floorboards, my hands reaching out to cover her raw, trembling fingers."
+            "Missy flinches, her breath catching, but she does not step back. The proximity between us is suffocating, thick with lye-steam and the scent of cedar."
 
-            cora "Yes."
+            cora "I do not see you as a shield, Missy. I see you as the only beautiful thing in this hotel that isn't a lie."
 
-            missy "Was it worth it?"
+            "I raise my hand, my thumb tracing the damp, flushed skin of her cheek, my voice dropping the maid's mask entirely. It is a quiet, sovereign register of deep romantic tenderness."
+            "Missy's eyes widen, her breathing turning shallow, her chest rising against my hands."
 
-            "No answer is safe."
+            missy "Cora... your touch is like... it's like a sin I want to keep."
+            cora "Then let us keep it together. No more shields, Missy. Only this."
 
-            cora "I don't know yet."
+            "She leans her forehead against my shoulder, her body trembling with a self-possessed, deliberate yielding."
+            "The physical heat between us is a dramatic middle ground—restrained, dangerous, but born of absolute romantic trust."
 
-        "Keep the truth. Offer comfort instead.":
+        "Keep the truth. Offer a coward's comfort. [[Guarded Distance]]":
 
-            # [STATE] State/progression update
+            # [STATE] Safe but keeps Missy guarded, locks out Path B intimacy
             $ story.set_missy_day4_repair_state("comfort_lie")
-            $ apply_effects(missy_susp=-15, insp=0, corr=5)
+            $ apply_effects(missy_susp=-10, insp=0, corr=5)
 
-            cora "Because I am a coward when cornered."
+            cora "Because I am a coward when cornered, Missy. I saw the door, I saw the threat, and I used what was closest. It was cruel, and I cannot justify it."
 
-            missy "That is not an answer."
+            missy "That is a confession, Cora. It is not an apology."
 
-            cora "No. But it is true."
+            cora "No. But it is the only honest thing I have left to give you."
 
-            "She lets me sit beside her."
-            "Not forgiveness."
-            "A pause before judgment."
+            "I sit on the edge of the bed, leaving a cold foot of cedar wood between us."
+            "She does not ask me to leave, but her defensive moral shield is up, her posture guarded."
+            "We are safe from Miss Stern tonight, but the book has lost its partner."
 
     # [ASSET] Visual/staging command
     hide missy_sprite
@@ -690,6 +756,9 @@ label day104_5_triumphant_chapter:
 
     # [STATE] State/progression update
     $ story.complete_manuscript_chapter("day4_triumphant_chapter")
+    call book1_write_chapter(chapter_key="day4_triumphant_chapter", current_day=104)
+
+    # [STATE] State/progression update
     $ apply_effects(stern_susp=15, insp=-15, corr=0)
 
     "The final sentence lands just before the candle dies."
