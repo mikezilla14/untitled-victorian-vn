@@ -127,6 +127,13 @@ transform right_full_body:
     xpos vp_x(0.8)
     yalign 1.0
 
+transform centre_full_body:
+    zoom 0.60
+    ypos 1.06   
+    xanchor 0.5
+    xpos vp_x(0.5)
+    yalign 1.0    
+
 transform left_full_body:
     zoom 0.60
     ypos 1.06   

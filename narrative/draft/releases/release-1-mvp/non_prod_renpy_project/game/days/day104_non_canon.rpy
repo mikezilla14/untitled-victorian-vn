@@ -757,6 +757,8 @@ label day104_5_triumphant_chapter:
     # [STATE] State/progression update
     $ story.complete_manuscript_chapter("day4_triumphant_chapter")
     call book1_write_chapter(chapter_key="day4_triumphant_chapter", current_day=104)
+
+    # [STATE] State/progression update
     $ apply_effects(stern_susp=15, insp=-15, corr=0)
 
     "The final sentence lands just before the candle dies."

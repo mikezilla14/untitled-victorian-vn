@@ -266,8 +266,14 @@ label day103_2_suite_gideon_tea:
     gideon "You."
 
     # [ASSET] Visual/staging command
+    show vance_sprite kneeling_cowed_dressing_gown at centre_full_body:
+        zoom 0.75
+        ypos 1.1
+
+    # [ASSET] Visual/staging command
+    with move # [asset keep]
     show cora_sprite base at left_bust with moveinleft # [asset auto]
-    show vance_sprite submissive at centre_bust with move # [asset auto]
+    show vance_sprite kneeling_cowed_dressing_gown at centre_bust with move # [asset auto]
     show gideon_sprite neutral at right_bust with move # [asset auto]
     cora "Sir."
 
@@ -1132,6 +1138,8 @@ label day103_3_bedroom_final_write:
                 # [STATE] State/progression update
                 $ story.complete_manuscript_chapter("day3_chapter")
                 call book1_write_chapter(chapter_key="day3_chapter", current_day=103)
+
+                # [STATE] State/progression update
                 $ apply_effects(stern_susp=5, insp=-20, corr=0)
 
                 "Chapter Three is complete."

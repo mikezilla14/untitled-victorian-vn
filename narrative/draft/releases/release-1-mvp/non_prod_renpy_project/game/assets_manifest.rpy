@@ -134,6 +134,7 @@ init -40 python:
     declare_image_with_fallback("cora_sprite guarded_travel", "images/sprites/cora/guarded_travel.png", "#d4a574")
     declare_image_with_fallback("cora_sprite focused", "images/sprites/cora/focused.png", "#d4a574")
     declare_image_with_fallback("cora_sprite flushed", "images/sprites/cora/flushed.png", "#d4a574")
+    declare_image_with_fallback("cora_sprite collar_travel", "images/sprites/cora/collar_travel.png", "#d4a574")
 
     # ── UI: persistent HUD (stats_overlay) ───────────────────────
     #
@@ -141,13 +142,13 @@ init -40 python:
     #   [268 × 190 px]  Exact display size in sidebar (HUD_SIDEBAR_WIDTH - 32 × 190).
     #   Design at 2× (536 × 380 px) and let Ren'Py scale down for sharpness.
     #   Cora portrait, framed bust shot. Used at corruption_level 1–2.
-    declare_image_with_fallback("ui_cora_base", "images/ui/ui_cora_base.png", "#d4a574")
+    declare_image_with_fallback("ui_cora_base", "images/sprites/cora/ui/ui_cora_base.png", "#d4a574")
     #
     # ui_cora_corrupted:
     #   [268 × 190 px]  Same dimensions as ui_cora_base (design at 2×: 536 × 380 px).
     #   Swapped in at corruption_level >= 3. Should read as visibly changed — colder,
     #   more controlled, slight desaturation or shadow shift.
-    declare_image_with_fallback("ui_cora_corrupted", "images/ui/ui_cora_corrupted.png", "#8b2942")
+    declare_image_with_fallback("ui_cora_corrupted", "images/sprites/cora/ui/ui_cora_corrupted.png", "#8b2942")
     #
     # ui_sidebar_bg:
     #   [300 × 1080 px]  Full sidebar at canvas height.
@@ -186,6 +187,15 @@ init -40 python:
     declare_image_with_fallback("ui_inkwell_empty", "images/ui/ui_inkwell_empty.png", "#1a1a1a")
     declare_image_with_fallback("ui_inkwell_full", "images/ui/ui_inkwell_full.png", "#1e5a8a")
 
+    # ── UI: Book Writing Screen Assets ───────────────────────────
+    declare_image_with_fallback("ui_book_writing_paper", "images/ui/book_writing_paper.png", "#f4efe2")
+    declare_image_with_fallback("ui_book_cover", "images/ui/book_cover.png", "#3d2314")
+    declare_image_with_fallback("ui_book_ui_bg", "images/ui/book_ui_bg.png", "#1c1410")
+    declare_image_with_fallback("ui_cora_mini_base", "images/ui/ui_cora_mini_base.png", "#d4a574")
+    declare_image_with_fallback("ui_cora_mini_corrupted", "images/ui/ui_cora_mini_corrupted.png", "#8b2942")
+    declare_image_with_fallback("ui_illustration_border", "images/ui/illustration_border.png", "#5a5a5a")
+    declare_image_with_fallback("ui_price_badge", "images/ui/price_badge.png", "#3a1a0a")
+
     # ── Audio aliases (None when missing; guard before play) ──────
     audio_themes_savoy_tension = register_audio("themes/savoy_tension", "audio/themes/savoy_tension.ogg")
     audio_themes_servants_floor_unease = register_audio("themes/servants_floor_unease", "audio/themes/servants_floor_unease.ogg")
@@ -210,6 +220,6 @@ init -40 python:
     audio_sfx_door_handle_jiggle = register_audio("sfx/door_handle_jiggle", "audio/sfx/door_handle_jiggle.ogg")
 
     # Thought overlay UI — mc_sprite_thought_icon is a placeholder until final art is created.
-    declare_image_with_fallback("mc_sprite_thought_icon", "images/sprites/ui/mc_sprite_thought_icon.png", "#d4a574")
+    declare_image_with_fallback("mc_sprite_thought_icon", "images/sprites/cora/ui/mc_sprite_thought_icon.png", "#d4a574")
 
     report_missing_assets()

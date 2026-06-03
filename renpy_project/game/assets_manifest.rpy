@@ -153,6 +153,15 @@ init -40 python:
     declare_image_with_fallback("ui_inkwell_empty", "images/ui/ui_inkwell_empty.webp", "#1a1a1a")
     declare_image_with_fallback("ui_inkwell_full", "images/ui/ui_inkwell_full.webp", "#1e5a8a")
 
+    # ── UI: Book Writing Screen Assets ───────────────────────────
+    declare_image_with_fallback("ui_book_writing_paper", "images/ui/book_writing_paper.webp", "#f4efe2")
+    declare_image_with_fallback("ui_book_cover", "images/ui/book_cover.webp", "#3d2314")
+    declare_image_with_fallback("ui_book_ui_bg", "images/ui/book_ui_bg.webp", "#1c1410")
+    declare_image_with_fallback("ui_cora_mini_base", "images/ui/ui_cora_mini_base.webp", "#d4a574")
+    declare_image_with_fallback("ui_cora_mini_corrupted", "images/ui/ui_cora_mini_corrupted.webp", "#8b2942")
+    declare_image_with_fallback("ui_illustration_border", "images/ui/illustration_border.webp", "#5a5a5a")
+    declare_image_with_fallback("ui_price_badge", "images/ui/price_badge.webp", "#3a1a0a")
+
     # ── Audio aliases (None when missing; guard before play) ──────
     audio_themes_savoy_tension = register_audio("themes/savoy_tension", "audio/themes/savoy_tension.ogg")
     audio_themes_servants_floor_unease = register_audio("themes/servants_floor_unease", "audio/themes/servants_floor_unease.ogg")

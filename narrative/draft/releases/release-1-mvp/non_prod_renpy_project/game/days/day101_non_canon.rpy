@@ -352,7 +352,7 @@ label day101_2_missy_meets_cora:
 
     # [ASSET] Visual/staging command
     scene bg_laundry_room_day:
-        zoom 1.2
+        xysize (1920, 1080)
 
     # [ASSET] Visual/staging command
     with fade
@@ -370,12 +370,16 @@ label day101_2_missy_meets_cora:
 
     cora "I must be. Cora Vale."
 
-    missy "I'm Missy. Miss Stern said I'm to show you where things go. Not everything, mind. If I showed you everything we'd both be dismissed and out on the Strand before tea. This place has more rules than the Bible, and twice as many ways to fall."
+    missy "I'm Missy. Miss Stern said I'm to show you where things go. {w}Not everything, mind."
+    missy "If I showed you everything we'd both be dismissed and out on the Strand before tea. This place has more rules than the Bible, and twice as many ways to fall."
 
     cora_inner "She says it brightly, but there is a sharp, quiet calculation in the way she eyes the door."
     cora_inner "Not simple chatter. A junior maid who has calculated the cost of a single slip."
 
     cora "Is the work always this warm?"
+    # [ASSET] Visual/staging command
+    show cora_sprite collar_travel at left_full_body
+    with dissolve
     missy "Oh, this is a pleasant day. Wait until the boilers sulk and the head laundress starts counting the soap-bars like they're gold sovereigns."
 
     "Missy laughs at her own warning, though her eyes remain alert, and she presses a folded stack of garments into my arms."
@@ -417,7 +421,10 @@ label day101_2_missy_meets_cora:
 label day101_2_coras_path_choice:
 
     # [ASSET] Visual/staging command
-    scene bg_servants_corridor_dim
+    scene bg_servants_corridor_dim:
+        xysize (1920, 1080)
+
+    # [ASSET] Visual/staging command
     with fade
 
     "The servants' corridor behind the guest wing is narrower than it should be."
@@ -554,7 +561,10 @@ label day101_3_taking_stock_day1:
     call check_confrontations
 
     # [ASSET] Visual/staging command
-    scene bg_servants_quarters_dusk
+    scene bg_servants_quarters_dusk:
+        xysize (1920, 1080)
+
+    # [ASSET] Visual/staging command
     with fade
 
     "By twilight my room has become mine in the meanest possible sense."
@@ -589,7 +599,7 @@ label day101_3_taking_stock_day1:
     menu:
         "I look at my journal, the ink drying on the page. The lay of the land is clear. How do I spend the night?"
 
-        "Write the first chapter of my manuscript. [[Progress manuscript]]" if has_story_fuel(15):
+        "Write the first chapter of my manuscript. [[Progress manuscript]]" if player.inspiration >= 15:
 
             # [STATE] State/progression update
             jump day101_4_write_the_chapter
@@ -665,7 +675,10 @@ label day101_3_taking_stock_day1:
 label day101_4_write_the_chapter:
 
     # [ASSET] Visual/staging command
-    scene bg_cora_desk_night
+    scene bg_cora_desk_night:
+        xysize (1920, 1080)
+
+    # [ASSET] Visual/staging command
     with dissolve
 
     # [STATE] This is the main Day 1 manuscript progression route
@@ -731,18 +744,25 @@ label day101_4_write_the_chapter:
         else:
             cora_inner "She understands that distance can sharpen a knife."
 
-    cora_inner "By the time the candle gutters, the chapter exists."
-    cora_inner "Not finished. Nothing true is finished on the first night."
-    cora_inner "But real enough to accuse me."
+    cora_inner "By the time the candle gutters, there are pages."
+    cora_inner "Not a chapter. Not a wound. Not even a proper lie."
 
-    # [STATE] Increment manuscript through encapsulated story method, not raw global variable
-    $ story.complete_manuscript_chapter("day1_chapter")
-    call book1_write_chapter(chapter_key="day1_chapter", current_day=101)
+    if player.corruption_level < 30:
+        call book1_write_chapter(chapter_key="day1_slop_chapter", current_day=101)
+        cora_inner "Flavorless slop."
+        cora_inner "Unsellable, bloodless, afraid of its own pulse."
+        cora_inner "I had inspiration, but no appetite, and the page told on me."
+    else:
+        call book1_write_chapter(chapter_key="day1_chapter", current_day=101)
+        cora_inner "There is a shape worth keeping, but it still feels premature."
+        cora_inner "Tomorrow's material will decide whether this becomes a chapter or kindling."
+
+    # [STATE] State/progression update
     $ apply_effects(insp=-10, corr=0)
 
     cora_inner "I press the pages flat beneath the ledger."
     cora_inner "Tomorrow the house will expect a maid."
-    cora_inner "It has acquired a witness instead."
+    cora_inner "Tonight it acquired a failed first draft."
 
     # [STATE] State/progression update
     call end_slot(outcome="d1_write_ch1")

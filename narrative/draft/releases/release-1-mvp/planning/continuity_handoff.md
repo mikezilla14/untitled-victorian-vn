@@ -34,9 +34,9 @@
 
 ## Handoff → Day 101
 
-**Exit state (Day 100):** Cora arrives London on the train with a forbidden manuscript and forged references; prologue seeds whether she `overheard` dismissal or `read_letters` at the estate. She is not yet hotel-shaped — still country grief and ambition in one body.
+**Exit state (Day 100):** Cora steps off the train at Waterloo with manuscript, forged references, and the gap between performed maid and inner author established. Prologue seeds discovery (`overheard` / `read_letters`), why she writes (`money_home` / `cataloguer` / `scandal_hungry`), and Holywell posture (`careful` / `eager` / `desperate`). Still country grief in a London smog body — not yet hotel-shaped.
 
-**Flags that matter today:** `prologue_found` (`overheard` / `read_letters`).
+**Flags that matter today:** `prologue_found`; `prologue_why_write`; `prologue_holywell_posture` (echo in dialogue/thought only until book1 wiring).
 
 **Relationships:** Stern unknown; Missy unknown; Gideon/Vance unseen or fleeting.
 

@@ -365,6 +365,8 @@ screen thought_overlay(who, what):
         # Icon — left anchor for the thought bubble row
         add "mc_sprite_thought_icon":
             at thought_fade
+            crop (150, 0, 500, 500)
+            zoom 1.2
             xysize (80, 80)
             xpos 60
             ypos 20
@@ -379,5 +381,147 @@ screen thought_overlay(who, what):
             padding (40, 30)
 
             text what style "thought_text" id "what"
+
+
+# ── PENNY DREADFUL BOOK WRITING SCREEN ───────────────────────────
+# Overrides standard NVL mode rendering for chapter writing events.
+screen nvl(dialogue, items=None):
+    # Left side: Manuscript Paper
+    add "ui_book_writing_paper" xpos 0 ypos 0
+
+    # Right side Panel Wrapper
+    frame:
+        xpos 960
+        ypos 0
+        xysize (960, 1080)
+        background None
+        padding (0, 0)
+
+        # 1. Tall Title Block (Stacked Penny Dreadful Masthead)
+        vbox:
+            xpos 96
+            ypos 40
+            xsize 768
+            spacing 2
+            
+            text "CORALIE VALE;" size 32 bold True color "#2c1b17" xalign 0.5
+            text "OR," size 18 italic True color "#2c1b17" xalign 0.5
+            text "THE TERROR OF THE SAVOY CORRIDORS." size 22 bold True color "#2c1b17" xalign 0.5
+
+        # 2. Woodcut Illustration Frame
+        frame:
+            xpos 96
+            ypos 200
+            xysize (768, 560)
+            background Frame("ui_illustration_border", 6, 6)
+            padding (10, 10)
+            
+            $ page_image = getattr(store, "book1_page_image", "ui_book_cover")
+            add page_image xalign 0.5 yalign 0.5 xysize (748, 540)
+
+        # 3. Price Banner & Publisher Slug Footer
+        frame:
+            xpos 96
+            ypos 780
+            xysize (768, 60)
+            background None
+            
+            # Diegetic "Price One Penny" cartouche on the left
+            hbox:
+                xalign 0.1
+                yalign 0.5
+                add "ui_price_badge" xysize (140, 40)
+            
+            # Publisher slug centered at the bottom margin
+            text "LONDON: PRINTED AND PUBLISHED BY SIR GIDEON LOCKE, SAVOY STRAND." size 14 color "#5f5f5f" xalign 0.5 yalign 0.5
+
+        # 4. Horizontal Stats HUD Bar
+        frame:
+            xpos 96
+            ypos 860
+            xysize (768, 160)
+            background "ui_book_ui_bg"
+            padding (20, 20)
+
+            hbox:
+                spacing 20
+                yalign 0.5
+
+                # Cora Mini Portrait (corruption dependent)
+                if player.corruption_level >= 3:
+                    add "ui_cora_mini_corrupted" xysize (120, 120)
+                else:
+                    add "ui_cora_mini_base" xysize (120, 120)
+
+                # Rescaled Inkwell displaying current inspiration / capacity
+                vbox:
+                    spacing 5
+                    yalign 0.5
+                    add "ui_inkwell_empty" xsize 60 ysize 102
+
+                # Split Horizontal Meters
+                vbox:
+                    spacing 15
+                    yalign 0.5
+                    xsize 480
+
+                    # Corruption Meter
+                    hbox:
+                        spacing 10
+                        text "Corruption" size 20 color "#d4a574" xsize 120
+                        bar:
+                            value player.corruption_level
+                            range 10
+                            xsize 350
+                            ysize 20
+                            left_bar Solid("#8b2942")
+                            right_bar Solid("#1a120a")
+
+                    # Anxiety Meter
+                    hbox:
+                        spacing 10
+                        text "Anxiety" size 20 color "#8b2942" xsize 120
+                        bar:
+                            value player.anxiety
+                            range 100
+                            xsize 350
+                            ysize 20
+                            left_bar Solid("#7a4a10")
+                            right_bar Solid("#1e150a")
+
+    # Manuscript Text Viewport (Left Side padding)
+    window:
+        id "window"
+        background None
+        xpos 100
+        ypos 100
+        xysize (760, 880)
+        padding (40, 40)
+
+        vbox:
+            spacing 20
+            
+            # Iterate and display NVL dialogue text
+            for d in dialogue:
+                window:
+                    id d.window_id
+                    background None
+                    
+                    vbox:
+                        if d.who:
+                            text d.who:
+                                id d.who_id
+                                bold True
+                                size 36
+                                color "#261c14"
+                                xalign 0.5
+                            null height 20
+                        text d.what:
+                            id d.what_id
+                            size 28
+                            color "#261c14"
+                            line_leading 6
+                            justify True
+
 
             

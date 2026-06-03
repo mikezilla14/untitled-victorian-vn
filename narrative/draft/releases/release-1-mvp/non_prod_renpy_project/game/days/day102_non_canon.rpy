@@ -35,7 +35,10 @@ label day102_1_cora_missy_first_shift:
     $ time_manager.set_current_day(2)
     $ set_time_period("Morning")
 
-    scene bg_master_suite_day
+    scene bg_master_suite_day:
+        xysize (1920, 1080)
+
+    # [ASSET] Visual/staging command
     with fade
 
     cora_inner "The Master Suite is larger in daylight and less honest for it."
@@ -86,7 +89,10 @@ label day102_1_cora_missy_first_shift:
 label day102_1_missy_finds_a_thing:
 
     # [ASSET] Visual/staging command
-    scene bg_master_suite_day
+    scene bg_master_suite_day:
+        xysize (1920, 1080)
+
+    # [ASSET] Visual/staging command
     with dissolve
 
     show missy_sprite smiling at centre_bust
@@ -138,7 +144,10 @@ label day102_1_missy_finds_a_thing:
 label day102_1_cora_takes_the_thing:
 
     # [ASSET] Visual/staging command
-    scene bg_master_suite_day
+    scene bg_master_suite_day:
+        xysize (1920, 1080)
+
+    # [ASSET] Visual/staging command
     with dissolve
 
     show missy_sprite confused at centre_bust
@@ -192,7 +201,10 @@ label day102_1_cora_takes_the_thing:
 label day102_1_cora_deceives_missy:
 
     # [ASSET] Visual/staging command
-    scene bg_master_suite_day
+    scene bg_master_suite_day:
+        xysize (1920, 1080)
+
+    # [ASSET] Visual/staging command
     with dissolve
 
     show missy_sprite confused at centre_bust
@@ -251,7 +263,10 @@ label day102_2_day2_chore_time:
     call check_confrontations
 
     # [ASSET] Visual/staging command
-    scene bg_servants_corridor_morning
+    scene bg_servants_corridor_morning:
+        xysize (1920, 1080) 
+
+    # [ASSET] Visual/staging command
     with dissolve
 
     cora_inner "We escape the suite with the linen cart and the sort of silence that pretends nothing has happened."
@@ -1033,6 +1048,8 @@ label day102_4_cora_writes_a_chapter:
             # [STATE] State/progression update
             $ story.complete_manuscript_chapter("day1_chapter")
             call book1_write_chapter(chapter_key="day1_chapter", current_day=102)
+
+            # [STATE] State/progression update
             $ apply_effects(vance_susp=0, insp=-10, corr=0)
 
             cora_inner "Chapter One is done."
@@ -1077,6 +1094,8 @@ label day102_4_cora_writes_a_chapter:
             # [STATE] State/progression update
             $ story.complete_manuscript_chapter("day2_chapter")
             call book1_write_chapter(chapter_key="day2_chapter", current_day=102)
+
+            # [STATE] State/progression update
             $ apply_effects(vance_susp=0, insp=-15, corr=0)
 
             cora_inner "By the time the candle shortens, the second chapter exists."
