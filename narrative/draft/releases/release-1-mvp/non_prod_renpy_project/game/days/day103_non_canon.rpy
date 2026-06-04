@@ -1129,11 +1129,25 @@ label day103_3_bedroom_final_write:
                     "The chapter becomes a summons. A girl walks toward the dark hearth and discovers that physical surrender can feel like authorship when the master's hand unbuttons her collar in the gold firelight."
 
                 if story.day3_brush_choice == "predator":
+<<<<<<< HEAD:narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy
                     "The mirror scene gives it teeth, the silver brush acting as a weapon of slow, shared visual dominance."
                 elif story.day3_brush_choice == "prey":
                     "The mirror scene gives it heat, the slide of copper hair over bare skin catching the master's dark, heavy gaze."
                 else:
                     "The fallen brush gives it an angle no gentleman would think to check, the maid watching his polished boots from the floor with a flushed, breathless submission."
+=======
+                    "The mirror scene gives it teeth."
+                    "She answered his question like a craftsman: Vance's beauty was in her bones, not her obedience, and her weakness was letting wounds show."
+                    "On the page, that answer is the chapter's real edge. The maid already understood the room before the gentleman arranged it."
+                elif story.day3_brush_choice == "prey":
+                    "The mirror scene gives it heat and a specific peril."
+                    "She looked at him when she should have looked at the lady. He saw her looking."
+                    "On the page, that visibility is the chapter's fulcrum: the maid is most dangerous precisely when she is most readable, because readability assumes the reader knows what to do with her."
+                else:
+                    "The fallen brush gives it the angle no gentleman thinks to check."
+                    "From the floor she saw the polished boot, the clenched slipper, the hem of her own uniform trembling against the carpet."
+                    "On the page, the maid's clumsiness is her method. The view from below has its own authority and he never looked down long enough to claim it."
+>>>>>>> origin/claude/editors-desk-feature-lqTyj:narrative/writers_room/releases/release 1 - mvp/day103_non_canon.rpy
 
                 # [STATE] State/progression update
                 $ story.complete_manuscript_chapter("day3_chapter")

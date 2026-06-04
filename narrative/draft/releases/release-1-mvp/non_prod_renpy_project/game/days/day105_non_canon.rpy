@@ -766,17 +766,75 @@ label day105_6_manuscript_reckoning:
         cora_inner "I write the machine around the man."
         "The carriage waiting outside. The solicitor's letterhead. The policeman's lowered eyes. The publisher's careful refusal dressed as taste."
         "Gideon becomes smaller on the page because the world behind him becomes vast."
+        # [BEAT] Cross-day recalled moments — the machine's earlier faces
+        if story.day1_interview_state == "competent":
+            "Stern called precision a dangerous word from a girl in a borrowed apron."
+            "She was not wrong. She was describing the machine's logic: exactness belongs to the people the machine was built to serve."
+        if story.day3_brush_choice == "predator":
+            "In the suite I named Vance's weakness with the accuracy of someone who has been watching rooms too long."
+            "He called me a little anatomist. Even his compliments describe the altitude of the shelf where he keeps me."
+        if story.day3_corridor_chain == "inspiration":
+            "That morning I counted it: bell-pull rhythm, servants' stair, the distance from Stern's office to the Master Suite."
+            "A hotel is a machine for sorting bodies by permission. Men like Gideon move through both halves and call the passage natural."
+            "That sentence was already in the book. I only had to let the page be large enough to hold what I had seen."
+
     elif story.day5_dynamic == "protege":
         cora_inner "I write the hunger honestly."
         "Not as triumph. Not as corruption alone."
+<<<<<<< HEAD:narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day105_non_canon.rpy
         cora_inner "As a tool I do not yet know how to hold without cutting someone poorer than me."
+=======
+        "As a tool I do not yet know how to hold without cutting someone poorer than me."
+        # [BEAT] Cross-day recalled moments — the specific acts of hunger
+        if story.day1_corridor_state == "predator":
+            "I sent Missy to the service door first."
+            "The corridor, the half-open door, the sound through plaster. I placed another girl's innocence between my hunger and the possible consequence."
+            "That is what the hunger looks like before the page makes it interesting. The chapter must say so."
+        if story.day2_tea_choice == "predator":
+            "In the suite I crossed to the trunk and produced the missing thing with composed hands."
+            "I said servant ways in a voice that meant something else, and he thanked me."
+            "The chapter must ask what I gave him in exchange for that thanks. It must answer honestly."
+        if story.day3_brush_choice == "predator":
+            "I stood behind the seated woman with a brush in my hand and described her weakness with the precision of a naturalist."
+            "On the page, the hunger that moves the maid is not cruelty. It is appetite: for the room, the view, the position, the precision."
+            "The chapter must learn to hold that without apologising for it and without pretending it comes free."
+
+>>>>>>> origin/claude/editors-desk-feature-lqTyj:narrative/writers_room/releases/release 1 - mvp/day105_non_canon.rpy
     elif story.day5_dynamic == "adversary":
         cora_inner "I write fear as evidence."
         "Not weakness. Evidence."
         "The body knows power before the mind builds theories to survive it."
+        # [BEAT] Cross-day recalled moments — the specific prey moments
+        if story.day1_corridor_state == "prey":
+            "The third board announced me. His eyes moved to the door."
+            "I felt the fear and kept moving toward it. The body was already inside the danger before I had decided to enter."
+            "That is the chapter's first evidence: fear and motion are not opposites."
+        if story.day3_brush_choice == "prey":
+            "I looked at him in the mirror when I should have looked at the floor. He saw me looking."
+            "The chapter calls this the body's deposition: the face that showed too much was not failure."
+            "It was the one moment in five days where I produced exactly what I felt without the maid's costume over it."
+        if story.day3_ultimatum == "defied":
+            "I said no to the nine o'clock room and the fear arrived correctly: sharp, specific, and located in the chest."
+            "That is what the chapter calls evidence. Not proof against him. Proof of the pressure's shape."
+
     else:
         cora_inner "I write what witnesses cost."
         "Who is believed. Who is displayed. Who is corrected for naming the room too accurately."
+        # [BEAT] Cross-day recalled moments — the cost of witnessing
+        if story.day2_tea_choice == "ghost":
+            "Missy said: I only did what you said."
+            "Stern said: quiet."
+            "The room agreed. Truth without rank is noise, and I was the one who arranged for Missy to be the noise."
+            "The chapter must name this. A witness who engineers another person's exposure is not a witness. She is a user of testimony."
+        if story.day1_corridor_state == "ghost":
+            "I pulled her away from the service door. I said we were not the cure."
+            "The chapter faces the other sentence: we were also not witnesses. We were bystanders who collected material and called the distance craft."
+            "The manuscript must decide whether those are different things."
+        if story.day3_brush_choice == "ghost":
+            "I dropped the brush and saw the room from the floor and kept the angle."
+            "From below: a polished boot, a clenched slipper, the hem of my own uniform trembling."
+            "A witness that low in the room is also a witness who can be stepped on."
+            "The chapter must say what that costs. Not only what it sees."
 
     if story.day2_tea_choice == "ghost" or story.day4_escape_state == "missy_cover" or story.missy_day4_used_as_cover:
         "Then Missy enters the page."
