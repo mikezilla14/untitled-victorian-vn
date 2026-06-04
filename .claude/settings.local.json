@@ -17,7 +17,10 @@
       "Bash(py scripts/scene_direction.py --files \"narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day104_non_canon.rpy,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day105_non_canon.rpy\")",
       "Bash(py scripts/format_non_canon.py --check narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day104_non_canon.rpy narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day105_non_canon.rpy)",
       "Bash(sed -n '153,158p' narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day104_non_canon.rpy)",
-      "Bash(py scripts/format_non_canon.py --check /tmp/d104.head)"
+      "Bash(py scripts/format_non_canon.py --check /tmp/d104.head)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\mikez\\\\OneDrive\\\\Documents\\\\gh\\\\git\\\\untitled-victorian-vn\\\\.agents\" -Recurse -File)",
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "Bash(find \"C:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn\" -name \".guardrails.yml\" -o -name \"guardrails.yml\" -o -name \"story_board.md\" -o -name \"storyboard.md\" 2>/dev/null)"
     ]
   }
 }
