@@ -2,7 +2,7 @@
 
 This file serves as a reference and template example for background location cards. The active, production-grade location card containing locked environmental parameters, overlays, and prompts is located here:
 
-👉 **[Active Location Card: assets_source/location_cards/servants_corridor.md](file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/assets_source/location_cards/servants_corridor.md)**
+**[Active Location Card: assets_source/location_cards/servants_corridor.md](../../../assets_source/location_cards/servants_corridor.md)**
 
 ---
 

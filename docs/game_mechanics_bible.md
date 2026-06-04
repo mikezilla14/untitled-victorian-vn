@@ -34,8 +34,8 @@ This document separates:
 - **Interactive vs. Milestone (Option B)**: The user's active choices directly adjust volatile **Acute Suspicion** (active heat they can influence), while programmatically calculated **Base Suspicion Deltas** are applied at key narrative milestones.
 - **Sum-clamping & Squeezing**: The combined sum of base and acute suspicion for any character is capped strictly at `100`. Permanent base suspicion takes priority floor, dynamically squeezing acute suspicion down if base increases and the sum would exceed 100.
 - **Anxiety Formula**: Global anxiety is calculated using independent probability (the probability of getting caught by at least one witness):
-  $$\text{player.anxiety} = 100 \cdot (1 - \prod_{i} (1 - \frac{\text{Susp}_i}{100}))$$
-  Where $\text{Susp}_i$ is the total suspicion (`base + acute`) for each active tracked character in `player.tracked_characters`.
+  $$/text{player.anxiety} = 100 /cdot (1 - /prod_{i} (1 - /frac{/text{Susp}_i}{100}))$$
+  Where $/text{Susp}_i$ is the total suspicion (`base + acute`) for each active tracked character in `player.tracked_characters`.
 - If Anxiety reaches 100, the narrative routes to the `game_over_dismissed` fail-state.
 
 ### 3) Writing gate mechanic

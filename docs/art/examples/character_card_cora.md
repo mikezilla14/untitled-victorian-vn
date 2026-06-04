@@ -2,7 +2,7 @@
 
 This file serves as a reference and template example for character sprite cards. The active, production-grade character card containing locked visual parameters and prompts is located here:
 
-👉 **[Active Character Card: assets_source/character_cards/cora.md](file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/assets_source/character_cards/cora.md)**
+**[Active Character Card: assets_source/character_cards/cora.md](../../../assets_source/character_cards/cora.md)**
 
 ---
 

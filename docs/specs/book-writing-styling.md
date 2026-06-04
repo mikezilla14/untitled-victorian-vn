@@ -4,6 +4,12 @@
 
 Define the visual layout, coordinates, styling guidelines, and asset declarations for the book writing feature. This feature displays in-game chapter manuscript text in NVL mode on the left side of the screen, while showing book cover/illustrations and a horizontal stats HUD on the right side.
 
+## Current implementation status
+
+Partial. This spec documents the intended visual styling and layout for the book-writing feature;
+confirm current runtime parity in `renpy_project/game/` before treating any individual screen or
+asset declaration as shipped.
+
 ---
 
 ## 🎨 Visual Concept: Penny Dreadful Sensibilities

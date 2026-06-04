@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "documentation_catalog.schema.json",
+  "title": "Documentation Catalogue",
+  "type": "object",
+  "required": ["schema_version", "generated_at", "repo_root", "entries", "findings"],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "repo_root": {
+      "type": "string"
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "kind", "title", "area", "summary", "links", "findings"],
+        "properties": {
+          "path": {"type": "string"},
+          "kind": {
+            "type": "string",
+            "enum": [
+              "agent-rule",
+              "agent-skill",
+              "agent-index",
+              "backlog",
+              "catalogue",
+              "contract",
+              "feature-spec",
+              "onboarding",
+              "readme",
+              "workflow",
+              "reference",
+              "other"
+            ]
+          },
+          "title": {"type": "string"},
+          "area": {"type": "string"},
+          "summary": {"type": "string"},
+          "modified_date": {"type": "string"},
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["target", "status"],
+              "properties": {
+                "target": {"type": "string"},
+                "status": {"type": "string", "enum": ["ok", "missing", "external", "anchor-only"]}
+              },
+              "additionalProperties": false
+            }
+          },
+          "findings": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["severity", "path", "message"],
+        "properties": {
+          "severity": {"type": "string", "enum": ["info", "warning", "error"]},
+          "path": {"type": "string"},
+          "message": {"type": "string"}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

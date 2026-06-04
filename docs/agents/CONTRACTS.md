@@ -91,6 +91,11 @@ Gate file content must include a `## Verdict` section with a recognized label (n
 
 When markdown handoff files exist, agents must also write the matching JSON sidecar. Schemas live in [`docs/contracts/`](../contracts/README.md).
 
+The documentation catalogue is the repo-wide documentation sidecar:
+`docs/documentation_catalog.json` must match
+[`docs/contracts/documentation_catalog.schema.json`](../contracts/documentation_catalog.schema.json)
+and is regenerated with `py scripts/documentation_audit.py --write`.
+
 | Artifact | JSON path | Schema |
 |----------|-----------|--------|
 | Gate verdict | `dayrdd_gate_<gate>.json` | `gate_verdict.schema.json` |
@@ -101,7 +106,7 @@ When markdown handoff files exist, agents must also write the matching JSON side
 JSON `verdict` values use underscores (e.g. `PSYCHOLOGICALLY_CONSISTENT`); markdown may use spaces. CI checks that both agree.
 
 ```powershell
-py scripts/contract_validate.py --day day105 --release "release 1 - mvp"
+py scripts/contract_validate.py --day day105 --release release-1-mvp
 py scripts/validate.py --skip-json-contracts --files "..."   # WIP only
 ```
 

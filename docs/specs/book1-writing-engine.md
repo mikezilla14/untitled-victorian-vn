@@ -203,7 +203,7 @@ Formalize assembly stages:
 ### 6) Inline Prose Macro Parser
 
 Implement a custom micro-DSL parsing and evaluation engine:
-- **Scanner**: A regex matcher looking for `\{\s*(?:"|[_a-zA-Z]).*?\}` to extract macro blocks without colliding with Ren'Py's formatting tags (e.g., `{b}`).
+- **Scanner**: A regex matcher looking for `/{/s*(?:"|[_a-zA-Z]).*?/}` to extract macro blocks without colliding with Ren'Py's formatting tags (e.g., `{b}`).
 - **Splitter**: Splits options within a block by semicolon `;` (handling quotes/semicolons correctly).
 - **Resolver**: If an option value is a variable reference (identifier), resolves it against `BOOK1_COMMON_FRAGMENTS` or globals.
 - **Evaluator**: Parses and evaluates conditions. Handles logical `and` / `or` operations with standard precedence (`and` binds tighter than `or`), checking attributes on the singletons `story` and `player`.
