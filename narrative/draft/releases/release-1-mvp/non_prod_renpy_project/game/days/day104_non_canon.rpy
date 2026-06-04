@@ -746,12 +746,95 @@ label day104_5_triumphant_chapter:
 
     "Only the candle, the page, and everything I have stolen without permission."
 
+    # [BEAT] Recalled escape moment — the method of survival shapes what "having the knife" means
+    if story.day4_escape_state == "fireplace":
+        "I still feel the grate. Cold stone. Soot. The particular humiliation of pressing myself smaller than a flue."
+        "I made myself nothing and emerged on the far side of the corridor with charcoal on my apron and the chapter already complete in my head."
+        "The book was always going to come out of that contraction."
+    elif story.day4_escape_state == "bold_lie":
+        "I said something outrageous and watched it land."
+        "Not because they believed me. Because challenging it required effort, and men in that room reserved effort for things that mattered."
+        "I was not yet a thing that mattered enough to disprove. That is the armour this chapter writes itself inside."
+    elif story.day4_escape_state == "missy_cover":
+        "I sent her in first."
+        "The corridor, the door, the timing."
+        "The manuscript gets the chapter it demanded. Missy got the corridor she did not ask for."
+        "That sentence must go somewhere. Here, in this chapter, it becomes a flaw with a purpose. Whether that is craft or rationalisation the page has not yet decided."
+    else:
+        "The escape has already become story."
+        "The fear is still here. But the shape of it is cleaner now."
+
+    # [BEAT] The knife — physical evidence vs memory
+    if story.has_photograph:
+        "The photograph is under the loose board beneath my bed."
+        "Physical evidence. Something that can be held, shown, placed on a table and left to do its own harm."
+        "I have a knife. Tonight I write what it looks like when a maid who has a knife is not afraid of it."
+    else:
+        "I have no paper to place between us. Only the image I carried out in my head instead of my apron pocket."
+        "Memory without documentation. The chapter must convince itself that this is enough."
+        "Tonight it will manage. Tomorrow Gideon will explain otherwise."
+
     "The chapter comes all at once."
     "Not because it is easy."
-    "Because I finally have the knife shaped correctly."
+    "Because I finally understand the shape of the threat, and understanding is a kind of violence."
 
-    "In this chapter, the lord's secret is not named."
-    "It is placed on a table in a sealed envelope and allowed to poison every polite sentence around it."
+    # [BEAT] The chapter's content — archetype-specific false triumph
+    # Primary branch on day2_tea_choice as the dominant moral frame for the story Cora is telling herself
+    if story.day2_tea_choice == "predator":
+        "In this chapter, the maid's composed lie becomes the only true sentence in the room."
+        "She placed the dangerous thing where the dangerous man could find it and be grateful to her for finding it."
+        "She said servant ways in a voice that meant something else, and he heard both meanings and chose the useful one."
+        if story.day3_brush_choice == "predator":
+            "In the mirror she named the seated woman's weakness with the precision of a naturalist."
+            "On the page, that answer is her origin: the maid already understood the room before the gentleman finished furnishing it."
+        elif story.day3_brush_choice == "prey":
+            "She looked at him in the mirror when she should have looked at the lady, and the chapter decides this was strategy too."
+            "The chapter is not entirely honest with itself here. Neither is she."
+        else:
+            "She dropped the brush and saw the room from the floor, and the chapter finds this consistent: she collects views that polished boots cannot reach."
+        "The heroine in this chapter wins by being too useful to destroy and too observant to lie to without cost."
+
+    elif story.day2_tea_choice == "prey":
+        "In this chapter, the maid's partial truth becomes the sharper weapon."
+        "She admitted what she saw and did not admit where she had stood to see it."
+        "The gentleman recognised the gap and called it interesting. The chapter calls the gap the entire point."
+        if story.day3_brush_choice == "predator":
+            "In the mirror she answered clinically and he called it well. The heroine in this chapter wins through accuracy: her eye is better than his secrets."
+        elif story.day3_brush_choice == "prey":
+            "She was seen and let herself be seen, and this chapter insists that visibility chosen is different from visibility imposed."
+            "That may even be true. The chapter believes it with more conviction than Cora does, tonight, writing it."
+        else:
+            "She retrieved the brush and called herself clumsy and kept the low angle. The chapter calls her restraint precision."
+        "The heroine in this chapter wins because her honesty is more carefully edited than his lies."
+
+    elif story.day2_tea_choice == "ghost":
+        "In this chapter, the maid disappears between the accusation and the conviction."
+        "Her hands are empty. Another girl's hands are where the blame landed."
+        "She moved through the room like weather and the room forgot she had a shape."
+        if story.day3_brush_choice == "predator":
+            "In the mirror she was composed and direct, and in the corridor she was nowhere."
+            "The chapter finds no contradiction in this. It may be wrong."
+        elif story.day3_brush_choice == "prey":
+            "She was too visible in the mirror and too absent in the corridor. The chapter says this is her range: she can be whatever the room requires."
+        else:
+            "She dropped the brush and vanished below the line of sight. The chapter calls both moments the same technique at different scales."
+        "The heroine in this chapter wins because she is never precisely where the accusation points."
+
+    else:
+        "In this chapter, the maid uses what she found."
+        "She gathered it, kept it, brought it out into the light, and named it correctly."
+        "The chapter calls this sufficient."
+
+    # [BEAT] The photograph in the chapter — the specific weapon and its specific limit
+    if story.has_photograph:
+        "The lord's sealed secret. The maid carrying it out in an apron pocket."
+        "In this chapter, this is enough. The evidence is categorical. His denial would require an audience willing to call it perjury."
+        "The chapter does not yet know that the audience must also be willing to hear the maid."
+    else:
+        "The lord's secret is real. The maid knows it, remembers it, has written it in clean declarative sentences."
+        "In this chapter, memory is the same as evidence."
+        "The chapter believes this completely. Tomorrow will be the first test of whether the world agrees."
+
     "The heroine defeats him completely. She is untouchable. She has won."
 
     # [STATE] State/progression update
