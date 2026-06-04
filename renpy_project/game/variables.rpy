@@ -11,3 +11,6 @@ default story        = StoryState()
 
 # HUD sidebar visibility (layout in screens.rpy).
 default hud_sidebar_visible = True
+
+# Legacy/alternate sidebar visibility used by screen sidebar().
+default sidebar_open = True
