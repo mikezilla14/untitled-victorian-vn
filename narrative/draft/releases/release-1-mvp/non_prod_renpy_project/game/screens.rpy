@@ -30,8 +30,8 @@ screen stats_overlay():
     $ _susp_alpha       = player.anxiety / 100.0
     $ _insp_cap         = max(player.inspiration_cap, 1)
     $ _insp_fill        = min(1.0, player.inspiration / float(_insp_cap))
-    $ _ink_w            = 64
-    $ _ink_h            = 110
+    $ _ink_w            = 300
+    $ _ink_h            = 300
     $ _cora_ui          = "ui_cora_corrupted" if player.corruption_level >= 3 else "ui_cora_base"
     $ _gx, _gw          = hud_game_viewport()
     $ _roman            = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
@@ -60,107 +60,111 @@ screen stats_overlay():
             yfill True
             xsize HUD_SIDEBAR_WIDTH
 
+            # Top Section: Portrait and Stats
             vbox:
-                spacing 0
-                xfill True
-                yfill True
+                xalign 0.5
+                xsize _bar_w
+                yalign 0.0
+                spacing 16
 
                 # ── ZONE 1: Portrait + Identity ────────────────────────
                 vbox:
-                    spacing 5
+                    spacing 8
                     xfill True
 
                     fixed:
                         xalign 0.5
-                        xysize (HUD_SIDEBAR_WIDTH - 32, 190)
+                        xysize (_bar_w, 190)
                         add _cora_ui:
                             xalign 0.5
                             yalign 0.5
-                            xysize (HUD_SIDEBAR_WIDTH - 190, 190)
+                            xysize (HUD_SIDEBAR_WIDTH - 130, 240)
 
-                    text "Cora" size 14 color "#c8a97e" xalign 0.5 bold True
+                    text "Cora" size 16 color "#c8a97e" xalign 0.5 bold True
 
                     hbox:
                         xalign 0.5
                         spacing 6
-                        text "Day [time_manager.current_day]" size 12 color "#9a7e5a"
-                        text "·" size 12 color "#5a4a2a"
-                        text "[time_manager.time_of_day]" size 12 color "#9a7e5a"
+                        text "Day [time_manager.current_day]" size 14 color "#9a7e5a"
+                        text "·" size 14 color "#5a4a2a"
+                        text "[time_manager.time_of_day]" size 14 color "#9a7e5a"
 
                 # ── Divider ────────────────────────────────────────────
-                null height 10
                 add "ui_sidebar_divider":
                     xalign 0.5
                     xsize _bar_w
                     ysize 10
-                null height 10
 
                 # ── ZONE 2: Stats ─────────────────────────────────────
                 vbox:
-                    spacing 16
+                    spacing 20
                     xfill True
-                    yfill True
 
                     # Anxiety
                     vbox:
-                        spacing 5
+                        spacing 6
                         xfill True
                         fixed:
-                            xfill True
-                            ysize 18
-                            text "ANXIETY" size 10 color "#6a5030" xalign 0.0 yalign 0.5
-                            text "[player.anxiety]%" size 10 color "#b87830" xalign 1.0 yalign 0.5
+                            xsize _bar_w
+                            ysize 20
+                            text "ANXIETY" size 12 color "#6a5030" xalign 0.0 yalign 0.5
+                            text "[player.anxiety]%" size 12 color "#b87830" xalign 1.0 yalign 0.5
                         fixed:
-                            xfill True
-                            ysize 10
+                            xsize _bar_w
+                            ysize 12
                             add Solid("#1e150a"):
                                 xsize _bar_w
-                                ysize 10
+                                ysize 12
                             if player.anxiety > 0:
                                 add Solid("#7a4a10"):
                                     xsize int(_bar_w * player.anxiety / 100)
-                                    ysize 10
+                                    ysize 12
 
                     # Corruption
                     vbox:
-                        spacing 5
+                        spacing 6
                         xfill True
                         fixed:
-                            xfill True
-                            ysize 18
-                            text "CORRUPTION" size 10 color "#6a5030" xalign 0.0 yalign 0.5
-                            text "Lv [_corruption_label]" size 10 color "#7a2828" xalign 1.0 yalign 0.5
+                            xsize _bar_w
+                            ysize 20
+                            text "CORRUPTION" size 12 color "#6a5030" xalign 0.0 yalign 0.5
+                            text "Lv [_corruption_label]" size 12 color "#7a2828" xalign 1.0 yalign 0.5
                         fixed:
-                            xfill True
-                            ysize 6
+                            xsize _bar_w
+                            ysize 12
                             add Solid("#150808"):
                                 xsize _bar_w
-                                ysize 6
+                                ysize 12
                             if _xp_frac > 0:
                                 add Solid("#5a1818"):
                                     xsize int(_bar_w * _xp_frac)
-                                    ysize 6
+                                    ysize 12
 
                     # Manuscript
                     vbox:
-                        spacing 6
+                        spacing 8
                         xfill True
-                        text "MANUSCRIPT" size 10 color "#6a5030"
+                        text "MANUSCRIPT" size 12 color "#6a5030"
                         hbox:
                             spacing 8
                             for i in range(HUD_MAX_CHAPTERS):
                                 if i < story.manuscript_progress:
-                                    text "■" size 16 color "#c8a97e"
+                                    text "■" size 18 color "#c8a97e"
                                 else:
-                                    text "□" size 16 color "#3a2a14"
+                                    text "□" size 18 color "#3a2a14"
+
+            # Bottom Section: Inkwell (Inspiration)
+            vbox:
+                xalign 0.5
+                xsize _bar_w
+                yalign 1.0
+                spacing 16
 
                 # ── Divider ────────────────────────────────────────────
-                null height 10
                 add "ui_sidebar_divider":
                     xalign 0.5
                     xsize _bar_w
                     ysize 10
-                null height 10
 
                 # ── ZONE 3: Inkwell (Inspiration) ─────────────────────
                 fixed:
@@ -457,7 +461,7 @@ screen nvl(dialogue, items=None):
                 vbox:
                     spacing 5
                     yalign 0.5
-                    add "ui_inkwell_empty" xsize 60 ysize 102
+                    add "ui_inkwell_empty" xsize 100 ysize 102
 
                 # Split Horizontal Meters
                 vbox:
