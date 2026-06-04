@@ -1,5 +1,6 @@
 label start:
     show screen stats_overlay
+    show screen sidebar
 
     scene bg_savoy_front_facade:
         zoom 1.75
