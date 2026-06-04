@@ -26,22 +26,42 @@ label test_day2_writing_harness:
     menu:
         "Day 2 writing test setup"
 
-        "Render book1 prose directly: day2_chapter (predator)":
+        "Render label-based book1 prose: day2_chapter (predator + trust break)":
 
             # [STATE] State/progression update
             jump test_day2_render_book1_day2_predator
 
-        "Render book1 prose directly: day2_chapter (ghost + misdirect + stern/missy pressure)":
+        "Render label-based book1 prose: day2_chapter (ghost + stern/missy pressure)":
 
             # [STATE] State/progression update
             jump test_day2_render_book1_day2_ghost
 
-        "Render book1 prose directly: day2_chapter (prey + partial confession)":
+        "Render label-based book1 prose: day2_chapter (prey + partial confession)":
 
             # [STATE] State/progression update
             jump test_day2_render_book1_day2_prey
 
-        "Run inline macro engine unit tests":
+        "Render book1 event: day1_chapter":
+
+            # [STATE] State/progression update
+            jump test_book1_render_day1_chapter
+
+        "Render book1 event: day3_chapter":
+
+            # [STATE] State/progression update
+            jump test_book1_render_day3_chapter
+
+        "Render book1 event: day4_triumphant_chapter":
+
+            # [STATE] State/progression update
+            jump test_book1_render_day4_triumphant_chapter
+
+        "Render book1 event: day5_reckoning_chapter":
+
+            # [STATE] State/progression update
+            jump test_book1_render_day5_reckoning_chapter
+
+        "Run legacy inline macro engine unit tests":
 
             # [STATE] State/progression update
             jump test_book1_inline_macros
@@ -68,7 +88,9 @@ label test_day2_render_book1_day2_predator:
     $ story.set_day1_ledger_focus("corruption")
     $ story.set_day2_contraband_state("stolen_wearing")
     $ story.set_day2_tea_choice("predator")
+    $ story.set_missy_day2_trust_break(True)
 
+    call book1_debug_chapter_route(chapter_key="day2_chapter")
     call book1_write_chapter(chapter_key="day2_chapter", current_day=102, include_debug=True)
     return
 
@@ -88,6 +110,7 @@ label test_day2_render_book1_day2_ghost:
     $ story.set_missy_day2_suspicion_state("uneasy")
     $ story.set_missy_day2_trust_break(True)
 
+    call book1_debug_chapter_route(chapter_key="day2_chapter")
     call book1_write_chapter(chapter_key="day2_chapter", current_day=102, include_debug=True)
     return
 
@@ -106,7 +129,66 @@ label test_day2_render_book1_day2_prey:
     $ story.set_day2_tea_choice("prey")
     $ story.set_missy_day2_suspicion_state("uneasy")
 
+    call book1_debug_chapter_route(chapter_key="day2_chapter")
     call book1_write_chapter(chapter_key="day2_chapter", current_day=102, include_debug=True)
+    return
+
+
+label test_book1_render_day1_chapter:
+    call test_day2_reset_state
+
+    # [STATE] State/progression update
+    $ story.set_corridor_state("predator")
+    $ story.set_day1_ledger_focus("corruption")
+
+    call book1_write_chapter(chapter_key="day1_chapter", current_day=101, include_debug=True)
+    return
+
+
+label test_book1_render_day3_chapter:
+    call test_day2_reset_state
+
+    # [STATE] State/progression update
+    $ story.set_day1_ledger_focus("inspiration")
+    $ story.set_day3_brush_choice("prey")
+    $ story.set_day3_twilight_action("frantic_write")
+    $ story.set_day3_ultimatum("defied")
+    $ story.set_day3_stern_response("partial_truth")
+
+    call book1_write_chapter(chapter_key="day3_chapter", current_day=103, include_debug=True)
+    return
+
+
+label test_book1_render_day4_triumphant_chapter:
+    call test_day2_reset_state
+
+    # [STATE] State/progression update
+    $ story.set_corridor_state("ghost")
+    $ story.set_day1_ledger_focus("inspiration")
+    $ story.set_missy_day2_suspicion_state("uneasy")
+    $ story.set_missy_day2_trust_break(True)
+    $ story.set_day4_night_action("finish_manuscript")
+    $ story.set_day4_escape_state("missy_cover")
+    $ story.set_has_photograph(True)
+
+    call book1_write_chapter(chapter_key="day4_triumphant_chapter", current_day=104, include_debug=True)
+    return
+
+
+label test_book1_render_day5_reckoning_chapter:
+    call test_day2_reset_state
+
+    # [STATE] State/progression update
+    $ story.set_day5_dynamic("adversary")
+    $ story.set_missy_day2_suspicion_state("uneasy")
+    $ story.set_missy_day2_trust_break(True)
+    $ story.set_day3_ultimatum("defied")
+    $ story.set_day4_escape_state("missy_cover")
+    $ story.set_has_photograph(True)
+    $ story.complete_release1_manuscript(True)
+    $ story.set_release1_completed(True)
+
+    call book1_write_chapter(chapter_key="day5_reckoning_chapter", current_day=105, include_debug=True)
     return
 
 
@@ -180,8 +262,8 @@ label test_book1_inline_macros:
         
         # Test Case 8: Multi-line option layout
         test_str8 = """{
-          "Line 1" if writer_route;
-          "Line 2" default;
+           "Line 1" if writer_route;
+           "Line 2" default;
         }"""
         res8 = Book1MacroEngine.resolve_inline_macros(test_str8)
         assert res8 == ["Line 2"], "Expected ['Line 2'], got {}".format(res8)

@@ -781,10 +781,7 @@ label day105_6_manuscript_reckoning:
     elif story.day5_dynamic == "protege":
         cora_inner "I write the hunger honestly."
         "Not as triumph. Not as corruption alone."
-<<<<<<< HEAD:narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day105_non_canon.rpy
         cora_inner "As a tool I do not yet know how to hold without cutting someone poorer than me."
-=======
-        "As a tool I do not yet know how to hold without cutting someone poorer than me."
         # [BEAT] Cross-day recalled moments — the specific acts of hunger
         if story.day1_corridor_state == "predator":
             "I sent Missy to the service door first."
@@ -799,7 +796,6 @@ label day105_6_manuscript_reckoning:
             "On the page, the hunger that moves the maid is not cruelty. It is appetite: for the room, the view, the position, the precision."
             "The chapter must learn to hold that without apologising for it and without pretending it comes free."
 
->>>>>>> origin/claude/editors-desk-feature-lqTyj:narrative/writers_room/releases/release 1 - mvp/day105_non_canon.rpy
     elif story.day5_dynamic == "adversary":
         cora_inner "I write fear as evidence."
         "Not weakness. Evidence."
