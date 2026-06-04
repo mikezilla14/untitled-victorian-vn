@@ -20,6 +20,16 @@ Each specialist returns:
 
 Defined in [`.agents/rules/orchestrator.md`](../../.agents/rules/orchestrator.md) § Handoff Contract.
 
+## Branch/worktree hygiene
+
+Multi-tool workflows must use one branch per goal, not one branch per tool. Before any agent edits files, run:
+
+```powershell
+py scripts/agent_git_preflight.py --require-feature-branch --fail-if-dirty
+```
+
+See [`docs/agents/BRANCH_WORKFLOW_CONTRACT.md`](BRANCH_WORKFLOW_CONTRACT.md) and the [`branch_handoff`](../../.agents/skills/branch_handoff/SKILL.md) skill.
+
 ## Creative–technical boundary
 
 | Rule | Enforced by |
@@ -51,6 +61,7 @@ Sub-agents (`divergent_writer`, `convergent_writer`) operate under `writers_room
 | `scripts/writers_room_pipeline.py` | Shared logic: convergent report, spec scripts, gate verdict files |
 | `scripts/orchestrate_review.py` | Local bundle: naming, engineering, Ren'Py, historical linter, **writers' room pipeline** |
 | `scripts/agent_next_step.py` | Prints next agent rule file for a pipeline stage |
+| `scripts/agent_git_preflight.py` | Branch, dirty tree, and worktree hygiene before agent edits |
 | `scripts/engineering_compliance.py` | State discipline, day naming |
 | `scripts/renpy_contract_linter.py` | Speaker/symbol contracts |
 | `scripts/historical_linter.py` | Victorian language slice |

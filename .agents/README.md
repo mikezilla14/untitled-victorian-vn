@@ -74,5 +74,6 @@ On `dayrdd_non_canon.rpy`, always **sequential**:
 - [`docs/agents/GETTING_STARTED.md`](../docs/agents/GETTING_STARTED.md)
 - [`docs/agents/PIPELINE_REFERENCE.md`](../docs/agents/PIPELINE_REFERENCE.md)
 - [`docs/agents/CONTRACTS.md`](../docs/agents/CONTRACTS.md)
+- [`docs/agents/BRANCH_WORKFLOW_CONTRACT.md`](../docs/agents/BRANCH_WORKFLOW_CONTRACT.md)
 - [`docs/dev_bible.md`](../docs/dev_bible.md) — engineering MVP contract
 - [`docs/game_mechanics_bible.md`](../docs/game_mechanics_bible.md) — player-facing mechanics

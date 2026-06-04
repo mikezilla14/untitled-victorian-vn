@@ -51,6 +51,7 @@ flowchart TD
 | [`docs/agents/GETTING_STARTED.md`](docs/agents/GETTING_STARTED.md) | Step-by-step for first-time users |
 | [`docs/agents/PIPELINE_REFERENCE.md`](docs/agents/PIPELINE_REFERENCE.md) | All pipelines, triggers, stages |
 | [`docs/agents/CONTRACTS.md`](docs/agents/CONTRACTS.md) | Handoffs, guardrails, validation tools |
+| [`docs/agents/BRANCH_WORKFLOW_CONTRACT.md`](docs/agents/BRANCH_WORKFLOW_CONTRACT.md) | Branch/worktree hygiene for multi-tool agent handoffs |
 | [`docs/narrative_workflow.md`](docs/narrative_workflow.md) | MVP narrative loop (human-readable) |
 | [`.guardrails.yml`](.guardrails.yml) | Which agent may edit which paths |
 
@@ -97,6 +98,7 @@ Skills under [`.agents/skills/`](.agents/skills/) wrap common workflows for Curs
 | [`spiciness_tuner`](.agents/skills/spiciness_tuner/SKILL.md) | Spice levels 1–5 |
 | [`check_assets`](.agents/skills/check_assets/SKILL.md) | Validate asset manifest sync |
 | [`scene_direction`](.agents/skills/scene_direction/SKILL.md) | Deterministic sprite placement post-process |
+| [`branch_handoff`](.agents/skills/branch_handoff/SKILL.md) | Branch/worktree preflight and multi-tool handoff hygiene |
 
 
 ## Pipeline helper (manual chaining)
