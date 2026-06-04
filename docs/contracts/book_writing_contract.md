@@ -1,65 +1,95 @@
-# Contract: Book Writing Engine (Inline Prose Macros & Holywell Street Style)
+# Contract: Book1 Label-Based Writing Engine
 
-This contract defines the syntax and creative workflow for writing `book1` NVL chapter prose in the non-canon draft.
+This contract defines how Book1 manuscript prose is authored in the non-canon Ren'Py draft.
 
-Machine-readable schema: not yet defined. Track future schema work in
+Machine-readable schema: not defined. Track future executable schema work in
 [../backlog/narrative-json-beat-pipeline.md](../backlog/narrative-json-beat-pipeline.md) if this
 contract becomes executable.
 
----
+## 1. Active Authoring Model
 
-## 1. Inline Prose Macro Syntax Reference
+Book1 prose lives in Ren'Py labels. The active MVP system does not use the older inline curly-brace macro DSL for new prose.
 
-The writing engine uses a custom micro-DSL enclosed in curly braces `{ ... }` to specify conditional variations in line-level text.
+Each major chapter branch should be a label named with the pattern:
 
-### Syntax Rules
-* **Format**: `{ "[literal text]" [condition]; "[another literal]" if [condition2]; "[fallback text]" default; }`
-* **Options Separation**: Options must be separated by semicolons `;`.
-* **String Literals**: Quoted in double quotes `"..."`.
-* **Variable References**: Unquoted identifiers (resolved against globals or common fragments).
-* **Evaluation Order**: Deterministic "first match wins" (evaluated top-to-bottom, stopping at the first positive condition or falling back to `default`).
+```renpy
+label book1_block_dayN_bucket_core:
+    call book1_nvl_write_line("...", word_delay=_book1_word_delay)
+    return
+```
 
-### Examples of Supported Expressions
-* **Boolean check**: `{ "Cora was nervous." if missy_day2_trust_break; "Cora was calm." default; }`
-* **Boolean equality comparison**: `{ "Cora was nervous." if missy_day2_trust_break == True; }`
-* **String equality comparison**: `{ "She hid the contraband." if day2_contraband_state == "stolen_wearing"; }`
-* **String inequality comparison**: `{ "She was not a guest." if day1_corridor_state != "ghost"; }`
-* **Numeric comparison**: `{ "Her obsession was high." if obsession >= 60; }`
-* **Compound condition (`and` / `or`)**: `{ "The master was furious." if day3_ultimatum == "defied" and player.corruption_level >= 30; }`
+Optional reusable beats may be separate labels:
 
----
+```renpy
+label book1_block_day2_missy_debt_or_repair:
+    if story.missy_day2_trust_break:
+        call book1_nvl_write_line("...", word_delay=_book1_word_delay)
+    else:
+        call book1_nvl_write_line("...", word_delay=_book1_word_delay)
+    return
+```
 
-## 2. Creative Workflow: Holywell Street Penny Dreadful
+## 2. Routing Contract
 
-When the book writing engine is called for new chapters (e.g., Day 2's chapters) or a rewrite is requested, the Writers' Room must execute the following creative workflow:
+`book1.CHAPTER_BLOCKS` is the immutable routing table. It maps chapter keys and state buckets to prose labels.
 
-### A. The Holywell Street Aesthetic
-Prose must be written against the expectations of a **melodramatic penny dreadful**, as sold by the publishers of ill repute on **Holywell Street**:
-* **Tone**: Sensational, salacious, high-tension, and emotionally charged.
-* **Transposition**: Cora's real-life (IRL) experiences at the Savoy Hotel (e.g., Stern, Vance, Gideon Locke, Miri) are transposed into the sensationalized book-world of **Ravenshade Conservatory**:
-  * *Gideon Locke* -> *Lord Caldor* (predatory stillness, velvet voice, furnace-room terms).
-  * *Lady Vance* -> *Lady Vayne* (lacquered poise, submissive fury, music-room door scandal).
-  * *Miss Stern* -> *Mr. Sterick* (iron authority, public discipline, surveillance etiquette).
-  * *Miri (Missy)* -> *Miri* (fragile readiness, courier, the conservatory ledger debt).
-  * *Cora* -> *Coralie Vale* (the heroine, service as theater, private maps of power).
+Writers normally should not edit `CHAPTER_BLOCKS`. It changes only when adding a new top-level route bucket, such as a new chapter key or new major state variant.
 
-### B. Cooperative Flag-Driven Branching
-1. **Flag Compilation**: Before writing begins, the **Non-Prod Code Agent** compiles a list of active gameplay flags/states up to that point in the story.
-2. **Three-Variant Foundation**: The **Writers' Room** brainstorms and writes spec variants for the 3 main branches:
-   * **Prey**: Intimate, exposed, danger and desire entangled.
-   * **Predator**: Tactical, agentic, heat as leverage rather than surrender.
-   * **Ghost**: Detached, observational, dispassionate moral accounting.
-3. **Branching Catch-up**: Where the flags compiled by the code agent affect the narrative, the writers must write branching storylines in the curly-brace macro format for each possible state of the flag. This branching logic must capture all possible playthrough state paths until the book narrative catches up to the current point in Cora's IRL story.
+Current MVP chapter keys:
 
----
+- `day1_slop_chapter`
+- `day1_chapter`
+- `day2_chapter`
+- `day3_chapter`
+- `day4_triumphant_chapter`
+- `day5_reckoning_chapter`
 
-## 3. NVL Pagination Contract
-To maintain compatibility with the parchment layout, the NVL rendering system paginates every **3 lines** using `nvl clear` internally. Writers should structure paragraph lengths and macro branches with this pacing constraints in mind.
+Day scripts call `book1_write_chapter(...)`; they do not contain manuscript prose.
 
----
+## 3. Prose Label Rules
 
-## 4. LLM Safety Guardrails & SFW Fallback Policy
-If any requested prose or scene description runs a risk of triggering LLM safety filters for suggestive, intimate, or adult content:
-* **No Suggestive Generation**: The writing agent must **not** attempt to generate highly suggestive, intimate, or explicit text.
-* **SFW Narrative Summary**: Instead, write a clean, Safe for Work (SFW) narrative summary of what happens in the scene or option.
-* **Human Hand-off Tag**: Clearly tag the summary block for human writing intervention using the exact tag: `[HUMAN WRITE: SFW summary of suggestive scene details]`. This prevents safety blocks and allows the pipeline to continue.
+Allowed:
+
+- Use `call book1_nvl_write_line("...", word_delay=_book1_word_delay)` for manuscript paragraphs.
+- Use ordinary Ren'Py `if` / `elif` / `else` for local variation.
+- Call other `book1_block_*` labels for optional multi-paragraph beats.
+- End every prose label with `return`.
+
+Forbidden:
+
+- Do not mutate `story`, `player`, or `time_manager` inside prose labels.
+- Do not apply stats, spend fuel, complete chapters, or route via `end_slot`.
+- Do not write new prose inside `BOOK1_PAYLOADS`.
+- Do not add curly-brace macro prose for new MVP content.
+
+## 4. NVL Pagination And Word Reveal
+
+All manuscript prose should pass through `book1_nvl_write_line(...)`.
+
+That helper:
+
+- reveals words one at a time through `book1_word_reveal_text(...)`;
+- clears the NVL page after 4 rendered lines;
+- preserves bottom whitespace on the current MVP NVL layout.
+
+If future visual styling changes alter page capacity, adjust the page limit centrally in `book1_write_chapter(...)`; do not hand-clear pages inside prose labels.
+
+## 5. Holywell Street Style
+
+Book1 prose is Cora's sensational manuscript layer, not literal hotel narration.
+
+- Cora becomes Coralie Vale.
+- Gideon Locke becomes Lord Caldor.
+- Lady Vance becomes Lady Vayne.
+- Miss Stern becomes Mr. Sterick.
+- Missy/Miri remains Miri as courier, witness, debt, or sacrifice.
+
+The manuscript layer may be hotter, more symbolic, and more melodramatic than the hotel layer, but it must still reveal Cora's psychology: what she changes, emphasizes, hides, or makes herself enjoy is the dramatic point.
+
+## 6. Safety Fallback
+
+If a requested prose passage risks blocking generation:
+
+- write a clean SFW summary instead of explicit prose;
+- mark the passage with `[HUMAN WRITE: SFW summary of suggestive scene details]`;
+- keep the label structurally valid and return cleanly.

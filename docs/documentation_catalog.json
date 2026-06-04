@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-06-04T10:16:39+00:00",
+  "generated_at": "2026-06-04T17:17:37+00:00",
   "repo_root": "untitled-victorian-vn",
   "entries": [
     {
@@ -1412,6 +1412,15 @@
       "findings": []
     },
     {
+      "path": "docs/backlog/book1-writing-feature-mvp.md",
+      "kind": "backlog",
+      "title": "Book1 Writing Feature MVP Backlog",
+      "area": "docs/backlog",
+      "summary": "Status: active non-prod MVP backlog.",
+      "links": [],
+      "findings": []
+    },
+    {
       "path": "docs/backlog/editors-desk-writing-mechanic.md",
       "kind": "backlog",
       "title": "Backlog: The Editor's Desk (Interactive Writing Slots)",
@@ -1503,6 +1512,10 @@
           "status": "ok"
         },
         {
+          "target": "book1-writing-feature-mvp.md",
+          "status": "ok"
+        },
+        {
           "target": "narrative-json-beat-pipeline.md",
           "status": "ok"
         },
@@ -1543,16 +1556,18 @@
     {
       "path": "docs/contracts/book_writing_contract.md",
       "kind": "contract",
-      "title": "Contract: Book Writing Engine (Inline Prose Macros & Holywell Street Style)",
+      "title": "Contract: Book1 Label-Based Writing Engine",
       "area": "docs/contracts",
-      "summary": "This contract defines the syntax and creative workflow for writing `book1` NVL chapter prose in the non-canon draft.",
+      "summary": "This contract defines how Book1 manuscript prose is authored in the non-canon Ren'Py draft.",
       "links": [
         {
           "target": "../backlog/narrative-json-beat-pipeline.md",
           "status": "ok"
         }
       ],
-      "findings": []
+      "findings": [
+        "Contract document does not link to a machine-readable schema or data file."
+      ]
     },
     {
       "path": "docs/contracts/examples/README.md",
@@ -1748,9 +1763,9 @@
     {
       "path": "docs/specs/book1-writing-engine.md",
       "kind": "feature-spec",
-      "title": "Spec: Book1 Writing Engine (NVL Artifact)",
+      "title": "Spec: Book1 Label-Based Writing Engine",
       "area": "docs/specs",
-      "summary": "Define a maintainable, schema-driven writing engine that generates `book1` NVL chapter prose from gameplay state, with explicit branch scoping, creative direction per payload, and predictable extensibility for future spi",
+      "summary": "Define the MVP Book1 writing artifact for Cora's manuscript scenes. Book1 renders NVL manuscript prose from gameplay state while keeping the authoring surface readable for writers.",
       "links": [],
       "findings": []
     },
@@ -2246,5 +2261,11 @@
       "findings": []
     }
   ],
-  "findings": []
+  "findings": [
+    {
+      "severity": "warning",
+      "path": "docs/contracts/book_writing_contract.md",
+      "message": "Contract document does not link to a machine-readable schema or data file."
+    }
+  ]
 }

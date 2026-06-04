@@ -21,11 +21,39 @@ init python in book1:
     _constant = True
 
     CHAPTER_BLOCKS = {
+        "day1_slop_chapter": {
+            "default": "book1_block_day1_slop_core",
+        },
+        "day1_chapter": {
+            "ghost": "book1_block_day1_ghost_core",
+            "predator": "book1_block_day1_predator_core",
+            "prey": "book1_block_day1_prey_core",
+            "default": "book1_block_day1_default_core",
+        },
         "day2_chapter": {
             "ghost": "book1_block_day2_ghost_core",
             "predator": "book1_block_day2_predator_core",
             "prey": "book1_block_day2_prey_core",
             "default": "book1_block_day2_default_core",
+        },
+        "day3_chapter": {
+            "ghost": "book1_block_day3_ghost_core",
+            "predator": "book1_block_day3_predator_core",
+            "prey": "book1_block_day3_prey_core",
+            "default": "book1_block_day3_default_core",
+        },
+        "day4_triumphant_chapter": {
+            "ghost": "book1_block_day4_ghost_core",
+            "predator": "book1_block_day4_predator_core",
+            "prey": "book1_block_day4_prey_core",
+            "default": "book1_block_day4_default_core",
+        },
+        "day5_reckoning_chapter": {
+            "muse": "book1_block_day5_muse_core",
+            "protege": "book1_block_day5_protege_core",
+            "adversary": "book1_block_day5_adversary_core",
+            "witness": "book1_block_day5_witness_core",
+            "default": "book1_block_day5_default_core",
         },
     }
 
@@ -345,8 +373,8 @@ init python:
     # PART 2: LEGACY GAMEPLAY DATA & DICTIONARIES
     # ==========================================================
     # DEPRECATED:
-    # BOOK1_COMMON_FRAGMENTS and BOOK1_PAYLOADS are kept as fallback
-    # for pre-pilot chapters. Do not add new Book1 prose here.
+    # Legacy macro fragments and payload dictionaries are quarantined.
+    # Active MVP Book1 rendering uses label routes in book1.CHAPTER_BLOCKS.
 
     BOOK1_COMMON_FRAGMENTS = {
         "missy_name": "Miri",
@@ -359,111 +387,7 @@ init python:
         "writing_control": "Coralie writes slowly, pressing each sentence into structure before allowing heat to bloom.",
     }
 
-    BOOK1_PAYLOADS = {
-        "day1_slop_chapter": {
-            "title": "Draft Fragment - Unsellable Night Pages",
-            "lines": (
-                "Coralie tries to restage the corridor scandal at Ravenshade Conservatory, but every sentence arrives scrubbed and timid.",
-                "Lord Caldor becomes vague menace, Lady Vayne becomes posture without hunger, and Mr. Sterick reads like a wax seal with no heat behind it.",
-                "Miri's fear is flattened into polite summary, as if danger can be made respectable by removing all appetite from the telling.",
-                "The result is technically clean and emotionally vacant - a manuscript page that sounds safe, market-proof, and dead on arrival.",
-            ),
-        },
-        "day1_chapter": {
-            "title": "Chapter I - The Conservatory Door",
-            "lines": (
-                "At Ravenshade Conservatory, Coralie Vale learns that service is theater and every corridor has an audience.",
-                "She studies Lady Vayne's posture, Mr. Sterick's clipped authority, and the predatory stillness of Lord Caldor.",
-                "The scandal behind the music room door becomes her first private map of power.",
-                "{ \"The narration stays observational, dispassionate, and evidentiary; desire is implied through omission, not declaration.\" if day1_corridor_state == \"ghost\";"
-                "  \"The narration is deliberate and tactical; heat appears as leverage, never as surrender.\" if day1_corridor_state == \"predator\";"
-                "  \"The narration is intimate and exposed; attraction and risk are allowed to coexist without tidy absolution.\" if day1_corridor_state == \"prey\"; }",
-                "{ \"Each chapter tracks who paid the cost rather than who won the room.\" if day1_corridor_state == \"ghost\" and day1_ledger_focus == \"inspiration\";"
-                "  \"Polished etiquette carries a visible edge.\" if day1_corridor_state == \"predator\" and day1_ledger_focus == \"corruption\";"
-                "  \"Curiosity is framed as both hunger and hazard.\" if day1_corridor_state == \"prey\";"
-                "  \"\" default; }",
-            ),
-        },
-        "day3_chapter": {
-            "title": "Chapter III - Furnace Parlour",
-            "lines": (
-                "By twilight rehearsal, Lord Caldor's attention feels less like patronage and more like choreography.",
-                "Coralie stages mirror, brush, and breath as evidence, knowing witnesses can become accomplices by standing still.",
-                "Every line she writes asks whether danger is a place, a person, or a desire she cannot dismiss.",
-                "{ \"The narration stays observational, dispassionate, and evidentiary; desire is implied through omission, not declaration.\" if day3_brush_choice == \"ghost\";"
-                "  \"The narration is deliberate and tactical; heat appears as leverage, never as surrender.\" if day3_brush_choice == \"predator\";"
-                "  \"The narration is intimate and exposed; attraction and risk are allowed to coexist without tidy absolution.\" if day3_brush_choice == \"prey\"; }",
-                "{ \"Each chapter tracks who paid the cost rather than who won the room.\" if day3_brush_choice == \"ghost\" and day1_ledger_focus == \"inspiration\";"
-                "  \"Polished etiquette carries a visible edge.\" if day3_brush_choice == \"predator\" and day1_ledger_focus == \"corruption\";"
-                "  \"Outward compliance shelters inward escalation.\" if day3_brush_choice == \"prey\" and day3_twilight_action == \"prepare_mask\";"
-                "  \"\" default; }",
-                "{ \"{caldor_pressure}, {caldor_voice}.\\nShe answers with refusal sharpened into etiquette, making defiance feel like a ceremonial blade.\\n{decision_frame}\" if day3_ultimatum == \"defied\";"
-                "  \"{caldor_pressure}, but this time consent is staged as survival arithmetic.\\nThe chapter acknowledges how surrender can be chosen and still feel perilously close to coercion.\\n{decision_frame}\" if day3_ultimatum == \"surrendered\";"
-                "  \"\" default; }",
-                "{ \"{writing_urgency}\\nThe prose runs hot with pursuit, turning fear into velocity.\" if day3_twilight_action == \"frantic_write\";"
-                "  \"{writing_control}\\nThe prose keeps its pulse but favors control over panic.\" default; }",
-                "{ \"Mr. Sterick drills Coralie on silence and timing, turning etiquette into an instrument of surveillance.\" if day3_stern_response == \"stupid\" or day3_stern_response == \"partial_truth\";"
-                "  \"\" default; }",
-                "{ \"The furnace-room ultimatum is rewritten as social choreography where terms, not touches, decide the temperature.\" if day3_ultimatum == \"defied\" or day3_ultimatum == \"surrendered\" or day3_ultimatum == \"bargained\";"
-                "  \"\" default; }",
-            ),
-        },
-        "day4_triumphant_chapter": {
-            "title": "Chapter IV - The Sealed Envelope",
-            "lines": (
-                "A hidden photograph becomes a coded sketch in the conservatory ledger, enough to threaten a lord without naming him.",
-                "Coralie drafts a false victory in which the heroine traps her patron using impeccable manners and one precise secret.",
-                "The chapter glows with triumph while quietly admitting the danger is merely sleeping.",
-                "{ \"The narration stays observational, dispassionate, and evidentiary; desire is implied through omission, not declaration.\" if day1_corridor_state == \"ghost\";"
-                "  \"The narration is deliberate and tactical; heat appears as leverage, never as surrender.\" if day1_corridor_state == \"predator\";"
-                "  \"The narration is intimate and exposed; attraction and risk are allowed to coexist without tidy absolution.\" if day1_corridor_state == \"prey\"; }",
-                "{ \"Each chapter tracks who paid the cost rather than who won the room.\" if day1_corridor_state == \"ghost\" and day1_ledger_focus == \"inspiration\";"
-                "  \"Polished etiquette carries a visible edge.\" if day1_corridor_state == \"predator\" and day1_ledger_focus == \"corruption\";"
-                "  \"Curiosity is framed as both hunger and hazard.\" if day1_corridor_state == \"prey\";"
-                "  \"\" default; }",
-                "{ \"{missy_name} is written as a {missy_role} who trusted the wrong corridor map, and Coralie keeps the betrayal visible.\\nThe scene does not absolve her; it records the debt like {debt_image}.\" if missy_day2_trust_break or missy_day4_used_as_cover;"
-                "  \"{missy_name} becomes a distant apprentice, cautious but present, and Coralie writes her with earned restraint.\\nThe page allows partial repair, but never pretends innocence returned unchanged.\" default; }",
-                "{ \"Mr. Sterick interrogates {missy_name} first, because hierarchy makes her easier to bruise in public.\\nCoralie notes how authority can sound procedural while functioning as punishment.\" if missy_day2_suspicion_state == \"uneasy\" or day4_stern_response == \"missy_cover\";"
-                "  \"Mr. Sterick keeps the reprimand diffuse, but {missy_name} still absorbs most of the room's panic.\\nCoralie records the moment as proof that class discipline rarely needs raised volume.\" default; }",
-                "{ \"{writing_urgency}\\nThe prose runs hot with pursuit, turning fear into velocity.\" if day4_night_action == \"finish_manuscript\";"
-                "  \"{writing_control}\\nThe prose keeps its pulse but favors control over panic.\" default; }",
-                "{ \"Coralie survives by spending Miri's credibility, and the chapter refuses to romanticize that exchange.\" if day4_escape_state == \"missy_cover\" or missy_day4_used_as_cover;"
-                "  \"\" default; }",
-                "{ \"The hidden photograph becomes a ledger cipher, reframing fear as admissible leverage.\" if has_photograph or day4_evidence_discovered;"
-                "  \"\" default; }",
-            ),
-        },
-        "day5_reckoning_chapter": {
-            "title": "Chapter V - Diagnosis At Dawn",
-            "lines": (
-                "On her final night in this volume, Coralie revises the ending from triumph to diagnosis.",
-                "Lord Caldor is no longer a singular monster but the face of a machine that rewards silence and punishes witnesses.",
-                "She keeps the physical silhouettes intact - his controlled stillness, Lady Vayne's lacquered poise, Mr. Sterick's iron posture, Miri's fragile readiness - while changing names and setting.",
-                "{ \"The narration stays observational, dispassionate, and evidentiary; desire is implied through omission, not declaration.\" if day5_dynamic == \"witness\";"
-                "  \"The narration is deliberate and tactical; heat appears as leverage, never as surrender.\" if day5_dynamic == \"adversary\";"
-                "  \"The narration is intimate and exposed; attraction and risk are allowed to coexist without tidy absolution.\" if day5_dynamic == \"protege\"; }",
-                "{ \"Each chapter tracks who paid the cost rather than who won the room.\" if day5_dynamic == \"witness\";"
-                "  \"Polished etiquette carries a visible edge.\" if day5_dynamic == \"adversary\";"
-                "  \"Controlled honesty replaces spectacle.\" if day5_dynamic == \"protege\";"
-                "  \"\" default; }",
-                "{ \"{missy_name} is written as a {missy_role} who trusted the wrong corridor map, and Coralie keeps the betrayal visible.\\nThe scene does not absolve her; it records the debt like {debt_image}.\" if missy_day2_trust_break or missy_day4_used_as_cover or missy_debt_carried_forward;"
-                "  \"{missy_name} becomes a distant apprentice, cautious but present, and Coralie writes her with earned restraint.\\nThe page allows partial repair, but never pretends innocence returned unchanged.\" default; }",
-                "{ \"{caldor_pressure}, {caldor_voice}.\\nShe answers with refusal sharpened into etiquette, making defiance feel like a ceremonial blade.\\n{decision_frame}\" if day3_ultimatum == \"defied\";"
-                "  \"{caldor_pressure}, but this time consent is staged as survival arithmetic.\\nThe chapter acknowledges how surrender can be chosen and still feel perilously close to coercion.\\n{decision_frame}\" if day3_ultimatum == \"surrendered\";"
-                "  \"\" default; }",
-                "{ \"Mr. Sterick interrogates {missy_name} first, because hierarchy makes her easier to bruise in public.\\nCoralie notes how authority can sound procedural while functioning as punishment.\" if missy_day2_suspicion_state == \"uneasy\" or day4_stern_response == \"missy_cover\";"
-                "  \"Mr. Sterick keeps the reprimand diffuse, but {missy_name} still absorbs most of the room's panic.\\nCoralie records the moment as proof that class discipline rarely needs raised volume.\" default; }",
-                "{ \"{writing_urgency}\\nThe prose runs hot with pursuit, turning fear into velocity.\" if release1_manuscript_completed;"
-                "  \"{writing_control}\\nThe prose keeps its pulse but favors control over panic.\" default; }",
-                "{ \"The final pass shifts from confession to diagnosis, mapping not just one man but the institution that protects him.\" if day5_dynamic == \"muse\" or day5_dynamic == \"adversary\" or day5_dynamic == \"witness\" or day5_dynamic == \"protege\";"
-                "  \"\" default; }",
-                "{ \"Coralie survives by spending Miri's credibility, and the chapter refuses to romanticize that exchange.\" if day4_escape_state == \"missy_cover\" or missy_day4_used_as_cover;"
-                "  \"\" default; }",
-                "{ \"The hidden photograph becomes a ledger cipher, reframing fear as admissible leverage.\" if has_photograph or day4_evidence_discovered;"
-                "  \"\" default; }",
-            ),
-        },
-    }
+    BOOK1_PAYLOADS = {}
 
 
     # ==========================================================
@@ -512,33 +436,45 @@ label book1_write_chapter(chapter_key="day1_chapter", current_day=101, word_dela
     $ _book1_page_line_count = 0
     $ _book1_page_line_limit = 4
 
-    if chapter_key == "day2_chapter":
+    if chapter_key == "day1_chapter":
+        call book1_nvl_write_line("Chapter I - The Conservatory Door", word_delay=_book1_word_delay)
+
+        # [STATE] State/progression update
+        $ _book1_theme = story.day1_corridor_state
+    elif chapter_key == "day2_chapter":
         call book1_nvl_write_line("Chapter II - The Hatbox Oath", word_delay=_book1_word_delay)
 
         # [STATE] State/progression update
         $ _book1_theme = story.day2_tea_choice
-        $ _book1_chapter_map = book1.CHAPTER_BLOCKS["day2_chapter"]
-        $ _book1_label = _book1_chapter_map.get(_book1_theme, _book1_chapter_map["default"])
+    elif chapter_key == "day3_chapter":
+        call book1_nvl_write_line("Chapter III - Furnace Parlour", word_delay=_book1_word_delay)
 
-        if include_debug:
-            call book1_nvl_write_line("DEBUG - Book1 chapter: [chapter_key]", word_delay=_book1_word_delay)
-            call book1_nvl_write_line("DEBUG - Book1 theme: [_book1_theme]", word_delay=_book1_word_delay)
-            call book1_nvl_write_line("DEBUG - Book1 block: [_book1_label]", word_delay=_book1_word_delay)
-
-        call expression _book1_label
-
-    else:
         # [STATE] State/progression update
-        $ _book1_lines = build_book1_chapter_packet(chapter_key, include_debug=include_debug)
-        $ _book1_idx = 0
-        while _book1_idx < len(_book1_lines):
+        $ _book1_theme = story.day3_brush_choice
+    elif chapter_key == "day4_triumphant_chapter":
+        call book1_nvl_write_line("Chapter IV - The Sealed Envelope", word_delay=_book1_word_delay)
 
-            # [STATE] State/progression update
-            $ _line = _book1_lines[_book1_idx]
-            call book1_nvl_write_line(_line, word_delay=_book1_word_delay)
+        # [STATE] State/progression update
+        $ _book1_theme = story.day1_corridor_state
+    elif chapter_key == "day5_reckoning_chapter":
+        call book1_nvl_write_line("Chapter V - Diagnosis At Dawn", word_delay=_book1_word_delay)
 
-            # [STATE] State/progression update
-            $ _book1_idx += 1
+        # [STATE] State/progression update
+        $ _book1_theme = story.day5_dynamic
+    else:
+
+        # [STATE] State/progression update
+        $ _book1_theme = "default"
+
+    $ _book1_chapter_map = book1.CHAPTER_BLOCKS.get(chapter_key, {})
+    $ _book1_label = _book1_chapter_map.get(_book1_theme, _book1_chapter_map.get("default", "book1_block_unknown_chapter"))
+
+    if include_debug:
+        call book1_nvl_write_line("DEBUG - Book1 chapter: [chapter_key]", word_delay=_book1_word_delay)
+        call book1_nvl_write_line("DEBUG - Book1 theme: [_book1_theme]", word_delay=_book1_word_delay)
+        call book1_nvl_write_line("DEBUG - Book1 block: [_book1_label]", word_delay=_book1_word_delay)
+
+    call expression _book1_label
 
     nvl clear
     return
@@ -567,22 +503,94 @@ label book1_debug_chapter_route(chapter_key="day2_chapter"):
     nvl clear
     nvl_narrator "DEBUG - Book1 chapter: [chapter_key]"
 
-    if chapter_key == "day2_chapter":
+    if chapter_key == "day1_chapter":
+
+        # [STATE] State/progression update
+        $ _theme = story.day1_corridor_state
+    elif chapter_key == "day2_chapter":
 
         # [STATE] State/progression update
         $ _theme = story.day2_tea_choice
+    elif chapter_key == "day3_chapter":
+
+        # [STATE] State/progression update
+        $ _theme = story.day3_brush_choice
+    elif chapter_key == "day4_triumphant_chapter":
+
+        # [STATE] State/progression update
+        $ _theme = story.day1_corridor_state
+    elif chapter_key == "day5_reckoning_chapter":
+
+        # [STATE] State/progression update
+        $ _theme = story.day5_dynamic
     else:
 
         # [STATE] State/progression update
-        $ _theme = "legacy"
+        $ _theme = "default"
 
     $ _chapter_map = book1.CHAPTER_BLOCKS.get(chapter_key, {})
-    $ _label = _chapter_map.get(_theme, _chapter_map.get("default", "LEGACY_OR_NO_ROUTE"))
+    $ _label = _chapter_map.get(_theme, _chapter_map.get("default", "NO_ROUTE"))
 
     nvl_narrator "Theme: [_theme]"
     nvl_narrator "Resolved label: [_label]"
 
     nvl clear
+    return
+
+
+label book1_block_unknown_chapter:
+
+    call book1_nvl_write_line("(Chapter not found: [chapter_key])", word_delay=_book1_word_delay)
+    return
+
+
+label book1_block_day1_slop_core:
+
+    call book1_nvl_write_line("Draft Fragment - Unsellable Night Pages", word_delay=_book1_word_delay)
+    call book1_nvl_write_line("Coralie tries to restage the corridor scandal at Ravenshade Conservatory, but every sentence arrives scrubbed and timid.", word_delay=_book1_word_delay)
+    call book1_nvl_write_line("Lord Caldor becomes vague menace, Lady Vayne becomes posture without hunger, and Mr. Sterick reads like a wax seal with no heat behind it.", word_delay=_book1_word_delay)
+    call book1_nvl_write_line("Miri's fear is flattened into polite summary, as if danger can be made respectable by removing all appetite from the telling.", word_delay=_book1_word_delay)
+    call book1_nvl_write_line("The result is technically clean and emotionally vacant - a manuscript page that sounds safe, market-proof, and dead on arrival.", word_delay=_book1_word_delay)
+    return
+
+
+label book1_block_day1_default_core:
+
+    call book1_block_day1_common_open
+    return
+
+
+label book1_block_day1_ghost_core:
+
+    call book1_block_day1_common_open
+    call book1_nvl_write_line("The narration stays observational, dispassionate, and evidentiary; desire is implied through omission, not declaration.", word_delay=_book1_word_delay)
+    if story.day1_ledger_focus == "inspiration":
+        call book1_nvl_write_line("Each chapter tracks who paid the cost rather than who won the room.", word_delay=_book1_word_delay)
+    return
+
+
+label book1_block_day1_predator_core:
+
+    call book1_block_day1_common_open
+    call book1_nvl_write_line("The narration is deliberate and tactical; heat appears as leverage, never as surrender.", word_delay=_book1_word_delay)
+    if story.day1_ledger_focus == "corruption":
+        call book1_nvl_write_line("Polished etiquette carries a visible edge.", word_delay=_book1_word_delay)
+    return
+
+
+label book1_block_day1_prey_core:
+
+    call book1_block_day1_common_open
+    call book1_nvl_write_line("The narration is intimate and exposed; attraction and risk are allowed to coexist without tidy absolution.", word_delay=_book1_word_delay)
+    call book1_nvl_write_line("Curiosity is framed as both hunger and hazard.", word_delay=_book1_word_delay)
+    return
+
+
+label book1_block_day1_common_open:
+
+    call book1_nvl_write_line("At Ravenshade Conservatory, Coralie Vale learns that service is theater and every corridor has an audience.", word_delay=_book1_word_delay)
+    call book1_nvl_write_line("She studies Lady Vayne's posture, Mr. Sterick's clipped authority, and the predatory stillness of Lord Caldor.", word_delay=_book1_word_delay)
+    call book1_nvl_write_line("The scandal behind the music room door becomes her first private map of power.", word_delay=_book1_word_delay)
     return
 
 
@@ -696,4 +704,328 @@ label book1_block_day2_stern_pressure_if_needed:
         call book1_nvl_write_line("Mr. Sterick turns the full theatre of blame upon Miri, and Coralie — whether witness or architect — records how guilt rolls downhill like marbles on polished oak.", word_delay=_book1_word_delay)
         call book1_nvl_write_line("The reprimand is couched in serviceable English and executed in the old currency: rank.", word_delay=_book1_word_delay)
 
+    return
+
+
+label book1_block_day3_default_core:
+
+    call book1_block_day3_common_open
+    call book1_block_day3_ultimatum_beat
+    call book1_block_day3_writing_cadence
+    call book1_block_day3_stern_beat
+    call book1_block_day3_furnace_beat
+    return
+
+
+label book1_block_day3_ghost_core:
+
+    call book1_block_day3_common_open
+    call book1_nvl_write_line("The narration stays observational, dispassionate, and evidentiary; desire is implied through omission, not declaration.", word_delay=_book1_word_delay)
+    if story.day1_ledger_focus == "inspiration":
+        call book1_nvl_write_line("Each chapter tracks who paid the cost rather than who won the room.", word_delay=_book1_word_delay)
+    call book1_block_day3_ultimatum_beat
+    call book1_block_day3_writing_cadence
+    call book1_block_day3_stern_beat
+    call book1_block_day3_furnace_beat
+    return
+
+
+label book1_block_day3_predator_core:
+
+    call book1_block_day3_common_open
+    call book1_nvl_write_line("The narration is deliberate and tactical; heat appears as leverage, never as surrender.", word_delay=_book1_word_delay)
+    if story.day1_ledger_focus == "corruption":
+        call book1_nvl_write_line("Polished etiquette carries a visible edge.", word_delay=_book1_word_delay)
+    call book1_block_day3_ultimatum_beat
+    call book1_block_day3_writing_cadence
+    call book1_block_day3_stern_beat
+    call book1_block_day3_furnace_beat
+    return
+
+
+label book1_block_day3_prey_core:
+
+    call book1_block_day3_common_open
+    call book1_nvl_write_line("The narration is intimate and exposed; attraction and risk are allowed to coexist without tidy absolution.", word_delay=_book1_word_delay)
+    if story.day3_twilight_action == "prepare_mask":
+        call book1_nvl_write_line("Outward compliance shelters inward escalation.", word_delay=_book1_word_delay)
+    call book1_block_day3_ultimatum_beat
+    call book1_block_day3_writing_cadence
+    call book1_block_day3_stern_beat
+    call book1_block_day3_furnace_beat
+    return
+
+
+label book1_block_day3_common_open:
+
+    call book1_nvl_write_line("By twilight rehearsal, Lord Caldor's attention feels less like patronage and more like choreography.", word_delay=_book1_word_delay)
+    call book1_nvl_write_line("Coralie stages mirror, brush, and breath as evidence, knowing witnesses can become accomplices by standing still.", word_delay=_book1_word_delay)
+    call book1_nvl_write_line("Every line she writes asks whether danger is a place, a person, or a desire she cannot dismiss.", word_delay=_book1_word_delay)
+    return
+
+
+label book1_block_day3_ultimatum_beat:
+
+    if story.day3_ultimatum == "defied":
+        call book1_nvl_write_line("Lord Caldor corners the heroine by the furnace doors, offering terms in a velvet voice.", word_delay=_book1_word_delay)
+        call book1_nvl_write_line("She answers with refusal sharpened into etiquette, making defiance feel like a ceremonial blade.", word_delay=_book1_word_delay)
+        call book1_nvl_write_line("The chapter refuses euphemism and keeps the moral cost visible.", word_delay=_book1_word_delay)
+    elif story.day3_ultimatum == "surrendered":
+        call book1_nvl_write_line("Lord Caldor corners the heroine by the furnace doors, but this time consent is staged as survival arithmetic.", word_delay=_book1_word_delay)
+        call book1_nvl_write_line("The chapter acknowledges how surrender can be chosen and still feel perilously close to coercion.", word_delay=_book1_word_delay)
+        call book1_nvl_write_line("The chapter refuses euphemism and keeps the moral cost visible.", word_delay=_book1_word_delay)
+    return
+
+
+label book1_block_day3_writing_cadence:
+
+    if story.day3_twilight_action == "frantic_write":
+        call book1_nvl_write_line("Coralie writes as if dawn will confiscate the pages, every paragraph urgent and thin-breathed.", word_delay=_book1_word_delay)
+        call book1_nvl_write_line("The prose runs hot with pursuit, turning fear into velocity.", word_delay=_book1_word_delay)
+    else:
+        call book1_nvl_write_line("Coralie writes slowly, pressing each sentence into structure before allowing heat to bloom.", word_delay=_book1_word_delay)
+        call book1_nvl_write_line("The prose keeps its pulse but favors control over panic.", word_delay=_book1_word_delay)
+    return
+
+
+label book1_block_day3_stern_beat:
+
+    if story.day3_stern_response == "stupid" or story.day3_stern_response == "partial_truth":
+        call book1_nvl_write_line("Mr. Sterick drills Coralie on silence and timing, turning etiquette into an instrument of surveillance.", word_delay=_book1_word_delay)
+    return
+
+
+label book1_block_day3_furnace_beat:
+
+    if story.day3_ultimatum == "defied" or story.day3_ultimatum == "surrendered" or story.day3_ultimatum == "bargained":
+        call book1_nvl_write_line("The furnace-room ultimatum is rewritten as social choreography where terms, not touches, decide the temperature.", word_delay=_book1_word_delay)
+    return
+
+
+label book1_block_day4_default_core:
+
+    call book1_block_day4_common_open
+    call book1_block_day4_moral_frame
+    call book1_block_day4_missy_debt_or_repair
+    call book1_block_day4_stern_pressure
+    call book1_block_day4_writing_cadence
+    call book1_block_day4_escape_and_evidence
+    return
+
+
+label book1_block_day4_ghost_core:
+
+    call book1_block_day4_common_open
+    call book1_nvl_write_line("The narration stays observational, dispassionate, and evidentiary; desire is implied through omission, not declaration.", word_delay=_book1_word_delay)
+    call book1_block_day4_moral_frame
+    call book1_block_day4_missy_debt_or_repair
+    call book1_block_day4_stern_pressure
+    call book1_block_day4_writing_cadence
+    call book1_block_day4_escape_and_evidence
+    return
+
+
+label book1_block_day4_predator_core:
+
+    call book1_block_day4_common_open
+    call book1_nvl_write_line("The narration is deliberate and tactical; heat appears as leverage, never as surrender.", word_delay=_book1_word_delay)
+    call book1_block_day4_moral_frame
+    call book1_block_day4_missy_debt_or_repair
+    call book1_block_day4_stern_pressure
+    call book1_block_day4_writing_cadence
+    call book1_block_day4_escape_and_evidence
+    return
+
+
+label book1_block_day4_prey_core:
+
+    call book1_block_day4_common_open
+    call book1_nvl_write_line("The narration is intimate and exposed; attraction and risk are allowed to coexist without tidy absolution.", word_delay=_book1_word_delay)
+    call book1_block_day4_moral_frame
+    call book1_block_day4_missy_debt_or_repair
+    call book1_block_day4_stern_pressure
+    call book1_block_day4_writing_cadence
+    call book1_block_day4_escape_and_evidence
+    return
+
+
+label book1_block_day4_common_open:
+
+    call book1_nvl_write_line("A hidden photograph becomes a coded sketch in the conservatory ledger, enough to threaten a lord without naming him.", word_delay=_book1_word_delay)
+    call book1_nvl_write_line("Coralie drafts a false victory in which the heroine traps her patron using impeccable manners and one precise secret.", word_delay=_book1_word_delay)
+    call book1_nvl_write_line("The chapter glows with triumph while quietly admitting the danger is merely sleeping.", word_delay=_book1_word_delay)
+    return
+
+
+label book1_block_day4_moral_frame:
+
+    if story.day1_corridor_state == "ghost" and story.day1_ledger_focus == "inspiration":
+        call book1_nvl_write_line("Each chapter tracks who paid the cost rather than who won the room.", word_delay=_book1_word_delay)
+    elif story.day1_corridor_state == "predator" and story.day1_ledger_focus == "corruption":
+        call book1_nvl_write_line("Polished etiquette carries a visible edge.", word_delay=_book1_word_delay)
+    elif story.day1_corridor_state == "prey":
+        call book1_nvl_write_line("Curiosity is framed as both hunger and hazard.", word_delay=_book1_word_delay)
+    return
+
+
+label book1_block_day4_missy_debt_or_repair:
+
+    if story.missy_day2_trust_break or story.missy_day4_used_as_cover:
+        call book1_nvl_write_line("Miri is written as a courier who trusted the wrong corridor map, and Coralie keeps the betrayal visible.", word_delay=_book1_word_delay)
+        call book1_nvl_write_line("The scene does not absolve her; it records the debt like a stain that cannot be laundered out.", word_delay=_book1_word_delay)
+    else:
+        call book1_nvl_write_line("Miri becomes a distant apprentice, cautious but present, and Coralie writes her with earned restraint.", word_delay=_book1_word_delay)
+        call book1_nvl_write_line("The page allows partial repair, but never pretends innocence returned unchanged.", word_delay=_book1_word_delay)
+    return
+
+
+label book1_block_day4_stern_pressure:
+
+    if story.missy_day2_suspicion_state == "uneasy" or story.day4_stern_response == "missy_cover":
+        call book1_nvl_write_line("Mr. Sterick interrogates Miri first, because hierarchy makes her easier to bruise in public.", word_delay=_book1_word_delay)
+        call book1_nvl_write_line("Coralie notes how authority can sound procedural while functioning as punishment.", word_delay=_book1_word_delay)
+    else:
+        call book1_nvl_write_line("Mr. Sterick keeps the reprimand diffuse, but Miri still absorbs most of the room's panic.", word_delay=_book1_word_delay)
+        call book1_nvl_write_line("Coralie records the moment as proof that class discipline rarely needs raised volume.", word_delay=_book1_word_delay)
+    return
+
+
+label book1_block_day4_writing_cadence:
+
+    if story.day4_night_action == "finish_manuscript":
+        call book1_nvl_write_line("Coralie writes as if dawn will confiscate the pages, every paragraph urgent and thin-breathed.", word_delay=_book1_word_delay)
+        call book1_nvl_write_line("The prose runs hot with pursuit, turning fear into velocity.", word_delay=_book1_word_delay)
+    else:
+        call book1_nvl_write_line("Coralie writes slowly, pressing each sentence into structure before allowing heat to bloom.", word_delay=_book1_word_delay)
+        call book1_nvl_write_line("The prose keeps its pulse but favors control over panic.", word_delay=_book1_word_delay)
+    return
+
+
+label book1_block_day4_escape_and_evidence:
+
+    if story.day4_escape_state == "missy_cover" or story.missy_day4_used_as_cover:
+        call book1_nvl_write_line("Coralie survives by spending Miri's credibility, and the chapter refuses to romanticize that exchange.", word_delay=_book1_word_delay)
+    if story.has_photograph or story.day4_evidence_discovered:
+        call book1_nvl_write_line("The hidden photograph becomes a ledger cipher, reframing fear as admissible leverage.", word_delay=_book1_word_delay)
+    return
+
+
+label book1_block_day5_default_core:
+
+    call book1_block_day5_common_open
+    call book1_block_day5_missy_debt_or_repair
+    call book1_block_day5_ultimatum_beat
+    call book1_block_day5_stern_pressure
+    call book1_block_day5_writing_cadence
+    call book1_block_day5_closing_diagnosis
+    return
+
+
+label book1_block_day5_muse_core:
+
+    call book1_block_day5_default_core
+    return
+
+
+label book1_block_day5_witness_core:
+
+    call book1_block_day5_common_open
+    call book1_nvl_write_line("The narration stays observational, dispassionate, and evidentiary; desire is implied through omission, not declaration.", word_delay=_book1_word_delay)
+    call book1_nvl_write_line("Each chapter tracks who paid the cost rather than who won the room.", word_delay=_book1_word_delay)
+    call book1_block_day5_missy_debt_or_repair
+    call book1_block_day5_ultimatum_beat
+    call book1_block_day5_stern_pressure
+    call book1_block_day5_writing_cadence
+    call book1_block_day5_closing_diagnosis
+    return
+
+
+label book1_block_day5_adversary_core:
+
+    call book1_block_day5_common_open
+    call book1_nvl_write_line("The narration is deliberate and tactical; heat appears as leverage, never as surrender.", word_delay=_book1_word_delay)
+    call book1_nvl_write_line("Polished etiquette carries a visible edge.", word_delay=_book1_word_delay)
+    call book1_block_day5_missy_debt_or_repair
+    call book1_block_day5_ultimatum_beat
+    call book1_block_day5_stern_pressure
+    call book1_block_day5_writing_cadence
+    call book1_block_day5_closing_diagnosis
+    return
+
+
+label book1_block_day5_protege_core:
+
+    call book1_block_day5_common_open
+    call book1_nvl_write_line("The narration is intimate and exposed; attraction and risk are allowed to coexist without tidy absolution.", word_delay=_book1_word_delay)
+    call book1_nvl_write_line("Controlled honesty replaces spectacle.", word_delay=_book1_word_delay)
+    call book1_block_day5_missy_debt_or_repair
+    call book1_block_day5_ultimatum_beat
+    call book1_block_day5_stern_pressure
+    call book1_block_day5_writing_cadence
+    call book1_block_day5_closing_diagnosis
+    return
+
+
+label book1_block_day5_common_open:
+
+    call book1_nvl_write_line("On her final night in this volume, Coralie revises the ending from triumph to diagnosis.", word_delay=_book1_word_delay)
+    call book1_nvl_write_line("Lord Caldor is no longer a singular monster but the face of a machine that rewards silence and punishes witnesses.", word_delay=_book1_word_delay)
+    call book1_nvl_write_line("She keeps the physical silhouettes intact - his controlled stillness, Lady Vayne's lacquered poise, Mr. Sterick's iron posture, Miri's fragile readiness - while changing names and setting.", word_delay=_book1_word_delay)
+    return
+
+
+label book1_block_day5_missy_debt_or_repair:
+
+    if story.missy_day2_trust_break or story.missy_day4_used_as_cover or story.missy_debt_carried_forward:
+        call book1_nvl_write_line("Miri is written as a courier who trusted the wrong corridor map, and Coralie keeps the betrayal visible.", word_delay=_book1_word_delay)
+        call book1_nvl_write_line("The scene does not absolve her; it records the debt like a stain that cannot be laundered out.", word_delay=_book1_word_delay)
+    else:
+        call book1_nvl_write_line("Miri becomes a distant apprentice, cautious but present, and Coralie writes her with earned restraint.", word_delay=_book1_word_delay)
+        call book1_nvl_write_line("The page allows partial repair, but never pretends innocence returned unchanged.", word_delay=_book1_word_delay)
+    return
+
+
+label book1_block_day5_ultimatum_beat:
+
+    if story.day3_ultimatum == "defied":
+        call book1_nvl_write_line("Lord Caldor corners the heroine by the furnace doors, offering terms in a velvet voice.", word_delay=_book1_word_delay)
+        call book1_nvl_write_line("She answers with refusal sharpened into etiquette, making defiance feel like a ceremonial blade.", word_delay=_book1_word_delay)
+        call book1_nvl_write_line("The chapter refuses euphemism and keeps the moral cost visible.", word_delay=_book1_word_delay)
+    elif story.day3_ultimatum == "surrendered":
+        call book1_nvl_write_line("Lord Caldor corners the heroine by the furnace doors, but this time consent is staged as survival arithmetic.", word_delay=_book1_word_delay)
+        call book1_nvl_write_line("The chapter acknowledges how surrender can be chosen and still feel perilously close to coercion.", word_delay=_book1_word_delay)
+        call book1_nvl_write_line("The chapter refuses euphemism and keeps the moral cost visible.", word_delay=_book1_word_delay)
+    return
+
+
+label book1_block_day5_stern_pressure:
+
+    if story.missy_day2_suspicion_state == "uneasy" or story.day4_stern_response == "missy_cover":
+        call book1_nvl_write_line("Mr. Sterick interrogates Miri first, because hierarchy makes her easier to bruise in public.", word_delay=_book1_word_delay)
+        call book1_nvl_write_line("Coralie notes how authority can sound procedural while functioning as punishment.", word_delay=_book1_word_delay)
+    else:
+        call book1_nvl_write_line("Mr. Sterick keeps the reprimand diffuse, but Miri still absorbs most of the room's panic.", word_delay=_book1_word_delay)
+        call book1_nvl_write_line("Coralie records the moment as proof that class discipline rarely needs raised volume.", word_delay=_book1_word_delay)
+    return
+
+
+label book1_block_day5_writing_cadence:
+
+    if story.release1_manuscript_completed:
+        call book1_nvl_write_line("Coralie writes as if dawn will confiscate the pages, every paragraph urgent and thin-breathed.", word_delay=_book1_word_delay)
+        call book1_nvl_write_line("The prose runs hot with pursuit, turning fear into velocity.", word_delay=_book1_word_delay)
+    else:
+        call book1_nvl_write_line("Coralie writes slowly, pressing each sentence into structure before allowing heat to bloom.", word_delay=_book1_word_delay)
+        call book1_nvl_write_line("The prose keeps its pulse but favors control over panic.", word_delay=_book1_word_delay)
+    return
+
+
+label book1_block_day5_closing_diagnosis:
+
+    if story.day5_dynamic == "muse" or story.day5_dynamic == "adversary" or story.day5_dynamic == "witness" or story.day5_dynamic == "protege":
+        call book1_nvl_write_line("The final pass shifts from confession to diagnosis, mapping not just one man but the institution that protects him.", word_delay=_book1_word_delay)
+    if story.day4_escape_state == "missy_cover" or story.missy_day4_used_as_cover:
+        call book1_nvl_write_line("Coralie survives by spending Miri's credibility, and the chapter refuses to romanticize that exchange.", word_delay=_book1_word_delay)
+    if story.has_photograph or story.day4_evidence_discovered:
+        call book1_nvl_write_line("The hidden photograph becomes a ledger cipher, reframing fear as admissible leverage.", word_delay=_book1_word_delay)
     return
