@@ -16,4 +16,4 @@ assets_source/
 
 ## Workflow References
 
-See [docs/art/README.md](file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/docs/art/README.md) for full style bible parameters, slicing instructions, background layering configurations, and compliance lint checking routines.
+See [docs/art/README.md](../docs/art/README.md) for full style bible parameters, slicing instructions, background layering configurations, and compliance lint checking routines.

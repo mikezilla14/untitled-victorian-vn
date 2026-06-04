@@ -2,6 +2,10 @@
 
 This contract defines the syntax and creative workflow for writing `book1` NVL chapter prose in the non-canon draft.
 
+Machine-readable schema: not yet defined. Track future schema work in
+[../backlog/narrative-json-beat-pipeline.md](../backlog/narrative-json-beat-pipeline.md) if this
+contract becomes executable.
+
 ---
 
 ## 1. Inline Prose Macro Syntax Reference

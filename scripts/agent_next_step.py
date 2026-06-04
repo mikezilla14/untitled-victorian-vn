@@ -81,6 +81,9 @@ PIPELINES: dict[str, list[dict]] = {
         {"stage": 4, "agent": "human", "note": "HARD STOP — human approval required"},
         {"stage": 5, "agent": "lead_narrative_editor", "note": "Or forensic_psychology_consultant if authorized"},
     ],
+    "documentation-audit": [
+        {"stage": 1, "agent": "documentation_steward", "note": "Update docs first, then refresh catalogue and audit artifacts"},
+    ],
 }
 
 AGENT_FILES: dict[str, str] = {
@@ -97,6 +100,7 @@ AGENT_FILES: dict[str, str] = {
     "prod_code_agent": "prod_code_agent.md",
     "chief_architect": "chief_architect.md",
     "gatekeeper_orchestrator": "gatekeeper_orchestrator.md",
+    "documentation_steward": "documentation_steward.md",
     "human": "(no rule file — human decision)",
 }
 

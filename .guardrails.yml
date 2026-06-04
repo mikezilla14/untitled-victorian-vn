@@ -12,6 +12,7 @@ agents:
   - orchestrator
   - adult_market_reviewer
   - scene_direction
+  - documentation_steward
 
 domains:
   canon_lore:
@@ -88,3 +89,22 @@ domains:
     mutable_by: [chief_architect, gatekeeper_orchestrator, human]
     agents_read: [all]
     notes: "Repository workflow, automation, and maintenance files."
+
+  documentation:
+    paths:
+      - docs/**
+      - README.md
+      - AGENTS.md
+      - CLAUDE.md
+      - .agents/**
+      - .guardrails.yml
+      - scripts/README.md
+      - scripts/agent_next_step.py
+      - scripts/documentation_audit.py
+      - .github/workflows/**
+      - assets_source/**/README.md
+      - narrative/**/README.md
+      - renpy_project/README.md
+    mutable_by: [documentation_steward, chief_architect, gatekeeper_orchestrator, human]
+    agents_read: [all]
+    notes: "Cross-project documentation catalogue, stale-doc audits, README coverage, and documentation automation."

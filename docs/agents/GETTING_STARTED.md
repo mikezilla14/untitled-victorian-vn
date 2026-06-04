@@ -61,7 +61,7 @@ Naming: `r` = release number, `dd` = two-digit day (`00`–`99`).
 While chaining agents manually:
 
 ```powershell
-py scripts/agent_next_step.py --pipeline produce-day --stage 1 --day 105 --release "release 1 - mvp"
+py scripts/agent_next_step.py --pipeline produce-day --stage 1 --day 105 --release release-1-mvp
 py scripts/agent_next_step.py --list-pipelines
 ```
 
@@ -69,8 +69,16 @@ py scripts/agent_next_step.py --list-pipelines
 
 Agents write **markdown + JSON** for gates, change briefs, profile deltas, and promotion handoffs. See [`docs/contracts/README.md`](../contracts/README.md).
 
+Documentation maintenance uses the same documentation-driven pattern. For stale README files,
+feature specs, or catalogue refreshes, route `documentation-audit` and run:
+
 ```powershell
-py scripts/contract_validate.py --day day105 --release "release 1 - mvp"
+py scripts/documentation_audit.py --write
+py scripts/documentation_audit.py --check
+```
+
+```powershell
+py scripts/contract_validate.py --day day105 --release release-1-mvp
 ```
 
 ## Step 7 — Validate before you PR

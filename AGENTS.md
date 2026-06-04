@@ -18,6 +18,7 @@ This repository uses **documentation-driven agent orchestration**: specialist ro
 | "Tune this scene to spice level 3" | `spice-tune` |
 | "F95 market review of prod" | `market-review` |
 | "Can Cora have a typewriter in 1891?" | `historical-check` |
+| "Update stale README files and catalogue docs" | `documentation-audit` |
 
 If the orchestrator is unsure (e.g. bare "assess prod"), it will ask **one** clarifying question before routing.
 
@@ -75,6 +76,7 @@ Load the linked `.md` file as the **full system prompt** when the orchestrator n
 | Prod code agent | [`.agents/rules/prod_code_agent.md`](.agents/rules/prod_code_agent.md) | `renpy_project/` |
 | Chief architect | [`.agents/rules/chief_architect.md`](.agents/rules/chief_architect.md) | Architecture / review |
 | Gatekeeper orchestrator | [`.agents/rules/gatekeeper_orchestrator.md`](.agents/rules/gatekeeper_orchestrator.md) | PR / domain checks |
+| Documentation steward | [`.agents/rules/documentation_steward.md`](.agents/rules/documentation_steward.md) | README/docs/spec sync + catalogue |
 
 Writers' room sub-index: [`.agents/rules/writers_room/README.md`](.agents/rules/writers_room/README.md).
 
@@ -99,6 +101,7 @@ Skills under [`.agents/skills/`](.agents/skills/) wrap common workflows for Curs
 | [`check_assets`](.agents/skills/check_assets/SKILL.md) | Validate asset manifest sync |
 | [`scene_direction`](.agents/skills/scene_direction/SKILL.md) | Deterministic sprite placement post-process |
 | [`branch_handoff`](.agents/skills/branch_handoff/SKILL.md) | Branch/worktree preflight and multi-tool handoff hygiene |
+| [`documentation_audit`](.agents/skills/documentation_audit/SKILL.md) | Sync stale docs/readmes/specs and refresh the generated catalogue |
 
 
 ## Pipeline helper (manual chaining)
@@ -130,6 +133,8 @@ CI validates convergent reports, spec scripts, gate markdown **and JSON sidecars
 
 ```powershell
 py scripts/contract_validate.py --day day105 --release release-1-mvp
+py scripts/documentation_audit.py --write
+py scripts/documentation_audit.py --check
 ```
 
 ## Backlog (not in MVP scope)

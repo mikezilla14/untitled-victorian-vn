@@ -15,6 +15,7 @@ An AI-accelerated, adult pseudo-sandbox RPG visual novel set in a Victorian hote
   * **`validate.py`**: CI entry — domains, engineering, Ren'Py lint, historical lint, writers' room pipeline (convergent + spec scripts + gate verdicts).
   * **`agent_next_step.py`**: Prints the next agent rule file for a pipeline stage (`py scripts/agent_next_step.py --pipeline produce-day --stage 1`).
   * **`orchestrate_review.py`**: Pre-PR contract bundle + remediation prompt. Use `py scripts/orchestrate_review.py --files <paths>` before PRs.
+  * **`documentation_audit.py`**: README/docs/spec catalogue refresh and stale-documentation audit.
 * **`/.agents`**: AI role rules.
 * **`/art_pipeline`**: Asset tooling (when present).
 * **`/renpy_project`**: The playable game — **core MVP deliverable**.
@@ -27,12 +28,14 @@ An AI-accelerated, adult pseudo-sandbox RPG visual novel set in a Victorian hote
 ## AI agent system
 
 **Start here:** [`AGENTS.md`](AGENTS.md) — single entry point, agent catalog, pipelines, and validation commands.
+Documentation catalogue: [`docs/DOCUMENTATION_CATALOG.md`](docs/DOCUMENTATION_CATALOG.md).
 
 Paste [`.agents/rules/orchestrator.md`](.agents/rules/orchestrator.md) as your system prompt, then state your task. See [`docs/agents/GETTING_STARTED.md`](docs/agents/GETTING_STARTED.md) for a zero-prior-knowledge walkthrough.
 
 ## AI roles (short)
 
 * **Orchestrator**: Decomposes a production task into ordered agent pipelines (`produce-day`, `review-scene`, `implement-spec`, `promote-day`, `promote-framework`, etc.).
+* **Documentation steward**: Keeps README files, project docs, feature specs, and the generated documentation catalogue in sync with current repo state.
 * **Prod code agent**: Promotes non-canon drafts and framework designs into production (`renpy_project/` and `docs/canon/`) while preserving creative text verbatim.
 * **Non-prod code agent**: Focuses on sandbox/draft implementations strictly in `narrative/draft/` preserving dialogue and prose verbatim.
 * **Chief architect**: Enforces Ren’Py methodology, reviews code changes, and checks creative-technical boundaries.

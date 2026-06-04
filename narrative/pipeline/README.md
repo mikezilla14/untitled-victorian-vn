@@ -4,7 +4,7 @@ Everything here is **non-canon** and supports the writers' room before and durin
 
 ## Why this exists
 
-Previously `speculative/` mixed spec scripts, brainstorm logs, gate verdicts, and JSON handoffs in one flat release folder — hard to browse and easy for agents to load the wrong context. Pipeline artifacts are grouped **by day** and **by type**.
+Previously `narrative/pipeline/` mixed spec scripts, brainstorm logs, gate verdicts, and JSON handoffs in one flat release folder — hard to browse and easy for agents to load the wrong context. Pipeline artifacts are grouped **by day** and **by type**.
 
 ## Folder types
 

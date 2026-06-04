@@ -32,9 +32,11 @@ flowchart TD
   Q11 -->|yes| HC[historical-check]
   Q11 -->|no| Q12{Canon doc change?}
   Q12 -->|yes| CU[canon-update]
-  Q12 -->|no| Q13{Touch .agents / guardrails?}
-  Q13 -->|yes| CAH[chief_architect + human]
-  Q13 -->|no| Unclear[Ask human one question]
+  Q12 -->|no| Q13{Docs / README / catalogue?}
+  Q13 -->|yes| DA[documentation-audit]
+  Q13 -->|no| Q14{Touch .agents / guardrails?}
+  Q14 -->|yes| CAH[chief_architect + human]
+  Q14 -->|no| Unclear[Ask human one question]
 ```
 
 ## Pipelines
@@ -139,6 +141,18 @@ If blocked on prose → `revise-narrative` first.
 | **1–3** | Lead editor, forensic psych, Victorian — impact analysis |
 | **4** | **Hard human stop** |
 | **5** | Authorized edit only |
+
+### `documentation-audit`
+
+| Trigger | Stale README files, docs/spec sync, documentation catalogue, weekly docs hygiene |
+|---------|----------------------------------------------------------------------------------|
+| **1** | `documentation_steward` — update stale docs first, add missing README coverage, then regenerate catalogue/audit artifacts |
+
+Generated artifacts:
+
+- `docs/DOCUMENTATION_CATALOG.md`
+- `docs/DOCUMENTATION_AUDIT.md`
+- `docs/documentation_catalog.json`
 
 ## Writers' room internal workflows
 

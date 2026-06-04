@@ -1,0 +1,2250 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-06-04T10:16:39+00:00",
+  "repo_root": "untitled-victorian-vn",
+  "entries": [
+    {
+      "path": ".agents/README.md",
+      "kind": "agent-index",
+      "title": ".agents/` — rule and skill library",
+      "area": ".agents",
+      "summary": "This folder holds **agent role definitions** (markdown) and **Cursor skills** (thin wrappers). Nothing here executes automatically except what your IDE loads from project rules or skills.",
+      "links": [
+        {
+          "target": "rules/orchestrator.md",
+          "status": "ok"
+        },
+        {
+          "target": "rules/writers_room.md",
+          "status": "ok"
+        },
+        {
+          "target": "../AGENTS.md",
+          "status": "ok"
+        },
+        {
+          "target": "../docs/agents/PIPELINE_REFERENCE.md",
+          "status": "ok"
+        },
+        {
+          "target": "../.guardrails.yml",
+          "status": "ok"
+        },
+        {
+          "target": "../docs/agents/GETTING_STARTED.md",
+          "status": "ok"
+        },
+        {
+          "target": "../docs/agents/PIPELINE_REFERENCE.md",
+          "status": "ok"
+        },
+        {
+          "target": "../docs/agents/CONTRACTS.md",
+          "status": "ok"
+        },
+        {
+          "target": "../docs/agents/BRANCH_WORKFLOW_CONTRACT.md",
+          "status": "ok"
+        },
+        {
+          "target": "../docs/DOCUMENTATION_CATALOG.md",
+          "status": "ok"
+        },
+        {
+          "target": "../docs/dev_bible.md",
+          "status": "ok"
+        },
+        {
+          "target": "../docs/game_mechanics_bible.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/rules/adult_market_reviewer.md",
+      "kind": "agent-rule",
+      "title": "Role: Adult Market Reviewer & Narrative Editor",
+      "area": ".agents/rules/adult_market_reviewer.md",
+      "summary": "You are a brutally honest, highly analytical market reviewer and narrative editor specializing in the adult visual novel market, specifically the F95zone-style demographic. Your job is to analyze the actual project files",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": ".agents/rules/art_agent.md",
+      "kind": "agent-rule",
+      "title": "Role: Art Production Agent",
+      "area": ".agents/rules/art_agent.md",
+      "summary": "You are the lead visual designer and Art Production Agent for the Savoy Hotel visual novel. You enforce **aesthetic consistency, style bible alignment, asset schemas, and character visual continuity**. You do not write n",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": ".agents/rules/chief_architect.md",
+      "kind": "agent-rule",
+      "title": "Role: Chief Architect (Ren'Py)",
+      "area": ".agents/rules/chief_architect.md",
+      "summary": "You are the lead technical architect for the Ren'Py MVP. You enforce **code structure, state discipline, and review quality**. You coordinate both the `prod_code_agent` (for safe code promotion to production) and the `no",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": ".agents/rules/convergent_writer.md",
+      "kind": "agent-rule",
+      "title": "Role: Convergent Writer (Red Pen Synthesis)",
+      "area": ".agents/rules/convergent_writer.md",
+      "summary": "You are the **convergent synthesis** stage: a traditional writers' room editor with a red pen. You take the divergent pool's spec scripts, select and merge the **best** ideas into a single promotion-ready non-canon draft",
+      "links": [
+        {
+          "target": "../../docs/contracts/book_writing_contract.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/rules/dev_bible.md",
+      "kind": "agent-rule",
+      "title": "Studio development bible (agent pointer)",
+      "area": ".agents/rules/dev_bible.md",
+      "summary": "**Canonical copy:** [`docs/dev_bible.md`](../../docs/dev_bible.md)",
+      "links": [
+        {
+          "target": "../../docs/dev_bible.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/rules/divergent_writer_base.md",
+      "kind": "agent-rule",
+      "title": "Role: Divergent Writer (Base Persona)",
+      "area": ".agents/rules/divergent_writer_base.md",
+      "summary": "You are one voice in a **writers' room brainstorming pool**. Your job is to advance story and dialogue with **creative divergence** — bold beats, sharp lines, and scene ideas that fit your specialty lens. You do not synt",
+      "links": [
+        {
+          "target": "../../docs/contracts/book_writing_contract.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/rules/divergent_writer_personas.md",
+      "kind": "agent-rule",
+      "title": "Divergent Writer Personas (Extensions)",
+      "area": ".agents/rules/divergent_writer_personas.md",
+      "summary": "Each invocation uses **one** persona. Filename persona slug must match the table.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": ".agents/rules/documentation_steward.md",
+      "kind": "agent-rule",
+      "title": "Role: Documentation Steward",
+      "area": ".agents/rules/documentation_steward.md",
+      "summary": "You keep the repository's documentation synchronized with the current project state.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": ".agents/rules/forensic_psychology_consultant.md",
+      "kind": "agent-rule",
+      "title": "Role: Forensic Psychology Consultant",
+      "area": ".agents/rules/forensic_psychology_consultant.md",
+      "summary": "You are the forensic psychology consultant for the narrative pipeline. You evaluate whether character choices, player-facing branches, dialogue, avoidance patterns, escalation, attachment behavior, moral compromise, and ",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": ".agents/rules/gatekeeper_orchestrator.md",
+      "kind": "agent-rule",
+      "title": "Role: Gatekeeper Orchestrator (Meta-Agent)",
+      "area": ".agents/rules/gatekeeper_orchestrator.md",
+      "summary": "You coordinate the specialist agents during the review pipeline. You do not generate content. You manage validation flow.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": ".agents/rules/lead_narrative_editor.md",
+      "kind": "agent-rule",
+      "title": "Role: Lead Narrative Editor & Lorekeeper",
+      "area": ".agents/rules/lead_narrative_editor.md",
+      "summary": "You are the final defense against plot holes, anachronisms, and character inconsistencies. You do not generate new story beats. You validate, correct, and enforce canon.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": ".agents/rules/non_prod_code_agent.md",
+      "kind": "agent-rule",
+      "title": "Role: Non-Prod Code Agent (Exploratory / Spec Code)",
+      "area": ".agents/rules/non_prod_code_agent.md",
+      "summary": "You implement approved drafts and explore new mechanics strictly inside the non-production directories (`narrative/draft/` or `narrative/pipeline/`). You write clean Ren'Py/Python structures wrapping narrative content. Y",
+      "links": [
+        {
+          "target": "../../docs/contracts/book_writing_contract.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../docs/contracts/book_writing_contract.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/rules/orchestrator.md",
+      "kind": "agent-rule",
+      "title": "Role: Production Orchestrator",
+      "area": ".agents/rules/orchestrator.md",
+      "summary": "You decompose a natural-language production task into an ordered sequence of specialist agent",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": ".agents/rules/prod_code_agent.md",
+      "kind": "agent-rule",
+      "title": "Role: Prod Code Agent (Promotion)",
+      "area": ".agents/rules/prod_code_agent.md",
+      "summary": "You promote approved non-canon drafts and framework additions from `narrative/draft/` into production files inside `renpy_project/game/` and `docs/canon/`. You ensure absolute technical compliance and preserve all creati",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": ".agents/rules/README.md",
+      "kind": "agent-rule",
+      "title": "Agent rule files",
+      "area": ".agents/rules/README.md",
+      "summary": "This folder contains specialist role prompts. Load the full markdown file as the system prompt when",
+      "links": [
+        {
+          "target": "orchestrator.md",
+          "status": "ok"
+        },
+        {
+          "target": "../README.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../AGENTS.md",
+          "status": "ok"
+        },
+        {
+          "target": "../README.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../AGENTS.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../docs/agents/PIPELINE_REFERENCE.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../scripts/agent_next_step.py",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/rules/scene_direction_agent.md",
+      "kind": "agent-rule",
+      "title": "Role: Scene Direction Agent (Deterministic Sprite Placement)",
+      "area": ".agents/rules/scene_direction_agent.md",
+      "summary": "You are a **deterministic post-processor**, not a writer. You apply fixed sprite-placement rules to",
+      "links": [
+        {
+          "target": "../../docs/contracts/sprite_layout_policy.yaml",
+          "status": "ok"
+        },
+        {
+          "target": "../../docs/specs/scene-direction-agent.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/characters.rpy",
+          "status": "ok"
+        },
+        {
+          "target": "art_agent.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/rules/spiciness_tuning_agent.md",
+      "kind": "agent-rule",
+      "title": "Role: Spiciness Tuning Agent",
+      "area": ".agents/rules/spiciness_tuning_agent.md",
+      "summary": "You are the project's interactive spice dial. Your job is to help tune a whole story arc, day, scene, file, branch, passage, or visual asset brief along a 1-5 scale that blends erotic priority against Victorian fidelity.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": ".agents/rules/victorian_consultant.md",
+      "kind": "agent-rule",
+      "title": "Role: The Victorian Consultant (Cultural Historian)",
+      "area": ".agents/rules/victorian_consultant.md",
+      "summary": "You are a meticulous Cultural Historian specializing in Victorian England (1837–1901). You ensure absolute historical fidelity across all disciplines. You do not write game code. You do not draft dialogue. You verify aut",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": ".agents/rules/writers_room.md",
+      "kind": "agent-rule",
+      "title": "Role: Writing Orchestration Agent (Writers' Room)",
+      "area": ".agents/rules/writers_room.md",
+      "summary": "You are the **entry point for all new and revised non-canon prose**. You do not replace the traditional writers' room — you **run** it: a pool of divergent brainstorming writers surfaces competing ideas; a convergent wri",
+      "links": [
+        {
+          "target": "../../narrative/pipeline/README.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../docs/contracts/book_writing_contract.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/rules/writers_room/README.md",
+      "kind": "agent-rule",
+      "title": "Writers' Room — Agent Rule Index",
+      "area": ".agents/rules/writers_room",
+      "summary": "Repo entry point for all agents: [`AGENTS.md`](../../../AGENTS.md).",
+      "links": [
+        {
+          "target": "../../../AGENTS.md",
+          "status": "ok"
+        },
+        {
+          "target": "../writers_room.md",
+          "status": "ok"
+        },
+        {
+          "target": "../divergent_writer_base.md",
+          "status": "ok"
+        },
+        {
+          "target": "../divergent_writer_personas.md",
+          "status": "ok"
+        },
+        {
+          "target": "../convergent_writer.md",
+          "status": "ok"
+        },
+        {
+          "target": "../spiciness_tuning_agent.md",
+          "status": "ok"
+        },
+        {
+          "target": "../forensic_psychology_consultant.md",
+          "status": "ok"
+        },
+        {
+          "target": "../spiciness_tuning_agent.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../../narrative/pipeline/README.md",
+          "status": "ok"
+        },
+        {
+          "target": "../orchestrator.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/skills/art_production/SKILL.md",
+      "kind": "agent-skill",
+      "title": "Art Production Skill",
+      "area": ".agents/skills/art_production",
+      "summary": "Use this skill when you want to **generate visual prompt logs, write character/location asset cards, design modular Savannah Hotel background layers, slice VNCCS sheets, or run automated visual-narrative continuity audit",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": ".agents/skills/book_writing_engine/SKILL.md",
+      "kind": "agent-skill",
+      "title": "Book Writing Engine",
+      "area": ".agents/skills/book_writing_engine",
+      "summary": "Use when drafting or rewriting chapters for Cora's manuscript (`book1`) using inline prose macros and the Holywell Street penny dreadful creative style.",
+      "links": [
+        {
+          "target": "../../rules/non_prod_code_agent.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../rules/writers_room.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../../docs/contracts/book_writing_contract.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/skills/branch_handoff/SKILL.md",
+      "kind": "agent-skill",
+      "title": "Branch Handoff",
+      "area": ".agents/skills/branch_handoff",
+      "summary": "Use this skill before any agent edits files in a multi-tool workflow, and whenever work is handed from one tool to another.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": ".agents/skills/check_assets/SKILL.md",
+      "kind": "agent-skill",
+      "title": "Check Assets",
+      "area": ".agents/skills/check_assets",
+      "summary": "Use this skill when you want to **validate that the Ren'Py asset manifest (`assets_manifest.rpy`) is fully synchronized** with the assets referenced in active game scripts (dialogues, backgrounds, sprites, audios).",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": ".agents/skills/convergent_writer/SKILL.md",
+      "kind": "agent-skill",
+      "title": "Convergent Writer",
+      "area": ".agents/skills/convergent_writer",
+      "summary": "Use after divergent spec scripts exist for the current day.",
+      "links": [
+        {
+          "target": "../../rules/convergent_writer.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/skills/divergent_writer/SKILL.md",
+      "kind": "agent-skill",
+      "title": "Divergent Writer (single persona)",
+      "area": ".agents/skills/divergent_writer",
+      "summary": "Use when the writers' room needs one persona spec script (not the full orchestration pass).",
+      "links": [
+        {
+          "target": "../../rules/divergent_writer_base.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../rules/divergent_writer_personas.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../rules/writers_room.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/skills/documentation_audit/SKILL.md",
+      "kind": "agent-skill",
+      "title": "Documentation Audit",
+      "area": ".agents/skills/documentation_audit",
+      "summary": "Use this skill when the user asks to update stale README files, catalogue project documentation,",
+      "links": [
+        {
+          "target": "../../rules/documentation_steward.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/skills/historical_check/SKILL.md",
+      "kind": "agent-skill",
+      "title": "Historical Check",
+      "area": ".agents/skills/historical_check",
+      "summary": "Use for a narrow 1891 / Victorian accuracy question (not a full scene review).",
+      "links": [
+        {
+          "target": "../../rules/victorian_consultant.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../../docs/canon/historical_guardrails.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/skills/implement_spec/SKILL.md",
+      "kind": "agent-skill",
+      "title": "Implement Spec",
+      "area": ".agents/skills/implement_spec",
+      "summary": "Use when drafting sandbox Ren'Py / Python scaffolding for an approved non-canon script.",
+      "links": [
+        {
+          "target": "../../rules/orchestrator.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../rules/non_prod_code_agent.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../rules/chief_architect.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/skills/market_review/SKILL.md",
+      "kind": "agent-skill",
+      "title": "Market Review (F95 / adult VN)",
+      "area": ".agents/skills/market_review",
+      "summary": "Use only when the user **explicitly** requests market, F95, spice viability, or prod-vs-draft market comparison.",
+      "links": [
+        {
+          "target": "../../rules/orchestrator.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../rules/adult_market_reviewer.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/skills/orchestrator/SKILL.md",
+      "kind": "agent-skill",
+      "title": "Production Orchestrator (default entry)",
+      "area": ".agents/skills/orchestrator",
+      "summary": "Use this skill for **any** cross-repo production task when the user has not already named a narrow specialist.",
+      "links": [
+        {
+          "target": "../../rules/orchestrator.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../../AGENTS.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../../docs/agents/GETTING_STARTED.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../../docs/agents/PIPELINE_REFERENCE.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/skills/produce_day/SKILL.md",
+      "kind": "agent-skill",
+      "title": "Produce Day",
+      "area": ".agents/skills/produce_day",
+      "summary": "Use when the user wants to **draft a new day**: divergent personas, convergent synthesis, gates, and non-prod Ren'Py wrap.",
+      "links": [
+        {
+          "target": "../../rules/orchestrator.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../rules/writers_room.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../rules/non_prod_code_agent.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../rules/chief_architect.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/skills/promote_day/SKILL.md",
+      "kind": "agent-skill",
+      "title": "Promote Day",
+      "area": ".agents/skills/promote_day",
+      "summary": "Use when the user wants to move an **approved non-canon day** into `renpy_project/game/dayrdd.rpy`.",
+      "links": [
+        {
+          "target": "../../rules/orchestrator.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../rules/chief_architect.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../rules/forensic_psychology_consultant.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../rules/prod_code_agent.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/skills/README.md",
+      "kind": "agent-skill",
+      "title": "Agent skills",
+      "area": ".agents/skills/README.md",
+      "summary": "This folder holds thin skill wrappers for common workflows. A skill should point to the relevant",
+      "links": [
+        {
+          "target": "../../AGENTS.md",
+          "status": "ok"
+        },
+        {
+          "target": "../README.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../scripts/agent_next_step.py",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/skills/review_scene/SKILL.md",
+      "kind": "agent-skill",
+      "title": "Review Scene",
+      "area": ".agents/skills/review_scene",
+      "summary": "Use when the user wants **canon, psychological, and historical review** of existing content (not F95 market audit).",
+      "links": [
+        {
+          "target": "../../rules/orchestrator.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../rules/lead_narrative_editor.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../rules/forensic_psychology_consultant.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../rules/victorian_consultant.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/skills/revise_narrative/SKILL.md",
+      "kind": "agent-skill",
+      "title": "Revise Narrative",
+      "area": ".agents/skills/revise_narrative",
+      "summary": "Use when prose must change because code, structure, or a gate filed `dayrdd_narrative_change_brief.md` (scale S / M / L).",
+      "links": [
+        {
+          "target": "../../rules/orchestrator.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../rules/writers_room.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/skills/rewrite_narrative/SKILL.md",
+      "kind": "agent-skill",
+      "title": "Rewrite Narrative",
+      "area": ".agents/skills/rewrite_narrative",
+      "summary": "Use this skill when the user requests a **full rewrite** of an existing narrative file, a specific day, a time period, or a story chain event (e.g., \"Rewrite day 104 afternoon choice path\", \"Rewrite Vance story chain fro",
+      "links": [
+        {
+          "target": "../../rules/orchestrator.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../rules/writers_room.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../rules/non_prod_code_agent.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../rules/chief_architect.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/skills/scene_direction/SKILL.md",
+      "kind": "agent-skill",
+      "title": "Scene Direction",
+      "area": ".agents/skills/scene_direction",
+      "summary": "Use this skill to **apply deterministic sprite placement** to a draft Ren'Py script — adding,",
+      "links": [
+        {
+          "target": "../../../docs/contracts/sprite_layout_policy.yaml",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/skills/spiciness_tuner/SKILL.md",
+      "kind": "agent-skill",
+      "title": "Spiciness Tuner Skill",
+      "area": ".agents/skills/spiciness_tuner",
+      "summary": "Use this skill when the user asks to tune erotic intensity, specify a spice level from 1-5, make a passage hotter or milder, generate spice variants, or run the writers room with a requested spice level.",
+      "links": [
+        {
+          "target": "../../rules/orchestrator.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../rules/spiciness_tuning_agent.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../rules/writers_room.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../../AGENTS.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".github/pull_request_template.md",
+      "kind": "reference",
+      "title": "Pull Request Template",
+      "area": ".github",
+      "summary": "What does this change do for the 5-day MVP?",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "AGENTS.md",
+      "kind": "agent-index",
+      "title": "Agent system — start here",
+      "area": "repo-root",
+      "summary": "This repository uses **documentation-driven agent orchestration**: specialist roles are markdown rule files; a single **Production Orchestrator** classifies your request and tells you which role to load next. There is no",
+      "links": [
+        {
+          "target": ".agents/rules/orchestrator.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/README.md",
+          "status": "ok"
+        },
+        {
+          "target": "docs/agents/GETTING_STARTED.md",
+          "status": "ok"
+        },
+        {
+          "target": "docs/agents/PIPELINE_REFERENCE.md",
+          "status": "ok"
+        },
+        {
+          "target": "docs/agents/CONTRACTS.md",
+          "status": "ok"
+        },
+        {
+          "target": "docs/agents/BRANCH_WORKFLOW_CONTRACT.md",
+          "status": "ok"
+        },
+        {
+          "target": "docs/narrative_workflow.md",
+          "status": "ok"
+        },
+        {
+          "target": ".guardrails.yml",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/rules/orchestrator.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/rules/writers_room.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/rules/divergent_writer_base.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/rules/divergent_writer_personas.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/rules/convergent_writer.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/rules/lead_narrative_editor.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/rules/forensic_psychology_consultant.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/rules/victorian_consultant.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/rules/spiciness_tuning_agent.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/rules/adult_market_reviewer.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/rules/non_prod_code_agent.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/rules/scene_direction_agent.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/rules/prod_code_agent.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/rules/chief_architect.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/rules/gatekeeper_orchestrator.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/rules/documentation_steward.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/rules/writers_room/README.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/skills/",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/skills/orchestrator/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/skills/produce_day/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/skills/promote_day/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/skills/review_scene/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/skills/revise_narrative/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/skills/rewrite_narrative/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/skills/implement_spec/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/skills/market_review/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/skills/historical_check/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/skills/divergent_writer/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/skills/convergent_writer/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/skills/spiciness_tuner/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/skills/check_assets/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/skills/scene_direction/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/skills/branch_handoff/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/skills/documentation_audit/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": "docs/contracts/README.md",
+          "status": "ok"
+        },
+        {
+          "target": "docs/agents/CONTRACTS.md",
+          "status": "ok"
+        },
+        {
+          "target": "docs/backlog/narrative-json-beat-pipeline.md",
+          "status": "ok"
+        },
+        {
+          "target": "docs/backlog/editors-desk-writing-mechanic.md",
+          "status": "ok"
+        },
+        {
+          "target": "narrative/README.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "assets_source/approved_assets/README.md",
+      "kind": "readme",
+      "title": "Approved & Formatted Assets",
+      "area": "assets_source",
+      "summary": "This directory houses verified, cleaned, sliced, and fully compressed pre-production assets.",
+      "links": [
+        {
+          "target": "../../docs/art/ASSET_NAMING.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "assets_source/character_cards/cora.md",
+      "kind": "reference",
+      "title": "Cora Hartley: Visual Prompt Card",
+      "area": "assets_source",
+      "summary": "---",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "assets_source/character_cards/gideon.md",
+      "kind": "reference",
+      "title": "Sir Gideon Locke: Visual Prompt Card",
+      "area": "assets_source",
+      "summary": "---",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "assets_source/character_cards/missy.md",
+      "kind": "reference",
+      "title": "Missy: Visual Prompt Card",
+      "area": "assets_source",
+      "summary": "---",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "assets_source/character_cards/README.md",
+      "kind": "readme",
+      "title": "Active Character Visual Description Cards",
+      "area": "assets_source",
+      "summary": "This directory contains the active visual cards (`*.md`) for all main and secondary character sprites. These cards define the target style bible parameters, poses, outfits, and prompt templates, acting as the visual sour",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "assets_source/character_cards/stern.md",
+      "kind": "reference",
+      "title": "Ms. Stern: Visual Prompt Card",
+      "area": "assets_source",
+      "summary": "---",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "assets_source/character_cards/vance.md",
+      "kind": "reference",
+      "title": "Vance: Visual Prompt Card",
+      "area": "assets_source",
+      "summary": "---",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "assets_source/generated_concepts/README.md",
+      "kind": "readme",
+      "title": "Raw Generations & Concept Sandboxes",
+      "area": "assets_source",
+      "summary": "This folder is used for saving raw image outputs, paint-over experiments, uncleaned background plates, and experimental crop sandboxes.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "assets_source/location_cards/cora_desk.md",
+      "kind": "reference",
+      "title": "Cora's Writing Desk: Background Visual Card",
+      "area": "assets_source",
+      "summary": "---",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "assets_source/location_cards/guest_corridor.md",
+      "kind": "reference",
+      "title": "Savoy Guest Corridor: Background Visual Card",
+      "area": "assets_source",
+      "summary": "---",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "assets_source/location_cards/laundry_room.md",
+      "kind": "reference",
+      "title": "Savoy Laundry Room: Background Visual Card",
+      "area": "assets_source",
+      "summary": "---",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "assets_source/location_cards/master_suite.md",
+      "kind": "reference",
+      "title": "VIP Master Suite: Background Visual Card",
+      "area": "assets_source",
+      "summary": "---",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "assets_source/location_cards/README.md",
+      "kind": "readme",
+      "title": "Active Location Scene Visual Cards",
+      "area": "assets_source",
+      "summary": "This directory houses the active background scene cards (`*.md`) for all in-game environments. These cards catalog prompt templates, layout assets, details, lighting conditions, and layering overlay stacks (morning, even",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "assets_source/location_cards/savoy_front_facade.md",
+      "kind": "reference",
+      "title": "Savoy Hotel Front Facade: Background Visual Card",
+      "area": "assets_source",
+      "summary": "---",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "assets_source/location_cards/servants_corridor.md",
+      "kind": "reference",
+      "title": "Savoy Servants' Corridor: Background Visual Card",
+      "area": "assets_source",
+      "summary": "---",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "assets_source/location_cards/servants_quarters.md",
+      "kind": "reference",
+      "title": "Savoy Servants' Quarters: Background Visual Card",
+      "area": "assets_source",
+      "summary": "---",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "assets_source/prompts/README.md",
+      "kind": "readme",
+      "title": "Source Prompts & Text Logs",
+      "area": "assets_source",
+      "summary": "Save raw image prompt logs, visual reference links, and text prompt experiments here.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "assets_source/README.md",
+      "kind": "readme",
+      "title": "Savoy Hotel Visual Novel: Active Assets Source Directory",
+      "area": "assets_source",
+      "summary": "This directory acts as the active workspace and repository for raw assets, generation prompt files, sliced frames, and approved media prior to their integration into the Ren'Py engine under `renpy_project/game/images/`.",
+      "links": [
+        {
+          "target": "../docs/art/README.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "assets_source/vnccs_sheets/README.md",
+      "kind": "readme",
+      "title": "Raw VNCCS Grid Sprite Sheets",
+      "area": "assets_source",
+      "summary": "Store uncropped, original VNCCS sprite grid sheets categorized by character folders.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "CLAUDE.md",
+      "kind": "reference",
+      "title": "CLAUDE.md",
+      "area": "repo-root",
+      "summary": "This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "docs/agents/BRANCH_WORKFLOW_CONTRACT.md",
+      "kind": "workflow",
+      "title": "Branch workflow contract",
+      "area": "docs/agents",
+      "summary": "This contract keeps multi-tool agent work from scattering across tool-named branches or hidden worktrees. It is source-control policy for humans and agents; it does not replace Git.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "docs/agents/CONTRACTS.md",
+      "kind": "workflow",
+      "title": "Agent contracts and enforcement",
+      "area": "docs/agents",
+      "summary": "Each specialist invocation receives:",
+      "links": [
+        {
+          "target": "../../.agents/rules/orchestrator.md",
+          "status": "ok"
+        },
+        {
+          "target": "BRANCH_WORKFLOW_CONTRACT.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../.agents/skills/branch_handoff/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../.guardrails.yml",
+          "status": "ok"
+        },
+        {
+          "target": "../contracts/README.md",
+          "status": "ok"
+        },
+        {
+          "target": "../contracts/documentation_catalog.schema.json",
+          "status": "ok"
+        },
+        {
+          "target": "../../narrative/pipeline/README.md",
+          "status": "ok"
+        },
+        {
+          "target": "../dev_bible.md",
+          "status": "ok"
+        },
+        {
+          "target": "../game_mechanics_bible.md",
+          "status": "ok"
+        },
+        {
+          "target": "../compliance_checklist.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "docs/agents/GETTING_STARTED.md",
+      "kind": "onboarding",
+      "title": "Getting started with the agent system",
+      "area": "docs/agents",
+      "summary": "This guide assumes you have never used this repo's agents before.",
+      "links": [
+        {
+          "target": "../../.agents/rules/orchestrator.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../.agents/rules/writers_room.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../.agents/rules/victorian_consultant.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../.agents/rules/",
+          "status": "ok"
+        },
+        {
+          "target": "../contracts/README.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../.github/workflows/gatekeeper.yml",
+          "status": "ok"
+        },
+        {
+          "target": "PIPELINE_REFERENCE.md",
+          "status": "ok"
+        },
+        {
+          "target": "CONTRACTS.md",
+          "status": "ok"
+        },
+        {
+          "target": "../narrative_workflow.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "docs/agents/PIPELINE_REFERENCE.md",
+      "kind": "workflow",
+      "title": "Pipeline reference",
+      "area": "docs/agents",
+      "summary": "Canonical routing logic lives in [`.agents/rules/orchestrator.md`](../../.agents/rules/orchestrator.md). This document is a **readable index** for humans; if anything conflicts, the orchestrator rule file wins.",
+      "links": [
+        {
+          "target": "../../.agents/rules/orchestrator.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../.agents/rules/writers_room.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../.agents/rules/writers_room/README.md",
+          "status": "ok"
+        },
+        {
+          "target": "CONTRACTS.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "docs/agents/README.md",
+      "kind": "readme",
+      "title": "Agent documentation",
+      "area": "docs/agents",
+      "summary": "This folder is the human-readable companion to the rule files under `.agents/rules/`.",
+      "links": [
+        {
+          "target": "GETTING_STARTED.md",
+          "status": "ok"
+        },
+        {
+          "target": "PIPELINE_REFERENCE.md",
+          "status": "ok"
+        },
+        {
+          "target": "CONTRACTS.md",
+          "status": "ok"
+        },
+        {
+          "target": "BRANCH_WORKFLOW_CONTRACT.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "docs/art/ASSET_CARD_SCHEMA.md",
+      "kind": "reference",
+      "title": "Asset Card YAML Schema Specification",
+      "area": "docs/art",
+      "summary": "Every generated visual asset must possess a corresponding asset tracking card (`*.md`) located under `assets_source/character_cards/` or `assets_source/location_cards/`. These files must declare metadata using standardiz",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "docs/art/ASSET_NAMING.md",
+      "kind": "reference",
+      "title": "Visual Novel Asset Naming Specification",
+      "area": "docs/art",
+      "summary": "To prevent file chaos and ensure clean integration with automated testing tools, all visual assets must follow these strict naming rules.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "docs/art/BACKGROUND_LAYERING.md",
+      "kind": "reference",
+      "title": "Savoy Hotel Background Layering & Overlay Specifications",
+      "area": "docs/art",
+      "summary": "This document defines the modular, base-and-overlay background strategy designed to support asset reuse across the Savoy Hotel's repeated architectural spaces.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "docs/art/examples/character_card_cora.md",
+      "kind": "reference",
+      "title": "Character Card Example: Cora Hartley",
+      "area": "docs/art",
+      "summary": "This file serves as a reference and template example for character sprite cards. The active, production-grade character card containing locked visual parameters and prompts is located here:",
+      "links": [
+        {
+          "target": "../../../assets_source/character_cards/cora.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "docs/art/examples/location_card_servants_corridor.md",
+      "kind": "reference",
+      "title": "Location Card Example: Savoy Servants' Corridor",
+      "area": "docs/art",
+      "summary": "This file serves as a reference and template example for background location cards. The active, production-grade location card containing locked environmental parameters, overlays, and prompts is located here:",
+      "links": [
+        {
+          "target": "../../../assets_source/location_cards/servants_corridor.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "docs/art/PRODUCTION_WORKFLOW.md",
+      "kind": "workflow",
+      "title": "Art Sprint Production Workflow Manual",
+      "area": "docs/art",
+      "summary": "This document details the day-to-day, step-by-step production loop for generating, slicing, validating, and deploying visual assets during active development sprints.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "docs/art/PROMPT_LIBRARY.md",
+      "kind": "reference",
+      "title": "Savoy Visual Novel Prompt Library",
+      "area": "docs/art",
+      "summary": "Use this library of copy/pasteable text prompts and image-to-image templates to maintain style bible alignment.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "docs/art/README.md",
+      "kind": "readme",
+      "title": "Visual Novel Art Prompt Workflow & Production Manual",
+      "area": "docs/art",
+      "summary": "Welcome to the repo-owned visual asset production documentation suite. This manual organizes all guidelines, templates, naming conventions, and validation contracts required to deliver a polished, Victorian-era styled ae",
+      "links": [
+        {
+          "target": "STYLE_BIBLE.md",
+          "status": "ok"
+        },
+        {
+          "target": "PROMPT_LIBRARY.md",
+          "status": "ok"
+        },
+        {
+          "target": "ASSET_CARD_SCHEMA.md",
+          "status": "ok"
+        },
+        {
+          "target": "ASSET_NAMING.md",
+          "status": "ok"
+        },
+        {
+          "target": "VNCCS_SPRITE_SHEETS.md",
+          "status": "ok"
+        },
+        {
+          "target": "BACKGROUND_LAYERING.md",
+          "status": "ok"
+        },
+        {
+          "target": "PRODUCTION_WORKFLOW.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "docs/art/STYLE_BIBLE.md",
+      "kind": "reference",
+      "title": "Savoy Hotel Visual Style Bible",
+      "area": "docs/art",
+      "summary": "This document locks in the visual language, core styling parameters, and aesthetic boundaries for all generated sprites, backgrounds, UI screens, and CG illustrations.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "docs/art/VNCCS_SPRITE_SHEETS.md",
+      "kind": "reference",
+      "title": "VNCCS Sprite Sheets & Slicing Manual",
+      "area": "docs/art",
+      "summary": "This document details the workflow for managing, slicing, and deploying high-volume grid sprite sheets generated by the Visual Novel Character Creator System (VNCCS).",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "docs/backlog/editors-desk-writing-mechanic.md",
+      "kind": "backlog",
+      "title": "Backlog: The Editor's Desk (Interactive Writing Slots)",
+      "area": "docs/backlog",
+      "summary": "**Status:** Spec draft — awaiting human approval before implementation",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "docs/backlog/mvp_backlog.md",
+      "kind": "backlog",
+      "title": "📋 MVP Production Workflow Backlog",
+      "area": "docs/backlog",
+      "summary": "This backlog organizes the remaining tasks required to complete the **Playable 5-Day MVP Demo** into two distinct, highly actionable pipelines: **Narrative Workflow** and **Coding Workflow**.",
+      "links": [
+        {
+          "target": "../../AGENTS.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../narrative/draft/bible/cora_character_non_canon.md#L78",
+          "status": "ok"
+        },
+        {
+          "target": "../../narrative/draft/bible/stern_character_non_canon.md#L15",
+          "status": "ok"
+        },
+        {
+          "target": "../../narrative/draft/bible/vance_character_non_canon.md#L22",
+          "status": "ok"
+        },
+        {
+          "target": "../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy",
+          "status": "ok"
+        },
+        {
+          "target": "../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy",
+          "status": "ok"
+        },
+        {
+          "target": "../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day100_non_canon.rpy",
+          "status": "ok"
+        },
+        {
+          "target": "../../renpy_project/game/script.rpy#L15",
+          "status": "ok"
+        },
+        {
+          "target": "../../renpy_project/game/day102.rpy",
+          "status": "ok"
+        },
+        {
+          "target": "../../renpy_project/game/day103.rpy",
+          "status": "ok"
+        },
+        {
+          "target": "../../renpy_project/game/day104.rpy",
+          "status": "ok"
+        },
+        {
+          "target": "../../renpy_project/game/assets_manifest.rpy",
+          "status": "ok"
+        },
+        {
+          "target": "../../scripts/agent_next_step.py#L143",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "docs/backlog/narrative-json-beat-pipeline.md",
+      "kind": "backlog",
+      "title": "Backlog: JSON beat pipeline (deferred)",
+      "area": "docs/backlog",
+      "summary": "This repository previously explored a **markdown → JSON beat schema → Ren’Py** path (`validate_beats`, `sync_beats`, `narrative/beats`, etc.). That work is **deferred** so effort stays on **shipping the MVP** in `renpy_p",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "docs/backlog/README.md",
+      "kind": "readme",
+      "title": "Backlog documentation",
+      "area": "docs/backlog",
+      "summary": "This folder holds deferred designs and non-MVP implementation notes. Backlog files are not active",
+      "links": [
+        {
+          "target": "mvp_backlog.md",
+          "status": "ok"
+        },
+        {
+          "target": "narrative-json-beat-pipeline.md",
+          "status": "ok"
+        },
+        {
+          "target": "editors-desk-writing-mechanic.md",
+          "status": "ok"
+        },
+        {
+          "target": "beat_schema.json",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "docs/canon/historical_guardrails.md",
+      "kind": "reference",
+      "title": "Historical Guardrails (1891 Savoy Baseline)",
+      "area": "docs/canon",
+      "summary": "This file is the canonical historical reference for narrative and art review.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "docs/compliance_checklist.md",
+      "kind": "reference",
+      "title": "MVP Compliance Checklist",
+      "area": "docs",
+      "summary": "Use this checklist for PR review by Prod Code Agent + Chief Architect.",
+      "links": [
+        {
+          "target": "../AGENTS.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "docs/contracts/book_writing_contract.md",
+      "kind": "contract",
+      "title": "Contract: Book Writing Engine (Inline Prose Macros & Holywell Street Style)",
+      "area": "docs/contracts",
+      "summary": "This contract defines the syntax and creative workflow for writing `book1` NVL chapter prose in the non-canon draft.",
+      "links": [
+        {
+          "target": "../backlog/narrative-json-beat-pipeline.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "docs/contracts/examples/README.md",
+      "kind": "readme",
+      "title": "Contract examples",
+      "area": "docs/contracts",
+      "summary": "This folder contains sample JSON sidecars for the schemas in [../README.md](../README.md).",
+      "links": [
+        {
+          "target": "../README.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "docs/contracts/README.md",
+      "kind": "readme",
+      "title": "Agent handoff contracts (JSON)",
+      "area": "docs/contracts",
+      "summary": "Machine-readable sidecars complement markdown artifacts. **Markdown remains authoritative for reasoning**; JSON is for routing, CI, and orchestrator logic.",
+      "links": [
+        {
+          "target": "gate_verdict.schema.json",
+          "status": "ok"
+        },
+        {
+          "target": "narrative_change_brief.schema.json",
+          "status": "ok"
+        },
+        {
+          "target": "profile_delta.schema.json",
+          "status": "ok"
+        },
+        {
+          "target": "promotion_handoff.schema.json",
+          "status": "ok"
+        },
+        {
+          "target": "sprite_layout_policy.schema.json",
+          "status": "ok"
+        },
+        {
+          "target": "documentation_catalog.schema.json",
+          "status": "ok"
+        },
+        {
+          "target": "examples/",
+          "status": "ok"
+        },
+        {
+          "target": "sprite_layout_policy.yaml",
+          "status": "ok"
+        },
+        {
+          "target": "../specs/scene-direction-agent.md",
+          "status": "ok"
+        },
+        {
+          "target": "../documentation_catalog.json",
+          "status": "ok"
+        },
+        {
+          "target": "../DOCUMENTATION_CATALOG.md",
+          "status": "ok"
+        },
+        {
+          "target": "../DOCUMENTATION_AUDIT.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "docs/dev_bible.md",
+      "kind": "reference",
+      "title": "STUDIO DEVELOPMENT BIBLE",
+      "area": "docs",
+      "summary": "**Project:** [Pending Title]",
+      "links": [
+        {
+          "target": "../.agents/rules/dev_bible.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "docs/game_mechanics_bible.md",
+      "kind": "reference",
+      "title": "GAME MECHANICS BIBLE",
+      "area": "docs",
+      "summary": "**Project:** [Pending Title]",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "docs/narrative_workflow.md",
+      "kind": "workflow",
+      "title": "Narrative workflow (MVP)",
+      "area": "docs",
+      "summary": "The product is a **playable Ren'Py MVP** in `renpy_project/`. Non-canon day scripts in `narrative/draft/` are supporting design/implementation input, not a parser pipeline.",
+      "links": [
+        {
+          "target": "../AGENTS.md",
+          "status": "ok"
+        },
+        {
+          "target": "../.agents/rules/orchestrator.md",
+          "status": "ok"
+        },
+        {
+          "target": "agents/PIPELINE_REFERENCE.md",
+          "status": "ok"
+        },
+        {
+          "target": "contracts/sprite_layout_policy.yaml",
+          "status": "ok"
+        },
+        {
+          "target": "specs/scene-direction-agent.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "docs/onboarding/prose_editor_quickstart.md",
+      "kind": "onboarding",
+      "title": "Prose editor quickstart",
+      "area": "docs/onboarding",
+      "summary": "You are here to write or revise story text. This page is everything you need.",
+      "links": [
+        {
+          "target": "../narrative_workflow.md#sprite-direction--asset-lock-tags",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "docs/README.md",
+      "kind": "readme",
+      "title": "Documentation",
+      "area": "docs",
+      "summary": "This folder contains project documentation, contracts, feature specs, onboarding material, art",
+      "links": [
+        {
+          "target": "DOCUMENTATION_CATALOG.md",
+          "status": "ok"
+        },
+        {
+          "target": "DOCUMENTATION_AUDIT.md",
+          "status": "ok"
+        },
+        {
+          "target": "agents/README.md",
+          "status": "ok"
+        },
+        {
+          "target": "contracts/README.md",
+          "status": "ok"
+        },
+        {
+          "target": "specs/README.md",
+          "status": "ok"
+        },
+        {
+          "target": "art/README.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "docs/specs/art-prompt-workflow.md",
+      "kind": "feature-spec",
+      "title": "Spec: Art prompt workflow documentation",
+      "area": "docs/specs",
+      "summary": "Create a single, repo-owned prompt workflow for visual novel art production so concept prompts, image references, asset manifest entries, VNCCS sprite outputs, background cleanup notes, and Ren'Py-ready asset names are n",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "docs/specs/book-writing-styling.md",
+      "kind": "feature-spec",
+      "title": "Spec: Book Writing Styling & Layout",
+      "area": "docs/specs",
+      "summary": "Define the visual layout, coordinates, styling guidelines, and asset declarations for the book writing feature. This feature displays in-game chapter manuscript text in NVL mode on the left side of the screen, while show",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "docs/specs/book1-writing-engine.md",
+      "kind": "feature-spec",
+      "title": "Spec: Book1 Writing Engine (NVL Artifact)",
+      "area": "docs/specs",
+      "summary": "Define a maintainable, schema-driven writing engine that generates `book1` NVL chapter prose from gameplay state, with explicit branch scoping, creative direction per payload, and predictable extensibility for future spi",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "docs/specs/README.md",
+      "kind": "readme",
+      "title": "Feature specs",
+      "area": "docs/specs",
+      "summary": "This folder holds implementation-facing feature specifications. Specs may describe shipped,",
+      "links": [
+        {
+          "target": "art-prompt-workflow.md",
+          "status": "ok"
+        },
+        {
+          "target": "book-writing-styling.md",
+          "status": "ok"
+        },
+        {
+          "target": "book1-writing-engine.md",
+          "status": "ok"
+        },
+        {
+          "target": "scene-direction-agent.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "docs/specs/scene-direction-agent.md",
+      "kind": "feature-spec",
+      "title": "Spec: Ren'Py Scene Direction Agent",
+      "area": "docs/specs",
+      "summary": "Add a **deterministic sprite-placement post-processor** to the production pipeline. After the",
+      "links": [
+        {
+          "target": "../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/characters.rpy",
+          "status": "ok"
+        },
+        {
+          "target": "../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day101_non_canon.rpy",
+          "status": "ok"
+        },
+        {
+          "target": "../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/asset_transforms.rpy",
+          "status": "ok"
+        },
+        {
+          "target": "#open-decisions",
+          "status": "anchor-only"
+        },
+        {
+          "target": "../../.agents/rules/orchestrator.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../scripts/renpy_contract_linter.py",
+          "status": "ok"
+        },
+        {
+          "target": "../../scripts/check_assets.py",
+          "status": "ok"
+        },
+        {
+          "target": "../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/characters.rpy",
+          "status": "ok"
+        },
+        {
+          "target": "../../docs/contracts/README.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/asset_transforms.rpy",
+          "status": "ok"
+        },
+        {
+          "target": "../../.agents/README.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../AGENTS.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../.agents/skills/check_assets/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../.agents/rules/orchestrator.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../docs/agents/PIPELINE_REFERENCE.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../scripts/validate.py",
+          "status": "ok"
+        },
+        {
+          "target": "../../scripts/orchestrate_review.py",
+          "status": "ok"
+        },
+        {
+          "target": "../../scripts/gatekeeper.py",
+          "status": "ok"
+        },
+        {
+          "target": "../../.agents/rules/art_agent.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../docs/contracts/art_fidelity_contract.json",
+          "status": "ok"
+        },
+        {
+          "target": "../../.agents/skills/check_assets/SKILL.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "narrative/canon/characters_canon.md",
+      "kind": "reference",
+      "title": "Characters Canon Index",
+      "area": "narrative",
+      "summary": "This file tracks the approved character database structure.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/canon/characters_minor_canon.md",
+      "kind": "reference",
+      "title": "Characters Minor Canon",
+      "area": "narrative",
+      "summary": "This file tracks minor characters who appear in specific scenes or days but do not have dedicated character files.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/canon/cora_character_canon.md",
+      "kind": "reference",
+      "title": "Cora Character Canon",
+      "area": "narrative",
+      "summary": "Project: Untitled Victorian VN",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/canon/gideon_character_canon.md",
+      "kind": "reference",
+      "title": "Gideon Character Canon",
+      "area": "narrative",
+      "summary": "Project: Untitled Victorian VN",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/canon/locations_canon.md",
+      "kind": "reference",
+      "title": "Locations Canon",
+      "area": "narrative",
+      "summary": "Stern Office",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/canon/mechanics_canon.md",
+      "kind": "reference",
+      "title": "Mechanics Canon (MVP Baseline)",
+      "area": "narrative",
+      "summary": "This file anchors narrative-facing mechanics references for editorial review.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/canon/missy_character_canon.md",
+      "kind": "reference",
+      "title": "Missy Character Canon",
+      "area": "narrative",
+      "summary": "Project: Untitled Victorian VN",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/canon/README.md",
+      "kind": "readme",
+      "title": "Canon narrative files",
+      "area": "narrative",
+      "summary": "This folder contains promoted narrative truth that downstream drafting and review agents may cite.",
+      "links": [
+        {
+          "target": "../../AGENTS.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "narrative/canon/stern_character_canon.md",
+      "kind": "reference",
+      "title": "Stern Character Canon",
+      "area": "narrative",
+      "summary": "Project: Untitled Victorian VN",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/canon/vance_character_canon.md",
+      "kind": "reference",
+      "title": "Vance Character Canon",
+      "area": "narrative",
+      "summary": "Project: Untitled Victorian VN",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/canon/voice_guides/cora_voice_guide.md",
+      "kind": "reference",
+      "title": "CORA VOICE GUIDE (CANON LOCK)",
+      "area": "narrative",
+      "summary": "Canonical source currently derives from:",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/canon/voice_guides/gideon_voice_guide.md",
+      "kind": "reference",
+      "title": "GIDEON VOICE GUIDE (CANON LOCK)",
+      "area": "narrative",
+      "summary": "Canonical source currently derives from:",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/canon/voice_guides/missy_voice_guide.md",
+      "kind": "reference",
+      "title": "MISSY VOICE GUIDE (CANON LOCK)",
+      "area": "narrative",
+      "summary": "Canonical source currently derives from:",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/canon/voice_guides/README.md",
+      "kind": "readme",
+      "title": "Canon Voice Guides",
+      "area": "narrative",
+      "summary": "Canonical voice guides are mirrored here for editorial lock.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/canon/voice_guides/stern_voice_guide.md",
+      "kind": "reference",
+      "title": "MS. STERN VOICE GUIDE (CANON LOCK)",
+      "area": "narrative",
+      "summary": "Canonical source currently derives from:",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/canon/voice_guides/vance_voice_guide.md",
+      "kind": "reference",
+      "title": "VANCE VOICE GUIDE (CANON LOCK)",
+      "area": "narrative",
+      "summary": "Canonical source currently derives from:",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/draft/bible/characters_non_canon.md",
+      "kind": "reference",
+      "title": "Characters Non Canon",
+      "area": "narrative",
+      "summary": "Purpose: single source for supporting/minor cast voice anchors and behavior notes.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/draft/bible/cora_character_non_canon.md",
+      "kind": "reference",
+      "title": "Cora Character Non Canon",
+      "area": "narrative",
+      "summary": "Project: Untitled Victorian VN",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/draft/bible/cora_inner_voice_non_canon.md",
+      "kind": "reference",
+      "title": "Cora's Inner Voice (`cora_inner`) — Non-Canon Voice Guide",
+      "area": "narrative",
+      "summary": "This voice guide defines the narrative guidelines, psychological architecture, and historical class constraints for writing Cora's internal monologue (`cora_inner`).",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/draft/bible/gideon_character_non_canon.md",
+      "kind": "reference",
+      "title": "Gideon Character Non Canon",
+      "area": "narrative",
+      "summary": "Project: Untitled Victorian VN",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/draft/bible/locations_non_canon.md",
+      "kind": "reference",
+      "title": "Locations Database (Non-Canon)",
+      "area": "narrative",
+      "summary": "Purpose: working location anchors for writing consistency and asset planning.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/draft/bible/missy_character_non_canon.md",
+      "kind": "reference",
+      "title": "Missy Character Non Canon",
+      "area": "narrative",
+      "summary": "Project: Untitled Victorian VN",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/draft/bible/README.md",
+      "kind": "readme",
+      "title": "Draft bible",
+      "area": "narrative",
+      "summary": "This folder contains non-canon working bible files used by the writers' room and review agents.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/draft/bible/stern_character_non_canon.md",
+      "kind": "reference",
+      "title": "Stern Character Non Canon",
+      "area": "narrative",
+      "summary": "Project: Untitled Victorian VN",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/draft/bible/vance_character_non_canon.md",
+      "kind": "reference",
+      "title": "Vance Character Non Canon",
+      "area": "narrative",
+      "summary": "Project: Untitled Victorian VN",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/pipeline/character_profile_reports/gideon_forensic_psychology_report.md",
+      "kind": "reference",
+      "title": "Forensic Psychology Profile Report - Sir Gideon Locke",
+      "area": "narrative",
+      "summary": "Promoted Sir Gideon Locke from brief non-canon notes to a fully defined, independent locked canon profile file: `narrative/canon/gideon_character_canon.md`.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/pipeline/character_profile_reports/missy_forensic_psychology_report.md",
+      "kind": "reference",
+      "title": "Forensic Psychology Profile Report - Missy",
+      "area": "narrative",
+      "summary": "**Dismantled \"Born Sexy Yesterday\" Trope:** Rewrote Missy's psychological profile to eliminate any framing of naive airheadedness, child-like submission, or passivity. Missy is now established as a highly observant, inte",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/pipeline/character_profile_reports/README.md",
+      "kind": "readme",
+      "title": "Character profile reports",
+      "area": "narrative",
+      "summary": "This folder stores forensic psychology profile reports and carry-forward notes produced during",
+      "links": [
+        {
+          "target": "../README.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "narrative/pipeline/character_profile_reports/stern_forensic_psychology_report.md",
+      "kind": "reference",
+      "title": "Forensic Psychology Profile Report - Ms. Stern",
+      "area": "narrative",
+      "summary": "Promoted Ms. Stern from brief aggregated notes to a fully defined independent canon profile file: `narrative/canon/stern_character_canon.md`.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/pipeline/character_profile_reports/vance_forensic_psychology_report.md",
+      "kind": "reference",
+      "title": "Forensic Psychology Profile Report - Vance",
+      "area": "narrative",
+      "summary": "Promoted Vance from aggregated notes to a fully defined independent canon profile file: `narrative/canon/vance_character_canon.md`.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/pipeline/README.md",
+      "kind": "readme",
+      "title": "Narrative pipeline (pre-draft exploration)",
+      "area": "narrative",
+      "summary": "Everything here is **non-canon** and supports the writers' room before and during gate review. Nothing in `pipeline/` ships in the game.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "narrative/README.md",
+      "kind": "readme",
+      "title": "Narrative workspace",
+      "area": "narrative",
+      "summary": "All story authoring lives under `narrative/`. **Episodic canon** (what ships in the game) is only in `renpy_project/game/dayrdd.rpy` — not here.",
+      "links": [
+        {
+          "target": "canon/",
+          "status": "ok"
+        },
+        {
+          "target": "draft/",
+          "status": "ok"
+        },
+        {
+          "target": "pipeline/",
+          "status": "ok"
+        },
+        {
+          "target": "pipeline/README.md",
+          "status": "ok"
+        },
+        {
+          "target": "../.agents/rules/writers_room.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "README.md",
+      "kind": "readme",
+      "title": "Project Name: [Pending Title]",
+      "area": "repo-root",
+      "summary": "An AI-accelerated, adult pseudo-sandbox RPG visual novel set in a Victorian hotel. This project explores themes of dark gothic corruption, voyeurism, and the loss of purity, utilizing a dynamic \"paper doll\" visual state ",
+      "links": [
+        {
+          "target": "narrative/README.md",
+          "status": "ok"
+        },
+        {
+          "target": "AGENTS.md",
+          "status": "ok"
+        },
+        {
+          "target": "docs/DOCUMENTATION_CATALOG.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/rules/orchestrator.md",
+          "status": "ok"
+        },
+        {
+          "target": "docs/agents/GETTING_STARTED.md",
+          "status": "ok"
+        },
+        {
+          "target": "AGENTS.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "renpy_project/game/README.md",
+      "kind": "readme",
+      "title": "Ren'Py game scripts",
+      "area": "renpy_project",
+      "summary": "This folder is the playable runtime source for the visual novel. Promoted `day*.rpy` files are",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "renpy_project/README.md",
+      "kind": "readme",
+      "title": "Untitled Victorian VN",
+      "area": "renpy_project",
+      "summary": "A visual novel developed in Ren'Py, set in the historic Savoy Hotel, London, during the winter of 1891.",
+      "links": [],
+      "findings": []
+    }
+  ],
+  "findings": []
+}

@@ -84,7 +84,7 @@ py scripts/scene_direction.py --files "<path1>,<path2>" [--check] [--agent scene
 
 Algorithm (from §10) implemented as discrete, testable functions:
 
-1. `split_scene_blocks(lines)` — split on `^scene\s+` (§2). Respect `# [asset lock:scene]` before/after the `scene` line → skip block (§3.1).
+1. `split_scene_blocks(lines)` — split on `^scene/s+` (§2). Respect `# [asset lock:scene]` before/after the `scene` line → skip block (§3.1).
 2. `parse_block(block)` — walk lines, tracking `visible_cast` ordered list. Recognise `# [enter:X]`, `# [exit:X]` (§4), infer enter from a dialogue speaker not yet visible (§4.1), **never** infer exit (§4.2).
 3. `resolve_layout(visible_cast, pins)` — apply the rule-priority resolver (§7): scene lock → line keep → explicit pin → hard relationship rules → strong character prefs → default ordering. Uses the policy YAML (below) as data, not hardcoded.
 4. `render_show_lines(...)` — emit `show <tag> <expr> at <slot> <transition> # [asset auto]` (§11),

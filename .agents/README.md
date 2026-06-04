@@ -27,6 +27,7 @@ This folder holds **agent role definitions** (markdown) and **Cursor skills** (t
     orchestrator/, produce_day/, promote_day/, review_scene/
     revise_narrative/, rewrite_narrative/, implement_spec/, market_review/
     historical_check/, divergent_writer/, convergent_writer/, spiciness_tuner/
+    documentation_audit/
 ```
 
 ## How invocation works
@@ -56,6 +57,7 @@ This folder holds **agent role definitions** (markdown) and **Cursor skills** (t
 | `prod_code_agent` | `prod_code_agent.md` | `promote-day`, `promote-framework` |
 | `chief_architect` | `chief_architect.md` | Code review, promotion validation |
 | `gatekeeper_orchestrator` | `gatekeeper_orchestrator.md` | PR / `scripts/gatekeeper.py` |
+| `documentation_steward` | `documentation_steward.md` | `documentation-audit` |
 
 Domain permissions: [`.guardrails.yml`](../.guardrails.yml) (enforced by `scripts/gatekeeper.py` when `--agent` is set).
 
@@ -75,5 +77,6 @@ On `dayrdd_non_canon.rpy`, always **sequential**:
 - [`docs/agents/PIPELINE_REFERENCE.md`](../docs/agents/PIPELINE_REFERENCE.md)
 - [`docs/agents/CONTRACTS.md`](../docs/agents/CONTRACTS.md)
 - [`docs/agents/BRANCH_WORKFLOW_CONTRACT.md`](../docs/agents/BRANCH_WORKFLOW_CONTRACT.md)
+- [`docs/DOCUMENTATION_CATALOG.md`](../docs/DOCUMENTATION_CATALOG.md) — generated cross-project documentation index
 - [`docs/dev_bible.md`](../docs/dev_bible.md) — engineering MVP contract
 - [`docs/game_mechanics_bible.md`](../docs/game_mechanics_bible.md) — player-facing mechanics

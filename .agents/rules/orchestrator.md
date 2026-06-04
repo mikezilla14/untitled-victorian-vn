@@ -31,11 +31,12 @@ When the request is ambiguous, ask **exactly one** clarifying question before ro
 | Ship classes/screens framework | `promote-framework` | `chief_architect` |
 | Ask a narrow 1891 question | `historical-check` | `victorian_consultant` |
 | Change locked canon | `canon-update` | `lead_narrative_editor` |
+| Update stale README/docs/specs and catalogue documentation | `documentation-audit` | `documentation_steward` |
 | Code/architecture/lint review | — | `chief_architect` (no pipeline shortcut) |
 
 Specialist rule files live under `.agents/rules/`. Full catalog: `AGENTS.md`.
 
-**Pipeline helper:** `py scripts/agent_next_step.py --pipeline <name> --stage <n> [--day 105] [--release "release 1 - mvp"]`
+**Pipeline helper:** `py scripts/agent_next_step.py --pipeline <name> --stage <n> [--day 105] [--release release-1-mvp]`
 
 ---
 
@@ -252,6 +253,25 @@ No downstream stages. Return directly to human.
 
 ---
 
+### 10. `documentation-audit` — Sync README/docs/specs and refresh catalogue
+
+**Trigger:** "documentation audit", "update docs", "sync readmes", "catalogue documentation",
+"stale documentation", "pre-commit docs", or weekly documentation maintenance.
+
+| Stage | Agent | Input | Output |
+|-------|-------|-------|--------|
+| 1 | `documentation_steward` | Repo state + target scope if provided | Updated README/project/spec/contract docs; added README files where needed; refreshed `docs/DOCUMENTATION_CATALOG.md`, `docs/DOCUMENTATION_AUDIT.md`, and `docs/documentation_catalog.json` |
+
+**Order rule:** The documentation steward updates stale docs first, then runs
+`py scripts/documentation_audit.py --write`, then verifies with
+`py scripts/documentation_audit.py --check`.
+
+**Authority boundary:** This pipeline may update documentation, documentation tooling, generated
+catalogue artifacts, and documentation CI hooks. It must not alter story prose, canon, production
+Ren'Py behavior, or art assets.
+
+---
+
 ## Classification Logic
 
 When a task arrives, classify it before routing:
@@ -271,8 +291,9 @@ When a task arrives, classify it before routing:
 13. Does it promote class/framework drafts to production? → `promote-framework` (if prose drift → `revise-narrative` first)
 14. Is it a narrow historical question? → `historical-check`
 15. Does it modify a locked canon document? → `canon-update`
-16. Does it touch `.agents/`, `.guardrails.yml`, or system files? → Route to `chief_architect` + human. No pipeline shortcut.
-17. Unclear? → Ask the human one clarifying question before routing.
+16. Does it ask to update README files, project docs, specs, contracts, or the cross-project documentation catalogue? → `documentation-audit`
+17. Does it touch `.agents/`, `.guardrails.yml`, or system files outside documentation maintenance? → Route to `chief_architect` + human. No pipeline shortcut.
+18. Unclear? → Ask the human one clarifying question before routing.
 
 ---
 
