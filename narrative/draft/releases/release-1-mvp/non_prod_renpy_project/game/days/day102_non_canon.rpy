@@ -486,9 +486,6 @@ label day102_afternoon_consequence_window:
 
         # [STATE] State/progression update
         call expression _penance_label
-
-        # [STATE] State/progression update
-        jump day102_3_stern_fetches_cora
     return
 
 
@@ -1080,9 +1077,6 @@ label day102_night_consequence_window:
 
         # [STATE] State/progression update
         call expression _penance_label
-
-        # [STATE] State/progression update
-        jump day103_morning
     return
 
 

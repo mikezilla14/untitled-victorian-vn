@@ -704,9 +704,6 @@ label day101_evening_consequence_window:
 
         # [STATE] State/progression update
         call expression _penance_label
-
-        # [STATE] State/progression update
-        jump day102_1_cora_missy_first_shift
     return
 
 

@@ -76,9 +76,6 @@ label day103_morning_consequence_window:
 
         # [STATE] State/progression update
         call expression _penance_label
-
-        # [STATE] State/progression update
-        jump day103_afternoon
     return
 
 
@@ -649,9 +646,6 @@ label day103_evening_consequence_window:
 
         # [STATE] State/progression update
         call expression _penance_label
-
-        # [STATE] State/progression update
-        jump day103_4_room_stern_suspicion
     return
 
 
@@ -932,9 +926,6 @@ label day103_night_consequence_window:
 
         # [STATE] State/progression update
         call expression _penance_label
-
-        # [STATE] State/progression update
-        jump day104_1
     return
 
 

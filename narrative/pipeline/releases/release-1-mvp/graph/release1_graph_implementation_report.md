@@ -35,7 +35,7 @@
 ## Extraction Counts
 
 - Nodes: 169
-- Edges: 157
+- Edges: 149
 - Choices: 97
 - Gates: 13
 - Effects: 92

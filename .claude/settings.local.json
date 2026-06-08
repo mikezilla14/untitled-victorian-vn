@@ -20,7 +20,14 @@
       "Bash(py scripts/format_non_canon.py --check /tmp/d104.head)",
       "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\mikez\\\\OneDrive\\\\Documents\\\\gh\\\\git\\\\untitled-victorian-vn\\\\.agents\" -Recurse -File)",
       "Bash(Select-Object -ExpandProperty FullName)",
-      "Bash(find \"C:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn\" -name \".guardrails.yml\" -o -name \"guardrails.yml\" -o -name \"story_board.md\" -o -name \"storyboard.md\" 2>/dev/null)"
+      "Bash(find \"C:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn\" -name \".guardrails.yml\" -o -name \"guardrails.yml\" -o -name \"story_board.md\" -o -name \"storyboard.md\" 2>/dev/null)",
+      "Bash(grep -oE '`[a-z-]+`' .agents/rules/orchestrator.md)",
+      "PowerShell(py scripts/documentation_audit.py --write)",
+      "PowerShell(py scripts/documentation_audit.py --check; \"exit: $LASTEXITCODE\")",
+      "Bash(git checkout *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git diff *)"
     ]
   }
 }

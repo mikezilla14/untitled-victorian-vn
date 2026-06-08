@@ -1,7 +1,7 @@
 {
   "counts": {
     "choices": 97,
-    "edges": 157,
+    "edges": 149,
     "effects": 92,
     "gaps": 81,
     "gates": 13,
@@ -30,7 +30,7 @@
     "ASSET": 206,
     "BEAT": 32,
     "CHOICE": 44,
-    "STATE": 302
+    "STATE": 294
   },
   "penance_summary": {
     "confidence": "medium",

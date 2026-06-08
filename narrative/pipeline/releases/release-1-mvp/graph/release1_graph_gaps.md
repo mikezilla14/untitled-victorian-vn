@@ -4,7 +4,7 @@
 
 ### gap_0007 - missing_dag_gate_tag
 
-- Source: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy:1023`
+- Source: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy:1020`
 - Label: `day102_3_gideon_interrupts_controls_vance`
 - Description: Flow-affecting condition has no DAG_GATE tag.
 - Recommended owner: Create/Rewrite Day Workflow
@@ -12,7 +12,7 @@
 
 ### gap_0008 - missing_dag_gate_tag
 
-- Source: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy:1098`
+- Source: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy:1092`
 - Label: `day102_4_cora_writes_a_chapter`
 - Description: Flow-affecting condition has no DAG_GATE tag.
 - Recommended owner: Create/Rewrite Day Workflow
@@ -20,7 +20,7 @@
 
 ### gap_0009 - missing_dag_gate_tag
 
-- Source: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy:1100`
+- Source: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy:1094`
 - Label: `day102_4_cora_writes_a_chapter`
 - Description: Flow-affecting condition has no DAG_GATE tag.
 - Recommended owner: Create/Rewrite Day Workflow
@@ -28,7 +28,7 @@
 
 ### gap_0010 - missing_dag_gate_tag
 
-- Source: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy:1138`
+- Source: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy:1132`
 - Label: `day102_4_cora_writes_a_chapter`
 - Description: Flow-affecting condition has no DAG_GATE tag.
 - Recommended owner: Create/Rewrite Day Workflow
@@ -44,7 +44,7 @@
 
 ### gap_0017 - missing_dag_gate_tag
 
-- Source: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy:1225`
+- Source: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy:1216`
 - Label: `day103_3_bedroom_final_write`
 - Description: Flow-affecting condition has no DAG_GATE tag.
 - Recommended owner: Create/Rewrite Day Workflow
@@ -52,7 +52,7 @@
 
 ### gap_0018 - missing_dag_gate_tag
 
-- Source: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day104_non_canon.rpy:970`
+- Source: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day104_non_canon.rpy:964`
 - Label: `day104_6_false_dawn_ending`
 - Description: Flow-affecting condition has no DAG_GATE tag.
 - Recommended owner: Create/Rewrite Day Workflow
@@ -126,7 +126,7 @@ No findings.
 
 ### gap_0011 - deprecated_generic_suspicion_usage
 
-- Source: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy:1191`
+- Source: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy:1185`
 - Label: `day102_4_cora_sneaks_a_feel`
 - Description: apply_effects() uses deprecated generic susp field.
 - Recommended owner: Non-Prod Code Agent
@@ -136,7 +136,7 @@ No findings.
 
 ### gap_0012 - unmapped_effect_fields
 
-- Source: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy:1191`
+- Source: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy:1185`
 - Label: `day102_4_cora_sneaks_a_feel`
 - Description: Unmapped apply_effects fields: susp.
 - Recommended owner: Balancing Pass
@@ -300,7 +300,7 @@ No findings.
 
 ### gap_0014 - dynamic_jump_targets
 
-- Source: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy:247`
+- Source: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy:244`
 - Label: `day103_1_optional_character_chain`
 - Description: story.resolve_chain_label() creates dynamic chain target.
 - Recommended owner: Chief Architect
@@ -308,7 +308,7 @@ No findings.
 
 ### gap_0015 - dynamic_jump_targets
 
-- Source: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy:253`
+- Source: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy:250`
 - Label: `day103_1_optional_character_chain`
 - Description: story.resolve_chain_label() creates dynamic chain target.
 - Recommended owner: Chief Architect
@@ -316,7 +316,7 @@ No findings.
 
 ### gap_0016 - dynamic_jump_targets
 
-- Source: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy:259`
+- Source: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy:256`
 - Label: `day103_1_optional_character_chain`
 - Description: story.resolve_chain_label() creates dynamic chain target.
 - Recommended owner: Chief Architect
