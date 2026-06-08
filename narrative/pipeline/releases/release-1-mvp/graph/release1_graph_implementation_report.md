@@ -39,7 +39,7 @@
 - Choices: 97
 - Gates: 13
 - Effects: 92
-- Gaps: 124
+- Gaps: 81
 
 ## Storyboard Audit
 

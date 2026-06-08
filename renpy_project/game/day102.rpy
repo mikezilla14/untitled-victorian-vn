@@ -7,7 +7,7 @@
 # day102.rpy
 # Release 1 / Day 02: THE CONTRABAND AND THE INQUEST
 # Promoted from day102_non_canon.rpy (Release 1 MVP, writers' room pass).
-# Spine: story_board.md Day 102; router via end_slot / advance_after_confrontation
+# Spine: story_board.md Day 102; normal exits jump directly to the next day label
 
 # ==========================================
 # DAY 2 NODE MAP
@@ -41,6 +41,8 @@ label day102_1_cora_missy_first_shift:
 
     missy "Best room in the hotel, this one. Best view, best rugs, best chance of being shouted at for breathing wrong."
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show missy_sprite smiling at right_bust with move # [asset auto]
     cora "You make it sound almost desirable."
 
     missy "Oh, it is. You should see the breakfast trays. Kippers. Proper marmalade. Eggs with little hats on."
@@ -90,6 +92,8 @@ label day102_1_missy_finds_a_thing:
 
     "Missy's voice has lost its shine."
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show missy_sprite confused at right_bust with move # [asset auto]
     cora "What is it?"
 
     missy "I don't know. I mean, I know it's clothing. I think."
@@ -134,6 +138,8 @@ label day102_1_cora_takes_the_thing:
     $ story.set_day2_contraband_state("stolen_wearing")
     $ apply_effects(vance_susp=5, insp=0, corr=15)
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show missy_sprite confused at right_bust with move # [asset auto]
     cora "Give it here."
 
     missy "Shouldn't we put it back?"
@@ -187,6 +193,8 @@ label day102_1_cora_deceives_missy:
     $ story.set_day2_contraband_state("planted_in_trunk")
     $ apply_effects(vance_susp=0, insp=5, corr=10)
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show missy_sprite confused at right_bust with move # [asset auto]
     cora "Put it away. Quickly."
 
     missy "Back in the hatbox?"
@@ -231,7 +239,7 @@ label day102_1_cora_deceives_missy:
 
 label day102_2_day2_chore_time:
 
-    call check_confrontations
+    call day102_afternoon_consequence_window
 
     # [STATE] State/progression update
     $ set_time_period("Afternoon")
@@ -256,6 +264,8 @@ label day102_2_day2_chore_time:
 
     missy "You are quiet."
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show missy_sprite smiling at right_bust with move # [asset auto]
     cora "I am working."
 
     missy "That's never stopped anyone from talking before."
@@ -299,6 +309,8 @@ label day102_2_day2_insp_choice:
 
     missy "You look like you're counting things."
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show missy_sprite smiling at right_bust with move # [asset auto]
     cora "I am."
 
     missy "What things?"
@@ -339,6 +351,8 @@ label day102_2_day2_corr_choice:
 
     missy "Cora, we'll be missed."
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show missy_sprite confused at right_bust with move # [asset auto]
     cora "Then push faster."
 
     missy "You were the one who slowed down."
@@ -362,19 +376,19 @@ label day102_2_optional_character_chain:
 
             # [STATE] State/progression update
             $ _chain_label = story.resolve_chain_label("stern")
-            jump expression _chain_label
+            call expression _chain_label
 
         "Steal an hour with Missy before Stern counts the sheets." if story.chain_available("missy"):
 
             # [STATE] State/progression update
             $ _chain_label = story.resolve_chain_label("missy")
-            jump expression _chain_label
+            call expression _chain_label
 
         "Drift toward the Locke Suite and watch who performs for whom." if story.chain_available("vance"):
 
             # [STATE] State/progression update
             $ _chain_label = story.resolve_chain_label("vance")
-            jump expression _chain_label
+            call expression _chain_label
 
         "Push the cart on and keep my hands honest.":
             if story.day2_chore_focus == "corruption":
@@ -384,7 +398,18 @@ label day102_2_optional_character_chain:
                 "I count boards, hinges, and the distance between stairs."
                 "Craft is safer when it has no audience."
             "The house loses interest when I stop offering it a face."
-            call end_slot(outcome="d2_reflect_done")
+            jump day102_3_stern_fetches_cora
+
+    jump day102_3_stern_fetches_cora
+
+
+label day102_afternoon_consequence_window:
+    call check_confrontations
+    $ _penance_label = story.pop_penance_for_window("day102_afternoon")
+    if _penance_label:
+        call expression _penance_label
+        jump day102_3_stern_fetches_cora
+    return
 
 
 # ── 023: STERN FETCHES CORA ─────────────────────────────────────
@@ -404,6 +429,8 @@ label day102_3_stern_fetches_cora:
 
     stern "Cora. Upstairs."
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show stern_sprite stern at right_bust with move # [asset auto]
     cora "Ma'am?"
 
     stern "Do not make me repeat myself."
@@ -518,6 +545,10 @@ label day102_3_cora_confesses:
     "The truth is not safe."
     "That does not make the lie safer."
 
+    show cora_sprite base at left_bust4 with moveinleft # [asset auto]
+    show stern_sprite stern at centre_left_bust4 with move # [asset auto]
+    show missy_sprite shocked at centre_right_bust4 with move # [asset auto]
+    show vance_sprite angry at right_bust4 with move # [asset auto]
     cora "Ma'am. I saw the item this morning."
 
     "Missy's head turns toward me."
@@ -568,6 +599,10 @@ label day102_3_cora_pretends_to_find_it:
     "That is the mask."
     "Helpful girls are allowed to cross rooms that guilty girls are not."
 
+    show cora_sprite base at left_bust4 with moveinleft # [asset auto]
+    show stern_sprite stern at centre_left_bust4 with move # [asset auto]
+    show missy_sprite shocked at centre_right_bust4 with move # [asset auto]
+    show vance_sprite angry at right_bust4 with move # [asset auto]
     cora "Pardon me, Madam. May I check where the morning things were placed?"
 
     vance "Do you imagine I have not looked?"
@@ -633,6 +668,10 @@ label day102_3_cora_frames_missy:
     "She exists."
     "She is simply not the one who speaks first."
 
+    show cora_sprite base at left_bust4 with moveinleft # [asset auto]
+    show stern_sprite stern at centre_left_bust4 with move # [asset auto]
+    show missy_sprite shocked at centre_right_bust4 with move # [asset auto]
+    show vance_sprite angry at right_bust4 with move # [asset auto]
     cora "Missy handled it this morning, Ma'am."
 
     missy "Cora—"
@@ -701,6 +740,10 @@ label day102_3_gideon_interrupt_controls_vance:
 
         gideon "You."
 
+        show cora_sprite base at left_bust4 with moveinleft # [asset auto]
+        show stern_sprite stern at centre_left_bust4 with move # [asset auto]
+        show vance_sprite cowed at centre_right_bust4 with move # [asset auto]
+        show gideon_sprite cold at right_bust4 with move # [asset auto]
         cora "Yes, Sir."
 
         gideon "You saw the item and failed to report it."
@@ -815,6 +858,8 @@ label day102_3_gideon_interrupt_controls_vance:
         "There are many possible answers."
         "None are small enough to fit in the corridor."
 
+        show cora_sprite base at left_bust with moveinleft # [asset auto]
+        show missy_sprite shocked at right_bust with move # [asset auto]
         cora "Not here."
 
         missy "No. Not anywhere."
@@ -866,7 +911,7 @@ label day102_3_gideon_interrupt_controls_vance:
 
 label day102_4_night:
 
-    call check_confrontations
+    call day102_night_consequence_window
 
     # [STATE] State/progression update
     $ set_time_period("Night")
@@ -896,6 +941,15 @@ label day102_4_night:
 
             # [STATE] State/progression update
             jump day102_4_cora_sneaks_a_feel
+
+
+label day102_night_consequence_window:
+    call check_confrontations
+    $ _penance_label = story.pop_penance_for_window("day102_night")
+    if _penance_label:
+        call expression _penance_label
+        jump day103_morning
+    return
 
 
 label day102_4_cora_writes_a_chapter:
@@ -981,7 +1035,7 @@ label day102_4_cora_writes_a_chapter:
             "None of it has become art yet."
             "It remains appetite and consequence."
 
-    call end_slot(outcome="d2_write_night")
+    jump day103_morning
 
 
 label day102_4_cora_sneaks_a_feel:
@@ -1034,4 +1088,4 @@ label day102_4_cora_sneaks_a_feel:
     "When I finally sleep, the candle has burned lower than I meant to allow."
     "Waste has consequences."
 
-    call end_slot(outcome="d2_write_night")
+    jump day103_morning

@@ -64,6 +64,7 @@ label day101_1_cora_waiting:
     "No one asks who I am."
     "That is the first rule of this place, then: be useful enough to ignore."
 
+    show stern_sprite neutral at centre_bust with moveinright # [asset auto]
     stern "Enter."
 
     # [STATE] State/progression update
@@ -88,6 +89,8 @@ label day101_1_morning_interview:
     "Her eyes move from my cap to my boots, weighing every inch for disobedience."
 
     stern "Cora Vale."
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show stern_sprite neutral at right_bust with move # [asset auto]
     cora "Yes, Ma'am."
     stern "You have worked in service before."
 
@@ -169,6 +172,8 @@ label day101_1_vance_throws_toy:
     "Her voice lands on me before her eyes do."
     "Velvet. Pearls. A face arranged for admiration and currently sharpened for harm."
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show vance_sprite angry at right_bust with move # [asset auto]
     cora "Yes, Miss."
 
     "I bend. I retrieve the little silver thing. I do not let my fingers tremble."
@@ -242,6 +247,8 @@ label day101_2_missy_meets_cora:
     show missy_sprite smiling at center
 
     missy "You must be Cora."
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show missy_sprite smiling at right_bust with move # [asset auto]
     cora "I must be."
 
     missy "I'm Missy. Miss Stern said I'm to show you where things go. Not everything, mind. If I showed you everything we'd both be dead before tea."
@@ -307,6 +314,8 @@ label day101_2_coras_path_choice:
     "Not a dropped tray."
     "Not a broken glass."
 
+    show missy_sprite smiling at left_bust with move # [asset auto]
+    show vance_sprite neutral at right_bust with moveinright # [asset auto]
     vance "Please. I understand. I do."
 
     # [ASSET] Visual/staging command
@@ -333,6 +342,8 @@ label day101_2_coras_path_choice:
             $ apply_effects(insp=10, corr=5)
             $ story.set_corridor_state("predator")
 
+            show cora_sprite base at left_bust with moveinleft # [asset auto]
+            show missy_sprite shocked at centre_bust with move # [asset auto]
             cora "You may be right. If she's hurt, someone should check."
             missy "Me?"
             cora "You know the house. If I open the wrong door on my first day, Stern will skin me."
@@ -348,6 +359,10 @@ label day101_2_coras_path_choice:
             "Through the narrow opening, I glimpse only fragments: Vance's white hand on dark carpet; the master's polished shoe; the silver head of his walking stick resting against his knee."
             "Missy gasps."
 
+            show cora_sprite base at left_bust4 with move # [asset auto]
+            show missy_sprite shocked at centre_left_bust4 with move # [asset auto]
+            show vance_sprite neutral at centre_right_bust4 with move # [asset auto]
+            show gideon_sprite neutral at right_bust4 with moveinright # [asset auto]
             gideon "The door."
 
             "Missy pulls it shut so fast the latch bites."
@@ -422,7 +437,7 @@ label day101_2_coras_path_choice:
 
 label day101_3_taking_stock_day1:
 
-    call check_confrontations
+    call day101_evening_consequence_window
 
     # [ASSET] Visual/staging command
     scene bg_servants_quarters_dusk
@@ -544,19 +559,19 @@ label day101_3_optional_character_chain:
 
             # [STATE] State/progression update
             $ _chain_label = story.resolve_chain_label("stern")
-            jump expression _chain_label
+            call expression _chain_label
 
         "Find Missy before the laundry goes cold." if story.chain_available("missy"):
 
             # [STATE] State/progression update
             $ _chain_label = story.resolve_chain_label("missy")
-            jump expression _chain_label
+            call expression _chain_label
 
         "Walk the guest wing where Mr. Locke's shoe still has authority." if story.chain_available("vance"):
 
             # [STATE] State/progression update
             $ _chain_label = story.resolve_chain_label("vance")
-            jump expression _chain_label
+            call expression _chain_label
 
         "Stay at the desk and let the ink dry.":
             if story.day1_ledger_focus == "corruption":
@@ -567,7 +582,18 @@ label day101_3_optional_character_chain:
 
             # [STATE] State/progression update
             $ apply_effects(insp=10, corr=0)
-            call end_slot(outcome="d1_reflect_done")
+            jump day101_4_writing_or_visiting
+
+    jump day101_4_writing_or_visiting
+
+
+label day101_evening_consequence_window:
+    call check_confrontations
+    $ _penance_label = story.pop_penance_for_window("day101_evening")
+    if _penance_label:
+        call expression _penance_label
+        jump day101_4_writing_or_visiting
+    return
 
 
 # ==========================================
@@ -576,7 +602,7 @@ label day101_3_optional_character_chain:
 
 label day101_4_writing_or_visiting:
 
-    call check_confrontations
+    call day101_night_consequence_window
 
     # [ASSET] Visual/staging command
     scene bg_cora_desk_night
@@ -618,6 +644,15 @@ label day101_4_writing_or_visiting:
 
         # [STATE] State/progression update
         jump day101_4_visit_missy
+
+
+label day101_night_consequence_window:
+    call check_confrontations
+    $ _penance_label = story.pop_penance_for_window("day101_night")
+    if _penance_label:
+        call expression _penance_label
+        jump day102_1_cora_missy_first_shift
+    return
 
 
 # ==========================================
@@ -682,7 +717,7 @@ label day101_4_write_the_chapter:
     "It has acquired a witness instead."
 
     # [STATE] State/progression update
-    call end_slot(outcome="d1_write_ch1")
+    jump day102_1_cora_missy_first_shift
 
 
 # ==========================================
@@ -707,6 +742,8 @@ label day101_4_visit_missy:
     show missy_sprite smiling at center
 
     missy "Cora?"
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show missy_sprite smiling at right_bust with move # [asset auto]
     cora "I couldn't sleep."
 
     missy "No one sleeps properly their first night. The pipes knock like ghosts and the mattresses are stuffed with old grudges."
@@ -794,4 +831,4 @@ label day101_4_visit_missy:
     # [ASSET] Visual/staging command
     hide missy_sprite
 
-    call end_slot(outcome="d1_visit_missy")
+    jump day102_1_cora_missy_first_shift

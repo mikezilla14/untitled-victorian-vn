@@ -94,25 +94,25 @@ flowchart TD
 | `prologue_found` | Day 100 | `"overheard"` or `"read_letters"` â€” seeds Cora's initial thematic inclination. |
 | `prologue_why_write` | Day 100 | `"money_home"` / `"cataloguer"` / `"scandal_hungry"` â€” seeds manuscript motive for book1. |
 | `prologue_holywell_posture` | Day 100 | `"careful"` / `"eager"` / `"desperate"` â€” seeds illicit-publisher risk appetite. |
-| `story.day1_interview_state` | Day 101 | `"meek"` / `"competent"` â€” early suspicion shaping with Stern. |
-| `story.day1_corridor_state` | Day 101 | `"predator"` / `"prey"` / `"ghost"` â€” determines Chapter 1 prose and Day 2's contraband branch. |
-| `story.day1_ledger_focus` | Day 101 | `"inspiration"` / `"corruption"` â€” dictates the framing of the writing or indulgence. |
-| `story.missy_day1_trust_state` | Day 101 | `"soothed"` / `"unsettled"` / `"warned_cora"` / `"shared_caution"` â€” tracks early relationship with Missy. |
-| `story.day2_contraband_state` | Day 102 | `"stolen_wearing"` / `"planted_in_trunk"` â€” outcome of the morning discovery; shapes the tea crisis. |
-| `story.day2_tea_choice` | Day 102 | `"prey"` (confess) / `"predator"` (pretend to find) / `"ghost"` (frame Missy) â€” drives the Day 3 consequence. |
-| `story.missy_day2_trust_break` | Day 102 | Boolean â€” True if Missy is framed (`"ghost"`). |
-| `story.day3_brush_choice` | Day 103 | `"predator"` (accomplice) / `"prey"` (deviant) / `"ghost"` (mouse) â€” Gideon mirror test. |
-| `story.day3_ultimatum` | Day 103 | `"defied"` / `"bargained"` / `"surrendered"` â€” response to Gideon's 9 PM demand. |
-| `story.day4_escape_state` | Day 104 | `"fireplace"` / `"bold_lie"` / `"missy_cover"` â€” survival method affecting suspicion and Missy. |
-| `story.has_photograph` | Day 104 | Boolean â€” True if Cora escaped with the evidence. |
-| `story.day5_dynamic` | Day 105 | `"muse"` / `"protege"` / `"adversary"` / `"witness"` â€” Gideon's assessment of Cora's true motivation. |
-| `story.day5_money_choice` | Day 105 | `"taken"` / `"refused"` / `"deferred"` â€” affects entanglement for Release 2. |
-| `story.gideon_entanglement_level` | Day 105 | `"accepted_money"` / `"refused_money"` / `"deferred_money"` â€” tracks Gideon leverage/money status for Release 2. |
-| `story.cora_release1_flavour` | Day 105 | `"observer"` / `"predator"` / `"prey"` / `"ghost"` â€” carries forward Cora's accumulated archetype. |
-| `story.stern_chain_level` | Day 101-104 | Integer `[0, 3]` â€” tracks Cora's optional relationship progression with Miss Stern. |
-| `story.missy_chain_level` | Day 101-104 | Integer `[0, 3]` â€” tracks Cora's optional relationship progression with Missy. |
-| `story.vance_chain_level` | Day 101-104 | Integer `[0, 3]` â€” tracks Cora's optional relationship progression with Vance. |
-| `story.penance_triggered` | Day 101-104 | Boolean â€” True when a personal character confrontation is triggered by combined suspicion â‰¥ 50. |
+| story.day1_interview_state | Day 101 | `"meek"` / `"competent"` â€” early suspicion shaping with Stern. |
+| story.day1_corridor_state | Day 101 | `"predator"` / `"prey"` / `"ghost"` â€” determines Chapter 1 prose and Day 2's contraband branch. |
+| story.day1_ledger_focus | Day 101 | `"inspiration"` / `"corruption"` â€” dictates the framing of the writing or indulgence. |
+| story.missy_day1_trust_state | Day 101 | `"soothed"` / `"unsettled"` / `"warned_cora"` / `"shared_caution"` â€” tracks early relationship with Missy. |
+| story.day2_contraband_state | Day 102 | `"stolen_wearing"` / `"planted_in_trunk"` â€” outcome of the morning discovery; shapes the tea crisis. |
+| story.day2_tea_choice | Day 102 | `"prey"` (confess) / `"predator"` (pretend to find) / `"ghost"` (frame Missy) â€” drives the Day 3 consequence. |
+| story.missy_day2_trust_break | Day 102 | Boolean â€” True if Missy is framed (`"ghost"`). |
+| story.day3_brush_choice | Day 103 | `"predator"` (accomplice) / `"prey"` (deviant) / `"ghost"` (mouse) â€” Gideon mirror test. |
+| story.day3_ultimatum | Day 103 | `"defied"` / `"bargained"` / `"surrendered"` â€” response to Gideon's 9 PM demand. |
+| story.day4_escape_state | Day 104 | `"fireplace"` / `"bold_lie"` / `"missy_cover"` â€” survival method affecting suspicion and Missy. |
+| story.has_photograph | Day 104 | Boolean â€” True if Cora escaped with the evidence. |
+| story.day5_dynamic | Day 105 | `"muse"` / `"protege"` / `"adversary"` / `"witness"` â€” Gideon's assessment of Cora's true motivation. |
+| story.day5_money_choice | Day 105 | `"taken"` / `"refused"` / `"deferred"` â€” affects entanglement for Release 2. |
+| story.gideon_entanglement_level | Day 105 | `"accepted_money"` / `"refused_money"` / `"deferred_money"` â€” tracks Gideon leverage/money status for Release 2. |
+| story.cora_release1_flavour | Day 105 | `"observer"` / `"predator"` / `"prey"` / `"ghost"` â€” carries forward Cora's accumulated archetype. |
+| story.stern_chain_level | Day 101-104 | Integer `[0, 3]` â€” tracks Cora's optional relationship progression with Miss Stern. |
+| story.missy_chain_level | Day 101-104 | Integer `[0, 3]` â€” tracks Cora's optional relationship progression with Missy. |
+| story.vance_chain_level | Day 101-104 | Integer `[0, 3]` â€” tracks Cora's optional relationship progression with Vance. |
+| story.penance_triggered | Day 101-104 | Boolean â€” True when a personal character confrontation is triggered by combined suspicion â‰¥ 50. |
 
 ### âš–ï¸ Hard Mechanic Gates
 
@@ -120,7 +120,7 @@ flowchart TD
 * **Two-Tiered Suspicion State**: Each tracked character (Stern, Vance, Gideon, Missy) maintains two independent pools of suspicion:
   * **Base Suspicion (`base_susp`)**: Permanent, established suspicion level reflecting structural plot events. Base suspicion is never naturally decayed.
   * **Acute Suspicion (`acute_susp`)**: Volatile, temporary heat generated by suspicious interactions (lies, snooping, wearing contraband). Acute suspicion is managed through gameplay actions.
-  * **Headroom Squeezing**: For each character, the combined suspicion ($base\_susp + acute\_susp$) is strictly capped at `100`. Permanent base suspicion takes precedence; if base suspicion increases programmatically at a major milestone and causes the combined total to exceed `100`, the acute suspicion is automatically **squeezed** (reduced) to fit within the remaining headroom.
+  * **Headroom Squeezing**: For each character, the combined suspicion ($base\_susp + acute\_susp$) is strictly capped at 100. Permanent base suspicion takes precedence; if base suspicion increases programmatically at a major milestone and causes the combined total to exceed 100, the acute suspicion is automatically **squeezed** (reduced) to fit within the remaining headroom.
   * **Asymptotic Acute Decay**: During optional grind or appeasement steps, acute suspicion naturally decays according to each character's specific decay rate $d$:
     $$S_t = S_0 \cdot (1 - d)$$
     * **Missy**: $d = 0.90$ (instant reset, Teflon Slate)
@@ -130,17 +130,17 @@ flowchart TD
 * **Derived Consolidated Anxiety (Independent Probability)**: Global `player.anxiety` is derived using independent probability theory, reflecting the compound probability of Cora getting caught by *at least one* active observer:
   $$\text{Anxiety} = 100 \cdot \left(1 - \prod_{c} \left(1 - \frac{\text{Susp}_c}{100}\right)\right)$$
   Where $\text{Susp}_c$ is the combined suspicion ($base\_susp + acute\_susp$ capped at 100) for each witness $c \in \{\text{stern, vance, gideon, missy}\}$.
-* **HUD/Compatibility Mirroring**: For compatibility with existing `.rpy` scripts, getter properties (e.g. `player.stern_suspicion`, `player.gideon_suspicion`) automatically return the combined total capped at `100`.
-* **Confrontation & Penance Check**: At the start of active slots (REFLECT or WRITE), the game calls `check_confrontations`. If any individual combined suspicion is $\ge 50$, a personal confrontation with that character is triggered. The confrontation and subsequent penance/atonement:
-  1. Consumes the active slot (sets `story.penance_triggered = True` and jumps to penance).
-  2. Reduces that character's acute suspicion by `35`, providing immediate anxiety relief.
-* **Vigilance / Breakdown Gate (Game Over)**: Reaching `100` consolidated Anxiety (either through a single combined suspicion hitting 100 or the compounded pressure of multiple suspicious observers) immediately triggers the `game_over_dismissed` fail-stateâ€”a nervous breakdown where Cora's mask cracks and she is dismissed by Miss Stern.
-* **Day 4 Write Paralysis**: Reaching `85` consolidated Anxiety during Day 4 Twilight blocks the Triumphant Write due to internal panic.
+* **HUD/Compatibility Mirroring**: For compatibility with existing `.rpy` scripts, getter properties (e.g. `player.stern_suspicion`, `player.gideon_suspicion`) automatically return the combined total capped at 100.
+* **Confrontation & Penance Check**: Named consequence windows call `check_confrontations`. If any individual combined suspicion is $\ge 50$, the check queues a concrete personal confrontation label. The window consumes the queue with `story.pop_penance_for_window(...)`, calls that confrontation, and returns to the day-owned spine.
+  1. Consumes the active consequence window, not the global route table.
+  2. Reduces that character's acute suspicion by 35, providing immediate anxiety relief.
+* **Vigilance / Breakdown Gate (Game Over)**: Reaching 100 consolidated Anxiety (either through a single combined suspicion hitting 100 or the compounded pressure of multiple suspicious observers) immediately triggers the game_over_dismissed fail-stateâ€”a nervous breakdown where Cora's mask cracks and she is dismissed by Miss Stern.
+* **Day 4 Write Paralysis**: Reaching 85 consolidated Anxiety during Day 4 Twilight blocks the Triumphant Write due to internal panic.
 
 #### ðŸ“… Two-Step Slot Integration
 To preserve crucial narrative forks and chapter variants without sacrificing optional grinds, active slots utilize a two-step flow:
-1. **Reflection Step**: The ledger or afternoon chore choice is presented first, setting essential focus flags (`day1_ledger_focus`, `day2_chore_focus`, `day3_corridor_chain`).
-2. **Optional Grind Step**: The day file presents a **contextual** chain menu. The player can choose to write (e.g. Chapter 1) or spend the slot grinding relationship chains. Each option calls `story.resolve_chain_label(character)` and jumps into the character's beat in `story_chains_non_canon.rpy`. Relationship chains have 3 levels and are gated by `story.chain_available(character)`. Desk retreat still calls `advance_after_confrontation`.
+1. **Reflection Step**: The ledger or afternoon chore choice is presented first, setting essential focus flags (day1_ledger_focus, day2_chore_focus, day3_corridor_chain).
+2. **Optional Grind Step**: The day file presents a **contextual** story window. Each option resolves the next relationship beat with `story.resolve_chain_label(character)`, calls that beat, and then returns to the day spine. Relationship chains have 3 levels and are gated by `story.chain_available(character)`. Desk retreat and normal exits now jump directly where the next day-owned label is obvious.
 
 #### ðŸŽ¯ Daily Story Gates
 - **Day 101 Night:** Writing Chapter One requires **(Inspiration + Corruption) â‰¥ 15**. Failure skips the chapter.
@@ -155,14 +155,14 @@ To preserve crucial narrative forks and chapter variants without sacrificing opt
 - **Presentation:** The player sees the same scene logic again through Cora's imagination, with heightened sensual detail, altered power emphasis, and CG edits/overlays that make clear this is the book's eroticised version rather than literal hotel action.
 - **Tone rule:** The manuscript layer can be hotter, more symbolic, and more physically explicit than the IRL hotel layer, but it should still reveal Cora's psychology: what she changes, exaggerates, omits, or makes herself enjoy is the point of the scene.
 - **Market role:** These minigame retellings are the MVP's primary adult-game handshake for the F95-style niche. The player should understand that writing is not only progression currency; it is where Cora converts danger into content.
-- **Branch memory:** The prose and CG edit should reflect prior flags (`day1_corridor_state`, `day1_ledger_focus`, `day2_contraband_state`, `day2_tea_choice`, `day3_brush_choice`, `day3_ultimatum`, `day4_escape_state`) so the fantasy payoff feels authored by the player's version of Cora.
+- **Branch memory:** The prose and CG edit should reflect prior flags (day1_corridor_state, day1_ledger_focus, day2_contraband_state, day2_tea_choice, day3_brush_choice, day3_ultimatum, day4_escape_state) so the fantasy payoff feels authored by the player's version of Cora.
 
 ---
 
-## MVP Spine Router (Single Timetable Contract)
+## MVP Spine Routing (Day-Owned Time Contract)
 
-> **Purpose:** Choices change stats and flags and flavour dialogue, but the run always reconverges on the same spine labels below. Week 1 implementation must route **every slot exit** through one router (`end_slot` / `advance_after_confrontation`) â€” not inline `jump day10Xâ€¦` across days.
-> **Source draft:** `story_chains_non_canon.rpy` (confrontations, chains, penance). **Runtime target:** `functions.rpy` + promoted `dayrdd.rpy`.
+> **Purpose:** Choices change stats, flags, and flavour dialogue, but the run reconverges on day-owned time labels and named dynamic windows. Current non-canon routing no longer relies on `end_slot` or `advance_after_confrontation` for migrated Day 101-104 story-chain and penance flow.
+> **Source draft:** `story_chains_non_canon.rpy` plus the day files under `game/days/`.
 
 ### Graph Audit Links
 
@@ -184,78 +184,80 @@ Manual `.rpy` rewrites should be followed by `storyboard_sync`, which updates th
 
 | Symbol | Meaning |
 |--------|---------|
-| **WORK** | Mandatory plot; always runs; no optional chain menu |
-| **REFLECT** | Ledger/chore menu â†’ focus flag â†’ optional contextual chain menu in day file â†’ `resolve_chain_label` |
-| **WRITE** | Night (or Day 4 twilight) manuscript beat |
-| **CHECK** | `call check_confrontations` at slot entry (anxiety â‰¥ 100 â†’ dismiss; any meter â‰¥ 50 â†’ penance) |
+| **WORK** | Mandatory plot; always runs; no optional chain menu. |
+| **STORY WINDOW** | Optional contextual chain menu. The day file resolves a chain label, calls it, and resumes the day spine. |
+| **CONSEQUENCE WINDOW** | Named penance check window. It calls `check_confrontations`, pops any queued penance label, calls it, and resumes the day spine. |
+| **WRITE** | Night, twilight, or final manuscript beat. |
+| **DEADLINE** | Manuscript-progress gate that can jump to a fail state. |
 
-Penance **consumes the current personal slot** (REFLECT or WRITE) and uses the same router row as â€œslot skipped.â€
+Penance is queued in story.pending_penance and consumed by named consequence windows. The deprecated compatibility routers remain in shared scripts for migration safety, but migrated labels do not call them.
 
 ### Spine sequence (labels only)
 
 | Step | Day | Period | Type | Enter label | Sets / gates |
 |------|-----|--------|------|-------------|--------------|
-| 0 | 100 | â€” | WORK | `day100_main` | `prologue_found` â†’ D1 |
-| 1 | 101 | Morning | WORK | `day101_main` â†’ `day101_1_cora_waiting` â†’ interview â†’ `day101_1_vance_throws_toy` | `day1_interview_state` |
-| 2 | 101 | Afternoon | WORK | `day101_2_missy_meets_cora` â†’ `day101_2_coras_path_choice` | `day1_corridor_state` |
-| 3 | 101 | Evening | REFLECT | `day101_3_taking_stock_day1` | **CHECK** â†’ ledger â†’ insp/corr â†’ chains |
-| 4 | 101 | Night | WRITE | `day101_4_writing_or_visiting` | **CHECK**; Ch1 fuel â‰¥ 15; write or visit; candidate first manuscript retelling minigame |
-| 5 | 102 | Morning | WORK | `day102_1_cora_missy_first_shift` â†’ finds thing â†’ takes/deceives | `day2_contraband_state` |
-| 6 | 102 | Afternoon | REFLECT | `day102_2_day2_chore_time` | **CHECK** â†’ chore insp/corr â†’ chains |
-| 7 | 102 | Evening | WORK | `day102_3_stern_fetches_cora` â†’ vance â†’ `day102_3_coras_choice` â†’ `day102_3_gideon_interrupts_controls_vance` | `day2_tea_choice` |
-| 8 | 102 | Night | WRITE | `day102_4_night` | **CHECK**; Ch1 catch-up / Ch2 or indulge; candidate first manuscript retelling minigame |
-| â€” | 103 | Morning | DEADLINE | `day103_morning` | If `manuscript_progress == 0` â†’ `game_over_deadline_1` |
-| 9 | 103 | Morning | REFLECT | `day103_1_servants_corridor` | **CHECK**; D2 consequence; corridor insp/corr â†’ chains |
-| 10 | 103 | Afternoon | WORK | `day103_2_suite_gideon_tea` â†’ vs_gideon â†’ `day103_2_suite_gideon_beat` | `day3_brush_choice`; 9 PM order |
-| 11 | 103 | Evening | WORK | `day103_3_bedroom_cora_frantic_writing_event` | **CHECK**; twilight action; always â†’ Stern |
-| 12 | 103 | Evening | WORK | `day103_4_room_stern_suspicion` | Stern summons |
-| 13 | 103 | Night | WORK | `day103_2_suite_night_tea` â†’ defy/bargain/surrender | `day3_ultimatum` |
-| 14 | 103 | Night | WRITE | `day103_3_bedroom_final_write` | **CHECK**; Ch3 â‰¥ 45 or frantic write; or barricade; candidate second manuscript retelling minigame |
-| 15 | 104 | Morning | WORK | `day104_1_false_dawn_suite_window` â†’ lockbox | `has_photograph` |
-| 16 | 104 | Afternoon | WORK | `day104_2_return_early` â†’ escape_* | `day4_escape_state` |
-| 17 | 104 | Evening | WORK | `day104_3_stern_pressure` â†’ `day104_4_twilight_ledger_false_dawn` | **CHECK**; anxiety â‰¥ 85 blocks triumphant write |
-| 18 | 104 | Night | WRITE | `day104_5_triumphant_chapter` or atonement/repair â†’ `day104_6_false_dawn_ending` | D4 penance skips triumphant; candidate second manuscript retelling minigame |
-| â€” | 105 | Morning | DEADLINE | End `day104_6_false_dawn_ending` | If `manuscript_progress < 2` â†’ `game_over_deadline_2` |
-| 19 | 105 | Day | WORK | `day105_1_monster_reemerges` â†’ summons â†’ leverage â†’ motivation â†’ marks | `day5_dynamic`, money |
-| 20 | 105 | Night | WRITE | `day105_6_manuscript_reckoning` | Final chapter |
-| 21 | 105 | Morning | WORK | `day105_7_release_one_ending` | MVP end |
+| 0 | 100 | - | WORK | `day100_main` | prologue_found -> D1 |
+| 1 | 101 | Morning | WORK | `day101_main` -> `day101_1_cora_waiting` -> `day101_1_morning_interview` -> `day101_1_vance_throws_toy` | day1_interview_state |
+| 2 | 101 | Afternoon | WORK | `day101_2_missy_meets_cora` -> `day101_2_coras_path_choice` | day1_corridor_state |
+| 3 | 101 | Evening | CONSEQUENCE | `day101_evening_consequence_window` | Queues and consumes confrontation labels before ledger prose continues. |
+| 4 | 101 | Night | STORY WINDOW / WRITE | `day101_night_story_window` -> `day101_4_write_the_chapter` or direct D102 handoff | Ch1 fuel gate; candidate first manuscript retelling minigame. |
+| 5 | 102 | Morning | WORK | `day102_1_cora_missy_first_shift` -> `day102_1_missy_finds_a_thing` -> takes/deceives | day2_contraband_state |
+| 6 | 102 | Afternoon | CONSEQUENCE / STORY WINDOW | `day102_afternoon_consequence_window` -> `day102_afternoon_story_window` | Chore insp/corr -> chains or direct crisis handoff. |
+| 7 | 102 | Evening | WORK | `day102_3_stern_fetches_cora` -> `day102_3_vance_goes_incandescent` -> `day102_3_coras_choice` -> `day102_3_gideon_interrupts_controls_vance` | day2_tea_choice |
+| 8 | 102 | Night | CONSEQUENCE / WRITE | `day102_night_consequence_window` -> `day102_4_night` -> write or indulge | Ch1 catch-up / Ch2 or indulge. |
+| - | 103 | Morning | DEADLINE | `day103_morning` | If manuscript_progress == 0 -> deadline fail. |
+| 9 | 103 | Morning | CONSEQUENCE / STORY WINDOW | `day103_morning_consequence_window` -> `day103_1_servants_corridor` -> `day103_1_optional_character_chain` | D2 consequence; corridor insp/corr -> chains. |
+| 10 | 103 | Afternoon | WORK | `day103_afternoon` -> `day103_2_suite_gideon_tea` -> `day103_2_suite_gideon_beat` | day3_brush_choice; 9 PM order. |
+| 11 | 103 | Evening | CONSEQUENCE / WORK | `day103_evening` -> `day103_evening_consequence_window` -> `day103_3_bedroom_cora_frantic_writing_event` | Twilight action; always -> Stern. |
+| 12 | 103 | Evening | WORK | `day103_4_room_stern_suspicion` | Stern summons. |
+| 13 | 103 | Night | CONSEQUENCE / WORK | `day103_night` -> `day103_night_consequence_window` -> `day103_2_suite_night_tea` | day3_ultimatum. |
+| 14 | 103 | Night | WRITE | `day103_3_bedroom_final_write` | Ch3 fuel gate or barricade; candidate second retelling minigame. |
+| 15 | 104 | Morning | WORK | `day104` -> `day104_morning` -> `day104_1_false_dawn_suite_window` -> `day104_1_lockbox_evidence` | has_photograph |
+| 16 | 104 | Afternoon | WORK | `day104_2_return_early` -> escape branches | day4_escape_state |
+| 17 | 104 | Evening | CONSEQUENCE / WORK | `day104_evening` -> `day104_3_stern_pressure` -> `day104_evening_consequence_window` -> `day104_4_twilight_ledger_false_dawn` | Anxiety >= 85 blocks triumphant write. |
+| 18 | 104 | Night | CONSEQUENCE / WRITE | `day104_night` -> `day104_night_consequence_window` -> `day104_5_triumphant_chapter` or `day104_6_false_dawn_ending` | D4 penance skips triumphant. |
+| - | 105 | Morning | DEADLINE | `day104_6_false_dawn_ending` | If manuscript_progress < 2 -> deadline fail. |
+| 19 | 105 | Day | WORK | `day105_1_monster_reemerges` -> summons -> leverage -> motivation -> marks | day5_dynamic, money. |
+| 20 | 105 | Night | WRITE | `day105_6_manuscript_reckoning` | Final chapter. |
+| 21 | 105 | Morning | WORK | `day105_7_release_one_ending` | MVP end. |
 
-WORK blocks **within** a period (e.g. tea crisis branches) keep normal `jump` to the next label in the same period â€” no clock change.
+WORK blocks within a period keep normal `jump` to the next label in the same period. Cross-period and cross-day handoffs now use explicit day-owned labels where the next target is obvious.
 
-### Router table â€” `end_slot` outcomes
+### Dynamic windows
 
-Every scene ending a personal or writing slot calls the router with one `outcome`. The router sets `time_manager` / `set_time_period` and `jump`s the next spine label.
-
-| Outcome | When fired | Set clock | Jump to |
-|---------|------------|-----------|---------|
-| `d1_reflect_done` | After D1 optional chain menu or desk retreat (D1 evening) | Evening â†’ Night | `day101_4_writing_or_visiting` |
-| `d1_write_ch1` | After `day101_4_write_the_chapter` | day=2, Morning | `day102_1_cora_missy_first_shift` |
-| `d1_visit_missy` | After `day101_4_visit_missy` | day=2, Morning | `day102_1_cora_missy_first_shift` |
-| `d2_reflect_done` | After D2 afternoon chain / desk retreat | Afternoon â†’ Evening | `day102_3_stern_fetches_cora` |
-| `d2_write_night` | After `day102_4_cora_writes_a_chapter` or indulge | day=3, Morning | `day103_morning` (deadline check) â†’ `day103_1_servants_corridor` |
-| `d3_reflect_done` | After D3 morning chain / desk retreat | Morning â†’ Afternoon | `day103_2_suite_gideon_tea` |
-| `d3_twilight_done` | After frantic / mask / indulge twilight | Stay Evening | `day103_4_room_stern_suspicion` |
-| `d3_stern_done` | After stern scene | Evening â†’ Night | `day103_2_suite_night_tea` |
-| `d3_ultimatum_done` | After defy / bargain / surrender | Stay Night | `day103_3_bedroom_final_write` |
-| `d3_write_night` | After final write or barricade | day=4, Morning | `day104_1` â†’ `day104_1_false_dawn_suite_window` |
-| `d4_twilight_done` | After atonement / repair / triumphant menu resolve | Evening â†’ Night | `day104_5_triumphant_chapter` **or** `day104_6_false_dawn_ending` |
-| `d4_write_night` | After triumphant chapter | Stay Night | `day104_6_false_dawn_ending` |
-| `d4_dawn_gate` | End of `day104_6_false_dawn_ending` | day=5, Morning | `day105_1_monster_reemerges` (or `game_over_deadline_2`) |
-| `d5_write_night` | After `day105_6_manuscript_reckoning` | Morning (epilogue) | `day105_7_release_one_ending` |
-| `penance` | After `confrontation_stern` / `_vance` / `_missy` | Same as skip row for current day+period | See Day 4 special below |
-
-**Day 4 penance special:** if `penance_triggered` after an evening confrontation, force Night â†’ `day104_6_false_dawn_ending` (no triumphant write).
+| Window | Role | Returns / handoff |
+|--------|------|-------------------|
+| `day101_evening_consequence_window` | Checks and consumes queued penance before Day 101 evening ledger flow. | D102 morning if penance fires; otherwise returns. |
+| `day101_night_story_window` | Optional Day 101 chain menu; calls chain labels and resumes. | D102 morning. |
+| `day102_afternoon_consequence_window` | Checks and consumes queued penance before Day 102 afternoon flow. | Day 102 evening crisis if penance fires; otherwise returns. |
+| `day102_afternoon_story_window` | Optional Day 102 chain menu; replaces `day102_2_optional_character_chain` as the normalized window. | Day 102 evening crisis. |
+| `day102_night_consequence_window` | Checks and consumes queued penance before Day 102 night flow. | Day 103 morning if penance fires; otherwise returns. |
+| `day103_morning_consequence_window` | Checks and consumes queued penance at Day 103 entry. | Day 103 afternoon if penance fires; otherwise returns. |
+| `day103_evening_consequence_window` | Checks and consumes queued penance before Day 103 evening writing event. | Stern suspicion beat if penance fires; otherwise returns. |
+| `day103_night_consequence_window` | Checks and consumes queued penance before Day 103 night write. | Day 104 handoff if penance fires; otherwise returns. |
+| `day104_evening_consequence_window` | Checks and consumes queued penance before Day 104 twilight choice. | Day 104 night if penance fires; otherwise returns. |
+| `day104_night_consequence_window` | Checks and consumes queued penance before Day 104 triumphant chapter. | False-dawn ending if penance fires; otherwise returns. |
 
 ### `check_confrontations` entry points
 
-| Day | Labels (slot start only) |
-|-----|--------------------------|
-| 101 | `day101_3_taking_stock_day1`, `day101_4_writing_or_visiting` |
-| 102 | `day102_2_day2_chore_time`, `day102_4_night` |
-| 103 | `day103_1_servants_corridor`, `day103_3_bedroom_cora_frantic_writing_event`, `day103_3_bedroom_final_write` |
-| 104 | `day104_4_twilight_ledger_false_dawn`, `day104_5_triumphant_chapter` |
+| Day | Named consequence windows |
+|-----|---------------------------|
+| 101 | `day101_evening_consequence_window` |
+| 102 | `day102_afternoon_consequence_window`, `day102_night_consequence_window` |
+| 103 | `day103_morning_consequence_window`, `day103_evening_consequence_window`, `day103_night_consequence_window` |
+| 104 | `day104_evening_consequence_window`, `day104_night_consequence_window` |
 
 Do not place **CHECK** inside mandatory WORK blocks (tea crisis, Gideon suite, escape) unless penance interrupt mid-plot is explicitly intended.
+
+### Closeout notes
+
+| Item | Current state |
+|------|---------------|
+| Optional chain exits | Migrated chain labels return to callers; day windows call them. |
+| Confrontation exits | Migrated confrontation labels return to callers; consequence windows consume queued penance. |
+| Day 101 / 102 normal exits | Non-canon and production Day 101/102 use direct obvious jumps instead of `end_slot`. |
+| Deprecated routers | `advance_after_confrontation` and `end_slot` remain as compatibility labels only. |
+| Graph drift | Storyboard reflects the current dynamic-window spine; remaining graph gaps are extractor metadata/balancing follow-ups unless flagged otherwise in `release1_graph_gaps.md`. |
 
 ### Spine flow (periods only)
 
@@ -291,22 +293,24 @@ flowchart LR
   F4 --> S5
 ```
 
-### Scene exit rules (rewrite weeks 2â€“4)
+### Scene exit rules (current routing closeout)
 
-| Do | Don't |
+| Do | Do not |
 |----|--------|
-| End REFLECT / WRITE / penance with `end_slot(outcome=â€¦)` | `jump day102_1â€¦` (or any cross-day label) from inside scene text |
-| Change dialogue and `apply_effects` inside a spine label | Change which label that scene exits to |
-| Use normal `jump` only inside the same WORK period | Maintain two timetables (inline jumps + router) |
+| Let day-owned labels and named dynamic windows control time-period routing. | Reintroduce `jump expression _chain_label` from day menus. |
+| Use `call expression _chain_label` for optional chain beats, then return to the current day spine. | Route migrated chains or confrontations through `advance_after_confrontation`. |
+| Keep `check_confrontations` inside named `*_consequence_window` labels. | Place confrontation checks directly in ordinary WORK labels. |
+| Use direct jumps for obvious Day 101/102 handoffs already represented in the day spine. | Add new `end_slot` calls for migrated normal flow. |
 
-### Promotion gaps (week 1)
+### Closeout status
 
-| Issue | Current promoted | Target |
-|-------|------------------|--------|
-| D1 ledger â†’ night | Skips chains; insp/corr â†’ `day101_4` directly | Chains â†’ router â†’ night write |
-| D1 night â†’ D2 | Raw `jump day102_1` | `end_slot` sets day=2, Morning |
-| D4 deadline | Missing on promoted `day104_6` | `manuscript_progress < 2` â†’ `game_over_deadline_2` |
-| D2 deadline | In `day102_non_canon` at `day103_morning` | Keep at `day103_morning` entry |
+| Item | Current state |
+|------|---------------|
+| Day 101 story window | `day101_night_story_window` owns optional chain calls before Day 102 handoff. |
+| Day 102 afternoon window | `day102_afternoon_story_window` replaces the old optional-character-chain route. |
+| Day 104 spine | `day104`, `day104_morning`, `day104_evening`, and `day104_night` provide clear day-owned routing in non-canon draft. |
+| Penance routing | `check_confrontations` queues labels; consequence windows consume with `pop_penance_for_window(...)`. |
+| Compatibility routers | `advance_after_confrontation` and `end_slot` remain only as deprecated compatibility labels. |
 
 ---
 
@@ -321,32 +325,32 @@ flowchart LR
 - **`day100_3_arrival`**: Waterloo; handoff to Day 101.
 
 ### Day 101
-*Source: `day101_non_canon.rpy`*
-- **`day101_1_cora_waiting` & `_morning_interview`**: First encounter with Stern. Choice between `"meek"` or `"competent"`.
+*Source: day101_non_canon.rpy*
+- **`day101_1_cora_waiting` & `day101_1_morning_interview`**: First encounter with Stern. Choice between "meek" or "competent".
 - **`day101_1_vance_throws_toy`**: Initial corridor collision with Vance and Gideon.
-- **`day101_2_missy_meets_cora` & `_coras_path_choice`**: Laundry room intro. The eavesdrop event that branches `day1_corridor_state` (`"predator"`, `"prey"`, `"ghost"`).
-- **`day101_3_taking_stock_day1`**: Ledger choice between `"inspiration"` (structural) or `"corruption"` (appetite).
-- **`day101_4_writing_or_visiting`**: Choice to write (Chapter 1) or visit Missy to establish relationship seeds. If used as the first manuscript retelling minigame, Cora eroticises the corridor eavesdrop according to `day1_corridor_state` and `day1_ledger_focus`, with CG edits that distinguish imagined manuscript content from literal hotel events.
+- **`day101_2_missy_meets_cora` & `day101_2_coras_path_choice`**: Laundry room intro. The eavesdrop event branches day1_corridor_state ("predator", "prey", "ghost").
+- **`day101_3_taking_stock_day1`**: Ledger choice between "inspiration" (structural) or "corruption" (appetite), preceded by `day101_evening_consequence_window`.
+- **`day101_night_story_window` & `day101_4_write_the_chapter`**: Night story-chain window and Chapter 1 writing path. Cora eroticises the corridor eavesdrop according to day1_corridor_state and day1_ledger_focus, with CG edits that distinguish imagined manuscript content from literal hotel events.
 
 ### Day 102
-*Source: `day102_non_canon.rpy`*
-- **`day102_1_cora_missy_first_shift` & `_missy_finds_a_thing`**: Missy discovers contraband.
-- **`day102_1_cora_takes_the_thing` / `_deceives_missy`**: Branch dictated by Day 1 corridor choice. Cora either wears the stolen item or plants it.
-- **`day102_2_day2_chore_time`**: Ledger choice (Insp/Corr) while working the corridor.
-- **`day102_3_stern_fetches_cora` & `_vance_goes_incandescent`**: The crisis begins over the missing item.
-- **`day102_3_coras_choice`**: The massive three-way branch -> `day2_tea_choice` (`"prey"`, `"predator"`, `"ghost"`).
+*Source: day102_non_canon.rpy*
+- **`day102_1_cora_missy_first_shift` & `day102_1_missy_finds_a_thing`**: Missy discovers contraband.
+- **`day102_1_cora_takes_the_thing` / `day102_1_cora_deceives_missy`**: Branch dictated by Day 1 corridor choice. Cora either wears the stolen item or plants it.
+- **`day102_2_day2_chore_time` -> `day102_afternoon_consequence_window` -> `day102_afternoon_story_window`**: Chore choice and optional story-chain window.
+- **`day102_3_stern_fetches_cora` & `day102_3_vance_goes_incandescent`**: The crisis begins over the missing item.
+- **`day102_3_coras_choice`**: The massive three-way branch sets day2_tea_choice ("prey", "predator", "ghost").
 - **`day102_3_gideon_interrupts_controls_vance`**: Gideon diffuses the situation to maintain quiet, observing Cora.
-- **`day102_4_cora_writes_a_chapter` / `_sneaks_a_feel`**: Night writing check (Ch1/Ch2) or indulgence. If Day 101 did not host the first retelling, this slot should deliver the first manuscript H-scene payoff by transforming the contraband/lace crisis into Cora's spicier authored version.
+- **`day102_night_consequence_window` -> `day102_4_cora_writes_a_chapter` / `day102_4_cora_sneaks_a_feel`**: Night writing check (Ch1/Ch2) or indulgence. If Day 101 did not host the first retelling, this slot should transform the contraband/lace crisis into Cora's spicier authored version.
 
 ### Day 103
 *Source: `day103_non_canon.rpy`*
 - **`day103_1_servants_corridor`**: Morning consequence of Day 2 choices (Vance's wrath, Stern's inspection, or Missy's silence).
-- **`day103_2_suite_gideon_tea` & `_cora_vs_gideon`**: Cora is summoned. The Hairbrush Test (`day3_brush_choice`).
+- **`day103_2_suite_gideon_tea` & `_cora_vs_gideon`**: Cora is summoned. The Hairbrush Test (day3_brush_choice).
 - **`day103_2_suite_gideon_beat`**: Gideon orders her to return at 9 PM alone.
 - **`day103_3_bedroom_cora_frantic_writing_event`**: Twilight action. Frantic write, mask prep, or indulging the words.
 - **`day103_4_room_stern_suspicion`**: Stern questions Cora's summons.
 - **`day103_2_suite_night_tea`**: The 9 PM encounter. Ultimatum choice: `"defied"`, `"bargained"`, `"surrendered"`.
-- **`day103_3_bedroom_final_write`**: Write the chapter (requires high stats) or barricade the door. Candidate second manuscript retelling minigame: Cora converts the brush test / 9 PM summons into a heightened erotic manuscript scene shaped by `day3_brush_choice` and `day3_ultimatum`.
+- **`day103_3_bedroom_final_write`**: Write the chapter (requires high stats) or barricade the door. Candidate second manuscript retelling minigame: Cora converts the brush test / 9 PM summons into a heightened erotic manuscript scene shaped by day3_brush_choice and day3_ultimatum.
 
 ### Day 104
 *Source: `day104_non_canon.rpy`*
@@ -360,7 +364,7 @@ flowchart LR
 *Source: `day105_non_canon.rpy`*
 - **`day105_1_monster_reemerges` & `_the_summons`**: The false dawn ends. Gideon summons Cora over the lockbox.
 - **`day105_3_leverage_collapses`**: Gideon dismantles the notion that a servant's truth matters against class structure.
-- **`day105_4_why_did_you_do_it`**: Cora's motivation sets `day5_dynamic` (`"muse"`, `"protege"`, `"adversary"`, `"witness"`).
+- **`day105_4_why_did_you_do_it`**: Cora's motivation sets day5_dynamic (`"muse"`, `"protege"`, `"adversary"`, `"witness"`).
 - **`day105_5_gideon_marks_cora`**: Evidence is burned/secured. Gideon leaves a money envelope.
 - **`day105_6_manuscript_reckoning`**: Night writing. The final MVP chapter is written, reframing the story.
 - **`day105_7_release_one_ending`**: Morning departure. Gideon marks Cora. Carry-forward flags are set for Release 2.

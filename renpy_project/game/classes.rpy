@@ -379,6 +379,7 @@ init -1 python:
             self.missy_chain_level  = 0
             self.vance_chain_level  = 0
             self.penance_triggered  = False
+            self.pending_penance    = []
 
         # ── Internal helpers ───────────────────────────────────────────
 
@@ -571,6 +572,21 @@ init -1 python:
         def set_penance_triggered(self, value):
             self._set_boolean_flag("penance_triggered", value)
 
+        def queue_penance(self, penance_label):
+            if penance_label not in self.pending_penance:
+                self.pending_penance.append(penance_label)
+
+        def has_pending_penance(self):
+            return len(self.pending_penance) > 0
+
+        def pop_penance_for_window(self, window_id):
+            if not self.pending_penance:
+                return None
+            return self.pending_penance.pop(0)
+
+        def clear_penance(self):
+            self.pending_penance = []
+
         def get_character_chain_level(self, character):
             if character not in self.VALID_CHAIN_CHARACTERS:
                 raise ValueError(
@@ -597,13 +613,14 @@ init -1 python:
 
         def get_post_penance_target(self, current_day, time_of_day):
             """Pure query — returns (next_day, next_time, next_label). No side effects."""
-            if current_day == 4 and self.penance_triggered:
+            if current_day == 4 and self.has_pending_penance():
                 return (4, "Night", "day104_6_false_dawn_ending")
             return self.POST_PENANCE_ROUTES.get((current_day, time_of_day))
 
         def consume_penance(self):
             """Command — clears penance_triggered. Always call explicitly after routing."""
             self.set_penance_triggered(False)
+            self.clear_penance()
 
         def get_slot_exit_target(self, outcome):
             """Return (next_day_or_None, next_time_or_None, next_label) for end_slot."""

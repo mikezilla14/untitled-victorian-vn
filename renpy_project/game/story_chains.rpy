@@ -22,11 +22,11 @@ label check_confrontations:
     # Confrontation gates checked at the start of non-work personal slots.
     # Threshold is PlayerStats.CONFRONTATION_THRESHOLD — do not hardcode here.
     if player.is_confrontation_ready("stern"):
-        jump confrontation_stern
+        $ story.queue_penance("confrontation_stern")
     elif player.is_confrontation_ready("vance"):
-        jump confrontation_vance
+        $ story.queue_penance("confrontation_vance")
     elif player.is_confrontation_ready("missy"):
-        jump confrontation_missy
+        $ story.queue_penance("confrontation_missy")
     return
 
 
@@ -74,6 +74,8 @@ label stern_chain_1:
             # [STATE] State/progression update
             $ apply_effects(stern_susp=-10, insp=5, corr=0)
             $ story.complete_chain_beat("stern")
+            show cora_sprite base at left_bust with moveinleft # [asset auto]
+            show stern_sprite neutral at right_bust with move # [asset auto]
             cora "Outward, Ma'am. Missy showed me, and I made sure to repeat it exactly."
             stern "Exactly is a large word for a small mind. Keep that precision, and you may survive another week."
             "She dismisses me with a slight twitch of her chin."
@@ -92,7 +94,7 @@ label stern_chain_1:
 
     # [ASSET] Visual/staging command
     hide stern_sprite
-    jump advance_after_confrontation
+    return
 
 
 label stern_chain_2:
@@ -116,6 +118,8 @@ label stern_chain_2:
             # [STATE] State/progression update
             $ apply_effects(stern_susp=-10, insp=5, corr=0)
             $ story.complete_chain_beat("stern")
+            show cora_sprite base at left_bust with moveinleft # [asset auto]
+            show stern_sprite neutral at right_bust with move # [asset auto]
             cora "Only my letters, Ma'am. My mother said a maid who cannot spell the inventory is of no use to a fine house."
             stern "Your mother was sensible. Keep to spelling 'apron' and 'lye', Cora. Leave the long words to those who do not have to wash them."
             "She leaves. The notebook is safe, but my fingers feel stained."
@@ -133,7 +137,7 @@ label stern_chain_2:
 
     # [ASSET] Visual/staging command
     hide stern_sprite
-    jump advance_after_confrontation
+    return
 
 
 label stern_chain_3:
@@ -157,6 +161,8 @@ label stern_chain_3:
             # [STATE] State/progression update
             $ apply_effects(stern_susp=-15, insp=5, corr=0)
             $ story.complete_chain_beat("stern")
+            show cora_sprite base at left_bust with moveinleft # [asset auto]
+            show stern_sprite neutral at right_bust with move # [asset auto]
             cora "Dust, Ma'am. And scraps that should have been swept before the second floor shift."
             stern "Correct. A drawer is a box for linens, not a confessional."
             "She nods, satisfied with my stupidity. I remain a ghost in her hotel."
@@ -175,7 +181,7 @@ label stern_chain_3:
 
     # [ASSET] Visual/staging command
     hide stern_sprite
-    jump advance_after_confrontation
+    return
 
 
 # ==============================================================================
@@ -202,6 +208,8 @@ label missy_chain_1:
             # [STATE] State/progression update
             $ apply_effects(missy_susp=-10, insp=10, corr=0)
             $ story.complete_chain_beat("missy")
+            show cora_sprite base at left_bust with moveinleft # [asset auto]
+            show missy_sprite smiling at right_bust with move # [asset auto]
             cora "Give it here. My mother taught me the French seam. It hides the raw edge completely."
             "I take the needle. We sit together in the steam, our shoulders touching."
             missy "You're a good friend, Cora. Most girls here would have told Stern to get the credit."
@@ -220,7 +228,7 @@ label missy_chain_1:
 
     # [ASSET] Visual/staging command
     hide missy_sprite
-    jump advance_after_confrontation
+    return
 
 
 label missy_chain_2:
@@ -243,6 +251,8 @@ label missy_chain_2:
             # [STATE] State/progression update
             $ apply_effects(missy_susp=-15, insp=10, corr=0)
             $ story.complete_chain_beat("missy")
+            show cora_sprite base at left_bust with moveinleft # [asset auto]
+            show missy_sprite neutral at right_bust with move # [asset auto]
             cora "Then don't look at it again, Missy. Valets keep secrets because they are paid to. We are paid only to wash the shirts."
             missy "You're right. I'll forget I ever saw it."
             "She smiles, relieved by my caution. The secret stays safe."
@@ -261,7 +271,7 @@ label missy_chain_2:
 
     # [ASSET] Visual/staging command
     hide missy_sprite
-    jump advance_after_confrontation
+    return
 
 
 label missy_chain_3:
@@ -285,6 +295,8 @@ label missy_chain_3:
             # [STATE] State/progression update
             $ apply_effects(missy_susp=-20, insp=5, corr=0)
             $ story.complete_chain_beat("missy")
+            show cora_sprite base at left_bust with moveinleft # [asset auto]
+            show missy_sprite shocked at right_bust with move # [asset auto]
             cora "It was a draft, Missy. A stupid, cruel exercise. I was trying to find the words, and I used what was closest."
             "I take the page and tear it into four pieces before her."
             cora "I am sorry. Truly."
@@ -303,7 +315,7 @@ label missy_chain_3:
 
     # [ASSET] Visual/staging command
     hide missy_sprite
-    jump advance_after_confrontation
+    return
 
 
 # ==============================================================================
@@ -328,6 +340,8 @@ label vance_chain_1:
             # [STATE] State/progression update
             $ apply_effects(vance_susp=-10, insp=5, corr=0)
             $ story.complete_chain_beat("vance")
+            show cora_sprite base at left_bust with moveinleft # [asset auto]
+            show vance_sprite neutral at right_bust with move # [asset auto]
             cora "Your handkerchief, Miss."
             "I offer it on my flat palm, my eyes fixed on her hem."
             vance "Ah. Useless little thing. Keep it or burn it, girl."
@@ -344,7 +358,7 @@ label vance_chain_1:
 
     # [ASSET] Visual/staging command
     hide vance_sprite
-    jump advance_after_confrontation
+    return
 
 
 label vance_chain_2:
@@ -380,7 +394,7 @@ label vance_chain_2:
 
     # [ASSET] Visual/staging command
     hide vance_sprite
-    jump advance_after_confrontation
+    return
 
 
 label vance_chain_3:
@@ -404,6 +418,8 @@ label vance_chain_3:
             # [STATE] State/progression update
             $ apply_effects(vance_susp=-20, insp=5, corr=0)
             $ story.complete_chain_beat("vance")
+            show cora_sprite base at left_bust with moveinleft # [asset auto]
+            show vance_sprite angry at right_bust with move # [asset auto]
             cora "I saw nothing, Miss. I only came to turn down the blankets. I am very simple, and I do not know the guests' business."
             vance "Simple. Yes. You look like a potato."
             "She turns away, dismissed by my performance. My cover is safe."
@@ -421,7 +437,7 @@ label vance_chain_3:
 
     # [ASSET] Visual/staging command
     hide vance_sprite
-    jump advance_after_confrontation
+    return
 
 
 # ==============================================================================
@@ -441,6 +457,8 @@ label confrontation_stern:
     stern "You have been seen, Cora Vale. In the west wing. In the laundry room. Spying. Whispering."
     stern "A maid with an opinion is a maid who belongs on the Strand."
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show stern_sprite neutral at right_bust with move # [asset auto]
     cora "Ma'am—"
 
     stern "Quiet. You will spend your night scrubbing the grand marble steps of the entrance hall."
@@ -458,8 +476,7 @@ label confrontation_stern:
 
     # [STATE] State/progression update
     $ apply_effects(stern_susp=-35, insp=0, corr=5)
-    $ story.set_penance_triggered(True)
-    jump advance_after_confrontation
+    return
 
 
 label confrontation_vance:
@@ -475,6 +492,8 @@ label confrontation_vance:
     vance "You insolent, spying creature. I told Gideon you were looking through the grates."
     vance "He said you were too small to kill. I disagreed."
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show vance_sprite angry at right_bust with move # [asset auto]
     cora "Miss Vance, I was only—"
 
     vance "You will wash my silk chemises again. Every one of them. By hand."
@@ -492,8 +511,7 @@ label confrontation_vance:
 
     # [STATE] State/progression update
     $ apply_effects(vance_susp=-35, insp=0, corr=5)
-    $ story.set_penance_triggered(True)
-    jump advance_after_confrontation
+    return
 
 
 label confrontation_missy:
@@ -511,8 +529,9 @@ label confrontation_missy:
 
     # [STATE] State/progression update
     $ apply_effects(missy_susp=-35, insp=5)
-    $ story.set_penance_triggered(True)
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show missy_sprite shocked at right_bust with move # [asset auto]
     cora "Missy, please. If you tell her, I am ruined. Let me help you. I'll do the night tubs for you."
 
     missy "You'll... you'll do my shifts?"
@@ -530,7 +549,7 @@ label confrontation_missy:
     "My ambition is buried under wet cotton. I cannot write a single line."
 
     # [STATE] State/progression update
-    jump advance_after_confrontation
+    return
 
 
 # ==============================================================================
@@ -545,8 +564,8 @@ label end_slot(outcome):
         # [STATE] State/progression update
         $ time_manager.set_current_day(4)
         $ set_time_period("Night")
-        $ _penance_flag = story.penance_triggered
-        $ story.consume_penance()
+        $ _penance_flag = story.has_pending_penance()
+        $ story.clear_penance()
         if _penance_flag or player.anxiety >= 85:
             jump day104_6_false_dawn_ending
         else:

@@ -43,11 +43,20 @@ label day103_morning:
     $ time_manager.set_current_day(3)
     $ set_time_period("Morning")
 
-    # [STATE] Check dynamic non-canon suspicion confrontations
-    call check_confrontations
+    # [STATE] Check dynamic suspicion confrontations
+    call day103_morning_consequence_window
     
     # [STATE] State/progression update
     jump day103_1_servants_corridor
+
+
+label day103_morning_consequence_window:
+    call check_confrontations
+    $ _penance_label = story.pop_penance_for_window("day103_morning")
+    if _penance_label:
+        call expression _penance_label
+        jump day103_2_suite_gideon_tea
+    return
 
 
 # ==========================================
@@ -207,19 +216,19 @@ label day103_1_optional_character_chain:
 
             # [STATE] State/progression update
             $ _chain_label = story.resolve_chain_label("stern")
-            jump expression _chain_label
+            call expression _chain_label
 
         "Find Missy while the house is still bruised from yesterday." if story.chain_available("missy"):
 
             # [STATE] State/progression update
             $ _chain_label = story.resolve_chain_label("missy")
-            jump expression _chain_label
+            call expression _chain_label
 
         "Watch the Locke Suite door before the tea order becomes a summons." if story.chain_available("vance"):
 
             # [STATE] State/progression update
             $ _chain_label = story.resolve_chain_label("vance")
-            jump expression _chain_label
+            call expression _chain_label
 
         "Keep moving with the cart and give no one a reason.":
             if story.day3_corridor_chain == "corruption":
@@ -233,6 +242,8 @@ label day103_1_optional_character_chain:
             # [STATE] State/progression update
             $ apply_effects(insp=10, corr=0)
             jump day103_2_suite_gideon_tea
+
+    jump day103_2_suite_gideon_tea
 
 
 # ==========================================
@@ -257,6 +268,9 @@ label day103_2_suite_gideon_tea:
 
     gideon "You."
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show vance_sprite submissive at centre_bust with move # [asset auto]
+    show gideon_sprite neutral at right_bust with move # [asset auto]
     cora "Sir."
 
     "I set the tea tray down."
@@ -349,6 +363,9 @@ label day103_2_cora_vs_gideon_insp:
     $ story.set_day3_brush_choice("predator")
     $ apply_effects(vance_susp=0, insp=20, corr=5)
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show vance_sprite submissive at centre_bust with move # [asset auto]
+    show gideon_sprite neutral at right_bust with move # [asset auto]
     cora "Yes, Sir."
 
     gideon "That is not an answer."
@@ -401,6 +418,9 @@ label day103_2_cora_vs_gideon_corr:
     "Not at Vance."
     "At him."
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show vance_sprite submissive at centre_bust with move # [asset auto]
+    show gideon_sprite neutral at right_bust with move # [asset auto]
     cora "Yes, Sir."
 
     gideon "Why?"
@@ -459,6 +479,9 @@ label day103_2_cora_vs_gideon_ghost:
     "My fingers fail me on command."
     "The brush slips and strikes the floor with a bright, silver crack."
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show vance_sprite submissive at centre_bust with move # [asset auto]
+    show gideon_sprite neutral at right_bust with move # [asset auto]
     cora "Forgive me, Sir."
 
     "I drop immediately to retrieve it, my uniform skirt catching against the leather of Gideon's boots."
@@ -504,6 +527,9 @@ label day103_2_suite_gideon_beat:
 
     gideon "You observe too much."
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show vance_sprite submissive at centre_bust with move # [asset auto]
+    show gideon_sprite dominant at right_bust with move # [asset auto]
     cora "I try to be useful, Sir."
 
     gideon "Useful girls do not stare through keyholes."
@@ -552,7 +578,7 @@ label day103_2_suite_gideon_beat:
 # ==========================================
 
 label day103_3_bedroom_cora_frantic_writing_event:
-    call check_confrontations
+    call day103_evening_consequence_window
 
     # [STATE] TimeManager transition to Evening
     $ set_time_period("Evening")
@@ -593,6 +619,15 @@ label day103_3_bedroom_cora_frantic_writing_event:
 
             # [STATE] State/progression update
             jump day103_3_indulge_words
+
+
+label day103_evening_consequence_window:
+    call check_confrontations
+    $ _penance_label = story.pop_penance_for_window("day103_evening")
+    if _penance_label:
+        call expression _penance_label
+        jump day103_4_room_stern_suspicion
+    return
 
 
 # ==========================================
@@ -713,6 +748,8 @@ label day103_4_room_stern_suspicion:
 
     stern "You have been called upstairs this evening."
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show stern_sprite stern at right_bust with move # [asset auto]
     cora "Yes, Ma'am."
 
     stern "Do you know why?"
@@ -818,6 +855,8 @@ label day103_2_suite_night_tea:
 
     gideon "You came."
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show gideon_sprite dominant at right_bust with move # [asset auto]
     cora "I was instructed to bring tea, Sir."
 
     gideon "By whom?"
@@ -899,6 +938,8 @@ label day103_2_night_defy_gideon:
     $ story.set_day3_ultimatum("defied")
     $ apply_effects(vance_susp=20, insp=20, corr=0)
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show gideon_sprite dominant at right_bust with move # [asset auto]
     cora "My writing is not part of my service, Sir."
 
     "There."
@@ -945,6 +986,8 @@ label day103_2_night_bargain_gideon:
     $ story.set_day3_ultimatum("bargained")
     $ apply_effects(vance_susp=10, insp=15, corr=10)
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show gideon_sprite dominant at right_bust with move # [asset auto]
     cora "A fragment, perhaps. If it keeps you from imagining worse."
 
     gideon "You negotiate quickly."
@@ -1005,6 +1048,8 @@ label day103_2_night_surrender_gideon:
     "I could lie better."
     "Instead, I let the fear and the heavy physical heat show."
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show gideon_sprite dominant at right_bust with move # [asset auto]
     cora "What do you want from me, Sir?"
 
     gideon "That is the first honest question you have asked."
@@ -1037,8 +1082,17 @@ label day103_2_night_surrender_gideon:
 # 033 CONTINUATION - BEDROOM FINAL WRITE
 # ==========================================
 
-label day103_3_bedroom_final_write:
+label day103_night_consequence_window:
     call check_confrontations
+    $ _penance_label = story.pop_penance_for_window("day103_night")
+    if _penance_label:
+        call expression _penance_label
+        jump day104_1
+    return
+
+
+label day103_3_bedroom_final_write:
+    call day103_night_consequence_window
 
     # [ASSET] Visual/staging command
     scene bg_cora_desk_night

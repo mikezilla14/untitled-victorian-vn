@@ -422,159 +422,7 @@ No findings.
 
 ## Storyboard Drift Notes
 
-### gap_0050 - storyboard_label_missing_from_scripts
-
-- Source: `narrative/draft/releases/release-1-mvp/planning/story_board.md:0`
-- Label: `day101_4`
-- Description: Storyboard references a label not extracted from scripts.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync or correct the storyboard reference.
-
-### gap_0051 - storyboard_label_missing_from_scripts
-
-- Source: `narrative/draft/releases/release-1-mvp/planning/story_board.md:0`
-- Label: `day101_4_visit_missy`
-- Description: Storyboard references a label not extracted from scripts.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync or correct the storyboard reference.
-
-### gap_0052 - storyboard_label_missing_from_scripts
-
-- Source: `narrative/draft/releases/release-1-mvp/planning/story_board.md:0`
-- Label: `day101_4_writing_or_visiting`
-- Description: Storyboard references a label not extracted from scripts.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync or correct the storyboard reference.
-
-### gap_0053 - storyboard_label_missing_from_scripts
-
-- Source: `narrative/draft/releases/release-1-mvp/planning/story_board.md:0`
-- Label: `day102_non_canon`
-- Description: Storyboard references a label not extracted from scripts.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync or correct the storyboard reference.
-
-### gap_0054 - storyboard_label_missing_from_scripts
-
-- Source: `narrative/draft/releases/release-1-mvp/planning/story_board.md:0`
-- Label: `day104_6`
-- Description: Storyboard references a label not extracted from scripts.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync or correct the storyboard reference.
-
-### gap_0055 - storyboard_label_missing_from_scripts
-
-- Source: `narrative/draft/releases/release-1-mvp/planning/story_board.md:0`
-- Label: `day1_corridor_state`
-- Description: Storyboard references a label not extracted from scripts.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync or correct the storyboard reference.
-
-### gap_0056 - storyboard_label_missing_from_scripts
-
-- Source: `narrative/draft/releases/release-1-mvp/planning/story_board.md:0`
-- Label: `day1_interview_state`
-- Description: Storyboard references a label not extracted from scripts.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync or correct the storyboard reference.
-
-### gap_0057 - storyboard_label_missing_from_scripts
-
-- Source: `narrative/draft/releases/release-1-mvp/planning/story_board.md:0`
-- Label: `day1_ledger_focus`
-- Description: Storyboard references a label not extracted from scripts.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync or correct the storyboard reference.
-
-### gap_0058 - storyboard_label_missing_from_scripts
-
-- Source: `narrative/draft/releases/release-1-mvp/planning/story_board.md:0`
-- Label: `day2_chore_focus`
-- Description: Storyboard references a label not extracted from scripts.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync or correct the storyboard reference.
-
-### gap_0059 - storyboard_label_missing_from_scripts
-
-- Source: `narrative/draft/releases/release-1-mvp/planning/story_board.md:0`
-- Label: `day2_contraband_state`
-- Description: Storyboard references a label not extracted from scripts.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync or correct the storyboard reference.
-
-### gap_0060 - storyboard_label_missing_from_scripts
-
-- Source: `narrative/draft/releases/release-1-mvp/planning/story_board.md:0`
-- Label: `day2_tea_choice`
-- Description: Storyboard references a label not extracted from scripts.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync or correct the storyboard reference.
-
-### gap_0061 - storyboard_label_missing_from_scripts
-
-- Source: `narrative/draft/releases/release-1-mvp/planning/story_board.md:0`
-- Label: `day3_brush_choice`
-- Description: Storyboard references a label not extracted from scripts.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync or correct the storyboard reference.
-
-### gap_0062 - storyboard_label_missing_from_scripts
-
-- Source: `narrative/draft/releases/release-1-mvp/planning/story_board.md:0`
-- Label: `day3_corridor_chain`
-- Description: Storyboard references a label not extracted from scripts.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync or correct the storyboard reference.
-
-### gap_0063 - storyboard_label_missing_from_scripts
-
-- Source: `narrative/draft/releases/release-1-mvp/planning/story_board.md:0`
-- Label: `day3_ultimatum`
-- Description: Storyboard references a label not extracted from scripts.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync or correct the storyboard reference.
-
-### gap_0064 - storyboard_label_missing_from_scripts
-
-- Source: `narrative/draft/releases/release-1-mvp/planning/story_board.md:0`
-- Label: `day4_escape_state`
-- Description: Storyboard references a label not extracted from scripts.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync or correct the storyboard reference.
-
-### gap_0065 - storyboard_label_missing_from_scripts
-
-- Source: `narrative/draft/releases/release-1-mvp/planning/story_board.md:0`
-- Label: `day5_dynamic`
-- Description: Storyboard references a label not extracted from scripts.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync or correct the storyboard reference.
-
-### gap_0066 - storyboard_label_missing_from_scripts
-
-- Source: `narrative/draft/releases/release-1-mvp/planning/story_board.md:0`
-- Label: `game_over_deadline_1`
-- Description: Storyboard references a label not extracted from scripts.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync or correct the storyboard reference.
-
-### gap_0067 - storyboard_label_missing_from_scripts
-
-- Source: `narrative/draft/releases/release-1-mvp/planning/story_board.md:0`
-- Label: `game_over_deadline_2`
-- Description: Storyboard references a label not extracted from scripts.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync or correct the storyboard reference.
-
-### gap_0068 - storyboard_label_missing_from_scripts
-
-- Source: `narrative/draft/releases/release-1-mvp/planning/story_board.md:0`
-- Label: `game_over_dismissed`
-- Description: Storyboard references a label not extracted from scripts.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync or correct the storyboard reference.
-
-### gap_0069 - script_label_missing_from_storyboard
+### gap_0050 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day100_2_desk_branch`
@@ -582,7 +430,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0070 - script_label_missing_from_storyboard
+### gap_0051 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day100_2_parlour_branch`
@@ -590,7 +438,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0071 - script_label_missing_from_storyboard
+### gap_0052 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day100_2_reconvergence`
@@ -598,47 +446,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0072 - script_label_missing_from_storyboard
-
-- Source: `n/a:0`
-- Label: `day101_1_morning_interview`
-- Description: Script label not referenced in storyboard.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync if this label is planning-relevant.
-
-### gap_0073 - script_label_missing_from_storyboard
-
-- Source: `n/a:0`
-- Label: `day101_evening_consequence_window`
-- Description: Script label not referenced in storyboard.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync if this label is planning-relevant.
-
-### gap_0074 - script_label_missing_from_storyboard
-
-- Source: `n/a:0`
-- Label: `day101_night_story_window`
-- Description: Script label not referenced in storyboard.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync if this label is planning-relevant.
-
-### gap_0075 - script_label_missing_from_storyboard
-
-- Source: `n/a:0`
-- Label: `day102_1_cora_deceives_missy`
-- Description: Script label not referenced in storyboard.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync if this label is planning-relevant.
-
-### gap_0076 - script_label_missing_from_storyboard
-
-- Source: `n/a:0`
-- Label: `day102_1_missy_finds_a_thing`
-- Description: Script label not referenced in storyboard.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync if this label is planning-relevant.
-
-### gap_0077 - script_label_missing_from_storyboard
+### gap_0053 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day102_2_day2_corr_choice`
@@ -646,7 +454,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0078 - script_label_missing_from_storyboard
+### gap_0054 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day102_2_day2_insp_choice`
@@ -654,15 +462,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0079 - script_label_missing_from_storyboard
-
-- Source: `n/a:0`
-- Label: `day102_2_optional_character_chain`
-- Description: Script label not referenced in storyboard.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync if this label is planning-relevant.
-
-### gap_0080 - script_label_missing_from_storyboard
+### gap_0055 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day102_3_cora_confesses`
@@ -670,7 +470,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0081 - script_label_missing_from_storyboard
+### gap_0056 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day102_3_cora_frames_missy`
@@ -678,7 +478,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0082 - script_label_missing_from_storyboard
+### gap_0057 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day102_3_cora_pretends_to_find_it`
@@ -686,47 +486,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0083 - script_label_missing_from_storyboard
-
-- Source: `n/a:0`
-- Label: `day102_3_vance_goes_incandescent`
-- Description: Script label not referenced in storyboard.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync if this label is planning-relevant.
-
-### gap_0084 - script_label_missing_from_storyboard
-
-- Source: `n/a:0`
-- Label: `day102_4_cora_sneaks_a_feel`
-- Description: Script label not referenced in storyboard.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync if this label is planning-relevant.
-
-### gap_0085 - script_label_missing_from_storyboard
-
-- Source: `n/a:0`
-- Label: `day102_afternoon_consequence_window`
-- Description: Script label not referenced in storyboard.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync if this label is planning-relevant.
-
-### gap_0086 - script_label_missing_from_storyboard
-
-- Source: `n/a:0`
-- Label: `day102_afternoon_story_window`
-- Description: Script label not referenced in storyboard.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync if this label is planning-relevant.
-
-### gap_0087 - script_label_missing_from_storyboard
-
-- Source: `n/a:0`
-- Label: `day102_night_consequence_window`
-- Description: Script label not referenced in storyboard.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync if this label is planning-relevant.
-
-### gap_0088 - script_label_missing_from_storyboard
+### gap_0058 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day103`
@@ -734,7 +494,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0089 - script_label_missing_from_storyboard
+### gap_0059 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day103_1_corridor_corr_chain`
@@ -742,7 +502,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0090 - script_label_missing_from_storyboard
+### gap_0060 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day103_1_corridor_insp_chain`
@@ -750,15 +510,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0091 - script_label_missing_from_storyboard
-
-- Source: `n/a:0`
-- Label: `day103_1_optional_character_chain`
-- Description: Script label not referenced in storyboard.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync if this label is planning-relevant.
-
-### gap_0092 - script_label_missing_from_storyboard
+### gap_0061 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day103_2_cora_vs_gideon_corr`
@@ -766,7 +518,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0093 - script_label_missing_from_storyboard
+### gap_0062 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day103_2_cora_vs_gideon_ghost`
@@ -774,7 +526,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0094 - script_label_missing_from_storyboard
+### gap_0063 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day103_2_cora_vs_gideon_insp`
@@ -782,7 +534,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0095 - script_label_missing_from_storyboard
+### gap_0064 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day103_2_night_bargain_gideon`
@@ -790,7 +542,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0096 - script_label_missing_from_storyboard
+### gap_0065 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day103_2_night_defy_gideon`
@@ -798,7 +550,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0097 - script_label_missing_from_storyboard
+### gap_0066 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day103_2_night_surrender_gideon`
@@ -806,7 +558,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0098 - script_label_missing_from_storyboard
+### gap_0067 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day103_2_suite_cora_vs_gideon`
@@ -814,7 +566,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0099 - script_label_missing_from_storyboard
+### gap_0068 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day103_3_frantic_write`
@@ -822,7 +574,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0100 - script_label_missing_from_storyboard
+### gap_0069 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day103_3_indulge_words`
@@ -830,7 +582,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0101 - script_label_missing_from_storyboard
+### gap_0070 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day103_3_prepare_mask`
@@ -838,71 +590,15 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0102 - script_label_missing_from_storyboard
+### gap_0071 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day103_afternoon`
+- Label: `day104_1`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0103 - script_label_missing_from_storyboard
-
-- Source: `n/a:0`
-- Label: `day103_evening`
-- Description: Script label not referenced in storyboard.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync if this label is planning-relevant.
-
-### gap_0104 - script_label_missing_from_storyboard
-
-- Source: `n/a:0`
-- Label: `day103_evening_consequence_window`
-- Description: Script label not referenced in storyboard.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync if this label is planning-relevant.
-
-### gap_0105 - script_label_missing_from_storyboard
-
-- Source: `n/a:0`
-- Label: `day103_morning_consequence_window`
-- Description: Script label not referenced in storyboard.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync if this label is planning-relevant.
-
-### gap_0106 - script_label_missing_from_storyboard
-
-- Source: `n/a:0`
-- Label: `day103_night`
-- Description: Script label not referenced in storyboard.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync if this label is planning-relevant.
-
-### gap_0107 - script_label_missing_from_storyboard
-
-- Source: `n/a:0`
-- Label: `day103_night_consequence_window`
-- Description: Script label not referenced in storyboard.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync if this label is planning-relevant.
-
-### gap_0108 - script_label_missing_from_storyboard
-
-- Source: `n/a:0`
-- Label: `day104`
-- Description: Script label not referenced in storyboard.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync if this label is planning-relevant.
-
-### gap_0109 - script_label_missing_from_storyboard
-
-- Source: `n/a:0`
-- Label: `day104_1_lockbox_evidence`
-- Description: Script label not referenced in storyboard.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync if this label is planning-relevant.
-
-### gap_0110 - script_label_missing_from_storyboard
+### gap_0072 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day104_2_escape_bold_lie`
@@ -910,7 +606,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0111 - script_label_missing_from_storyboard
+### gap_0073 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day104_2_escape_fireplace`
@@ -918,7 +614,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0112 - script_label_missing_from_storyboard
+### gap_0074 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day104_2_escape_missy_cover`
@@ -926,7 +622,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0113 - script_label_missing_from_storyboard
+### gap_0075 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day104_4_atonement`
@@ -934,7 +630,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0114 - script_label_missing_from_storyboard
+### gap_0076 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day104_4_missy_repair`
@@ -942,47 +638,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0115 - script_label_missing_from_storyboard
-
-- Source: `n/a:0`
-- Label: `day104_evening`
-- Description: Script label not referenced in storyboard.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync if this label is planning-relevant.
-
-### gap_0116 - script_label_missing_from_storyboard
-
-- Source: `n/a:0`
-- Label: `day104_evening_consequence_window`
-- Description: Script label not referenced in storyboard.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync if this label is planning-relevant.
-
-### gap_0117 - script_label_missing_from_storyboard
-
-- Source: `n/a:0`
-- Label: `day104_morning`
-- Description: Script label not referenced in storyboard.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync if this label is planning-relevant.
-
-### gap_0118 - script_label_missing_from_storyboard
-
-- Source: `n/a:0`
-- Label: `day104_night`
-- Description: Script label not referenced in storyboard.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync if this label is planning-relevant.
-
-### gap_0119 - script_label_missing_from_storyboard
-
-- Source: `n/a:0`
-- Label: `day104_night_consequence_window`
-- Description: Script label not referenced in storyboard.
-- Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync if this label is planning-relevant.
-
-### gap_0120 - script_label_missing_from_storyboard
+### gap_0077 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day105_2_the_summons`
@@ -990,7 +646,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0121 - script_label_missing_from_storyboard
+### gap_0078 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day105_4_motivation_ghost`
@@ -998,7 +654,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0122 - script_label_missing_from_storyboard
+### gap_0079 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day105_4_motivation_observer`
@@ -1006,7 +662,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0123 - script_label_missing_from_storyboard
+### gap_0080 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day105_4_motivation_predator`
@@ -1014,7 +670,7 @@ No findings.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
-### gap_0124 - script_label_missing_from_storyboard
+### gap_0081 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day105_4_motivation_prey`

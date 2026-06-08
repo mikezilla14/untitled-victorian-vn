@@ -95,6 +95,7 @@ label day104_2_return_early:
 
     "A key turns in the outer door."
 
+    show vance_sprite neutral at centre_bust with moveinright # [asset auto]
     vance "—and I will not tolerate that tone from her again. Not from a dresser, not from a maid, not from anyone."
 
     "They are early."
@@ -193,6 +194,9 @@ label day104_2_escape_bold_lie:
 
     gideon "That is my question."
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show vance_sprite angry at centre_bust with move # [asset auto]
+    show gideon_sprite angry at right_bust with move # [asset auto]
     cora "Checking the desk for dust, Sir. Miss Stern's orders."
 
     "The lie stands up."
@@ -266,6 +270,8 @@ label day104_2_escape_missy_cover:
     "Wrong place. Right time."
     "For me."
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show missy_sprite shocked at right_bust with move # [asset auto]
     cora "They need you in the suite. Now. Take this."
 
     "I push the dust cloth into her hands."
@@ -329,6 +335,8 @@ label day104_3_stern_pressure:
             $ story.set_day4_stern_response("boring")
             $ apply_effects(stern_susp=-15, insp=0, corr=0)
 
+            show cora_sprite base at left_bust with moveinleft # [asset auto]
+            show stern_sprite stern at right_bust with move # [asset auto]
             cora "Ground-floor silver, Ma'am. Then linens. Then back stairs. I should have reported each change."
 
             stern "Yes. You should have."
@@ -384,7 +392,7 @@ label day104_3_stern_pressure:
 # ── 4: TWILIGHT LEDGER / FALSE DAWN ─────────────────────────────
 
 label day104_4_twilight_ledger_false_dawn:
-    call check_confrontations
+    call day104_evening_consequence_window
 
     scene bg_servants_quarters_dusk
     with dissolve
@@ -423,6 +431,15 @@ label day104_4_twilight_ledger_false_dawn:
 
 
 # ── 4: ATONEMENT / SAFETY FIRST ─────────────────────────────────
+
+label day104_evening_consequence_window:
+    call check_confrontations
+    $ _penance_label = story.pop_penance_for_window("day104_evening")
+    if _penance_label:
+        call expression _penance_label
+        jump day104_6_false_dawn_ending
+    return
+
 
 label day104_4_atonement:
 
@@ -475,6 +492,8 @@ label day104_4_missy_repair:
 
     missy "You sent me in there."
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show missy_sprite shocked at right_bust with move # [asset auto]
     cora "Yes."
 
     "The word is smaller than the harm."
@@ -535,7 +554,7 @@ label day104_4_missy_repair:
 # ── 5: TRIUMPHANT CHAPTER ───────────────────────────────────────
 
 label day104_5_triumphant_chapter:
-    call check_confrontations
+    call day104_night_consequence_window
 
     $ set_time_period("Night")
 
@@ -573,6 +592,15 @@ label day104_5_triumphant_chapter:
 
 
 # ── 6: FALSE DAWN ENDING ────────────────────────────────────────
+
+label day104_night_consequence_window:
+    call check_confrontations
+    $ _penance_label = story.pop_penance_for_window("day104_night")
+    if _penance_label:
+        call expression _penance_label
+        jump day104_6_false_dawn_ending
+    return
+
 
 label day104_6_false_dawn_ending:
 
