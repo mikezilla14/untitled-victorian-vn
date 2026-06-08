@@ -34,9 +34,13 @@ flowchart TD
   Q12 -->|yes| CU[canon-update]
   Q12 -->|no| Q13{Docs / README / catalogue?}
   Q13 -->|yes| DA[documentation-audit]
-  Q13 -->|no| Q14{Touch .agents / guardrails?}
-  Q14 -->|yes| CAH[chief_architect + human]
-  Q14 -->|no| Unclear[Ask human one question]
+  Q13 -->|no| Q14{DAG tag update?}
+  Q14 -->|yes| DTU[dag-tag-update]
+  Q14 -->|no| Q15{Storyboard sync?}
+  Q15 -->|yes| SBS[storyboard-sync]
+  Q15 -->|no| Q16{Touch .agents / guardrails?}
+  Q16 -->|yes| CAH[chief_architect + human]
+  Q16 -->|no| Unclear[Ask human one question]
 ```
 
 ## Pipelines
@@ -153,6 +157,23 @@ Generated artifacts:
 - `docs/DOCUMENTATION_CATALOG.md`
 - `docs/DOCUMENTATION_AUDIT.md`
 - `docs/documentation_catalog.json`
+
+### `dag-tag-update`
+
+| Trigger | Add, refresh, recreate, audit, or repair `.rpy` `[DAG_*]` comments |
+|---------|---------------------------------------------------------------------|
+| **1** | `non_prod_code_agent` â€” update only `[DAG_*]` comments; preserve `[DAG_* ... manual]` unless explicitly told to overwrite |
+| **2** | `documentation_steward` â€” confirm downstream graph outputs and storyboard references are refreshed or reported stale |
+
+Any DAG tag update or recreate triggers graph manifest regeneration and storyboard drift audit.
+
+### `storyboard-sync`
+
+| Trigger | Manual `.rpy` rewrite, structural agent rewrite, or graph audit reports storyboard drift |
+|---------|------------------------------------------------------------------------------------------|
+| **1** | `documentation_steward` â€” update `story_board.md` from current `.rpy` scripts and graph audit evidence |
+
+`story_board.md` is documentation derived from `.rpy` files, not the machine-readable graph source.
 
 ## Writers' room internal workflows
 

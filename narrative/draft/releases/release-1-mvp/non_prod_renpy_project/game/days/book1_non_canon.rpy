@@ -427,6 +427,7 @@ init python:
         return ("{w=" + str(word_delay) + "} ").join(words)
 
 
+# [DAG_NODE id=book1_write_chapter type=write]
 label book1_write_chapter(chapter_key="day1_chapter", current_day=101, word_delay=0.04, include_debug=False):
 
     nvl clear
@@ -480,6 +481,7 @@ label book1_write_chapter(chapter_key="day1_chapter", current_day=101, word_dela
     return
 
 
+# [DAG_NODE id=book1_nvl_write_line type=write]
 label book1_nvl_write_line(line, word_delay=0.04):
 
     if _book1_page_line_count >= _book1_page_line_limit:
@@ -498,6 +500,7 @@ label book1_nvl_write_line(line, word_delay=0.04):
     return
 
 
+# [DAG_NODE id=book1_debug_chapter_route type=write]
 label book1_debug_chapter_route(chapter_key="day2_chapter"):
 
     nvl clear
@@ -538,12 +541,14 @@ label book1_debug_chapter_route(chapter_key="day2_chapter"):
     return
 
 
+# [DAG_NODE id=book1_block_unknown_chapter type=write]
 label book1_block_unknown_chapter:
 
     call book1_nvl_write_line("(Chapter not found: [chapter_key])", word_delay=_book1_word_delay)
     return
 
 
+# [DAG_NODE id=book1_block_day1_slop_core type=write]
 label book1_block_day1_slop_core:
 
     call book1_nvl_write_line("Draft Fragment - Unsellable Night Pages", word_delay=_book1_word_delay)
@@ -554,12 +559,14 @@ label book1_block_day1_slop_core:
     return
 
 
+# [DAG_NODE id=book1_block_day1_default_core type=write]
 label book1_block_day1_default_core:
 
     call book1_block_day1_common_open
     return
 
 
+# [DAG_NODE id=book1_block_day1_ghost_core type=write]
 label book1_block_day1_ghost_core:
 
     call book1_block_day1_common_open
@@ -569,6 +576,7 @@ label book1_block_day1_ghost_core:
     return
 
 
+# [DAG_NODE id=book1_block_day1_predator_core type=write]
 label book1_block_day1_predator_core:
 
     call book1_block_day1_common_open
@@ -578,6 +586,7 @@ label book1_block_day1_predator_core:
     return
 
 
+# [DAG_NODE id=book1_block_day1_prey_core type=write]
 label book1_block_day1_prey_core:
 
     call book1_block_day1_common_open
@@ -586,6 +595,7 @@ label book1_block_day1_prey_core:
     return
 
 
+# [DAG_NODE id=book1_block_day1_common_open type=write]
 label book1_block_day1_common_open:
 
     call book1_nvl_write_line("At Ravenshade Conservatory, Coralie Vale learns that service is theater and every corridor has an audience.", word_delay=_book1_word_delay)
@@ -594,6 +604,7 @@ label book1_block_day1_common_open:
     return
 
 
+# [DAG_NODE id=book1_block_day2_ghost_core type=write]
 label book1_block_day2_ghost_core:
 
     call book1_nvl_write_line("Chapter the Second opens upon a lady's hatbox in the conservatory suite, sealed like a coffin for silk and scandal.", word_delay=_book1_word_delay)
@@ -614,6 +625,7 @@ label book1_block_day2_ghost_core:
     return
 
 
+# [DAG_NODE id=book1_block_day2_predator_core type=write]
 label book1_block_day2_predator_core:
 
     call book1_nvl_write_line("Chapter the Second opens upon a lady's hatbox in the conservatory suite, sealed like a coffin for silk and scandal.", word_delay=_book1_word_delay)
@@ -634,6 +646,7 @@ label book1_block_day2_predator_core:
     return
 
 
+# [DAG_NODE id=book1_block_day2_prey_core type=write]
 label book1_block_day2_prey_core:
 
     call book1_nvl_write_line("Chapter the Second opens upon a lady's hatbox in the conservatory suite, sealed like a coffin for silk and scandal.", word_delay=_book1_word_delay)
@@ -652,6 +665,7 @@ label book1_block_day2_prey_core:
     return
 
 
+# [DAG_NODE id=book1_block_day2_default_core type=write]
 label book1_block_day2_default_core:
 
     call book1_nvl_write_line("Chapter the Second opens upon a lady's hatbox in the conservatory suite, sealed like a coffin for silk and scandal.", word_delay=_book1_word_delay)
@@ -665,6 +679,7 @@ label book1_block_day2_default_core:
     return
 
 
+# [DAG_NODE id=book1_block_day2_missy_debt_or_repair type=write]
 label book1_block_day2_missy_debt_or_repair:
 
     if story.missy_day2_trust_break:
@@ -676,6 +691,7 @@ label book1_block_day2_missy_debt_or_repair:
     return
 
 
+# [DAG_NODE id=book1_block_day2_stern_suspicion_or_diffuse type=write]
 label book1_block_day2_stern_suspicion_or_diffuse:
 
     if story.missy_day2_suspicion_state == "uneasy":
@@ -688,6 +704,7 @@ label book1_block_day2_stern_suspicion_or_diffuse:
     return
 
 
+# [DAG_NODE id=book1_block_day2_contraband_state type=write]
 label book1_block_day2_contraband_state:
 
     if story.day2_contraband_state == "stolen_wearing":
@@ -698,6 +715,7 @@ label book1_block_day2_contraband_state:
     return
 
 
+# [DAG_NODE id=book1_block_day2_stern_pressure_if_needed type=write]
 label book1_block_day2_stern_pressure_if_needed:
 
     if story.missy_day2_suspicion_state == "uneasy" or story.missy_day2_trust_break:
@@ -707,6 +725,7 @@ label book1_block_day2_stern_pressure_if_needed:
     return
 
 
+# [DAG_NODE id=book1_block_day3_default_core type=write]
 label book1_block_day3_default_core:
 
     call book1_block_day3_common_open
@@ -717,6 +736,7 @@ label book1_block_day3_default_core:
     return
 
 
+# [DAG_NODE id=book1_block_day3_ghost_core type=write]
 label book1_block_day3_ghost_core:
 
     call book1_block_day3_common_open
@@ -730,6 +750,7 @@ label book1_block_day3_ghost_core:
     return
 
 
+# [DAG_NODE id=book1_block_day3_predator_core type=write]
 label book1_block_day3_predator_core:
 
     call book1_block_day3_common_open
@@ -743,6 +764,7 @@ label book1_block_day3_predator_core:
     return
 
 
+# [DAG_NODE id=book1_block_day3_prey_core type=write]
 label book1_block_day3_prey_core:
 
     call book1_block_day3_common_open
@@ -756,6 +778,7 @@ label book1_block_day3_prey_core:
     return
 
 
+# [DAG_NODE id=book1_block_day3_common_open type=write]
 label book1_block_day3_common_open:
 
     call book1_nvl_write_line("By twilight rehearsal, Lord Caldor's attention feels less like patronage and more like choreography.", word_delay=_book1_word_delay)
@@ -764,6 +787,7 @@ label book1_block_day3_common_open:
     return
 
 
+# [DAG_NODE id=book1_block_day3_ultimatum_beat type=write]
 label book1_block_day3_ultimatum_beat:
 
     if story.day3_ultimatum == "defied":
@@ -777,6 +801,7 @@ label book1_block_day3_ultimatum_beat:
     return
 
 
+# [DAG_NODE id=book1_block_day3_writing_cadence type=write]
 label book1_block_day3_writing_cadence:
 
     if story.day3_twilight_action == "frantic_write":
@@ -788,6 +813,7 @@ label book1_block_day3_writing_cadence:
     return
 
 
+# [DAG_NODE id=book1_block_day3_stern_beat type=write]
 label book1_block_day3_stern_beat:
 
     if story.day3_stern_response == "stupid" or story.day3_stern_response == "partial_truth":
@@ -795,6 +821,7 @@ label book1_block_day3_stern_beat:
     return
 
 
+# [DAG_NODE id=book1_block_day3_furnace_beat type=write]
 label book1_block_day3_furnace_beat:
 
     if story.day3_ultimatum == "defied" or story.day3_ultimatum == "surrendered" or story.day3_ultimatum == "bargained":
@@ -802,6 +829,7 @@ label book1_block_day3_furnace_beat:
     return
 
 
+# [DAG_NODE id=book1_block_day4_default_core type=write]
 label book1_block_day4_default_core:
 
     call book1_block_day4_common_open
@@ -813,6 +841,7 @@ label book1_block_day4_default_core:
     return
 
 
+# [DAG_NODE id=book1_block_day4_ghost_core type=write]
 label book1_block_day4_ghost_core:
 
     call book1_block_day4_common_open
@@ -825,6 +854,7 @@ label book1_block_day4_ghost_core:
     return
 
 
+# [DAG_NODE id=book1_block_day4_predator_core type=write]
 label book1_block_day4_predator_core:
 
     call book1_block_day4_common_open
@@ -837,6 +867,7 @@ label book1_block_day4_predator_core:
     return
 
 
+# [DAG_NODE id=book1_block_day4_prey_core type=write]
 label book1_block_day4_prey_core:
 
     call book1_block_day4_common_open
@@ -849,6 +880,7 @@ label book1_block_day4_prey_core:
     return
 
 
+# [DAG_NODE id=book1_block_day4_common_open type=write]
 label book1_block_day4_common_open:
 
     call book1_nvl_write_line("A hidden photograph becomes a coded sketch in the conservatory ledger, enough to threaten a lord without naming him.", word_delay=_book1_word_delay)
@@ -857,6 +889,7 @@ label book1_block_day4_common_open:
     return
 
 
+# [DAG_NODE id=book1_block_day4_moral_frame type=write]
 label book1_block_day4_moral_frame:
 
     if story.day1_corridor_state == "ghost" and story.day1_ledger_focus == "inspiration":
@@ -868,6 +901,7 @@ label book1_block_day4_moral_frame:
     return
 
 
+# [DAG_NODE id=book1_block_day4_missy_debt_or_repair type=write]
 label book1_block_day4_missy_debt_or_repair:
 
     if story.missy_day2_trust_break or story.missy_day4_used_as_cover:
@@ -879,6 +913,7 @@ label book1_block_day4_missy_debt_or_repair:
     return
 
 
+# [DAG_NODE id=book1_block_day4_stern_pressure type=write]
 label book1_block_day4_stern_pressure:
 
     if story.missy_day2_suspicion_state == "uneasy" or story.day4_stern_response == "missy_cover":
@@ -890,6 +925,7 @@ label book1_block_day4_stern_pressure:
     return
 
 
+# [DAG_NODE id=book1_block_day4_writing_cadence type=write]
 label book1_block_day4_writing_cadence:
 
     if story.day4_night_action == "finish_manuscript":
@@ -901,6 +937,7 @@ label book1_block_day4_writing_cadence:
     return
 
 
+# [DAG_NODE id=book1_block_day4_escape_and_evidence type=write]
 label book1_block_day4_escape_and_evidence:
 
     if story.day4_escape_state == "missy_cover" or story.missy_day4_used_as_cover:
@@ -910,6 +947,7 @@ label book1_block_day4_escape_and_evidence:
     return
 
 
+# [DAG_NODE id=book1_block_day5_default_core type=write]
 label book1_block_day5_default_core:
 
     call book1_block_day5_common_open
@@ -921,12 +959,14 @@ label book1_block_day5_default_core:
     return
 
 
+# [DAG_NODE id=book1_block_day5_muse_core type=write]
 label book1_block_day5_muse_core:
 
     call book1_block_day5_default_core
     return
 
 
+# [DAG_NODE id=book1_block_day5_witness_core type=write]
 label book1_block_day5_witness_core:
 
     call book1_block_day5_common_open
@@ -940,6 +980,7 @@ label book1_block_day5_witness_core:
     return
 
 
+# [DAG_NODE id=book1_block_day5_adversary_core type=write]
 label book1_block_day5_adversary_core:
 
     call book1_block_day5_common_open
@@ -953,6 +994,7 @@ label book1_block_day5_adversary_core:
     return
 
 
+# [DAG_NODE id=book1_block_day5_protege_core type=write]
 label book1_block_day5_protege_core:
 
     call book1_block_day5_common_open
@@ -966,6 +1008,7 @@ label book1_block_day5_protege_core:
     return
 
 
+# [DAG_NODE id=book1_block_day5_common_open type=write]
 label book1_block_day5_common_open:
 
     call book1_nvl_write_line("On her final night in this volume, Coralie revises the ending from triumph to diagnosis.", word_delay=_book1_word_delay)
@@ -974,6 +1017,7 @@ label book1_block_day5_common_open:
     return
 
 
+# [DAG_NODE id=book1_block_day5_missy_debt_or_repair type=write]
 label book1_block_day5_missy_debt_or_repair:
 
     if story.missy_day2_trust_break or story.missy_day4_used_as_cover or story.missy_debt_carried_forward:
@@ -985,6 +1029,7 @@ label book1_block_day5_missy_debt_or_repair:
     return
 
 
+# [DAG_NODE id=book1_block_day5_ultimatum_beat type=write]
 label book1_block_day5_ultimatum_beat:
 
     if story.day3_ultimatum == "defied":
@@ -998,6 +1043,7 @@ label book1_block_day5_ultimatum_beat:
     return
 
 
+# [DAG_NODE id=book1_block_day5_stern_pressure type=write]
 label book1_block_day5_stern_pressure:
 
     if story.missy_day2_suspicion_state == "uneasy" or story.day4_stern_response == "missy_cover":
@@ -1009,6 +1055,7 @@ label book1_block_day5_stern_pressure:
     return
 
 
+# [DAG_NODE id=book1_block_day5_writing_cadence type=write]
 label book1_block_day5_writing_cadence:
 
     if story.release1_manuscript_completed:
@@ -1020,6 +1067,7 @@ label book1_block_day5_writing_cadence:
     return
 
 
+# [DAG_NODE id=book1_block_day5_closing_diagnosis type=write]
 label book1_block_day5_closing_diagnosis:
 
     if story.day5_dynamic == "muse" or story.day5_dynamic == "adversary" or story.day5_dynamic == "witness" or story.day5_dynamic == "protege":

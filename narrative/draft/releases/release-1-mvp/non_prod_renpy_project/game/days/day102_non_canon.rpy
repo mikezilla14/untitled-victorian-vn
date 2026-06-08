@@ -29,6 +29,7 @@
 
 # ── 021: CORA + MISSY FIRST SHIFT ───────────────────────────────
 
+# [DAG_NODE id=day102_1_cora_missy_first_shift type=work day=102]
 label day102_1_cora_missy_first_shift:
 
     # [STATE] State/progression update
@@ -86,6 +87,7 @@ label day102_1_cora_missy_first_shift:
     jump day102_1_missy_finds_a_thing
 
 
+# [DAG_NODE id=day102_1_missy_finds_a_thing type=work day=102]
 label day102_1_missy_finds_a_thing:
 
     # [ASSET] Visual/staging command
@@ -141,6 +143,7 @@ label day102_1_missy_finds_a_thing:
         jump day102_1_cora_deceives_missy
 
 
+# [DAG_NODE id=day102_1_cora_takes_the_thing type=work day=102]
 label day102_1_cora_takes_the_thing:
 
     # [ASSET] Visual/staging command
@@ -198,6 +201,7 @@ label day102_1_cora_takes_the_thing:
     jump day102_2_day2_chore_time
 
 
+# [DAG_NODE id=day102_1_cora_deceives_missy type=work day=102]
 label day102_1_cora_deceives_missy:
 
     # [ASSET] Visual/staging command
@@ -255,11 +259,13 @@ label day102_1_cora_deceives_missy:
 
 # ── 022: DAY 2 CHORE TIME ───────────────────────────────────────
 
+# [DAG_NODE id=day102_2_day2_chore_time type=work day=102]
 label day102_2_day2_chore_time:
 
     # [STATE] State/progression update
     $ set_time_period("Afternoon")
 
+    # [DAG_CHECK type=confrontation]
     call check_confrontations
 
     # [ASSET] Visual/staging command
@@ -299,6 +305,7 @@ label day102_2_day2_chore_time:
     # [STATE] State/progression update
     $ show_ledger_ui()
 
+    # [DAG_CHOICE group=day102_2_day2_chore_time_menu_1]
     menu:
         "How do I carry the morning?"
 
@@ -313,6 +320,7 @@ label day102_2_day2_chore_time:
             jump day102_2_day2_corr_choice
 
 
+# [DAG_NODE id=day102_2_day2_insp_choice type=choice]
 label day102_2_day2_insp_choice:
 
     # [ASSET] Visual/staging command
@@ -351,6 +359,7 @@ label day102_2_day2_insp_choice:
     jump day102_2_optional_character_chain
 
 
+# [DAG_NODE id=day102_2_day2_corr_choice type=choice]
 label day102_2_day2_corr_choice:
 
     # [ASSET] Visual/staging command
@@ -391,9 +400,11 @@ label day102_2_day2_corr_choice:
     jump day102_2_optional_character_chain
 
 
+# [DAG_NODE id=day102_2_optional_character_chain type=work day=102]
 label day102_2_optional_character_chain:
 
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=day102_2_optional_character_chain_menu_1]
     menu:
         "The cart is still. The corridor has not forgotten yesterday."
 
@@ -451,11 +462,13 @@ label day102_2_optional_character_chain:
             cora_inner "There is a brilliant, dangerous chapter in that."
             
             cora_inner "The house loses interest when I stop offering it a face."
+            # [DAG_ROUTE outcome=d2_reflect_done]
             call end_slot(outcome="d2_reflect_done")
 
 
 # ── 023: STERN FETCHES CORA ─────────────────────────────────────
 
+# [DAG_NODE id=day102_3_stern_fetches_cora type=work day=102]
 label day102_3_stern_fetches_cora:
 
     # [ASSET] Visual/staging command
@@ -495,6 +508,7 @@ label day102_3_stern_fetches_cora:
     jump day102_3_vance_goes_incandescent
 
 
+# [DAG_NODE id=day102_3_vance_goes_incandescent type=work day=102]
 label day102_3_vance_goes_incandescent:
 
     # [ASSET] Visual/staging command
@@ -550,9 +564,11 @@ label day102_3_vance_goes_incandescent:
     jump day102_3_coras_choice
 
 
+# [DAG_NODE id=day102_3_coras_choice type=choice]
 label day102_3_coras_choice:
 
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=day102_3_coras_choice_menu_1]
     menu:
         "What do I do?"
 
@@ -572,6 +588,7 @@ label day102_3_coras_choice:
             jump day102_3_cora_frames_missy
 
 
+# [DAG_NODE id=day102_3_cora_confesses type=work day=102]
 label day102_3_cora_confesses:
 
     # [ASSET] Visual/staging command
@@ -626,6 +643,7 @@ label day102_3_cora_confesses:
     jump day102_3_gideon_interrupts_controls_vance
 
 
+# [DAG_NODE id=day102_3_cora_pretends_to_find_it type=work day=102]
 label day102_3_cora_pretends_to_find_it:
 
     # [ASSET] Visual/staging command
@@ -695,6 +713,7 @@ label day102_3_cora_pretends_to_find_it:
     jump day102_3_gideon_interrupts_controls_vance
 
 
+# [DAG_NODE id=day102_3_cora_frames_missy type=work day=102]
 label day102_3_cora_frames_missy:
 
     # [ASSET] Visual/staging command
@@ -752,6 +771,7 @@ label day102_3_cora_frames_missy:
     jump day102_3_gideon_interrupts_controls_vance
 
 
+# [DAG_NODE id=day102_3_gideon_interrupts_controls_vance type=work day=102]
 label day102_3_gideon_interrupts_controls_vance:
 
     # [STATE] State/progression update
@@ -986,11 +1006,13 @@ label day102_3_gideon_interrupts_controls_vance:
 
 # ── 024: NIGHT — WRITE OR INDULGE ───────────────────────────────
 
+# [DAG_NODE id=day102_4_night type=work day=102]
 label day102_4_night:
 
     # [STATE] State/progression update
     $ set_time_period("Night")
 
+    # [DAG_CHECK type=confrontation]
     call check_confrontations
 
     # [ASSET] Visual/staging command
@@ -1007,6 +1029,7 @@ label day102_4_night:
     # [STATE] State/progression update
     $ show_ledger_ui()
 
+    # [DAG_CHOICE group=day102_4_night_menu_1]
     menu:
         "What do I do with the night?"
 
@@ -1021,6 +1044,7 @@ label day102_4_night:
             jump day102_4_cora_sneaks_a_feel
 
 
+# [DAG_NODE id=day102_4_cora_writes_a_chapter type=write]
 label day102_4_cora_writes_a_chapter:
 
     # [ASSET] Visual/staging command
@@ -1110,9 +1134,11 @@ label day102_4_cora_writes_a_chapter:
             cora_inner "None of it has become art yet."
             cora_inner "It remains appetite and consequence."
 
+    # [DAG_ROUTE outcome=d2_write_night]
     call end_slot(outcome="d2_write_night")
 
 
+# [DAG_NODE id=day102_4_cora_sneaks_a_feel type=work day=102]
 label day102_4_cora_sneaks_a_feel:
 
     # [ASSET] Visual/staging command
@@ -1163,6 +1189,7 @@ label day102_4_cora_sneaks_a_feel:
     cora_inner "When I finally sleep, the candle has burned lower than I meant to allow."
     cora_inner "Waste has consequences."
 
+    # [DAG_ROUTE outcome=d2_write_night]
     call end_slot(outcome="d2_write_night")
 
 # Promotion note: deadline gate lives on day103.rpy label day103_morning (via end_slot d2_write_night).

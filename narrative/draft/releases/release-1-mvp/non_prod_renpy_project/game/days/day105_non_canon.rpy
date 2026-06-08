@@ -65,6 +65,7 @@
 # 1 - MONSTER RE-EMERGES
 # ==========================================
 
+# [DAG_NODE id=day105_1_monster_reemerges type=work day=105]
 label day105_1_monster_reemerges:
 
     # [ASSET] Existing Day 5 / recurring Master Suite background
@@ -109,6 +110,7 @@ label day105_1_monster_reemerges:
 # 2 - THE SUMMONS
 # ==========================================
 
+# [DAG_NODE id=day105_2_the_summons type=work day=105]
 label day105_2_the_summons:
 
     # [ASSET] Visual/staging command
@@ -188,6 +190,7 @@ label day105_2_the_summons:
 # 3 - LEVERAGE COLLAPSES
 # ==========================================
 
+# [DAG_NODE id=day105_3_leverage_collapses type=work day=105]
 label day105_3_leverage_collapses:
 
     # [ASSET] Visual/staging command
@@ -305,6 +308,7 @@ label day105_3_leverage_collapses:
 # 4 - WHY DID YOU DO IT?
 # ==========================================
 
+# [DAG_NODE id=day105_4_why_did_you_do_it type=choice]
 label day105_4_why_did_you_do_it:
 
     # [ASSET] Visual/staging command
@@ -336,6 +340,7 @@ label day105_4_why_did_you_do_it:
     gideon "Why?"
 
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=day105_4_why_did_you_do_it_menu_1]
     menu:
         "Why did I do it?"
 
@@ -364,6 +369,7 @@ label day105_4_why_did_you_do_it:
 # 4 - MOTIVATION: OBSERVER / MUSE
 # ==========================================
 
+# [DAG_NODE id=day105_4_motivation_observer type=work day=105]
 label day105_4_motivation_observer:
 
     # [ASSET] Visual/staging command
@@ -410,6 +416,7 @@ label day105_4_motivation_observer:
 # 4 - MOTIVATION: PREDATOR / PROTÉGÉ
 # ==========================================
 
+# [DAG_NODE id=day105_4_motivation_predator type=work day=105]
 label day105_4_motivation_predator:
 
     # [ASSET] Visual/staging command
@@ -457,6 +464,7 @@ label day105_4_motivation_predator:
 # 4 - MOTIVATION: PREY / ADVERSARY
 # ==========================================
 
+# [DAG_NODE id=day105_4_motivation_prey type=work day=105]
 label day105_4_motivation_prey:
 
     # [ASSET] Visual/staging command
@@ -502,6 +510,7 @@ label day105_4_motivation_prey:
 # 4 - MOTIVATION: GHOST / WITNESS
 # ==========================================
 
+# [DAG_NODE id=day105_4_motivation_ghost type=work day=105]
 label day105_4_motivation_ghost:
 
     # [ASSET] Visual/staging command
@@ -545,6 +554,7 @@ label day105_4_motivation_ghost:
 # 5 - GIDEON MARKS CORA
 # ==========================================
 
+# [DAG_NODE id=day105_5_gideon_marks_cora type=work day=105]
 label day105_5_gideon_marks_cora:
 
     # [ASSET] Visual/staging command
@@ -647,6 +657,7 @@ label day105_5_gideon_marks_cora:
     "Servants who reach too quickly are thieves twice."
 
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=day105_5_gideon_marks_cora_menu_1]
     menu:
         "Do I take Gideon's money?"
 
@@ -737,6 +748,7 @@ label day105_5_gideon_marks_cora:
 # 6 - MANUSCRIPT RECKONING
 # ==========================================
 
+# [DAG_NODE id=day105_6_manuscript_reckoning type=write]
 label day105_6_manuscript_reckoning:
 
     # [ASSET] Existing Cora desk night background
@@ -871,6 +883,7 @@ label day105_6_manuscript_reckoning:
 # 7 - RELEASE ONE ENDING
 # ==========================================
 
+# [DAG_NODE id=day105_7_release_one_ending type=work day=105]
 label day105_7_release_one_ending:
 
     # [ASSET] Visual/staging command

@@ -84,6 +84,25 @@ PIPELINES: dict[str, list[dict]] = {
     "documentation-audit": [
         {"stage": 1, "agent": "documentation_steward", "note": "Update docs first, then refresh catalogue and audit artifacts"},
     ],
+    "dag-tag-update": [
+        {
+            "stage": 1,
+            "agent": "non_prod_code_agent",
+            "note": "Update only [DAG_*] comments; preserve manual DAG tags unless explicitly told to overwrite them",
+        },
+        {
+            "stage": 2,
+            "agent": "documentation_steward",
+            "note": "Confirm downstream graph outputs and storyboard references are refreshed or reported stale",
+        },
+    ],
+    "storyboard-sync": [
+        {
+            "stage": 1,
+            "agent": "documentation_steward",
+            "note": "Update story_board.md from current .rpy scripts and graph audit evidence; .rpy remains source of truth",
+        },
+    ],
 }
 
 AGENT_FILES: dict[str, str] = {

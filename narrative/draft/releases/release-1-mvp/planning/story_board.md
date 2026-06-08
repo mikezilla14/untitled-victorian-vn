@@ -1,11 +1,52 @@
-# Untitled Victorian VN — Storyboard (Release 1 - MVP)
+# Story Board Lineage & Ownership
 
-> **Legend**
-> 📌 Notes · 🚩 Flag Seeded · ⚖️ Stat Gated · 🚪 Branch Point
+This storyboard is a human-readable planning, review, and continuity artifact derived from the Release 1 non-canon `.rpy` draft scripts.
+
+The `.rpy` files are the structural source of truth for graph extraction:
+
+`narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/*.rpy`
+`narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/*.rpy`
+
+This file must not be treated as the primary machine-readable source for routing, DAG tags, menu structure, gates, stat effects, or graph manifests. Those are extracted from `.rpy` scripts plus optional `[DAG_*]` comments.
+
+## Managing Skills / Workflows
+
+This storyboard is created, refreshed, or audited by these workflows:
+
+| Workflow / Skill | Role |
+|------------------|------|
+| `produce_day` | Creates new day draft structure that may later be reflected in this storyboard. |
+| `rewrite_narrative` | May change `.rpy` structure; storyboard must be audited afterward. |
+| `revise_narrative` | May change labels, branches, gates, or prose continuity; storyboard drift should be checked afterward. |
+| `implement_spec` | May add technical scaffolding to `.rpy`; storyboard should only be updated if structural intent changes. |
+| `dag_tag_update` | Adds or refreshes `[DAG_*]` comments in `.rpy`; triggers graph manifest regeneration and storyboard drift audit. |
+| `storyboard_sync` | Updates this storyboard from current `.rpy` scripts and graph audit outputs after manual or agent-authored rewrites. |
+| `documentation_audit` | Refreshes documentation references and confirms this lineage note remains accurate. |
+
+## Direction Of Truth
+
+```text
+.rpy draft scripts + optional DAG tags
+        |
+        v
+graph manifest / CSVs / audit reports
+        |
+        v
+storyboard drift notes and human documentation updates
+```
+
+The storyboard may guide human planning, but future agents must not reverse the direction and generate the playable or extractable graph from this file alone.
 
 ---
 
-## Story Structure — MVP Path
+# Untitled Victorian VN â€” Storyboard (Release 1 - MVP)
+
+> **Legend**
+> ðŸ“Œ Notes Â· ðŸš© Flag Seeded Â· âš–ï¸ Stat Gated Â· ðŸšª Branch Point
+
+---
+
+## Story Structure â€” MVP Path
 
 ```mermaid
 flowchart TD
@@ -39,42 +80,43 @@ flowchart TD
 1. **State Contract Integrity**: All flags are maintained within the `StoryState` class layer via setters (e.g., `story.set_corridor_state("prey")`). No ad hoc `default story.day1_corridor_state = ...` assignments in episodic scripts. Mutually exclusive branches use a single string and a whitelisted setter.
 2. **Label Naming**: `day[R][dd]_[p]_[location_description]` where R is Release (1) and dd is the day (01-05). Example: `day103_2_suite_gideon_tea`.
 3. **Symbols & Speakers**: All speaker tokens (e.g., `cora`, `stern`) must map to defined `Character` objects in `characters.rpy`. All stat effects must use `apply_effects()`.
-4. **Passage-Level Design**: Non-canon drafts serve as **design intent**. They hold the narrative structure, the dialogue, and the flow, which are then strictly parsed into the canon `dayrdd.rpy` scripts.
+4. **Passage-Level Design**: Non-canon drafts serve as **design intent**. They hold the narrative structure, the dialogue, and the flow, which are then strictly parsed into the canon `dayrdd.rpy` scripts. Graph extraction reads the `.rpy` drafts directly rather than reverse-engineering this storyboard.
+5. **Graph Annotation**: Structural `.rpy` labels, menus, gates, and router exits may include thin `[DAG_*]` comments. These comments are non-player-facing technical metadata used by the graph manifest extractor. They must not replace `[STATE]`, `[CHOICE]`, `[BEAT]`, or `[ASSET]` markers. Human-authored DAG comments may be marked `manual`; tag-update agents must skip those unless explicitly instructed to overwrite manual DAG tags.
 
 ---
 
 ## Global State Tracking (Day 100-105)
 
-### 🚩 Key Narrative Flags
+### ðŸš© Key Narrative Flags
 
 | Flag Name | Set In | Function / Forward Impact |
 |-----------|--------|---------------------------|
-| `prologue_found` | Day 100 | `"overheard"` or `"read_letters"` — seeds Cora's initial thematic inclination. |
-| `prologue_why_write` | Day 100 | `"money_home"` / `"cataloguer"` / `"scandal_hungry"` — seeds manuscript motive for book1. |
-| `prologue_holywell_posture` | Day 100 | `"careful"` / `"eager"` / `"desperate"` — seeds illicit-publisher risk appetite. |
-| `story.day1_interview_state` | Day 101 | `"meek"` / `"competent"` — early suspicion shaping with Stern. |
-| `story.day1_corridor_state` | Day 101 | `"predator"` / `"prey"` / `"ghost"` — determines Chapter 1 prose and Day 2's contraband branch. |
-| `story.day1_ledger_focus` | Day 101 | `"inspiration"` / `"corruption"` — dictates the framing of the writing or indulgence. |
-| `story.missy_day1_trust_state` | Day 101 | `"soothed"` / `"unsettled"` / `"warned_cora"` / `"shared_caution"` — tracks early relationship with Missy. |
-| `story.day2_contraband_state` | Day 102 | `"stolen_wearing"` / `"planted_in_trunk"` — outcome of the morning discovery; shapes the tea crisis. |
-| `story.day2_tea_choice` | Day 102 | `"prey"` (confess) / `"predator"` (pretend to find) / `"ghost"` (frame Missy) — drives the Day 3 consequence. |
-| `story.missy_day2_trust_break` | Day 102 | Boolean — True if Missy is framed (`"ghost"`). |
-| `story.day3_brush_choice` | Day 103 | `"predator"` (accomplice) / `"prey"` (deviant) / `"ghost"` (mouse) — Gideon mirror test. |
-| `story.day3_ultimatum` | Day 103 | `"defied"` / `"bargained"` / `"surrendered"` — response to Gideon's 9 PM demand. |
-| `story.day4_escape_state` | Day 104 | `"fireplace"` / `"bold_lie"` / `"missy_cover"` — survival method affecting suspicion and Missy. |
-| `story.has_photograph` | Day 104 | Boolean — True if Cora escaped with the evidence. |
-| `story.day5_dynamic` | Day 105 | `"muse"` / `"protege"` / `"adversary"` / `"witness"` — Gideon's assessment of Cora's true motivation. |
-| `story.day5_money_choice` | Day 105 | `"taken"` / `"refused"` / `"deferred"` — affects entanglement for Release 2. |
-| `story.gideon_entanglement_level` | Day 105 | `"accepted_money"` / `"refused_money"` / `"deferred_money"` — tracks Gideon leverage/money status for Release 2. |
-| `story.cora_release1_flavour` | Day 105 | `"observer"` / `"predator"` / `"prey"` / `"ghost"` — carries forward Cora's accumulated archetype. |
-| `story.stern_chain_level` | Day 101-104 | Integer `[0, 3]` — tracks Cora's optional relationship progression with Miss Stern. |
-| `story.missy_chain_level` | Day 101-104 | Integer `[0, 3]` — tracks Cora's optional relationship progression with Missy. |
-| `story.vance_chain_level` | Day 101-104 | Integer `[0, 3]` — tracks Cora's optional relationship progression with Vance. |
-| `story.penance_triggered` | Day 101-104 | Boolean — True when a personal character confrontation is triggered by combined suspicion ≥ 50. |
+| `prologue_found` | Day 100 | `"overheard"` or `"read_letters"` â€” seeds Cora's initial thematic inclination. |
+| `prologue_why_write` | Day 100 | `"money_home"` / `"cataloguer"` / `"scandal_hungry"` â€” seeds manuscript motive for book1. |
+| `prologue_holywell_posture` | Day 100 | `"careful"` / `"eager"` / `"desperate"` â€” seeds illicit-publisher risk appetite. |
+| `story.day1_interview_state` | Day 101 | `"meek"` / `"competent"` â€” early suspicion shaping with Stern. |
+| `story.day1_corridor_state` | Day 101 | `"predator"` / `"prey"` / `"ghost"` â€” determines Chapter 1 prose and Day 2's contraband branch. |
+| `story.day1_ledger_focus` | Day 101 | `"inspiration"` / `"corruption"` â€” dictates the framing of the writing or indulgence. |
+| `story.missy_day1_trust_state` | Day 101 | `"soothed"` / `"unsettled"` / `"warned_cora"` / `"shared_caution"` â€” tracks early relationship with Missy. |
+| `story.day2_contraband_state` | Day 102 | `"stolen_wearing"` / `"planted_in_trunk"` â€” outcome of the morning discovery; shapes the tea crisis. |
+| `story.day2_tea_choice` | Day 102 | `"prey"` (confess) / `"predator"` (pretend to find) / `"ghost"` (frame Missy) â€” drives the Day 3 consequence. |
+| `story.missy_day2_trust_break` | Day 102 | Boolean â€” True if Missy is framed (`"ghost"`). |
+| `story.day3_brush_choice` | Day 103 | `"predator"` (accomplice) / `"prey"` (deviant) / `"ghost"` (mouse) â€” Gideon mirror test. |
+| `story.day3_ultimatum` | Day 103 | `"defied"` / `"bargained"` / `"surrendered"` â€” response to Gideon's 9 PM demand. |
+| `story.day4_escape_state` | Day 104 | `"fireplace"` / `"bold_lie"` / `"missy_cover"` â€” survival method affecting suspicion and Missy. |
+| `story.has_photograph` | Day 104 | Boolean â€” True if Cora escaped with the evidence. |
+| `story.day5_dynamic` | Day 105 | `"muse"` / `"protege"` / `"adversary"` / `"witness"` â€” Gideon's assessment of Cora's true motivation. |
+| `story.day5_money_choice` | Day 105 | `"taken"` / `"refused"` / `"deferred"` â€” affects entanglement for Release 2. |
+| `story.gideon_entanglement_level` | Day 105 | `"accepted_money"` / `"refused_money"` / `"deferred_money"` â€” tracks Gideon leverage/money status for Release 2. |
+| `story.cora_release1_flavour` | Day 105 | `"observer"` / `"predator"` / `"prey"` / `"ghost"` â€” carries forward Cora's accumulated archetype. |
+| `story.stern_chain_level` | Day 101-104 | Integer `[0, 3]` â€” tracks Cora's optional relationship progression with Miss Stern. |
+| `story.missy_chain_level` | Day 101-104 | Integer `[0, 3]` â€” tracks Cora's optional relationship progression with Missy. |
+| `story.vance_chain_level` | Day 101-104 | Integer `[0, 3]` â€” tracks Cora's optional relationship progression with Vance. |
+| `story.penance_triggered` | Day 101-104 | Boolean â€” True when a personal character confrontation is triggered by combined suspicion â‰¥ 50. |
 
-### ⚖️ Hard Mechanic Gates
+### âš–ï¸ Hard Mechanic Gates
 
-#### 🧠 The Accumulated Anxiety Design (Option B)
+#### ðŸ§  The Accumulated Anxiety Design (Option B)
 * **Two-Tiered Suspicion State**: Each tracked character (Stern, Vance, Gideon, Missy) maintains two independent pools of suspicion:
   * **Base Suspicion (`base_susp`)**: Permanent, established suspicion level reflecting structural plot events. Base suspicion is never naturally decayed.
   * **Acute Suspicion (`acute_susp`)**: Volatile, temporary heat generated by suspicious interactions (lies, snooping, wearing contraband). Acute suspicion is managed through gameplay actions.
@@ -92,19 +134,19 @@ flowchart TD
 * **Confrontation & Penance Check**: At the start of active slots (REFLECT or WRITE), the game calls `check_confrontations`. If any individual combined suspicion is $\ge 50$, a personal confrontation with that character is triggered. The confrontation and subsequent penance/atonement:
   1. Consumes the active slot (sets `story.penance_triggered = True` and jumps to penance).
   2. Reduces that character's acute suspicion by `35`, providing immediate anxiety relief.
-* **Vigilance / Breakdown Gate (Game Over)**: Reaching `100` consolidated Anxiety (either through a single combined suspicion hitting 100 or the compounded pressure of multiple suspicious observers) immediately triggers the `game_over_dismissed` fail-state—a nervous breakdown where Cora's mask cracks and she is dismissed by Miss Stern.
+* **Vigilance / Breakdown Gate (Game Over)**: Reaching `100` consolidated Anxiety (either through a single combined suspicion hitting 100 or the compounded pressure of multiple suspicious observers) immediately triggers the `game_over_dismissed` fail-stateâ€”a nervous breakdown where Cora's mask cracks and she is dismissed by Miss Stern.
 * **Day 4 Write Paralysis**: Reaching `85` consolidated Anxiety during Day 4 Twilight blocks the Triumphant Write due to internal panic.
 
-#### 📅 Two-Step Slot Integration
+#### ðŸ“… Two-Step Slot Integration
 To preserve crucial narrative forks and chapter variants without sacrificing optional grinds, active slots utilize a two-step flow:
 1. **Reflection Step**: The ledger or afternoon chore choice is presented first, setting essential focus flags (`day1_ledger_focus`, `day2_chore_focus`, `day3_corridor_chain`).
 2. **Optional Grind Step**: The day file presents a **contextual** chain menu. The player can choose to write (e.g. Chapter 1) or spend the slot grinding relationship chains. Each option calls `story.resolve_chain_label(character)` and jumps into the character's beat in `story_chains_non_canon.rpy`. Relationship chains have 3 levels and are gated by `story.chain_available(character)`. Desk retreat still calls `advance_after_confrontation`.
 
-#### 🎯 Daily Story Gates
-- **Day 101 Night:** Writing Chapter One requires **(Inspiration + Corruption) ≥ 15**. Failure skips the chapter.
-- **Day 102 Night:** Writing Chapter Two requires **Ch1 gate ≥ 15** (if missed) or **Ch2 gate ≥ 30**. Alternative indulgence trades manuscript progress for stats.
-- **Day 103 Night:** Barricading the door for Chapter Three requires **(Inspiration + Corruption) ≥ 45**.
-- **Day 104 Twilight:** If **Anxiety (Suspicion) ≥ 85**, writing is blocked (Cora is too paralyzed by fear). She must choose safety/atonement or Missy repair.
+#### ðŸŽ¯ Daily Story Gates
+- **Day 101 Night:** Writing Chapter One requires **(Inspiration + Corruption) â‰¥ 15**. Failure skips the chapter.
+- **Day 102 Night:** Writing Chapter Two requires **Ch1 gate â‰¥ 15** (if missed) or **Ch2 gate â‰¥ 30**. Alternative indulgence trades manuscript progress for stats.
+- **Day 103 Night:** Barricading the door for Chapter Three requires **(Inspiration + Corruption) â‰¥ 45**.
+- **Day 104 Twilight:** If **Anxiety (Suspicion) â‰¥ 85**, writing is blocked (Cora is too paralyzed by fear). She must choose safety/atonement or Missy repair.
 - **Day 105 Morning:** Leverage defusal is structural. The photograph cannot defeat Gideon's class privilege, but the motivation confessed shapes Cora's arc and ending manuscript reckoning.
 
 #### Adult Payoff Structure: Manuscript Retelling Minigame
@@ -119,74 +161,90 @@ To preserve crucial narrative forks and chapter variants without sacrificing opt
 
 ## MVP Spine Router (Single Timetable Contract)
 
-> **Purpose:** Choices change stats and flags and flavour dialogue, but the run always reconverges on the same spine labels below. Week 1 implementation must route **every slot exit** through one router (`end_slot` / `advance_after_confrontation`) — not inline `jump day10X…` across days.  
+> **Purpose:** Choices change stats and flags and flavour dialogue, but the run always reconverges on the same spine labels below. Week 1 implementation must route **every slot exit** through one router (`end_slot` / `advance_after_confrontation`) â€” not inline `jump day10Xâ€¦` across days.
 > **Source draft:** `story_chains_non_canon.rpy` (confrontations, chains, penance). **Runtime target:** `functions.rpy` + promoted `dayrdd.rpy`.
+
+### Graph Audit Links
+
+Latest generated graph manifest:
+
+`narrative/pipeline/releases/release-1-mvp/graph/release1_graph_manifest.json`
+
+Latest graph gaps:
+
+`narrative/pipeline/releases/release-1-mvp/graph/release1_graph_gaps.md`
+
+Latest graph audit:
+
+`narrative/pipeline/releases/release-1-mvp/graph/release1_graph_audit.md`
+
+Manual `.rpy` rewrites should be followed by `storyboard_sync`, which updates this file from the current scripts and graph audit outputs. This keeps the storyboard current as documentation while preserving the rule that `.rpy` scripts remain the structural source of truth.
 
 ### Slot type legend
 
 | Symbol | Meaning |
 |--------|---------|
 | **WORK** | Mandatory plot; always runs; no optional chain menu |
-| **REFLECT** | Ledger/chore menu → focus flag → optional contextual chain menu in day file → `resolve_chain_label` |
+| **REFLECT** | Ledger/chore menu â†’ focus flag â†’ optional contextual chain menu in day file â†’ `resolve_chain_label` |
 | **WRITE** | Night (or Day 4 twilight) manuscript beat |
-| **CHECK** | `call check_confrontations` at slot entry (anxiety ≥ 100 → dismiss; any meter ≥ 50 → penance) |
+| **CHECK** | `call check_confrontations` at slot entry (anxiety â‰¥ 100 â†’ dismiss; any meter â‰¥ 50 â†’ penance) |
 
-Penance **consumes the current personal slot** (REFLECT or WRITE) and uses the same router row as “slot skipped.”
+Penance **consumes the current personal slot** (REFLECT or WRITE) and uses the same router row as â€œslot skipped.â€
 
 ### Spine sequence (labels only)
 
 | Step | Day | Period | Type | Enter label | Sets / gates |
 |------|-----|--------|------|-------------|--------------|
-| 0 | 100 | — | WORK | `day100_main` | `prologue_found` → D1 |
-| 1 | 101 | Morning | WORK | `day101_main` → `day101_1_cora_waiting` → interview → `day101_1_vance_throws_toy` | `day1_interview_state` |
-| 2 | 101 | Afternoon | WORK | `day101_2_missy_meets_cora` → `day101_2_coras_path_choice` | `day1_corridor_state` |
-| 3 | 101 | Evening | REFLECT | `day101_3_taking_stock_day1` | **CHECK** → ledger → insp/corr → chains |
-| 4 | 101 | Night | WRITE | `day101_4_writing_or_visiting` | **CHECK**; Ch1 fuel ≥ 15; write or visit; candidate first manuscript retelling minigame |
-| 5 | 102 | Morning | WORK | `day102_1_cora_missy_first_shift` → finds thing → takes/deceives | `day2_contraband_state` |
-| 6 | 102 | Afternoon | REFLECT | `day102_2_day2_chore_time` | **CHECK** → chore insp/corr → chains |
-| 7 | 102 | Evening | WORK | `day102_3_stern_fetches_cora` → vance → `day102_3_coras_choice` → `day102_3_gideon_interrupts_controls_vance` | `day2_tea_choice` |
+| 0 | 100 | â€” | WORK | `day100_main` | `prologue_found` â†’ D1 |
+| 1 | 101 | Morning | WORK | `day101_main` â†’ `day101_1_cora_waiting` â†’ interview â†’ `day101_1_vance_throws_toy` | `day1_interview_state` |
+| 2 | 101 | Afternoon | WORK | `day101_2_missy_meets_cora` â†’ `day101_2_coras_path_choice` | `day1_corridor_state` |
+| 3 | 101 | Evening | REFLECT | `day101_3_taking_stock_day1` | **CHECK** â†’ ledger â†’ insp/corr â†’ chains |
+| 4 | 101 | Night | WRITE | `day101_4_writing_or_visiting` | **CHECK**; Ch1 fuel â‰¥ 15; write or visit; candidate first manuscript retelling minigame |
+| 5 | 102 | Morning | WORK | `day102_1_cora_missy_first_shift` â†’ finds thing â†’ takes/deceives | `day2_contraband_state` |
+| 6 | 102 | Afternoon | REFLECT | `day102_2_day2_chore_time` | **CHECK** â†’ chore insp/corr â†’ chains |
+| 7 | 102 | Evening | WORK | `day102_3_stern_fetches_cora` â†’ vance â†’ `day102_3_coras_choice` â†’ `day102_3_gideon_interrupts_controls_vance` | `day2_tea_choice` |
 | 8 | 102 | Night | WRITE | `day102_4_night` | **CHECK**; Ch1 catch-up / Ch2 or indulge; candidate first manuscript retelling minigame |
-| — | 103 | Morning | DEADLINE | `day103_morning` | If `manuscript_progress == 0` → `game_over_deadline_1` |
-| 9 | 103 | Morning | REFLECT | `day103_1_servants_corridor` | **CHECK**; D2 consequence; corridor insp/corr → chains |
-| 10 | 103 | Afternoon | WORK | `day103_2_suite_gideon_tea` → vs_gideon → `day103_2_suite_gideon_beat` | `day3_brush_choice`; 9 PM order |
-| 11 | 103 | Evening | WORK | `day103_3_bedroom_cora_frantic_writing_event` | **CHECK**; twilight action; always → Stern |
+| â€” | 103 | Morning | DEADLINE | `day103_morning` | If `manuscript_progress == 0` â†’ `game_over_deadline_1` |
+| 9 | 103 | Morning | REFLECT | `day103_1_servants_corridor` | **CHECK**; D2 consequence; corridor insp/corr â†’ chains |
+| 10 | 103 | Afternoon | WORK | `day103_2_suite_gideon_tea` â†’ vs_gideon â†’ `day103_2_suite_gideon_beat` | `day3_brush_choice`; 9 PM order |
+| 11 | 103 | Evening | WORK | `day103_3_bedroom_cora_frantic_writing_event` | **CHECK**; twilight action; always â†’ Stern |
 | 12 | 103 | Evening | WORK | `day103_4_room_stern_suspicion` | Stern summons |
-| 13 | 103 | Night | WORK | `day103_2_suite_night_tea` → defy/bargain/surrender | `day3_ultimatum` |
-| 14 | 103 | Night | WRITE | `day103_3_bedroom_final_write` | **CHECK**; Ch3 ≥ 45 or frantic write; or barricade; candidate second manuscript retelling minigame |
-| 15 | 104 | Morning | WORK | `day104_1_false_dawn_suite_window` → lockbox | `has_photograph` |
-| 16 | 104 | Afternoon | WORK | `day104_2_return_early` → escape_* | `day4_escape_state` |
-| 17 | 104 | Evening | WORK | `day104_3_stern_pressure` → `day104_4_twilight_ledger_false_dawn` | **CHECK**; anxiety ≥ 85 blocks triumphant write |
-| 18 | 104 | Night | WRITE | `day104_5_triumphant_chapter` or atonement/repair → `day104_6_false_dawn_ending` | D4 penance skips triumphant; candidate second manuscript retelling minigame |
-| — | 105 | Morning | DEADLINE | End `day104_6_false_dawn_ending` | If `manuscript_progress < 2` → `game_over_deadline_2` |
-| 19 | 105 | Day | WORK | `day105_1_monster_reemerges` → summons → leverage → motivation → marks | `day5_dynamic`, money |
+| 13 | 103 | Night | WORK | `day103_2_suite_night_tea` â†’ defy/bargain/surrender | `day3_ultimatum` |
+| 14 | 103 | Night | WRITE | `day103_3_bedroom_final_write` | **CHECK**; Ch3 â‰¥ 45 or frantic write; or barricade; candidate second manuscript retelling minigame |
+| 15 | 104 | Morning | WORK | `day104_1_false_dawn_suite_window` â†’ lockbox | `has_photograph` |
+| 16 | 104 | Afternoon | WORK | `day104_2_return_early` â†’ escape_* | `day4_escape_state` |
+| 17 | 104 | Evening | WORK | `day104_3_stern_pressure` â†’ `day104_4_twilight_ledger_false_dawn` | **CHECK**; anxiety â‰¥ 85 blocks triumphant write |
+| 18 | 104 | Night | WRITE | `day104_5_triumphant_chapter` or atonement/repair â†’ `day104_6_false_dawn_ending` | D4 penance skips triumphant; candidate second manuscript retelling minigame |
+| â€” | 105 | Morning | DEADLINE | End `day104_6_false_dawn_ending` | If `manuscript_progress < 2` â†’ `game_over_deadline_2` |
+| 19 | 105 | Day | WORK | `day105_1_monster_reemerges` â†’ summons â†’ leverage â†’ motivation â†’ marks | `day5_dynamic`, money |
 | 20 | 105 | Night | WRITE | `day105_6_manuscript_reckoning` | Final chapter |
 | 21 | 105 | Morning | WORK | `day105_7_release_one_ending` | MVP end |
 
-WORK blocks **within** a period (e.g. tea crisis branches) keep normal `jump` to the next label in the same period — no clock change.
+WORK blocks **within** a period (e.g. tea crisis branches) keep normal `jump` to the next label in the same period â€” no clock change.
 
-### Router table — `end_slot` outcomes
+### Router table â€” `end_slot` outcomes
 
 Every scene ending a personal or writing slot calls the router with one `outcome`. The router sets `time_manager` / `set_time_period` and `jump`s the next spine label.
 
 | Outcome | When fired | Set clock | Jump to |
 |---------|------------|-----------|---------|
-| `d1_reflect_done` | After D1 optional chain menu or desk retreat (D1 evening) | Evening → Night | `day101_4_writing_or_visiting` |
+| `d1_reflect_done` | After D1 optional chain menu or desk retreat (D1 evening) | Evening â†’ Night | `day101_4_writing_or_visiting` |
 | `d1_write_ch1` | After `day101_4_write_the_chapter` | day=2, Morning | `day102_1_cora_missy_first_shift` |
 | `d1_visit_missy` | After `day101_4_visit_missy` | day=2, Morning | `day102_1_cora_missy_first_shift` |
-| `d2_reflect_done` | After D2 afternoon chain / desk retreat | Afternoon → Evening | `day102_3_stern_fetches_cora` |
-| `d2_write_night` | After `day102_4_cora_writes_a_chapter` or indulge | day=3, Morning | `day103_morning` (deadline check) → `day103_1_servants_corridor` |
-| `d3_reflect_done` | After D3 morning chain / desk retreat | Morning → Afternoon | `day103_2_suite_gideon_tea` |
+| `d2_reflect_done` | After D2 afternoon chain / desk retreat | Afternoon â†’ Evening | `day102_3_stern_fetches_cora` |
+| `d2_write_night` | After `day102_4_cora_writes_a_chapter` or indulge | day=3, Morning | `day103_morning` (deadline check) â†’ `day103_1_servants_corridor` |
+| `d3_reflect_done` | After D3 morning chain / desk retreat | Morning â†’ Afternoon | `day103_2_suite_gideon_tea` |
 | `d3_twilight_done` | After frantic / mask / indulge twilight | Stay Evening | `day103_4_room_stern_suspicion` |
-| `d3_stern_done` | After stern scene | Evening → Night | `day103_2_suite_night_tea` |
+| `d3_stern_done` | After stern scene | Evening â†’ Night | `day103_2_suite_night_tea` |
 | `d3_ultimatum_done` | After defy / bargain / surrender | Stay Night | `day103_3_bedroom_final_write` |
-| `d3_write_night` | After final write or barricade | day=4, Morning | `day104_1` → `day104_1_false_dawn_suite_window` |
-| `d4_twilight_done` | After atonement / repair / triumphant menu resolve | Evening → Night | `day104_5_triumphant_chapter` **or** `day104_6_false_dawn_ending` |
+| `d3_write_night` | After final write or barricade | day=4, Morning | `day104_1` â†’ `day104_1_false_dawn_suite_window` |
+| `d4_twilight_done` | After atonement / repair / triumphant menu resolve | Evening â†’ Night | `day104_5_triumphant_chapter` **or** `day104_6_false_dawn_ending` |
 | `d4_write_night` | After triumphant chapter | Stay Night | `day104_6_false_dawn_ending` |
 | `d4_dawn_gate` | End of `day104_6_false_dawn_ending` | day=5, Morning | `day105_1_monster_reemerges` (or `game_over_deadline_2`) |
 | `d5_write_night` | After `day105_6_manuscript_reckoning` | Morning (epilogue) | `day105_7_release_one_ending` |
 | `penance` | After `confrontation_stern` / `_vance` / `_missy` | Same as skip row for current day+period | See Day 4 special below |
 
-**Day 4 penance special:** if `penance_triggered` after an evening confrontation, force Night → `day104_6_false_dawn_ending` (no triumphant write).
+**Day 4 penance special:** if `penance_triggered` after an evening confrontation, force Night â†’ `day104_6_false_dawn_ending` (no triumphant write).
 
 ### `check_confrontations` entry points
 
@@ -233,11 +291,11 @@ flowchart LR
   F4 --> S5
 ```
 
-### Scene exit rules (rewrite weeks 2–4)
+### Scene exit rules (rewrite weeks 2â€“4)
 
 | Do | Don't |
 |----|--------|
-| End REFLECT / WRITE / penance with `end_slot(outcome=…)` | `jump day102_1…` (or any cross-day label) from inside scene text |
+| End REFLECT / WRITE / penance with `end_slot(outcome=â€¦)` | `jump day102_1â€¦` (or any cross-day label) from inside scene text |
 | Change dialogue and `apply_effects` inside a spine label | Change which label that scene exits to |
 | Use normal `jump` only inside the same WORK period | Maintain two timetables (inline jumps + router) |
 
@@ -245,9 +303,9 @@ flowchart LR
 
 | Issue | Current promoted | Target |
 |-------|------------------|--------|
-| D1 ledger → night | Skips chains; insp/corr → `day101_4` directly | Chains → router → night write |
-| D1 night → D2 | Raw `jump day102_1` | `end_slot` sets day=2, Morning |
-| D4 deadline | Missing on promoted `day104_6` | `manuscript_progress < 2` → `game_over_deadline_2` |
+| D1 ledger â†’ night | Skips chains; insp/corr â†’ `day101_4` directly | Chains â†’ router â†’ night write |
+| D1 night â†’ D2 | Raw `jump day102_1` | `end_slot` sets day=2, Morning |
+| D4 deadline | Missing on promoted `day104_6` | `manuscript_progress < 2` â†’ `game_over_deadline_2` |
 | D2 deadline | In `day102_non_canon` at `day103_morning` | Keep at `day103_morning` entry |
 
 ---

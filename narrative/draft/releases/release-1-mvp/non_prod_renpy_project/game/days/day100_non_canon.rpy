@@ -27,6 +27,7 @@
 # MAIN ENTRY — MORNING (train, leaving the west)
 # ==========================================
 
+# [DAG_NODE id=day100_main type=work day=100]
 label day100_main:
 
     # [STATE] State/progression update
@@ -75,6 +76,7 @@ label day100_main:
 # AFTERNOON — boredom, reading, Holywell Street
 # ==========================================
 
+# [DAG_NODE id=day100_1_afternoon_boredom type=work day=100]
 label day100_1_afternoon_boredom:
 
     # [STATE] State/progression update
@@ -104,6 +106,7 @@ label day100_1_afternoon_boredom:
     cora_inner "They pay for what housekeepers burn."
 
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=day100_1_afternoon_boredom_menu_1]
     menu:
         "Why am I really doing this?"
 
@@ -132,6 +135,7 @@ label day100_1_afternoon_boredom:
             cora_inner "The country taught me appetite has no rank. London will teach me price."
 
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=day100_1_afternoon_boredom_menu_2]
     menu:
         "The Holywell Street handbill promises discretion. How do I answer it in my head?"
 
@@ -166,6 +170,7 @@ label day100_1_afternoon_boredom:
 # EVENING — Wiltshire flashback (discovery)
 # ==========================================
 
+# [DAG_NODE id=day100_2_evening_flashback type=work day=100]
 label day100_2_evening_flashback:
 
     # [STATE] State/progression update
@@ -192,6 +197,7 @@ label day100_2_evening_flashback:
     cora_inner "The raw margins of a house that sermons in public."
 
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=day100_2_evening_flashback_menu_1]
     menu:
         "The parlour's breath, or the desk's quiet ink?"
 
@@ -210,6 +216,7 @@ label day100_2_evening_flashback:
             jump day100_2_desk_branch
 
 
+# [DAG_NODE id=day100_2_parlour_branch type=work day=100]
 label day100_2_parlour_branch:
 
     "The murmur through the oak is not servants. It is appetite with the locks left off."
@@ -231,6 +238,7 @@ label day100_2_parlour_branch:
     jump day100_2_reconvergence
 
 
+# [DAG_NODE id=day100_2_desk_branch type=work day=100]
 label day100_2_desk_branch:
 
     cora_inner "The parlour stays shut. The letters are louder."
@@ -247,6 +255,7 @@ label day100_2_desk_branch:
     jump day100_2_reconvergence
 
 
+# [DAG_NODE id=day100_2_reconvergence type=work day=100]
 label day100_2_reconvergence:
 
     "The latch clicks. Sir John stands in the doorway."
@@ -272,6 +281,7 @@ label day100_2_reconvergence:
 # NIGHT — daydream (~2.8), wake, arrival
 # ==========================================
 
+# [DAG_NODE id=day100_3_night_daydream type=work day=100]
 label day100_3_night_daydream:
 
     # [STATE] State/progression update
@@ -324,6 +334,7 @@ label day100_3_night_daydream:
     jump day100_3_arrival
 
 
+# [DAG_NODE id=day100_3_arrival type=work day=100]
 label day100_3_arrival:
 
     "My satchel has slipped. The buckle gapes."

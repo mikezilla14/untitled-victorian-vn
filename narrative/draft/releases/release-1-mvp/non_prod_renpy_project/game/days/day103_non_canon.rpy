@@ -39,6 +39,7 @@
 # 030 - ENTRY DEADLINE GATE
 # ==========================================
 
+# [DAG_NODE id=day103_morning type=work day=103]
 label day103_morning:
     
     # [STATE] Check writing deadline progress
@@ -52,6 +53,7 @@ label day103_morning:
     $ set_time_period("Morning")
 
     # [STATE] Check dynamic non-canon suspicion confrontations
+    # [DAG_CHECK type=confrontation]
     call check_confrontations
     
     # [STATE] State/progression update
@@ -62,6 +64,7 @@ label day103_morning:
 # 031 - CONTEXTUAL GRIND / CORRIDOR ENTRY
 # ==========================================
 
+# [DAG_NODE id=day103_1_servants_corridor type=work day=103]
 label day103_1_servants_corridor:
 
     # [ASSET] Existing Day 3 servants' corridor morning background
@@ -114,6 +117,7 @@ label day103_1_servants_corridor:
     cora_inner "By late morning, the corridor outside the guest wing feels less like architecture and more like a decision waiting to happen."
 
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=day103_1_servants_corridor_menu_1]
     menu:
         "Which discipline keeps my hands steady?"
 
@@ -132,6 +136,7 @@ label day103_1_servants_corridor:
 # 031 - CORRIDOR INSPIRATION CHAIN
 # ==========================================
 
+# [DAG_NODE id=day103_1_corridor_insp_chain type=work day=103]
 label day103_1_corridor_insp_chain:
 
     # [ASSET] Visual/staging command
@@ -166,6 +171,7 @@ label day103_1_corridor_insp_chain:
 # 031 - CORRIDOR CORRUPTION CHAIN
 # ==========================================
 
+# [DAG_NODE id=day103_1_corridor_corr_chain type=work day=103]
 label day103_1_corridor_corr_chain:
 
     # [ASSET] Visual/staging command
@@ -205,9 +211,11 @@ label day103_1_corridor_corr_chain:
 # 031 - OPTIONAL CHARACTER CHAIN (DAY 3 MORNING)
 # ==========================================
 
+# [DAG_NODE id=day103_1_optional_character_chain type=work day=103]
 label day103_1_optional_character_chain:
 
     # [CHOICE] Contextual grind gate after corridor reflection; resolver picks chain beat
+    # [DAG_CHOICE group=day103_1_optional_character_chain_menu_1]
     menu:
         "The corridor is still deciding what kind of morning this will be."
 
@@ -247,6 +255,7 @@ label day103_1_optional_character_chain:
 # 032 - SUITE: GIDEON TEA
 # ==========================================
 
+# [DAG_NODE id=day103_2_suite_gideon_tea type=work day=103]
 label day103_2_suite_gideon_tea:
 
     # [STATE] TimeManager transition to Afternoon
@@ -305,6 +314,7 @@ label day103_2_suite_gideon_tea:
 # 032 - SUITE: CORA VS GIDEON
 # ==========================================
 
+# [DAG_NODE id=day103_2_suite_cora_vs_gideon type=work day=103]
 label day103_2_suite_cora_vs_gideon:
 
     # [ASSET] Visual/staging command
@@ -331,6 +341,7 @@ label day103_2_suite_cora_vs_gideon:
     cora_inner "He has summoned me for position."
 
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=day103_2_suite_cora_vs_gideon_menu_1]
     menu:
         "How do I answer the test?"
 
@@ -354,6 +365,7 @@ label day103_2_suite_cora_vs_gideon:
 # 032 - TEST BRANCH: INSPIRATION
 # ==========================================
 
+# [DAG_NODE id=day103_2_cora_vs_gideon_insp type=work day=103]
 label day103_2_cora_vs_gideon_insp:
 
     # [ASSET] Visual/staging command
@@ -405,6 +417,7 @@ label day103_2_cora_vs_gideon_insp:
 # 032 - TEST BRANCH: CORRUPTION
 # ==========================================
 
+# [DAG_NODE id=day103_2_cora_vs_gideon_corr type=work day=103]
 label day103_2_cora_vs_gideon_corr:
 
     # [ASSET] Visual/staging command
@@ -462,6 +475,7 @@ label day103_2_cora_vs_gideon_corr:
 # 032 - TEST BRANCH: GHOST
 # ==========================================
 
+# [DAG_NODE id=day103_2_cora_vs_gideon_ghost type=work day=103]
 label day103_2_cora_vs_gideon_ghost:
 
     # [ASSET] Visual/staging command
@@ -509,6 +523,7 @@ label day103_2_cora_vs_gideon_ghost:
 # 032 - SUITE: GIDEON BEAT
 # ==========================================
 
+# [DAG_NODE id=day103_2_suite_gideon_beat type=work day=103]
 label day103_2_suite_gideon_beat:
 
     # [ASSET] Visual/staging command
@@ -584,10 +599,12 @@ label day103_2_suite_gideon_beat:
 # 033 - BEDROOM: CORA FRANTIC WRITING EVENT
 # ==========================================
 
+# [DAG_NODE id=day103_3_bedroom_cora_frantic_writing_event type=write]
 label day103_3_bedroom_cora_frantic_writing_event:
     # [STATE] TimeManager transition to Evening
     $ set_time_period("Evening")
 
+    # [DAG_CHECK type=confrontation]
     call check_confrontations
 
     # [ASSET] Existing servants' quarters dusk background
@@ -611,6 +628,7 @@ label day103_3_bedroom_cora_frantic_writing_event:
     cora_inner "Not enough time to be sane about either."
 
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=day103_3_bedroom_cora_frantic_writing_event_menu_1]
     menu:
         "Write with whatever time is left. [[Frantic Write]]":
 
@@ -632,6 +650,7 @@ label day103_3_bedroom_cora_frantic_writing_event:
 # 033 - FRANTIC WRITE
 # ==========================================
 
+# [DAG_NODE id=day103_3_frantic_write type=write]
 label day103_3_frantic_write:
 
     # [ASSET] Visual/staging command
@@ -666,6 +685,7 @@ label day103_3_frantic_write:
 # 033 - PREPARE MASK
 # ==========================================
 
+# [DAG_NODE id=day103_3_prepare_mask type=work day=103]
 label day103_3_prepare_mask:
 
     # [ASSET] Visual/staging command
@@ -696,6 +716,7 @@ label day103_3_prepare_mask:
 # 033 - INDULGE WORDS
 # ==========================================
 
+# [DAG_NODE id=day103_3_indulge_words type=work day=103]
 label day103_3_indulge_words:
 
     # [ASSET] Visual/staging command
@@ -727,6 +748,7 @@ label day103_3_indulge_words:
 # 034 - ROOM: STERN SUSPICION
 # ==========================================
 
+# [DAG_NODE id=day103_4_room_stern_suspicion type=work day=103]
 label day103_4_room_stern_suspicion:
 
     # [ASSET] Visual/staging command
@@ -756,6 +778,7 @@ label day103_4_room_stern_suspicion:
     "A trap with no clever answer."
 
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=day103_4_room_stern_suspicion_menu_1]
     menu:
         "How do I answer Stern?"
 
@@ -836,6 +859,7 @@ label day103_4_room_stern_suspicion:
 # 032 CONTINUATION - NIGHT TEA / ULTIMATUM PAYOFF
 # ==========================================
 
+# [DAG_NODE id=day103_2_suite_night_tea type=work day=103]
 label day103_2_suite_night_tea:
 
     # [STATE] TimeManager transition to Night
@@ -904,6 +928,7 @@ label day103_2_suite_night_tea:
     cora_inner "A man with power has discovered a locked cabinet and is deciding whether to force it open or purchase the key, his physical presence crowding the small space between us."
 
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=day103_2_suite_night_tea_menu_1]
     menu:
         "How do I survive Gideon's knowledge?"
 
@@ -927,6 +952,7 @@ label day103_2_suite_night_tea:
 # NIGHT TEA - DEFY GIDEON
 # ==========================================
 
+# [DAG_NODE id=day103_2_night_defy_gideon type=work day=103]
 label day103_2_night_defy_gideon:
 
     # [ASSET] Visual/staging command
@@ -975,6 +1001,7 @@ label day103_2_night_defy_gideon:
 # NIGHT TEA - BARGAIN GIDEON
 # ==========================================
 
+# [DAG_NODE id=day103_2_night_bargain_gideon type=work day=103]
 label day103_2_night_bargain_gideon:
 
     # [ASSET] Visual/staging command
@@ -1033,6 +1060,7 @@ label day103_2_night_bargain_gideon:
 # NIGHT TEA - SURRENDER GIDEON
 # ==========================================
 
+# [DAG_NODE id=day103_2_night_surrender_gideon type=work day=103]
 label day103_2_night_surrender_gideon:
 
     # [ASSET] Visual/staging command
@@ -1083,7 +1111,9 @@ label day103_2_night_surrender_gideon:
 # 033 CONTINUATION - BEDROOM FINAL WRITE
 # ==========================================
 
+# [DAG_NODE id=day103_3_bedroom_final_write type=write]
 label day103_3_bedroom_final_write:
+    # [DAG_CHECK type=confrontation]
     call check_confrontations
 
     # [ASSET] Visual/staging command
@@ -1106,6 +1136,7 @@ label day103_3_bedroom_final_write:
         "The command is poisonous because I wanted the same thing, my skin still tingling from his proximity."
 
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=day103_3_bedroom_final_write_menu_1]
     menu:
         "Can I turn the night into a chapter?"
 
@@ -1193,6 +1224,7 @@ label day103_3_bedroom_final_write:
 # HANDOFF STUB
 # ==========================================
 
+# [DAG_NODE id=day104_1 type=work day=104]
 label day104_1:
 
     # [STATE] State/progression update

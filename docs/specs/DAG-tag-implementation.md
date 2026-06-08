@@ -2,14 +2,14 @@ I reviewed the repo. The spec should be adjusted quite a bit.
 
 The important repo reality is this:
 
-1. The project is **documentation-driven prompt chaining**, not an in-repo autonomous pipeline. `AGENTS.md` says there is no in-repo LLM runtime; agents are markdown rule files and the orchestrator routes work by prompt chaining. 
-2. The existing narrative workflow says the playable product is `renpy_project/`, and non-canon day scripts in `narrative/draft/` are supporting design/implementation input, “not a parser pipeline.” 
-3. The actual draft day path is already standardised as `narrative/draft/releases/<release>/non_prod_renpy_project/game/days/dayrdd_non_canon.rpy`. 
-4. `scripts/**`, `.agents/**`, and repo workflow docs are **not** Non-Prod Code Agent territory under guardrails; they sit under repo operations / documentation ownership. Non-prod can write `narrative/draft/**` and `narrative/pipeline/**`.  
-5. The draft `.rpy` files already have a real marker system: `[ASSET]`, `[STATE]`, `[CHOICE]`, `[BEAT]`, plus scene-direction tags. 
-6. The runtime already has useful machine-readable truth: `apply_effects()` has concrete params for `insp`, `corr`, acute suspicion like `stern_susp`, and base suspicion like `stern_base`; generic `susp` is deprecated.  
-7. Router outcomes already live in `StoryState.SLOT_EXIT_ROUTES`, and penance routes live in `POST_PENANCE_ROUTES`. 
-8. Existing draft scripts already expose lots of graph-relevant structure through labels, menus, `apply_effects()`, setters, `check_confrontations`, `end_slot()`, and `advance_after_confrontation`.    
+1. The project is **documentation-driven prompt chaining**, not an in-repo autonomous pipeline. `AGENTS.md` says there is no in-repo LLM runtime; agents are markdown rule files and the orchestrator routes work by prompt chaining.
+2. The existing narrative workflow says the playable product is `renpy_project/`, and non-canon day scripts in `narrative/draft/` are supporting design/implementation input, “not a parser pipeline.”
+3. The actual draft day path is already standardised as `narrative/draft/releases/<release>/non_prod_renpy_project/game/days/dayrdd_non_canon.rpy`.
+4. `scripts/**`, `.agents/**`, and repo workflow docs are **not** Non-Prod Code Agent territory under guardrails; they sit under repo operations / documentation ownership. Non-prod can write `narrative/draft/**` and `narrative/pipeline/**`.
+5. The draft `.rpy` files already have a real marker system: `[ASSET]`, `[STATE]`, `[CHOICE]`, `[BEAT]`, plus scene-direction tags.
+6. The runtime already has useful machine-readable truth: `apply_effects()` has concrete params for `insp`, `corr`, acute suspicion like `stern_susp`, and base suspicion like `stern_base`; generic `susp` is deprecated.
+7. Router outcomes already live in `StoryState.SLOT_EXIT_ROUTES`, and penance routes live in `POST_PENANCE_ROUTES`.
+8. Existing draft scripts already expose lots of graph-relevant structure through labels, menus, `apply_effects()`, setters, `check_confrontations`, `end_slot()`, and `advance_after_confrontation`.
 
 So the new spec should **not** create a grand new architecture. It should add a repo-realistic graph extractor under `narrative/pipeline/`, plus a lightweight tag contract that existing create/rewrite/implement flows can follow.
 
@@ -433,7 +433,119 @@ Avoid adding a `DAG_*` tag as the only marker immediately before a `menu:`, `sce
 
 ---
 
-## 14. Manifest Tool Must Not Insert Tags
+## 14. Human-Locked DAG Tags
+
+Human-authored DAG tags are allowed and must be preservable.
+
+Use the `manual` flag to mark a tag as human-managed:
+
+```renpy
+# [DAG_NODE id=day102_3_coras_choice type=choice day=102 period=Evening slot=WORK manual]
+# [DAG_CHOICE group=day2_tea_choice sets=story.day2_tea_choice manual]
+# [DAG_BRANCH option=predator sets=story.day2_tea_choice:predator manual]
+# [DAG_GATE id=day102_ch2_gate type=writing_fuel condition="has_story_fuel(30)" manual]
+# [DAG_ROUTE outcome=d2_write_night to=day103_morning manual]
+```
+
+Default agent behavior:
+
+```text
+Preserve manual DAG tags.
+Skip edits to any DAG tag carrying `manual`.
+Report skipped manual tags in the implementation report.
+Do not rewrite nearby prose, routing, stats, staging, or non-DAG markers.
+```
+
+Explicit overwrite behavior:
+
+```text
+Manual DAG tags may only be overwritten when the human explicitly asks for it.
+```
+
+Recommended command flag for a future tag updater:
+
+```powershell
+py narrative/pipeline/tools/update_dag_tags.py `
+  --files "path/to/day102_non_canon.rpy" `
+  --overwrite-manual-dag-tags
+```
+
+Without that explicit flag/request, manual DAG tags are authoritative.
+
+Accepted aliases may be added later (`human`, `lock`), but Phase 1 should standardize on `manual`.
+
+---
+
+## 15. DAG Tag Update Workflow
+
+Add a dedicated workflow/skill variant:
+
+```text
+dag-tag-update
+```
+
+Purpose:
+
+```text
+Update or recreate `[DAG_*]` comments only, without touching prose, routing, stats, staging, or existing non-DAG markers.
+```
+
+Normal placement:
+
+```text
+rewrite-narrative / revise-narrative / manual rewrite
+  -> scene_direction if cast/staging changed
+  -> dag-tag-update
+  -> graph manifest extraction
+  -> storyboard drift audit
+  -> storyboard_sync when documentation is stale
+```
+
+Rules:
+
+```text
+Default update preserves manual DAG tags.
+Default recreate preserves manual DAG tags.
+Full recreate may overwrite manual tags only with an explicit human request.
+Any DAG tag update or recreate must rerun downstream graph files and references.
+```
+
+Downstream files to regenerate after a DAG tag update:
+
+```text
+release1_graph_manifest.json
+release1_nodes.csv
+release1_edges.csv
+release1_choices.csv
+release1_gates.csv
+release1_effects.csv
+release1_router_outcomes.csv
+release1_graph_gaps.md
+release1_graph_audit.md
+release1_graph_mermaid.mmd
+release1_graph_implementation_report.md
+```
+
+The gap report should include:
+
+```text
+Manual DAG Tags Preserved
+```
+
+Each preserved manual tag row should include:
+
+```text
+source_file
+line_number
+tag_type
+tag_id_or_group
+reason_skipped
+overwrite_command
+```
+
+---
+
+## 16. Manifest Tool Must Not Insert Tags
 
 The extractor must never edit `.rpy` scripts.
 
@@ -451,7 +563,7 @@ But tag insertion belongs to the day creation/rewrite/implement workflows.
 
 ---
 
-## 15. Nodes CSV
+## 17. Nodes CSV
 
 Columns:
 
@@ -500,7 +612,7 @@ unknown
 
 ---
 
-## 16. Edges CSV
+## 18. Edges CSV
 
 Columns:
 
@@ -540,7 +652,7 @@ to_label = dynamic:story.resolve_chain_label(character)
 
 ---
 
-## 17. Choices CSV
+## 19. Choices CSV
 
 Columns:
 
@@ -573,7 +685,7 @@ Do not edit menu text.
 
 ---
 
-## 18. Gates CSV
+## 20. Gates CSV
 
 Columns:
 
@@ -606,7 +718,7 @@ Only create gate rows for conditions that affect story flow, writing progression
 
 ---
 
-## 19. Effects CSV
+## 21. Effects CSV
 
 Columns:
 
@@ -635,7 +747,7 @@ This file is important because it becomes the first balancing spreadsheet seed.
 
 ---
 
-## 20. Router Outcomes CSV
+## 22. Router Outcomes CSV
 
 Columns:
 
@@ -663,7 +775,7 @@ If `SLOT_EXIT_ROUTES` defines an outcome with no call site, report a warning, no
 
 ---
 
-## 21. Gap Report
+## 23. Gap Report
 
 Create:
 
@@ -685,6 +797,7 @@ Gate Pass/Fail Ambiguity
 Optional Chain Window Gaps
 Penance / Opportunity Cost Gaps
 Storyboard Drift Notes
+Manual DAG Tags Preserved
 ```
 
 Each gap must include:
@@ -723,7 +836,7 @@ formatter or validator changes -> Chief Architect
 
 ---
 
-## 22. Storyboard Audit
+## 24. Storyboard Audit
 
 If `--storyboard` is supplied, compare the extracted graph against `story_board.md`.
 
@@ -756,7 +869,7 @@ Do not rewrite `story_board.md` in Phase 1.
 
 ---
 
-## 23. Audit Report
+## 25. Audit Report
 
 Create:
 
@@ -797,7 +910,7 @@ Partial — graph skeleton usable, balancing inputs incomplete
 
 ---
 
-## 24. Mermaid Output
+## 26. Mermaid Output
 
 Create:
 
@@ -821,7 +934,7 @@ Keep readable. Do not dump every local jump.
 
 ---
 
-## 25. Validation Command
+## 27. Validation Command
 
 After implementation, run:
 
@@ -848,7 +961,7 @@ Do not require changes to CI in Phase 1.
 
 ---
 
-## 26. Implementation Report
+## 28. Implementation Report
 
 Create:
 
@@ -871,7 +984,61 @@ recommended next owner
 
 ---
 
-## 27. Future Phase 2
+## 29. Storyboard Sync Workflow
+
+Add a dedicated workflow/skill:
+
+```text
+storyboard-sync
+```
+
+Purpose:
+
+```text
+Update `story_board.md` after manual or agent-authored `.rpy` changes so the planning document reflects current script structure, without treating the storyboard as the source of truth.
+```
+
+Use after:
+
+```text
+human rewrites `.rpy` labels, menus, choices, gates, routes, or major beats
+rewrite-narrative changes structure
+revise-narrative changes structure
+dag-tag-update or graph extraction reports storyboard drift
+manual continuity edits affect the spine or scene ledger
+```
+
+Allowed primary write:
+
+```text
+narrative/draft/releases/release-1-mvp/planning/story_board.md
+```
+
+Rules:
+
+```text
+`.rpy` files are source of truth.
+Do not edit `.rpy` files.
+Do not invent structure absent from scripts.
+Preserve the storyboard lineage header.
+Update affected sections only where practical.
+If script intent is ambiguous, add a drift note or open question rather than guessing.
+```
+
+Suggested pipeline placement after manual rewrites:
+
+```text
+human edits `.rpy`
+  -> manual rewrite review framework
+  -> dag-tag-update if structure changed
+  -> graph manifest regeneration
+  -> storyboard-sync
+  -> continuity sync in a future feature
+```
+
+---
+
+## 30. Future Phase 2
 
 Phase 2 may add:
 
@@ -883,17 +1050,34 @@ orchestrator skill updates
 state contract audit
 runtime setter/enum reconciliation
 graph manifest consumed by balancing simulator
+manual rewrite review framework
+continuity tracker sync workflow
 ```
 
 Do not build Phase 2 in this task.
 
 ## Changes I’d make to `story_board.md`
 
-Do **not** convert `story_board.md` into a fully generated artifact yet. The repo currently treats it as required planning context for produce/rewrite workflows, and the narrative workflow explicitly lists it as a required context file for new day drafting.  
+Do **not** convert `story_board.md` into a fully generated artifact yet. The repo currently treats it as required planning context for produce/rewrite workflows, and the narrative workflow explicitly lists it as a required context file for new day drafting.
 
 Make smaller changes:
 
-1. Add a section near the top:
+1. Add a lineage header at the very top:
+
+```markdown
+# Story Board Lineage & Ownership
+
+This storyboard is a human-readable planning, review, and continuity artifact derived from the Release 1 non-canon `.rpy` draft scripts.
+
+The `.rpy` files are the structural source of truth for graph extraction:
+
+`narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/*.rpy`
+`narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/*.rpy`
+
+This file must not be treated as the primary machine-readable source for routing, DAG tags, menu structure, gates, stat effects, or graph manifests. Those are extracted from `.rpy` scripts plus optional `[DAG_*]` comments.
+```
+
+2. Add a section near the top:
 
 ```markdown
 ## Graph Extraction Note
@@ -907,13 +1091,13 @@ Generated graph outputs live under:
 `narrative/pipeline/releases/release-1-mvp/graph/`
 ```
 
-2. In “Coding, Class, and Style Conventions,” add a fifth convention:
+3. In “Coding, Class, and Style Conventions,” add a fifth convention:
 
 ```markdown
-5. **Graph Annotation:** Structural `.rpy` labels, menus, gates, and router exits may include thin `[DAG_*]` comments. These comments are non-player-facing technical metadata used by the graph manifest extractor. They must not replace `[STATE]`, `[CHOICE]`, `[BEAT]`, or `[ASSET]` markers.
+5. **Graph Annotation:** Structural `.rpy` labels, menus, gates, and router exits may include thin `[DAG_*]` comments. These comments are non-player-facing technical metadata used by the graph manifest extractor. They must not replace `[STATE]`, `[CHOICE]`, `[BEAT]`, or `[ASSET]` markers. Human-authored DAG comments may be marked `manual`; tag-update agents must skip those unless explicitly instructed to overwrite manual DAG tags.
 ```
 
-3. Add a “Graph Audit Links” section near the router section:
+4. Add a “Graph Audit Links” section near the router section:
 
 ```markdown
 ## Graph Audit Links
@@ -929,9 +1113,11 @@ Latest graph gaps:
 Latest audit:
 
 `narrative/pipeline/releases/release-1-mvp/graph/release1_graph_audit.md`
+
+Manual `.rpy` rewrites should be followed by `storyboard_sync`, which updates this file from the current scripts and graph audit outputs. This keeps the storyboard current as documentation while preserving the rule that `.rpy` scripts remain the structural source of truth.
 ```
 
-4. Update any language that implies `story_board.md` is the parser source of truth. Its current “Passage-Level Design” note says non-canon drafts hold narrative structure, dialogue, and flow, then are parsed into canon scripts. That is broadly consistent with script-first graph extraction, but it should say the graph extractor reads the `.rpy` drafts directly rather than reverse-engineering the storyboard. 
+5. Update any language that implies `story_board.md` is the parser source of truth. Its current “Passage-Level Design” note says non-canon drafts hold narrative structure, dialogue, and flow, then are parsed into canon scripts. That is broadly consistent with script-first graph extraction, but it should say the graph extractor reads the `.rpy` drafts directly rather than reverse-engineering the storyboard.
 
 ## One blunt recommendation
 

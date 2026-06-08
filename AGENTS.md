@@ -102,6 +102,8 @@ Skills under [`.agents/skills/`](.agents/skills/) wrap common workflows for Curs
 | [`scene_direction`](.agents/skills/scene_direction/SKILL.md) | Deterministic sprite placement post-process |
 | [`branch_handoff`](.agents/skills/branch_handoff/SKILL.md) | Branch/worktree preflight and multi-tool handoff hygiene |
 | [`documentation_audit`](.agents/skills/documentation_audit/SKILL.md) | Sync stale docs/readmes/specs and refresh the generated catalogue |
+| [`dag_tag_update`](.agents/skills/dag_tag_update/SKILL.md) | Add, refresh, or recreate `.rpy` `[DAG_*]` comments while preserving human `manual` tags by default |
+| [`storyboard_sync`](.agents/skills/storyboard_sync/SKILL.md) | Update `story_board.md` from current `.rpy` scripts and graph audit outputs after manual or agent rewrites |
 
 
 ## Pipeline helper (manual chaining)

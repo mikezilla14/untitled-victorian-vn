@@ -62,6 +62,7 @@
 # 1 - FALSE DAWN / SUITE WINDOW
 # ==========================================
 
+# [DAG_NODE id=day104_1_false_dawn_suite_window type=work day=104]
 label day104_1_false_dawn_suite_window:
 
     # [ASSET] Existing Day 4 Master Suite day background
@@ -106,6 +107,7 @@ label day104_1_false_dawn_suite_window:
 # 1 - LOCKBOX / EVIDENCE
 # ==========================================
 
+# [DAG_NODE id=day104_1_lockbox_evidence type=work day=104]
 label day104_1_lockbox_evidence:
 
     # [ASSET] Visual/staging command
@@ -153,6 +155,7 @@ label day104_1_lockbox_evidence:
 # 2 - RETURN EARLY
 # ==========================================
 
+# [DAG_NODE id=day104_2_return_early type=work day=104]
 label day104_2_return_early:
 
     # [ASSET] Visual/staging command
@@ -172,6 +175,7 @@ label day104_2_return_early:
     cora_inner "I am standing beside Gideon's desk with his lockbox open and his ruin pressed against my ribs."
 
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=day104_2_return_early_menu_1]
     menu:
         "Sixty seconds. How do I survive?"
 
@@ -195,6 +199,7 @@ label day104_2_return_early:
 # 2 - ESCAPE: FIREPLACE
 # ==========================================
 
+# [DAG_NODE id=day104_2_escape_fireplace type=work day=104]
 label day104_2_escape_fireplace:
 
     # [ASSET] Visual/staging command
@@ -254,6 +259,7 @@ label day104_2_escape_fireplace:
 # 2 - ESCAPE: BOLD LIE
 # ==========================================
 
+# [DAG_NODE id=day104_2_escape_bold_lie type=work day=104]
 label day104_2_escape_bold_lie:
 
     # [ASSET] Visual/staging command
@@ -334,6 +340,7 @@ label day104_2_escape_bold_lie:
 # 2 - ESCAPE: MISSY COVER
 # ==========================================
 
+# [DAG_NODE id=day104_2_escape_missy_cover type=work day=104]
 label day104_2_escape_missy_cover:
 
     # [ASSET] Visual/staging command
@@ -435,6 +442,7 @@ label day104_2_escape_missy_cover:
 # 3 - STERN PRESSURE
 # ==========================================
 
+# [DAG_NODE id=day104_3_stern_pressure type=work day=104]
 label day104_3_stern_pressure:
 
     # [STATE] State/progression update
@@ -469,6 +477,7 @@ label day104_3_stern_pressure:
     stern "You were difficult to locate this afternoon."
 
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=day104_3_stern_pressure_menu_1]
     menu:
         "How do I handle Stern's pressure?"
 
@@ -540,7 +549,9 @@ label day104_3_stern_pressure:
 # 4 - TWILIGHT LEDGER / FALSE DAWN
 # ==========================================
 
+# [DAG_NODE id=day104_4_twilight_ledger_false_dawn type=work day=104]
 label day104_4_twilight_ledger_false_dawn:
+    # [DAG_CHECK type=confrontation]
     call check_confrontations
 
     # [ASSET] Visual/staging command
@@ -565,6 +576,7 @@ label day104_4_twilight_ledger_false_dawn:
     cora_inner "For courage."
 
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=day104_4_twilight_ledger_false_dawn_menu_1]
     menu:
         "Perform visible penance to lower their guard. [[Atonement]]":
 
@@ -593,6 +605,7 @@ label day104_4_twilight_ledger_false_dawn:
 # 4 - ATONEMENT / SAFETY FIRST
 # ==========================================
 
+# [DAG_NODE id=day104_4_atonement type=work day=104]
 label day104_4_atonement:
 
     # [ASSET] Visual/staging command
@@ -640,6 +653,7 @@ label day104_4_atonement:
 # 4 - MISSY REPAIR
 # ==========================================
 
+# [DAG_NODE id=day104_4_missy_repair type=work day=104]
 label day104_4_missy_repair:
 
     # [ASSET] Visual/staging command
@@ -674,6 +688,7 @@ label day104_4_missy_repair:
     missy "Why, Cora? I trusted you. I thought... I thought you were the only righteous thing in this terrible hotel."
 
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=day104_4_missy_repair_menu_1]
     menu:
         "Give her the raw, romantic truth. Offer my vulnerability. [[Tender Romance / Path B Intimacy]]":
 
@@ -728,7 +743,9 @@ label day104_4_missy_repair:
 # 5 - TRIUMPHANT CHAPTER
 # ==========================================
 
+# [DAG_NODE id=day104_5_triumphant_chapter type=work day=104]
 label day104_5_triumphant_chapter:
+    # [DAG_CHECK type=confrontation]
     call check_confrontations
 
     # [ASSET] Visual/staging command
@@ -857,6 +874,7 @@ label day104_5_triumphant_chapter:
 # 6 - FALSE DAWN ENDING
 # ==========================================
 
+# [DAG_NODE id=day104_6_false_dawn_ending type=work day=104]
 label day104_6_false_dawn_ending:
 
     # [ASSET] Visual/staging command

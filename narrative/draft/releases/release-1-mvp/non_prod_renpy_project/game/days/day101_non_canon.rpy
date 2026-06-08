@@ -39,6 +39,7 @@
 # ==========================================
 
 
+# [DAG_NODE id=day101_main type=work day=101]
 label day101_main:
 
     # [BEAT] Narrator's intro. Keep brief; the horror pressure comes from Cora being trapped in procedure
@@ -61,6 +62,7 @@ label day101_main:
 # 011 - CORA WAITING
 # ==========================================
 
+# [DAG_NODE id=day101_1_cora_waiting type=work day=101]
 label day101_1_cora_waiting:
 
     # [ASSET] Existing Day 1 corridor background
@@ -103,6 +105,7 @@ label day101_1_cora_waiting:
 # 011 - MORNING INTERVIEW
 # ==========================================
 
+# [DAG_NODE id=day101_1_morning_interview type=work day=101]
 label day101_1_morning_interview:
 
     # [ASSET] Visual/staging command
@@ -162,6 +165,7 @@ label day101_1_morning_interview:
     # This choice currently does not affect story progress there should be tie in to a future narrative flow or remove the flag and ekep the stat changes
 
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=day101_1_morning_interview_menu_1]
     menu:
         "How do I survive Stern's inspection?" 
 
@@ -222,6 +226,7 @@ label day101_1_morning_interview:
 # 011 - VANCE THROWS TOY
 # ==========================================
 
+# [DAG_NODE id=day101_1_vance_throws_toy type=work day=101]
 label day101_1_vance_throws_toy:
 
     # [ASSET] Visual/staging command
@@ -348,6 +353,7 @@ label day101_1_vance_throws_toy:
 # ==========================================
 # 012 - MISSY MEETS CORA
 # ==========================================
+# [DAG_NODE id=day101_2_missy_meets_cora type=work day=101]
 label day101_2_missy_meets_cora:
 
     # [ASSET] Visual/staging command
@@ -418,6 +424,7 @@ label day101_2_missy_meets_cora:
 # 012 - CORA'S PATH CHOICE
 # ==========================================
 
+# [DAG_NODE id=day101_2_coras_path_choice type=choice]
 label day101_2_coras_path_choice:
 
     # [ASSET] Visual/staging command
@@ -458,6 +465,7 @@ label day101_2_coras_path_choice:
     cora_inner "The moment is the choice of what I become in order to use it."
 
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=day101_2_coras_path_choice_menu_1]
     menu:
         "How do I take the material?"
 
@@ -553,11 +561,13 @@ label day101_2_coras_path_choice:
 # 013 - TAKING STOCK DAY 1
 # ==========================================
 
+# [DAG_NODE id=day101_3_taking_stock_day1 type=work day=101]
 label day101_3_taking_stock_day1:
 
     # [STATE] State/progression update
     $ set_time_period("Evening")
 
+    # [DAG_CHECK type=confrontation]
     call check_confrontations
 
     # [ASSET] Visual/staging command
@@ -596,6 +606,7 @@ label day101_3_taking_stock_day1:
         cora_inner "I had not known that before today."
 
     # [CHOICE] Decision point - combined Evening / Night choice
+    # [DAG_CHOICE group=day101_3_taking_stock_day1_menu_1]
     menu:
         "I look at my journal, the ink drying on the page. The lay of the land is clear. How do I spend the night?"
 
@@ -625,6 +636,7 @@ label day101_3_taking_stock_day1:
         "Stay at the desk and let the ink dry. [[Rest and reflect]]":
 
             # [CHOICE] Choose reflection discipline
+            # [DAG_CHOICE group=day101_3_taking_stock_day1_menu_2]
             menu:
                 "Which discipline keeps my hands steady?"
 
@@ -665,6 +677,7 @@ label day101_3_taking_stock_day1:
 
             # [STATE] Apply final reflection effects and end the slot
             $ apply_effects(insp=10, corr=0)
+            # [DAG_ROUTE outcome=d1_reflect_done]
             call end_slot(outcome="d1_reflect_done")
 
 
@@ -672,6 +685,7 @@ label day101_3_taking_stock_day1:
 # 014 - WRITE THE CHAPTER
 # ==========================================
 
+# [DAG_NODE id=day101_4_write_the_chapter type=write]
 label day101_4_write_the_chapter:
 
     # [ASSET] Visual/staging command
@@ -685,6 +699,7 @@ label day101_4_write_the_chapter:
     $ story.set_day1_night_action("write")
 
     # [CHOICE] Choose writing framing
+    # [DAG_CHOICE group=day101_4_write_the_chapter_menu_1]
     menu:
         "How do I frame the first chapter of my novel?"
 
@@ -765,6 +780,7 @@ label day101_4_write_the_chapter:
     cora_inner "Tonight it acquired a failed first draft."
 
     # [STATE] State/progression update
+    # [DAG_ROUTE outcome=d1_write_ch1]
     call end_slot(outcome="d1_write_ch1")
 
 

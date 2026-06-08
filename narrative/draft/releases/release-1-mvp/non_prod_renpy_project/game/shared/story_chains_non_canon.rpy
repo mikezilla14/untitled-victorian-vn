@@ -20,6 +20,7 @@
 # 1. DEFERRED CONFRONTATIONS CHECKPOINT & TIME-ADVANCEMENT ROUTER
 # ==============================================================================
 
+# [DAG_NODE id=check_confrontations type=penance_check]
 label check_confrontations:
     # Game Over Dismissal check (Anxiety >= 100)
     if player.anxiety >= 100:
@@ -44,6 +45,7 @@ label check_confrontations:
     return
 
 
+# [DAG_NODE id=advance_after_confrontation type=router]
 label advance_after_confrontation:
     # [STATE] Route lookup — add new days in StoryState.POST_PENANCE_ROUTES (classes_non_canon.rpy)
     $ _target = story.get_post_penance_target(time_manager.current_day, time_manager.time_of_day)
@@ -61,6 +63,7 @@ label advance_after_confrontation:
 # 2. DYNAMIC NARRATIVE CHAIN: MISS STERN ("The Sovereign Disciplines")
 # ==============================================================================
 
+# [DAG_NODE id=stern_chain_1 type=chain character=stern level=1]
 label stern_chain_1:
 
     # [ASSET] Visual/staging command
@@ -86,6 +89,7 @@ label stern_chain_1:
     stern "Cora. The sheets for suite 402. Did you fold them with the lock-stitch hem outward, or did you simply tumble them in the country fashion?"
     
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=stern_chain_1_menu_1]
     menu:
         "Lower my head and act like a simple, stupid country girl. [[Shed Suspicion / Break Chain]]":
 
@@ -127,6 +131,7 @@ label stern_chain_1:
     jump advance_after_confrontation
 
 
+# [DAG_NODE id=stern_chain_2 type=chain character=stern level=2]
 label stern_chain_2:
 
     # [ASSET] Visual/staging command
@@ -148,6 +153,7 @@ label stern_chain_2:
     stern "A ledger of kitchen weights, Cora? Or does a chambermaid believe she has thoughts worth preserving in ink?"
     
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=stern_chain_2_menu_1]
     menu:
         "Apologize and call it a spelling exercise. [[Shed Suspicion / Break Chain]]":
 
@@ -190,6 +196,7 @@ label stern_chain_2:
     jump advance_after_confrontation
 
 
+# [DAG_NODE id=stern_chain_3 type=chain character=stern level=3]
 label stern_chain_3:
 
     # [ASSET] Visual/staging command
@@ -211,6 +218,7 @@ label stern_chain_3:
     stern "Tell me, Cora. What do you see?"
     
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=stern_chain_3_menu_1]
     menu:
         "Pretend to see only rubbish. [[Shed Suspicion / Break Chain]]":
 
@@ -263,6 +271,7 @@ label stern_chain_3:
 # 3. DYNAMIC NARRATIVE CHAIN: MISSY ("The Laundry Quarters Erotics")
 # ==============================================================================
 
+# [DAG_NODE id=missy_chain_1 type=chain character=missy level=1]
 label missy_chain_1:
 
     # [ASSET] Visual/staging command
@@ -288,6 +297,7 @@ label missy_chain_1:
     missy "If Miss Stern sees this tear, she'll dock my pay three shillings. It was that gentleman in room 301. He threw his boots at the door while I was changing the wash-water. He has no right, Cora. None at all."
     
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=missy_chain_1_menu_1]
     menu:
         "Help her stitch it silently. Comfort her. [[Shed Suspicion / Break Chain]]":
 
@@ -326,6 +336,7 @@ label missy_chain_1:
     jump advance_after_confrontation
 
 
+# [DAG_NODE id=missy_chain_2 type=chain character=missy level=2]
 label missy_chain_2:
 
     # [ASSET] Visual/staging command
@@ -349,6 +360,7 @@ label missy_chain_2:
     "Before I can think, I grab Missy by the wrist and drag her into the narrow cedar broom closet, closing the door behind us into pitch blackness."
 
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=missy_chain_2_menu_1]
     menu:
         "Tell her to keep quiet for her own safety. [[Shed Suspicion / Break Chain]]":
 
@@ -387,6 +399,7 @@ label missy_chain_2:
     jump advance_after_confrontation
 
 
+# [DAG_NODE id=missy_chain_3 type=chain character=missy level=3]
 label missy_chain_3:
 
     # [ASSET] Visual/staging command
@@ -408,6 +421,7 @@ label missy_chain_3:
     missy "Did you write this? Have you been prying into my soul to make a story?"
     
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=missy_chain_3_menu_1]
     menu:
         "Apologize. Tear the page. Beg her forgiveness. [[Shed Suspicion / Break Chain]]":
 
@@ -458,6 +472,7 @@ label missy_chain_3:
 # 4. DYNAMIC NARRATIVE CHAIN: MISS VANCE ("The Blackmail Collusion")
 # ==============================================================================
 
+# [DAG_NODE id=vance_chain_1 type=chain character=vance level=1]
 label vance_chain_1:
 
     # [ASSET] Visual/staging command
@@ -481,6 +496,7 @@ label vance_chain_1:
     "It lies on the red carpet like a dropped petal."
     
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=vance_chain_1_menu_1]
     menu:
         "Return it silently with a perfect maid's bow. [[Shed Suspicion / Break Chain]]":
 
@@ -513,6 +529,7 @@ label vance_chain_1:
     jump advance_after_confrontation
 
 
+# [DAG_NODE id=vance_chain_2 type=chain character=vance level=2]
 label vance_chain_2:
 
     # [ASSET] Visual/staging command
@@ -532,6 +549,7 @@ label vance_chain_2:
     "The electric bulb makes her red hair look like spun copper."
 
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=vance_chain_2_menu_1]
     menu:
         "Slip past silently in the shadows. [[Shed Suspicion / Break Chain]]":
 
@@ -572,6 +590,7 @@ label vance_chain_2:
     jump advance_after_confrontation
 
 
+# [DAG_NODE id=vance_chain_3 type=chain character=vance level=3]
 label vance_chain_3:
 
     # [ASSET] Visual/staging command
@@ -593,6 +612,7 @@ label vance_chain_3:
     vance "What do you want, girl? Speak, or I will tell Stern you stole my pearl pin."
     
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=vance_chain_3_menu_1]
     menu:
         "Play the simple country potato maid. [[Shed Suspicion / Break Chain]]":
 
@@ -635,6 +655,7 @@ label vance_chain_3:
 # 5. CONFRONTATIONS AND PENANCE (STAT RECOVERY VEHICLES)
 # ==============================================================================
 
+# [DAG_NODE id=confrontation_stern type=penance]
 label confrontation_stern:
 
     # [ASSET] Visual/staging command
@@ -672,6 +693,7 @@ label confrontation_stern:
     jump advance_after_confrontation
 
 
+# [DAG_NODE id=confrontation_vance type=penance]
 label confrontation_vance:
 
     # [ASSET] Visual/staging command
@@ -709,6 +731,7 @@ label confrontation_vance:
     jump advance_after_confrontation
 
 
+# [DAG_NODE id=confrontation_missy type=penance]
 label confrontation_missy:
 
     # [ASSET] Visual/staging command
@@ -759,6 +782,7 @@ label confrontation_missy:
 # 7. CENTRALIZED EXIT ROUTER
 # ==============================================================================
 
+# [DAG_NODE id=end_slot type=router]
 label end_slot(outcome):
 
     # d4_twilight_done requires player.anxiety — handled here; all others via SLOT_EXIT_ROUTES.

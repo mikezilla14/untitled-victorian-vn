@@ -27,7 +27,7 @@ This folder holds **agent role definitions** (markdown) and **Cursor skills** (t
     orchestrator/, produce_day/, promote_day/, review_scene/
     revise_narrative/, rewrite_narrative/, implement_spec/, market_review/
     historical_check/, divergent_writer/, convergent_writer/, spiciness_tuner/
-    documentation_audit/
+    documentation_audit/, dag_tag_update/, storyboard_sync/
 ```
 
 ## How invocation works
@@ -52,12 +52,12 @@ This folder holds **agent role definitions** (markdown) and **Cursor skills** (t
 | `victorian_consultant` | `victorian_consultant.md` | Gates, `historical-check`, `canon-update` |
 | `spiciness_tuning_agent` | `spiciness_tuning_agent.md` | `spice-tune` |
 | `adult_market_reviewer` | `adult_market_reviewer.md` | `market-review` (read-only) |
-| `non_prod_code_agent` | `non_prod_code_agent.md` | `produce-day`, `implement-spec` |
+| `non_prod_code_agent` | `non_prod_code_agent.md` | `produce-day`, `implement-spec`, `dag-tag-update` |
 | `scene_direction` | `scene_direction_agent.md` | `produce-day`, `rewrite-narrative`, `revise-narrative`, `spice-tune` (sprite-placement post-process) |
 | `prod_code_agent` | `prod_code_agent.md` | `promote-day`, `promote-framework` |
 | `chief_architect` | `chief_architect.md` | Code review, promotion validation |
 | `gatekeeper_orchestrator` | `gatekeeper_orchestrator.md` | PR / `scripts/gatekeeper.py` |
-| `documentation_steward` | `documentation_steward.md` | `documentation-audit` |
+| `documentation_steward` | `documentation_steward.md` | `documentation-audit`, `storyboard-sync`, `dag-tag-update` downstream reference check |
 
 Domain permissions: [`.guardrails.yml`](../.guardrails.yml) (enforced by `scripts/gatekeeper.py` when `--agent` is set).
 

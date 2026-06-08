@@ -34,6 +34,9 @@ When the request is ambiguous, ask **exactly one** clarifying question before ro
 | Update stale README/docs/specs and catalogue documentation | `documentation-audit` | `documentation_steward` |
 | Code/architecture/lint review | — | `chief_architect` (no pipeline shortcut) |
 
+| Add, refresh, or recreate `.rpy` `[DAG_*]` comments | `dag-tag-update` | `non_prod_code_agent` |
+| Sync `story_board.md` after manual or agent `.rpy` rewrites | `storyboard-sync` | `documentation_steward` |
+
 Specialist rule files live under `.agents/rules/`. Full catalog: `AGENTS.md`.
 
 **Pipeline helper:** `py scripts/agent_next_step.py --pipeline <name> --stage <n> [--day 105] [--release release-1-mvp]`
@@ -272,6 +275,38 @@ Ren'Py behavior, or art assets.
 
 ---
 
+### 11. `dag-tag-update` â€” Refresh DAG metadata comments
+
+**Trigger:** Human asks to add/update/recreate `[DAG_*]` tags, graph extraction reports missing tags,
+or a rewrite changed `.rpy` structure.
+
+| Stage | Agent | Input | Output |
+|-------|-------|-------|--------|
+| 1 | `non_prod_code_agent` | Target non-canon `.rpy` files + DAG spec | `[DAG_*]` comments updated only; prose/routing/stats/staging untouched |
+| 2 | `documentation_steward` | Stage 1 diff + graph outputs | Downstream graph/storyboard references refreshed or reported stale |
+
+**Manual tag rule:** Any `[DAG_* ... manual]` tag is human-authored and must be skipped unless the
+human explicitly asks to overwrite manual DAG tags.
+
+**Downstream:** Any DAG tag update or recreate triggers graph manifest regeneration and storyboard
+drift audit.
+
+---
+
+### 12. `storyboard-sync` â€” Update storyboard from current scripts
+
+**Trigger:** Manual `.rpy` rewrite, agent rewrite with structural changes, graph audit reports
+storyboard drift, or human asks to update `story_board.md`.
+
+| Stage | Agent | Input | Output |
+|-------|-------|-------|--------|
+| 1 | `documentation_steward` | Current `.rpy` files, graph audit/gaps if available, existing storyboard | `story_board.md` updated as documentation; `.rpy` remains source of truth |
+
+**Authority boundary:** `story_board.md` is a human planning/review document derived from `.rpy`
+scripts and graph audit outputs. Do not use it as the machine-readable graph source.
+
+---
+
 ## Classification Logic
 
 When a task arrives, classify it before routing:
@@ -296,6 +331,11 @@ When a task arrives, classify it before routing:
 18. Unclear? → Ask the human one clarifying question before routing.
 
 ---
+
+Additional routing checks:
+
+- If the task asks to add, refresh, recreate, or repair `.rpy` DAG tags, route to `dag-tag-update`.
+- If the task asks to update `story_board.md` after manual or agent `.rpy` changes, route to `storyboard-sync`.
 
 ## Handoff Contract
 
