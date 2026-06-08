@@ -13,6 +13,7 @@ agents:
   - adult_market_reviewer
   - scene_direction
   - documentation_steward
+  - writers_desk
 
 domains:
   canon_lore:
@@ -71,6 +72,15 @@ domains:
     mutable_by: [writers_room, spiciness_tuning_agent, lead_narrative_editor, forensic_psychology_consultant, victorian_consultant, non_prod_code_agent, human]
     agents_read: [all]
     notes: "Pre-draft exploration. ideas/ and synthesis/ are context-firewalled for new assignments."
+
+  writer_experience:
+    paths:
+      - .agents/skills/writer_*/**
+      - narrative/draft/releases/**/intents/**
+      - narrative/draft/releases/**/exceptions/**
+    mutable_by: [writers_desk, human, documentation_steward]
+    agents_read: [all]
+    notes: "Writer-facing skill COPY + Writer's Desk authoring/exception artifacts. Owned by the writing side; copy/wording changes do NOT require chief_architect review. The Desk's routing logic and rule file (.agents/rules/writers_desk.md) stay repo_operations. Precedence caveat: gatekeeper.py grants on ANY matching domain, so chief_architect retains access via repo_operations/documentation; this lane is an additive grant + an ownership convention, not a hard exclusion."
 
   repo_operations:
     paths:

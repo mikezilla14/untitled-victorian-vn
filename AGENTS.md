@@ -19,6 +19,7 @@ This repository uses **documentation-driven agent orchestration**: specialist ro
 | "F95 market review of prod" | `market-review` |
 | "Can Cora have a typewriter in 1891?" | `historical-check` |
 | "Update stale README files and catalogue docs" | `documentation-audit` |
+| "Write the Day 3 corridor scene where Cora hides the letters" (prose-first, non-technical author) | Writer's Desk → `produce-day` |
 
 If the orchestrator is unsure (e.g. bare "assess prod"), it will ask **one** clarifying question before routing.
 
@@ -77,6 +78,7 @@ Load the linked `.md` file as the **full system prompt** when the orchestrator n
 | Chief architect | [`.agents/rules/chief_architect.md`](.agents/rules/chief_architect.md) | Architecture / review |
 | Gatekeeper orchestrator | [`.agents/rules/gatekeeper_orchestrator.md`](.agents/rules/gatekeeper_orchestrator.md) | PR / domain checks |
 | Documentation steward | [`.agents/rules/documentation_steward.md`](.agents/rules/documentation_steward.md) | README/docs/spec sync + catalogue |
+| Writer's Desk (prose-first concierge) | [`.agents/rules/writers_desk.md`](.agents/rules/writers_desk.md) | Sandbox `narrative/draft/**`, `narrative/pipeline/**` (routes to existing pipelines) |
 
 Writers' room sub-index: [`.agents/rules/writers_room/README.md`](.agents/rules/writers_room/README.md).
 
@@ -104,6 +106,15 @@ Skills under [`.agents/skills/`](.agents/skills/) wrap common workflows for Curs
 | [`documentation_audit`](.agents/skills/documentation_audit/SKILL.md) | Sync stale docs/readmes/specs and refresh the generated catalogue |
 | [`dag_tag_update`](.agents/skills/dag_tag_update/SKILL.md) | Add, refresh, or recreate `.rpy` `[DAG_*]` comments while preserving human `manual` tags by default |
 | [`storyboard_sync`](.agents/skills/storyboard_sync/SKILL.md) | Update `story_board.md` from current `.rpy` scripts and graph audit outputs after manual or agent rewrites |
+| [`writer_write_scene`](.agents/skills/writer_write_scene/SKILL.md) | **Prose-first**: author a new scene/day in plain language (Writer's Desk) |
+| [`writer_rewrite_scene`](.agents/skills/writer_rewrite_scene/SKILL.md) | **Prose-first**: rewrite/revise existing content in plain language |
+| [`writer_add_flag`](.agents/skills/writer_add_flag/SKILL.md) | **Prose-first**: track something new (boolean default; prompts for allowed values otherwise) |
+| [`writer_add_effect`](.agents/skills/writer_add_effect/SKILL.md) | **Prose-first**: attach a stat consequence in emotional terms |
+| [`writer_add_branch`](.agents/skills/writer_add_branch/SKILL.md) | **Prose-first**: add a choice/branch by meaning (Observer/Predator/Prey/Ghost) |
+| [`writer_write_book`](.agents/skills/writer_write_book/SKILL.md) | **Prose-first**: author Book1 (Holywell Street) manuscript prose |
+| [`writer_contract_check`](.agents/skills/writer_contract_check/SKILL.md) | **Prose-first**: full-fidelity advisory contract pre-check before gates |
+| [`writer_log_exception`](.agents/skills/writer_log_exception/SKILL.md) | **Prose-first**: log a self-signed, impact-acknowledged contract override |
+| [`writer_status`](.agents/skills/writer_status/SKILL.md) | **Prose-first**: plain-language "what's left before this is safe to ship?" |
 
 
 ## Pipeline helper (manual chaining)

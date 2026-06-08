@@ -28,6 +28,9 @@ This folder holds **agent role definitions** (markdown) and **Cursor skills** (t
     revise_narrative/, rewrite_narrative/, implement_spec/, market_review/
     historical_check/, divergent_writer/, convergent_writer/, spiciness_tuner/
     documentation_audit/, dag_tag_update/, storyboard_sync/
+    writer_write_scene/, writer_rewrite_scene/, writer_add_flag/, writer_add_effect/
+    writer_add_branch/, writer_write_book/, writer_contract_check/
+    writer_log_exception/, writer_status/   ← prose-first Writer's Desk skills
 ```
 
 ## How invocation works
@@ -58,6 +61,7 @@ This folder holds **agent role definitions** (markdown) and **Cursor skills** (t
 | `chief_architect` | `chief_architect.md` | Code review, promotion validation |
 | `gatekeeper_orchestrator` | `gatekeeper_orchestrator.md` | PR / `scripts/gatekeeper.py` |
 | `documentation_steward` | `documentation_steward.md` | `documentation-audit`, `storyboard-sync`, `dag-tag-update` downstream reference check |
+| `writers_desk` | `writers_desk.md` | Prose-first concierge: routes `writer_*` skills to `produce-day`, `revise-narrative`, `rewrite-narrative`, `implement-spec`; see [`docs/specs/writers-desk-agent-framework.md`](../docs/specs/writers-desk-agent-framework.md) |
 
 Domain permissions: [`.guardrails.yml`](../.guardrails.yml) (enforced by `scripts/gatekeeper.py` when `--agent` is set).
 

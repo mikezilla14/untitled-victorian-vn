@@ -103,6 +103,29 @@ PIPELINES: dict[str, list[dict]] = {
             "note": "Update story_board.md from current .rpy scripts and graph audit evidence; .rpy remains source of truth",
         },
     ],
+    "writer-author": [
+        {
+            "stage": 1,
+            "agent": "writers_desk",
+            "note": "Prose-first intake -> Authoring Intent (intents/dayrdd_authoring_intent.md) -> full-fidelity contract pre-check (advisory)",
+        },
+        {"stage": 2, "agent": "writers_room", "note": "Convergent/gates on captured prose (scale S/M/L)"},
+        {"stage": 3, "agent": "non_prod_code_agent", "note": "Shape verbatim prose + tags + DAG/asset sync after gates pass"},
+        {"stage": 4, "agent": "chief_architect", "note": "Sandbox code validation"},
+    ],
+    "flag-wiring-only": [
+        {
+            "stage": 1,
+            "agent": "writers_desk",
+            "note": "Capture flag in plain language: boolean by default; if one-of-N, prompt for allowed values + record whitelist request",
+        },
+        {
+            "stage": 2,
+            "agent": "non_prod_code_agent",
+            "note": "Wire attribute/whitelist/setter into classes_non_canon.rpy + classes_non_canon_notes.md",
+        },
+        {"stage": 3, "agent": "chief_architect", "note": "Framework mockup review; queue for promote-framework"},
+    ],
 }
 
 AGENT_FILES: dict[str, str] = {
@@ -120,6 +143,7 @@ AGENT_FILES: dict[str, str] = {
     "chief_architect": "chief_architect.md",
     "gatekeeper_orchestrator": "gatekeeper_orchestrator.md",
     "documentation_steward": "documentation_steward.md",
+    "writers_desk": "writers_desk.md",
     "human": "(no rule file — human decision)",
 }
 

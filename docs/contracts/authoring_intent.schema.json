@@ -1,0 +1,149 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/untitled-victorian-vn/contracts/authoring_intent.schema.json",
+  "title": "AuthoringIntent",
+  "description": "Prose-first, writer-initiated authoring request emitted by the Writer's Desk and consumed by writers_room / non_prod_code_agent. See docs/specs/writers-desk-agent-framework.md.",
+  "type": "object",
+  "required": [
+    "contract_version",
+    "day_id",
+    "release",
+    "status",
+    "scale",
+    "layer",
+    "captured_by"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "contract_version": { "type": "string", "const": "1" },
+    "day_id": { "type": "string", "pattern": "^day[0-9]{3}$" },
+    "release": { "type": "string", "minLength": 1 },
+    "status": {
+      "type": "string",
+      "enum": ["DRAFT", "CONTRACT_CHECKED", "IN_PIPELINE", "GATED", "CLOSED"]
+    },
+    "scale": { "type": "string", "enum": ["S", "M", "L"] },
+    "layer": { "type": "string", "enum": ["hotel", "book1_manuscript"] },
+    "captured_by": { "type": "string", "const": "writers_desk" },
+    "author": { "type": "string", "default": "writer" },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "time_period": {
+          "type": "string",
+          "enum": ["Early Morning", "Morning", "Afternoon", "Evening", "Night", "Late Night"]
+        },
+        "label_or_window": { "type": "string" }
+      }
+    },
+    "requested_flags": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["plain_name", "type"],
+        "additionalProperties": false,
+        "properties": {
+          "plain_name": { "type": "string", "minLength": 1 },
+          "field": { "type": "string" },
+          "type": { "type": "string", "enum": ["boolean", "one_of"] },
+          "allowed_values": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "default": { "type": "string" }
+        },
+        "allOf": [
+          {
+            "if": { "properties": { "type": { "const": "one_of" } } },
+            "then": { "required": ["allowed_values", "default"] }
+          }
+        ]
+      }
+    },
+    "requested_effects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["trigger", "deltas"],
+        "additionalProperties": false,
+        "properties": {
+          "trigger": { "type": "string", "minLength": 1 },
+          "deltas": {
+            "type": "object",
+            "additionalProperties": { "type": "integer" }
+          }
+        }
+      }
+    },
+    "requested_branches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["at", "arms"],
+        "additionalProperties": false,
+        "properties": {
+          "at": { "type": "string", "minLength": 1 },
+          "arms": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "object",
+              "required": ["text", "meaning"],
+              "additionalProperties": false,
+              "properties": {
+                "text": { "type": "string", "minLength": 1 },
+                "meaning": {
+                  "type": "string",
+                  "enum": ["observer", "predator", "prey", "ghost"]
+                },
+                "sets": { "type": "string" },
+                "effects": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "contract_precheck": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "prose": { "$ref": "#/$defs/precheck_result" },
+        "historical": { "$ref": "#/$defs/precheck_result" },
+        "psychological": { "$ref": "#/$defs/precheck_result" }
+      }
+    },
+    "routing": {
+      "type": "object",
+      "required": ["pipeline", "next_agent"],
+      "additionalProperties": false,
+      "properties": {
+        "pipeline": {
+          "type": "string",
+          "enum": ["produce-day", "revise-narrative", "rewrite-narrative", "implement-spec", "flag-wiring-only"]
+        },
+        "next_agent": {
+          "type": "string",
+          "enum": ["writers_room", "non_prod_code_agent"]
+        }
+      }
+    },
+    "markdown_intent_path": { "type": "string" },
+    "exception_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "$defs": {
+    "precheck_result": {
+      "type": "object",
+      "required": ["verdict"],
+      "additionalProperties": false,
+      "properties": {
+        "verdict": { "type": "string", "enum": ["PASS", "SUGGESTION", "EXCEPTION"] },
+        "exception_ids": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

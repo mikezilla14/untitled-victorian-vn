@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-06-08T18:58:39+00:00",
+  "generated_at": "2026-06-08T19:26:30+00:00",
   "repo_root": "untitled-victorian-vn",
   "entries": [
     {
@@ -2188,7 +2188,7 @@
       "kind": "feature-spec",
       "title": "Writer's Desk Agent & Skill Framework Spec",
       "area": "docs/specs",
-      "summary": "Status: **planned** (design / proposal — not yet implemented).",
+      "summary": "Status: **partial** — agent rule, skills, schema, and pipelines scaffolded and registered; workflow",
       "links": [],
       "findings": []
     },
