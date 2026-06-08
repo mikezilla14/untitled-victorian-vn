@@ -39,7 +39,14 @@
 # 030 - ENTRY DEADLINE GATE
 # ==========================================
 
-# [DAG_NODE id=day103_morning type=work day=103]
+# [DAG_NODE id=day103 type=time_period day=103 period=Morning]
+label day103:
+
+    # [STATE] State/progression update
+    jump day103_morning
+
+
+# [DAG_NODE id=day103_morning type=time_period day=103 period=Morning]
 label day103_morning:
     
     # [STATE] Check writing deadline progress
@@ -52,12 +59,27 @@ label day103_morning:
     $ time_manager.set_current_day(3)
     $ set_time_period("Morning")
 
-    # [STATE] Check dynamic non-canon suspicion confrontations
-    # [DAG_CHECK type=confrontation]
-    call check_confrontations
-    
+    call day103_morning_consequence_window
+
     # [STATE] State/progression update
     jump day103_1_servants_corridor
+
+
+# [DAG_NODE id=day103_morning_consequence_window type=dynamic_window day=103 period=Morning window=consequence penance=true returns_to=day103_morning]
+label day103_morning_consequence_window:
+    # [DAG_CHECK type=confrontation]
+    call check_confrontations
+
+    # [STATE] State/progression update
+    $ _penance_label = story.pop_penance_for_window("day103_morning")
+    if _penance_label:
+
+        # [STATE] State/progression update
+        call expression _penance_label
+
+        # [STATE] State/progression update
+        jump day103_afternoon
+    return
 
 
 # ==========================================
@@ -211,7 +233,7 @@ label day103_1_corridor_corr_chain:
 # 031 - OPTIONAL CHARACTER CHAIN (DAY 3 MORNING)
 # ==========================================
 
-# [DAG_NODE id=day103_1_optional_character_chain type=work day=103]
+# [DAG_NODE id=day103_1_optional_character_chain type=dynamic_window day=103 period=Morning window=story_chain returns_to=day103_morning]
 label day103_1_optional_character_chain:
 
     # [CHOICE] Contextual grind gate after corridor reflection; resolver picks chain beat
@@ -223,19 +245,19 @@ label day103_1_optional_character_chain:
 
             # [STATE] State/progression update
             $ _chain_label = story.resolve_chain_label("stern")
-            jump expression _chain_label
+            call expression _chain_label
 
         "Find Missy while the house is still bruised from yesterday." if story.chain_available("missy"):
 
             # [STATE] State/progression update
             $ _chain_label = story.resolve_chain_label("missy")
-            jump expression _chain_label
+            call expression _chain_label
 
         "Watch the Locke Suite door before the tea order becomes a summons." if story.chain_available("vance"):
 
             # [STATE] State/progression update
             $ _chain_label = story.resolve_chain_label("vance")
-            jump expression _chain_label
+            call expression _chain_label
 
         "Keep moving with the cart and give no one a reason.":
             if story.day3_corridor_chain == "corruption":
@@ -248,14 +270,24 @@ label day103_1_optional_character_chain:
 
             # [STATE] State/progression update
             $ apply_effects(insp=10, corr=0)
-            jump day103_2_suite_gideon_tea
+            jump day103_afternoon
+
+    # [STATE] Dynamic story-chain window returns to authored day flow
+    jump day103_afternoon
 
 
 # ==========================================
 # 032 - SUITE: GIDEON TEA
 # ==========================================
 
-# [DAG_NODE id=day103_2_suite_gideon_tea type=work day=103]
+# [DAG_NODE id=day103_afternoon type=time_period day=103 period=Afternoon]
+label day103_afternoon:
+
+    # [STATE] State/progression update
+    jump day103_2_suite_gideon_tea
+
+
+# [DAG_NODE id=day103_2_suite_gideon_tea type=work day=103 period=Afternoon]
 label day103_2_suite_gideon_tea:
 
     # [STATE] TimeManager transition to Afternoon
@@ -599,13 +631,36 @@ label day103_2_suite_gideon_beat:
 # 033 - BEDROOM: CORA FRANTIC WRITING EVENT
 # ==========================================
 
-# [DAG_NODE id=day103_3_bedroom_cora_frantic_writing_event type=write]
+# [DAG_NODE id=day103_evening type=time_period day=103 period=Evening]
+label day103_evening:
+
+    # [STATE] State/progression update
+    jump day103_3_bedroom_cora_frantic_writing_event
+
+
+# [DAG_NODE id=day103_evening_consequence_window type=dynamic_window day=103 period=Evening window=consequence penance=true returns_to=day103_evening]
+label day103_evening_consequence_window:
+    # [DAG_CHECK type=confrontation]
+    call check_confrontations
+
+    # [STATE] State/progression update
+    $ _penance_label = story.pop_penance_for_window("day103_evening")
+    if _penance_label:
+
+        # [STATE] State/progression update
+        call expression _penance_label
+
+        # [STATE] State/progression update
+        jump day103_4_room_stern_suspicion
+    return
+
+
+# [DAG_NODE id=day103_3_bedroom_cora_frantic_writing_event type=write day=103 period=Evening]
 label day103_3_bedroom_cora_frantic_writing_event:
     # [STATE] TimeManager transition to Evening
     $ set_time_period("Evening")
 
-    # [DAG_CHECK type=confrontation]
-    call check_confrontations
+    call day103_evening_consequence_window
 
     # [ASSET] Existing servants' quarters dusk background
     scene bg_servants_quarters_dusk
@@ -859,7 +914,31 @@ label day103_4_room_stern_suspicion:
 # 032 CONTINUATION - NIGHT TEA / ULTIMATUM PAYOFF
 # ==========================================
 
-# [DAG_NODE id=day103_2_suite_night_tea type=work day=103]
+# [DAG_NODE id=day103_night type=time_period day=103 period=Night]
+label day103_night:
+
+    # [STATE] State/progression update
+    jump day103_2_suite_night_tea
+
+
+# [DAG_NODE id=day103_night_consequence_window type=dynamic_window day=103 period=Night window=consequence penance=true returns_to=day103_night]
+label day103_night_consequence_window:
+    # [DAG_CHECK type=confrontation]
+    call check_confrontations
+
+    # [STATE] State/progression update
+    $ _penance_label = story.pop_penance_for_window("day103_night")
+    if _penance_label:
+
+        # [STATE] State/progression update
+        call expression _penance_label
+
+        # [STATE] State/progression update
+        jump day104_1
+    return
+
+
+# [DAG_NODE id=day103_2_suite_night_tea type=work day=103 period=Night]
 label day103_2_suite_night_tea:
 
     # [STATE] TimeManager transition to Night
@@ -1113,8 +1192,7 @@ label day103_2_night_surrender_gideon:
 
 # [DAG_NODE id=day103_3_bedroom_final_write type=write]
 label day103_3_bedroom_final_write:
-    # [DAG_CHECK type=confrontation]
-    call check_confrontations
+    call day103_night_consequence_window
 
     # [ASSET] Visual/staging command
     scene bg_cora_desk_night

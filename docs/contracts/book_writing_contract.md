@@ -46,6 +46,8 @@ Current MVP chapter keys:
 
 Day scripts call `book1_write_chapter(...)`; they do not contain manuscript prose.
 
+Day time-period refactors must not move manuscript prose into day labels. Day files continue to call `book1_write_chapter(...)`; Book1 prose remains in `book1_block_*` labels.
+
 ## 3. Prose Label Rules
 
 Allowed:

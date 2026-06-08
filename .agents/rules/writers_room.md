@@ -48,6 +48,32 @@ New mechanics → flag for Chief Architect before draft submission.
 
 ---
 
+## Day Script Structure Contract
+
+New and revised day drafts must preserve a writer-first Ren'Py structure. This contract supports the time-period routing refactor in `docs/specs/story-chain-routing-refactor.md`.
+
+Required:
+
+- Top-level day labels enter the first time-period label.
+- Structural time-period spine labels may use names such as `day103_morning`, `day103_afternoon`, `day103_evening`, and `day103_night`.
+- Major authored scene labels should keep the existing `dayRdd_p_location_description` pattern unless the label is itself a structural time-period spine.
+- Time-period labels own prose, transitions, fixed choices, and ordinary passage of time.
+- Time-period labels move forward using explicit `jump` targets.
+- Optional story-chain and penance/consequence content may only appear through explicit named dynamic windows inside a time-period label.
+- Dynamic windows must be sparse: normally one or two per day.
+- Dynamic windows return to the time-period label.
+- Optional chain scenes return to the dynamic window.
+- Penance is queued by prior choices and consumed only by authored consequence windows.
+
+Forbidden:
+
+- Do not turn every time period into `resolve_content(...)`.
+- Do not make a day label a mechanical list of scene calls.
+- Do not route optional chain scenes directly to the next day or time label.
+- Do not write new prose inside coding-only refactors.
+
+---
+
 ## Context firewall (critical)
 
 Paths that **must not** be loaded for routine new-day assignments (human may override for "mine the archive"):

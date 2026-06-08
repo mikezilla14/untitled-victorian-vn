@@ -1,14 +1,14 @@
 gate_id,label,gate_type,condition,pass_to,fail_to,source_file,line_number,has_dag_gate_tag,confidence
-gate_0001,day102_3_gideon_interrupts_controls_vance,condition,story.manuscript_progress == 0,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy,997,False,medium
-gate_0002,day102_4_cora_writes_a_chapter,condition,story.manuscript_progress == 0,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy,1056,False,medium
-gate_0003,day102_4_cora_writes_a_chapter,writing_fuel,has_story_fuel(15),,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy,1058,False,medium
-gate_0004,day102_4_cora_writes_a_chapter,writing_fuel,has_story_fuel(30),,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy,1096,False,medium
-gate_0005,day103_morning,condition,story.manuscript_progress == 0,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,46,False,medium
-gate_0006,day103_3_bedroom_final_write,writing_fuel,"has_story_fuel(45) or story.day3_twilight_action == ""frantic_write""",,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,1147,False,medium
-gate_0007,day104_6_false_dawn_ending,condition,story.manuscript_progress < 2,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day104_non_canon.rpy,907,False,medium
+gate_0001,day102_3_gideon_interrupts_controls_vance,condition,story.manuscript_progress == 0,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy,1023,False,medium
+gate_0002,day102_4_cora_writes_a_chapter,condition,story.manuscript_progress == 0,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy,1098,False,medium
+gate_0003,day102_4_cora_writes_a_chapter,writing_fuel,has_story_fuel(15),,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy,1100,False,medium
+gate_0004,day102_4_cora_writes_a_chapter,writing_fuel,has_story_fuel(30),,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy,1138,False,medium
+gate_0005,day103_morning,condition,story.manuscript_progress == 0,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,53,False,medium
+gate_0006,day103_3_bedroom_final_write,writing_fuel,"has_story_fuel(45) or story.day3_twilight_action == ""frantic_write""",,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,1225,False,medium
+gate_0007,day104_6_false_dawn_ending,condition,story.manuscript_progress < 2,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day104_non_canon.rpy,970,False,medium
 gate_0008,file,writing_fuel,player.inspiration < required_insp or player.corruption_level < required_corr,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/functions_non_canon.rpy,82,False,medium
 gate_0009,check_confrontations,anxiety,player.anxiety >= 100,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy,26,False,medium
 gate_0010,check_confrontations,confrontation,"player.is_confrontation_ready(""stern"")",,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy,33,False,medium
 gate_0011,check_confrontations,confrontation,"player.is_confrontation_ready(""vance"")",,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy,37,False,medium
 gate_0012,check_confrontations,confrontation,"player.is_confrontation_ready(""missy"")",,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy,41,False,medium
-gate_0013,end_slot,anxiety,_penance_flag or player.anxiety >= 85,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy,796,False,medium
+gate_0013,end_slot,anxiety,_penance_flag or player.anxiety >= 85,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy,797,False,medium

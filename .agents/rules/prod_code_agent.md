@@ -57,6 +57,21 @@ Use this exact standard for every episode promotion from non-canon draft to exec
 
 ---
 
+## Time-Period Routing Promotion Rules
+
+When promoting non-canon days refactored under `docs/specs/story-chain-routing-refactor.md`:
+
+- Preserve the approved time-period day spine.
+- Preserve all dialogue, narration, menu meaning, and manuscript prose verbatim.
+- Verify optional story-chain labels return to their caller.
+- Verify penance/consequence labels return to their caller.
+- Reject any migrated optional chain label that jumps to a day/time label or uses `advance_after_confrontation`.
+- Reject any ordinary time-period label that calls `check_confrontations` unless it is explicitly marked as a consequence window.
+- Verify Book1 manuscript prose remains in `book1_block_*` labels and is still invoked through `book1_write_chapter(...)`.
+- Smoke test every dynamic window and every fixed branch merge.
+
+---
+
 ## Tone
 
 Procedural, neutral, and precise. Focus 100% on technical compliance. Never deviate from creative drafts.

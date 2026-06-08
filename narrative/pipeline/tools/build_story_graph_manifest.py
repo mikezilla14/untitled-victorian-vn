@@ -187,7 +187,7 @@ def split_args(raw: str) -> dict[str, str]:
 def infer_node_type(label: str, dag_attrs: dict[str, Any], lines: list[str], start: int, end: int) -> str:
     if isinstance(dag_attrs.get("type"), str):
         value = str(dag_attrs["type"])
-        if value in {"work", "choice", "reflect", "write", "chain", "penance_check", "router", "hard_fail", "unknown"}:
+        if value in {"work", "choice", "reflect", "write", "chain", "story_chain", "time_period", "dynamic_window", "penance", "penance_check", "router", "hard_fail", "unknown"}:
             return value
     if label == "check_confrontations":
         return "penance_check"

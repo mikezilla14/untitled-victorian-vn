@@ -33,20 +33,22 @@ label check_confrontations:
     if player.is_confrontation_ready("stern"):
 
         # [STATE] State/progression update
-        jump confrontation_stern
+        $ story.queue_penance("confrontation_stern")
     elif player.is_confrontation_ready("vance"):
 
         # [STATE] State/progression update
-        jump confrontation_vance
+        $ story.queue_penance("confrontation_vance")
     elif player.is_confrontation_ready("missy"):
 
         # [STATE] State/progression update
-        jump confrontation_missy
+        $ story.queue_penance("confrontation_missy")
     return
 
 
 # [DAG_NODE id=advance_after_confrontation type=router]
 label advance_after_confrontation:
+    # DEPRECATED:
+    # Old route-owner pattern. New chain and penance labels must return to their caller.
     # [STATE] Route lookup — add new days in StoryState.POST_PENANCE_ROUTES (classes_non_canon.rpy)
     $ _target = story.get_post_penance_target(time_manager.current_day, time_manager.time_of_day)
     $ story.consume_penance()
@@ -128,7 +130,7 @@ label stern_chain_1:
 
     # [ASSET] Visual/staging command
     hide stern_sprite
-    jump advance_after_confrontation
+    return
 
 
 # [DAG_NODE id=stern_chain_2 type=chain character=stern level=2]
@@ -193,7 +195,7 @@ label stern_chain_2:
 
     # [ASSET] Visual/staging command
     hide stern_sprite
-    jump advance_after_confrontation
+    return
 
 
 # [DAG_NODE id=stern_chain_3 type=chain character=stern level=3]
@@ -264,7 +266,7 @@ label stern_chain_3:
 
     # [ASSET] Visual/staging command
     hide stern_sprite
-    jump advance_after_confrontation
+    return
 
 
 # ==============================================================================
@@ -333,7 +335,7 @@ label missy_chain_1:
 
     # [ASSET] Visual/staging command
     hide missy_sprite
-    jump advance_after_confrontation
+    return
 
 
 # [DAG_NODE id=missy_chain_2 type=chain character=missy level=2]
@@ -396,7 +398,7 @@ label missy_chain_2:
 
     # [ASSET] Visual/staging command
     hide missy_sprite
-    jump advance_after_confrontation
+    return
 
 
 # [DAG_NODE id=missy_chain_3 type=chain character=missy level=3]
@@ -465,7 +467,7 @@ label missy_chain_3:
 
     # [ASSET] Visual/staging command
     hide missy_sprite
-    jump advance_after_confrontation
+    return
 
 
 # ==============================================================================
@@ -526,7 +528,7 @@ label vance_chain_1:
 
     # [ASSET] Visual/staging command
     hide vance_sprite
-    jump advance_after_confrontation
+    return
 
 
 # [DAG_NODE id=vance_chain_2 type=chain character=vance level=2]
@@ -587,7 +589,7 @@ label vance_chain_2:
 
     # [ASSET] Visual/staging command
     hide vance_sprite
-    jump advance_after_confrontation
+    return
 
 
 # [DAG_NODE id=vance_chain_3 type=chain character=vance level=3]
@@ -648,7 +650,7 @@ label vance_chain_3:
 
     # [ASSET] Visual/staging command
     hide vance_sprite
-    jump advance_after_confrontation
+    return
 
 
 # ==============================================================================
@@ -689,8 +691,7 @@ label confrontation_stern:
 
     # [STATE] State/progression update
     $ apply_effects(stern_susp=-35, insp=0, corr=5)
-    $ story.set_penance_triggered(True)
-    jump advance_after_confrontation
+    return
 
 
 # [DAG_NODE id=confrontation_vance type=penance]
@@ -727,8 +728,7 @@ label confrontation_vance:
 
     # [STATE] State/progression update
     $ apply_effects(vance_susp=-35, insp=0, corr=5)
-    $ story.set_penance_triggered(True)
-    jump advance_after_confrontation
+    return
 
 
 # [DAG_NODE id=confrontation_missy type=penance]
@@ -747,8 +747,6 @@ label confrontation_missy:
 
     # [STATE] State/progression update
     $ apply_effects(missy_susp=-35, insp=5)
-    $ story.set_penance_triggered(True)
-
     show cora_sprite base at left_bust with moveinleft # [asset auto]
     show missy_sprite shocked at right_bust with move # [asset auto]
     cora "Missy, please. If you tell her, I am ruined. Let me help you. I'll do the night tubs for you."
@@ -768,7 +766,7 @@ label confrontation_missy:
     "My ambition is buried under wet cotton. I cannot write a single line."
 
     # [STATE] State/progression update
-    jump advance_after_confrontation
+    return
 
 
 # ==============================================================================
@@ -784,6 +782,9 @@ label confrontation_missy:
 
 # [DAG_NODE id=end_slot type=router]
 label end_slot(outcome):
+    # DEPRECATED:
+    # Old centralized route-owner pattern. Refactored day files should jump
+    # directly to their next time-period/day label.
 
     # d4_twilight_done requires player.anxiety — handled here; all others via SLOT_EXIT_ROUTES.
     if outcome == "d4_twilight_done":
@@ -791,8 +792,8 @@ label end_slot(outcome):
         # [STATE] State/progression update
         $ time_manager.set_current_day(4)
         $ set_time_period("Night")
-        $ _penance_flag = story.penance_triggered
-        $ story.consume_penance()
+        $ _penance_flag = story.has_pending_penance()
+        $ story.clear_penance()
         if _penance_flag or player.anxiety >= 85:
 
             # [STATE] State/progression update

@@ -72,6 +72,25 @@ When a coding task **requires** new or changed player-facing prose (not just bra
 
 ---
 
+## Time-Period Routing Refactor Rules
+
+When implementing `docs/specs/story-chain-routing-refactor.md` in non-production `.rpy` files:
+
+1. Preserve all dialogue, narration, menu meaning, and manuscript prose verbatim.
+2. Preserve existing `[ASSET]`, `[STATE]`, `[CHOICE]`, `[BEAT]`, and `[DAG_*]` context tags unless the requested DAG update explicitly changes DAG tags.
+3. Preserve any `[DAG_* ... manual]` tag unless the human explicitly asks to overwrite manual DAG tags.
+4. You may move existing prose between labels only when the order, branch conditions, and player-facing text remain unchanged.
+5. You may introduce time-period labels, dynamic window labels, and compatibility aliases.
+6. You may convert optional chain routing from `jump expression _chain_label` to `call expression _chain_label`.
+7. You may convert migrated chain/consequence labels from `jump advance_after_confrontation` to `return`.
+8. You may remove `call check_confrontations` only when replacing it with an explicit consequence window or when the refactor brief says the checkpoint is deprecated at that site.
+9. You must not invent bridge prose to hide structural seams. If a new transition line is needed, file a narrative change brief.
+10. Any new state field or helper method must be mocked in `classes_non_canon.rpy` and documented in `classes_non_canon_notes.md`.
+11. After `.rpy` edits, run graph sync with `py narrative/pipeline/tools/build_story_graph_manifest.py --release release-1-mvp --out-dir narrative/pipeline/releases/release-1-mvp/graph --storyboard narrative/draft/releases/release-1-mvp/planning/story_board.md`.
+12. If graph sync reports storyboard drift, invoke `storyboard_sync` rather than editing graph outputs by hand.
+
+---
+
 ## Tone
 
 Meticulous, technical, and obedient. Defer all creative decisions to the Writers' Room. Never invent dialogue. If in doubt, stop and ask the human.

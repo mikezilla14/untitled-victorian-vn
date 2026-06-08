@@ -62,7 +62,23 @@
 # 1 - FALSE DAWN / SUITE WINDOW
 # ==========================================
 
-# [DAG_NODE id=day104_1_false_dawn_suite_window type=work day=104]
+# [DAG_NODE id=day104 type=time_period day=104 period=Morning]
+label day104:
+
+    # [STATE] State/progression update
+    jump day104_morning
+
+
+# [DAG_NODE id=day104_morning type=time_period day=104 period=Morning]
+label day104_morning:
+
+    # [STATE] State/progression update
+    $ time_manager.set_current_day(4)
+    $ set_time_period("Morning")
+    jump day104_1_false_dawn_suite_window
+
+
+# [DAG_NODE id=day104_1_false_dawn_suite_window type=work day=104 period=Morning]
 label day104_1_false_dawn_suite_window:
 
     # [ASSET] Existing Day 4 Master Suite day background
@@ -252,7 +268,7 @@ label day104_2_escape_fireplace:
     "So is the soot."
 
     # [STATE] State/progression update
-    jump day104_3_stern_pressure
+    jump day104_evening
 
 
 # ==========================================
@@ -333,7 +349,7 @@ label day104_2_escape_bold_lie:
     "I go before my courage notices what it has done."
 
     # [STATE] State/progression update
-    jump day104_3_stern_pressure
+    jump day104_evening
 
 
 # ==========================================
@@ -435,14 +451,21 @@ label day104_2_escape_missy_cover:
     cora_inner "But Missy has paid for my survival in currency I did not have the courage to spend."
 
     # [STATE] State/progression update
-    jump day104_3_stern_pressure
+    jump day104_evening
 
 
 # ==========================================
 # 3 - STERN PRESSURE
 # ==========================================
 
-# [DAG_NODE id=day104_3_stern_pressure type=work day=104]
+# [DAG_NODE id=day104_evening type=time_period day=104 period=Evening]
+label day104_evening:
+
+    # [STATE] State/progression update
+    jump day104_3_stern_pressure
+
+
+# [DAG_NODE id=day104_3_stern_pressure type=work day=104 period=Evening]
 label day104_3_stern_pressure:
 
     # [STATE] State/progression update
@@ -551,8 +574,7 @@ label day104_3_stern_pressure:
 
 # [DAG_NODE id=day104_4_twilight_ledger_false_dawn type=work day=104]
 label day104_4_twilight_ledger_false_dawn:
-    # [DAG_CHECK type=confrontation]
-    call check_confrontations
+    call day104_evening_consequence_window
 
     # [ASSET] Visual/staging command
     scene bg_servants_quarters_dusk
@@ -586,7 +608,7 @@ label day104_4_twilight_ledger_false_dawn:
         "Risk the dark room to write the triumphant chapter. [[Triumphant Write]]" if player.anxiety < 85:
 
             # [STATE] State/progression update
-            jump day104_5_triumphant_chapter
+            jump day104_night
 
         "Risk the dark room to write the triumphant chapter. [[Triumphant Write]]" if player.anxiety >= 85:
             "My hand shakes too violently to hold the pen. The hotel feels alive, every creaking floorboard a footstep, every shadow a reaching hand."
@@ -599,6 +621,23 @@ label day104_4_twilight_ledger_false_dawn:
 
             # [STATE] State/progression update
             jump day104_4_missy_repair
+
+
+# [DAG_NODE id=day104_evening_consequence_window type=dynamic_window day=104 period=Evening window=consequence penance=true returns_to=day104_4_twilight_ledger_false_dawn]
+label day104_evening_consequence_window:
+    # [DAG_CHECK type=confrontation]
+    call check_confrontations
+
+    # [STATE] State/progression update
+    $ _penance_label = story.pop_penance_for_window("day104_evening")
+    if _penance_label:
+
+        # [STATE] State/progression update
+        call expression _penance_label
+
+        # [STATE] State/progression update
+        jump day104_night
+    return
 
 
 # ==========================================
@@ -743,10 +782,17 @@ label day104_4_missy_repair:
 # 5 - TRIUMPHANT CHAPTER
 # ==========================================
 
-# [DAG_NODE id=day104_5_triumphant_chapter type=work day=104]
+# [DAG_NODE id=day104_night type=time_period day=104 period=Night]
+label day104_night:
+
+    # [STATE] State/progression update
+    $ set_time_period("Night")
+    jump day104_5_triumphant_chapter
+
+
+# [DAG_NODE id=day104_5_triumphant_chapter type=work day=104 period=Night]
 label day104_5_triumphant_chapter:
-    # [DAG_CHECK type=confrontation]
-    call check_confrontations
+    call day104_night_consequence_window
 
     # [ASSET] Visual/staging command
     scene bg_cora_desk_night
@@ -868,6 +914,23 @@ label day104_5_triumphant_chapter:
 
     # [STATE] State/progression update
     jump day104_6_false_dawn_ending
+
+
+# [DAG_NODE id=day104_night_consequence_window type=dynamic_window day=104 period=Night window=consequence penance=true returns_to=day104_5_triumphant_chapter]
+label day104_night_consequence_window:
+    # [DAG_CHECK type=confrontation]
+    call check_confrontations
+
+    # [STATE] State/progression update
+    $ _penance_label = story.pop_penance_for_window("day104_night")
+    if _penance_label:
+
+        # [STATE] State/progression update
+        call expression _penance_label
+
+        # [STATE] State/progression update
+        jump day104_6_false_dawn_ending
+    return
 
 
 # ==========================================

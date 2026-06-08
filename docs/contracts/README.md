@@ -19,6 +19,7 @@ When a markdown gate file exists, the matching `.json` **must** exist and `verdi
 |--------|------|
 | Gate verdict | [`gate_verdict.schema.json`](gate_verdict.schema.json) |
 | Narrative change brief | [`narrative_change_brief.schema.json`](narrative_change_brief.schema.json) |
+| Authoring intent (Writer's Desk) | [`authoring_intent.schema.json`](authoring_intent.schema.json) |
 | Profile delta | [`profile_delta.schema.json`](profile_delta.schema.json) |
 | Promotion handoff | [`promotion_handoff.schema.json`](promotion_handoff.schema.json) |
 | Sprite layout policy | [`sprite_layout_policy.schema.json`](sprite_layout_policy.schema.json) |

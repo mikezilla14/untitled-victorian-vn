@@ -1,18 +1,17 @@
 {
   "counts": {
     "choices": 97,
-    "edges": 160,
+    "edges": 157,
     "effects": 92,
-    "gaps": 111,
+    "gaps": 124,
     "gates": 13,
-    "nodes": 151,
+    "nodes": 169,
     "router_outcomes": 13
   },
   "dag_tags": {
     "DAG_CHECK": 8,
     "DAG_CHOICE": 34,
-    "DAG_NODE": 142,
-    "DAG_ROUTE": 5
+    "DAG_NODE": 160
   },
   "files_scanned": [
     "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/book1_non_canon.rpy",
@@ -31,7 +30,7 @@
     "ASSET": 206,
     "BEAT": 32,
     "CHOICE": 44,
-    "STATE": 261
+    "STATE": 302
   },
   "penance_summary": {
     "confidence": "medium",

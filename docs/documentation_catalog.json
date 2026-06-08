@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-06-08T12:14:23+00:00",
+  "generated_at": "2026-06-08T18:58:39+00:00",
   "repo_root": "untitled-victorian-vn",
   "entries": [
     {
@@ -24,6 +24,10 @@
         },
         {
           "target": "../docs/agents/PIPELINE_REFERENCE.md",
+          "status": "ok"
+        },
+        {
+          "target": "../docs/specs/writers-desk-agent-framework.md",
           "status": "ok"
         },
         {
@@ -291,6 +295,20 @@
       "area": ".agents/rules/victorian_consultant.md",
       "summary": "You are a meticulous Cultural Historian specializing in Victorian England (1837–1901). You ensure absolute historical fidelity across all disciplines. You do not write game code. You do not draft dialogue. You verify aut",
       "links": [],
+      "findings": []
+    },
+    {
+      "path": ".agents/rules/writers_desk.md",
+      "kind": "agent-rule",
+      "title": "Role: Writer's Desk (Prose-First Authoring Concierge)",
+      "area": ".agents/rules/writers_desk.md",
+      "summary": "You are the **prose-first front door** for the Writer (a non-technical creative author). She speaks",
+      "links": [
+        {
+          "target": "../../docs/specs/writers-desk-agent-framework.md",
+          "status": "ok"
+        }
+      ],
       "findings": []
     },
     {
@@ -757,6 +775,176 @@
       "findings": []
     },
     {
+      "path": ".agents/skills/writer_add_branch/SKILL.md",
+      "kind": "agent-skill",
+      "title": "Writer: Add Branch",
+      "area": ".agents/skills/writer_add_branch",
+      "summary": "Lets the Writer add a **choice / branching path** described by meaning, not syntax (e.g. \"Add a",
+      "links": [
+        {
+          "target": "../../rules/writers_desk.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../../docs/specs/story-chain-routing-refactor.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/skills/writer_add_effect/SKILL.md",
+      "kind": "agent-skill",
+      "title": "Writer: Add Effect",
+      "area": ".agents/skills/writer_add_effect",
+      "summary": "Lets the Writer attach a **stat consequence** to a moment in emotional terms (e.g. \"Refusing the",
+      "links": [
+        {
+          "target": "../../rules/writers_desk.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../rules/chief_architect.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/skills/writer_add_flag/SKILL.md",
+      "kind": "agent-skill",
+      "title": "Writer: Add Flag",
+      "area": ".agents/skills/writer_add_flag",
+      "summary": "Lets the Writer **track something the story should remember** without touching `classes.rpy` (e.g.",
+      "links": [
+        {
+          "target": "../../rules/writers_desk.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../rules/non_prod_code_agent.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/skills/writer_contract_check/SKILL.md",
+      "kind": "agent-skill",
+      "title": "Writer: Contract Check",
+      "area": ".agents/skills/writer_contract_check",
+      "summary": "Runs the **full-fidelity, advisory** contract pre-check on the Writer's draft before it goes to the",
+      "links": [
+        {
+          "target": "../../rules/writers_desk.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../rules/lead_narrative_editor.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../rules/forensic_psychology_consultant.md",
+          "status": "ok"
+        },
+        {
+          "target": "../writer_log_exception/SKILL.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/skills/writer_log_exception/SKILL.md",
+      "kind": "agent-skill",
+      "title": "Writer: Log Exception",
+      "area": ".agents/skills/writer_log_exception",
+      "summary": "Records a **human-overridden contract exception** when the Writer chooses to keep prose that a",
+      "links": [
+        {
+          "target": "../../rules/writers_desk.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/skills/writer_rewrite_scene/SKILL.md",
+      "kind": "agent-skill",
+      "title": "Writer: Rewrite Scene",
+      "area": ".agents/skills/writer_rewrite_scene",
+      "summary": "Prose-first front door for **rewriting or revising** existing content (e.g. \"Rewrite Day 4",
+      "links": [
+        {
+          "target": "../../rules/writers_desk.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../rules/orchestrator.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/skills/writer_status/SKILL.md",
+      "kind": "agent-skill",
+      "title": "Writer: Status",
+      "area": ".agents/skills/writer_status",
+      "summary": "Gives the Writer a plain-language answer to \"What's left before this is safe to ship?\" by reading",
+      "links": [
+        {
+          "target": "../../rules/writers_desk.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/skills/writer_write_book/SKILL.md",
+      "kind": "agent-skill",
+      "title": "Writer: Write Book",
+      "area": ".agents/skills/writer_write_book",
+      "summary": "Front door for authoring **Cora's Book1 manuscript** prose — the Holywell Street penny-dreadful",
+      "links": [
+        {
+          "target": "../../rules/writers_desk.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../../docs/contracts/book_writing_contract.md",
+          "status": "ok"
+        },
+        {
+          "target": "../book_writing_engine/SKILL.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/skills/writer_write_scene/SKILL.md",
+      "kind": "agent-skill",
+      "title": "Writer: Write Scene",
+      "area": ".agents/skills/writer_write_scene",
+      "summary": "Prose-first front door for authoring a **new scene or day**. Use when the Writer describes a scene",
+      "links": [
+        {
+          "target": "../../rules/writers_desk.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../../docs/contracts/authoring_intent.schema.json",
+          "status": "ok"
+        },
+        {
+          "target": "../../rules/orchestrator.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
       "path": ".github/pull_request_template.md",
       "kind": "reference",
       "title": "Pull Request Template",
@@ -869,6 +1057,10 @@
           "status": "ok"
         },
         {
+          "target": ".agents/rules/writers_desk.md",
+          "status": "ok"
+        },
+        {
           "target": ".agents/rules/writers_room/README.md",
           "status": "ok"
         },
@@ -946,6 +1138,42 @@
         },
         {
           "target": ".agents/skills/storyboard_sync/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/skills/writer_write_scene/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/skills/writer_rewrite_scene/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/skills/writer_add_flag/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/skills/writer_add_effect/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/skills/writer_add_branch/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/skills/writer_write_book/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/skills/writer_contract_check/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/skills/writer_log_exception/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/skills/writer_status/SKILL.md",
           "status": "ok"
         },
         {
@@ -1635,6 +1863,10 @@
           "status": "ok"
         },
         {
+          "target": "authoring_intent.schema.json",
+          "status": "ok"
+        },
+        {
           "target": "profile_delta.schema.json",
           "status": "ok"
         },
@@ -1836,6 +2068,14 @@
         {
           "target": "scene-direction-agent.md",
           "status": "ok"
+        },
+        {
+          "target": "story-chain-routing-refactor.md",
+          "status": "ok"
+        },
+        {
+          "target": "writers-desk-agent-framework.md",
+          "status": "ok"
         }
       ],
       "findings": []
@@ -1932,6 +2172,24 @@
           "status": "ok"
         }
       ],
+      "findings": []
+    },
+    {
+      "path": "docs/specs/story-chain-routing-refactor.md",
+      "kind": "feature-spec",
+      "title": "Story Chain Routing Refactor Spec",
+      "area": "docs/specs",
+      "summary": "Status: planned.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "docs/specs/writers-desk-agent-framework.md",
+      "kind": "feature-spec",
+      "title": "Writer's Desk Agent & Skill Framework Spec",
+      "area": "docs/specs",
+      "summary": "Status: **planned** (design / proposal — not yet implemented).",
+      "links": [],
       "findings": []
     },
     {

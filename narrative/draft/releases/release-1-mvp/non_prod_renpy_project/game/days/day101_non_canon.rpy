@@ -567,8 +567,7 @@ label day101_3_taking_stock_day1:
     # [STATE] State/progression update
     $ set_time_period("Evening")
 
-    # [DAG_CHECK type=confrontation]
-    call check_confrontations
+    call day101_evening_consequence_window
 
     # [ASSET] Visual/staging command
     scene bg_servants_quarters_dusk:
@@ -605,8 +604,18 @@ label day101_3_taking_stock_day1:
         cora_inner "A voice can kneel."
         cora_inner "I had not known that before today."
 
+    # [STATE] State/progression update
+    jump day101_night_story_window
+
+
+# [DAG_NODE id=day101_night_story_window type=dynamic_window day=101 period=Night window=story_chain returns_to=day101_3_taking_stock_day1]
+label day101_night_story_window:
+
+    # [STATE] State/progression update
+    $ set_time_period("Night")
+
     # [CHOICE] Decision point - combined Evening / Night choice
-    # [DAG_CHOICE group=day101_3_taking_stock_day1_menu_1]
+    # [DAG_CHOICE group=day101_night_story_window_menu_1]
     menu:
         "I look at my journal, the ink drying on the page. The lay of the land is clear. How do I spend the night?"
 
@@ -619,19 +628,19 @@ label day101_3_taking_stock_day1:
 
             # [STATE] State/progression update
             $ _chain_label = story.resolve_chain_label("stern")
-            jump expression _chain_label
+            call expression _chain_label
 
         "Find Missy before the laundry goes cold." if story.chain_available("missy"):
 
             # [STATE] State/progression update
             $ _chain_label = story.resolve_chain_label("missy")
-            jump expression _chain_label
+            call expression _chain_label
 
         "Walk the guest wing where Mr. Locke's shoe still has authority." if story.chain_available("vance"):
 
             # [STATE] State/progression update
             $ _chain_label = story.resolve_chain_label("vance")
-            jump expression _chain_label
+            call expression _chain_label
 
         "Stay at the desk and let the ink dry. [[Rest and reflect]]":
 
@@ -677,8 +686,28 @@ label day101_3_taking_stock_day1:
 
             # [STATE] Apply final reflection effects and end the slot
             $ apply_effects(insp=10, corr=0)
-            # [DAG_ROUTE outcome=d1_reflect_done]
-            call end_slot(outcome="d1_reflect_done")
+            # [STATE] State/progression update
+            jump day102_1_cora_missy_first_shift
+
+    # [STATE] Dynamic story-chain window returns to authored day flow
+    jump day102_1_cora_missy_first_shift
+
+
+# [DAG_NODE id=day101_evening_consequence_window type=dynamic_window day=101 period=Evening window=consequence penance=true returns_to=day101_3_taking_stock_day1]
+label day101_evening_consequence_window:
+    # [DAG_CHECK type=confrontation]
+    call check_confrontations
+
+    # [STATE] State/progression update
+    $ _penance_label = story.pop_penance_for_window("day101_evening")
+    if _penance_label:
+
+        # [STATE] State/progression update
+        call expression _penance_label
+
+        # [STATE] State/progression update
+        jump day102_1_cora_missy_first_shift
+    return
 
 
 # ==========================================
@@ -780,7 +809,6 @@ label day101_4_write_the_chapter:
     cora_inner "Tonight it acquired a failed first draft."
 
     # [STATE] State/progression update
-    # [DAG_ROUTE outcome=d1_write_ch1]
-    call end_slot(outcome="d1_write_ch1")
+    jump day102_1_cora_missy_first_shift
 
 

@@ -107,18 +107,50 @@ def is_confrontation_ready(self, char):
 
 ---
 
-## 5. Command-Query Separation: `consume_penance` decoupled from `get_post_penance_target`
+## 5. Deprecated compatibility: old penance bridge decoupled from route queries
 
 Previously, `StoryState.get_post_penance_target` silently reset `penance_triggered` as a side effect inside a query method — a Command-Query Separation (CQS) violation. Any caller that read `penance_triggered` after calling the method would observe unexpected state.
 
-`get_post_penance_target` is now a pure query with no side effects. A new explicit command method handles the reset:
+`get_post_penance_target` is now a pure query with no side effects. The old explicit reset command remains only as a deprecated compatibility shim:
 
 ```python
 def consume_penance(self):
-    """Command — clears penance_triggered. Always call explicitly after routing."""
+    """DEPRECATED compatibility shim; migrated windows pop pending_penance directly."""
     self.set_penance_triggered(False)
+    self.clear_penance()
 ```
 
-Callers (`advance_after_confrontation`, `end_slot d4_twilight_done`) now call `story.consume_penance()` explicitly after reading the routing target.
+Old compatibility callers may still call `story.consume_penance()` after reading the routing target. Migrated day files must not use this path; they consume queued labels with `story.pop_penance_for_window(...)`.
 
-**Promotion note:** Apply the same split to `StoryState` in `renpy_project/game/classes.rpy`. Add `consume_penance` method and remove the `set_penance_triggered(False)` call from `get_post_penance_target`.
+**Promotion note:** If old route-owner labels remain in production during migration, keep `consume_penance()` as a deprecated compatibility shim. Otherwise remove the old bridge and use the queued penance helpers below.
+
+---
+
+## 6. Time-period routing refactor: pending penance queue
+
+`StoryState` now includes a non-canon `pending_penance` list for the time-period routing refactor in `docs/specs/story-chain-routing-refactor.md`.
+
+Added helpers:
+
+```python
+def queue_penance(self, penance_label):
+    if penance_label not in self.pending_penance:
+        self.pending_penance.append(penance_label)
+
+def has_pending_penance(self):
+    return len(self.pending_penance) > 0
+
+def pop_penance_for_window(self, window_id):
+    if not self.pending_penance:
+        return None
+    return self.pending_penance.pop(0)
+
+def clear_penance(self):
+    self.pending_penance = []
+```
+
+`pending_penance` is now the active non-canon penance route. `check_confrontations` queues a concrete penance label such as `confrontation_stern`; named consequence windows consume that queue with `story.pop_penance_for_window(...)`, call the returned label, then return control to the day-owned time spine.
+
+`penance_triggered` and `consume_penance()` remain only as deprecated compatibility infrastructure for old route-owner labels. The migrated non-canon day files now route penance through named consequence windows instead of the bridge.
+
+**Promotion note:** When this refactor is promoted, add `pending_penance` and the queue helper methods to `StoryState` in `renpy_project/game/classes.rpy`. Prefer removing `penance_triggered` once production no longer needs old route-owner compatibility labels.

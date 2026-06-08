@@ -1,9 +1,9 @@
 outcome,target_day,target_period,target_label,source,call_sites,confidence
-d1_reflect_done,1,Night,day101_4_writing_or_visiting,StoryState.SLOT_EXIT_ROUTES,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day101_non_canon.rpy:681,high
-d1_write_ch1,2,Morning,day102_1_cora_missy_first_shift,StoryState.SLOT_EXIT_ROUTES,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day101_non_canon.rpy:784,high
+d1_reflect_done,1,Night,day101_4_writing_or_visiting,StoryState.SLOT_EXIT_ROUTES,,high
+d1_write_ch1,2,Morning,day102_1_cora_missy_first_shift,StoryState.SLOT_EXIT_ROUTES,,high
 d1_visit_missy,2,Morning,day102_1_cora_missy_first_shift,StoryState.SLOT_EXIT_ROUTES,,high
-d2_reflect_done,2,Evening,day102_3_stern_fetches_cora,StoryState.SLOT_EXIT_ROUTES,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy:466,high
-d2_write_night,3,Morning,day103_morning,StoryState.SLOT_EXIT_ROUTES,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy:1138;narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy:1193,high
+d2_reflect_done,2,Evening,day102_3_stern_fetches_cora,StoryState.SLOT_EXIT_ROUTES,,high
+d2_write_night,3,Morning,day103_morning,StoryState.SLOT_EXIT_ROUTES,,high
 d3_reflect_done,3,Afternoon,day103_2_suite_gideon_tea,StoryState.SLOT_EXIT_ROUTES,,high
 d3_twilight_done,,,day103_4_room_stern_suspicion,StoryState.SLOT_EXIT_ROUTES,,high
 d3_stern_done,3,Night,day103_2_suite_night_tea,StoryState.SLOT_EXIT_ROUTES,,high

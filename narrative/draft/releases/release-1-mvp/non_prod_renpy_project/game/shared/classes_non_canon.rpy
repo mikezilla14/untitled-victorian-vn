@@ -299,6 +299,9 @@ init -1 python:
 
         # Maps (day, time_of_day) → (next_day, next_time, next_label).
         # Used by advance_after_confrontation. Add one entry per new day/slot.
+        # DEPRECATED compatibility route table for the old route-owner pattern.
+        # New time-period routing uses explicit day labels plus dynamic windows
+        # that call optional content and return to the day spine.
         POST_PENANCE_ROUTES = {
             (1, "Morning"):   (1, "Night",     "day101_4_writing_or_visiting"),
             (1, "Evening"):   (2, "Morning",   "day102_1_cora_missy_first_shift"),
@@ -317,6 +320,8 @@ init -1 python:
         # Maps outcome string → (next_day_or_None, next_time_or_None, next_label).
         # Used by end_slot. None values mean "leave day/time unchanged".
         # d4_twilight_done is handled in get_slot_exit_target() due to conditional label.
+        # DEPRECATED compatibility route table for old end_slot exits.
+        # Refactored day files should jump directly to the next time period/day.
         SLOT_EXIT_ROUTES = {
             "d1_reflect_done":   (2, "Morning",    "day102_1_cora_missy_first_shift"),
             "d1_write_ch1":      (2, "Morning",    "day102_1_cora_missy_first_shift"),
@@ -402,6 +407,7 @@ init -1 python:
             self.missy_chain_level  = 0
             self.vance_chain_level  = 0
             self.penance_triggered  = False
+            self.pending_penance    = []
 
         # ── Internal helpers ───────────────────────────────────────────
 
@@ -598,7 +604,23 @@ init -1 python:
             self._set_chain_level("vance_chain_level", value)
 
         def set_penance_triggered(self, value):
+            """DEPRECATED compatibility bridge; use pending_penance queue helpers."""
             self._set_boolean_flag("penance_triggered", value)
+
+        def queue_penance(self, penance_label):
+            if penance_label not in self.pending_penance:
+                self.pending_penance.append(penance_label)
+
+        def has_pending_penance(self):
+            return len(self.pending_penance) > 0
+
+        def pop_penance_for_window(self, window_id):
+            if not self.pending_penance:
+                return None
+            return self.pending_penance.pop(0)
+
+        def clear_penance(self):
+            self.pending_penance = []
 
         def get_character_chain_level(self, character):
             if character not in self.VALID_CHAIN_CHARACTERS:
@@ -626,13 +648,14 @@ init -1 python:
 
         def get_post_penance_target(self, current_day, time_of_day):
             """Pure query — returns (next_day, next_time, next_label). No side effects."""
-            if current_day == 4 and self.penance_triggered:
+            if current_day == 4 and self.has_pending_penance():
                 return (4, "Night", "day104_6_false_dawn_ending")
             return self.POST_PENANCE_ROUTES.get((current_day, time_of_day))
 
         def consume_penance(self):
-            """Command — clears penance_triggered. Always call explicitly after routing."""
+            """DEPRECATED compatibility shim; migrated windows pop pending_penance directly."""
             self.set_penance_triggered(False)
+            self.clear_penance()
 
         def get_slot_exit_target(self, outcome):
             """Return (next_day_or_None, next_time_or_None, next_label) for end_slot."""

@@ -15,7 +15,7 @@
 # day102_non_canon.rpy
 # Release 1 / Day 02 non-canon Ren'Py-shaped draft
 # Source: promoted renpy_project/game/day102.rpy + writers' room divergent pool (day102)
-# Spine: story_board.md Day 102; router via end_slot / advance_after_confrontation
+# Spine: story_board.md Day 102; time-period routing via explicit day labels and dynamic windows
 
 # ==========================================
 # DAY 2 NODE MAP
@@ -265,8 +265,7 @@ label day102_2_day2_chore_time:
     # [STATE] State/progression update
     $ set_time_period("Afternoon")
 
-    # [DAG_CHECK type=confrontation]
-    call check_confrontations
+    call day102_afternoon_consequence_window
 
     # [ASSET] Visual/staging command
     scene bg_servants_corridor_morning:
@@ -356,7 +355,7 @@ label day102_2_day2_insp_choice:
     cora_inner "For one small second, the house loses."
 
     # [STATE] State/progression update
-    jump day102_2_optional_character_chain
+    jump day102_afternoon_story_window
 
 
 # [DAG_NODE id=day102_2_day2_corr_choice type=choice]
@@ -397,14 +396,21 @@ label day102_2_day2_corr_choice:
     cora_inner "Useful, at least."
 
     # [STATE] State/progression update
-    jump day102_2_optional_character_chain
+    jump day102_afternoon_story_window
 
 
-# [DAG_NODE id=day102_2_optional_character_chain type=work day=102]
+# [DAG_NODE id=day102_2_optional_character_chain type=dynamic_window day=102 period=Afternoon window=story_chain returns_to=day102_2_day2_chore_time]
 label day102_2_optional_character_chain:
 
+    # [STATE] State/progression update
+    jump day102_afternoon_story_window
+
+
+# [DAG_NODE id=day102_afternoon_story_window type=dynamic_window day=102 period=Afternoon window=story_chain returns_to=day102_2_day2_chore_time]
+label day102_afternoon_story_window:
+
     # [CHOICE] Decision point
-    # [DAG_CHOICE group=day102_2_optional_character_chain_menu_1]
+    # [DAG_CHOICE group=day102_afternoon_story_window_menu_1]
     menu:
         "The cart is still. The corridor has not forgotten yesterday."
 
@@ -412,19 +418,19 @@ label day102_2_optional_character_chain:
 
             # [STATE] State/progression update
             $ _chain_label = story.resolve_chain_label("stern")
-            jump expression _chain_label
+            call expression _chain_label
 
         "Steal an hour with Missy before Stern counts the sheets." if story.chain_available("missy"):
 
             # [STATE] State/progression update
             $ _chain_label = story.resolve_chain_label("missy")
-            jump expression _chain_label
+            call expression _chain_label
 
         "Drift toward the Locke Suite and watch who performs for whom." if story.chain_available("vance"):
 
             # [STATE] State/progression update
             $ _chain_label = story.resolve_chain_label("vance")
-            jump expression _chain_label
+            call expression _chain_label
 
         "Push the cart on and keep my hands honest.":
             if story.day2_chore_focus == "corruption":
@@ -462,8 +468,28 @@ label day102_2_optional_character_chain:
             cora_inner "There is a brilliant, dangerous chapter in that."
             
             cora_inner "The house loses interest when I stop offering it a face."
-            # [DAG_ROUTE outcome=d2_reflect_done]
-            call end_slot(outcome="d2_reflect_done")
+            # [STATE] State/progression update
+            jump day102_3_stern_fetches_cora
+
+    # [STATE] Dynamic story-chain window returns to authored day flow
+    jump day102_3_stern_fetches_cora
+
+
+# [DAG_NODE id=day102_afternoon_consequence_window type=dynamic_window day=102 period=Afternoon window=consequence penance=true returns_to=day102_2_day2_chore_time]
+label day102_afternoon_consequence_window:
+    # [DAG_CHECK type=confrontation]
+    call check_confrontations
+
+    # [STATE] State/progression update
+    $ _penance_label = story.pop_penance_for_window("day102_afternoon")
+    if _penance_label:
+
+        # [STATE] State/progression update
+        call expression _penance_label
+
+        # [STATE] State/progression update
+        jump day102_3_stern_fetches_cora
+    return
 
 
 # ── 023: STERN FETCHES CORA ─────────────────────────────────────
@@ -1012,8 +1038,7 @@ label day102_4_night:
     # [STATE] State/progression update
     $ set_time_period("Night")
 
-    # [DAG_CHECK type=confrontation]
-    call check_confrontations
+    call day102_night_consequence_window
 
     # [ASSET] Visual/staging command
     scene bg_cora_desk_night
@@ -1042,6 +1067,23 @@ label day102_4_night:
 
             # [STATE] State/progression update
             jump day102_4_cora_sneaks_a_feel
+
+
+# [DAG_NODE id=day102_night_consequence_window type=dynamic_window day=102 period=Night window=consequence penance=true returns_to=day102_4_night]
+label day102_night_consequence_window:
+    # [DAG_CHECK type=confrontation]
+    call check_confrontations
+
+    # [STATE] State/progression update
+    $ _penance_label = story.pop_penance_for_window("day102_night")
+    if _penance_label:
+
+        # [STATE] State/progression update
+        call expression _penance_label
+
+        # [STATE] State/progression update
+        jump day103_morning
+    return
 
 
 # [DAG_NODE id=day102_4_cora_writes_a_chapter type=write]
@@ -1134,8 +1176,8 @@ label day102_4_cora_writes_a_chapter:
             cora_inner "None of it has become art yet."
             cora_inner "It remains appetite and consequence."
 
-    # [DAG_ROUTE outcome=d2_write_night]
-    call end_slot(outcome="d2_write_night")
+    # [STATE] State/progression update
+    jump day103_morning
 
 
 # [DAG_NODE id=day102_4_cora_sneaks_a_feel type=work day=102]
@@ -1189,7 +1231,7 @@ label day102_4_cora_sneaks_a_feel:
     cora_inner "When I finally sleep, the candle has burned lower than I meant to allow."
     cora_inner "Waste has consequences."
 
-    # [DAG_ROUTE outcome=d2_write_night]
-    call end_slot(outcome="d2_write_night")
+    # [STATE] State/progression update
+    jump day103_morning
 
-# Promotion note: deadline gate lives on day103.rpy label day103_morning (via end_slot d2_write_night).
+# Promotion note: deadline gate lives on day103.rpy label day103_morning.

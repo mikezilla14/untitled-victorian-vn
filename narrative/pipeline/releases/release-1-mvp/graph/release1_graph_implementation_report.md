@@ -34,12 +34,12 @@
 
 ## Extraction Counts
 
-- Nodes: 151
-- Edges: 160
+- Nodes: 169
+- Edges: 157
 - Choices: 97
 - Gates: 13
 - Effects: 92
-- Gaps: 111
+- Gaps: 124
 
 ## Storyboard Audit
 
