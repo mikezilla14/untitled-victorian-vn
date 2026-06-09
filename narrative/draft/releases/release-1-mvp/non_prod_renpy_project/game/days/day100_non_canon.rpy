@@ -179,7 +179,8 @@ label day100_2_evening_flashback:
     scene bg_country_estate_study
     with dissolve
 
-    play music "themes/melancholy" fadein 1.5
+    if audio_themes_melancholy:
+        play music audio_themes_melancholy fadein 1.5
 
     "Sir John's library was the only territory in Wiltshire where I could breathe — by license, not by right."
 
@@ -290,7 +291,8 @@ label day100_3_night_daydream:
     scene bg_train_carriage_day
     with dissolve
 
-    play sound "sfx/train_whistle"
+    if audio_sfx_train_whistle:
+        play sound audio_sfx_train_whistle
 
     "A whistle tears through the tunnel-dark. My forehead strikes the cold glass."
 

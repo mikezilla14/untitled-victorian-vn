@@ -586,12 +586,16 @@ label day104_4_twilight_ledger_false_dawn:
     "My hands have stopped shaking."
     cora_inner "This feels like improvement until I realise they have only gone numb."
 
-    "The photograph is hidden beneath the loose board under my bed."
-    "Not safe."
-    "Safer than my skin."
-    cora_inner "I have evidence."
-    cora_inner "I have leverage."
-    cora_inner "I have, for the first time since arriving, something Gideon Locke does not want me to have."
+    if story.has_photograph:
+        "The photograph is hidden beneath the loose board under my bed."
+        "Not safe."
+        "Safer than my skin."
+        cora_inner "I have evidence."
+        cora_inner "I have leverage."
+        cora_inner "I have, for the first time since arriving, something Gideon Locke does not want me to have."
+    else:
+        cora_inner "The lockbox still holds what I could not carry."
+        cora_inner "I have memory, appetite, and a manuscript — not yet a weapon."
 
     cora_inner "The manuscript waits."
     cora_inner "Not for more material."
@@ -605,19 +609,16 @@ label day104_4_twilight_ledger_false_dawn:
             # [STATE] State/progression update
             jump day104_4_atonement
 
-        "Risk the dark room to write the triumphant chapter. [[Triumphant Write]]" if player.anxiety < 85:
+        "Risk the dark room to write the triumphant chapter. [[Triumphant Write]]":
 
-            # [STATE] State/progression update
+            if player.anxiety >= ANXIETY_WRITE_PARALYSIS:
+                "My hand shakes too violently to hold the pen. The hotel feels alive, every creaking floorboard a footstep, every shadow a reaching hand."
+                "At this level of anxiety, my panic blocks the pen."
+                jump day104_4_twilight_ledger_false_dawn
+
             jump day104_night
 
-        "Risk the dark room to write the triumphant chapter. [[Triumphant Write]]" if player.anxiety >= 85:
-            "My hand shakes too violently to hold the pen. The hotel feels alive, every creaking floorboard a footstep, every shadow a reaching hand."
-            "At this level of anxiety, my panic blocks the pen."
-
-            # [STATE] State/progression update
-            jump day104_4_twilight_ledger_false_dawn
-
-        "Find Missy and salvage what remains of her trust. [[Missy Repair]]" if getattr(story, "missy_day4_repair_state", "") == "":
+        "Find Missy and salvage what remains of her trust. [[Missy Repair]]" if missy_repair_available():
 
             # [STATE] State/progression update
             jump day104_4_missy_repair
@@ -625,15 +626,8 @@ label day104_4_twilight_ledger_false_dawn:
 
 # [DAG_NODE id=day104_evening_consequence_window type=dynamic_window day=104 period=Evening window=consequence penance=true returns_to=day104_4_twilight_ledger_false_dawn]
 label day104_evening_consequence_window:
-    # [DAG_CHECK type=confrontation]
-    call check_confrontations
-
-    # [STATE] State/progression update
-    $ _penance_label = story.pop_penance_for_window("day104_evening")
-    if _penance_label:
-
-        # [STATE] State/progression update
-        call expression _penance_label
+    call watch_suspicion
+    call consume_pending_penance("day104_evening")
     return
 
 
@@ -915,15 +909,8 @@ label day104_5_triumphant_chapter:
 
 # [DAG_NODE id=day104_night_consequence_window type=dynamic_window day=104 period=Night window=consequence penance=true returns_to=day104_5_triumphant_chapter]
 label day104_night_consequence_window:
-    # [DAG_CHECK type=confrontation]
-    call check_confrontations
-
-    # [STATE] State/progression update
-    $ _penance_label = story.pop_penance_for_window("day104_night")
-    if _penance_label:
-
-        # [STATE] State/progression update
-        call expression _penance_label
+    call watch_suspicion
+    call consume_pending_penance("day104_night")
     return
 
 
@@ -945,11 +932,15 @@ label day104_6_false_dawn_ending:
         "The manuscript remains untouched."
         "But the danger has passed. I am still here. I have survived the day."
 
-    "Beneath the loose floorboard, Gideon's photograph waits in the dark."
-    "My leverage. My absolute proof."
+    if story.has_photograph:
+        "Beneath the loose floorboard, Gideon's photograph waits in the dark."
+        "My leverage. My absolute proof."
+        "Tomorrow I will decide how to use it."
+        "Tomorrow Gideon Locke will learn that servants can keep evidence."
+    else:
+        "Tomorrow I will decide what survives of today's theft."
+        "Tomorrow Gideon Locke will still own the rooms I cleaned."
 
-    "Tomorrow I will decide how to use it."
-    "Tomorrow Gideon Locke will learn that servants can keep evidence."
     "Tomorrow the balance changes."
 
     "For the first time since I arrived, sleep comes without asking permission."

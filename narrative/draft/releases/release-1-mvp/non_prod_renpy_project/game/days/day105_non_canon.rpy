@@ -751,6 +751,9 @@ label day105_5_gideon_marks_cora:
 # [DAG_NODE id=day105_6_manuscript_reckoning type=write]
 label day105_6_manuscript_reckoning:
 
+    if player.corruption_level < WRITE_GATE_CH2[1]:
+        jump bad_ending_rejection
+
     # [ASSET] Existing Cora desk night background
     scene bg_cora_desk_night
     with fade

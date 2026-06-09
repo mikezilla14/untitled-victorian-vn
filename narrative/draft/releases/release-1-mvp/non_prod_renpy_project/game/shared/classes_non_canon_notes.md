@@ -21,18 +21,18 @@ To simplify the in-game economy and align with the "inkwell" capacity lore:
 
 ---
 
-## 2. Refined Writing Gate (`has_story_fuel`)
+## 2. Writing Gate (`has_story_fuel`) — AND semantics
 
-The story-writing progression was previously gated by a combined sum of Inspiration and Corruption XP exceeding a progressive threshold:
+Writing gates use **AND**, not sum: both floors must clear.
+
 ```python
-# Old Sum-based Check
-def has_story_fuel(self, required_total=15):
-    return (self.inspiration + self.corruption_xp) >= required_total
+WRITE_GATE_CH1 = (15, 2)   # inspiration >= 15 AND corruption_level >= 2
+WRITE_GATE_CH2 = (30, 3)   # inspiration >= 30 AND corruption_level >= 3
+WRITE_GATE_CH3 = (45, 3)   # inspiration >= 45 AND corruption_level >= 3
+WRITE_SLOP_MAX_CORRUPTION_LEVEL = 2  # Day 101 slop chapter when corruption_level <= 2
 ```
 
-This has been replaced by a modular, parameterized check accepting individual targets for both required inspiration and required corruption:
-1. **Inspiration Check**: Cora must have available inspiration meeting or exceeding `required_insp` (defaults to `30`).
-2. **Corruption Check**: Cora must have a corruption level meeting or exceeding `required_corr` (defaults to `30`).
+Call sites use `has_story_fuel(*WRITE_GATE_CH1)` etc. Day 101 menu write option uses the same CH1 gate.
 
 ### Upgraded Python Implementations
 These gates are updated across the class definition and global wrappers to maintain absolute synchronization:

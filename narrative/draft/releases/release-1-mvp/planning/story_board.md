@@ -143,10 +143,13 @@ To preserve crucial narrative forks and chapter variants without sacrificing opt
 2. **Optional Grind Step**: The day file presents a **contextual** story window. Each option resolves the next relationship beat with `story.resolve_chain_label(character)`, calls that beat, and then returns to the day spine. Relationship chains have 3 levels and are gated by `story.chain_available(character)`. Desk retreat and normal exits now jump directly where the next day-owned label is obvious.
 
 #### ðŸŽ¯ Daily Story Gates
-- **Day 101 Night:** Writing Chapter One requires **(Inspiration + Corruption) â‰¥ 15**. Failure skips the chapter.
-- **Day 102 Night:** Writing Chapter Two requires **Ch1 gate â‰¥ 15** (if missed) or **Ch2 gate â‰¥ 30**. Alternative indulgence trades manuscript progress for stats.
-- **Day 103 Night:** Barricading the door for Chapter Three requires **(Inspiration + Corruption) â‰¥ 45**.
-- **Day 104 Twilight:** If **Anxiety (Suspicion) â‰¥ 85**, writing is blocked (Cora is too paralyzed by fear). She must choose safety/atonement or Missy repair.
+
+Writing gates use **AND** semantics (`has_story_fuel` in `functions_non_canon.rpy`): both inspiration and corruption_level must meet their floors. Constants: `WRITE_GATE_CH1` (15, 2), `WRITE_GATE_CH2` (30, 3), `WRITE_GATE_CH3` (45, 3).
+
+- **Day 101 Night:** Write menu and Chapter One require **CH1 gate** (inspiration â‰¥ 15 **and** corruption_level â‰¥ 2). Below corruption_level 3 on the page â†’ slop draft (no `manuscript_progress`); at or above â†’ real Ch1 + progress.
+- **Day 102 Night:** Ch1 catch-up requires **CH1 gate** (if missed); Ch2 requires **CH2 gate** (30 / 3). Alternative indulgence trades manuscript progress for stats.
+- **Day 103 Night:** Chapter Three requires **CH3 gate** (45 / 3), or frantic_write bypass.
+- **Day 104 Twilight:** If **Anxiety â‰¥ 85** (`ANXIETY_WRITE_PARALYSIS`), triumphant write is blocked. Atonement always available; Missy repair when `missy_day4_used_as_cover`.
 - **Day 105 Morning:** Leverage defusal is structural. The photograph cannot defeat Gideon's class privilege, but the motivation confessed shapes Cora's arc and ending manuscript reckoning.
 
 #### Adult Payoff Structure: Manuscript Retelling Minigame

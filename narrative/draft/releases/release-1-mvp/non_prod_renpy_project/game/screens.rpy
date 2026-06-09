@@ -44,6 +44,7 @@ screen stats_overlay():
         xpos _gx
         xsize _gw
         ysize config.screen_height
+        alpha 0.0
 
     # Suspicion vignette — scales with anxiety (story area only)
     add "ui_suspicion_vignette":
@@ -183,7 +184,7 @@ screen stats_overlay():
                             xysize=(_ink_w, _ink_h),
                         ):
                             xalign 0.5
-                            yalign 1.0
+                            yalign 0.5
 
         textbutton "◂":
             style "hud_sidebar_tab"

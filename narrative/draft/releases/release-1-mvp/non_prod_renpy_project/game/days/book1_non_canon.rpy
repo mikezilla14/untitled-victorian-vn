@@ -432,6 +432,9 @@ label book1_write_chapter(chapter_key="day1_chapter", current_day=101, word_dela
 
     nvl clear
 
+    if audio_themes_private_ink:
+        play music audio_themes_private_ink fadein 1.0
+
     # [STATE] State/progression update
     $ _book1_word_delay = word_delay
     $ _book1_page_line_count = 0
@@ -456,7 +459,7 @@ label book1_write_chapter(chapter_key="day1_chapter", current_day=101, word_dela
         call book1_nvl_write_line("Chapter IV - The Sealed Envelope", word_delay=_book1_word_delay)
 
         # [STATE] State/progression update
-        $ _book1_theme = story.day1_corridor_state
+        $ _book1_theme = story.day2_tea_choice
     elif chapter_key == "day5_reckoning_chapter":
         call book1_nvl_write_line("Chapter V - Diagnosis At Dawn", word_delay=_book1_word_delay)
 

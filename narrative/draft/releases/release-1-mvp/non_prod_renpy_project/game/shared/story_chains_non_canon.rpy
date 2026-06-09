@@ -17,31 +17,49 @@
 # Enforces character-specific suspicion thresholds, deferred penance routing, and deadlines.
 
 # ==============================================================================
-# 1. DEFERRED CONFRONTATIONS CHECKPOINT & TIME-ADVANCEMENT ROUTER
+# 1. SUSPICION WATCHER & DYNAMIC WINDOW ROUTING (call/return — no spine jumps)
 # ==============================================================================
+
+# [DAG_NODE id=watch_suspicion type=penance_check]
+label watch_suspicion:
+    # Hard fail: consolidated anxiety breakdown
+    if player.anxiety >= 100:
+        jump game_over_dismissed
+
+    # Soft fail: queue confrontation labels for the next dynamic window to consume
+    if player.is_confrontation_ready("stern"):
+        $ story.queue_penance("confrontation_stern")
+    if player.is_confrontation_ready("vance"):
+        $ story.queue_penance("confrontation_vance")
+    if player.is_confrontation_ready("missy"):
+        $ story.queue_penance("confrontation_missy")
+    return
+
 
 # [DAG_NODE id=check_confrontations type=penance_check]
 label check_confrontations:
-    # Game Over Dismissal check (Anxiety >= 100)
-    if player.anxiety >= 100:
+    # Backward-compatible alias — prefer watch_suspicion in new code
+    call watch_suspicion
+    return
 
-        # [STATE] State/progression update
-        jump game_over_dismissed
 
-    # Confrontation gates checked at the start of non-work personal slots.
-    # Threshold is PlayerStats.CONFRONTATION_THRESHOLD — do not hardcode here.
-    if player.is_confrontation_ready("stern"):
+# [DAG_NODE id=consume_pending_penance type=penance_consume]
+label consume_pending_penance(window_id):
+    $ _penance_label = story.consume_penance_at_window(window_id)
+    if _penance_label:
+        call expression _penance_label
+    return
 
-        # [STATE] State/progression update
-        $ story.queue_penance("confrontation_stern")
-    elif player.is_confrontation_ready("vance"):
 
-        # [STATE] State/progression update
-        $ story.queue_penance("confrontation_vance")
-    elif player.is_confrontation_ready("missy"):
-
-        # [STATE] State/progression update
-        $ story.queue_penance("confrontation_missy")
+# [DAG_NODE id=story_window_penance_gate type=penance_consume]
+label story_window_penance_gate(window_id):
+    # Sacrifices the optional chain menu when penance is queued
+    $ _penance_consumed = False
+    if story.has_pending_penance():
+        $ _penance_label = story.consume_penance_at_window(window_id)
+        if _penance_label:
+            call expression _penance_label
+            $ _penance_consumed = True
     return
 
 

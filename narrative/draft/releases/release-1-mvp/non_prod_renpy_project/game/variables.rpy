@@ -14,3 +14,6 @@ default hud_sidebar_visible = True
 
 # Auto-Highlight speaker tracking
 default speaking_char = None
+
+# Set by story_window_penance_gate when pending penance consumes the chain slot.
+default _penance_consumed = False

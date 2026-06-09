@@ -265,8 +265,6 @@ label day102_2_day2_chore_time:
     # [STATE] State/progression update
     $ set_time_period("Afternoon")
 
-    call day102_afternoon_consequence_window
-
     # [ASSET] Visual/staging command
     scene bg_servants_corridor_morning:
         xysize (1920, 1080) 
@@ -355,7 +353,9 @@ label day102_2_day2_insp_choice:
     cora_inner "For one small second, the house loses."
 
     # [STATE] State/progression update
-    jump day102_afternoon_story_window
+    call day102_afternoon_consequence_window
+    call day102_afternoon_story_window
+    jump day102_3_stern_fetches_cora
 
 
 # [DAG_NODE id=day102_2_day2_corr_choice type=choice]
@@ -396,18 +396,24 @@ label day102_2_day2_corr_choice:
     cora_inner "Useful, at least."
 
     # [STATE] State/progression update
-    jump day102_afternoon_story_window
+    call day102_afternoon_consequence_window
+    call day102_afternoon_story_window
+    jump day102_3_stern_fetches_cora
 
 
 # [DAG_NODE id=day102_2_optional_character_chain type=dynamic_window day=102 period=Afternoon window=story_chain returns_to=day102_2_day2_chore_time]
 label day102_2_optional_character_chain:
 
-    # [STATE] State/progression update
-    jump day102_afternoon_story_window
+    call day102_afternoon_story_window
+    return
 
 
 # [DAG_NODE id=day102_afternoon_story_window type=dynamic_window day=102 period=Afternoon window=story_chain returns_to=day102_2_day2_chore_time]
 label day102_afternoon_story_window:
+
+    call story_window_penance_gate("day102_afternoon")
+    if _penance_consumed:
+        return
 
     # [CHOICE] Decision point
     # [DAG_CHOICE group=day102_afternoon_story_window_menu_1]
@@ -468,24 +474,14 @@ label day102_afternoon_story_window:
             cora_inner "There is a brilliant, dangerous chapter in that."
             
             cora_inner "The house loses interest when I stop offering it a face."
-            # [STATE] State/progression update
-            jump day102_3_stern_fetches_cora
 
-    # [STATE] Dynamic story-chain window returns to authored day flow
-    jump day102_3_stern_fetches_cora
+    return
 
 
 # [DAG_NODE id=day102_afternoon_consequence_window type=dynamic_window day=102 period=Afternoon window=consequence penance=true returns_to=day102_2_day2_chore_time]
 label day102_afternoon_consequence_window:
-    # [DAG_CHECK type=confrontation]
-    call check_confrontations
-
-    # [STATE] State/progression update
-    $ _penance_label = story.pop_penance_for_window("day102_afternoon")
-    if _penance_label:
-
-        # [STATE] State/progression update
-        call expression _penance_label
+    # Watch-only: penance consumes the afternoon story-chain window
+    call watch_suspicion
     return
 
 
@@ -1068,15 +1064,8 @@ label day102_4_night:
 
 # [DAG_NODE id=day102_night_consequence_window type=dynamic_window day=102 period=Night window=consequence penance=true returns_to=day102_4_night]
 label day102_night_consequence_window:
-    # [DAG_CHECK type=confrontation]
-    call check_confrontations
-
-    # [STATE] State/progression update
-    $ _penance_label = story.pop_penance_for_window("day102_night")
-    if _penance_label:
-
-        # [STATE] State/progression update
-        call expression _penance_label
+    call watch_suspicion
+    call consume_pending_penance("day102_night")
     return
 
 
@@ -1091,7 +1080,7 @@ label day102_4_cora_writes_a_chapter:
 
     if story.manuscript_progress == 0:
 
-        if has_story_fuel(15):
+        if has_story_fuel(*WRITE_GATE_CH1):
 
             cora_inner "Chapter One comes late, but it comes with teeth."
 
@@ -1129,7 +1118,7 @@ label day102_4_cora_writes_a_chapter:
 
     else:
 
-        if has_story_fuel(30):
+        if has_story_fuel(*WRITE_GATE_CH2):
 
             cora_inner "Chapter Two begins with a hatbox."
             cora_inner "Not the object inside."

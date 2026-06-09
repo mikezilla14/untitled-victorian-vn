@@ -605,7 +605,8 @@ label day101_3_taking_stock_day1:
         cora_inner "I had not known that before today."
 
     # [STATE] State/progression update
-    jump day101_night_story_window
+    call day101_night_story_window
+    jump day102_1_cora_missy_first_shift
 
 
 # [DAG_NODE id=day101_night_story_window type=dynamic_window day=101 period=Night window=story_chain returns_to=day101_3_taking_stock_day1]
@@ -614,15 +615,19 @@ label day101_night_story_window:
     # [STATE] State/progression update
     $ set_time_period("Night")
 
+    call story_window_penance_gate("day101_night")
+    if _penance_consumed:
+        return
+
     # [CHOICE] Decision point - combined Evening / Night choice
     # [DAG_CHOICE group=day101_night_story_window_menu_1]
     menu:
         "I look at my journal, the ink drying on the page. The lay of the land is clear. How do I spend the night?"
 
-        "Write the first chapter of my manuscript. [[Progress manuscript]]" if player.inspiration >= 15:
+        "Write the first chapter of my manuscript. [[Progress manuscript]]" if has_story_fuel(*WRITE_GATE_CH1):
 
             # [STATE] State/progression update
-            jump day101_4_write_the_chapter
+            call day101_4_write_the_chapter
 
         "Listen for Miss Stern's keys in the west corridor." if story.chain_available("stern"):
 
@@ -686,24 +691,14 @@ label day101_night_story_window:
 
             # [STATE] Apply final reflection effects and end the slot
             $ apply_effects(insp=10, corr=0)
-            # [STATE] State/progression update
-            jump day102_1_cora_missy_first_shift
 
-    # [STATE] Dynamic story-chain window returns to authored day flow
-    jump day102_1_cora_missy_first_shift
+    return
 
 
 # [DAG_NODE id=day101_evening_consequence_window type=dynamic_window day=101 period=Evening window=consequence penance=true returns_to=day101_3_taking_stock_day1]
 label day101_evening_consequence_window:
-    # [DAG_CHECK type=confrontation]
-    call check_confrontations
-
-    # [STATE] State/progression update
-    $ _penance_label = story.pop_penance_for_window("day101_evening")
-    if _penance_label:
-
-        # [STATE] State/progression update
-        call expression _penance_label
+    # Watch-only: penance consumes the night story-chain window, not this slot
+    call watch_suspicion
     return
 
 
@@ -788,12 +783,13 @@ label day101_4_write_the_chapter:
     cora_inner "By the time the candle gutters, there are pages."
     cora_inner "Not a chapter. Not a wound. Not even a proper lie."
 
-    if player.corruption_level < 30:
+    if player.corruption_level <= WRITE_SLOP_MAX_CORRUPTION_LEVEL:
         call book1_write_chapter(chapter_key="day1_slop_chapter", current_day=101)
         cora_inner "Flavorless slop."
         cora_inner "Unsellable, bloodless, afraid of its own pulse."
         cora_inner "I had inspiration, but no appetite, and the page told on me."
     else:
+        $ story.complete_manuscript_chapter("day1_chapter")
         call book1_write_chapter(chapter_key="day1_chapter", current_day=101)
         cora_inner "There is a shape worth keeping, but it still feels premature."
         cora_inner "Tomorrow's material will decide whether this becomes a chapter or kindling."
@@ -805,7 +801,6 @@ label day101_4_write_the_chapter:
     cora_inner "Tomorrow the house will expect a maid."
     cora_inner "Tonight it acquired a failed first draft."
 
-    # [STATE] State/progression update
-    jump day102_1_cora_missy_first_shift
+    return
 
 

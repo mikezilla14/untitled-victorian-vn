@@ -67,15 +67,8 @@ label day103_morning:
 
 # [DAG_NODE id=day103_morning_consequence_window type=dynamic_window day=103 period=Morning window=consequence penance=true returns_to=day103_morning]
 label day103_morning_consequence_window:
-    # [DAG_CHECK type=confrontation]
-    call check_confrontations
-
-    # [STATE] State/progression update
-    $ _penance_label = story.pop_penance_for_window("day103_morning")
-    if _penance_label:
-
-        # [STATE] State/progression update
-        call expression _penance_label
+    # Watch-only: penance consumes the morning story-chain window
+    call watch_suspicion
     return
 
 
@@ -183,7 +176,8 @@ label day103_1_corridor_insp_chain:
     "From me."
 
     # [STATE] State/progression update
-    jump day103_1_optional_character_chain
+    call day103_1_optional_character_chain
+    jump day103_afternoon
 
 
 # ==========================================
@@ -223,7 +217,8 @@ label day103_1_corridor_corr_chain:
     "And he has asked that I bring it."
 
     # [STATE] State/progression update
-    jump day103_1_optional_character_chain
+    call day103_1_optional_character_chain
+    jump day103_afternoon
 
 
 # ==========================================
@@ -232,6 +227,10 @@ label day103_1_corridor_corr_chain:
 
 # [DAG_NODE id=day103_1_optional_character_chain type=dynamic_window day=103 period=Morning window=story_chain returns_to=day103_morning]
 label day103_1_optional_character_chain:
+
+    call story_window_penance_gate("day103_morning")
+    if _penance_consumed:
+        return
 
     # [CHOICE] Contextual grind gate after corridor reflection; resolver picks chain beat
     # [DAG_CHOICE group=day103_1_optional_character_chain_menu_1]
@@ -267,10 +266,8 @@ label day103_1_optional_character_chain:
 
             # [STATE] State/progression update
             $ apply_effects(insp=10, corr=0)
-            jump day103_afternoon
 
-    # [STATE] Dynamic story-chain window returns to authored day flow
-    jump day103_afternoon
+    return
 
 
 # ==========================================
@@ -637,15 +634,8 @@ label day103_evening:
 
 # [DAG_NODE id=day103_evening_consequence_window type=dynamic_window day=103 period=Evening window=consequence penance=true returns_to=day103_evening]
 label day103_evening_consequence_window:
-    # [DAG_CHECK type=confrontation]
-    call check_confrontations
-
-    # [STATE] State/progression update
-    $ _penance_label = story.pop_penance_for_window("day103_evening")
-    if _penance_label:
-
-        # [STATE] State/progression update
-        call expression _penance_label
+    call watch_suspicion
+    call consume_pending_penance("day103_evening")
     return
 
 
@@ -917,15 +907,8 @@ label day103_night:
 
 # [DAG_NODE id=day103_night_consequence_window type=dynamic_window day=103 period=Night window=consequence penance=true returns_to=day103_night]
 label day103_night_consequence_window:
-    # [DAG_CHECK type=confrontation]
-    call check_confrontations
-
-    # [STATE] State/progression update
-    $ _penance_label = story.pop_penance_for_window("day103_night")
-    if _penance_label:
-
-        # [STATE] State/progression update
-        call expression _penance_label
+    call watch_suspicion
+    call consume_pending_penance("day103_night")
     return
 
 
@@ -1213,7 +1196,7 @@ label day103_3_bedroom_final_write:
 
             # [PROMOTION NOTE]
             # Tune threshold later. Day 3 should be a major writing gate.
-            if has_story_fuel(45) or story.day3_twilight_action == "frantic_write":
+            if has_story_fuel(*WRITE_GATE_CH3) or story.day3_twilight_action == "frantic_write":
 
                 "I write as if the lock is already failing, my fingers hot and quick."
 

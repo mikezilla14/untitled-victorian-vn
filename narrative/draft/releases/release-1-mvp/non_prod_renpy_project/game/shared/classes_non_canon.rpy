@@ -238,12 +238,10 @@ init -1 python:
             """Returns True if char's total suspicion has reached the confrontation threshold."""
             return self.get_total_suspicion(char) >= self.CONFRONTATION_THRESHOLD
 
-        def has_story_fuel(self, required_insp=30, required_corr=30):
+        def has_story_fuel(self, required_insp=30, required_corr=3):
             """
-            Read-only writing-gate check.
-            Returns True if:
-            1. Inspiration available is >= required_insp (defaults to 30).
-            2. Corruption level is >= required_corr (defaults to 30).
+            Read-only writing-gate check (AND, not sum).
+            Returns True only when BOTH inspiration and corruption_level meet their floors.
             """
             return self.inspiration >= required_insp and self.corruption_level >= required_corr
 
@@ -610,14 +608,23 @@ init -1 python:
         def queue_penance(self, penance_label):
             if penance_label not in self.pending_penance:
                 self.pending_penance.append(penance_label)
+                self.set_penance_triggered(True)
 
         def has_pending_penance(self):
             return len(self.pending_penance) > 0
 
-        def pop_penance_for_window(self, window_id):
+        def consume_penance_at_window(self, window_id):
+            """Pop the next queued penance label for a dynamic window. Clears penance_triggered when queue empties."""
             if not self.pending_penance:
                 return None
-            return self.pending_penance.pop(0)
+            penance_label = self.pending_penance.pop(0)
+            if not self.pending_penance:
+                self.set_penance_triggered(False)
+            return penance_label
+
+        def pop_penance_for_window(self, window_id):
+            """Backward-compatible alias for consume_penance_at_window."""
+            return self.consume_penance_at_window(window_id)
 
         def clear_penance(self):
             self.pending_penance = []

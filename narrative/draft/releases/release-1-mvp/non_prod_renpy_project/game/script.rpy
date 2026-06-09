@@ -7,6 +7,5 @@ label start:
     jump day100_main
 
 label check_suspicion:
-    if player.anxiety >= 100:
-        jump game_over_dismissed
+    call watch_suspicion
     return

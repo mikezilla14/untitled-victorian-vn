@@ -72,6 +72,8 @@ init -40 python:
     declare_image_with_fallback("bg_servants_corridor_dusk", "images/backgrounds/bg_servants_corridor_dusk.png")
     declare_image_with_fallback("bg_savoy_corridor_morning_", "images/backgrounds/bg_savoy_corridor_morning_.png")
     declare_image_with_fallback("bg_savoy_front_facade_", "images/backgrounds/bg_savoy_front_facade_.png")
+    declare_image_with_fallback("bg_train_carriage_day", "images/backgrounds/bg_train_carriage_day.png", "#2a2520")
+    declare_image_with_fallback("bg_country_estate_study", "images/backgrounds/bg_country_estate_study.png", "#1e1810")
 
     # ── Sprites: Stern ────────────────────────────────────────────
     # [~700 × 1080 px, transparent background]
@@ -112,10 +114,11 @@ init -40 python:
     # ── Sprites: Gideon ───────────────────────────────────────────
     # [~700 × 1080 px, transparent background]  (same spec as Stern above)
     declare_image_with_fallback("gideon_sprite cold", "images/sprites/gideon/cold.png", "#a30000")
-    declare_image_with_fallback("gideon_sprite neutral", "images/sprites/gideon/neutral.png", "#a30000")
+    # neutral.png missing on disk — neutralf is interim stand-in until art pass
+    declare_image_with_fallback("gideon_sprite neutral", "images/sprites/gideon/neutralf.png", "#a30000")
+    declare_image_with_fallback("gideon_sprite neutralf", "images/sprites/gideon/neutralf.png", "#a30000")
     declare_image_with_fallback("gideon_sprite dominant", "images/sprites/gideon/dominant.png", "#a30000")
     declare_image_with_fallback("gideon_sprite angry", "images/sprites/gideon/angry.png", "#a30000")
-    declare_image_with_fallback("gideon_sprite neutralf", "images/sprites/gideon/neutralf.png", "#a30000")
 
     # ── Sprites: Missy ────────────────────────────────────────────
     # [~700 × 1080 px, transparent background]  (same spec as Stern above)
@@ -154,7 +157,7 @@ init -40 python:
     #   [300 × 1080 px]  Full sidebar at canvas height.
     #   Aged dark-leather or near-black parchment texture. Warm near-black with subtle
     #   grain/wear. Semi-opaque (~95%) so the scene bleeds through faintly.
-    declare_image_with_fallback("ui_sidebar_bg", "images/ui/ui_sidebar_bg.png", "#1a120af2")
+    declare_image_with_fallback("ui_sidebar_bg", "images/ui/ui_sidebar_bg.webp", "#1a120af2")
     #
     # ui_sidebar_divider:
     #   [268 × 10 px]  Exact display size (HUD_SIDEBAR_WIDTH - 32 × 10).
@@ -173,7 +176,7 @@ init -40 python:
     #   [1920 × 1080 px]  Full canvas. Displayed scaled to story viewport (1620 × 1080 px).
     #   Rendered at alpha = player.anxiety / 100; fully opaque at anxiety 100.
     #   Deep red/crimson radial burn at edges — should feel oppressive at full intensity.
-    declare_image_with_fallback("ui_suspicion_vignette", "images/ui/ui_suspicion_vignette.png", "#3a0000")
+    declare_image_with_fallback("ui_suspicion_vignette", "images/ui/ui_suspicion_vignette.webp", "#3a0000")
     #
     # ui_inkwell_empty / ui_inkwell_full:
     #   [64 × 110 px]  Exact display size in sidebar.
@@ -197,6 +200,8 @@ init -40 python:
     declare_image_with_fallback("ui_price_badge", "images/ui/price_badge.png", "#3a1a0a")
 
     # ── Audio aliases (None when missing; guard before play) ──────
+    audio_themes_melancholy = register_audio("themes/melancholy", "audio/themes/melancholy.ogg")
+    audio_sfx_train_whistle = register_audio("sfx/train_whistle", "audio/sfx/train_whistle.ogg")
     audio_themes_savoy_tension = register_audio("themes/savoy_tension", "audio/themes/savoy_tension.ogg")
     audio_themes_servants_floor_unease = register_audio("themes/servants_floor_unease", "audio/themes/servants_floor_unease.ogg")
     audio_themes_private_ink = register_audio("themes/private_ink", "audio/themes/private_ink.ogg")
