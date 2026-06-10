@@ -18,7 +18,6 @@
 # Conceptual role: slam the door back in Cora's face after Day 4's false dawn.
 # Core thesis: Gideon is not the true antagonist; he is the first visible instrument of the structural power protecting men like him.
 # Release function: close the MVP arc while opening the series arc — Cora has written, survived, and been noticed.
-# Promotion note: delete the temporary day105_1_monster_reemerges stub from day104_non_canon.rpy when this file is promoted.
 # Promotion note: replace story/player helper calls with exact runtime method names during implementation.
 # Convergent pass: synthesized from day105_*_spec.rpy pool (thematic, humour, tension, erotic, mystery, class). Specs retained in narrative/pipeline/.
 

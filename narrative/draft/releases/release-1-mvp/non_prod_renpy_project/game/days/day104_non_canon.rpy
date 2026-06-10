@@ -54,7 +54,7 @@
 #   -> 4_twilight_ledger_false_dawn
 #   -> 5_triumphant_chapter
 #   -> 6_false_dawn_ending
-#   -> day105_1_monster_reemerges
+#   -> day105_1_monster_reemerges (Day 105 entry)
 
 
 # ==========================================
@@ -922,6 +922,9 @@ label day104_night_consequence_window:
 # [DAG_NODE id=day104_6_false_dawn_ending type=work day=104]
 label day104_6_false_dawn_ending:
 
+    # [STATE] State/progression update
+    $ set_time_period("Night")
+
     # [ASSET] Visual/staging command
     scene bg_cora_desk_night
     with dissolve
@@ -952,7 +955,9 @@ label day104_6_false_dawn_ending:
 
     "I mistake the difference for victory."
 
-    # IMPLEMENT DEADLINE GATE CHECK HERE
+    # [STATE] State/progression update
+    $ resolve_turn()
+
     if story.manuscript_progress < 2:
 
         # [STATE] State/progression update
