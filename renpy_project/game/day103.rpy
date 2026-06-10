@@ -24,7 +24,7 @@
 #   -> 034 - room-stern-suspicion
 #   -> 032 - suite-night-tea (9 PM summons)
 #   -> 033 - bedroom-final-write (manuscript retelling minigame)
-#   -> day104_1 (handoff)
+#   -> day104_1 (Day 104 entry)
 
 
 # ==========================================

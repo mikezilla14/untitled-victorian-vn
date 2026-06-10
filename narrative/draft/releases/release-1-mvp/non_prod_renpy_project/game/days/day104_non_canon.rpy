@@ -18,7 +18,6 @@
 # Conceptual role: Cora survives the monster's house in daylight, finishes the manuscript, and believes she has gained decisive leverage.
 # Day 5 should puncture that belief: Gideon is not the true invulnerable enemy; the society protecting him is.
 # Asset constraint: uses assets already present in the supplied Day 4 draft plus recurring character sprites from earlier Day drafts.
-# Promotion note: delete the temporary day104_041 stub from day103_non_canon.rpy when this file is promoted.
 # Promotion note: replace story/player helper calls with exact runtime method names during implementation.
 
 # ==========================================

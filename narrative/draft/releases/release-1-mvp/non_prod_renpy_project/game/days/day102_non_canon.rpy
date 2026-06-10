@@ -1220,5 +1220,3 @@ label day102_4_cora_sneaks_a_feel:
 
     # [STATE] State/progression update
     jump day103_morning
-
-# Promotion note: deadline gate lives on day103.rpy label day103_morning.

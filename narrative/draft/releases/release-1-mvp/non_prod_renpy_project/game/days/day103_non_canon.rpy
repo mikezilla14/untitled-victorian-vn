@@ -32,7 +32,7 @@
 #   -> 034 - room-stern-suspicion
 #   -> 032 - suite-night-tea (9 PM summons)
 #   -> 033 - bedroom-final-write (manuscript retelling minigame)
-#   -> day104_1 (handoff)
+#   -> day104_1_false_dawn_suite_window (Day 104 entry)
 
 
 # ==========================================
@@ -1273,15 +1273,4 @@ label day103_3_bedroom_final_write:
 
     # [STATE] State/progression update
     $ resolve_turn()
-    jump day104_1
-
-
-# ==========================================
-# HANDOFF STUB
-# ==========================================
-
-# [DAG_NODE id=day104_1 type=work day=104]
-label day104_1:
-
-    # [STATE] State/progression update
     jump day104_1_false_dawn_suite_window
