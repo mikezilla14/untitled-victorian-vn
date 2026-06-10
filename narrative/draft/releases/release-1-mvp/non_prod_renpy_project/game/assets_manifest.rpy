@@ -72,6 +72,7 @@ init -40 python:
     declare_image_with_fallback("bg_servants_corridor_dusk", "images/backgrounds/bg_servants_corridor_dusk.png")
     declare_image_with_fallback("bg_savoy_corridor_morning_", "images/backgrounds/bg_savoy_corridor_morning_.png")
     declare_image_with_fallback("bg_savoy_front_facade_", "images/backgrounds/bg_savoy_front_facade_.png")
+    declare_image_with_fallback("bg_country_estate_corridor_night", "images/backgrounds/bg_country_estate_corridor_night.png", "#141210")
     declare_image_with_fallback("bg_train_carriage_day", "images/backgrounds/bg_train_carriage_day.png", "#2a2520")
     declare_image_with_fallback("bg_country_estate_study", "images/backgrounds/bg_country_estate_study.png", "#1e1810")
 

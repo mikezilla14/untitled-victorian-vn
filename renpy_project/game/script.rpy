@@ -14,7 +14,7 @@ label start:
     cora "I send seven shillings home every month. My parents are so proud I secured a position here. If I lose this place..."
     cora "But I didn't come to London just to scrub floors."
 
-    jump day101_main
+    jump day100_main
 
 
 label check_suspicion:
