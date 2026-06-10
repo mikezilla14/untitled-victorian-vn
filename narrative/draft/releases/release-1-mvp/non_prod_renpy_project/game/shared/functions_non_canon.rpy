@@ -110,8 +110,8 @@ init python:
         """
         Read-only writing-gate check (AND, not sum).
         Returns True only when BOTH:
-          player.inspiration >= required_insp
-          player.corruption_level >= required_corr
+            player.inspiration >= required_insp
+            player.corruption_level >= required_corr
         Use WRITE_GATE_CH1 / CH2 / CH3 for manuscript slots.
         """
         return player.has_story_fuel(required_insp, required_corr)
