@@ -311,7 +311,7 @@ Story windows: `call story_window_penance_gate(window_id)` at entry; if `_penanc
 | 7.1 | `renpy lint` — zero errors on non_prod project | [ ] |
 | 7.2 | Update `non_prod_renpy_project/README.md` (file names, flat insp cap 50, endings list) | [ ] |
 | 7.3 | Resolve `classes_non_canon.rpy` header comment (“NOT loaded”) — Ren'Py loads all `.rpy` under `game/` | [ ] |
-| 7.4 | Run asset compliance script when available; fix unmanifested references | [ ] |
+| 7.4 | Run asset compliance script when available; fix unmanifested references | [x] |
 | 7.5 | `storyboard_sync` after mechanics land — close graph drift | [ ] |
 | 7.6 | Remove dev debris from `images/` (`ChatGPT Image*.png`, `*.png~`, `rembg.bat`) or gitignore | [ ] |
 

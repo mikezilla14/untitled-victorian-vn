@@ -228,4 +228,13 @@ init -40 python:
     # Thought overlay UI — mc_sprite_thought_icon is a placeholder until final art is created.
     declare_image_with_fallback("mc_sprite_thought_icon", "images/sprites/cora/ui/mc_sprite_thought_icon.png", "#d4a574")
 
+    # ── Event Illustrations (CGs) ───────────────────────────────
+    # [1920 × 1080 px]
+    declare_image_with_fallback("cg_manuscript_retelling_d1_corridor", "images/cgs/cg_manuscript_retelling_d1_corridor.png", "#2b1c10")
+    declare_image_with_fallback("cg_manuscript_retelling_d2_lace", "images/cgs/cg_manuscript_retelling_d2_lace.png", "#2b1c10")
+    declare_image_with_fallback("cg_manuscript_retelling_d3_brush", "images/cgs/cg_manuscript_retelling_d3_brush.png", "#2b1c10")
+    declare_image_with_fallback("cg_manuscript_retelling_d4_false_dawn", "images/cgs/cg_manuscript_retelling_d4_false_dawn.png", "#2b1c10")
+    declare_image_with_fallback("cg_gideon_photograph", "images/cgs/cg_gideon_photograph.png", "#2b1c10")
+    declare_image_with_fallback("cg_photograph_burning", "images/cgs/cg_photograph_burning.png", "#2b1c10")
+
     report_missing_assets()

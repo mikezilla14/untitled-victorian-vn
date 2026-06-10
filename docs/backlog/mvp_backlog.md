@@ -145,8 +145,8 @@ Tasks are pre-formatted for direct allocation to human developers or specific sp
 
 ---
 
-### 🟡 [C-5] Central Assets Manifest Audit & Verification
-* **Description:** Verify that every asset referenced in the newly promoted Day 103, Day 104, and Day 105 files is declared in the Central Assets Manifest to prevent runtime graphics crashes.
+### 🟢 [C-5] Central Assets Manifest Audit & Verification
+* **Description:** Complete (2026-06-10). Verified that every asset referenced in day files is declared in the Central Assets Manifest, including declaring `cg_manuscript_retelling_d1-d4`, `cg_gideon_photograph`, and `cg_photograph_burning` to prevent future runtime crashes. Compliance check passes.
 * **Affected File:** [assets_manifest.rpy](../../renpy_project/game/assets_manifest.rpy)
 * **Audit Checklist:** Check references for:
   * Sprite: `vance_sprite mirror_watch_terror`

@@ -1,7 +1,7 @@
 # Daily Standup Status Report
 
 **Report date:** Wednesday, June 10, 2026  
-**Generated:** 2026-06-10T12:09:16
+**Generated:** 2026-06-10T12:11:40
 
 ```text
 ========================================================================
@@ -13,7 +13,7 @@
 ========================================================================
 
 🏆 PROJECT INTEGRITY GRADES
-   Overall Project Health: [ B ] (Checklist: 54/128 - 42.2%)
+   Overall Project Health: [ B ] (Checklist: 55/128 - 43.0%)
    - Chief Architect:       [ C+ ] (Codebase, Linting, & Architecture)
    - Adult Market Reviewer: [ A ] (Erotic Tension, Pacing, & Viability)
    - Lead Narrative Editor: [ B ] (Canon, Voice Lock, & Writing Gates)
@@ -23,11 +23,11 @@
 ------------------------------------------------------------------------
 ⚙️  Chief Architect (@.agents/rules/chief_architect.md)
    ✔️ Clean Compilation: Non-production build compiles without Ren'Py errors.
-   ⚠️ ASSET DRIFT: 42 declared assets are missing from non-prod disk.
+   ⚠️ ASSET DRIFT: 48 declared assets are missing from non-prod disk.
       - Image 'bg_servants_quarters_dusk' missing at: 'images/backgrounds/bg_servants_quarters_dusk.png'
       - Image 'bg_cora_desk_night' missing at: 'images/backgrounds/bg_cora_desk_night.png'
       - Image 'bg_master_suite_night' missing at: 'images/backgrounds/bg_master_suite_night.png'
-      - ... and 39 more.
+      - ... and 45 more.
    *What's Working:* Writing gates structure is operational; StoryState variables set via setter API.
    *What's Not:* Screens frame 'alpha' parameter compilation crash; deadline hard-fail gates still require wiring.
 
@@ -51,7 +51,7 @@
    Phase 4 — Dynamic content: story chains & penance (M2) [ =============== ] 16/16 (100%)
    Phase 5 — Book writing system (M3)                 [ =========------ ] 8/13 (62%)
    Phase 6 — Structural assets (M4)                   [ =====---------- ] 10/29 (34%)
-   Phase 7 — Code hygiene & promotion prep (M5)       [ --------------- ] 0/6 (0%)
+   Phase 7 — Code hygiene & promotion prep (M5)       [ ==------------- ] 1/6 (17%)
    Phase 8 — After partner prose rewrite (M6)         [ --------------- ] 0/7 (0%)
    Playtest matrix — “structure done” sign-off        [ --------------- ] 0/10 (0%)
 

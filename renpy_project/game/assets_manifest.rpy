@@ -165,6 +165,15 @@ init -40 python:
     declare_image_with_fallback("ui_illustration_border", "images/ui/illustration_border.webp", "#5a5a5a")
     declare_image_with_fallback("ui_price_badge", "images/ui/price_badge.webp", "#3a1a0a")
 
+    # ── Event Illustrations (CGs) ───────────────────────────────
+    # [1920 × 1080 px]
+    declare_image_with_fallback("cg_manuscript_retelling_d1_corridor", "images/cgs/cg_manuscript_retelling_d1_corridor.webp", "#2b1c10")
+    declare_image_with_fallback("cg_manuscript_retelling_d2_lace", "images/cgs/cg_manuscript_retelling_d2_lace.webp", "#2b1c10")
+    declare_image_with_fallback("cg_manuscript_retelling_d3_brush", "images/cgs/cg_manuscript_retelling_d3_brush.webp", "#2b1c10")
+    declare_image_with_fallback("cg_manuscript_retelling_d4_false_dawn", "images/cgs/cg_manuscript_retelling_d4_false_dawn.webp", "#2b1c10")
+    declare_image_with_fallback("cg_gideon_photograph", "images/cgs/cg_gideon_photograph.webp", "#2b1c10")
+    declare_image_with_fallback("cg_photograph_burning", "images/cgs/cg_photograph_burning.webp", "#2b1c10")
+
     # ── Audio aliases (None when missing; guard before play) ──────
     audio_themes_savoy_tension = register_audio("themes/savoy_tension", "audio/themes/savoy_tension.ogg")
     audio_themes_servants_floor_unease = register_audio("themes/servants_floor_unease", "audio/themes/servants_floor_unease.ogg")
