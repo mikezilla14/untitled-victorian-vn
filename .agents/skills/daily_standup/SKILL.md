@@ -40,6 +40,16 @@ Use this daily at the start of a session or whenever you want to refocus and rep
 4. **Action Today's Checklist**:
    Prioritize "Today's Critical Actions" printed by the script, beginning with compile blockers and high-priority backlog tasks.
 
+5. **Hand off to code / prose agents**:
+   Reports include an **Agent work queue** (JSON). Agents use [`.agents/skills/action_from_standup/SKILL.md`](../../action_from_standup/SKILL.md):
+
+   ```powershell
+   py scripts/resolve_work_item.py --from-standup --next
+   ```
+
+   Registry: [`docs/backlog/task_registry.json`](../../../docs/backlog/task_registry.json)  
+   Contract: [`planning/standup_agent_contract.md`](../../../narrative/draft/releases/release-1-mvp/planning/standup_agent_contract.md)
+
 ## Customization
 
 To initialize or shift the Epic start date, modify `narrative/draft/releases/release-1-mvp/planning/epic_schedule.json` or pass the `--start-date` argument:

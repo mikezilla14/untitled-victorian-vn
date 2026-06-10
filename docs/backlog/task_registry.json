@@ -1,0 +1,328 @@
+{
+  "schema_version": 1,
+  "description": "Maps standup / backlog / checklist items to specs, agent rules, skills, and verification commands.",
+  "standup_entrypoint": "narrative/draft/releases/release-1-mvp/planning/daily_standup_report.md",
+  "phase_defaults": {
+    "Phase 1": {
+      "lane": "code",
+      "agent": "non_prod_code_agent",
+      "skill": "implement_spec",
+      "pipeline": "implement-spec",
+      "pipeline_stage": 1,
+      "specs": [
+        "narrative/draft/releases/release-1-mvp/planning/mvp_systems_integration_checklist.md",
+        "narrative/draft/releases/release-1-mvp/planning/story_board.md",
+        "docs/specs/book1-writing-engine.md"
+      ]
+    },
+    "Phase 2": {
+      "lane": "code",
+      "agent": "non_prod_code_agent",
+      "skill": "implement_spec",
+      "pipeline": "implement-spec",
+      "pipeline_stage": 1,
+      "specs": [
+        "narrative/draft/releases/release-1-mvp/planning/mvp_systems_integration_checklist.md",
+        "docs/specs/story-chain-routing-refactor.md",
+        "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/classes_non_canon_notes.md"
+      ]
+    },
+    "Phase 3": {
+      "lane": "integration",
+      "agent": "non_prod_code_agent",
+      "skill": "orchestrator",
+      "pipeline": "produce-day",
+      "pipeline_stage": 2,
+      "specs": [
+        "narrative/draft/releases/release-1-mvp/planning/mvp_systems_integration_checklist.md",
+        "narrative/draft/releases/release-1-mvp/planning/story_board.md"
+      ]
+    },
+    "Phase 4": {
+      "lane": "code",
+      "agent": "non_prod_code_agent",
+      "skill": "implement_spec",
+      "pipeline": "implement-spec",
+      "pipeline_stage": 1,
+      "specs": [
+        "narrative/draft/releases/release-1-mvp/planning/mvp_systems_integration_checklist.md",
+        "docs/specs/story-chain-routing-refactor.md",
+        "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy"
+      ]
+    },
+    "Phase 5": {
+      "lane": "code",
+      "agent": "non_prod_code_agent",
+      "skill": "implement_spec",
+      "pipeline": "implement-spec",
+      "pipeline_stage": 1,
+      "specs": [
+        "narrative/draft/releases/release-1-mvp/planning/mvp_systems_integration_checklist.md",
+        "docs/specs/book1-writing-engine.md",
+        "docs/specs/book-writing-styling.md",
+        "docs/contracts/book_writing_contract.md"
+      ]
+    },
+    "Phase 6": {
+      "lane": "code",
+      "agent": "non_prod_code_agent",
+      "skill": "check_assets",
+      "specs": [
+        "narrative/draft/releases/release-1-mvp/planning/mvp_systems_integration_checklist.md",
+        "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/assets_manifest.rpy"
+      ],
+      "verify": ["py scripts/check_assets.py"]
+    },
+    "Phase 7": {
+      "lane": "audit",
+      "agent": "chief_architect",
+      "skill": "documentation_audit",
+      "pipeline": "documentation-audit",
+      "pipeline_stage": 1,
+      "specs": [
+        "narrative/draft/releases/release-1-mvp/planning/mvp_systems_integration_checklist.md",
+        "docs/agents/CONTRACTS.md"
+      ]
+    }
+  },
+  "tasks": {
+    "COMPILE_ERROR": {
+      "title": "Resolve non-prod Ren'Py compile error",
+      "lane": "code",
+      "agent": "non_prod_code_agent",
+      "skill": "implement_spec",
+      "pipeline": "implement-spec",
+      "pipeline_stage": 1,
+      "standup_kind": "blocked",
+      "specs": [
+        "narrative/draft/releases/release-1-mvp/planning/mvp_systems_integration_checklist.md",
+        "docs/agents/CONTRACTS.md"
+      ],
+      "files": [
+        "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/errors.txt"
+      ],
+      "verify": ["py scripts/validate.py --profile code"]
+    },
+    "N-1": {
+      "title": "Historical Linter Anachronisms Cleansing",
+      "lane": "prose",
+      "agent": "victorian_consultant",
+      "skill": "historical_check",
+      "pipeline": "historical-check",
+      "pipeline_stage": 1,
+      "backlog_anchor": "N-1",
+      "specs": [
+        "docs/backlog/mvp_backlog.md",
+        "narrative/draft/bible/cora_character_non_canon.md",
+        "narrative/draft/bible/stern_character_non_canon.md",
+        "narrative/draft/bible/vance_character_non_canon.md"
+      ],
+      "verify": ["py scripts/validate.py --profile narrative"]
+    },
+    "N-2": {
+      "title": "Day 100 Prologue Specialist Gates Clearance",
+      "lane": "gate",
+      "agent": "lead_narrative_editor",
+      "skill": "review_scene",
+      "pipeline": "review-scene",
+      "pipeline_stage": 1,
+      "backlog_anchor": "N-2",
+      "specs": [
+        "docs/backlog/mvp_backlog.md",
+        "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day100_non_canon.rpy"
+      ],
+      "deliverables": [
+        "narrative/pipeline/releases/release-1-mvp/days/day100/gates/"
+      ],
+      "verify": [
+        "py scripts/validate.py --profile changed --agent human --files narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day100_non_canon.rpy"
+      ]
+    },
+    "N-3": {
+      "title": "Day 103 Writers' Room Pipeline Convergence",
+      "lane": "prose",
+      "agent": "writers_room",
+      "skill": "convergent_writer",
+      "pipeline": "produce-day",
+      "pipeline_stage": 1,
+      "backlog_anchor": "N-3",
+      "specs": [
+        "docs/backlog/mvp_backlog.md",
+        ".agents/rules/writers_room.md",
+        "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy"
+      ],
+      "deliverables": [
+        "narrative/pipeline/releases/release-1-mvp/days/day103/synthesis/",
+        "narrative/pipeline/releases/release-1-mvp/days/day103/specs/",
+        "narrative/pipeline/releases/release-1-mvp/days/day103/gates/"
+      ],
+      "verify": ["py scripts/validate.py --profile full"]
+    },
+    "N-4": {
+      "title": "Day 104 Writers' Room Pipeline Convergence",
+      "lane": "prose",
+      "agent": "writers_room",
+      "skill": "convergent_writer",
+      "pipeline": "produce-day",
+      "pipeline_stage": 1,
+      "backlog_anchor": "N-4",
+      "specs": [
+        "docs/backlog/mvp_backlog.md",
+        ".agents/rules/writers_room.md",
+        "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day104_non_canon.rpy"
+      ],
+      "deliverables": [
+        "narrative/pipeline/releases/release-1-mvp/days/day104/synthesis/",
+        "narrative/pipeline/releases/release-1-mvp/days/day104/specs/",
+        "narrative/pipeline/releases/release-1-mvp/days/day104/gates/"
+      ],
+      "verify": ["py scripts/validate.py --profile full"]
+    },
+    "N-5": {
+      "title": "Prose Formatting Repair for Day 102 Draft",
+      "lane": "prose",
+      "agent": "writers_room",
+      "skill": "revise_narrative",
+      "pipeline": "revise-narrative",
+      "pipeline_stage": 1,
+      "backlog_anchor": "N-5",
+      "specs": ["docs/backlog/mvp_backlog.md"],
+      "files": [
+        "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy"
+      ],
+      "verify": ["py scripts/format_non_canon.py"]
+    },
+    "N-6": {
+      "title": "Complete Story Chains Rewrite",
+      "lane": "prose",
+      "agent": "writers_room",
+      "skill": "rewrite_narrative",
+      "pipeline": "rewrite-narrative",
+      "pipeline_stage": 1,
+      "backlog_anchor": "N-6",
+      "specs": [
+        "docs/backlog/mvp_backlog.md",
+        "docs/specs/story-chain-routing-refactor.md",
+        ".agents/rules/writers_room.md",
+        ".agents/rules/adult_market_reviewer.md"
+      ],
+      "files": [
+        "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy"
+      ],
+      "verify": [
+        "py scripts/validate.py --profile narrative --files narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy"
+      ]
+    },
+    "C-1": {
+      "title": "Day 100 Prologue Production Promotion",
+      "lane": "code",
+      "agent": "prod_code_agent",
+      "skill": "promote_day",
+      "pipeline": "promote-day",
+      "pipeline_stage": 3,
+      "backlog_anchor": "C-1",
+      "blocked_by": ["N-2"],
+      "specs": ["docs/backlog/mvp_backlog.md", "docs/agents/PIPELINE_REFERENCE.md"],
+      "files": [
+        "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day100_non_canon.rpy"
+      ],
+      "deliverables": ["renpy_project/game/day100.rpy"],
+      "verify": ["py scripts/validate.py --profile code --files renpy_project/game/day100.rpy"]
+    },
+    "C-2": {
+      "title": "Game Start Entry Point Integration",
+      "lane": "code",
+      "agent": "prod_code_agent",
+      "skill": "promote_day",
+      "pipeline": "promote-day",
+      "pipeline_stage": 3,
+      "backlog_anchor": "C-2",
+      "specs": ["docs/backlog/mvp_backlog.md"],
+      "files": ["renpy_project/game/script.rpy"],
+      "verify": ["py scripts/validate.py --profile code"]
+    },
+    "C-3": {
+      "title": "Purge Temporary Day 102 & 103 Transition Stubs",
+      "lane": "code",
+      "agent": "prod_code_agent",
+      "skill": "promote_day",
+      "pipeline": "promote-day",
+      "pipeline_stage": 3,
+      "backlog_anchor": "C-3",
+      "specs": ["docs/backlog/mvp_backlog.md"],
+      "files": ["renpy_project/game/day102.rpy", "renpy_project/game/day103.rpy"],
+      "verify": ["py scripts/validate.py --profile code"]
+    },
+    "C-4": {
+      "title": "Purge Temporary Day 104 Transition Stubs",
+      "lane": "code",
+      "agent": "prod_code_agent",
+      "skill": "promote_day",
+      "pipeline": "promote-day",
+      "pipeline_stage": 3,
+      "backlog_anchor": "C-4",
+      "specs": ["docs/backlog/mvp_backlog.md"],
+      "files": ["renpy_project/game/day104.rpy"],
+      "verify": ["py scripts/validate.py --profile code"]
+    },
+    "C-5": {
+      "title": "Central Assets Manifest Audit & Verification",
+      "lane": "audit",
+      "agent": "chief_architect",
+      "skill": "check_assets",
+      "backlog_anchor": "C-5",
+      "specs": [
+        "docs/backlog/mvp_backlog.md",
+        "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/assets_manifest.rpy"
+      ],
+      "verify": ["py scripts/check_assets.py"]
+    },
+    "C-6": {
+      "title": "Repair agent_next_step.py Typo",
+      "lane": "code",
+      "agent": "chief_architect",
+      "skill": "orchestrator",
+      "backlog_anchor": "C-6",
+      "specs": ["docs/backlog/mvp_backlog.md"],
+      "files": ["scripts/agent_next_step.py"],
+      "verify": ["py scripts/agent_next_step.py --list-pipelines"]
+    },
+    "confrontation_stern": {
+      "title": "Verify confrontation_stern penance label",
+      "lane": "integration",
+      "agent": "non_prod_code_agent",
+      "skill": "implement_spec",
+      "match_checklist": "confrontation_stern",
+      "specs": [
+        "docs/specs/story-chain-routing-refactor.md",
+        "narrative/draft/releases/release-1-mvp/planning/mvp_systems_integration_checklist.md",
+        "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy"
+      ],
+      "files": ["narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy"]
+    },
+    "confrontation_vance": {
+      "title": "Verify confrontation_vance penance label",
+      "lane": "integration",
+      "agent": "non_prod_code_agent",
+      "skill": "implement_spec",
+      "match_checklist": "confrontation_vance",
+      "specs": [
+        "docs/specs/story-chain-routing-refactor.md",
+        "narrative/draft/releases/release-1-mvp/planning/mvp_systems_integration_checklist.md",
+        "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy"
+      ]
+    },
+    "confrontation_missy": {
+      "title": "Verify confrontation_missy penance label",
+      "lane": "integration",
+      "agent": "non_prod_code_agent",
+      "skill": "implement_spec",
+      "match_checklist": "confrontation_missy",
+      "specs": [
+        "docs/specs/story-chain-routing-refactor.md",
+        "narrative/draft/releases/release-1-mvp/planning/mvp_systems_integration_checklist.md",
+        "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy"
+      ]
+    }
+  }
+}

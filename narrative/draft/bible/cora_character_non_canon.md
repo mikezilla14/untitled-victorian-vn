@@ -75,7 +75,7 @@ Archetype: The Undercover Observer / The Emerging Sovereign
 #### Player-Inflected Modes (Release 1 Flavours)
 Cora's fundamental drive can be emphasised by player choice. These are tonal inflections, not separate characters.
 
-- The Observer / Muse: Driven to finish the manuscript. She views the hotel's abuses objectively, turning trauma into art. She wants the truth of the ending—clarity over personal power.
+- The Observer / Muse: Driven to finish the manuscript. She views the hotel's abuses objectively, turning grievous shock into art. She wants the truth of the ending—clarity over personal power.
 - The Predator / Protégé: Driven by the intoxicating realisation of her own capability. She tests manipulation and sheds apology for ambition.
 - The Prey / Adversary: Driven by visceral fear and retaliation. She seeks a weapon because she has been terrified—volatile, desperation-led.
 - The Ghost / Witness: Driven to remain unseen while cataloging the machine's cruelty. Survival often requires leaving others exposed; she notes exactly who gets crushed.

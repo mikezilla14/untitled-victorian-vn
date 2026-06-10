@@ -27,7 +27,7 @@ This folder holds **agent role definitions** (markdown) and **Cursor skills** (t
     orchestrator/, produce_day/, promote_day/, review_scene/
     revise_narrative/, rewrite_narrative/, implement_spec/, market_review/
     historical_check/, divergent_writer/, convergent_writer/, spiciness_tuner/
-    documentation_audit/, dag_tag_update/, storyboard_sync/, daily_standup/
+    documentation_audit/, dag_tag_update/, storyboard_sync/, daily_standup/, action_from_standup/
     writer_write_scene/, writer_rewrite_scene/, writer_add_flag/, writer_add_effect/
     writer_add_branch/, writer_write_book/, writer_contract_check/
     writer_log_exception/, writer_status/   ← prose-first Writer's Desk skills

@@ -19,7 +19,7 @@ Archetype: The Humiliated Companion / Fallen Respectability
 
 #### Present Savoy Tenancy (Release 1 Entry Point)
 - Resident companion in Gideon Locke's premium suite at the Savoy.
-- She acts as the public lady of the suite, projecting performative authority over the hotel staff to maintain the illusion of her elevated status.
+- She acts as the public lady of the suite, casting performative authority over the hotel staff to maintain the illusion of her elevated status.
 - Privately, her existence is one of constant, fragile terror. Gideon's psychological dominance keeps her in a state of chronic, controlled humiliation, which she sublimates into physical and emotional fury directed at the servants beneath her.
 
 ---

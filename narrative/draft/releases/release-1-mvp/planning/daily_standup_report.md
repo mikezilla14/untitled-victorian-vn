@@ -1,7 +1,7 @@
 # Daily Standup Status Report
 
 **Report date:** Wednesday, June 10, 2026  
-**Generated:** 2026-06-10T10:06:19
+**Generated:** 2026-06-10T10:34:07
 
 ```text
 ========================================================================
@@ -13,8 +13,8 @@
 ========================================================================
 
 🏆 PROJECT INTEGRITY GRADES
-   Overall Project Health: [ C- ] (Checklist: 50/128 - 39.1%)
-   - Chief Architect:       [ F ] (Codebase, Linting, & Architecture)
+   Overall Project Health: [ C+ ] (Checklist: 50/128 - 39.1%)
+   - Chief Architect:       [ C+ ] (Codebase, Linting, & Architecture)
    - Adult Market Reviewer: [ B ] (Erotic Tension, Pacing, & Viability)
    - Lead Narrative Editor: [ C- ] (Canon, Voice Lock, & Writing Gates)
 
@@ -22,7 +22,7 @@
 🤖 SPECIALIST REPORTS
 ------------------------------------------------------------------------
 ⚙️  Chief Architect (@.agents/rules/chief_architect.md)
-   ❌ CRITICAL COMPILE ERROR: game/screens.rpy at line 63: 'alpha' is not a keyword argument or valid child of the frame statement.
+   ✔️ Clean Compilation: Non-production build compiles without Ren'Py errors.
    ⚠️ ASSET DRIFT: 41 declared assets are missing from non-prod disk.
       - Image 'bg_servants_quarters_dusk' missing at: 'images/backgrounds/bg_servants_quarters_dusk.png'
       - Image 'bg_cora_desk_night' missing at: 'images/backgrounds/bg_cora_desk_night.png'
@@ -59,28 +59,132 @@
 ------------------------------------------------------------------------
 🔥 TODAY'S CRITICAL ACTIONS
 ------------------------------------------------------------------------
-   1. [BLOCKED] Resolve compilation error in game/screens.rpy at line 63: 'alpha' is not a keyword argument or valid child of the frame statement.
-   2. 🔴 [N-1] Historical Linter Anachronisms Cleansing (Assignee: victorian_consultant)
-      ↳ The historical validation pass has flagged modern clinical psychology terms inside the non-canon character profiles. These must be replaced with 1891 period-appropriate vocabulary.
-   3. 🔴 [N-2] Day 100 Prologue Specialist Gates Clearance (Assignee: lead_narrative_editor + forensic_psychology_consultant + victorian_consultant)
+   1. 🔴 [N-2] Day 100 Prologue Specialist Gates Clearance (Assignee: lead_narrative_editor + forensic_psychology_consultant + victorian_consultant)
       ↳ `day100_non_canon.rpy` is structurally complete, but it has not been cleared by the specialist gates. You must generate the gate verdicts before promotion.
-   4. 🔴 [N-3] Day 103 Writers' Room Pipeline Convergence (Assignee: convergent_writer + Gates)
+   2. 🔴 [N-3] Day 103 Writers' Room Pipeline Convergence (Assignee: convergent_writer + Gates)
       ↳ Day 103 has been promoted into production, but its official Writers' Room pipeline folder is completely missing. Generate the convergent report, sandboxed specs, and gate reviews.
-   5. 🔴 [N-4] Day 104 Writers' Room Pipeline Convergence (Assignee: convergent_writer + Gates)
+   3. 🔴 [N-4] Day 104 Writers' Room Pipeline Convergence (Assignee: convergent_writer + Gates)
       ↳ Day 104 has been promoted into production, but its official Writers' Room pipeline folder is completely missing. Generate the convergent report, sandboxed specs, and gate reviews.
-   6. 🔴 [N-6] Complete Story Chains Rewrite (From Scratch) (Assignee: convergent_writer + specialist editors)
+   4. 🔴 [N-6] Complete Story Chains Rewrite (From Scratch) (Assignee: convergent_writer + specialist editors)
       ↳ Complete, from-scratch rewrite of `story_chains_non_canon.rpy` to transform optional character paths into high-tension, Level 3/4 spicier narrative tracks (Missy, Stern, and Vance). The chains must serve as the primary engine for high-risk stat gains, accommodate dynamic day/time contexts, and force sharp opportunity-cost player decisions.
-   7. 🔴 [C-1] Day 100 Prologue Production Promotion (Assignee: prod_code_agent)
+   5. 🔴 [C-1] Day 100 Prologue Production Promotion (Assignee: prod_code_agent)
       ↳ Once Day 100 clears its specialist narrative gates (Task `[N-2]`), promote the draft script verbatim into production.
-   8. 🔴 [C-2] Game Start Entry Point Integration (Assignee: prod_code_agent)
+   6. 🔴 [C-2] Game Start Entry Point Integration (Assignee: prod_code_agent)
       ↳ The production runtime currently skips Day 100, jumping directly to Day 101. Integrate the Prologue so the game launches correctly.
-   9. 🔴 [C-3] Purge Temporary Day 102 & 103 Transition Stubs (Assignee: prod_code_agent)
+   7. 🔴 [C-3] Purge Temporary Day 102 & 103 Transition Stubs (Assignee: prod_code_agent)
       ↳ Clean up non-prod transition stubs in production scripts that were created during sequential drafting.
-   10. 🔴 [C-4] Purge Temporary Day 104 Transition Stubs (Assignee: prod_code_agent)
+   8. 🔴 [C-4] Purge Temporary Day 104 Transition Stubs (Assignee: prod_code_agent)
       ↳ Clean up non-prod transition stubs in the production script for Day 104.
-   11. 🔧 [CHECKLIST] `confrontation_stern` | Stern | [ ] | [ ]
-   12. 🔧 [CHECKLIST] `confrontation_vance` | Vance | [ ] | [ ]
-   13. 🔧 [CHECKLIST] `confrontation_missy` | Missy | [ ] | [ ]
+   9. 🔧 [CHECKLIST] `confrontation_stern` | Stern | [ ] | [ ]
+   10. 🔧 [CHECKLIST] `confrontation_vance` | Vance | [ ] | [ ]
+   11. 🔧 [CHECKLIST] `confrontation_missy` | Missy | [ ] | [ ]
 
 ========================================================================
+```
+
+## Agent work queue
+
+Point code or prose agents at this report, then resolve the next item:
+
+```powershell
+py scripts/resolve_work_item.py --from-standup --next
+```
+
+Skill: `.agents/skills/action_from_standup/SKILL.md`  
+Registry: `docs/backlog/task_registry.json`  
+Contract: `narrative/draft/releases/release-1-mvp/planning/standup_agent_contract.md`
+
+```json
+{
+  "items": [
+    {
+      "priority": 1,
+      "registry_id": "N-2",
+      "lane": "gate",
+      "title": "Day 100 Prologue Specialist Gates Clearance",
+      "agent": "lead_narrative_editor",
+      "skill": "review_scene"
+    },
+    {
+      "priority": 2,
+      "registry_id": "N-3",
+      "lane": "prose",
+      "title": "Day 103 Writers' Room Pipeline Convergence",
+      "agent": "writers_room",
+      "skill": "convergent_writer"
+    },
+    {
+      "priority": 3,
+      "registry_id": "N-4",
+      "lane": "prose",
+      "title": "Day 104 Writers' Room Pipeline Convergence",
+      "agent": "writers_room",
+      "skill": "convergent_writer"
+    },
+    {
+      "priority": 4,
+      "registry_id": "N-6",
+      "lane": "prose",
+      "title": "Complete Story Chains Rewrite",
+      "agent": "writers_room",
+      "skill": "rewrite_narrative"
+    },
+    {
+      "priority": 5,
+      "registry_id": "C-1",
+      "lane": "code",
+      "title": "Day 100 Prologue Production Promotion",
+      "agent": "prod_code_agent",
+      "skill": "promote_day"
+    },
+    {
+      "priority": 6,
+      "registry_id": "C-2",
+      "lane": "code",
+      "title": "Game Start Entry Point Integration",
+      "agent": "prod_code_agent",
+      "skill": "promote_day"
+    },
+    {
+      "priority": 7,
+      "registry_id": "C-3",
+      "lane": "code",
+      "title": "Purge Temporary Day 102 & 103 Transition Stubs",
+      "agent": "prod_code_agent",
+      "skill": "promote_day"
+    },
+    {
+      "priority": 8,
+      "registry_id": "C-4",
+      "lane": "code",
+      "title": "Purge Temporary Day 104 Transition Stubs",
+      "agent": "prod_code_agent",
+      "skill": "promote_day"
+    },
+    {
+      "priority": 9,
+      "registry_id": "confrontation_stern",
+      "lane": "integration",
+      "title": "Verify confrontation_stern penance label",
+      "agent": "non_prod_code_agent",
+      "skill": "implement_spec"
+    },
+    {
+      "priority": 10,
+      "registry_id": "confrontation_vance",
+      "lane": "integration",
+      "title": "Verify confrontation_vance penance label",
+      "agent": "non_prod_code_agent",
+      "skill": "implement_spec"
+    },
+    {
+      "priority": 11,
+      "registry_id": "confrontation_missy",
+      "lane": "integration",
+      "title": "Verify confrontation_missy penance label",
+      "agent": "non_prod_code_agent",
+      "skill": "implement_spec"
+    }
+  ]
+}
 ```

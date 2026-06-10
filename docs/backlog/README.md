@@ -1,19 +1,33 @@
-# Backlog documentation
-
-This folder holds deferred designs and non-MVP implementation notes. Backlog files are not active
-contracts until promoted by the Chief Architect or explicitly routed through the orchestrator.
+# Backlog & standup work routing
 
 ## Files
 
 | File | Purpose |
 |------|---------|
-| [mvp_backlog.md](mvp_backlog.md) | Human-curated MVP task backlog. |
-| [book1-writing-feature-mvp.md](book1-writing-feature-mvp.md) | Active non-prod MVP backlog for the Book1 manuscript rendering feature. |
-| [narrative-json-beat-pipeline.md](narrative-json-beat-pipeline.md) | Deferred JSON beat pipeline design. |
-| [editors-desk-writing-mechanic.md](editors-desk-writing-mechanic.md) | Deferred Editors' Desk mechanic design. |
-| [beat_schema.json](beat_schema.json) | Draft schema for future beat-catalog work. |
+| [`mvp_backlog.md`](mvp_backlog.md) | Human-readable task definitions (N-* narrative, C-* coding) |
+| [`task_registry.json`](task_registry.json) | Machine routing: specs, agents, skills, verify commands |
 
-## Promotion rule
+## Agent flow
 
-Before backlog work becomes active implementation, add or update a spec under `docs/specs/`, route
-through `.agents/rules/orchestrator.md`, and refresh the documentation catalogue.
+```mermaid
+flowchart LR
+  Standup[daily_standup_report.md] --> Resolver[resolve_work_item.py]
+  Registry[task_registry.json] --> Resolver
+  Backlog[mvp_backlog.md] --> Resolver
+  Resolver --> Packet[Work packet brief]
+  Packet --> Agent[Code or prose agent]
+  Agent --> Verify[validate.py / check_assets]
+```
+
+1. Standup runs daily (`py scripts/daily_standup.py --report`).
+2. Agent reads `planning/daily_standup_report.md`.
+3. Agent runs `py scripts/resolve_work_item.py --from-standup --next`.
+4. Agent loads rule + skill from packet, reads specs, executes, verifies.
+
+Skill: [`.agents/skills/action_from_standup/SKILL.md`](../../.agents/skills/action_from_standup/SKILL.md)
+
+## Adding a new task
+
+1. Add section to `mvp_backlog.md` with id, description, files, verify command.
+2. Add matching entry to `task_registry.json` under `tasks`.
+3. Regenerate standup so the item appears in the work queue.

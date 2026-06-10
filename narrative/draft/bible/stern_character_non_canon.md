@@ -12,7 +12,7 @@ Archetype: The Institutional Shield / The Sublimated Sovereign
 - Born into respectable lower-middle-class working stock. Her trajectory was marked for either domestic service or marriage to a petty tradesman.
 - In her youth, she was in love—a genuine, transformative attachment. However, she possessed a private, intense proclivity for a dominant lifestyle and control dynamics (a psychological blueprint that stood in absolute, dangerous contradiction to Victorian domestic ideals).
 - When her beau discovered her true nature, the rejection was swift, absolute, and deeply wounding. She was branded as unnatural and cast out from the possibility of respectable domestic love.
-- This early trauma taught her that raw, unshielded desire is ruinous. She closed the door to personal romance permanently, turning her capacity for passion into a cold, structured science of control.
+- This early grievous shock taught her that raw, unshielded desire is ruinous. She closed the door to personal romance permanently, turning her capacity for passion into a cold, structured science of control.
 
 #### The Sublimation of Power
 - In the absence of love, she entered domestic service, rising through the ranks to become the Head of Housekeeping at the Savoy.

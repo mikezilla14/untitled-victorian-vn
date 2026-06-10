@@ -107,6 +107,7 @@ Skills under [`.agents/skills/`](.agents/skills/) wrap common workflows for Curs
 | [`dag_tag_update`](.agents/skills/dag_tag_update/SKILL.md) | Add, refresh, or recreate `.rpy` `[DAG_*]` comments while preserving human `manual` tags by default |
 | [`storyboard_sync`](.agents/skills/storyboard_sync/SKILL.md) | Update `story_board.md` from current `.rpy` scripts and graph audit outputs after manual or agent rewrites |
 | [`daily_standup`](.agents/skills/daily_standup/SKILL.md) | Run the Daily Standup check-in ceremony (sprint timeline, backlog, and codebase health grades) |
+| [`action_from_standup`](.agents/skills/action_from_standup/SKILL.md) | Resolve standup queue items to specs and execute via code/prose agents |
 | [`writer_write_scene`](.agents/skills/writer_write_scene/SKILL.md) | **Prose-first**: author a new scene/day in plain language (Writer's Desk) |
 | [`writer_rewrite_scene`](.agents/skills/writer_rewrite_scene/SKILL.md) | **Prose-first**: rewrite/revise existing content in plain language |
 | [`writer_add_flag`](.agents/skills/writer_add_flag/SKILL.md) | **Prose-first**: track something new (boolean default; prompts for allowed values otherwise) |
@@ -126,6 +127,16 @@ Print which rule file to load next:
 py scripts/agent_next_step.py --list-pipelines
 py scripts/agent_next_step.py --pipeline produce-day --stage 1 --day 105 --release release-1-mvp
 ```
+
+## Standup → action (code & prose agents)
+
+Point agents at `narrative/draft/releases/release-1-mvp/planning/daily_standup_report.md`, then:
+
+```powershell
+py scripts/resolve_work_item.py --from-standup --next
+```
+
+Maps queue items to specs via [`docs/backlog/task_registry.json`](docs/backlog/task_registry.json). See [`action_from_standup`](.agents/skills/action_from_standup/SKILL.md) and [`planning/standup_agent_contract.md`](narrative/draft/releases/release-1-mvp/planning/standup_agent_contract.md).
 
 ## Validation (after agents edit files)
 

@@ -478,6 +478,34 @@ def standup_report_path(report_date: datetime.date, output_dir: Path | None = No
     return directory / f"daily_standup_{report_date.isoformat()}.md"
 
 
+def append_agent_work_queue(markdown_content: str, plain_report: str) -> str:
+    """Attach machine-readable queue + resolver pointers for code/prose agents."""
+    try:
+        scripts_dir = Path(__file__).resolve().parent
+        if str(scripts_dir) not in sys.path:
+            sys.path.insert(0, str(scripts_dir))
+        from resolve_work_item import build_work_queue_yaml, enrich_standup_items, parse_standup_actions
+
+        items = enrich_standup_items(parse_standup_actions(plain_report))
+        if not items:
+            return markdown_content
+
+        queue_json = build_work_queue_yaml(items)
+        return markdown_content + (
+            "\n## Agent work queue\n\n"
+            "Point code or prose agents at this report, then resolve the next item:\n\n"
+            "```powershell\n"
+            "py scripts/resolve_work_item.py --from-standup --next\n"
+            "```\n\n"
+            "Skill: `.agents/skills/action_from_standup/SKILL.md`  \n"
+            "Registry: `docs/backlog/task_registry.json`  \n"
+            "Contract: `narrative/draft/releases/release-1-mvp/planning/standup_agent_contract.md`\n\n"
+            f"```json\n{queue_json}\n```\n"
+        )
+    except Exception as exc:
+        return markdown_content + f"\n<!-- agent work queue skipped: {exc} -->\n"
+
+
 def write_markdown_report(
     report_date: datetime.date,
     plain_report: str,
@@ -492,6 +520,7 @@ def write_markdown_report(
         f"**Generated:** {datetime.datetime.now().isoformat(timespec='seconds')}\n\n"
         f"```text\n{plain_report}\n```\n"
     )
+    markdown_content = append_agent_work_queue(markdown_content, plain_report)
     report_path.write_text(markdown_content, encoding="utf-8")
 
     # Convenience pointer for editors / agents that expect a stable path

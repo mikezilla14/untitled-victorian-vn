@@ -9,19 +9,16 @@ Tasks are pre-formatted for direct allocation to human developers or specific sp
 ## 🎨 Pipeline A: Narrative Workflow (Lore, Voice, & Gating)
 *Focus: Creative writing, historical accuracy sweeps, psychological profiling, and gating validation.*
 
-### 🔴 [N-1] Historical Linter Anachronisms Cleansing
-* **Description:** The historical validation pass has flagged modern clinical psychology terms inside the non-canon character profiles. These must be replaced with 1891 period-appropriate vocabulary.
+### 🟢 [N-1] Historical Linter Anachronisms Cleansing
+* **Description:** Complete (2026-06-10). Replaced modern clinical terms in non-canon character profiles with 1891 period-appropriate vocabulary; `historical_linter.py` clean on all three bible files.
 * **Affected Files:**
-  * [cora_character_non_canon.md](../../narrative/draft/bible/cora_character_non_canon.md#L78) (Line 78: "trauma")
-  * [stern_character_non_canon.md](../../narrative/draft/bible/stern_character_non_canon.md#L15) (Line 15: "trauma")
-  * [vance_character_non_canon.md](../../narrative/draft/bible/vance_character_non_canon.md#L22) (Line 22: "projecting")
-* **Suggested Fixes:**
-  * *"trauma"* ➡️ *"grievous shock"*, *"dread affliction"*, or *"long-shadowed grief"*
-  * *"projecting"* ➡️ *"casting her own distress"*, *"attributing her own shame"*, or *"venting her own secret grief"*
+  * [cora_character_non_canon.md](../../narrative/draft/bible/cora_character_non_canon.md) — "trauma" → "grievous shock"
+  * [stern_character_non_canon.md](../../narrative/draft/bible/stern_character_non_canon.md) — "trauma" → "grievous shock"
+  * [vance_character_non_canon.md](../../narrative/draft/bible/vance_character_non_canon.md) — "projecting" → "casting"
 * **Assignee:** `victorian_consultant`
 * **Verification Command:**
   ```powershell
-  py scripts/validate.py --profile narrative
+  py scripts/historical_linter.py --file narrative/draft/bible/cora_character_non_canon.md
   ```
 
 ---
