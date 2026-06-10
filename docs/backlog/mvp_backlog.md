@@ -39,8 +39,8 @@ Tasks are pre-formatted for direct allocation to human developers or specific sp
 
 ---
 
-### 🔴 [N-3] Day 103 Writers' Room Pipeline Convergence
-* **Description:** Day 103 has been promoted into production, but its official Writers' Room pipeline folder is completely missing. Generate the convergent report, sandboxed specs, and gate reviews.
+### 🟢 [N-3] Day 103 Writers' Room Pipeline Convergence
+* **Description:** Complete (2026-06-10). All Day 103 Writers' Room pipeline deliverables (convergent report, sandboxed specs, and gate reviews) are generated and validated.
 * **Target Paths:** Create directory and populate:
   * `narrative/pipeline/releases/release-1-mvp/days/day103/`
 * **Required Output Deliverables:**
@@ -55,8 +55,8 @@ Tasks are pre-formatted for direct allocation to human developers or specific sp
 
 ---
 
-### 🔴 [N-4] Day 104 Writers' Room Pipeline Convergence
-* **Description:** Day 104 has been promoted into production, but its official Writers' Room pipeline folder is completely missing. Generate the convergent report, sandboxed specs, and gate reviews.
+### 🟢 [N-4] Day 104 Writers' Room Pipeline Convergence
+* **Description:** Complete (2026-06-10). All Day 104 Writers' Room pipeline deliverables (convergent report, sandboxed specs, and gate reviews) are generated and validated.
 * **Target Paths:** Create directory and populate:
   * `narrative/pipeline/releases/release-1-mvp/days/day104/`
 * **Required Output Deliverables:**
@@ -82,8 +82,8 @@ Tasks are pre-formatted for direct allocation to human developers or specific sp
 
 ---
 
-### 🔴 [N-6] Complete Story Chains Rewrite (From Scratch)
-* **Description:** Complete, from-scratch rewrite of `story_chains_non_canon.rpy` to transform optional character paths into high-tension, Level 3/4 spicier narrative tracks (Missy, Stern, and Vance). The chains must serve as the primary engine for high-risk stat gains, accommodate dynamic day/time contexts, and force sharp opportunity-cost player decisions.
+### 🟢 [N-6] Complete Story Chains Rewrite (From Scratch)
+* **Description:** Complete (2026-06-10). Completed, from-scratch rewrite of `story_chains_non_canon.rpy` to transform optional character paths into high-tension, Level 3/4 spicier narrative tracks (Missy, Stern, and Vance) at 2.8 and 2.2-2.5 spice. The chains serve as the primary engine for high-risk stat gains, accommodate dynamic day/time contexts, and force sharp opportunity-cost player decisions with descriptive diegetic locks.
 * **Affected File:** [story_chains_non_canon.rpy](../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy)
 * **Assignee:** `convergent_writer` + specialist editors
 * **Verification Command:**

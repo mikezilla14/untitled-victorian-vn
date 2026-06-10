@@ -198,9 +198,9 @@ Story windows: `call story_window_penance_gate(window_id)` at entry; if `_penanc
 
 | Label | Character | Fires at combined susp ≥ 50 | Done |
 |-------|-----------|-------------------------------|------|
-| `confrontation_stern` | Stern | [ ] | [ ] |
-| `confrontation_vance` | Vance | [ ] | [ ] |
-| `confrontation_missy` | Missy | [ ] | [ ] |
+| `confrontation_stern` | Stern | [x] | [x] |
+| `confrontation_vance` | Vance | [x] | [x] |
+| `confrontation_missy` | Missy | [x] | [x] |
 
 ### 4.4 Deprecated routers (do not use in new code)
 

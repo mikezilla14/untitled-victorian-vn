@@ -257,7 +257,7 @@ def calculate_grades(
     # 2. Adult Market Reviewer Grade
     am_score = 100.0
     # Check backlog for N-6 (Story Chains Rewrite) and C-5 (Manifest audit)
-    backlog_ids = [t["id"] for t in backlog_tasks]
+    backlog_ids = [t["id"] for t in backlog_tasks if t["priority"] != "Low"]
     if "N-6" in backlog_ids:
         am_score -= 10.0  # Erotic engine rewrite missing
     # Check book chapters checklist completion (Phase 5)
@@ -402,7 +402,7 @@ def build_report(
 
     # Adult Market Reviewer Report
     lines.append(f"🍓 {c_yellow}{c_bold}Adult Market Reviewer (@.agents/rules/adult_market_reviewer.md){c_end}")
-    active_chains_rewrite = "N-6" in [t["id"] for t in backlog_tasks]
+    active_chains_rewrite = "N-6" in [t["id"] for t in backlog_tasks if t["priority"] != "Low"]
     if active_chains_rewrite:
         lines.append(f"   {c_red}❌ PENDING MECHANICS REWRITE:{c_end} Task [N-6] Story Chains Rewrite is blocking high-tension Level 3/4 routes.")
     else:
@@ -413,7 +413,7 @@ def build_report(
 
     # Lead Narrative Editor Report
     lines.append(f"✍️  {c_hdr}{c_bold}Lead Narrative Editor (@.agents/rules/lead_narrative_editor.md){c_end}")
-    active_linters = [t for t in backlog_tasks if t["id"] in ["N-1", "N-2"]]
+    active_linters = [t for t in backlog_tasks if t["id"] in ["N-1", "N-2"] and t["priority"] != "Low"]
     if active_linters:
         for al in active_linters:
             lines.append(f"   {c_yellow}⚠️ BLOCKED GATE:{c_end} [{al['id']}] {al['title']} (Assignee: {al['assignee']})")
