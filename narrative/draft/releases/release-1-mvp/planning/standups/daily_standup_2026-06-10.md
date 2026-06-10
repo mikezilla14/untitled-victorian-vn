@@ -1,7 +1,7 @@
 # Daily Standup Status Report
 
 **Report date:** Wednesday, June 10, 2026  
-**Generated:** 2026-06-10T12:15:16
+**Generated:** 2026-06-10T12:22:46
 
 ```text
 ========================================================================
@@ -58,65 +58,7 @@
 ------------------------------------------------------------------------
 🔥 TODAY'S CRITICAL ACTIONS
 ------------------------------------------------------------------------
-   1. 🔴 [C-1] Day 100 Prologue Production Promotion (Assignee: prod_code_agent)
-      ↳ Once Day 100 clears its specialist narrative gates (Task `[N-2]`), promote the draft script verbatim into production.
-   2. 🔴 [C-2] Game Start Entry Point Integration (Assignee: prod_code_agent)
-      ↳ The production runtime currently skips Day 100, jumping directly to Day 101. Integrate the Prologue so the game launches correctly.
-   3. 🔴 [C-3] Purge Temporary Day 102 & 103 Transition Stubs (Assignee: prod_code_agent)
-      ↳ Clean up non-prod transition stubs in production scripts that were created during sequential drafting.
-   4. 🔴 [C-4] Purge Temporary Day 104 Transition Stubs (Assignee: prod_code_agent)
-      ↳ Clean up non-prod transition stubs in the production script for Day 104.
+   🎉 No critical blockages or pending actions! Excellent progress.
 
 ========================================================================
-```
-
-## Agent work queue
-
-Point code or prose agents at this report, then resolve the next item:
-
-```powershell
-py scripts/resolve_work_item.py --from-standup --next
-```
-
-Skill: `.agents/skills/action_from_standup/SKILL.md`  
-Registry: `docs/backlog/task_registry.json`  
-Contract: `narrative/draft/releases/release-1-mvp/planning/standup_agent_contract.md`
-
-```json
-{
-  "items": [
-    {
-      "priority": 1,
-      "registry_id": "C-1",
-      "lane": "code",
-      "title": "Day 100 Prologue Production Promotion",
-      "agent": "prod_code_agent",
-      "skill": "promote_day"
-    },
-    {
-      "priority": 2,
-      "registry_id": "C-2",
-      "lane": "code",
-      "title": "Game Start Entry Point Integration",
-      "agent": "prod_code_agent",
-      "skill": "promote_day"
-    },
-    {
-      "priority": 3,
-      "registry_id": "C-3",
-      "lane": "code",
-      "title": "Purge Temporary Day 102 & 103 Transition Stubs",
-      "agent": "prod_code_agent",
-      "skill": "promote_day"
-    },
-    {
-      "priority": 4,
-      "registry_id": "C-4",
-      "lane": "code",
-      "title": "Purge Temporary Day 104 Transition Stubs",
-      "agent": "prod_code_agent",
-      "skill": "promote_day"
-    }
-  ]
-}
 ```

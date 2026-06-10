@@ -97,10 +97,10 @@ Tasks are pre-formatted for direct allocation to human developers or specific sp
 ## 💻 Pipeline B: Coding Workflow (Ren'Py Development & Integration)
 *Focus: Script integration, runtime flow, state discipline, and tool chain repair.*
 
-### 🔴 [C-1] Day 100 Prologue Production Promotion
-* **Description:** Once Day 100 clears its specialist narrative gates (Task `[N-2]`), promote the draft script verbatim into production.
+### 🟢 [C-1] Day 100 Prologue Production Promotion
+* **Description:** Complete (2026-06-10). Promoted `day100_non_canon.rpy` verbatim into `renpy_project/game/day100.rpy`; added prologue `StoryState` fields (`prologue_why_write`, `prologue_holywell_posture`) and Day 100 asset fallbacks in production manifest; wrote `day100_promotion_handoff.json`.
 * **Source File:** [day100_non_canon.rpy](../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day100_non_canon.rpy)
-* **Target File:** `[NEW]` `renpy_project/game/day100.rpy`
+* **Target File:** `renpy_project/game/day100.rpy`
 * **Assignee:** `prod_code_agent`
 * **Verification Command:**
   ```powershell
@@ -109,39 +109,34 @@ Tasks are pre-formatted for direct allocation to human developers or specific sp
 
 ---
 
-### 🔴 [C-2] Game Start Entry Point Integration
-* **Description:** The production runtime currently skips Day 100, jumping directly to Day 101. Integrate the Prologue so the game launches correctly.
-* **Affected File:** [script.rpy](../../renpy_project/game/script.rpy#L15) (Line 15)
-* **Action:** Change the target of the `start` label jump:
-  ```diff
-  - jump day101_main
-  + jump day100_main
-  ```
+### 🟢 [C-2] Game Start Entry Point Integration
+* **Description:** Complete (2026-06-10). Non-prod `script.rpy` already jumped to `day100_main`; production `script.rpy` updated to match. Added `bg_country_estate_corridor_night` fallback to non-prod manifest.
+* **Affected File:** [script.rpy](../../renpy_project/game/script.rpy#L15)
 * **Assignee:** `prod_code_agent`
 * **Verification Command:**
   ```powershell
-  # Check for correct jump target alignment
   py scripts/validate.py --profile code
   ```
 
 ---
 
-### 🔴 [C-3] Purge Temporary Day 102 & 103 Transition Stubs
-* **Description:** Clean up non-prod transition stubs in production scripts that were created during sequential drafting.
-* **Action Items:**
-  * In [day102.rpy](../../renpy_project/game/day102.rpy), purge the temporary `day103_morning` stub. 
-  * In [day103.rpy](../../renpy_project/game/day103.rpy), purge the `# HANDOFF STUB` and the temporary `day104_041` stub.
-* **Assignee:** `prod_code_agent`
-* **Verification Command:** Run Ren'Py Lint to ensure clean compilation.
+### 🟢 [C-3] Purge Temporary Day 102 & 103 Transition Stubs
+* **Description:** Complete (2026-06-10). Removed `HANDOFF STUB` / `label day104_1` forwarder from non-prod `day103_non_canon.rpy`; night exit now jumps directly to `day104_1_false_dawn_suite_window`. Removed stale promotion notes from `day102_non_canon.rpy` and `day104_non_canon.rpy`. Production `day103.rpy` already lacked the handoff stub.
+* **Assignee:** `non_prod_code_agent` → `prod_code_agent`
+* **Verification Command:**
+  ```powershell
+  py scripts/validate.py --profile code --files "renpy_project/game/day102.rpy,renpy_project/game/day103.rpy"
+  ```
 
 ---
 
-### 🔴 [C-4] Purge Temporary Day 104 Transition Stubs
-* **Description:** Clean up non-prod transition stubs in the production script for Day 104.
-* **Action Item:**
-  * In [day104.rpy](../../renpy_project/game/day104.rpy), purge the temporary `day105_1_monster_reemerges` stub.
-* **Assignee:** `prod_code_agent`
-* **Verification Command:** Run Ren'Py Lint.
+### 🟢 [C-4] Purge Temporary Day 104 Transition Stubs
+* **Description:** Complete (2026-06-10). No forwarder stub existed in production `day104.rpy` (legitimate `jump day105_1_monster_reemerges` to promoted `day105.rpy`). Non-prod `day104_6_false_dawn_ending` aligned with production spine (`set_time_period`, `resolve_turn`); removed stale Day 105 stub promotion note from `day105_non_canon.rpy`.
+* **Assignee:** `non_prod_code_agent` → `prod_code_agent`
+* **Verification Command:**
+  ```powershell
+  py scripts/validate.py --profile code --files "renpy_project/game/day104.rpy"
+  ```
 
 ---
 
