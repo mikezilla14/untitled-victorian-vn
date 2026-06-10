@@ -3,86 +3,92 @@
 # Release 1 / Day 00 / Prologue / Tension Lens
 
 label day100_main_tension:
-    scene bg_train_carriage_day
+    scene bg_country_estate_corridor_night
     with fade
 
-    # [BEAT] Tension: Silent carriage, ticking clock, impending arrival.
-    "The click-clack of the tracks is not rhythmic. It is an accelerating countdown."
-    "With every mile, the air in the carriage grows thinner, replaced by the heavy coal smoke of Waterloo."
-    "I keep my hand pressed to my satchel. It holds the forged references and the half-written pages."
-    "If the conductor looks too closely... if a passenger glimpses the loose ink... the game ends before it begins."
-
-    jump day100_2_discovery_flashback_tension
+    # [BEAT] Tension: High stakes, kinetic sneaking.
+    "One false step on the third riser and the house will wake. The silence is a pressure."
+    "I freeze when the grandfather clock downstairs chimed two. My heart beats against my ribs like a trapped bird."
+    "I have three pages in my hand when the corridor floorboard groans behind me."
+    jump day100_1_afternoon_boredom_tension
 
 
-label day100_2_discovery_flashback_tension:
+label day100_1_afternoon_boredom_tension:
     scene bg_country_estate_study
     with dissolve
-    play music "themes/melancholy"
 
-    # [TENSION HOOK] The dangerous silence of the study.
-    "Sir John's study was too quiet. The silence was an alarm waiting to trigger."
-    "I stood before the mahogany bureau, my feather duster raised like a flag of truce."
-    "But the desk was left open. Sir John's letters lay exposed under the light."
-    "And from the adjoining parlour, behind the oak door, came a sound."
-    "Not a cough. A sudden, sharp gasp — a struggle."
+    "Sir John's study. The door is slightly ajar—a sliver of dark wood like a trap."
+    "I must recover the confiscated pages before the morning mail cart leaves for the station."
+    "If he has read them, if he sends them to my next place, I am not merely dismissed—I am ruined."
 
     menu:
-        "Risk the door, or risk the desk?"
+        "Where did he hide them?"
 
-        "Press close to the parlour door. [Overhear: +15 Corruption]":
-            $ apply_effects(insp=0, corr=15)
-            $ story.set_prologue_found("overheard")
-            jump day100_2_parlour_tension
-
-        "Examine the desk. [Read: +15 Inspiration, +10 Corruption]":
+        "In the bureau drawer. [[Search the bureau: +15 Inspiration, +10 Corruption]]":
             $ apply_effects(insp=15, corr=10)
             $ story.set_prologue_found("read_letters")
             jump day100_2_desk_tension
 
+        "Near the parlour door. [[Search the parlour entrance: +15 Corruption]]":
+            $ apply_effects(corr=15)
+            $ story.set_prologue_found("overheard")
+            jump day100_2_parlour_tension
+
 
 label day100_2_parlour_tension:
-    # [BEAT] Information asymmetry. Cora knows what Sir John hides.
-    "I press my ear to the panel. My pulse thuds against the oak."
-    "Inside, the master's voice is low, choked with a terror I have never heard in his speech."
-    "Sir John" "George... stop. If the staff... if the housemaid..."
-    "George" "The housemaid is a country mouse, John. She is down in the kitchens washing the lard from her sleeves."
-    "I stand frozen. If Sir John turns the handle now, I am standing in his path. The proximity is a knife."
+    "My hands are cold as I touch the wall. Voices inside the parlour rise and fall in a tight, breathless tempo."
+    "It is George, the master of the stables, speaking in a low, sharp command that cuts the silence."
+    "The raw adrenaline of their secret makes my skin prickle. It is dangerous material."
     jump day100_2_reconvergence_tension
 
 
 label day100_2_desk_tension:
-    # [BEAT] Impending discovery.
-    "My hands are shaking as I lean over the desk."
-    "The handwriting is Sir John's, but it has run wild. The lines overlap like tangled veins."
-    "Cora" "He writes ofGeorge. He writes of the Strand... of a rented room... of improper acts that would hang a footman."
-    "Every word is a liability. Every letter is a rope."
-    "I hear a shoe click on the floorboards in the hall. My heart hammers against my ribs. I must fold them, I must put them back—"
+    "My fingers scramble through the desk drawers, paper rustling under my nails like dry leaves."
+    "Under a stack of rent rolls, I find Sir John's letters—words of desperate, hidden want that make my breath stop."
+    "The stakes are written in black ink: a master's ruin, and my own."
     jump day100_2_reconvergence_tension
 
 
 label day100_2_reconvergence_tension:
-    # [BEAT] The trap closes.
-    "The door handle jiggles."
-    "I draw back, but Sir John is already in the study."
-    "His eyes go straight to the open desk, then to my hands, then to my face."
-    "Sir John" "You."
-    "The single syllable is a dismissal. His voice is grey, cold, and final."
-    "Sir John" "Get out, Cora Vale. If a single word leaves this library, I will see to it that you find no shelter in this county, or the next."
-    $ renpy.block_rollback()
-    jump day100_3_awakening_tension
+    "A key turns in the outer door. The lock clicks."
+    "Panic. I slide behind the window screen, folding myself into the dust-scented dark."
+    "Sir John enters. He does not search the room; his gaze goes straight to my hiding place."
+    "Sir John" "Come out, Vale."
+    "The quietness of his voice is worse than a shout. It is the absolute authority of the house."
+
+    menu:
+        "How do I answer?"
+
+        "Lie — I was seeking a draft in the study. [[prologue_holywell_posture = careful]]":
+            $ story.set_prologue_holywell_posture("careful")
+            cora "There was a draft, sir."
+            cora_inner "My voice is level, country-flat. Let him hear a simpleton."
+
+        "Deflect — the pages are my own. [[prologue_holywell_posture = eager]]":
+            $ story.set_prologue_holywell_posture("eager")
+            cora "They are my pages, sir."
+            cora_inner "A dangerous word from a maid in a borrowed apron. I will not cower."
+
+        "Submit — throw myself on his mercy. [[prologue_holywell_posture = desperate]]":
+            $ story.set_prologue_holywell_posture("desperate")
+            cora "Forgive me, sir."
+            cora_inner "I bend my neck. Let him believe the submission is real."
+
+    jump day100_3_night_daydream_tension
 
 
-label day100_3_awakening_tension:
+label day100_3_night_daydream_tension:
     scene bg_train_carriage_day
     with dissolve
-    play sound "sfx/train_whistle"
 
-    "The train whistle screams, a sudden shock that pulls me from the dark study."
-    "My satchel is on the carriage floorboards, its buckle open."
-    "The manuscript pages have spilled like teeth across the wood."
-    "The gentleman opposite me is lowering his newspaper. His eyes are drifting down to the elegant, scandalous lines."
-    "I scramble in a frantic rush, my fingers burning as I sweep the sheets away from his gaze."
-    "I tuck them back. I clamp the satchel shut."
-    "The skyline of London looms through the smoke. The Savoy is a cage, but it is my only shelter."
+    "The third-class carriage is a rattle of iron and coal smoke. The gentleman opposite watches me."
+    "I feel the satchel between my boots. If my fingers tremble, he will see."
+    "Wiltshire is a story closed. London rises through the smog like a cage."
+    jump day100_3_arrival_tension
+
+
+label day100_3_arrival_tension:
+    "The carriage lurches as we hit the points. The satchel buckle slips; sheets of paper scatter."
+    "I gather them frantically, sweeping the written lines under my skirt before the gentleman can read a word."
+    "Waterloo station's iron ribs loom ahead. There is no turning back."
     jump day101_main

@@ -3,85 +3,67 @@
 # Release 1 / Day 00 / Prologue / Mystery Lens
 
 label day100_main_mystery:
-    scene bg_train_carriage_day
+    scene bg_country_estate_corridor_night
     with fade
 
-    # [BEAT] Mystery: Clues in the carriage, secrets in the bag.
-    "A secret is a physical weight. I feel it in the satchel, pressed flat between my knees."
-    "I have forged references from Wiltshire, but the ink is too dark, the paper too heavy."
-    "If anyone were to search... if the police were to question me..."
-    "I must study the passengers. I must know the signs of suspicion."
-
-    jump day100_2_discovery_flashback_mystery
+    # [BEAT] Mystery: Secrets, locks, and hidden references.
+    "In Sir John's study, every drawer holds a double life."
+    "I have spent months observing the patterns: the keys left in the brass lock, the letters hidden under rent rolls."
+    "They think a maid does not look at the spines, but I have read the drawers."
+    jump day100_1_afternoon_boredom_mystery
 
 
-label day100_2_discovery_flashback_mystery:
+label day100_1_afternoon_boredom_mystery:
     scene bg_country_estate_study
     with dissolve
-    play music "themes/melancholy"
 
-    # [CLUE] Sir John's open desk and letters.
-    "Sir John's desk was an archive of things he wished to bury."
-    "He was a careful man, usually. He locked the cabinet. He burned the drafts."
-    "But today, the keys were left in the lock."
-    "And from the adjoining parlour, behind the oak door, came the sound."
-    "A sharp, muffled cry. A secret slipping out."
+    "The master's desk contains more than accounts. It holds his secret instructions."
+    "My confiscated manuscript pages are somewhere in this room, and I will not leave without them."
+    "If I am caught, I have forged references in my pocket, but they are a fragile shield."
 
     menu:
-        "The sound behind the door, or the secrets on the desk?"
+        "Where did he hide the pages?"
 
-        "Eavesdrop at the parlour door. [Corruption focus: +15 Corruption]":
-            $ apply_effects(insp=0, corr=15)
-            $ story.set_prologue_found("overheard")
-            jump day100_2_parlour_mystery
-
-        "Examine the open letters. [Clue focus: +15 Inspiration, +10 Corruption]":
+        "In the walnut bureau. [[Search the bureau: +15 Inspiration, +10 Corruption]]":
             $ apply_effects(insp=15, corr=10)
             $ story.set_prologue_found("read_letters")
             jump day100_2_desk_mystery
 
+        "By the parlour door. [[Search the parlour entrance: +15 Corruption]]":
+            $ apply_effects(corr=15)
+            $ story.set_prologue_found("overheard")
+            jump day100_2_parlour_mystery
+
 
 label day100_2_parlour_mystery:
-    # [BEAT] Gathering the auditory clue.
-    "I press my ear to the panel. I listen like a detective."
-    "Sir John's voice is low, but the words are clear through the keyhole."
-    "Sir John" "George, the letters are in the bureau. If someone..."
-    "George" "The housemaid doesn't know the alphabet, John. She is safe."
-    "I draw back. The letters. The letters are evidence."
+    "The parlour door is slightly ajar. I hear voices discussing a secret lockbox in London."
+    "George" "The Savoy lockbox is secure, John. The key remains with the solicitor on the Strand."
+    "Sir John" "And if the papers are found? If a servant opens it?"
+    "George" "The servants see nothing. They are wallpaper."
+    "A lockbox at the Savoy. A key on the Strand. A mystery that matches my ambition."
     jump day100_2_reconvergence_mystery
 
 
 label day100_2_desk_mystery:
-    # [CLUE] Reading the evidence.
-    "I lean over the bureau. My eyes scan the ink."
-    "The letter is to George. It details dates, a room in London, a deposit in a London bank."
-    "Cora" "He writes of a photograph. A photograph kept in a locked box at the Savoy."
-    # [PAYOFF LATER] The Savoy lockbox photograph hook!
-    "The Savoy. He is going there, then. He is keeping his secrets in the city."
-    "I hear his footsteps returning. I slide the letters back into the slot."
+    "My fingers touch a hidden latch in the walnut drawer. A secret compartment opens."
+    "Inside is a letter to George, mentioning a locked photographic plate box at the Savoy."
+    "The instructions are clear: a London secret, hidden under the master's respectability."
     jump day100_2_reconvergence_mystery
 
 
 label day100_2_reconvergence_mystery:
-    # [BEAT] The discovery of the spy.
-    "The door swings open. Sir John stands there."
-    "His eyes go straight to the bureau, then to me."
-    "Sir John" "What are you doing here, Vale?"
-    "cora" "I was only dusting the cabinet, Sir."
-    "Sir John" "Get out. You are dismissed. If a word of this leaves this library, I will ruin you."
-    $ renpy.block_rollback()
-    jump day100_3_awakening_mystery
+    "A floorboard creaks. I slip behind the screen, my hand tight on the walnut bureau."
+    "Sir John enters. He holds my manuscript pages. His eyes are cold, measuring my trespass."
+    "Sir John" "Come out, Vale."
+    "He knows I have seen his drawers. The secret between us is a dangerous lever."
+    jump day100_3_night_daydream_mystery
 
 
-label day100_3_awakening_mystery:
+label day100_3_night_daydream_mystery:
     scene bg_train_carriage_day
     with dissolve
-    play sound "sfx/train_whistle"
 
-    "The train whistle screams, pulling me back to Waterloo."
-    "My satchel is open on the floorboards, its contents spilled."
-    "The manuscript pages, yes, and the forged reference."
-    "I gather them up, my mind turning over the clue I gathered."
-    "Sir John has secrets. He has a lockbox at the Savoy."
-    "I am going there. I have his hand, his writing, and his secrets in my head."
+    "The train moves east toward London. The gentleman opposite watches my satchel."
+    "I have the reference for the Savoy, but my thoughts are on the lockbox and the key on the Strand."
+    "Wiltshire ends. The city is a puzzle of locks, and I bring the key in my pages."
     jump day101_main

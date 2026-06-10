@@ -132,7 +132,7 @@ Constants in `functions_non_canon.rpy`:
 
 | Day | Entry label | Exit / handoff | Time periods routed | Done |
 |-----|-------------|----------------|---------------------|------|
-| 100 | `day100_main` | → `day101_1_cora_waiting` | Prologue complete | [ ] |
+| 100 | `day100_main` | → `day101_1_cora_waiting` | Prologue complete | [x] |
 | 101 | `day101_main` | → `day102_1_cora_missy_first_shift` | Morning → Afternoon → Evening consequence → Night window/write | [ ] |
 | 102 | `day102_1_cora_missy_first_shift` | → `day103_morning` | Morning contraband → Afternoon chains → Evening tea crisis → Night write/indulge | [ ] |
 | 103 | `day103_morning` | → `day104_1_false_dawn_suite_window` | Morning consequence → Afternoon Gideon → Evening frantic → Night ultimatum + write | [ ] |

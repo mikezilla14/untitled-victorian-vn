@@ -614,6 +614,8 @@ label day104_4_twilight_ledger_false_dawn:
             if player.anxiety >= ANXIETY_WRITE_PARALYSIS:
                 "My hand shakes too violently to hold the pen. The hotel feels alive, every creaking floorboard a footstep, every shadow a reaching hand."
                 "At this level of anxiety, my panic blocks the pen."
+
+                # [STATE] State/progression update
                 jump day104_4_twilight_ledger_false_dawn
 
             jump day104_night

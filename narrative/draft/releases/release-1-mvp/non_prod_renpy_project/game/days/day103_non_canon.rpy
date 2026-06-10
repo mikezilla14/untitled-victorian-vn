@@ -177,6 +177,8 @@ label day103_1_corridor_insp_chain:
 
     # [STATE] State/progression update
     call day103_1_optional_character_chain
+
+    # [STATE] State/progression update
     jump day103_afternoon
 
 
@@ -218,6 +220,8 @@ label day103_1_corridor_corr_chain:
 
     # [STATE] State/progression update
     call day103_1_optional_character_chain
+
+    # [STATE] State/progression update
     jump day103_afternoon
 
 

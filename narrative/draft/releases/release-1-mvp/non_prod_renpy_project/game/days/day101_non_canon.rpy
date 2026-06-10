@@ -606,6 +606,8 @@ label day101_3_taking_stock_day1:
 
     # [STATE] State/progression update
     call day101_night_story_window
+
+    # [STATE] State/progression update
     jump day102_1_cora_missy_first_shift
 
 
@@ -789,6 +791,8 @@ label day101_4_write_the_chapter:
         cora_inner "Unsellable, bloodless, afraid of its own pulse."
         cora_inner "I had inspiration, but no appetite, and the page told on me."
     else:
+
+        # [STATE] State/progression update
         $ story.complete_manuscript_chapter("day1_chapter")
         call book1_write_chapter(chapter_key="day1_chapter", current_day=101)
         cora_inner "There is a shape worth keeping, but it still feels premature."

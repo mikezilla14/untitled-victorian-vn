@@ -355,6 +355,8 @@ label day102_2_day2_insp_choice:
     # [STATE] State/progression update
     call day102_afternoon_consequence_window
     call day102_afternoon_story_window
+
+    # [STATE] State/progression update
     jump day102_3_stern_fetches_cora
 
 
@@ -398,6 +400,8 @@ label day102_2_day2_corr_choice:
     # [STATE] State/progression update
     call day102_afternoon_consequence_window
     call day102_afternoon_story_window
+
+    # [STATE] State/progression update
     jump day102_3_stern_fetches_cora
 
 

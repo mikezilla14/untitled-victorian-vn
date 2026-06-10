@@ -752,6 +752,8 @@ label day105_5_gideon_marks_cora:
 label day105_6_manuscript_reckoning:
 
     if player.corruption_level < WRITE_GATE_CH2[1]:
+
+        # [STATE] State/progression update
         jump bad_ending_rejection
 
     # [ASSET] Existing Cora desk night background
