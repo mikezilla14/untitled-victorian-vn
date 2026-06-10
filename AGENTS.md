@@ -106,6 +106,7 @@ Skills under [`.agents/skills/`](.agents/skills/) wrap common workflows for Curs
 | [`documentation_audit`](.agents/skills/documentation_audit/SKILL.md) | Sync stale docs/readmes/specs and refresh the generated catalogue |
 | [`dag_tag_update`](.agents/skills/dag_tag_update/SKILL.md) | Add, refresh, or recreate `.rpy` `[DAG_*]` comments while preserving human `manual` tags by default |
 | [`storyboard_sync`](.agents/skills/storyboard_sync/SKILL.md) | Update `story_board.md` from current `.rpy` scripts and graph audit outputs after manual or agent rewrites |
+| [`daily_standup`](.agents/skills/daily_standup/SKILL.md) | Run the Daily Standup check-in ceremony (sprint timeline, backlog, and codebase health grades) |
 | [`writer_write_scene`](.agents/skills/writer_write_scene/SKILL.md) | **Prose-first**: author a new scene/day in plain language (Writer's Desk) |
 | [`writer_rewrite_scene`](.agents/skills/writer_rewrite_scene/SKILL.md) | **Prose-first**: rewrite/revise existing content in plain language |
 | [`writer_add_flag`](.agents/skills/writer_add_flag/SKILL.md) | **Prose-first**: track something new (boolean default; prompts for allowed values otherwise) |

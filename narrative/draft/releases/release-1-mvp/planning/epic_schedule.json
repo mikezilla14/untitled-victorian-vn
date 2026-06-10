@@ -1,0 +1,11 @@
+{
+  "epic_name": "Release 1 - MVP",
+  "epic_start_date": "2026-05-18",
+  "weekly_foci": {
+    "1": "Sprint 1: Spine Routing & Fuel Gates (Milestones 1 & 3)",
+    "2": "Sprint 2: Dynamic Systems, Story Chains & Fail States (Milestones 1 & 2)",
+    "3": "Sprint 3: UI & Structural Assets Integration (Milestone 4)",
+    "4": "Sprint 4: Full-fidelity Verification & Prose Drop (Milestone 5)",
+    "5": "Sprint 5: Soft Launch to Subscribers, Next Release Planning & Playtest Bug Fixes (Milestone 6 / Ship)"
+  }
+}
