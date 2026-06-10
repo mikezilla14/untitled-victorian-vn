@@ -24,14 +24,22 @@
 label watch_suspicion:
     # Hard fail: consolidated anxiety breakdown
     if player.anxiety >= 100:
+
+        # [STATE] State/progression update
         jump game_over_dismissed
 
     # Soft fail: queue confrontation labels for the next dynamic window to consume
     if player.is_confrontation_ready("stern"):
+
+        # [STATE] State/progression update
         $ story.queue_penance("confrontation_stern")
     if player.is_confrontation_ready("vance"):
+
+        # [STATE] State/progression update
         $ story.queue_penance("confrontation_vance")
     if player.is_confrontation_ready("missy"):
+
+        # [STATE] State/progression update
         $ story.queue_penance("confrontation_missy")
     return
 
@@ -45,6 +53,8 @@ label check_confrontations:
 
 # [DAG_NODE id=consume_pending_penance type=penance_consume]
 label consume_pending_penance(window_id):
+
+    # [STATE] State/progression update
     $ _penance_label = story.consume_penance_at_window(window_id)
     if _penance_label:
         call expression _penance_label
@@ -54,11 +64,17 @@ label consume_pending_penance(window_id):
 # [DAG_NODE id=story_window_penance_gate type=penance_consume]
 label story_window_penance_gate(window_id):
     # Sacrifices the optional chain menu when penance is queued
+
+    # [STATE] State/progression update
     $ _penance_consumed = False
     if story.has_pending_penance():
+
+        # [STATE] State/progression update
         $ _penance_label = story.consume_penance_at_window(window_id)
         if _penance_label:
             call expression _penance_label
+
+            # [STATE] State/progression update
             $ _penance_consumed = True
     return
 

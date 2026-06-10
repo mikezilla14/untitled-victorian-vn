@@ -1,7 +1,7 @@
 # Daily Standup Status Report
 
 **Report date:** Wednesday, June 10, 2026  
-**Generated:** 2026-06-10T11:25:39
+**Generated:** 2026-06-10T11:30:05
 
 ```text
 ========================================================================
@@ -59,25 +59,23 @@
 ------------------------------------------------------------------------
 🔥 TODAY'S CRITICAL ACTIONS
 ------------------------------------------------------------------------
-   1. 🔴 [N-2] Day 100 Prologue Specialist Gates Clearance (Assignee: lead_narrative_editor + forensic_psychology_consultant + victorian_consultant)
-      ↳ `day100_non_canon.rpy` is structurally complete, but it has not been cleared by the specialist gates. You must generate the gate verdicts before promotion.
-   2. 🔴 [N-3] Day 103 Writers' Room Pipeline Convergence (Assignee: convergent_writer + Gates)
+   1. 🔴 [N-3] Day 103 Writers' Room Pipeline Convergence (Assignee: convergent_writer + Gates)
       ↳ Day 103 has been promoted into production, but its official Writers' Room pipeline folder is completely missing. Generate the convergent report, sandboxed specs, and gate reviews.
-   3. 🔴 [N-4] Day 104 Writers' Room Pipeline Convergence (Assignee: convergent_writer + Gates)
+   2. 🔴 [N-4] Day 104 Writers' Room Pipeline Convergence (Assignee: convergent_writer + Gates)
       ↳ Day 104 has been promoted into production, but its official Writers' Room pipeline folder is completely missing. Generate the convergent report, sandboxed specs, and gate reviews.
-   4. 🔴 [N-6] Complete Story Chains Rewrite (From Scratch) (Assignee: convergent_writer + specialist editors)
+   3. 🔴 [N-6] Complete Story Chains Rewrite (From Scratch) (Assignee: convergent_writer + specialist editors)
       ↳ Complete, from-scratch rewrite of `story_chains_non_canon.rpy` to transform optional character paths into high-tension, Level 3/4 spicier narrative tracks (Missy, Stern, and Vance). The chains must serve as the primary engine for high-risk stat gains, accommodate dynamic day/time contexts, and force sharp opportunity-cost player decisions.
-   5. 🔴 [C-1] Day 100 Prologue Production Promotion (Assignee: prod_code_agent)
+   4. 🔴 [C-1] Day 100 Prologue Production Promotion (Assignee: prod_code_agent)
       ↳ Once Day 100 clears its specialist narrative gates (Task `[N-2]`), promote the draft script verbatim into production.
-   6. 🔴 [C-2] Game Start Entry Point Integration (Assignee: prod_code_agent)
+   5. 🔴 [C-2] Game Start Entry Point Integration (Assignee: prod_code_agent)
       ↳ The production runtime currently skips Day 100, jumping directly to Day 101. Integrate the Prologue so the game launches correctly.
-   7. 🔴 [C-3] Purge Temporary Day 102 & 103 Transition Stubs (Assignee: prod_code_agent)
+   6. 🔴 [C-3] Purge Temporary Day 102 & 103 Transition Stubs (Assignee: prod_code_agent)
       ↳ Clean up non-prod transition stubs in production scripts that were created during sequential drafting.
-   8. 🔴 [C-4] Purge Temporary Day 104 Transition Stubs (Assignee: prod_code_agent)
+   7. 🔴 [C-4] Purge Temporary Day 104 Transition Stubs (Assignee: prod_code_agent)
       ↳ Clean up non-prod transition stubs in the production script for Day 104.
-   9. 🔧 [CHECKLIST] `confrontation_stern` | Stern | [ ] | [ ]
-   10. 🔧 [CHECKLIST] `confrontation_vance` | Vance | [ ] | [ ]
-   11. 🔧 [CHECKLIST] `confrontation_missy` | Missy | [ ] | [ ]
+   8. 🔧 [CHECKLIST] `confrontation_stern` | Stern | [ ] | [ ]
+   9. 🔧 [CHECKLIST] `confrontation_vance` | Vance | [ ] | [ ]
+   10. 🔧 [CHECKLIST] `confrontation_missy` | Missy | [ ] | [ ]
 
 ========================================================================
 ```
@@ -99,14 +97,6 @@ Contract: `narrative/draft/releases/release-1-mvp/planning/standup_agent_contrac
   "items": [
     {
       "priority": 1,
-      "registry_id": "N-2",
-      "lane": "gate",
-      "title": "Day 100 Prologue Specialist Gates Clearance",
-      "agent": "lead_narrative_editor",
-      "skill": "review_scene"
-    },
-    {
-      "priority": 2,
       "registry_id": "N-3",
       "lane": "prose",
       "title": "Day 103 Writers' Room Pipeline Convergence",
@@ -114,7 +104,7 @@ Contract: `narrative/draft/releases/release-1-mvp/planning/standup_agent_contrac
       "skill": "convergent_writer"
     },
     {
-      "priority": 3,
+      "priority": 2,
       "registry_id": "N-4",
       "lane": "prose",
       "title": "Day 104 Writers' Room Pipeline Convergence",
@@ -122,7 +112,7 @@ Contract: `narrative/draft/releases/release-1-mvp/planning/standup_agent_contrac
       "skill": "convergent_writer"
     },
     {
-      "priority": 4,
+      "priority": 3,
       "registry_id": "N-6",
       "lane": "prose",
       "title": "Complete Story Chains Rewrite",
@@ -130,7 +120,7 @@ Contract: `narrative/draft/releases/release-1-mvp/planning/standup_agent_contrac
       "skill": "rewrite_narrative"
     },
     {
-      "priority": 5,
+      "priority": 4,
       "registry_id": "C-1",
       "lane": "code",
       "title": "Day 100 Prologue Production Promotion",
@@ -138,7 +128,7 @@ Contract: `narrative/draft/releases/release-1-mvp/planning/standup_agent_contrac
       "skill": "promote_day"
     },
     {
-      "priority": 6,
+      "priority": 5,
       "registry_id": "C-2",
       "lane": "code",
       "title": "Game Start Entry Point Integration",
@@ -146,7 +136,7 @@ Contract: `narrative/draft/releases/release-1-mvp/planning/standup_agent_contrac
       "skill": "promote_day"
     },
     {
-      "priority": 7,
+      "priority": 6,
       "registry_id": "C-3",
       "lane": "code",
       "title": "Purge Temporary Day 102 & 103 Transition Stubs",
@@ -154,7 +144,7 @@ Contract: `narrative/draft/releases/release-1-mvp/planning/standup_agent_contrac
       "skill": "promote_day"
     },
     {
-      "priority": 8,
+      "priority": 7,
       "registry_id": "C-4",
       "lane": "code",
       "title": "Purge Temporary Day 104 Transition Stubs",
@@ -162,7 +152,7 @@ Contract: `narrative/draft/releases/release-1-mvp/planning/standup_agent_contrac
       "skill": "promote_day"
     },
     {
-      "priority": 9,
+      "priority": 8,
       "registry_id": "confrontation_stern",
       "lane": "integration",
       "title": "Verify confrontation_stern penance label",
@@ -170,7 +160,7 @@ Contract: `narrative/draft/releases/release-1-mvp/planning/standup_agent_contrac
       "skill": "implement_spec"
     },
     {
-      "priority": 10,
+      "priority": 9,
       "registry_id": "confrontation_vance",
       "lane": "integration",
       "title": "Verify confrontation_vance penance label",
@@ -178,7 +168,7 @@ Contract: `narrative/draft/releases/release-1-mvp/planning/standup_agent_contrac
       "skill": "implement_spec"
     },
     {
-      "priority": 11,
+      "priority": 10,
       "registry_id": "confrontation_missy",
       "lane": "integration",
       "title": "Verify confrontation_missy penance label",

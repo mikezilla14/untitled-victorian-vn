@@ -228,8 +228,8 @@ Story windows: `call story_window_penance_gate(window_id)` at entry; if `_penanc
 
 - [ ] Every key in `book1.CHAPTER_BLOCKS` has a reachable `book1_block_*` label
 - [ ] `book1_block_unknown_chapter` is unreachable in normal play
-- [ ] `book1_page_image` store var set per branch when CG art exists (stub OK until Phase 6)
-- [x] NVL screen renders without missing-image crashes (fallbacks OK)
+- [ ] `book1_page_image` store var set per branch when CG art exists (stub acceptable until Phase 6)
+- [x] NVL screen renders without missing-image crashes (fallbacks acceptable)
 - [x] `book1_write_chapter` plays `audio_themes_private_ink` when file present
 
 ### 5.3 Test harness (dev only)
@@ -261,7 +261,7 @@ Story windows: `call story_window_penance_gate(window_id)` at entry; if `_penanc
 | `ui_vignette_ambient` | `images/ui/ui_vignette_ambient.webp` | Present | [x] |
 | `ui_suspicion_vignette` | `images/ui/ui_suspicion_vignette.webp` | Present | [x] |
 | `ui_cora_base` / `ui_cora_corrupted` | `images/sprites/cora/ui/` | Present | [x] |
-| `mc_sprite_thought_icon` | placeholder OK for M4 | [ ] |
+| `mc_sprite_thought_icon` | placeholder acceptable for M4 | [ ] |
 
 **File:** `game/assets_manifest.rpy`, `game/screens.rpy`
 

@@ -23,8 +23,8 @@ Tasks are pre-formatted for direct allocation to human developers or specific sp
 
 ---
 
-### 🔴 [N-2] Day 100 Prologue Specialist Gates Clearance
-* **Description:** `day100_non_canon.rpy` is structurally complete, but it has not been cleared by the specialist gates. You must generate the gate verdicts before promotion.
+### 🟢 [N-2] Day 100 Prologue Specialist Gates Clearance
+* **Description:** Complete (2026-06-10). Rewrote prologue to start in motion, generated all three specialist gates, and validated successfully.
 * **Target Paths:** Write verdict markdown and JSON sidecars inside:
   * `narrative/pipeline/releases/release-1-mvp/days/day100/gates/`
 * **Required Gates:**

@@ -13,12 +13,12 @@ The defining narrative and dramatic mechanic of the game is the **Gap** between 
 ### Forensic Psychology Perspective (The Self-Protective Shield)
 - **The Monologue as Control:** Cora is structurally powerless—an undercover Irish maid with forged papers, a dangerous manuscript, and no safety net. Her internal monologue is not passive stream-of-consciousness; it is **active composition**. By editing her experiences into aphoristic, taxonomic prose, she converts terrifying vulnerability into structured narrative material. If she can dissect the room, she cannot be crushed by it.
 - **Intellectual Vanity:** While service demands total subservience, Cora's inner voice is proud, deeply intelligent, and slightly naive about the "destiny" of her authorship. The monologue is the only space where her vanity can safely exist. However, when she is intellectually provoked (especially by Sir Gideon), this vanity creates a self-protective breach—the Gap narrows, risking exposure.
-- **Trauma and Precariousness:** Her rural poverty, the traumatic dismissal from the country estate, and the ambient threat of London ruin mean she operates under constant compression. Fear compresses her spoken words but sharpens her internal observations into clinical, unsentimental accounting.
+- **Shock and Precariousness:** Her rural poverty, the sudden dismissal from the country estate, and the ambient threat of London ruin mean she operates under constant compression. Fear compresses her spoken words but sharpens her internal observations into clinical, unsentimental accounting.
 
 ### Victorian Consultant Perspective (The Class and Accent Mask)
 - **Class Compliance:** In 1891 London, a domestic servant's survival relies on absolute invisibility. Spoken speech (`cora`) must adhere to strict etiquette: short sentences, low-register tones, and deferential titles (`"Yes, Ma'am"`, `"Yes, Sir"`). 
 - **The Performed Persona:** Cora poses as an English country girl. Every spoken word is calculated to maintain this regional, class-appropriate mask. 
-- **The Irish Firewall:** Cora is biologically and culturally Irish. Under extreme trauma, stress, or private reflection, her internal monologue (`cora_inner`) slips past the performed English mask into authentic Irish vocabulary, idioms, or cadence (e.g., *grudges, dampness, narrow board, raw margins*). Her private mind is the only place where her true heritage is safe from structural anti-Irish prejudice.
+- **The Irish Firewall:** Cora is biologically and culturally Irish. Under extreme shock, distress, or private reflection, her internal monologue (`cora_inner`) slips past the performed English mask into authentic Irish vocabulary, idioms, or cadence (e.g., *grudges, dampness, narrow board, raw margins*). Her private mind is the only place where her true heritage is safe from structural anti-Irish prejudice.
 
 ---
 
@@ -30,7 +30,7 @@ To write authentic lines for `cora_inner`, follow these distinct linguistic rule
 |---|---|---|
 | **Tone** | Analytical, taxological, cynical, dryly ironic, hyper-literary, unvarnished. | Objective, atmospheric, neutral, descriptive, historic. |
 | **Diction** | Rich, learned vocabulary (derived from a parish vicarage library), precise nouns, sharp sensory details, and clinical verbs. | Sensory, environmental, structural, focused on physical staging. |
-| **Syntax** | **High Stress:** Compressed, punchy fragments.<br>**Reflection:** Rhythmic, balanced, aphoristic sentences. | Clear, linear, paced to indicate time transitions or scene changes. |
+| **Syntax** | **High Pressure:** Compressed, punchy fragments.<br>**Reflection:** Rhythmic, balanced, aphoristic sentences. | Clear, linear, paced to indicate time transitions or scene changes. |
 | **Scope** | Cora's subjective judgment, private calculations, character dissection, and emotional sediment. | Environmental backdrops, passage of time, staging cues, and global events (e.g., London heatwaves, street noises, carriage arrivals). |
 
 ---
