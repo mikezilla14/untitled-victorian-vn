@@ -21,8 +21,9 @@ Implemented so far:
 - Breakpoint memory on `PlayerStats`.
 - Breakpoint monologue fallback table.
 - `apply_effects(..._susp, ..._base)` routing through suspicion feedback.
-- Small character-specific attention UI.
+- Small character-specific attention UI at `xpos 0.4`, `ypos 0.5`.
 - Callback-driven sprite emphasis where suspicion focus wins over active speaker focus.
+- Authored suspicion prose separated from trigger/runtime logic.
 
 Deferred:
 
@@ -133,7 +134,7 @@ Minor suspicion change:
 
 - Set `suspicion_focus` to the affected character.
 - Set `suspicion_focus_intensity = 1`.
-- Pulse a small per-character eye/attention UI if implemented.
+- Pulse a small per-character eye/attention UI for `1.5` seconds.
 - Optionally play a soft notice sound when sound is enabled.
 - Clear focus after a short pause.
 
@@ -163,6 +164,7 @@ The eye UI is per-character, not global.
 MVP display:
 
 - Small eye/attention indicator near the dialogue box or HUD edge.
+- Current placeholder position is `xpos 0.4`, `ypos 0.5`, center-anchored.
 - Character name or short label beside it.
 - Eye openness reflects that character's current suspicion tier.
 - Hidden when no suspicion event is active.
@@ -244,9 +246,19 @@ Manual smoke checks:
 - Raising Vance suspicion while Stern is speaking emphasizes Vance, not Stern.
 - High anxiety changes monologue flavor without creating a persistent full-screen red overlay.
 
-## Open Questions
+## Remaining Pickup Tasks
 
-- Should `suspicion_breakpoints_seen` live inside `PlayerStats` or `StoryState`?
-- Should the eye UI use final art, a simple text/symbol placeholder, or the existing HUD asset pipeline first?
-- Should ledger/debug screens show exact suspicion numbers in dev builds only?
-- Should base suspicion and acute suspicion share breakpoint logic, or should only total suspicion trigger breakpoints?
+- Add or update a lightweight script/test fixture if an appropriate Ren'Py function-level harness exists.
+- Manually smoke test the minor popup timing and placement.
+- Manually smoke test Vance crossing `15` from below.
+- Manually smoke test Vance rising within the same tier.
+- Manually smoke test Stern jumping across multiple breakpoints; only the highest crossed breakpoint should monologue.
+- Manually smoke test suspicion reduction.
+- Manually smoke test high-anxiety monologue selection.
+
+## Recorded Decisions
+
+- Breakpoint history lives on `PlayerStats`.
+- Breakpoint detection uses total suspicion, including both base and acute suspicion.
+- The MVP eye UI uses a text/symbol placeholder; final art is deferred polish.
+- Player-facing UI does not show exact suspicion numbers.

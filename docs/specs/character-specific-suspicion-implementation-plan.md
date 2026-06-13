@@ -178,7 +178,7 @@ Acceptance:
 
 - [ ] T7.1 Add or update a lightweight script/test fixture if the repo has an existing Ren'Py lint harness for function-level checks.
 - [ ] T7.2 Manually test Vance crossing 15 from below.
-- [ ] T7.3 Manually test Vance rising within the same tier.
+- [ ] T7.3 Manually test Vance rising within the same tier; the minor popup should remain readable for 1.5 seconds at `xpos 0.4`, `ypos 0.5`.
 - [ ] T7.4 Manually test Stern crossing multiple breakpoints in one jump; only the highest crossed breakpoint should monologue, unless implementation deliberately queues all.
 - [ ] T7.5 Manually test suspicion reduction.
 - [ ] T7.6 Manually test high-anxiety monologue selection.
