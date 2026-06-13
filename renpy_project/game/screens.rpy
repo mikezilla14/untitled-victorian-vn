@@ -374,6 +374,7 @@ screen suspicion_attention(character):
 
         hbox:
             spacing 10
-            text "EYE" size 14 color _border bold True alpha _alpha
-            text _name size 14 color "#dfcbb5" bold True alpha _alpha
-            text _tier size 12 color "#9a7e5a" alpha _alpha
+            at Transform(alpha=_alpha)
+            text "EYE" size 14 color _border bold True
+            text _name size 14 color "#dfcbb5" bold True
+            text _tier size 12 color "#9a7e5a"
