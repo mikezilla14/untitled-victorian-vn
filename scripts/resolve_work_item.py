@@ -46,6 +46,15 @@ SKILLS_DIR = ROOT / ".agents" / "skills"
 
 
 def load_registry() -> dict:
+    try:
+        scripts_dir = Path(__file__).resolve().parent
+        if str(scripts_dir) not in sys.path:
+            sys.path.insert(0, str(scripts_dir))
+        from daily_standup import sync_backlog_to_registry
+        sync_backlog_to_registry()
+    except Exception as e:
+        print(f"Warning: Backlog-to-registry sync failed during load: {e}")
+        
     if not REGISTRY_PATH.exists():
         raise FileNotFoundError(f"Task registry missing: {REGISTRY_PATH}")
     return json.loads(REGISTRY_PATH.read_text(encoding="utf-8"))
@@ -128,6 +137,27 @@ def parse_standup_actions(standup_text: str) -> list[dict[str, Any]]:
             )
             continue
 
+        if "[DISCOVERED]" in body:
+            discovered_body = body.split("[DISCOVERED]", 1)[-1].strip()
+            if "scene direction" in discovered_body.lower():
+                registry_id = "DISCOVERED_SCENE_DIR"
+            elif "format" in discovered_body.lower():
+                registry_id = "DISCOVERED_FORMAT"
+            elif "historical" in discovered_body.lower():
+                registry_id = "DISCOVERED_HISTORICAL"
+            else:
+                registry_id = "DISCOVERED_GENERIC"
+                
+            items.append(
+                {
+                    "priority": priority,
+                    "kind": "discovered",
+                    "registry_id": registry_id,
+                    "summary": discovered_body,
+                }
+            )
+            continue
+
         items.append(
             {
                 "priority": priority,
@@ -193,6 +223,82 @@ def resolve_task(registry_id: str | None, summary: str = "") -> dict[str, Any]:
 
     if registry_id and registry_id.startswith("PHASE_"):
         return _phase_default_packet(registry_id.replace("PHASE_", ""), summary)
+
+    if registry_id and registry_id.startswith("DISCOVERED_"):
+        file_path = ""
+        file_match = re.search(r"(?:for|in|Format|errors in)\s+(\S+\.rpy|\S+\.md)", summary)
+        if file_match:
+            file_path = file_match.group(1).strip()
+            file_path = re.sub(r'[\(\)\`\'\"]', '', file_path).strip()
+            
+        if registry_id == "DISCOVERED_SCENE_DIR":
+            return {
+                "registry_id": registry_id,
+                "title": f"Update scene direction for {file_path}",
+                "lane": "code",
+                "summary": summary,
+                "agent": "scene_direction_agent",
+                "agent_rule": agent_rule_path("scene_direction_agent"),
+                "skill": "scene_direction",
+                "skill_path": skill_path("scene_direction"),
+                "files": [file_path] if file_path else [],
+                "verify": [f"py scripts/scene_direction.py --files \"{file_path}\" --check"] if file_path else ["py scripts/scene_direction.py --check"],
+                "action_note": f"Run scene direction agent: py scripts/scene_direction.py --files \"{file_path}\"",
+                "resolution": "discovered_scene_dir",
+                "deliverables": [],
+                "specs": [
+                    "docs/specs/scene-direction-agent.md",
+                    "docs/contracts/sprite_layout_policy.yaml"
+                ],
+                "pipeline": None,
+                "pipeline_stage": None,
+                "blocked_by": [],
+                "backlog_excerpt": None
+            }
+        elif registry_id == "DISCOVERED_FORMAT":
+            return {
+                "registry_id": registry_id,
+                "title": f"Format file {file_path}",
+                "lane": "prose",
+                "agent": "writers_room",
+                "agent_rule": agent_rule_path("writers_room"),
+                "skill": "revise_narrative",
+                "skill_path": skill_path("revise_narrative"),
+                "files": [file_path] if file_path else [],
+                "verify": [f"py scripts/format_non_canon.py --check \"{file_path}\""] if file_path else ["py scripts/format_non_canon.py --check"],
+                "action_note": f"Run formatter: py scripts/format_non_canon.py \"{file_path}\"",
+                "resolution": "discovered_format",
+                "deliverables": [],
+                "specs": [
+                    "narrative/draft/releases/release-1-mvp/planning/mvp_systems_integration_checklist.md"
+                ],
+                "pipeline": None,
+                "pipeline_stage": None,
+                "blocked_by": [],
+                "backlog_excerpt": None
+            }
+        elif registry_id == "DISCOVERED_HISTORICAL":
+            return {
+                "registry_id": registry_id,
+                "title": f"Fix historical linter errors in {file_path}",
+                "lane": "prose",
+                "agent": "victorian_consultant",
+                "agent_rule": agent_rule_path("victorian_consultant"),
+                "skill": "historical_check",
+                "skill_path": skill_path("historical_check"),
+                "files": [file_path] if file_path else [],
+                "verify": [f"py scripts/historical_linter.py --file \"{file_path}\""] if file_path else [],
+                "action_note": f"Run historical linter: py scripts/historical_linter.py --file \"{file_path}\"",
+                "resolution": "discovered_historical",
+                "deliverables": [],
+                "specs": [
+                    "docs/backlog/mvp_backlog.md"
+                ],
+                "pipeline": None,
+                "pipeline_stage": None,
+                "blocked_by": [],
+                "backlog_excerpt": None
+            }
 
     task = registry.get("tasks", {}).get(registry_id or "")
     if not task:
