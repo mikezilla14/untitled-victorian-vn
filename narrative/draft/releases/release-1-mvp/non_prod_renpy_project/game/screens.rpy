@@ -27,7 +27,6 @@ init -100 python:
 screen stats_overlay():
     zorder 100
 
-    $ _susp_alpha       = player.anxiety / 100.0
     $ _insp_cap         = max(player.inspiration_cap, 1)
     $ _insp_fill        = min(1.0, player.inspiration / float(_insp_cap))
     $ _ink_w            = 300
@@ -45,13 +44,6 @@ screen stats_overlay():
         xsize _gw
         ysize config.screen_height
         alpha 0.0
-
-    # Suspicion vignette — scales with anxiety (story area only)
-    add "ui_suspicion_vignette":
-        xpos _gx
-        xsize _gw
-        ysize config.screen_height
-        alpha _susp_alpha
 
     if hud_sidebar_visible:
         frame:
@@ -316,6 +308,29 @@ screen choice(items):
                 background Solid("#000000aa")
                 hover_background Solid("#222222ee")
                 xpadding 20 ypadding 10
+
+
+screen suspicion_attention(character):
+    zorder 210
+
+    $ _gx, _gw = hud_game_viewport()
+    $ _name = SUSPICION_CHARACTER_NAMES.get(character, character.title())
+    $ _tier = suspicion_tier(player.get_total_suspicion(character)).upper()
+    $ _alpha = 0.95 if suspicion_focus_intensity >= 2 else 0.72
+    $ _border = "#c8a97e" if suspicion_focus_intensity >= 2 else "#7a4a10"
+
+    frame:
+        xpos _gx + 42
+        ypos config.screen_height - 360
+        xpadding 14
+        ypadding 8
+        background Solid("#0d0d0dcc")
+
+        hbox:
+            spacing 10
+            text "EYE" size 14 color _border bold True alpha _alpha
+            text _name size 14 color "#dfcbb5" bold True alpha _alpha
+            text _tier size 12 color "#9a7e5a" alpha _alpha
 
 
 # ── THOUGHT OVERLAY ────────────────────────────────────────────

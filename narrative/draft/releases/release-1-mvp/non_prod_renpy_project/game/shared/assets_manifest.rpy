@@ -171,15 +171,9 @@ init -40 python:
     # ui_vignette_ambient:
     #   [1920 × 1080 px]  Full canvas. Displayed scaled to the story viewport
     #   (1620 × 1080 px at runtime). Radial darkening at edges, ~20–30% max opacity.
-    #   Provides constant cinematic framing, independent of the anxiety vignette.
+    #   Provides constant cinematic framing, independent of suspicion feedback.
     #   Fallback is transparent — missing asset produces no visible effect.
     declare_image_with_fallback("ui_vignette_ambient", "images/ui/ui_vignette_ambient.png", "#00000000")
-    #
-    # ui_suspicion_vignette:
-    #   [1920 × 1080 px]  Full canvas. Displayed scaled to story viewport (1620 × 1080 px).
-    #   Rendered at alpha = player.anxiety / 100; fully opaque at anxiety 100.
-    #   Deep red/crimson radial burn at edges — should feel oppressive at full intensity.
-    declare_image_with_fallback("ui_suspicion_vignette", "images/ui/ui_suspicion_vignette.webp", "#3a0000")
     #
     # ui_inkwell_empty / ui_inkwell_full:
     #   [64 × 110 px]  Exact display size in sidebar.

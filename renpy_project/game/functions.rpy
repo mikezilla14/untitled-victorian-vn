@@ -8,6 +8,108 @@
 
 init python:
 
+    SUSPICION_BREAKPOINTS = [15, 35, 60, 85]
+
+    SUSPICION_CHARACTER_NAMES = {
+        "stern": "Miss Stern",
+        "vance": "Vance",
+        "gideon": "Sir Gideon",
+        "missy": "Missy",
+        "generic": "Someone",
+    }
+
+    SUSPICION_MONOLOGUES = {
+        ("vance", "noticed", "low"): ["Vance noticed the edge of my mask and said nothing."],
+        ("vance", "noticed", "medium"): ["Vance's eyes caught on mine for half a second too long."],
+        ("vance", "noticed", "high"): ["Vance saw something; not enough to accuse me, enough to remember."],
+        ("stern", "noticed", "low"): ["Miss Stern filed the moment away as neatly as a key returned to its hook."],
+        ("stern", "noticed", "medium"): ["Miss Stern said nothing, which was worse than a question."],
+        ("stern", "noticed", "high"): ["Miss Stern had seen the inconsistency and would not misplace it."],
+        ("gideon", "noticed", "low"): ["Sir Gideon smiled as if I had finally become interesting."],
+        ("gideon", "noticed", "medium"): ["Sir Gideon watched me as though patience were another form of ownership."],
+        ("gideon", "noticed", "high"): ["Sir Gideon had caught the shape of the lie and seemed almost pleased."],
+        ("missy", "noticed", "low"): ["Missy waited for the harmless explanation I had not prepared."],
+        ("missy", "noticed", "medium"): ["Missy's trust faltered, and the cost of that was suddenly plain."],
+        ("missy", "noticed", "high"): ["Missy looked at me as if I had made kindness into a trick."],
+        ("generic", "noticed", "low"): ["My mask held, but someone had seen the edge of it."],
+        ("generic", "noticed", "medium"): ["A glance shifted the room by an inch."],
+        ("generic", "noticed", "high"): ["A pause, a look, a change in the air; I felt it before I understood it."],
+        ("generic", "watching", "low"): ["The room had begun to study me back."],
+        ("generic", "watching", "medium"): ["Someone was arranging the pieces now."],
+        ("generic", "watching", "high"): ["The silence around me had learned to count."],
+        ("generic", "dangerous", "low"): ["Suspicion had become a pattern, and patterns could be followed."],
+        ("generic", "dangerous", "medium"): ["One more careless answer could make the pattern visible."],
+        ("generic", "dangerous", "high"): ["The walls were closing in now; my next mistake could finish me."],
+        ("generic", "critical", "low"): ["The next misstep would not be forgiven as clumsiness."],
+        ("generic", "critical", "medium"): ["The room was one breath from accusation."],
+        ("generic", "critical", "high"): ["There was almost no mask left to hold."],
+        ("generic", "fallback"): ["Something in the room shifted, not enough to name, enough to remember."],
+    }
+
+    def suspicion_tier(value):
+        if value >= 85:
+            return "critical"
+        if value >= 60:
+            return "dangerous"
+        if value >= 35:
+            return "watching"
+        if value >= 15:
+            return "noticed"
+        return "clear"
+
+    def anxiety_tier(value):
+        if value >= 70:
+            return "high"
+        if value >= 35:
+            return "medium"
+        return "low"
+
+    def crossed_suspicion_breakpoints(old, new):
+        if new <= old:
+            return []
+        return [breakpoint for breakpoint in SUSPICION_BREAKPOINTS if old < breakpoint <= new]
+
+    def get_suspicion_monologue(character, tier, anxiety, reason=None, scene_context=None):
+        candidates = []
+        if scene_context is not None and reason is not None:
+            candidates.append((character, tier, anxiety, reason, scene_context))
+        if reason is not None:
+            candidates.append((character, tier, anxiety, reason))
+        candidates.extend([
+            (character, tier, anxiety),
+            (character, tier),
+            ("generic", tier, anxiety),
+            ("generic", "fallback"),
+        ])
+        for key in candidates:
+            lines = SUSPICION_MONOLOGUES.get(key)
+            if lines:
+                return renpy.random.choice(lines)
+        return "Something in the room shifted, not enough to name, enough to remember."
+
+    def raise_suspicion(character, amount=0, base_amount=0, reason=None, scene_context=None, feedback=True):
+        if character not in player.tracked_characters:
+            raise ValueError("Unknown suspicion character '{}'. Must be one of: {}".format(
+                character,
+                ", ".join(player.tracked_characters),
+            ))
+
+        old = player.get_total_suspicion(character)
+        player.add_suspicion(character, acute_amount=amount, base_amount=base_amount)
+        new = player.get_total_suspicion(character)
+
+        if not feedback or old == new:
+            return new
+
+        renpy.call("suspicion_feedback_minor", character, old, new)
+
+        crossed = crossed_suspicion_breakpoints(old, new)
+        unseen = player.record_suspicion_breakpoints(character, crossed)
+        if unseen:
+            renpy.call("suspicion_breakpoint", character, unseen[-1], reason, scene_context)
+
+        return new
+
     def apply_effects(insp=0, corr=0, susp=0, 
                       stern_susp=0, stern_base=0, 
                       vance_susp=0, vance_base=0, 
@@ -34,15 +136,15 @@ init python:
         if susp != 0:
             raise ValueError("Legacy general 'susp' is deprecated. Suspicion must target a specific witness (stern_susp, vance_susp, missy_susp, gideon_susp).")
 
-        # Character-specific suspicions (acute & base):
+        # Character-specific suspicions (acute & base), processed deterministically.
         if stern_susp != 0 or stern_base != 0:
-            player.add_suspicion("stern", acute_amount=stern_susp, base_amount=stern_base)
+            raise_suspicion("stern", amount=stern_susp, base_amount=stern_base)
         if vance_susp != 0 or vance_base != 0:
-            player.add_suspicion("vance", acute_amount=vance_susp, base_amount=vance_base)
-        if missy_susp != 0 or missy_base != 0:
-            player.add_suspicion("missy", acute_amount=missy_susp, base_amount=missy_base)
+            raise_suspicion("vance", amount=vance_susp, base_amount=vance_base)
         if gideon_susp != 0 or gideon_base != 0:
-            player.add_suspicion("gideon", acute_amount=gideon_susp, base_amount=gideon_base)
+            raise_suspicion("gideon", amount=gideon_susp, base_amount=gideon_base)
+        if missy_susp != 0 or missy_base != 0:
+            raise_suspicion("missy", amount=missy_susp, base_amount=missy_base)
 
         player.update_stats()
         return success

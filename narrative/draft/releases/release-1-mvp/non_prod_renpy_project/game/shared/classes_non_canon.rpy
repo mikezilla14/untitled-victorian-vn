@@ -85,6 +85,12 @@ init -1 python:
             
             # The Tracking List
             self.tracked_characters = ["stern", "vance", "gideon", "missy"]
+            self.suspicion_breakpoints_seen = {
+                "stern": [],
+                "vance": [],
+                "gideon": [],
+                "missy": [],
+            }
             
             # ASYMPTOTIC DECAY RATES (d)
             self.decay_rates = {
@@ -122,6 +128,25 @@ init -1 python:
             base = getattr(self, "{}_base_susp".format(char), 0)
             acute = getattr(self, "{}_acute_susp".format(char), 0)
             return max(0, min(100, base + acute))
+
+        def _ensure_suspicion_breakpoints_seen(self):
+            if not hasattr(self, "suspicion_breakpoints_seen"):
+                self.suspicion_breakpoints_seen = {}
+            for char in self.tracked_characters:
+                if char not in self.suspicion_breakpoints_seen:
+                    self.suspicion_breakpoints_seen[char] = []
+
+        def record_suspicion_breakpoints(self, character, breakpoints):
+            """Record newly crossed suspicion breakpoints and return only unseen values."""
+            self._ensure_suspicion_breakpoints_seen()
+            seen = self.suspicion_breakpoints_seen[character]
+            newly_seen = []
+            for breakpoint in breakpoints:
+                if breakpoint not in seen:
+                    seen.append(breakpoint)
+                    newly_seen.append(breakpoint)
+            seen.sort()
+            return newly_seen
 
         def recalculate_anxiety(self):
             """

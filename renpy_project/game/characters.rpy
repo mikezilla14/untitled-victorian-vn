@@ -4,11 +4,11 @@
 #  To rename, recolour, or add a character: edit only this file.
 # ═══════════════════════════════════════════════════════════════
 
-define cora    = Character("Cora",      color="#d4a574")
-define cora_inner = Character(None, what_italic=True, what_color="#dfcbb5")
-define gideon  = Character("Sir Gideon", color="#a30000")
-define stern   = Character("Miss Stern", color="#555555")
-define vance   = Character("Vance",      color="#7b3f98")
-define missy   = Character("Missy",      color="#5fa8d3")
-define narrator = Character(None)
-define sys_msg     = Character("System",    color="#ffcc00")
+define cora    = Character("Cora",      color="#d4a574", callback=name_callback, cb_name="cora")
+define cora_inner = Character(None, what_italic=True, what_color="#dfcbb5", callback=name_callback, cb_name=None)
+define gideon  = Character("Sir Gideon", color="#a30000", callback=name_callback, cb_name="gideon")
+define stern   = Character("Miss Stern", color="#555555", callback=name_callback, cb_name="stern")
+define vance   = Character("Vance",      color="#7b3f98", callback=name_callback, cb_name="vance")
+define missy   = Character("Missy",      color="#5fa8d3", callback=name_callback, cb_name="missy")
+define narrator = Character(None, callback=name_callback, cb_name=None)
+define sys_msg     = Character("System",    color="#ffcc00", callback=name_callback, cb_name=None)

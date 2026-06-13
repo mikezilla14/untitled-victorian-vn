@@ -14,3 +14,10 @@ default hud_sidebar_visible = True
 
 # Legacy/alternate sidebar visibility used by screen sidebar().
 default sidebar_open = True
+
+# Auto-highlight speaker tracking.
+default speaking_char = None
+
+# Suspicion attention pulse state.
+default suspicion_focus = None
+default suspicion_focus_intensity = 0
