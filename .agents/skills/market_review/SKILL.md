@@ -1,6 +1,6 @@
 # Market Review (F95 / adult VN)
 
-Use only when the user **explicitly** requests market, F95, spice viability, or prod-vs-draft market comparison.
+Use only when the user **explicitly** requests **market** or F95 viability (read-only). To **change** erotic intensity levels, use [`spiciness_tuner`](../spiciness_tuner/SKILL.md) instead.
 
 ## What to do
 

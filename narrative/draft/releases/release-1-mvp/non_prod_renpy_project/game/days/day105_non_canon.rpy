@@ -116,7 +116,7 @@ label day105_2_the_summons:
     scene bg_master_suite_day
     with dissolve
 
-    show gideon_sprite dominant at center
+    show gideon_sprite dominant at centre_bust
 
     "The clock on the mantel has stopped."
     cora_inner "Or I have."
@@ -196,7 +196,7 @@ label day105_3_leverage_collapses:
     scene bg_master_suite_day
     with dissolve
 
-    show gideon_sprite dominant at center
+    show gideon_sprite dominant at centre_bust
 
     "He remains seated."
     "I remain standing."
@@ -314,7 +314,7 @@ label day105_4_why_did_you_do_it:
     scene bg_master_suite_day
     with dissolve
 
-    show gideon_sprite dominant at center
+    show gideon_sprite dominant at centre_bust
 
     gideon "Still."
 
@@ -375,7 +375,7 @@ label day105_4_motivation_observer:
     scene bg_master_suite_day
     with dissolve
 
-    show gideon_sprite dominant at center
+    show gideon_sprite dominant at centre_bust
 
     $ story.set_day5_dynamic("muse")
     $ story.set_cora_release1_flavour("observer")
@@ -422,7 +422,7 @@ label day105_4_motivation_predator:
     scene bg_master_suite_day
     with dissolve
 
-    show gideon_sprite dominant at center
+    show gideon_sprite dominant at centre_bust
 
     $ story.set_day5_dynamic("protege")
     $ story.set_cora_release1_flavour("predator")
@@ -470,7 +470,7 @@ label day105_4_motivation_prey:
     scene bg_master_suite_day
     with dissolve
 
-    show gideon_sprite dominant at center
+    show gideon_sprite dominant at centre_bust
 
     $ story.set_day5_dynamic("adversary")
     $ story.set_cora_release1_flavour("prey")
@@ -516,7 +516,7 @@ label day105_4_motivation_ghost:
     scene bg_master_suite_day
     with dissolve
 
-    show gideon_sprite dominant at center
+    show gideon_sprite dominant at centre_bust
 
     $ story.set_day5_dynamic("witness")
     $ story.set_cora_release1_flavour("ghost")
@@ -560,7 +560,7 @@ label day105_5_gideon_marks_cora:
     scene bg_master_suite_day
     with dissolve
 
-    show gideon_sprite dominant at center
+    show gideon_sprite dominant at centre_bust
 
     "Gideon turns away first."
     "Not because he is finished with me."

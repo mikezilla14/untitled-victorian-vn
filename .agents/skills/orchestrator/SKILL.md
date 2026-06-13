@@ -12,8 +12,11 @@ Use this skill for **any** cross-repo production task when the user has not alre
 ## Human docs
 
 - [AGENTS.md](../../../AGENTS.md) — catalog and quick start
+- [docs/agents/SKILL_CATALOG.md](../../../docs/agents/SKILL_CATALOG.md) — **skill → agent → pipeline → contract**
 - [docs/agents/GETTING_STARTED.md](../../../docs/agents/GETTING_STARTED.md)
 - [docs/agents/PIPELINE_REFERENCE.md](../../../docs/agents/PIPELINE_REFERENCE.md)
+
+**Not this skill:** prose-first Writer → `writer_*` skills + `writers_desk.md`. Documentation hygiene → `documentation_audit` + `documentation_steward.md`.
 
 ## Do not
 

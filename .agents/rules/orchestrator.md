@@ -5,6 +5,7 @@
 # Portability: Designed to run from any IDE (Cursor, VS Code, etc.) or Claude Code CLI.
 #              No tool-specific automation required — orchestration is sequential prompt chaining.
 # Human index: AGENTS.md (repo root) | Pipeline tables: docs/agents/PIPELINE_REFERENCE.md
+# Skill catalogue: docs/agents/SKILL_CATALOG.md (skill → agent → pipeline → contract)
 
 ## Purpose
 
@@ -16,28 +17,43 @@ When the request is ambiguous, ask **exactly one** clarifying question before ro
 
 ---
 
+## Entry lanes (pick before classifying)
+
+| Lane | Load as system prompt | Skill index |
+|------|------------------------|-------------|
+| Technical production | This file (`orchestrator.md`) | [`orchestrator`](../../.agents/skills/orchestrator/SKILL.md) |
+| Prose-first authoring | [`writers_desk.md`](writers_desk.md) or any `writer_*` skill | [`SKILL_CATALOG.md`](../../docs/agents/SKILL_CATALOG.md) § Writer's Desk |
+| Documentation hygiene | [`documentation_steward.md`](documentation_steward.md) | [`documentation_audit`](../../.agents/skills/documentation_audit/SKILL.md) |
+
+If the human uses plain-language scene/choice authoring, route to **Writer's Desk** (`writer-author`, `revise-narrative`, `rewrite-narrative`, or `flag-wiring-only`) — not `produce-day`.
+
+---
+
 ## Quick routing table
 
 | If the human wants to… | Pipeline | First agent to invoke |
 |------------------------|----------|------------------------|
-| Draft a new day end-to-end | `produce-day` | `writers_room` |
+| Author in plain language (any `writer_*` skill) | routes via Desk | `writers_desk` |
+| Draft a new day end-to-end (**technical** path) | `produce-day` | `writers_room` |
+| New scene/day after Desk intake | `writer-author` | `writers_desk` (stage 1) → `writers_room` (stage 2) |
 | Fix prose after code/review (brief OPEN) | `revise-narrative` | `writers_room` |
 | Rewrite a file, day, time period, or story chain event | `rewrite-narrative` | `writers_room` |
 | Review existing scene (canon/psych/history) | `review-scene` | three gates (parallel) |
-| F95 / market / spice viability audit | `market-review` | `adult_market_reviewer` |
-| Tune erotic intensity 1–5 | `spice-tune` | `spiciness_tuning_agent` |
+| F95 / adult VN market viability (read-only) | `market-review` | `adult_market_reviewer` |
+| Tune erotic intensity 1–5 or generate spice variants | `spice-tune` | `spiciness_tuning_agent` |
 | Sandbox Ren'Py for a spec | `implement-spec` | `non_prod_code_agent` |
 | Ship day to `renpy_project` | `promote-day` | `chief_architect` |
 | Ship classes/screens framework | `promote-framework` | `chief_architect` |
 | Ask a narrow 1891 question | `historical-check` | `victorian_consultant` |
 | Change locked canon | `canon-update` | `lead_narrative_editor` |
-| Update stale README/docs/specs and catalogue documentation | `documentation-audit` | `documentation_steward` |
+| Wire flag/effect only (Desk) | `flag-wiring-only` | `writers_desk` |
+| Docs/catalogue/README hygiene | `documentation-audit` | `documentation_steward` |
 | Code/architecture/lint review | — | `chief_architect` (no pipeline shortcut) |
 
-| Add, refresh, or recreate `.rpy` `[DAG_*]` comments | `dag-tag-update` | `non_prod_code_agent` |
+| Add, refresh, or recreate `.rpy` `[DAG_*]` comments | `dag-tag-update` | `non_prod_code_agent` (stage 1); `documentation_steward` (stage 2) |
 | Sync `story_board.md` after manual or agent `.rpy` rewrites | `storyboard-sync` | `documentation_steward` |
 
-Specialist rule files live under `.agents/rules/`. Full catalog: `AGENTS.md`.
+Specialist rule files: `.agents/rules/`. Agent table: `AGENTS.md`. Skill → pipeline map: `docs/agents/SKILL_CATALOG.md`.
 
 **Pipeline helper:** `py scripts/agent_next_step.py --pipeline <name> --stage <n> [--day 105] [--release release-1-mvp]`
 
@@ -63,6 +79,11 @@ agents to run in what order, and define what each agent should receive and retur
 - "Implement the approved day 105 non-canon draft."
 - "Revise day 103 dialogue: new `story.day3_ultimatum` branch needs matching prose (scale M)."
 - "Code added a flag in classes_non_canon — run narrative revision before continue implement-spec."
+- "Write the Day 3 corridor scene where Cora hides the letters." (prose-first → `writers_desk` → `writer-author`)
+- "Documentation audit — sync READMEs and refresh the catalogue."
+- "Refresh sprite staging on day 104." (`scene_direction` skill — not a pipeline)
+
+**Sandbox day path (MVP):** `narrative/draft/releases/<release>/non_prod_renpy_project/game/days/dayrdd_non_canon.rpy`
 
 ---
 
@@ -99,9 +120,11 @@ agents to run in what order, and define what each agent should receive and retur
 
 ---
 
-### 3. `market-review` — F95/adult VN market, spice, and production reality review
+### 3. `market-review` — F95/adult VN market viability (read-only)
 
-**Trigger:** Explicit market-language requests such as "F95 review", "market review", "spice audit", "adult market review", "tone and tension review", "assess prod for F95", "compare prod to non-canon for market/spice", or "deep dive market viability".
+**Trigger:** Explicit market-language requests such as "F95 review", "market review", "adult market review", "tone and tension review", "assess prod for F95", "compare prod to non-canon for **market**", or "deep dive market viability".
+
+**Not this pipeline:** tuning erotic intensity to level 1–5, making content hotter/milder, or generating spice level variants → `spice-tune` + [`spiciness_tuner`](../../.agents/skills/spiciness_tuner/SKILL.md).
 
 **Ambiguity guard:** Do **not** route bare "assess prod", "assess draft", "compare prod to non-canon", "review changes", or "evaluate before promotion" to this pipeline automatically. Those phrases may mean code/architecture review, canon/narrative review, market review, or prod/draft implementation drift. If the prompt does not clearly name the review lens, ask one concise follow-up question before invoking an agent.
 
@@ -117,7 +140,7 @@ agents to run in what order, and define what each agent should receive and retur
 - **`compare-prod-draft`**: compare paired `dayrdd_non_canon.rpy` and `renpy_project/game/dayrdd.rpy` files before promotion or drift repair.
 - **`deep-dive`**: review canon, planned MVP, backlog, and runtime together.
 
-**Authority boundary:** `adult_market_reviewer` is read-only. It may recommend rewrite, escalation, cut, defer, or promotion status, but it does not rewrite prose, edit canon, or change production. If the human approves a market rewrite, route the resulting task to `revise-narrative` or `produce-day` as appropriate.
+**Authority boundary:** `adult_market_reviewer` is read-only. It may recommend rewrite, escalation, cut, defer, or promotion status, but it does not rewrite prose, edit canon, or change production. If the human approves a market rewrite, route to `revise-narrative`, `spice-tune`, or `writer-author` as appropriate — not inline edits by the reviewer.
 
 **Common follow-up question for ambiguous assess/compare requests:** "Which lens should I use: code/architecture, canon/narrative, market/spice, or prod-vs-draft implementation drift?"
 
@@ -136,7 +159,8 @@ agents to run in what order, and define what each agent should receive and retur
 | 3 | `lead_narrative_editor` | Selected tuned draft | `PASS` / `REJECT` |
 | 4 | `forensic_psychology_consultant` | Selected tuned draft after narrative pass | `PSYCHOLOGICALLY CONSISTENT` / `PROFILE UPDATE REQUIRED` / `PSYCHOLOGICAL DRIFT` |
 | 5 | `victorian_consultant` | Selected tuned draft after psychology clears | `HISTORICALLY SOUND` / fantasy-bend notes / `MAJOR VIOLATION` |
-| 6 | `scene_direction` | Selected tuned draft after all gates clear | `[asset auto]` sprite lines refreshed if the tuned prose changed who is on screen; idempotent |
+
+Diagnosis-only (stage 1, no prose rewrite) ends at stage 1. When stages 2–5 ran and cast may have changed, run **scene direction post-process** (§ below) before any `non_prod_code_agent` handoff — this is not part of spice tuning logic.
 
 **Variant rule:** If the human requests multiple levels or "all 5", keep outputs as variants in `narrative/pipeline/experiments/` until the human selects one. Do not merge several levels into `dayrdd_non_canon.rpy`.
 
@@ -240,6 +264,34 @@ No downstream stages. Return directly to human.
 
 ---
 
+### 8B. `writer-author` — Prose-first new scene/day (Writer's Desk)
+
+**Trigger:** Plain-language authoring via [`writer_write_scene`](../../.agents/skills/writer_write_scene/SKILL.md) or equivalent after Desk intake.
+
+**Rule:** [`writers_desk.md`](writers_desk.md) · Spec: `docs/specs/writers-desk-agent-framework.md`
+
+| Stage | Agent | Input | Output |
+|-------|-------|-------|--------|
+| 1 | `writers_desk` | Writer plain language | `intents/dayrdd_authoring_intent.md` (+ `.json`) + advisory contract pre-check |
+| 2 | `writers_room` | Authoring Intent + scale S/M/L | Convergent draft + sequential gates |
+| 2.5 | `scene_direction` | Post-gate draft (if staged scenes) | `[asset auto]` lines only — § Scene direction post-process |
+| 3 | `non_prod_code_agent` | Directed draft | Shaped sandbox `.rpy`; verbatim prose |
+| 4 | `chief_architect` | Stage 3 output | `PASS` / `REJECT` |
+
+---
+
+### 8C. `flag-wiring-only` — Desk flag/effect wiring (no prose change)
+
+**Trigger:** [`writer_add_flag`](../../.agents/skills/writer_add_flag/SKILL.md) / [`writer_add_effect`](../../.agents/skills/writer_add_effect/SKILL.md) after Intent captures the request.
+
+| Stage | Agent | Input | Output |
+|-------|-------|-------|--------|
+| 1 | `writers_desk` | Plain-language flag/effect | Intent `requested_flags` / effects block |
+| 2 | `non_prod_code_agent` | Intent | `classes_non_canon.rpy` + notes |
+| 3 | `chief_architect` | Stage 2 output | Framework review; queue `promote-framework` when ready |
+
+---
+
 ### 9. `canon-update` — Modify a locked canon document
 
 **Trigger:** "Update [character/location/mechanics] canon to reflect [change]"
@@ -275,7 +327,7 @@ Ren'Py behavior, or art assets.
 
 ---
 
-### 11. `dag-tag-update` â€” Refresh DAG metadata comments
+### 11. `dag-tag-update` — Refresh DAG metadata comments
 
 **Trigger:** Human asks to add/update/recreate `[DAG_*]` tags, graph extraction reports missing tags,
 or a rewrite changed `.rpy` structure.
@@ -293,7 +345,7 @@ drift audit.
 
 ---
 
-### 12. `storyboard-sync` â€” Update storyboard from current scripts
+### 12. `storyboard-sync` — Update storyboard from current scripts
 
 **Trigger:** Manual `.rpy` rewrite, agent rewrite with structural changes, graph audit reports
 storyboard drift, or human asks to update `story_board.md`.
@@ -307,28 +359,46 @@ scripts and graph audit outputs. Do not use it as the machine-readable graph sou
 
 ---
 
+## Scene direction post-process (cross-cutting)
+
+**Not a pipeline.** Deterministic sprite placement via `scripts/scene_direction.py` and the `scene_direction` agent/skill. Touches `[asset auto]` `show`/`hide` lines only — never dialogue or gated prose.
+
+**Run when:** Writers' room gates pass on prose-changing work and the draft has staged scenes — immediately **before** `non_prod_code_agent` shapes or wraps the file.
+
+**Hooks in:** `produce-day` (after stage 1 gates, shown as 1.5 in that table), `rewrite-narrative` (1.5), `revise-narrative` (after stages 2–4, shown as 5.5), `writer-author` (after stage 2, before stage 3), and any other gated prose pass that may change on-screen cast (including `spice-tune` when stage 2 ran).
+
+**Skip when:** No staged scenes; diagnosis-only `spice-tune`; read-only pipelines (`market-review`, `review-scene`).
+
+```powershell
+py scripts/scene_direction.py --files "<dayrdd_non_canon.rpy>"
+py scripts/format_non_canon.py <same paths>
+```
+
+---
+
 ## Classification Logic
 
 When a task arrives, classify it before routing:
 
-1. Does it produce new story content / draft implementations? → `produce-day`
-2. Does it require **prose changes** because code/structure/review changed (brief filed)? → `revise-narrative`
-3. Does it ask to rewrite a file, day, time period, or story chain event? → `rewrite-narrative`
-4. Does it ask whether choices, motives, traits, profiles, or emotional behavior are psychologically consistent? → `forensic_psychology_consultant` (or `revise-narrative` if prose must change)
-5. Does it use bare "assess", "compare", "review changes", or "evaluate before promotion" without naming a lens? → Ask one follow-up question: code/architecture, canon/narrative, psychology/character consistency, market/spice, or prod-vs-draft implementation drift.
-6. Does it explicitly ask for adult VN/F95 market viability, spice, tone, fetish clarity, or whole-project market review? → `market-review`
-7. Does it ask to tune erotic intensity to level 1-5, make content hotter/milder, or generate spice variants? → `spice-tune`
-8. Does it review existing content for canon/historical accuracy without market focus? → `review-scene`
-9. Does it ask for code, architecture, Ren'Py, state, routing, lint, or implementation quality review? → `chief_architect`
-10. Does it ask for prod-vs-draft implementation drift before promotion? → `chief_architect` + `lead_narrative_editor` + `forensic_psychology_consultant` as needed; use `adult_market_reviewer` only if market/spice lens is explicitly requested too.
-11. Does it draft code for a spec in the writers' room sandbox? → `implement-spec` (if blocked on prose → `revise-narrative` first)
-12. Does it promote episodic drafts to production `renpy_project`? → `promote-day` (if prose drift → `revise-narrative` first)
-13. Does it promote class/framework drafts to production? → `promote-framework` (if prose drift → `revise-narrative` first)
-14. Is it a narrow historical question? → `historical-check`
-15. Does it modify a locked canon document? → `canon-update`
-16. Does it ask to update README files, project docs, specs, contracts, or the cross-project documentation catalogue? → `documentation-audit`
-17. Does it touch `.agents/`, `.guardrails.yml`, or system files outside documentation maintenance? → Route to `chief_architect` + human. No pipeline shortcut.
-18. Unclear? → Ask the human one clarifying question before routing.
+1. Is it **prose-first** plain-language authoring or any `writer_*` skill? → `writers_desk` → route per `writers_desk.md` (`writer-author`, `revise-narrative`, `rewrite-narrative`, `flag-wiring-only`).
+2. Is it **documentation hygiene** (READMEs, specs, catalogue, storyboard doc)? → `documentation_steward` / `documentation-audit`, `storyboard-sync`, or `dag-tag-update` stage 2.
+3. Does it produce a **new day** on the **technical** path ("produce day N" with no Desk)? → `produce-day`
+4. Does it require **prose changes** because code/structure/review changed (brief filed)? → `revise-narrative`
+5. Does it ask to rewrite a file, day, time period, or story chain event? → `rewrite-narrative`
+6. Does it ask whether choices, motives, traits, profiles, or emotional behavior are psychologically consistent? → `forensic_psychology_consultant` (or `revise-narrative` if prose must change)
+7. Does it use bare "assess", "compare", "review changes", or "evaluate before promotion" without naming a lens? → Ask one follow-up: code/architecture, canon/narrative, psychology, **market**, **spice tune**, or prod-vs-draft drift.
+8. Does it explicitly ask for adult VN/F95 **market** viability, tone/tension positioning, or promotion market verdict? → `market-review`
+9. Does it ask to **tune** erotic intensity to level 1–5, make content hotter/milder, or generate spice variants? → `spice-tune`
+10. Does it review existing content for canon/psych/history without market focus? → `review-scene`
+11. Does it ask for code, architecture, Ren'Py, state, routing, lint, or implementation quality review? → `chief_architect`
+12. Does it ask for prod-vs-draft implementation drift before promotion? → `chief_architect` + gates as needed; `adult_market_reviewer` only if market lens is explicit.
+13. Does it draft code for a spec in the sandbox? → `implement-spec` (if blocked on prose → `revise-narrative` first)
+14. Does it promote episodic drafts to `renpy_project`? → `promote-day`
+15. Does it promote class/framework drafts to production? → `promote-framework`
+16. Is it a narrow historical question? → `historical-check`
+17. Does it modify a locked canon document? → `canon-update`
+18. Does it touch `.agents/`, `.guardrails.yml`, or system files outside documentation maintenance? → `chief_architect` + human
+19. Unclear? → Ask the human one clarifying question before routing.
 
 ---
 

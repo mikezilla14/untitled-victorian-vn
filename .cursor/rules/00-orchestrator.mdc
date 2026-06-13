@@ -9,13 +9,19 @@ This project uses markdown-defined specialist agents coordinated by a **Producti
 
 ## Default behavior
 
-For production, narrative, promotion, review, spice tuning, or canon tasks:
+**Three entry lanes** (see [docs/agents/SKILL_CATALOG.md](docs/agents/SKILL_CATALOG.md)):
 
-1. Read [AGENTS.md](AGENTS.md) for the catalog and quick routing table.
-2. Follow [`.agents/rules/orchestrator.md`](.agents/rules/orchestrator.md) to classify the request and select a pipeline.
-3. If the user says "assess", "review", or "compare" without naming a lens (code, canon, psychology, market, prod-vs-draft), ask **one** clarifying question before acting.
-4. When executing a pipeline stage, apply the full rule file for that agent from `.agents/rules/`.
-5. Respect gate order on promotion drafts: lead narrative editor → forensic psychology → Victorian consultant (sequential).
+1. **Technical production** → [`.agents/rules/orchestrator.md`](.agents/rules/orchestrator.md)
+2. **Prose-first Writer** → [`.agents/rules/writers_desk.md`](.agents/rules/writers_desk.md) or a `writer_*` skill (routes to `writer-author`, not `produce-day`)
+3. **Documentation hygiene** → [`.agents/rules/documentation_steward.md`](.agents/rules/documentation_steward.md)
+
+For routed pipeline work:
+
+1. Read [AGENTS.md](AGENTS.md) and [SKILL_CATALOG.md](docs/agents/SKILL_CATALOG.md) for skill → pipeline → contract.
+2. Classify the request; if ambiguous ("assess", "review", "compare" without lens), ask **one** clarifying question.
+3. Apply the full agent rule from `.agents/rules/` per stage.
+4. After gated prose: `scene_direction` post-process before `non_prod_code_agent` (not part of spice-tune logic).
+5. Gate order on promotion drafts: lead narrative editor → forensic psychology → Victorian (sequential).
 
 ## Do not
 
@@ -33,4 +39,5 @@ For production, narrative, promotion, review, spice tuning, or canon tasks:
 
 - [docs/agents/GETTING_STARTED.md](docs/agents/GETTING_STARTED.md)
 - [docs/agents/PIPELINE_REFERENCE.md](docs/agents/PIPELINE_REFERENCE.md)
+- [docs/agents/SKILL_CATALOG.md](docs/agents/SKILL_CATALOG.md)
 - [docs/agents/CONTRACTS.md](docs/agents/CONTRACTS.md)

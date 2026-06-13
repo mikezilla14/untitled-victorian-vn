@@ -295,8 +295,8 @@ label day103_2_suite_gideon_tea:
     scene bg_master_suite_day
     with fade
 
-    show gideon_sprite neutral at right
-    show vance_sprite submissive at left
+    show gideon_sprite neutral at right_bust
+    show vance_sprite kneeling_cowed_dressing_gown at left_bust
 
     "The Master Suite receives me with the politeness of a trap."
     "Vance sits at the vanity. Her hands are folded in her lap, but the pale curve of her shoulders trembles slightly as the heavy aroma of warm silk and French powder rises between us."
@@ -312,7 +312,7 @@ label day103_2_suite_gideon_tea:
     # [ASSET] Visual/staging command
     with move # [asset keep]
     show cora_sprite base at left_bust with moveinleft # [asset auto]
-    show vance_sprite kneeling_cowed_dressing_gown at centre_bust with move # [asset auto]
+    
     show gideon_sprite neutral at right_bust with move # [asset auto]
     cora "Sir."
 
@@ -320,7 +320,7 @@ label day103_2_suite_gideon_tea:
     "The cups make a small sound against the table. Too loud, sharp in the afternoon quiet."
 
     gideon "Ms. Vance's maid is indisposed. You will assist her."
-
+    show vance_sprite kneeling_cowed_dressing_gown at centre_bust with move # [asset auto]
     vance "That is not necessary."
 
     gideon "It is not a negotiation."
@@ -351,8 +351,8 @@ label day103_2_suite_cora_vs_gideon:
     scene bg_master_suite_day
     with dissolve
 
-    show gideon_sprite neutral at right
-    show vance_sprite submissive at left
+    show gideon_sprite neutral at right_bust
+    show vance_sprite kneeling_cowed_dressing_gown at centre_bust
 
     "I draw the brush through Vance's hair."
     "It is heavier than it looks. Softer than she is, sliding through my fingertips like warm copper wire."
@@ -402,15 +402,18 @@ label day103_2_cora_vs_gideon_insp:
     scene bg_master_suite_day
     with dissolve
 
-    show gideon_sprite neutral at right
-    show vance_sprite submissive at left
+    show gideon_sprite neutral at right_bust
+    show cora_sprite base at centre_full_body
+    show vance_sprite kneeling_cowed_dressing_gown at centre_full_body:
+        zoom 0.75
+        ypos 1.1
 
     # [STATE] Predator/accomplice angle, but framed through craft rather than cartoon cruelty
     $ story.set_day3_brush_choice("predator")
     $ apply_effects(vance_susp=0, insp=20, corr=5)
 
     show cora_sprite base at left_bust with moveinleft # [asset auto]
-    show vance_sprite submissive at centre_bust with move # [asset auto]
+    show vance_sprite neutral_dressing_gown at centre_bust with move # [asset auto]
     show gideon_sprite neutral at right_bust with move # [asset auto]
     cora "Yes, Sir."
 
@@ -454,8 +457,8 @@ label day103_2_cora_vs_gideon_corr:
     scene bg_master_suite_day
     with dissolve
 
-    show gideon_sprite neutral at right
-    show vance_sprite submissive at left
+    show gideon_sprite neutral at right_bust
+    show vance_sprite submissive at left_bust
 
     # [STATE] Prey/deviant angle. Cora lets desire show and becomes visible
     $ story.set_day3_brush_choice("prey")
@@ -512,8 +515,8 @@ label day103_2_cora_vs_gideon_ghost:
     scene bg_master_suite_day
     with dissolve
 
-    show gideon_sprite neutral at right
-    show vance_sprite submissive at left
+    show gideon_sprite neutral at right_bust
+    show vance_sprite submissive at left_bust
 
     # [STATE] Ghost/mouse angle. Apparent panic, but Cora still records the scene
     $ story.set_day3_brush_choice("ghost")
@@ -560,8 +563,9 @@ label day103_2_suite_gideon_beat:
     scene bg_master_suite_day
     with dissolve
 
-    show gideon_sprite dominant at center
-    show vance_sprite submissive at left
+    show gideon_sprite dominant at centre_bust
+    show vance_sprite neutral_dressing_gown at centre_bust:
+        xpos 0.49
 
     "Vance is dismissed behind the dressing screen before the brushing is properly finished."
     "She goes because he expects her to go, her silk rustling in the dark corner."
@@ -803,7 +807,7 @@ label day103_4_room_stern_suspicion:
     cora_inner "Worse."
 
     # [ASSET] Visual/staging command
-    show stern_sprite stern at center
+    show stern_sprite stern at centre_bust
 
     stern "Open."
 
@@ -931,7 +935,7 @@ label day103_2_suite_night_tea:
     cora_inner "That is because it contains a choice."
 
     # [ASSET] Visual/staging command
-    show gideon_sprite dominant at center
+    show gideon_sprite dominant at centre_bust
 
     gideon "You came."
 
@@ -1016,7 +1020,7 @@ label day103_2_night_defy_gideon:
     scene bg_master_suite_night
     with dissolve
 
-    show gideon_sprite dominant at center
+    show gideon_sprite dominant at centre_bust
 
     $ story.set_day3_ultimatum("defied")
     $ apply_effects(vance_susp=20, insp=20, corr=0)
@@ -1065,7 +1069,7 @@ label day103_2_night_bargain_gideon:
     scene bg_master_suite_night
     with dissolve
 
-    show gideon_sprite dominant at center
+    show gideon_sprite dominant at centre_bust
 
     $ story.set_day3_ultimatum("bargained")
     $ apply_effects(vance_susp=10, insp=15, corr=10)
@@ -1124,7 +1128,7 @@ label day103_2_night_surrender_gideon:
     scene bg_master_suite_night
     with dissolve
 
-    show gideon_sprite dominant at center
+    show gideon_sprite dominant at centre_bust
 
     $ story.set_day3_ultimatum("surrendered")
     $ apply_effects(vance_susp=15, insp=10, corr=25)

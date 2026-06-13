@@ -4,22 +4,25 @@ This repository uses **documentation-driven agent orchestration**: specialist ro
 
 ## Quick start (zero prior knowledge)
 
-1. Open [`.agents/rules/orchestrator.md`](.agents/rules/orchestrator.md).
-2. Paste the **entire file** as the system prompt for your AI session.
-3. Describe your task in plain language.
+Pick an **entry lane**, paste the rule file (or enable the matching skill), describe your task in plain language.
 
-**Examples:**
+| Lane | Load as system prompt | Example prompt |
+|------|------------------------|----------------|
+| Technical production | [`.agents/rules/orchestrator.md`](.agents/rules/orchestrator.md) | "Produce day 106: Cora finds the ledger discrepancy" → `produce-day` |
+| Prose-first (Writer) | [`.agents/rules/writers_desk.md`](.agents/rules/writers_desk.md) or a `writer_*` skill | "Write the Day 3 corridor scene where Cora hides the letters" → `writer-author` |
+| Documentation hygiene | [`.agents/rules/documentation_steward.md`](.agents/rules/documentation_steward.md) | "Documentation audit — sync READMEs" → `documentation-audit` |
 
-| You say | Orchestrator runs |
-|---------|-------------------|
-| "Produce day 106: Cora finds the ledger discrepancy" | `produce-day` |
+**Full skill index:** [`docs/agents/SKILL_CATALOG.md`](docs/agents/SKILL_CATALOG.md) (skill → agent → pipeline → contract).
+
+**More examples (technical lane via orchestrator):**
+
+| You say | Pipeline |
+|---------|----------|
 | "Review day 103 for canon and history" | `review-scene` |
 | "Promote day 105 to production" | `promote-day` |
 | "Tune this scene to spice level 3" | `spice-tune` |
 | "F95 market review of prod" | `market-review` |
 | "Can Cora have a typewriter in 1891?" | `historical-check` |
-| "Update stale README files and catalogue docs" | `documentation-audit` |
-| "Write the Day 3 corridor scene where Cora hides the letters" (prose-first, non-technical author) | Writer's Desk → `produce-day` |
 
 If the orchestrator is unsure (e.g. bare "assess prod"), it will ask **one** clarifying question before routing.
 
@@ -52,6 +55,7 @@ flowchart TD
 | [`.agents/README.md`](.agents/README.md) | Agent catalog, skills, folder layout |
 | [`docs/agents/GETTING_STARTED.md`](docs/agents/GETTING_STARTED.md) | Step-by-step for first-time users |
 | [`docs/agents/PIPELINE_REFERENCE.md`](docs/agents/PIPELINE_REFERENCE.md) | All pipelines, triggers, stages |
+| [`docs/agents/SKILL_CATALOG.md`](docs/agents/SKILL_CATALOG.md) | **Canonical** skill → agent → pipeline → contract index |
 | [`docs/agents/CONTRACTS.md`](docs/agents/CONTRACTS.md) | Handoffs, guardrails, validation tools |
 | [`docs/agents/BRANCH_WORKFLOW_CONTRACT.md`](docs/agents/BRANCH_WORKFLOW_CONTRACT.md) | Branch/worktree hygiene for multi-tool agent handoffs |
 | [`docs/narrative_workflow.md`](docs/narrative_workflow.md) | MVP narrative loop (human-readable) |
@@ -78,45 +82,24 @@ Load the linked `.md` file as the **full system prompt** when the orchestrator n
 | Chief architect | [`.agents/rules/chief_architect.md`](.agents/rules/chief_architect.md) | Architecture / review |
 | Gatekeeper orchestrator | [`.agents/rules/gatekeeper_orchestrator.md`](.agents/rules/gatekeeper_orchestrator.md) | PR / domain checks |
 | Documentation steward | [`.agents/rules/documentation_steward.md`](.agents/rules/documentation_steward.md) | README/docs/spec sync + catalogue |
-| Writer's Desk (prose-first concierge) | [`.agents/rules/writers_desk.md`](.agents/rules/writers_desk.md) | Sandbox `narrative/draft/**`, `narrative/pipeline/**` (routes to existing pipelines) |
+| Writer's Desk (prose-first concierge) | [`.agents/rules/writers_desk.md`](.agents/rules/writers_desk.md) | `intents/**`, `exceptions/**` only — routes to `writer-author`, `revise-narrative`, `rewrite-narrative`, `flag-wiring-only` |
 
 Writers' room sub-index: [`.agents/rules/writers_room/README.md`](.agents/rules/writers_room/README.md).
 
-## Cursor skills (optional discovery)
+## Cursor skills
 
-Skills under [`.agents/skills/`](.agents/skills/) wrap common workflows for Cursor's skill picker:
+Skills under [`.agents/skills/`](.agents/skills/) are thin wrappers: each loads an agent rule, names one pipeline (or cross-cutting step), and lists contracts/commands.
 
-| Skill | When to use |
-|-------|-------------|
-| [`orchestrator`](.agents/skills/orchestrator/SKILL.md) | Any production task — **default entry** |
-| [`produce_day`](.agents/skills/produce_day/SKILL.md) | Draft a new day end-to-end |
-| [`promote_day`](.agents/skills/promote_day/SKILL.md) | Move approved draft to `renpy_project/` |
-| [`review_scene`](.agents/skills/review_scene/SKILL.md) | Canon + psychology + history review |
-| [`revise_narrative`](.agents/skills/revise_narrative/SKILL.md) | Code/editor-driven prose repair |
-| [`rewrite_narrative`](.agents/skills/rewrite_narrative/SKILL.md) | Full rewrite of a file, day, time period, or story chain event |
-| [`implement_spec`](.agents/skills/implement_spec/SKILL.md) | Sandbox Ren'Py wrap |
-| [`market_review`](.agents/skills/market_review/SKILL.md) | F95 / market read-only review |
-| [`historical_check`](.agents/skills/historical_check/SKILL.md) | Narrow 1891 question |
-| [`divergent_writer`](.agents/skills/divergent_writer/SKILL.md) | Single persona spec script |
-| [`convergent_writer`](.agents/skills/convergent_writer/SKILL.md) | Synthesis pass |
-| [`spiciness_tuner`](.agents/skills/spiciness_tuner/SKILL.md) | Spice levels 1–5 |
-| [`check_assets`](.agents/skills/check_assets/SKILL.md) | Validate asset manifest sync |
-| [`scene_direction`](.agents/skills/scene_direction/SKILL.md) | Deterministic sprite placement post-process |
-| [`branch_handoff`](.agents/skills/branch_handoff/SKILL.md) | Branch/worktree preflight and multi-tool handoff hygiene |
-| [`documentation_audit`](.agents/skills/documentation_audit/SKILL.md) | Sync stale docs/readmes/specs and refresh the generated catalogue |
-| [`dag_tag_update`](.agents/skills/dag_tag_update/SKILL.md) | Add, refresh, or recreate `.rpy` `[DAG_*]` comments while preserving human `manual` tags by default |
-| [`storyboard_sync`](.agents/skills/storyboard_sync/SKILL.md) | Update `story_board.md` from current `.rpy` scripts and graph audit outputs after manual or agent rewrites |
-| [`daily_standup`](.agents/skills/daily_standup/SKILL.md) | Run the Daily Standup check-in ceremony (sprint timeline, backlog, and codebase health grades) |
-| [`action_from_standup`](.agents/skills/action_from_standup/SKILL.md) | Resolve standup queue items to specs and execute via code/prose agents |
-| [`writer_write_scene`](.agents/skills/writer_write_scene/SKILL.md) | **Prose-first**: author a new scene/day in plain language (Writer's Desk) |
-| [`writer_rewrite_scene`](.agents/skills/writer_rewrite_scene/SKILL.md) | **Prose-first**: rewrite/revise existing content in plain language |
-| [`writer_add_flag`](.agents/skills/writer_add_flag/SKILL.md) | **Prose-first**: track something new (boolean default; prompts for allowed values otherwise) |
-| [`writer_add_effect`](.agents/skills/writer_add_effect/SKILL.md) | **Prose-first**: attach a stat consequence in emotional terms |
-| [`writer_add_branch`](.agents/skills/writer_add_branch/SKILL.md) | **Prose-first**: add a choice/branch by meaning (Observer/Predator/Prey/Ghost) |
-| [`writer_write_book`](.agents/skills/writer_write_book/SKILL.md) | **Prose-first**: author Book1 (Holywell Street) manuscript prose |
-| [`writer_contract_check`](.agents/skills/writer_contract_check/SKILL.md) | **Prose-first**: full-fidelity advisory contract pre-check before gates |
-| [`writer_log_exception`](.agents/skills/writer_log_exception/SKILL.md) | **Prose-first**: log a self-signed, impact-acknowledged contract override |
-| [`writer_status`](.agents/skills/writer_status/SKILL.md) | **Prose-first**: plain-language "what's left before this is safe to ship?" |
+**Canonical table (skill → agent → pipeline → contract):** [`docs/agents/SKILL_CATALOG.md`](docs/agents/SKILL_CATALOG.md)
+
+| Category | Skills |
+|----------|--------|
+| **Entry** | `orchestrator`, `documentation_audit` |
+| **Pipeline (1:1)** | `produce_day`, `writer_write_scene`, `promote_day`, `review_scene`, `revise_narrative`, `rewrite_narrative`, `implement_spec`, `market_review`, `spiciness_tuner`, `historical_check`, `storyboard_sync`, `dag_tag_update` |
+| **Writer's Desk** | `writer_rewrite_scene`, `writer_add_flag`, `writer_add_effect`, `writer_add_branch`, `writer_write_book`, `writer_contract_check`, `writer_log_exception`, `writer_status` |
+| **Cross-cutting** | `scene_direction`, `check_assets`, `branch_handoff`, `divergent_writer`, `convergent_writer` |
+| **Planning** | `daily_standup`, `action_from_standup` |
+| **Specialist** | `book_writing_engine`, `art_production` |
 
 
 ## Pipeline helper (manual chaining)

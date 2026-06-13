@@ -4,19 +4,20 @@ This guide assumes you have never used this repo's agents before.
 
 ## What you are doing
 
-You are **chaining AI sessions** (or one long session) where each step uses a different "role" defined in markdown. The **Production Orchestrator** is the only role that plans the sequence; everyone else executes one slice of work.
+You are **chaining AI sessions** (or one long session) where each step uses a different "role" defined in markdown. The **Production Orchestrator** plans technical production sequences; **Writer's Desk** and **Documentation steward** are alternate entry lanes for prose-first and docs work.
 
 You are **not** running a local agent server. Cursor/Claude does the inference; this repo supplies the instructions.
 
 ## Step 1 — Pick your entry
 
-| Goal | Load this as system prompt |
-|------|----------------------------|
-| Any production task (recommended) | [`.agents/rules/orchestrator.md`](../../.agents/rules/orchestrator.md) |
-| Write or revise story only | [`.agents/rules/writers_room.md`](../../.agents/rules/writers_room.md) |
-| One historical question | [`.agents/rules/victorian_consultant.md`](../../.agents/rules/victorian_consultant.md) |
+| Goal | Load this as system prompt | Skill picker |
+|------|----------------------------|--------------|
+| Technical production (days, code, promotion) | [`.agents/rules/orchestrator.md`](../../.agents/rules/orchestrator.md) | `orchestrator` |
+| Prose-first authoring (plain language) | [`.agents/rules/writers_desk.md`](../../.agents/rules/writers_desk.md) | `writer_write_scene`, `writer_rewrite_scene`, … |
+| Documentation / catalogue hygiene | [`.agents/rules/documentation_steward.md`](../../.agents/rules/documentation_steward.md) | `documentation_audit` |
+| One historical question only | [`.agents/rules/victorian_consultant.md`](../../.agents/rules/victorian_consultant.md) | `historical_check` |
 
-In Cursor you can also enable the project rule **"Victorian VN — use orchestrator"** (`.cursor/rules/00-orchestrator.mdc`) or pick a skill from `.agents/skills/`.
+Full skill index: [`SKILL_CATALOG.md`](SKILL_CATALOG.md). In Cursor, enable project rule **"Victorian VN — use orchestrator"** (`.cursor/rules/00-orchestrator.mdc`) or pick a skill from `.agents/skills/`.
 
 ## Step 2 — State your task clearly
 
@@ -50,7 +51,7 @@ Do not improvise gate order. On new promotion drafts the order is always:
 | Divergent spec scripts | `narrative/pipeline/releases/<release>/dayrdd_<persona>_spec.rpy` |
 | Idea sidecars (not assignment context) | `narrative/pipeline/releases/<release>/dayrdd_<persona>_ideas.md` |
 | Convergent report | `narrative/pipeline/releases/<release>/dayrdd_convergent_report.md` |
-| Promotion draft | `narrative/draft/releases/<release>/dayrdd_non_canon.rpy` |
+| Promotion draft (MVP sandbox) | `narrative/draft/releases/<release>/non_prod_renpy_project/game/days/dayrdd_non_canon.rpy` |
 | Gate verdicts | `narrative/pipeline/releases/<release>/dayrdd_gate_*.md` |
 | Production day | `renpy_project/game/dayrdd.rpy` |
 

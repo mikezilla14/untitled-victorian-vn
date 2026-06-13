@@ -18,7 +18,7 @@ Each specialist returns:
 | References | File paths for any violation |
 | Fix list | Concrete actions if rejecting |
 
-Defined in [`.agents/rules/orchestrator.md`](../../.agents/rules/orchestrator.md) § Handoff Contract.
+Defined in [`.agents/rules/orchestrator.md`](../../.agents/rules/orchestrator.md) § Handoff Contract. Skill → pipeline mapping: [`SKILL_CATALOG.md`](SKILL_CATALOG.md).
 
 ## Branch/worktree hygiene
 
@@ -49,7 +49,7 @@ Enforcement:
 py scripts/gatekeeper.py --agent writers_room --files "path/to/file"
 ```
 
-Registered agents: `chief_architect`, `lead_narrative_editor`, `forensic_psychology_consultant`, `writers_room`, `spiciness_tuning_agent`, `victorian_consultant`, `prod_code_agent`, `non_prod_code_agent`, `gatekeeper_orchestrator`, `orchestrator`, `adult_market_reviewer` (read-only — no mutable paths).
+Registered agents: `chief_architect`, `lead_narrative_editor`, `forensic_psychology_consultant`, `writers_room`, `spiciness_tuning_agent`, `victorian_consultant`, `prod_code_agent`, `non_prod_code_agent`, `scene_direction`, `documentation_steward`, `writers_desk`, `gatekeeper_orchestrator`, `orchestrator`, `adult_market_reviewer` (read-only — no mutable paths).
 
 Sub-agents (`divergent_writer`, `convergent_writer`) operate under `writers_room` permissions.
 
@@ -100,8 +100,10 @@ and is regenerated with `py scripts/documentation_audit.py --write`.
 |----------|-----------|--------|
 | Gate verdict | `dayrdd_gate_<gate>.json` | `gate_verdict.schema.json` |
 | Narrative change brief | `dayrdd_narrative_change_brief.json` | `narrative_change_brief.schema.json` |
+| Authoring intent (Writer's Desk) | `intents/dayrdd_authoring_intent.json` | `authoring_intent.schema.json` |
 | Profile delta | `dayrdd_profile_delta.json` | `profile_delta.schema.json` |
 | Promotion handoff | `dayrdd_promotion_handoff.json` | `promotion_handoff.schema.json` |
+| Documentation catalogue | `docs/documentation_catalog.json` | `documentation_catalog.schema.json` |
 
 JSON `verdict` values use underscores (e.g. `PSYCHOLOGICALLY_CONSISTENT`); markdown may use spaces. CI checks that both agree.
 

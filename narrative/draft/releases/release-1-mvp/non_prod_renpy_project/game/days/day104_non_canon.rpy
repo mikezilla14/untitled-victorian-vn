@@ -233,8 +233,8 @@ label day104_2_escape_fireplace:
     "I close the lockbox, shove it beneath the correspondence, and crawl into the cold soot with the photograph against my chest."
 
     # [ASSET] Visual/staging command
-    show gideon_sprite angry at right
-    show vance_sprite angry at left
+    show gideon_sprite angry at right_bust
+    show vance_sprite angry at left_bust
 
     "They enter arguing."
     "Vance first, bright with grievance. Gideon behind her, quiet enough to make the silence arrange itself around him."
@@ -290,8 +290,8 @@ label day104_2_escape_bold_lie:
     "By the time the door opens, I am wiping the desk as if mahogany has personally insulted Miss Stern."
 
     # [ASSET] Visual/staging command
-    show vance_sprite angry at left
-    show gideon_sprite angry at right
+    show vance_sprite angry at left_bust
+    show gideon_sprite angry at right_bust
 
     vance "What is she doing here?"
 
@@ -381,7 +381,7 @@ label day104_2_escape_missy_cover:
     with fade
 
 
-    show missy_sprite shocked at center
+    show missy_sprite shocked at centre_bust
 
     "Missy is in the corridor with a stack of towels."
     cora_inner "Wrong place. Right time."
@@ -489,7 +489,7 @@ label day104_3_stern_pressure:
         "I had handed her a target and called it haste."
 
     # [ASSET] Visual/staging command
-    show stern_sprite stern at center
+    show stern_sprite stern at centre_bust
 
     stern "Cora."
 
@@ -691,7 +691,7 @@ label day104_4_missy_repair:
     scene bg_servants_quarters_dusk
     with dissolve
 
-    show missy_sprite shocked at center
+    show missy_sprite shocked at centre_bust
 
     $ story.set_day4_twilight_action("missy_repair")
     $ apply_effects(missy_susp=-15, insp=5, corr=0)

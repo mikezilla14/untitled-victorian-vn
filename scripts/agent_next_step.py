@@ -20,8 +20,13 @@ RULES = ROOT / ".agents" / "rules"
 
 PIPELINES: dict[str, list[dict]] = {
     "produce-day": [
-        {"stage": 1, "agent": "writers_room", "note": "Workflow A: divergent -> convergent -> 3 gates (sequential)"},
-        {"stage": 2, "agent": "non_prod_code_agent", "note": "After all gates pass; verbatim prose"},
+        {
+            "stage": 1,
+            "agent": "writers_room",
+            "note": "Workflow A: divergent -> convergent -> 3 gates (sequential)",
+            "after_gates": "scene_direction",
+        },
+        {"stage": 2, "agent": "non_prod_code_agent", "note": "After gates + scene_direction post-process; verbatim prose"},
         {"stage": 3, "agent": "chief_architect", "note": "Sandbox code validation"},
     ],
     "review-scene": [
@@ -40,7 +45,12 @@ PIPELINES: dict[str, list[dict]] = {
         {"stage": 2, "agent": "writers_room", "note": "If prose must change"},
         {"stage": 3, "agent": "lead_narrative_editor"},
         {"stage": 4, "agent": "forensic_psychology_consultant"},
-        {"stage": 5, "agent": "victorian_consultant"},
+        {
+            "stage": 5,
+            "agent": "victorian_consultant",
+            "after_gates": "scene_direction",
+            "note": "If stages 2-5 ran and cast may have changed",
+        },
     ],
     "implement-spec": [
         {"stage": 1, "agent": "non_prod_code_agent"},
@@ -65,13 +75,23 @@ PIPELINES: dict[str, list[dict]] = {
         {"stage": 1, "agent": "writers_room", "note": "Brief scale S/M/L -> workflows B / partial / A"},
         {"stage": 2, "agent": "lead_narrative_editor"},
         {"stage": 3, "agent": "forensic_psychology_consultant"},
-        {"stage": 4, "agent": "victorian_consultant"},
+        {
+            "stage": 4,
+            "agent": "victorian_consultant",
+            "after_gates": "scene_direction",
+            "note": "After stage 4 clears: scene_direction for touched scenes if staged",
+        },
         {"stage": 5, "agent": "writers_room", "note": "Close brief; handoff to requester"},
         {"stage": 6, "agent": "non_prod_code_agent", "note": "Typical resume target"},
     ],
     "rewrite-narrative": [
-        {"stage": 1, "agent": "writers_room", "note": "Workflow A: full divergent pool -> convergent -> 3 gates (sequential)"},
-        {"stage": 2, "agent": "non_prod_code_agent", "note": "After all gates pass; verbatim prose"},
+        {
+            "stage": 1,
+            "agent": "writers_room",
+            "note": "Workflow A: full divergent pool -> convergent -> 3 gates (sequential)",
+            "after_gates": "scene_direction",
+        },
+        {"stage": 2, "agent": "non_prod_code_agent", "note": "After gates + scene_direction post-process; verbatim prose"},
         {"stage": 3, "agent": "chief_architect", "note": "Sandbox code validation"},
     ],
     "canon-update": [
@@ -109,8 +129,13 @@ PIPELINES: dict[str, list[dict]] = {
             "agent": "writers_desk",
             "note": "Prose-first intake -> Authoring Intent (intents/dayrdd_authoring_intent.md) -> full-fidelity contract pre-check (advisory)",
         },
-        {"stage": 2, "agent": "writers_room", "note": "Convergent/gates on captured prose (scale S/M/L)"},
-        {"stage": 3, "agent": "non_prod_code_agent", "note": "Shape verbatim prose + tags + DAG/asset sync after gates pass"},
+        {
+            "stage": 2,
+            "agent": "writers_room",
+            "note": "Convergent/gates on captured prose (scale S/M/L)",
+            "after_gates": "scene_direction",
+        },
+        {"stage": 3, "agent": "non_prod_code_agent", "note": "Shape verbatim prose + tags + DAG/asset sync after gates + scene_direction"},
         {"stage": 4, "agent": "chief_architect", "note": "Sandbox code validation"},
     ],
     "flag-wiring-only": [
@@ -144,6 +169,7 @@ AGENT_FILES: dict[str, str] = {
     "gatekeeper_orchestrator": "gatekeeper_orchestrator.md",
     "documentation_steward": "documentation_steward.md",
     "writers_desk": "writers_desk.md",
+    "scene_direction": "scene_direction_agent.md",
     "human": "(no rule file — human decision)",
 }
 
@@ -175,6 +201,13 @@ def print_stage(pipeline: str, step: dict, day: str | None, release: str | None)
         print(f"Rule file: {path.relative_to(ROOT).as_posix()}")
     if step.get("note"):
         print(f"Note: {step['note']}")
+    if step.get("after_gates"):
+        agent = step["after_gates"]
+        path = rule_path(agent)
+        print(f"After gates pass: run {agent} post-process (cross-cutting, not next --stage)")
+        if path:
+            print(f"  Rule/skill: {path.relative_to(ROOT).as_posix()} · .agents/skills/scene_direction/SKILL.md")
+        print("  Command: py scripts/scene_direction.py --files \"<sandbox dayrdd_non_canon.rpy>\"")
     if day and release:
         dd = day.replace("day", "") if day.startswith("day") else day
         rid = day if day.startswith("day") else f"day{dd}"
