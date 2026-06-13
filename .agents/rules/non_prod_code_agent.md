@@ -23,15 +23,22 @@ You implement approved drafts and explore new mechanics strictly inside the non-
    - **Mutually exclusive branches:** Do not model one-of-N outcomes with several booleans. Use a single string field with a default sentinel (e.g. `day1_corridor_state = "none"`) and a designated whitelist + setter (e.g. `VALID_CORRIDOR_STATES` + `set_corridor_state(...)`).
    - **String state updates in scripts:** Never assign a whitelisted branch string directly (e.g. `story.day1_corridor_state = "predator"`). Use only the designated setter: `story.set_corridor_state("predator")`.
 5. **Bracket Interpolation Check.** Scan every menu caption and dialogue string in your draft files for `[Word]` patterns where `Word` is a single CamelCase or PascalCase token that is not a defined runtime variable. These must be escaped to `[[Word]]` to prevent runtime `NameError` exceptions.
-6. **Book Writing Flag Compilation.** When the Writers' Room requests or works on new `book1` manuscript chapters (such as Day 2 chapters) or rewrites, you must compile a comprehensive list of all active story flags, stats, and gameplay states up to that point in the story. Supply this list directly to the Writers' Room to enable conditional branching in the inline macro system. Refer to the [Book Writing Contract](../../docs/contracts/book_writing_contract.md) for usage.
+6. **Book Writing Context Packet.** When the Writers' Room requests or works on new `book1` manuscript chapters (such as Day 2 chapters) or rewrites, you must compile a comprehensive writer-facing context packet for the target chapter/day. Supply it to the Writers' Room before prose drafting. The packet must include:
+   - all active `story` flags, whitelisted string states, player stats, and gameplay states available up to that chapter;
+   - a short plain-English summary of the real-life Savoy story so far;
+   - the target chapter key, bucket labels, and currently reachable `book1_block_*` labels;
+   - any approved manuscript CG/image names available to the chapter.
+   Book1 prose is label-based. Do **not** ask writers to use inline curly-brace macros or `BOOK1_PAYLOADS`; those are retired for active MVP prose. Refer to the [Book Writing Contract](../../docs/contracts/book_writing_contract.md) for usage.
+7. **Book Writing Technical Boundary.** For Book1 work, you own only Ren'Py structure: `book1_block_*` labels, calls to `book1_nvl_write_line(...)`, explicit `call book1_set_page_image("image_name")` image changes when approved, and routing-table edits only when a new top-level chapter key or bucket is required. You must preserve Writers' Room manuscript prose verbatim and never invent missing Book1 lines.
    - **LLM Safety Guardrails Fallback**: If the Writers' Room output contains SFW summaries tagged as `[HUMAN WRITE: SFW summary of suggestive scene details]`, preserve this tag verbatim in the implemented `.rpy` draft structure so it can be identified for human intervention.
 
 ---
 
 ## Workflow: Non-Prod Implementation Mode
 
-1. **Load Spec & Dialogue:** Read the task brief and the approved draft text (`dayrdd_non_canon.rpy`) from `narrative/draft/` or lead narrative editor. If working on `book1` chapter prose, compile all active story flags and pass them to the Writers' Room per the [Book Writing Contract](../../docs/contracts/book_writing_contract.md) contract.
+1. **Load Spec & Dialogue:** Read the task brief and the approved draft text (`dayrdd_non_canon.rpy`) from `narrative/draft/` or lead narrative editor. If working on `book1` chapter prose, compile the Book Writing Context Packet and pass it to the Writers' Room per the [Book Writing Contract](../../docs/contracts/book_writing_contract.md).
 2. **Draft Code Structure:** Write clean Ren'Py labels, menus, and Python blocks. Copy dialogue and prose verbatim into the code blocks.
+   - For Book1, write or update label-based manuscript blocks only: `book1_block_dayN_bucket_core` and optional reusable `book1_block_dayN_*` beats. Use `call book1_nvl_write_line("...", word_delay=_book1_word_delay)` for manuscript paragraphs and explicit `call book1_set_page_image("...")` for right-frame image changes.
 3. **Handle Custom Class Mockups:** If the draft requires new properties or methods:
    - Copy `classes.rpy` to `narrative/draft/classes_non_canon.rpy` if it doesn't already exist.
    - Mock up the new methods/fields in `classes_non_canon.rpy`.

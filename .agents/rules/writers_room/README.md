@@ -34,6 +34,8 @@ Writing orchestration rules live in the parent `.agents/rules/` directory (flat 
 
 **Spice tuning:** If a task specifies level 1-5, a subset, or all levels, load [../spiciness_tuning_agent.md](../spiciness_tuning_agent.md). Single-level drafts proceed through normal writers-room gates. Multi-level outputs stay in `narrative/pipeline/experiments/` until the human selects a variant.
 
+**Book/chapter writing:** If a task asks to write or rewrite Cora's Book1 manuscript/chapter prose, route through [`../../skills/writer_write_book/SKILL.md`](../../skills/writer_write_book/SKILL.md) or [`../../skills/book_writing_engine/SKILL.md`](../../skills/book_writing_engine/SKILL.md). Book1 uses label-based `book1_block_*` prose, ordinary Ren'Py branching, and explicit image cues for `book1_set_page_image(...)`; do not use inline curly-brace macros.
+
 **Revisions (code, editor, or psychology):** `non_prod_code_agent`, `lead_narrative_editor`, or `forensic_psychology_consultant` files `dayrdd_narrative_change_brief.md` → workflows **D/E/E2** (scale S/M/L). Orchestrator: `revise-narrative`.
 
 ## Outputs (see also [narrative/pipeline/README.md](../../../narrative/pipeline/README.md))

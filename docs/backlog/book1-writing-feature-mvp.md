@@ -6,7 +6,8 @@ This backlog tracks the remaining work required before the Book1 manuscript rend
 
 ## Current State
 
-- Non-prod Book1 rendering lives in `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/book1_non_canon.rpy`.
+- Non-prod Book1 engine/routing lives in `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/book1_non_canon.rpy`.
+- Book1 manuscript prose lives in per-day files: `book1_day101_non_canon.rpy` through `book1_day105_non_canon.rpy`.
 - Active MVP chapters route through label-based prose blocks.
 - `book1_nvl_write_line(...)` provides word-by-word reveal and 4-line NVL pagination.
 - `test_day2_writing_non_canon.rpy` provides direct render harness entries for the active chapter events.

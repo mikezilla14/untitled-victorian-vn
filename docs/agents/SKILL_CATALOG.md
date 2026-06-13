@@ -52,7 +52,7 @@
 | [`writer_add_flag`](../../.agents/skills/writer_add_flag/SKILL.md) | "Remember if she kept the brooch" | `flag-wiring-only` | `authoring_intent` |
 | [`writer_add_effect`](../../.agents/skills/writer_add_effect/SKILL.md) | Stat consequence in emotional terms | via Intent → target pipeline | `authoring_intent` |
 | [`writer_add_branch`](../../.agents/skills/writer_add_branch/SKILL.md) | New choice by meaning (Observer/Predator/Prey/Ghost) | via Intent → `revise-narrative` / `writer-author` | `authoring_intent` |
-| [`writer_write_book`](../../.agents/skills/writer_write_book/SKILL.md) | Book1 Holywell Street manuscript | `book_writing_engine` | book writing contract |
+| [`writer_write_book`](../../.agents/skills/writer_write_book/SKILL.md) | Book1 Holywell Street manuscript | `book_writing_engine` | label-based book writing contract |
 | [`writer_contract_check`](../../.agents/skills/writer_contract_check/SKILL.md) | Pre-gate advisory review | *(no pipeline)* | `authoring_intent` |
 | [`writer_log_exception`](../../.agents/skills/writer_log_exception/SKILL.md) | Log contract override | *(no pipeline)* | `exceptions/contract_exceptions.md` |
 | [`writer_status`](../../.agents/skills/writer_status/SKILL.md) | "What's left before ship?" | *(advisory)* | exceptions + gates status |
@@ -88,7 +88,7 @@ Desk-owned pipelines: **`writer-author`**, **`flag-wiring-only`**.
 
 | Skill | Agent rule | Notes |
 |-------|------------|-------|
-| [`book_writing_engine`](../../.agents/skills/book_writing_engine/SKILL.md) | book writing rules | Book1 manuscript; not day `.rpy` |
+| [`book_writing_engine`](../../.agents/skills/book_writing_engine/SKILL.md) | book writing rules | Book1 manuscript; context packet plus `book1_block_*` labels |
 | [`art_production`](../../.agents/skills/art_production/SKILL.md) | art production rules | Prompt logs, asset cards, `art_fidelity_contract` |
 
 ---

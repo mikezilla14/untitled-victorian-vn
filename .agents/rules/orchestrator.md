@@ -34,6 +34,7 @@ If the human uses plain-language scene/choice authoring, route to **Writer's Des
 | If the human wants to… | Pipeline | First agent to invoke |
 |------------------------|----------|------------------------|
 | Author in plain language (any `writer_*` skill) | routes via Desk | `writers_desk` |
+| Write or rewrite Cora's Book1 manuscript/chapter prose | `write-book` via Desk | `writer_write_book` → `book_writing_engine` |
 | Draft a new day end-to-end (**technical** path) | `produce-day` | `writers_room` |
 | New scene/day after Desk intake | `writer-author` | `writers_desk` (stage 1) → `writers_room` (stage 2) |
 | Fix prose after code/review (brief OPEN) | `revise-narrative` | `writers_room` |
@@ -381,6 +382,7 @@ py scripts/format_non_canon.py <same paths>
 When a task arrives, classify it before routing:
 
 1. Is it **prose-first** plain-language authoring or any `writer_*` skill? → `writers_desk` → route per `writers_desk.md` (`writer-author`, `revise-narrative`, `rewrite-narrative`, `flag-wiring-only`).
+   - If the request is specifically for Cora's Book1 manuscript/chapter prose, route through `writer_write_book` / `book_writing_engine`. Require the Non-Prod Code Agent's Book Writing Context Packet, then Writers' Room synthesis/gates, then `non_prod_code_agent` label wrapping into `book1_block_*` labels.
 2. Is it **documentation hygiene** (READMEs, specs, catalogue, storyboard doc)? → `documentation_steward` / `documentation-audit`, `storyboard-sync`, or `dag-tag-update` stage 2.
 3. Does it produce a **new day** on the **technical** path ("produce day N" with no Desk)? → `produce-day`
 4. Does it require **prose changes** because code/structure/review changed (brief filed)? → `revise-narrative`

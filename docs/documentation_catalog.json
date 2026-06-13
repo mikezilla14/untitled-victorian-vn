@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-06-13T08:13:56+00:00",
+  "generated_at": "2026-06-13T11:30:29+00:00",
   "repo_root": "untitled-victorian-vn",
   "entries": [
     {
@@ -114,12 +114,7 @@
       "title": "Role: Convergent Writer (Red Pen Synthesis)",
       "area": ".agents/rules/convergent_writer.md",
       "summary": "You are the **convergent synthesis** stage: a traditional writers' room editor with a red pen. You take the divergent pool's spec scripts, select and merge the **best** ideas into a single promotion-ready non-canon draft",
-      "links": [
-        {
-          "target": "../../docs/contracts/book_writing_contract.md",
-          "status": "ok"
-        }
-      ],
+      "links": [],
       "findings": []
     },
     {
@@ -142,12 +137,7 @@
       "title": "Role: Divergent Writer (Base Persona)",
       "area": ".agents/rules/divergent_writer_base.md",
       "summary": "You are one voice in a **writers' room brainstorming pool**. Your job is to advance story and dialogue with **creative divergence** — bold beats, sharp lines, and scene ideas that fit your specialty lens. You do not synt",
-      "links": [
-        {
-          "target": "../../docs/contracts/book_writing_contract.md",
-          "status": "ok"
-        }
-      ],
+      "links": [],
       "findings": []
     },
     {
@@ -426,6 +416,14 @@
           "status": "ok"
         },
         {
+          "target": "../../skills/writer_write_book/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../skills/book_writing_engine/SKILL.md",
+          "status": "ok"
+        },
+        {
           "target": "../../../narrative/pipeline/README.md",
           "status": "ok"
         },
@@ -459,7 +457,7 @@
       "kind": "agent-skill",
       "title": "Book Writing Engine",
       "area": ".agents/skills/book_writing_engine",
-      "summary": "Use when drafting or rewriting chapters for Cora's manuscript (`book1`) using inline prose macros and the Holywell Street penny dreadful creative style.",
+      "summary": "Use when drafting or rewriting chapters for Cora's manuscript (`book1`) using the label-based Book1 prose engine and the Holywell Street penny dreadful creative style.",
       "links": [
         {
           "target": "../../rules/non_prod_code_agent.md",

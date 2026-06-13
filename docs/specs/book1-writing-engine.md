@@ -13,13 +13,23 @@ The active MVP architecture is label-based:
 
 The older inline macro/payload direction is retired for active MVP prose. Macro code may remain temporarily quarantined in non-prod files, but new Book1 work must not add prose to `BOOK1_PAYLOADS` or depend on curly-brace prose macros.
 
+Book/chapter writing prompt calls should enter through `writer_write_book` or the `book_writing_engine` skill. Those flows request a Book Writing Context Packet from `non_prod_code_agent`, then route prose through the Writers' Room and gates before the code agent wraps approved prose into `book1_block_*` labels.
+
 ## Target Scope
 
-- Runtime file: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/book1_non_canon.rpy`
+- Engine/runtime file: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/book1_non_canon.rpy`
+- Per-day prose files:
+  - `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/book1_day101_non_canon.rpy`
+  - `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/book1_day102_non_canon.rpy`
+  - `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/book1_day103_non_canon.rpy`
+  - `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/book1_day104_non_canon.rpy`
+  - `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/book1_day105_non_canon.rpy`
 - Gameplay call sites: `day101_non_canon.rpy` through `day105_non_canon.rpy`
 - Direct harness: `test_day2_writing_non_canon.rpy`
 
 Production promotion is out of scope until Chief Architect approval.
+
+The runtime is split into a small shared engine file plus per-day Book1 prose files. That split preserves the public interfaces below.
 
 ## Implemented MVP Behavior
 
@@ -31,8 +41,9 @@ Production promotion is out of scope until Chief Architect approval.
   - `day3_chapter`
   - `day4_triumphant_chapter`
   - `day5_reckoning_chapter`
-- Day 1, Day 2, Day 3, Day 4, and Day 5 manuscript prose is authored as `book1_block_*` labels.
+- Day 1, Day 2, Day 3, Day 4, and Day 5 manuscript prose is authored as `book1_block_*` labels in the matching `book1_day10N_non_canon.rpy` file.
 - `book1_nvl_write_line(...)` applies word-by-word reveal and clears the NVL page after 4 rendered lines.
+- `book1_set_page_image(...)` updates the current manuscript right-frame image.
 - `book1_debug_chapter_route(...)` shows the chapter key, state bucket, and resolved prose label.
 - The test harness includes direct render entries for the active Book1 chapter events.
 
@@ -54,6 +65,7 @@ Not allowed inside prose labels:
 - calling `end_slot`
 - adding prose to `BOOK1_PAYLOADS`
 - using curly-brace macro syntax for new prose
+- hiding CG/image triggers inside prose text
 
 Day scripts remain responsible for fuel checks, manuscript completion, stat changes, and routing after the writing event.
 
@@ -76,6 +88,15 @@ Shared manuscript line renderer.
 - Applies word-by-word reveal with `book1_word_reveal_text(...)`.
 - Paginates after 4 NVL lines to preserve bottom whitespace.
 - Does not mutate gameplay state.
+
+### `label book1_set_page_image(image_name="ui_book_cover")`
+
+Optional helper for manuscript CG/illustration changes.
+
+- Sets `book1_page_image` for the current Book1/NVL screen.
+- Is called explicitly before the affected prose beat.
+- Does not mutate story progress, stats, or route state.
+- Uses approved asset names or manifest fallbacks.
 
 ### `book1.CHAPTER_BLOCKS`
 

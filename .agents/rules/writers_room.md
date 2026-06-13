@@ -136,18 +136,18 @@ Spice tuning does not bypass gates. After the selected tuned draft exists, run *
 
 ## Book Writing Engine & Holywell Street Penny Dreadful Workflow
 
-When drafting or rewriting chapters for Cora's manuscript (`book1`), the writers' room implements the custom inline prose macro contract and Holywell Street aesthetic.
+When drafting or rewriting chapters for Cora's manuscript (`book1`), route prompt calls through the `writer_write_book` front door or the `book_writing_engine` skill. The Writers' Room owns manuscript prose; the Non-Prod Code Agent owns the label wrapper and flag/context packet.
 
-* **Macro System Syntax**: You must write conditional variations inline within the chapter's lines. The syntax is:
-  `{ "[literal text]" default; "[another literal]" if [condition]; }`
-  Condition expressions support variables, booleans, numbers, and string comparisons (e.g. `day1_corridor_state == "prey"` or `missy_day2_trust_break == True`), plus logical `and` / `or` operations.
+* **Active structure**: Book1 prose is label-based. Final manuscript prose must land in `book1_block_*` labels invoked by `book1_write_chapter(...)`. Do **not** write new prose in `BOOK1_PAYLOADS`, do **not** use curly-brace inline macro syntax, and do **not** move manuscript prose into day labels.
+* **Writer context packet**: Rely on the active flag/state list, story-so-far summary, chapter key, bucket labels, and approved CG/image names compiled by the **Non-Prod Code Agent**. Ask for that packet if it is missing.
 * **Holywell Street Aesthetic**: Write against the expectations of a salacious **penny dreadful** from the publishers of ill repute on **Holywell Street** (sensational, melodramatic, emotionally heightened).
 * **Story Transposition**: Cora's IRL Savoy Hotel events are transposed into the fictional book-world **Ravenshade Conservatory** (Lord Caldor, Lady Vayne, Mr. Sterick, Miri, Coralie Vale).
 * **Branching caught-up**:
-  1. Rely on the active flag list compiled by the **Non-Prod Code Agent**.
-  2. Brainstorm and synthesize 3 main variants: **prey**, **predator**, and **ghost**.
-  3. Write branching storylines inside curly-brace macro blocks for each possible state of the flags until the story catches up to the current point in the IRL story.
-* **NVL Layout Constraint**: The rendering system paginates every **3 lines** using `nvl clear` internally. Structure paragraphs and macro outcomes with this constraint in mind.
+  1. Brainstorm and synthesize the relevant bucket variants, usually **prey**, **predator**, and **ghost** for days 1-4 and the day-specific buckets for later chapters.
+  2. Use ordinary Ren'Py `if` / `elif` / `else` and reusable `book1_block_*` beat labels for local variation.
+  3. Keep branch conditions readable against `story` / `player` fields from the context packet.
+* **CG/image payload**: If the manuscript illustration should change, specify an explicit image cue for `non_prod_code_agent` to implement as `call book1_set_page_image("image_name")` before the affected prose line or beat. Do not hide image changes inside prose text.
+* **NVL Layout Constraint**: The rendering system paginates centrally through `book1_nvl_write_line(...)` after the current Book1 page-line limit. Structure paragraphs as short manuscript paragraphs; do not hand-clear pages inside prose labels.
 * **LLM Safety Guardrails Fallback**: If there is a risk of triggering LLM safety filters for suggestive, intimate, or adult content, do **not** generate highly suggestive or explicit text. Instead, write a SFW summary of the scene/lines and clearly tag it as `[HUMAN WRITE: SFW summary of suggestive scene details]`.
 
 Detailed contract: [Book Writing Contract](../../docs/contracts/book_writing_contract.md).

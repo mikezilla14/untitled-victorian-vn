@@ -79,7 +79,7 @@ flowchart LR
 | New choice / branch by meaning | [`writer_add_branch`](../../.agents/skills/writer_add_branch/SKILL.md) | via Intent → `revise-narrative` or `writer-author` |
 | Stat consequence in emotional terms | [`writer_add_effect`](../../.agents/skills/writer_add_effect/SKILL.md) | via Intent → target pipeline |
 | Track something new (bool default) | [`writer_add_flag`](../../.agents/skills/writer_add_flag/SKILL.md) | `flag-wiring-only` (batched class wiring) |
-| Book1 manuscript prose | [`writer_write_book`](../../.agents/skills/writer_write_book/SKILL.md) | `book_writing_engine` skill |
+| Book1 manuscript prose | [`writer_write_book`](../../.agents/skills/writer_write_book/SKILL.md) | `book_writing_engine` skill → Book Writing Context Packet → label-based `book1_block_*` output |
 | Pre-gate contract review | [`writer_contract_check`](../../.agents/skills/writer_contract_check/SKILL.md) | advisory only (no pipeline) |
 | Log contract override | [`writer_log_exception`](../../.agents/skills/writer_log_exception/SKILL.md) | `exceptions/contract_exceptions.md` |
 | What's left before ship? | [`writer_status`](../../.agents/skills/writer_status/SKILL.md) | advisory only |

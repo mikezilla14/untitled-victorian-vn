@@ -29,6 +29,10 @@ label book1_block_day2_missy_debt_or_repair:
     return
 ```
 
+Each Book1 chapter assignment should start from a writer-facing context packet. At minimum, the packet lists available flags/states up to that point, a short real-life Savoy story-so-far summary, the target chapter key and route buckets, and approved manuscript CG/image names.
+
+Book1 is split into a small shared engine plus day/chapter prose files. The runtime contract remains the same: day scripts call `book1_write_chapter(...)`; prose lives in `book1_block_*` labels. For Release 1 MVP, use `book1_day101_non_canon.rpy` through `book1_day105_non_canon.rpy` for prose.
+
 ## 2. Routing Contract
 
 `book1.CHAPTER_BLOCKS` is the immutable routing table. It maps chapter keys and state buckets to prose labels.
@@ -55,6 +59,7 @@ Allowed:
 - Use `call book1_nvl_write_line("...", word_delay=_book1_word_delay)` for manuscript paragraphs.
 - Use ordinary Ren'Py `if` / `elif` / `else` for local variation.
 - Call other `book1_block_*` labels for optional multi-paragraph beats.
+- Use `call book1_set_page_image("image_name")` for explicit manuscript illustration changes when the image name is approved or has a manifest fallback.
 - End every prose label with `return`.
 
 Forbidden:
@@ -63,6 +68,7 @@ Forbidden:
 - Do not apply stats, spend fuel, complete chapters, or route via `end_slot`.
 - Do not write new prose inside `BOOK1_PAYLOADS`.
 - Do not add curly-brace macro prose for new MVP content.
+- Do not hide CG/image triggers in prose text or invent a second inline trigger language.
 
 ## 4. NVL Pagination And Word Reveal
 
@@ -76,7 +82,20 @@ That helper:
 
 If future visual styling changes alter page capacity, adjust the page limit centrally in `book1_write_chapter(...)`; do not hand-clear pages inside prose labels.
 
-## 5. Holywell Street Style
+## 5. CG / Illustration Payload
+
+The Book1 right-frame illustration is controlled explicitly by code, not by parsing prose text.
+
+Use:
+
+```renpy
+call book1_set_page_image("cg_manuscript_retelling_d3_brush")
+call book1_nvl_write_line("...", word_delay=_book1_word_delay)
+```
+
+The helper should set the store-level `book1_page_image` value used by the Book1/NVL screen. Writers may request image cue placement, but the Non-Prod Code Agent implements the call and verifies the target asset name or fallback.
+
+## 6. Holywell Street Style
 
 Book1 prose is Cora's sensational manuscript layer, not literal hotel narration.
 
@@ -88,7 +107,7 @@ Book1 prose is Cora's sensational manuscript layer, not literal hotel narration.
 
 The manuscript layer may be hotter, more symbolic, and more melodramatic than the hotel layer, but it must still reveal Cora's psychology: what she changes, emphasizes, hides, or makes herself enjoy is the dramatic point.
 
-## 6. Safety Fallback
+## 7. Safety Fallback
 
 If a requested prose passage risks blocking generation:
 

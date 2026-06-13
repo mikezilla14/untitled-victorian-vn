@@ -74,7 +74,7 @@ conflict in conversation is cheaper than a gate `REJECT`.
 | Localized edit, single branch, flavour line | `revise-narrative` (Workflow B) |
 | Full rewrite of file/day/period/chain | `rewrite-narrative` (Workflow A) |
 | Flag / effect wiring only | **`flag-wiring-only`** (Desk → non_prod_code_agent → chief_architect) |
-| Book1 manuscript prose | `book_writing_engine` skill (Holywell Street contract) |
+| Book1 manuscript prose | `writer_write_book` → `book_writing_engine` (label-based Book Writing Contract) |
 | Tag / DAG refresh + graph sync | `dag-tag-update` |
 | Asset gap | `check_assets` |
 
