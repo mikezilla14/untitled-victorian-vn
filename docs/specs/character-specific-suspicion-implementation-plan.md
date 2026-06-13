@@ -42,9 +42,9 @@ Production and non-prod should remain aligned, but production should not blindly
 ### Phase 0 - Prep And Scope Lock
 
 - [x] T0.1 Confirm the non-prod shared-file move is intentional before editing moved shared files in bulk.
-- [ ] T0.2 Re-run `git status --short` and record unrelated dirty files before implementation.
-- [ ] T0.3 Confirm whether production should receive the auto-highlight module now or whether sprite emphasis remains non-prod-only for this pass.
-- [ ] T0.4 Decide whether debug-only testing labels are allowed in production or should live only in non-prod.
+- [x] T0.2 Re-run `git status --short` and record unrelated dirty files before implementation.
+- [x] T0.3 Confirm whether production should receive the auto-highlight module now or whether sprite emphasis remains non-prod-only for this pass.
+- [x] T0.4 Decide whether debug-only testing labels are allowed in production or should live only in non-prod.
 
 Acceptance:
 
@@ -105,7 +105,7 @@ Acceptance:
   - generic fallback
 - [x] T3.4 Seed at least one line for every character at `noticed`.
 - [x] T3.5 Seed generic fallback lines for `noticed`, `watching`, `dangerous`, and `critical` across low/high anxiety.
-- [ ] T3.6 Keep all lines one sentence unless a later writing pass explicitly expands them.
+- [x] T3.6 Keep all lines one sentence unless a later writing pass explicitly expands them.
 - [x] T3.7 Mirror the table into non-prod, or document production as source of truth if non-prod imports runtime files directly.
 
 Acceptance:
@@ -152,12 +152,12 @@ Acceptance:
 
 ### Phase 6 - Content Pass
 
-- [ ] T6.1 Write 5-8 Vance monologue lines.
-- [ ] T6.2 Write 5-8 Stern monologue lines.
-- [ ] T6.3 Write 5-8 Gideon monologue lines.
-- [ ] T6.4 Write 5-8 Missy monologue lines.
-- [ ] T6.5 Add reason tags only for already common script contexts, such as `recognised_detail`, `pattern_detected`, `disciplinary_notice`, or `hurt_trust`.
-- [ ] T6.6 Run a prose pass for tone consistency: knife-tip, not diary.
+- [x] T6.1 Write 5-8 Vance monologue lines.
+- [x] T6.2 Write 5-8 Stern monologue lines.
+- [x] T6.3 Write 5-8 Gideon monologue lines.
+- [x] T6.4 Write 5-8 Missy monologue lines.
+- [x] T6.5 Add reason tags only for already common script contexts, such as `recognised_detail`, `pattern_detected`, `disciplinary_notice`, or `hurt_trust`.
+- [x] T6.6 Run a prose pass for tone consistency: knife-tip, not diary.
 
 Acceptance:
 
@@ -172,13 +172,13 @@ Acceptance:
 - [ ] T7.4 Manually test Stern crossing multiple breakpoints in one jump; only the highest crossed breakpoint should monologue, unless implementation deliberately queues all.
 - [ ] T7.5 Manually test suspicion reduction.
 - [ ] T7.6 Manually test high-anxiety monologue selection.
-- [ ] T7.7 Run production validation:
+- [x] T7.7 Run production validation:
 
 ```powershell
 py scripts/validate.py --profile changed --agent human --files "renpy_project/game/classes.rpy,renpy_project/game/functions.rpy,renpy_project/game/variables.rpy,renpy_project/game/screens.rpy,renpy_project/game/script.rpy,renpy_project/game/characters.rpy"
 ```
 
-- [ ] T7.8 Run non-prod validation:
+- [x] T7.8 Run non-prod validation:
 
 ```powershell
 py scripts/validate.py --profile changed --agent writers_room --skip-gate-checks --files "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/classes_non_canon.rpy,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/functions_non_canon.rpy,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/screens.rpy,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/characters.rpy"
