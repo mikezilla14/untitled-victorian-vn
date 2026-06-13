@@ -43,18 +43,7 @@ Acceptance:
 
 ## P1 - Architecture Completion
 
-### B1-4: Remove quarantined macro code
-
-After one successful Ren'Py playtest pass, delete the retired inline macro parser and legacy payload helper code from `book1_non_canon.rpy`.
-
-Acceptance:
-
-- no `Book1MacroEngine`;
-- no active `BOOK1_PAYLOADS`;
-- no `_book1_render_line` or `build_book1_chapter_packet`;
-- Book1 render tests still pass.
-
-### B1-5: Strengthen route debug coverage
+### B1-4: Strengthen route debug coverage
 
 Expand `book1_debug_chapter_route(...)` or add harness calls so every MVP chapter key can display its resolved route before rendering.
 
@@ -64,7 +53,7 @@ Acceptance:
 
 ## P2 - Presentation Polish
 
-### B1-6: Align with visual styling spec
+### B1-5: Align with visual styling spec
 
 Compare the current NVL-only MVP implementation against `docs/specs/book-writing-styling.md`.
 
@@ -72,7 +61,7 @@ Acceptance:
 
 - choose either current NVL-only presentation for MVP or a separate approved task for manuscript-page visuals.
 
-### B1-7: Optional writing feedback
+### B1-6: Optional writing feedback
 
 Consider cosmetic page-turn or ink-scratch feedback.
 

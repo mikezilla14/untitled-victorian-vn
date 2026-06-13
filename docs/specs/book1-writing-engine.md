@@ -11,7 +11,7 @@ The active MVP architecture is label-based:
 - `book1_write_chapter(...)` owns routing, word reveal, and pagination.
 - prose labels render text only and return cleanly.
 
-The older inline macro/payload direction is retired for active MVP prose. Macro code may remain temporarily quarantined in non-prod files, but new Book1 work must not add prose to `BOOK1_PAYLOADS` or depend on curly-brace prose macros.
+The older inline macro/payload direction is retired and removed from the active non-prod Book1 engine. New Book1 work must not add prose to `BOOK1_PAYLOADS` or depend on curly-brace prose macros.
 
 Book/chapter writing prompt calls should enter through `writer_write_book` or the `book_writing_engine` skill. Those flows request a Book Writing Context Packet from `non_prod_code_agent`, then route prose through the Writers' Room and gates before the code agent wraps approved prose into `book1_block_*` labels.
 
