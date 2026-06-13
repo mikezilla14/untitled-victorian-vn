@@ -40,6 +40,7 @@ Runtime implementation targets:
 
 - `renpy_project/game/classes.rpy`
 - `renpy_project/game/functions.rpy`
+- `renpy_project/game/suspicion_monologues.rpy`
 - `renpy_project/game/screens.rpy`
 - `renpy_project/game/assets_manifest.rpy`
 - `renpy_project/game/asset_transforms.rpy`
@@ -49,10 +50,17 @@ Non-prod mirror targets:
 
 - `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/classes_non_canon.rpy`
 - `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/functions_non_canon.rpy`
+- `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/suspicion_monologues_non_canon.rpy`
 - `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/screens.rpy`
 - `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/assets_manifest.rpy`
 - `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/asset_transforms.rpy`
 - `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/00auto_highlight.rpy`
+
+Feature CI/CD path:
+
+1. Implement and validate changes in the non-prod Ren'Py project under `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/`.
+2. Promote the validated non-prod shape into `renpy_project/game/`.
+3. Do not implement new feature behavior in production first.
 
 ## Model
 
@@ -164,6 +172,11 @@ Exact values and breakpoint history remain hidden from the player. Ledger/debug 
 ## Monologue Selection
 
 Monologues are table-driven and hand-authored.
+
+The prose table lives outside the trigger/runtime functions so writers can update authored reaction lines without editing suspicion mechanics:
+
+- Non-prod source: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/suspicion_monologues_non_canon.rpy`
+- Production mirror: `renpy_project/game/suspicion_monologues.rpy`
 
 Lookup inputs:
 

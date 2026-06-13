@@ -21,12 +21,19 @@ Implement breakpoint-based, character-specific suspicion feedback without restor
 
 Implement this in four narrow passes:
 
+1. Implement and validate each feature pass in the non-prod Ren'Py project.
+2. Promote the validated non-prod shape into production.
+3. Re-run production validation after promotion.
+
+Within that non-prod-first path, use four narrow implementation passes:
+
 1. Mechanics and API: add breakpoint memory, tier helpers, monologue lookup, and `raise_suspicion`.
 2. Runtime integration: route existing `apply_effects(..._susp, ..._base)` through the new helper without breaking existing scripts.
 3. Feedback UI: add `suspicion_focus`, a small eye/attention screen, and optional sprite focus integration.
 4. Content and smoke scene: seed monologue tables and add a temporary/dev-only test path or documented manual smoke sequence.
 
 Production and non-prod should remain aligned, but production should not blindly copy non-prod-only writing-gate differences.
+New feature behavior should never be implemented in production first.
 
 ## Architectural Decisions
 
@@ -35,6 +42,7 @@ Production and non-prod should remain aligned, but production should not blindly
 - Trigger breakpoint feedback only on upward crossings. Suspicion reductions never fire monologues.
 - Keep `apply_effects` as the existing narrative API, but add `raise_suspicion` as the explicit low-level helper and future writer-facing call.
 - Keep anxiety automatic from suspicion totals for current runtime compatibility. Do not add separate manual anxiety APIs in this pass unless a later design explicitly changes the model.
+- Keep authored suspicion prose in `suspicion_monologues_non_canon.rpy` first, then promote to `suspicion_monologues.rpy`; runtime functions should only perform lookup and trigger behavior.
 - Use text/symbol placeholder UI first. Final eye art is a polish task.
 
 ## Task List
@@ -94,7 +102,9 @@ Acceptance:
 
 ### Phase 3 - Monologue Table
 
-- [x] T3.1 Add `suspicion_monologues` table in a dedicated runtime file or in `functions.rpy` if no better home exists.
+- [x] T3.1 Add `suspicion_monologues` table in a dedicated prose/data file, non-prod first:
+  - `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/suspicion_monologues_non_canon.rpy`
+  - `renpy_project/game/suspicion_monologues.rpy`
 - [x] T3.2 Implement `get_suspicion_monologue(character, tier, anxiety, reason=None, scene_context=None)`.
 - [x] T3.3 Implement fallback lookup in this order:
   - character + tier + anxiety + reason + scene context
@@ -106,7 +116,7 @@ Acceptance:
 - [x] T3.4 Seed at least one line for every character at `noticed`.
 - [x] T3.5 Seed generic fallback lines for `noticed`, `watching`, `dangerous`, and `critical` across low/high anxiety.
 - [x] T3.6 Keep all lines one sentence unless a later writing pass explicitly expands them.
-- [x] T3.7 Mirror the table into non-prod, or document production as source of truth if non-prod imports runtime files directly.
+- [x] T3.7 Promote the validated non-prod table into production; non-prod remains the feature source path.
 
 Acceptance:
 
@@ -193,15 +203,16 @@ Acceptance:
 ## Suggested Implementation Order
 
 1. T0.1-T0.4
-2. T1.1-T1.6 in production only
-3. T3.1-T3.5 in production only
-4. T4.1-T4.7 in production only
-5. T2.1-T2.5 in production only
-6. Run production validation and manual smoke checks
-7. Mirror successful production mechanics into non-prod shared files
-8. Decide and implement Phase 5 sprite highlight integration
-9. Complete Phase 6 content pass
-10. Run final production and non-prod validation
+2. Implement T1.1-T1.7 in non-prod shared files.
+3. Implement T3.1-T3.6 in non-prod, keeping authored prose in `suspicion_monologues_non_canon.rpy`.
+4. Implement T4.1-T4.8 in non-prod.
+5. Implement T2.1-T2.6 in non-prod.
+6. Run non-prod validation and manual smoke checks.
+7. Promote the validated non-prod mechanics, UI, and prose table into production.
+8. Run production validation and manual smoke checks.
+9. Decide and implement Phase 5 sprite highlight integration through the same non-prod-first promotion path.
+10. Complete Phase 6 content pass through the same non-prod-first promotion path.
+11. Run final production and non-prod validation.
 
 ## Risk Register
 
