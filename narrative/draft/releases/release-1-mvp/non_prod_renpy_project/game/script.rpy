@@ -15,7 +15,7 @@ label suspicion_feedback_minor(character, old, new):
     $ suspicion_focus = character
     $ suspicion_focus_intensity = 1
     show screen suspicion_attention(character)
-    pause 0.25
+    pause 1.5
     $ suspicion_focus_intensity = 0
     $ suspicion_focus = None
     hide screen suspicion_attention

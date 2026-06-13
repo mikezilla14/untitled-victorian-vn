@@ -320,8 +320,10 @@ screen suspicion_attention(character):
     $ _border = "#c8a97e" if suspicion_focus_intensity >= 2 else "#7a4a10"
 
     frame:
-        xpos _gx + 42
-        ypos config.screen_height - 360
+        xpos 0.4
+        ypos 0.5
+        xanchor 0.5
+        yanchor 0.5
         xpadding 14
         ypadding 8
         background Solid("#0d0d0dcc")
