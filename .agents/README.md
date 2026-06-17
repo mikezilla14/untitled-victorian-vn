@@ -78,7 +78,7 @@ Repo-wide index: [`../AGENTS.md`](../AGENTS.md) · Skill catalogue: [`../docs/ag
 
 
 
-**Sandbox day path:** `narrative/draft/releases/<release>/non_prod_renpy_project/game/days/dayrdd_non_canon.rpy`
+**Sandbox day path:** `main-game/draft/releases/<release>/non_prod_main-game/prod-game/game/days/dayrdd_non_canon.rpy`
 
 
 

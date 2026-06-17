@@ -17,7 +17,7 @@ flowchart TD
   5 --> 6[6. Update Card Status to Rough/Needs_Revision]
   6 --> 7[7. Promote to VNCCS / Layer Cleanup]
   7 --> 8[8. Slice, Crop, and Canvas Align]
-  8 --> 9[9. Declare in renpy_project Manifest]
+  8 --> 9[9. Declare in prod-game Manifest]
   9 --> 10[10. Run Asset & Fidelity Linters]
 ```
 
@@ -34,7 +34,7 @@ Generate concepts using Midjourney, Gemini, or VNCCS, applying the core visual a
 Save all generation prompts and raw, unmasked image outputs inside `assets_source/prompts/` and `assets_source/generated_concepts/`.
 
 ### 5. Check in Engine Immediately
-Drop the raw, rough concept into `renpy_project/game/images/` to immediately fill the manifest gap and keep gameplay scripts playable, even before pixel cleanup is performed.
+Drop the raw, rough concept into `main-game/prod-game/game/images/` to immediately fill the manifest gap and keep gameplay scripts playable, even before pixel cleanup is performed.
 
 ### 6. Update Card Status
 Mark the asset card's `status` field to `rough` or `needs_revision`.
@@ -46,7 +46,7 @@ Once a concept is conceptually approved, promote it for final grid slicing (spri
 Execute alpha background removal and canvas coordinates alignment matching the rules in `docs/art/VNCCS_SPRITE_SHEETS.md`. Export the clean asset as a desaturated, compressed `.webp` to `assets_source/approved_assets/`.
 
 ### 9. Declare in the Manifest
-If the asset represents a new key alias, declare its file path mapping inside `renpy_project/game/assets_manifest.rpy`.
+If the asset represents a new key alias, declare its file path mapping inside `main-game/prod-game/game/assets_manifest.rpy`.
 
 ### 10. Run Asset & Fidelity Linters
 Execute the project's automated verification tools to verify manifest synchronization and block visual continuity contradictions:

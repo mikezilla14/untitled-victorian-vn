@@ -10,7 +10,7 @@ gate verdicts and the exception ledger. No syntax, no jargon.
    - gate verdicts: `dayrdd_gate_lead_narrative.md`, `dayrdd_gate_forensic_psychology.md`,
      `dayrdd_gate_victorian.md`;
    - the Authoring Intent status;
-   - `narrative/draft/releases/<release>/exceptions/contract_exceptions.md`.
+   - `main-game/draft/releases/<release>/exceptions/contract_exceptions.md`.
 3. Summarize in plain language:
    - which gates have passed / are pending / rejected;
    - any **PROPOSED** exceptions (impact not yet acknowledged) — these **block promotion**;

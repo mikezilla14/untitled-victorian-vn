@@ -10,13 +10,13 @@ updated to reflect current script structure.
 3. Read the current storyboard:
 
 ```text
-narrative/draft/releases/planning/story_board.md
+main-game/draft/releases/planning/story_board.md
 ```
 
 4. If available, read current graph audit/gap outputs from:
 
 ```text
-narrative/pipeline/releases/release-1-mvp/graph/
+main-game/pipeline/releases/release-1-mvp/graph/
 ```
 
 5. Update only the affected storyboard sections where practical:

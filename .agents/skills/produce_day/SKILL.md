@@ -14,19 +14,19 @@ Catalogue: [`SKILL_CATALOG.md`](../../../docs/agents/SKILL_CATALOG.md)
 
 ## Required context files
 
-- `narrative/draft/releases/planning/story_board.md`
-- `narrative/draft/releases/planning/continuity_handoff.md` (current day section only)
+- `main-game/draft/releases/planning/story_board.md`
+- `main-game/draft/releases/planning/continuity_handoff.md` (current day section only)
 
 ## Outputs
 
-- `narrative/draft/releases/<release>/non_prod_renpy_project/game/days/dayrdd_non_canon.rpy`
-- `narrative/pipeline/releases/<release>/days/dayrdd/synthesis/dayrdd_convergent_report.md`
+- `main-game/draft/releases/<release>/non_prod_main-game/prod-game/game/days/dayrdd_non_canon.rpy`
+- `main-game/pipeline/releases/<release>/days/dayrdd/synthesis/dayrdd_convergent_report.md`
 - Gate verdicts: `dayrdd_gate_lead_narrative.md`, `dayrdd_gate_forensic_psychology.md`, `dayrdd_gate_victorian.md` (+ `.json` sidecars)
 
 ## Validate
 
 ```powershell
 py scripts/agent_next_step.py --pipeline produce-day --stage 1 --day <dd> --release release-1-mvp
-py scripts/validate.py --profile changed --agent writers_room --files "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/dayrdd_non_canon.rpy"
+py scripts/validate.py --profile changed --agent writers_room --files "main-game/non-prod-game/game/days/dayrdd_non_canon.rpy"
 py scripts/contract_validate.py --day dayrdd --release release-1-mvp
 ```

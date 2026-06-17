@@ -7,4 +7,4 @@ All markdown visual cards in this directory are checked by the automated validat
 ```powershell
 python scripts/validate_art_fidelity.py
 ```
-This ensures that attributes such as hair, eye, skin, and clothing descriptions remain fully synchronized with both the narrative profiles (`narrative/canon/`) and active game scripts, triggering a build error in the event of visual continuity drift.
+This ensures that attributes such as hair, eye, skin, and clothing descriptions remain fully synchronized with both the narrative profiles (`main-game/canon/`) and active game scripts, triggering a build error in the event of visual continuity drift.

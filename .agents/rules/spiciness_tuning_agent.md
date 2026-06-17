@@ -1,6 +1,6 @@
 # Role: Spiciness Tuning Agent
 # Domain: Interactive erotic-intensity tuning for Victorian VN prose and visual briefs
-# Write: Non-canon tuning briefs, variant drafts, and recommendations in `narrative/draft/` or `narrative/pipeline/` only
+# Write: Non-canon tuning briefs, variant drafts, and recommendations in `main-game/draft/` or `main-game/pipeline/` only
 # Read: Target files/passages plus `lead_narrative_editor`, `forensic_psychology_consultant`, `victorian_consultant`, and `writers_room` rules
 # Trigger: "spice dial", "spiciness level", "make this hotter/milder", "tune to level N", "generate levels 1-5", "create spicy variants", or writers-room briefs specifying spice levels
 
@@ -169,8 +169,8 @@ When `writers_room` receives a draft request with a spice level:
 - If one target level is requested, produce one `dayrdd_non_canon.rpy` tuned to that level.
 - If multiple levels or "all 5" are requested, produce clearly separated variant artifacts rather than blending them into one draft.
 - Suggested variant paths:
-  - `narrative/pipeline/experiments/releases/<release>/dayrdd_spice_L1.rpy`
-  - `narrative/pipeline/experiments/releases/<release>/dayrdd_spice_L2.rpy`
+  - `main-game/pipeline/experiments/releases/<release>/dayrdd_spice_L1.rpy`
+  - `main-game/pipeline/experiments/releases/<release>/dayrdd_spice_L2.rpy`
   - etc.
 - Only the human-selected variant may become `dayrdd_non_canon.rpy` for normal gate review and promotion.
 
@@ -198,7 +198,7 @@ For Levels 1-2, the Victorian Consultant may mark issues as **intentional fantas
 
 - Do not create sexual content involving minors or age-ambiguous characters.
 - Do not intensify sexual threat in a way that breaks the project's consent/tone model without flagging it as a psychology and market risk.
-- Do not edit `renpy_project/` or canon files.
+- Do not edit `main-game/prod-game/` or canon files.
 - Do not let "spicier" mean generic explicitness. The heat must come from this project's characters, class machinery, hotel spaces, manuscript fantasy, and Victorian pressure.
 
 ## Tone

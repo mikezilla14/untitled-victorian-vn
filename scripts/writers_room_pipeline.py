@@ -242,7 +242,7 @@ def validate_day_pipeline(
         ):
             messages.append(
                 "  [WARN] No gate verdict files yet — required before promotion "
-                f"(see narrative/pipeline/releases/{ctx.release_slug}/days/"
+                f"(see main-game/pipeline/releases/{ctx.release_slug}/days/"
                 f"{ctx.day_id}/gates/)"
             )
         else:

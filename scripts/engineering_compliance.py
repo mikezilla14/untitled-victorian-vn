@@ -30,7 +30,7 @@ def check_no_new_defaults_outside_variables(files):
     for file in files:
         if not file.endswith(".rpy"):
             continue
-        if file.replace("\\", "/") == "renpy_project/game/variables.rpy":
+        if file.replace("\\", "/") == "main-game/prod-game/game/variables.rpy":
             continue
         full_path = Path(file)
         if not full_path.exists():
@@ -74,7 +74,7 @@ def check_suspicion_guard_order(files):
     violations = []
     for file in files:
         norm = file.replace("\\", "/")
-        if not re.match(r"renpy_project/game/day\d+\.rpy$", norm):
+        if not re.match(r"main-game/prod-game/game/day\d+\.rpy$", norm):
             continue
         full_path = Path(file)
         if not full_path.exists():
@@ -93,7 +93,7 @@ def check_suspicion_guard_order(files):
 
 def check_script_thin_if_touched(files):
     violations = []
-    target = "renpy_project/game/script.rpy"
+    target = "main-game/prod-game/game/script.rpy"
     if target not in [f.replace("\\", "/") for f in files]:
         return violations
 
@@ -121,7 +121,7 @@ def check_no_direct_story_corridor_state_assignment(files):
         if not file.endswith(".rpy"):
             continue
         norm = file.replace("\\", "/")
-        if not norm.startswith("renpy_project/game/"):
+        if not norm.startswith("main-game/prod-game/game/"):
             continue
         full_path = Path(file)
         if not full_path.exists():
@@ -145,7 +145,7 @@ def check_no_bare_set_corridor_state_call(files):
         if not file.endswith(".rpy"):
             continue
         norm = file.replace("\\", "/")
-        if not norm.startswith("renpy_project/game/"):
+        if not norm.startswith("main-game/prod-game/game/"):
             continue
         full_path = Path(file)
         if not full_path.exists():
@@ -205,7 +205,7 @@ def check_day_file_naming_contract(files):
         if not full_path.exists():
             continue
 
-        if norm.startswith("narrative/draft/") and name.endswith("_non_canon.rpy"):
+        if norm.startswith("main-game/draft/") and name.endswith("_non_canon.rpy"):
             if name.startswith("day"):
                 if not DAYRXX_NON_CANON_RE.fullmatch(name):
                     violations.append(
@@ -213,7 +213,15 @@ def check_day_file_naming_contract(files):
                     )
             continue
 
-        if norm.startswith("renpy_project/game/") and name.endswith(".rpy"):
+        if norm.startswith("main-game/non-prod-game/game/days/") and name.endswith("_non_canon.rpy"):
+            if name.startswith("day"):
+                if not DAYRXX_NON_CANON_RE.fullmatch(name):
+                    violations.append(
+                        f"{file} invalid non-canon day filename. Expected dayrdd_non_canon.rpy (example: day100_non_canon.rpy)."
+                    )
+            continue
+
+        if norm.startswith("main-game/prod-game/game/") and name.endswith(".rpy"):
             if LEGACY_DAY_RPY_RE.fullmatch(name) and not DAYRXX_RPY_RE.fullmatch(name):
                 violations.append(
                     f"{file} uses legacy episodic filename. Expected dayrxx.rpy (example: day101.rpy)."

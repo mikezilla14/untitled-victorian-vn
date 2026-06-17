@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Canonical narrative layout paths — single source of truth for CI and agents."""
+"""Canonical game workspace paths — single source of truth for CI and agents."""
 
 from __future__ import annotations
 
@@ -7,8 +7,8 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+MAIN_GAME = ROOT / "main-game"
 
-# Release folder slug (paths) vs display name (JSON contracts)
 DEFAULT_RELEASE_SLUG = "release-1-mvp"
 DEFAULT_RELEASE_NAME = "release 1 - mvp"
 
@@ -40,7 +40,6 @@ class DayContext:
 
     @property
     def release_name(self) -> str:
-        """Display name for JSON handoff contracts."""
         return release_display_name(self.release_slug)
 
 
@@ -49,20 +48,52 @@ def parse_day_id(filename: str) -> str | None:
     return match.group(1) if match else None
 
 
+def canon_root() -> Path:
+    return MAIN_GAME / "canon"
+
+
+def draft_root() -> Path:
+    return MAIN_GAME / "draft"
+
+
+def planning_dir() -> Path:
+    return draft_root() / "releases" / "planning"
+
+
 def draft_release_root(release_slug: str) -> Path:
-    return ROOT / "narrative" / "draft" / "releases" / normalize_release_slug(release_slug)
+    return draft_root() / "releases" / normalize_release_slug(release_slug)
+
+
+def non_prod_game_dir() -> Path:
+    return MAIN_GAME / "non-prod-game"
+
+
+def prod_game_dir() -> Path:
+    return MAIN_GAME / "prod-game"
 
 
 def draft_day_dir(ctx: DayContext) -> Path:
-    return draft_release_root(ctx.release_slug) / "non_prod_renpy_project" / "game" / "days"
+    return non_prod_game_dir() / "game" / "days"
+
+
+def draft_shared_dir() -> Path:
+    return non_prod_game_dir() / "game" / "shared"
 
 
 def draft_non_canon_path(ctx: DayContext) -> Path:
     return draft_day_dir(ctx) / f"{ctx.day_id}_non_canon.rpy"
 
 
+def prod_day_path(ctx: DayContext) -> Path:
+    return prod_game_dir() / "game" / f"{ctx.day_id}.rpy"
+
+
+def pipeline_root() -> Path:
+    return MAIN_GAME / "pipeline"
+
+
 def pipeline_release_root(release_slug: str) -> Path:
-    return ROOT / "narrative" / "pipeline" / "releases" / normalize_release_slug(release_slug)
+    return pipeline_root() / "releases" / normalize_release_slug(release_slug)
 
 
 def pipeline_day_dir(ctx: DayContext) -> Path:
@@ -90,9 +121,25 @@ def pipeline_handoffs_dir(ctx: DayContext) -> Path:
 
 
 def parse_non_canon_path(file_path: Path) -> DayContext | None:
-    """Parse narrative/draft/releases/<slug>/non_prod_renpy_project/game/days/dayNNN_non_canon.rpy."""
+    """Parse main-game/non-prod-game/game/days/dayNNN_non_canon.rpy."""
+    path = file_path.resolve()
     try:
-        rel = file_path.relative_to(ROOT / "narrative" / "draft" / "releases")
+        rel = path.relative_to(non_prod_game_dir() / "game" / "days")
+    except ValueError:
+        return _parse_legacy_non_canon_path(path)
+    filename = rel.parts[-1] if rel.parts else rel.name
+    if not filename.endswith("_non_canon.rpy"):
+        return None
+    day_id = filename.replace("_non_canon.rpy", "")
+    if not DAY_ID_RE.match(day_id):
+        return None
+    return DayContext(day_id=day_id, release_slug=DEFAULT_RELEASE_SLUG)
+
+
+def _parse_legacy_non_canon_path(file_path: Path) -> DayContext | None:
+    legacy_root = ROOT / "narrative" / "draft" / "releases"
+    try:
+        rel = file_path.relative_to(legacy_root)
     except ValueError:
         return None
     parts = rel.parts
@@ -107,6 +154,6 @@ def parse_non_canon_path(file_path: Path) -> DayContext | None:
     return DayContext(day_id=day_id, release_slug=parts[0])
 
 
-# Legacy path detection (pre-refactor) for helpful error messages
 LEGACY_WRITERS_ROOM_PREFIX = "narrative/draft/"
 LEGACY_SPECULATIVE_PREFIX = "narrative/pipeline/"
+LEGACY_PROD_PREFIX = "renpy_project/"

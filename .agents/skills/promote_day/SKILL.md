@@ -1,6 +1,6 @@
 # Promote Day
 
-Use when the user wants to move an **approved non-canon day** into `renpy_project/game/dayrdd.rpy`.
+Use when the user wants to move an **approved non-canon day** into `main-game/prod-game/game/dayrdd.rpy`.
 
 ## What to do
 
@@ -21,5 +21,5 @@ Creative dialogue and narrator prose must copy **verbatim** from the writers' ro
 ## Validate
 
 ```powershell
-py scripts/orchestrate_review.py --files "narrative/draft/releases/<release>/dayrdd_non_canon.rpy,renpy_project/game/dayrdd.rpy"
+py scripts/orchestrate_review.py --files "main-game/draft/releases/<release>/dayrdd_non_canon.rpy,main-game/prod-game/game/dayrdd.rpy"
 ```

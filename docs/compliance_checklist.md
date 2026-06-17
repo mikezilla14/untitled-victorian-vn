@@ -16,11 +16,11 @@ Manual-only items remain reviewer responsibilities.
 
 ## B) State architecture
 
-- [ ] Core state remains class-backed in `renpy_project/game/classes.rpy` (`TimeManager`, `PlayerStats`, `StoryState`); no raw globals for game state in day scripts.
-- [ ] No new global `default` declarations outside `renpy_project/game/variables.rpy`.
+- [ ] Core state remains class-backed in `main-game/prod-game/game/classes.rpy` (`TimeManager`, `PlayerStats`, `StoryState`); no raw globals for game state in day scripts.
+- [ ] No new global `default` declarations outside `main-game/prod-game/game/variables.rpy`.
 - [ ] Stat/flag mutations are traceable and consistent with existing patterns; binary flags use `bool` + setters; mutually exclusive outcomes use a **single** string + whitelist in Python + a single setter, not several booleans.
 - [ ] Direct field edits are avoided when a mutation method exists. In game scripts, **do not** assign whitelisted string fields (e.g. `story.day1_corridor_state = ...`) or `story.has_*` booleans; use setters (e.g. `story.set_corridor_state("predator")`, `story.set_has_written_first_chapter(True)`).
-- [ ] `scripts/engineering_compliance.py` includes checks for disallowed `story.day1_corridor_state` assignment and unqualified `set_corridor_state(` in `renpy_project/game/`.
+- [ ] `scripts/engineering_compliance.py` includes checks for disallowed `story.day1_corridor_state` assignment and unqualified `set_corridor_state(` in `main-game/prod-game/game/`.
 
 ## C) Mechanics integrity
 
@@ -33,7 +33,7 @@ Manual-only items remain reviewer responsibilities.
 
 - [ ] `script.rpy` remains thin (entry + guard labels; no heavy logic).
 - [ ] Repeated mechanics are consolidated or explicitly queued for `functions.rpy`.
-- [ ] **Asset manifest updated:** every new `scene`, `show <sprite>`, and audio alias introduced by the promoted file has a matching `declare_image_with_fallback` or `register_audio` entry in `renpy_project/game/assets_manifest.rpy`. Undeclared assets are not caught by `renpy lint` — they silently render as solid-colour placeholders at runtime. PR diff must include `assets_manifest.rpy` if any new asset is referenced.
+- [ ] **Asset manifest updated:** every new `scene`, `show <sprite>`, and audio alias introduced by the promoted file has a matching `declare_image_with_fallback` or `register_audio` entry in `main-game/prod-game/game/assets_manifest.rpy`. Undeclared assets are not caught by `renpy lint` — they silently render as solid-colour placeholders at runtime. PR diff must include `assets_manifest.rpy` if any new asset is referenced.
 - [ ] **Bracket interpolation audit:** grep each promoted `.rpy` file for `/[[A-Z][a-zA-Z]+/]`; any match in a string that is not a defined runtime variable must be escaped to `[[Word]]` before promotion. Unescaped brackets cause a `NameError` at the first player interaction with that menu.
 - [ ] `renpy lint` passes with zero errors.
 

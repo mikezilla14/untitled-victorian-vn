@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-06-17T12:13:50+00:00",
+  "generated_at": "2026-06-17T12:50:43+00:00",
   "repo_root": "untitled-victorian-vn",
   "entries": [
     {
@@ -190,7 +190,7 @@
       "kind": "agent-rule",
       "title": "Role: Non-Prod Code Agent (Exploratory / Spec Code)",
       "area": ".agents/rules/non_prod_code_agent.md",
-      "summary": "You implement approved drafts and explore new mechanics strictly inside the non-production directories (`narrative/draft/` or `narrative/pipeline/`). You write clean Ren'Py/Python structures wrapping narrative content. Y",
+      "summary": "You implement approved drafts and explore new mechanics strictly inside the non-production directories (`main-game/draft/` or `main-game/pipeline/`). You write clean Ren'Py/Python structures wrapping narrative content. Y",
       "links": [
         {
           "target": "../../docs/contracts/book_writing_contract.md",
@@ -258,7 +258,7 @@
       "kind": "agent-rule",
       "title": "Role: Prod Code Agent (Promotion)",
       "area": ".agents/rules/prod_code_agent.md",
-      "summary": "You promote approved non-canon drafts and framework additions from `narrative/draft/` into production files inside `renpy_project/game/` and `docs/canon/`. You ensure absolute technical compliance and preserve all creati",
+      "summary": "You promote approved non-canon drafts and framework additions from `main-game/draft/` into production files inside `main-game/prod-game/game/` and `main-game/canon/`. You ensure absolute technical compliance and preserve",
       "links": [],
       "findings": []
     },
@@ -316,7 +316,7 @@
           "status": "ok"
         },
         {
-          "target": "../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/characters.rpy",
+          "target": "../../main-game/non-prod-game/game/characters.rpy",
           "status": "missing"
         },
         {
@@ -325,7 +325,7 @@
         }
       ],
       "findings": [
-        "Broken relative link: ../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/characters.rpy"
+        "Broken relative link: ../../main-game/non-prod-game/game/characters.rpy"
       ]
     },
     {
@@ -368,7 +368,7 @@
       "summary": "You are the **entry point for all new and revised non-canon prose**. You do not replace the traditional writers' room — you **run** it: a pool of divergent brainstorming writers surfaces competing ideas; a convergent wri",
       "links": [
         {
-          "target": "../../narrative/pipeline/README.md",
+          "target": "../../main-game/pipeline/README.md",
           "status": "ok"
         },
         {
@@ -426,7 +426,7 @@
           "status": "ok"
         },
         {
-          "target": "../../../narrative/pipeline/README.md",
+          "target": "../../../main-game/pipeline/README.md",
           "status": "ok"
         },
         {
@@ -538,7 +538,7 @@
           "status": "ok"
         },
         {
-          "target": "../../../narrative/draft/releases/planning/standup_agent_contract.md",
+          "target": "../../../main-game/draft/releases/planning/standup_agent_contract.md",
           "status": "ok"
         }
       ],
@@ -594,7 +594,7 @@
           "status": "ok"
         },
         {
-          "target": "../../../docs/canon/historical_guardrails.md",
+          "target": "../../../main-game/canon/historical_guardrails.md",
           "status": "ok"
         }
       ],
@@ -717,7 +717,7 @@
       "kind": "agent-skill",
       "title": "Promote Day",
       "area": ".agents/skills/promote_day",
-      "summary": "Use when the user wants to move an **approved non-canon day** into `renpy_project/game/dayrdd.rpy`.",
+      "summary": "Use when the user wants to move an **approved non-canon day** into `main-game/prod-game/game/dayrdd.rpy`.",
       "links": [
         {
           "target": "../../rules/orchestrator.md",
@@ -1215,7 +1215,7 @@
           "status": "ok"
         },
         {
-          "target": "narrative/draft/releases/planning/standup_agent_contract.md",
+          "target": "main-game/draft/releases/planning/standup_agent_contract.md",
           "status": "ok"
         },
         {
@@ -1235,7 +1235,7 @@
           "status": "ok"
         },
         {
-          "target": "narrative/README.md",
+          "target": "main-game/README.md",
           "status": "ok"
         }
       ],
@@ -1404,7 +1404,7 @@
       "kind": "readme",
       "title": "Savoy Hotel Visual Novel: Active Assets Source Directory",
       "area": "assets_source",
-      "summary": "This directory acts as the active workspace and repository for raw assets, generation prompt files, sliced frames, and approved media prior to their integration into the Ren'Py engine under `renpy_project/game/images/`.",
+      "summary": "This directory acts as the active workspace and repository for raw assets, generation prompt files, sliced frames, and approved media prior to their integration into the Ren'Py engine under `main-game/prod-game/game/imag",
       "links": [
         {
           "target": "../docs/art/README.md",
@@ -1476,7 +1476,7 @@
           "status": "ok"
         },
         {
-          "target": "../../narrative/pipeline/README.md",
+          "target": "../../main-game/pipeline/README.md",
           "status": "ok"
         },
         {
@@ -1852,12 +1852,12 @@
           "status": "ok"
         },
         {
-          "target": "../../.agents/skills/revise_narrative/SKILL.md",
-          "status": "ok"
+          "target": "../../.agents/skills/revise_main-game/SKILL.md",
+          "status": "missing"
         },
         {
-          "target": "../../.agents/skills/rewrite_narrative/SKILL.md",
-          "status": "ok"
+          "target": "../../.agents/skills/rewrite_main-game/SKILL.md",
+          "status": "missing"
         },
         {
           "target": "../../.agents/skills/implement_spec/SKILL.md",
@@ -1968,7 +1968,10 @@
           "status": "ok"
         }
       ],
-      "findings": []
+      "findings": [
+        "Broken relative link: ../../.agents/skills/revise_main-game/SKILL.md",
+        "Broken relative link: ../../.agents/skills/rewrite_main-game/SKILL.md"
+      ]
     },
     {
       "path": "docs/art/ASSET_CARD_SCHEMA.md",
@@ -2129,35 +2132,35 @@
           "status": "ok"
         },
         {
-          "target": "../../narrative/draft/bible/cora_character_non_canon.md",
+          "target": "../../main-game/draft/bible/cora_character_non_canon.md",
           "status": "ok"
         },
         {
-          "target": "../../narrative/draft/bible/stern_character_non_canon.md",
+          "target": "../../main-game/draft/bible/stern_character_non_canon.md",
           "status": "ok"
         },
         {
-          "target": "../../narrative/draft/bible/vance_character_non_canon.md",
+          "target": "../../main-game/draft/bible/vance_character_non_canon.md",
           "status": "ok"
         },
         {
-          "target": "../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy",
+          "target": "../../main-game/non-prod-game/game/days/day102_non_canon.rpy",
           "status": "ok"
         },
         {
-          "target": "../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy",
+          "target": "../../main-game/non-prod-game/game/shared/story_chains_non_canon.rpy",
           "status": "ok"
         },
         {
-          "target": "../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day100_non_canon.rpy",
+          "target": "../../main-game/non-prod-game/game/days/day100_non_canon.rpy",
           "status": "ok"
         },
         {
-          "target": "../../renpy_project/game/script.rpy#L15",
+          "target": "../../main-game/prod-game/game/script.rpy#L15",
           "status": "ok"
         },
         {
-          "target": "../../renpy_project/game/assets_manifest.rpy",
+          "target": "../../main-game/prod-game/game/assets_manifest.rpy",
           "status": "ok"
         },
         {
@@ -2172,7 +2175,7 @@
       "kind": "backlog",
       "title": "Backlog: JSON beat pipeline (deferred)",
       "area": "docs/backlog",
-      "summary": "This repository previously explored a **markdown → JSON beat schema → Ren’Py** path (`validate_beats`, `sync_beats`, `narrative/beats`, etc.). That work is **deferred** so effort stays on **shipping the MVP** in `renpy_p",
+      "summary": "This repository previously explored a **markdown → JSON beat schema → Ren’Py** path (`validate_beats`, `sync_beats`, `main-game/beats`, etc.). That work is **deferred** so effort stays on **shipping the MVP** in `main-ga",
       "links": [],
       "findings": []
     },
@@ -2196,15 +2199,6 @@
           "status": "ok"
         }
       ],
-      "findings": []
-    },
-    {
-      "path": "docs/canon/historical_guardrails.md",
-      "kind": "reference",
-      "title": "Historical Guardrails (1891 Savoy Baseline)",
-      "area": "docs/canon",
-      "summary": "This file is the canonical historical reference for narrative and art review.",
-      "links": [],
       "findings": []
     },
     {
@@ -2341,7 +2335,7 @@
       "kind": "workflow",
       "title": "Narrative workflow (MVP)",
       "area": "docs",
-      "summary": "The product is a **playable Ren'Py MVP** in `renpy_project/`. Non-canon day scripts in `narrative/draft/` are supporting design/implementation input, not a parser pipeline.",
+      "summary": "The product is a **playable Ren'Py MVP** in `main-game/prod-game/`. Non-canon day scripts in `main-game/draft/` are supporting design/implementation input, not a parser pipeline.",
       "links": [
         {
           "target": "../AGENTS.md",
@@ -2558,15 +2552,15 @@
       "summary": "Add a **deterministic sprite-placement post-processor** to the production pipeline. After the",
       "links": [
         {
-          "target": "../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/characters.rpy",
+          "target": "../../main-game/non-prod-game/game/characters.rpy",
           "status": "missing"
         },
         {
-          "target": "../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day101_non_canon.rpy",
+          "target": "../../main-game/non-prod-game/game/days/day101_non_canon.rpy",
           "status": "ok"
         },
         {
-          "target": "../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/asset_transforms.rpy",
+          "target": "../../main-game/non-prod-game/game/asset_transforms.rpy",
           "status": "missing"
         },
         {
@@ -2586,7 +2580,7 @@
           "status": "ok"
         },
         {
-          "target": "../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/characters.rpy",
+          "target": "../../main-game/non-prod-game/game/characters.rpy",
           "status": "missing"
         },
         {
@@ -2594,7 +2588,7 @@
           "status": "ok"
         },
         {
-          "target": "../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/asset_transforms.rpy",
+          "target": "../../main-game/non-prod-game/game/asset_transforms.rpy",
           "status": "missing"
         },
         {
@@ -2643,10 +2637,10 @@
         }
       ],
       "findings": [
-        "Broken relative link: ../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/characters.rpy",
-        "Broken relative link: ../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/asset_transforms.rpy",
-        "Broken relative link: ../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/characters.rpy",
-        "Broken relative link: ../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/asset_transforms.rpy"
+        "Broken relative link: ../../main-game/non-prod-game/game/characters.rpy",
+        "Broken relative link: ../../main-game/non-prod-game/game/asset_transforms.rpy",
+        "Broken relative link: ../../main-game/non-prod-game/game/characters.rpy",
+        "Broken relative link: ../../main-game/non-prod-game/game/asset_transforms.rpy"
       ]
     },
     {
@@ -2668,73 +2662,82 @@
       "findings": []
     },
     {
-      "path": "narrative/canon/characters_canon.md",
+      "path": "main-game/canon/characters_canon.md",
       "kind": "reference",
       "title": "Characters Canon Index",
-      "area": "narrative",
+      "area": "main-game",
       "summary": "This file tracks the approved character database structure.",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/canon/characters_minor_canon.md",
+      "path": "main-game/canon/characters_minor_canon.md",
       "kind": "reference",
       "title": "Characters Minor Canon",
-      "area": "narrative",
+      "area": "main-game",
       "summary": "This file tracks minor characters who appear in specific scenes or days but do not have dedicated character files.",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/canon/cora_character_canon.md",
+      "path": "main-game/canon/cora_character_canon.md",
       "kind": "reference",
       "title": "Cora Character Canon",
-      "area": "narrative",
+      "area": "main-game",
       "summary": "Project: Untitled Victorian VN",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/canon/gideon_character_canon.md",
+      "path": "main-game/canon/gideon_character_canon.md",
       "kind": "reference",
       "title": "Gideon Character Canon",
-      "area": "narrative",
+      "area": "main-game",
       "summary": "Project: Untitled Victorian VN",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/canon/locations_canon.md",
+      "path": "main-game/canon/historical_guardrails.md",
+      "kind": "reference",
+      "title": "Historical Guardrails (1891 Savoy Baseline)",
+      "area": "main-game",
+      "summary": "This file is the canonical historical reference for narrative and art review.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "main-game/canon/locations_canon.md",
       "kind": "reference",
       "title": "Locations Canon",
-      "area": "narrative",
+      "area": "main-game",
       "summary": "Stern Office",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/canon/mechanics_canon.md",
+      "path": "main-game/canon/mechanics_canon.md",
       "kind": "reference",
       "title": "Mechanics Canon (MVP Baseline)",
-      "area": "narrative",
+      "area": "main-game",
       "summary": "This file anchors narrative-facing mechanics references for editorial review.",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/canon/missy_character_canon.md",
+      "path": "main-game/canon/missy_character_canon.md",
       "kind": "reference",
       "title": "Missy Character Canon",
-      "area": "narrative",
+      "area": "main-game",
       "summary": "Project: Untitled Victorian VN",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/canon/README.md",
+      "path": "main-game/canon/README.md",
       "kind": "readme",
       "title": "Canon narrative files",
-      "area": "narrative",
+      "area": "main-game",
       "summary": "This folder contains promoted narrative truth that downstream drafting and review agents may cite.",
       "links": [
         {
@@ -2745,181 +2748,208 @@
       "findings": []
     },
     {
-      "path": "narrative/canon/stern_character_canon.md",
+      "path": "main-game/canon/stern_character_canon.md",
       "kind": "reference",
       "title": "Stern Character Canon",
-      "area": "narrative",
+      "area": "main-game",
       "summary": "Project: Untitled Victorian VN",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/canon/vance_character_canon.md",
+      "path": "main-game/canon/vance_character_canon.md",
       "kind": "reference",
       "title": "Vance Character Canon",
-      "area": "narrative",
+      "area": "main-game",
       "summary": "Project: Untitled Victorian VN",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/canon/voice_guides/cora_voice_guide.md",
+      "path": "main-game/canon/voice_guides/cora_voice_guide.md",
       "kind": "reference",
       "title": "CORA VOICE GUIDE (CANON LOCK)",
-      "area": "narrative",
+      "area": "main-game",
       "summary": "Canonical source currently derives from:",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/canon/voice_guides/gideon_voice_guide.md",
+      "path": "main-game/canon/voice_guides/gideon_voice_guide.md",
       "kind": "reference",
       "title": "GIDEON VOICE GUIDE (CANON LOCK)",
-      "area": "narrative",
+      "area": "main-game",
       "summary": "Canonical source currently derives from:",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/canon/voice_guides/missy_voice_guide.md",
+      "path": "main-game/canon/voice_guides/missy_voice_guide.md",
       "kind": "reference",
       "title": "MISSY VOICE GUIDE (CANON LOCK)",
-      "area": "narrative",
+      "area": "main-game",
       "summary": "Canonical source currently derives from:",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/canon/voice_guides/README.md",
+      "path": "main-game/canon/voice_guides/README.md",
       "kind": "readme",
       "title": "Canon Voice Guides",
-      "area": "narrative",
+      "area": "main-game",
       "summary": "Canonical voice guides are mirrored here for editorial lock.",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/canon/voice_guides/stern_voice_guide.md",
+      "path": "main-game/canon/voice_guides/stern_voice_guide.md",
       "kind": "reference",
       "title": "MS. STERN VOICE GUIDE (CANON LOCK)",
-      "area": "narrative",
+      "area": "main-game",
       "summary": "Canonical source currently derives from:",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/canon/voice_guides/vance_voice_guide.md",
+      "path": "main-game/canon/voice_guides/vance_voice_guide.md",
       "kind": "reference",
       "title": "VANCE VOICE GUIDE (CANON LOCK)",
-      "area": "narrative",
+      "area": "main-game",
       "summary": "Canonical source currently derives from:",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/draft/bible/characters_non_canon.md",
+      "path": "main-game/draft/bible/characters_non_canon.md",
       "kind": "reference",
       "title": "Characters Non Canon",
-      "area": "narrative",
+      "area": "main-game",
       "summary": "Purpose: single source for supporting/minor cast voice anchors and behavior notes.",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/draft/bible/cora_character_non_canon.md",
+      "path": "main-game/draft/bible/cora_character_non_canon.md",
       "kind": "reference",
       "title": "Cora Character Non Canon",
-      "area": "narrative",
+      "area": "main-game",
       "summary": "Project: Untitled Victorian VN",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/draft/bible/cora_inner_voice_non_canon.md",
+      "path": "main-game/draft/bible/cora_inner_voice_non_canon.md",
       "kind": "reference",
       "title": "Cora's Inner Voice (`cora_inner`) — Non-Canon Voice Guide",
-      "area": "narrative",
+      "area": "main-game",
       "summary": "This voice guide defines the narrative guidelines, psychological architecture, and historical class constraints for writing Cora's internal monologue (`cora_inner`).",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/draft/bible/gideon_character_non_canon.md",
+      "path": "main-game/draft/bible/gideon_character_non_canon.md",
       "kind": "reference",
       "title": "Gideon Character Non Canon",
-      "area": "narrative",
+      "area": "main-game",
       "summary": "Project: Untitled Victorian VN",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/draft/bible/locations_non_canon.md",
+      "path": "main-game/draft/bible/locations_non_canon.md",
       "kind": "reference",
       "title": "Locations Database (Non-Canon)",
-      "area": "narrative",
+      "area": "main-game",
       "summary": "Purpose: working location anchors for writing consistency and asset planning.",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/draft/bible/missy_character_non_canon.md",
+      "path": "main-game/draft/bible/missy_character_non_canon.md",
       "kind": "reference",
       "title": "Missy Character Non Canon",
-      "area": "narrative",
+      "area": "main-game",
       "summary": "Project: Untitled Victorian VN",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/draft/bible/README.md",
+      "path": "main-game/draft/bible/README.md",
       "kind": "readme",
       "title": "Draft bible",
-      "area": "narrative",
+      "area": "main-game",
       "summary": "This folder contains non-canon working bible files used by the writers' room and review agents.",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/draft/bible/stern_character_non_canon.md",
+      "path": "main-game/draft/bible/stern_character_non_canon.md",
       "kind": "reference",
       "title": "Stern Character Non Canon",
-      "area": "narrative",
+      "area": "main-game",
       "summary": "Project: Untitled Victorian VN",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/draft/bible/vance_character_non_canon.md",
+      "path": "main-game/draft/bible/vance_character_non_canon.md",
       "kind": "reference",
       "title": "Vance Character Non Canon",
-      "area": "narrative",
+      "area": "main-game",
       "summary": "Project: Untitled Victorian VN",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/pipeline/character_profile_reports/gideon_forensic_psychology_report.md",
+      "path": "main-game/non-prod-game/game/shared/classes_non_canon_notes.md",
       "kind": "reference",
-      "title": "Forensic Psychology Profile Report - Sir Gideon Locke",
-      "area": "narrative",
-      "summary": "Promoted Sir Gideon Locke from brief non-canon notes to a fully defined, independent locked canon profile file: `narrative/canon/gideon_character_canon.md`.",
+      "title": "Technical Documentation: Refined Writing Gate Mechanics & Flat Inkwell Cap",
+      "area": "main-game",
+      "summary": "This document details the architectural updates implemented in the Release 1 sandbox (`main-game/draft/releases/release-1-mvp/`) to support the refined writing gate mechanics, flat inspiration capacity, and separated res",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/pipeline/character_profile_reports/missy_forensic_psychology_report.md",
+      "path": "main-game/non-prod-game/game/shared/story_chains_non_canon_notes.md",
+      "kind": "reference",
+      "title": "Technical Documentation: Two-Tiered Character-Specific Suspicion (Option B)",
+      "area": "main-game",
+      "summary": "This document details the architectural additions implemented in the Release 1 sandbox (`main-game/draft/releases/release-1-mvp/`) to support the refined character-specific story chains, choice dynamics, and confrontatio",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "main-game/non-prod-game/README.md",
+      "kind": "readme",
+      "title": "Untitled Victorian VN",
+      "area": "main-game",
+      "summary": "A visual novel developed in Ren'Py, set in the historic Savoy Hotel, London, during the winter of 1891.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "main-game/pipeline/character_profile_reports/gideon_forensic_psychology_report.md",
+      "kind": "reference",
+      "title": "Forensic Psychology Profile Report - Sir Gideon Locke",
+      "area": "main-game",
+      "summary": "Promoted Sir Gideon Locke from brief non-canon notes to a fully defined, independent locked canon profile file: `main-game/canon/gideon_character_canon.md`.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "main-game/pipeline/character_profile_reports/missy_forensic_psychology_report.md",
       "kind": "reference",
       "title": "Forensic Psychology Profile Report - Missy",
-      "area": "narrative",
+      "area": "main-game",
       "summary": "**Dismantled \"Born Sexy Yesterday\" Trope:** Rewrote Missy's psychological profile to eliminate any framing of naive airheadedness, child-like submission, or passivity. Missy is now established as a highly observant, inte",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/pipeline/character_profile_reports/README.md",
+      "path": "main-game/pipeline/character_profile_reports/README.md",
       "kind": "readme",
       "title": "Character profile reports",
-      "area": "narrative",
+      "area": "main-game",
       "summary": "This folder stores forensic psychology profile reports and carry-forward notes produced during",
       "links": [
         {
@@ -2930,38 +2960,56 @@
       "findings": []
     },
     {
-      "path": "narrative/pipeline/character_profile_reports/stern_forensic_psychology_report.md",
+      "path": "main-game/pipeline/character_profile_reports/stern_forensic_psychology_report.md",
       "kind": "reference",
       "title": "Forensic Psychology Profile Report - Ms. Stern",
-      "area": "narrative",
-      "summary": "Promoted Ms. Stern from brief aggregated notes to a fully defined independent canon profile file: `narrative/canon/stern_character_canon.md`.",
+      "area": "main-game",
+      "summary": "Promoted Ms. Stern from brief aggregated notes to a fully defined independent canon profile file: `main-game/canon/stern_character_canon.md`.",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/pipeline/character_profile_reports/vance_forensic_psychology_report.md",
+      "path": "main-game/pipeline/character_profile_reports/vance_forensic_psychology_report.md",
       "kind": "reference",
       "title": "Forensic Psychology Profile Report - Vance",
-      "area": "narrative",
-      "summary": "Promoted Vance from aggregated notes to a fully defined independent canon profile file: `narrative/canon/vance_character_canon.md`.",
+      "area": "main-game",
+      "summary": "Promoted Vance from aggregated notes to a fully defined independent canon profile file: `main-game/canon/vance_character_canon.md`.",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/pipeline/README.md",
+      "path": "main-game/pipeline/README.md",
       "kind": "readme",
       "title": "Narrative pipeline (pre-draft exploration)",
-      "area": "narrative",
+      "area": "main-game",
       "summary": "Everything here is **non-canon** and supports the writers' room before and during gate review. Nothing in `pipeline/` ships in the game.",
       "links": [],
       "findings": []
     },
     {
-      "path": "narrative/README.md",
+      "path": "main-game/prod-game/game/README.md",
       "kind": "readme",
-      "title": "Narrative workspace",
-      "area": "narrative",
-      "summary": "All story authoring lives under `narrative/`. **Episodic canon** (what ships in the game) is only in `renpy_project/game/dayrdd.rpy` — not here.",
+      "title": "Ren'Py game scripts",
+      "area": "main-game",
+      "summary": "This folder is the playable runtime source for the visual novel. Promoted `day*.rpy` files are",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "main-game/prod-game/README.md",
+      "kind": "readme",
+      "title": "Untitled Victorian VN",
+      "area": "main-game",
+      "summary": "A visual novel developed in Ren'Py, set in the historic Savoy Hotel, London, during the winter of 1891.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "main-game/README.md",
+      "kind": "readme",
+      "title": "Game workspace (`main-game/`)",
+      "area": "main-game",
+      "summary": "All story authoring and both Ren'Py projects live here. **Episodic canon** (what ships) is only in `prod-game/game/dayrdd.rpy`.",
       "links": [
         {
           "target": "canon/",
@@ -2973,6 +3021,14 @@
         },
         {
           "target": "pipeline/",
+          "status": "ok"
+        },
+        {
+          "target": "non-prod-game/",
+          "status": "ok"
+        },
+        {
+          "target": "prod-game/",
           "status": "ok"
         },
         {
@@ -2994,7 +3050,7 @@
       "summary": "An AI-accelerated, adult pseudo-sandbox RPG visual novel set in a Victorian hotel. This project explores themes of dark gothic corruption, voyeurism, and the loss of purity, utilizing a dynamic \"paper doll\" visual state ",
       "links": [
         {
-          "target": "narrative/README.md",
+          "target": "main-game/README.md",
           "status": "ok"
         },
         {
@@ -3019,36 +3075,28 @@
         }
       ],
       "findings": []
-    },
-    {
-      "path": "renpy_project/game/README.md",
-      "kind": "readme",
-      "title": "Ren'Py game scripts",
-      "area": "renpy_project",
-      "summary": "This folder is the playable runtime source for the visual novel. Promoted `day*.rpy` files are",
-      "links": [],
-      "findings": []
-    },
-    {
-      "path": "renpy_project/README.md",
-      "kind": "readme",
-      "title": "Untitled Victorian VN",
-      "area": "renpy_project",
-      "summary": "A visual novel developed in Ren'Py, set in the historic Savoy Hotel, London, during the winter of 1891.",
-      "links": [],
-      "findings": []
     }
   ],
   "findings": [
     {
       "severity": "error",
       "path": ".agents/rules/scene_direction_agent.md",
-      "message": "Broken relative link: ../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/characters.rpy"
+      "message": "Broken relative link: ../../main-game/non-prod-game/game/characters.rpy"
     },
     {
       "severity": "error",
       "path": ".agents/skills/daily_standup/SKILL.md",
       "message": "Broken relative link: ../../action_from_standup/SKILL.md"
+    },
+    {
+      "severity": "error",
+      "path": "docs/agents/SKILL_CATALOG.md",
+      "message": "Broken relative link: ../../.agents/skills/revise_main-game/SKILL.md"
+    },
+    {
+      "severity": "error",
+      "path": "docs/agents/SKILL_CATALOG.md",
+      "message": "Broken relative link: ../../.agents/skills/rewrite_main-game/SKILL.md"
     },
     {
       "severity": "warning",
@@ -3058,22 +3106,67 @@
     {
       "severity": "error",
       "path": "docs/specs/scene-direction-agent.md",
-      "message": "Broken relative link: ../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/characters.rpy"
+      "message": "Broken relative link: ../../main-game/non-prod-game/game/characters.rpy"
     },
     {
       "severity": "error",
       "path": "docs/specs/scene-direction-agent.md",
-      "message": "Broken relative link: ../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/asset_transforms.rpy"
+      "message": "Broken relative link: ../../main-game/non-prod-game/game/asset_transforms.rpy"
     },
     {
       "severity": "error",
       "path": "docs/specs/scene-direction-agent.md",
-      "message": "Broken relative link: ../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/characters.rpy"
+      "message": "Broken relative link: ../../main-game/non-prod-game/game/characters.rpy"
     },
     {
       "severity": "error",
       "path": "docs/specs/scene-direction-agent.md",
-      "message": "Broken relative link: ../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/asset_transforms.rpy"
+      "message": "Broken relative link: ../../main-game/non-prod-game/game/asset_transforms.rpy"
+    },
+    {
+      "severity": "warning",
+      "path": "main-game/non-prod-game/game",
+      "message": "Complex folder has no README.md index."
+    },
+    {
+      "severity": "warning",
+      "path": "main-game/non-prod-game/game/AEditor",
+      "message": "Complex folder has no README.md index."
+    },
+    {
+      "severity": "warning",
+      "path": "main-game/non-prod-game/game/days",
+      "message": "Complex folder has no README.md index."
+    },
+    {
+      "severity": "warning",
+      "path": "main-game/non-prod-game/game/gui",
+      "message": "Complex folder has no README.md index."
+    },
+    {
+      "severity": "warning",
+      "path": "main-game/non-prod-game/game/gui/phone",
+      "message": "Complex folder has no README.md index."
+    },
+    {
+      "severity": "warning",
+      "path": "main-game/non-prod-game/game/images",
+      "message": "Complex folder has no README.md index."
+    },
+    {
+      "severity": "warning",
+      "path": "main-game/non-prod-game/game/images/sprites",
+      "message": "Complex folder has no README.md index."
+    },
+    {
+      "severity": "warning",
+      "path": "main-game/non-prod-game/game/images/ui",
+      "message": "Complex folder has no README.md index."
+    },
+    {
+      "severity": "warning",
+      "path": "main-game/non-prod-game/game/shared",
+      "message": "Complex folder has no README.md index."
     }
   ]
 }

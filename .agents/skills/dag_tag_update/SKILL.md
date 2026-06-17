@@ -37,7 +37,7 @@ tags" or an equivalent `--overwrite-manual-dag-tags` flag in a future updater co
 After updating or recreating DAG tags, regenerate the graph outputs under:
 
 ```text
-narrative/pipeline/releases/release-1-mvp/graph/
+main-game/pipeline/releases/release-1-mvp/graph/
 ```
 
 Then run `storyboard_sync` if the graph audit reports storyboard drift.

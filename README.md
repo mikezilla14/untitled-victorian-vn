@@ -4,13 +4,14 @@ An AI-accelerated, adult pseudo-sandbox RPG visual novel set in a Victorian hote
 
 ## Repository architecture (monorepo)
 
-* **`/docs`**: Studio and mechanics docs. **`docs/narrative_workflow.md`** describes the MVP narrative loop (non-canon Ren'Py draft `.rpy` -> promoted runtime `.rpy` in `renpy_project/`).
+* **`/docs`**: Studio and mechanics docs. **`docs/narrative_workflow.md`** describes the MVP narrative loop (non-canon Ren'Py draft `.rpy` -> promoted runtime `.rpy` in `main-game/prod-game/`).
 * **`/docs/backlog`**: Deferred tooling (e.g. optional JSON beat schema), not required for MVP.
-* **`/narrative`**: Story workspace — see [`narrative/README.md`](narrative/README.md).
-  * **`/narrative/canon`**: Static promoted lore and voice guides.
-  * **`/narrative/draft`**: Non-canon promotion drafts (`dayrdd_non_canon.rpy`), planning, bible databases.
-  * **`/narrative/pipeline`**: Pre-draft exploration (specs, ideas, gates) — per-day typed folders.
-* **`/renpy_project/game`**: **Episodic canon** — shipped `dayrdd.rpy` runtime scripts.
+* **`/main-game`**: Game workspace — see [`main-game/README.md`](main-game/README.md).
+  * **`/main-game/canon`**: Static promoted lore, voice guides, and historical guardrails.
+  * **`/main-game/draft`**: Planning, bible databases, writer intents/exceptions.
+  * **`/main-game/non-prod-game`**: Non-canon Ren'Py sandbox (`dayrdd_non_canon.rpy`).
+  * **`/main-game/pipeline`**: Pre-draft exploration (specs, ideas, gates) — per-day typed folders.
+* **`/main-game/prod-game/game`**: **Episodic canon** — shipped `dayrdd.rpy` runtime scripts (core MVP deliverable).
 * **`/scripts`**: Tooling and validation scripts.
   * **`validate.py`**: CI entry — domains, engineering, Ren'Py lint, historical lint, writers' room pipeline (convergent + spec scripts + gate verdicts).
   * **`agent_next_step.py`**: Prints the next agent rule file for a pipeline stage (`py scripts/agent_next_step.py --pipeline produce-day --stage 1`).
@@ -18,7 +19,6 @@ An AI-accelerated, adult pseudo-sandbox RPG visual novel set in a Victorian hote
   * **`documentation_audit.py`**: README/docs/spec catalogue refresh and stale-documentation audit.
 * **`/.agents`**: AI role rules.
 * **`/art_pipeline`**: Asset tooling (when present).
-* **`/renpy_project`**: The playable game — **core MVP deliverable**.
 
 ## Tech stack
 
@@ -36,10 +36,10 @@ Paste [`.agents/rules/orchestrator.md`](.agents/rules/orchestrator.md) as your s
 
 * **Orchestrator**: Decomposes a production task into ordered agent pipelines (`produce-day`, `review-scene`, `implement-spec`, `promote-day`, `promote-framework`, etc.).
 * **Documentation steward**: Keeps README files, project docs, feature specs, and the generated documentation catalogue in sync with current repo state.
-* **Prod code agent**: Promotes non-canon drafts and framework designs into production (`renpy_project/` and `docs/canon/`) while preserving creative text verbatim.
-* **Non-prod code agent**: Focuses on sandbox/draft implementations strictly in `narrative/draft/` preserving dialogue and prose verbatim.
+* **Prod code agent**: Promotes non-canon drafts and framework designs into production (`main-game/prod-game/` and `main-game/canon/`) while preserving creative text verbatim.
+* **Non-prod code agent**: Focuses on sandbox/draft implementations in `main-game/non-prod-game/` preserving dialogue and prose verbatim.
 * **Chief architect**: Enforces Ren’Py methodology, reviews code changes, and checks creative-technical boundaries.
-* **Writers’ room (orchestration)**: Runs divergent spec scripts → convergent synthesis → `dayrdd_non_canon.rpy`; owns 100% of creative prose/dialogue in the promotion draft. Do not load pipeline `ideas/` or `synthesis/` for new assignments (see `narrative/README.md`).
+* **Writers’ room (orchestration)**: Runs divergent spec scripts → convergent synthesis → `dayrdd_non_canon.rpy`; owns 100% of creative prose/dialogue in the promotion draft. Do not load pipeline `ideas/` or `synthesis/` for new assignments (see `main-game/README.md`).
 * **Spiciness tuner**: Interactive 1-5 erotic intensity dial for whole-story, day, scene, passage, branch, and visual-brief variants. Level 5 is the default historical-fidelity-first project setting; lower levels progressively prioritize erotic fantasy.
 * **Victorian consultant / historical linter**: Era-appropriate language checks on writers’ room narrative drafts in CI.
 
@@ -48,10 +48,10 @@ Paste [`.agents/rules/orchestrator.md`](.agents/rules/orchestrator.md) as your s
 **Automated (recommended):** See [`AGENTS.md`](AGENTS.md) — paste `.agents/rules/orchestrator.md` as your system prompt, then state your task (e.g. `"Produce day N: [brief]"` or `"Promote day N"`).
 
 **Manual:**
-1. Write a **non-canon Ren'Py draft script** (`dayrdd_non_canon.rpy`) in `narrative/draft/`.
+1. Write a **non-canon Ren'Py draft script** (`dayrdd_non_canon.rpy`) in `main-game/non-prod-game/game/days/`.
 2. CI runs **`scripts/historical_linter.py`** on changed writers-room narrative drafts (`*_non_canon.rpy`).
-3. Work with the **non-prod code agent** to implement technical wrapping and python logic inside the non-canon draft files under `narrative/draft/`.
-4. Work with the **prod code agent** to promote validated drafts to the production **`renpy_project/game/`** folder.
+3. Work with the **non-prod code agent** to implement technical wrapping and python logic inside the non-canon draft files under `main-game/non-prod-game/`.
+4. Work with the **prod code agent** to promote validated drafts to the production **`main-game/prod-game/game/`** folder.
 5. Run local orchestration with **`py scripts/orchestrate_review.py --files <path_to_draft>,<path_to_runtime>`** to automatically verify all Agent Contracts.
 6. **Chief architect** validates structure, state contracts, lint, and strict creative-technical preservation on code changes.
 

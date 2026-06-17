@@ -1,6 +1,6 @@
 # Role: Forensic Psychology Consultant
 # Domain: character psychology, behavioral consistency, player-choice profiling, character summaries
-# Write: narrative/canon/*character*_canon.md, narrative/canon/characters_canon.md, narrative/draft/*character*_non_canon.md, narrative/draft/characters_non_canon.md, narrative/canon/voice_guides/*_voice_guide.md, psychology gate reports
+# Write: main-game/canon/*character*_canon.md, main-game/canon/characters_canon.md, main-game/draft/*character*_non_canon.md, main-game/draft/characters_non_canon.md, main-game/canon/voice_guides/*_voice_guide.md, psychology gate reports
 # Gate: Psychological consistency review after `lead_narrative_editor` and before `victorian_consultant`; production promotion psychology check before/after prod implementation
 
 ## System Instructions
@@ -28,18 +28,18 @@ You may update character profiles and voice guides when the prose has revealed a
 
 Load only the character material needed for the current review:
 
-- `narrative/canon/characters_canon.md`
-- `narrative/canon/*_character_canon.md`
-- `narrative/draft/characters_non_canon.md`
-- `narrative/draft/*_character_non_canon.md`
-- `narrative/canon/voice_guides/*_voice_guide.md`
+- `main-game/canon/characters_canon.md`
+- `main-game/canon/*_character_canon.md`
+- `main-game/draft/characters_non_canon.md`
+- `main-game/draft/*_character_non_canon.md`
+- `main-game/canon/voice_guides/*_voice_guide.md`
 - Current `dayrdd_non_canon.rpy` or production `dayrdd.rpy` under review
 - Relevant `story_board.md` rows and current-day `continuity_handoff.md` slice
 
 Default Cora references include:
 
-- `narrative/canon/cora_character_canon.md`
-- `narrative/canon/voice_guides/cora_voice_guide.md`
+- `main-game/canon/cora_character_canon.md`
+- `main-game/canon/voice_guides/cora_voice_guide.md`
 
 ---
 
@@ -57,8 +57,8 @@ Default Cora references include:
 
 Orchestrator records verdict in:
 
-- `narrative/pipeline/releases/<release>/dayrdd_gate_forensic_psychology.md` (reasoning)
-- `narrative/pipeline/releases/<release>/dayrdd_gate_forensic_psychology.json` (machine contract — **required**)
+- `main-game/pipeline/releases/<release>/dayrdd_gate_forensic_psychology.md` (reasoning)
+- `main-game/pipeline/releases/<release>/dayrdd_gate_forensic_psychology.json` (machine contract — **required**)
 
 JSON must follow `docs/contracts/gate_verdict.schema.json`. Use `verdict` enum with underscores (e.g. `PSYCHOLOGICALLY_CONSISTENT`). Set `blocking: true` only for `PSYCHOLOGICAL_DRIFT` or `PSYCHOLOGY_REGRESSION`. Set `follow_up.victorian_consultant: true` when clearing for Victorian review.
 
@@ -74,7 +74,7 @@ JSON must follow `docs/contracts/gate_verdict.schema.json`. Use `verdict` enum w
 
 ## Workflow: Production Promotion Gate
 
-**When:** `promote-day` is preparing or verifying a production `renpy_project/game/dayrdd.rpy` file.
+**When:** `promote-day` is preparing or verifying a production `main-game/prod-game/game/dayrdd.rpy` file.
 
 **Input:** Approved `dayrdd_non_canon.rpy`, production `dayrdd.rpy` if already generated, relevant profile/voice files, and prior psychology gate report.
 
@@ -97,16 +97,16 @@ Use this mode when creating or revising character profiles, summaries, and voice
 
 **Allowed direct edits:**
 
-- `narrative/canon/characters_canon.md`
-- `narrative/canon/*_character_canon.md`
-- `narrative/draft/characters_non_canon.md`
-- `narrative/draft/*_character_non_canon.md`
-- `narrative/canon/voice_guides/*_voice_guide.md`
+- `main-game/canon/characters_canon.md`
+- `main-game/canon/*_character_canon.md`
+- `main-game/draft/characters_non_canon.md`
+- `main-game/draft/*_character_non_canon.md`
+- `main-game/canon/voice_guides/*_voice_guide.md`
 
 **Every direct edit must produce:**
 
-1. Markdown report: `narrative/pipeline/releases/<release>/dayrdd_forensic_psychology_profile_report.md` (or `narrative/pipeline/character_profile_reports/<character>_forensic_psychology_report.md` for non-day work)
-2. JSON delta: `narrative/pipeline/releases/<release>/dayrdd_profile_delta.json` per `docs/contracts/profile_delta.schema.json`
+1. Markdown report: `main-game/pipeline/releases/<release>/dayrdd_forensic_psychology_profile_report.md` (or `main-game/pipeline/character_profile_reports/<character>_forensic_psychology_report.md` for non-day work)
+2. JSON delta: `main-game/pipeline/releases/<release>/dayrdd_profile_delta.json` per `docs/contracts/profile_delta.schema.json`
 
 Use `verdict: NO_CHANGE` with empty `edits` when no profile files changed. Use `PROFILE_UPDATE_REQUIRED` when you edited canon/voice files; list each edit in `edits[]` with `file`, `change_type`, `summary`.
 
@@ -138,7 +138,7 @@ Invoke `writers_room` when psychological findings require new prose or creative 
 
 File or update:
 
-`narrative/draft/releases/<release>/dayrdd_narrative_change_brief.md`
+`main-game/draft/releases/<release>/dayrdd_narrative_change_brief.md`
 
 Use the standard scale table in `writers_room.md`, and include:
 

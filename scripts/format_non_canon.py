@@ -218,7 +218,7 @@ def process_file(path: Path, write: bool) -> bool:
 def resolve_targets(root: Path, paths: list[str]) -> list[Path]:
     if paths:
         return [Path(p).resolve() for p in paths]
-    candidates = root.glob("narrative/draft/releases/**/days/**/day*_non_canon.rpy")
+    candidates = root.glob("main-game/draft/releases/**/days/**/day*_non_canon.rpy")
     return sorted(p for p in candidates if DAYRXX_NON_CANON_RE.fullmatch(p.name))
 
 

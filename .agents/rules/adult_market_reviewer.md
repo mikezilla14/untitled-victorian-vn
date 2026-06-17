@@ -19,9 +19,9 @@ You are a **reviewer**, not a writer. Do not rewrite scenes unless the human exp
 
 Read these first when judging continuity, character intent, and locked project direction:
 
-- `narrative/canon/`
-- `docs/canon/`
-- `narrative/canon/voice_guides/`
+- `main-game/canon/`
+- `main-game/canon/`
+- `main-game/canon/voice_guides/`
 - `docs/game_mechanics_bible.md`
 - `.agents/rules/dev_bible.md`
 
@@ -31,12 +31,12 @@ Canon is not malleable. If market advice conflicts with canon, flag the conflict
 
 Read these as malleable design and writing drafts:
 
-- `narrative/draft/`
-- `narrative/draft/releases/release-1-mvp/`
-- `narrative/draft/releases/planning/story_board.md`
-- `narrative/draft/releases/planning/continuity_handoff.md`
-- `narrative/draft/characters_non_canon.md`
-- `narrative/draft/locations_non_canon.md`
+- `main-game/draft/`
+- `main-game/draft/releases/release-1-mvp/`
+- `main-game/draft/releases/planning/story_board.md`
+- `main-game/draft/releases/planning/continuity_handoff.md`
+- `main-game/draft/characters_non_canon.md`
+- `main-game/draft/locations_non_canon.md`
 
 Non-canon files can be criticized aggressively. Treat them as pre-production material that may be restructured, intensified, cut, or rewritten before promotion.
 
@@ -44,14 +44,14 @@ Non-canon files can be criticized aggressively. Treat them as pre-production mat
 
 Read these as the actual playable game:
 
-- `renpy_project/`
-- `renpy_project/game/*.rpy`
-- `renpy_project/game/assets_manifest.rpy`
-- `renpy_project/README.md`
+- `main-game/prod-game/`
+- `main-game/prod-game/game/*.rpy`
+- `main-game/prod-game/game/assets_manifest.rpy`
+- `main-game/prod-game/README.md`
 
 Production is the current player experience. When draft and production disagree, clearly distinguish:
 
-- **Implemented now:** what the player can actually encounter in `renpy_project/`
+- **Implemented now:** what the player can actually encounter in `main-game/prod-game/`
 - **Planned / drafted:** what exists only in writers-room or backlog docs
 - **Backlog / deferred:** what exists in `docs/backlog/`
 
@@ -60,7 +60,7 @@ Production is the current player experience. When draft and production disagree,
 Read these for planned systems and deferred ideas:
 
 - `docs/backlog/`
-- `narrative/pipeline/README.md`
+- `main-game/pipeline/README.md`
 
 Do not treat backlog ideas as shipped content. Evaluate whether they solve current market problems or create scope risk.
 
@@ -72,17 +72,17 @@ Only enter these modes when the orchestrator or human clearly requests the **mar
 
 ### 1. `assess-prod`
 
-Use when the human asks to assess the current game, production build, or `renpy_project/`.
+Use when the human asks to assess the current game, production build, or `main-game/prod-game/`.
 
 Read:
 
-- `renpy_project/README.md`
-- `renpy_project/game/script.rpy`
-- `renpy_project/game/day*.rpy`
-- `renpy_project/game/story_chains.rpy`
-- `renpy_project/game/classes.rpy`
-- `renpy_project/game/functions.rpy`
-- `renpy_project/game/assets_manifest.rpy`
+- `main-game/prod-game/README.md`
+- `main-game/prod-game/game/script.rpy`
+- `main-game/prod-game/game/day*.rpy`
+- `main-game/prod-game/game/story_chains.rpy`
+- `main-game/prod-game/game/classes.rpy`
+- `main-game/prod-game/game/functions.rpy`
+- `main-game/prod-game/game/assets_manifest.rpy`
 - Relevant canon and voice guides
 
 Evaluate the actual player-facing experience, implemented pacing, stat gates, adult content delivery, CG/asset support, and whether the build makes its market promise early enough.
@@ -93,7 +93,7 @@ Use when the human asks to assess non-canon, planned release content, or the wri
 
 Read:
 
-- `narrative/draft/releases/planning/story_board.md`
+- `main-game/draft/releases/planning/story_board.md`
 - Affected `dayrdd_non_canon.rpy` files
 - `continuity_handoff.md` as needed
 - `characters_non_canon.md` and `locations_non_canon.md`
@@ -107,8 +107,8 @@ Use when the human asks to compare production against non-canon, evaluate change
 
 Read paired files:
 
-- Draft: `narrative/draft/releases/release-1-mvp/dayrdd_non_canon.rpy`
-- Production: `renpy_project/game/dayrdd.rpy`
+- Draft: `main-game/draft/releases/release-1-mvp/dayrdd_non_canon.rpy`
+- Production: `main-game/prod-game/game/dayrdd.rpy`
 - Supporting runtime files when mechanics differ
 - `story_board.md`
 - Relevant canon and voice guides
@@ -127,10 +127,10 @@ Use when the human asks for an overall project review.
 
 Read:
 
-- Canon: `narrative/canon/`, `docs/canon/`, voice guides
-- Planned: `narrative/draft/releases/release-1-mvp/`
+- Canon: `main-game/canon/`, `main-game/canon/`, voice guides
+- Planned: `main-game/draft/releases/release-1-mvp/`
 - Backlog: `docs/backlog/`
-- Runtime: `renpy_project/`
+- Runtime: `main-game/prod-game/`
 - README / development docs as needed
 
 Produce a high-level but file-grounded assessment of what is implemented, what is planned, what is deferred, what is missing for the target market, and what should be prioritized next.

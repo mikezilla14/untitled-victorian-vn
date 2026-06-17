@@ -287,8 +287,8 @@ Desk sessions live in **their own runtime files**, parallel to day episodes, so 
 
 | Layer | Pattern | Example |
 |-------|---------|---------|
-| Writers' Room draft | `desk[rdd]_non_canon.rpy` | `narrative/draft/releases/release-1-mvp/desk101_non_canon.rpy` |
-| Runtime (promoted) | `desk[rdd].rpy` | `renpy_project/game/desk101.rpy` |
+| Writers' Room draft | `desk[rdd]_non_canon.rpy` | `main-game/draft/releases/release-1-mvp/desk101_non_canon.rpy` |
+| Runtime (promoted) | `desk[rdd].rpy` | `main-game/prod-game/game/desk101.rpy` |
 
 - `r` = release (`1` for MVP), `dd` = day slot (`01`–`05`), same indexing as `day101.rpy`.
 - This is an **approved exception** to the default “all episodic content in `dayrdd.rpy`” rule, scoped to WRITE-slot drafting only.
@@ -361,7 +361,7 @@ Ren'Py loads all `game/*.rpy` automatically; no `script.rpy` import list require
 ### 9.5 Promotion path
 
 1. Draft in `desk[rdd]_non_canon.rpy` (Writers' Room).
-2. Promote to `renpy_project/game/desk[rdd].rpy` with the same speaker/symbol/manifest audits as `dayrdd.rpy`.
+2. Promote to `main-game/prod-game/game/desk[rdd].rpy` with the same speaker/symbol/manifest audits as `dayrdd.rpy`.
 3. Trim promoted drafting out of `day[rdd].rpy` if any was inlined during transition.
 
 ---
@@ -380,7 +380,7 @@ Ren'Py loads all `game/*.rpy` automatically; no `script.rpy` import list require
 
 **Shared helpers** (no narrative labels): `functions.rpy` — e.g. `desk_resolve_crop(day, hook_field)`, ink tier lookup. UI: `screens.rpy` until approved.
 
-Prototype first in `narrative/pipeline/code_experiments/desk101.rpy` if `game/` merge is gated.
+Prototype first in `main-game/pipeline/code_experiments/desk101.rpy` if `game/` merge is gated.
 
 ---
 
@@ -424,10 +424,10 @@ Prototype first in `narrative/pipeline/code_experiments/desk101.rpy` if `game/` 
 
 **Must align with:**
 
-- `narrative/canon/cora_character_canon.md` — manuscript as improper, self-serving record; not activist reform.
-- `narrative/canon/mechanics_canon.md` — Inspiration / Corruption / Suspicion; no conflicting stat awards.
+- `main-game/canon/cora_character_canon.md` — manuscript as improper, self-serving record; not activist reform.
+- `main-game/canon/mechanics_canon.md` — Inspiration / Corruption / Suspicion; no conflicting stat awards.
 - `story_board.md` — WRITE gates, deadlines, router outcomes.
-- Voice guides under `narrative/canon/voice_guides/`.
+- Voice guides under `main-game/canon/voice_guides/`.
 
 **Reject if:**
 
@@ -482,7 +482,7 @@ Prototype first in `narrative/pipeline/code_experiments/desk101.rpy` if `game/` 
 ## 16. References
 
 - Conversation source: Gemini "Editor's Desk" / Kuleshov / Mad-Libs / inkwell cadence (user-provided, 2026-05).
-- Runtime baseline: `renpy_project/game/day101.rpy` (`day101_4_write_the_chapter`), `day102.rpy` (`day102_4_cora_writes_a_chapter`); desk modules **proposed** as `desk101.rpy` … `desk105.rpy`.
-- State: `renpy_project/game/classes.rpy` (`StoryState`, `complete_manuscript_chapter`, `VALID_RELEASE1_FLAVOURS`).
-- Gates: `renpy_project/game/functions.rpy` (`has_story_fuel`).
-- Spine: `narrative/draft/releases/planning/story_board.md` WRITE rows and router table.
+- Runtime baseline: `main-game/prod-game/game/day101.rpy` (`day101_4_write_the_chapter`), `day102.rpy` (`day102_4_cora_writes_a_chapter`); desk modules **proposed** as `desk101.rpy` … `desk105.rpy`.
+- State: `main-game/prod-game/game/classes.rpy` (`StoryState`, `complete_manuscript_chapter`, `VALID_RELEASE1_FLAVOURS`).
+- Gates: `main-game/prod-game/game/functions.rpy` (`has_story_fuel`).
+- Spine: `main-game/draft/releases/planning/story_board.md` WRITE rows and router table.

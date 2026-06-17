@@ -16,13 +16,13 @@ Day files should be readable writer-first Ren'Py scripts with explicit time-peri
 
 ## Source Of Truth
 
-- Non-production scripts: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/`
-- Non-production shared routing: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/`
+- Non-production scripts: `main-game/non-prod-game/game/days/`
+- Non-production shared routing: `main-game/non-prod-game/game/shared/`
 - Implementation contracts: `.agents/rules/writers_room.md`, `.agents/rules/non_prod_code_agent.md`, `.agents/rules/prod_code_agent.md`, `.agents/rules/chief_architect.md`
 - Book writing contract: `docs/contracts/book_writing_contract.md`
-- DAG spec and graph tooling: `docs/specs/DAG-tag-implementation.md`, `narrative/pipeline/tools/build_story_graph_manifest.py`
+- DAG spec and graph tooling: `docs/specs/DAG-tag-implementation.md`, `main-game/pipeline/tools/build_story_graph_manifest.py`
 
-Production files under `renpy_project/` are read-only during the non-prod refactor. Promotion happens later through `prod_code_agent` after gates.
+Production files under `main-game/prod-game/` are read-only during the non-prod refactor. Promotion happens later through `prod_code_agent` after gates.
 
 ## Architect Findings
 
@@ -239,9 +239,9 @@ The implementation is complete when:
 Run after implementation:
 
 ```powershell
-py scripts/orchestrate_review.py --files "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy"
-py scripts/validate.py --profile changed --agent non_prod_code_agent --skip-gate-checks --files "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy"
-py narrative/pipeline/tools/build_story_graph_manifest.py --release release-1-mvp --out-dir narrative/pipeline/releases/release-1-mvp/graph --storyboard narrative/draft/releases/planning/story_board.md
+py scripts/orchestrate_review.py --files "main-game/non-prod-game/game/days/day103_non_canon.rpy"
+py scripts/validate.py --profile changed --agent non_prod_code_agent --skip-gate-checks --files "main-game/non-prod-game/game/days/day103_non_canon.rpy"
+py main-game/pipeline/tools/build_story_graph_manifest.py --release release-1-mvp --out-dir main-game/pipeline/releases/release-1-mvp/graph --storyboard main-game/draft/releases/planning/story_board.md
 ```
 
 For multi-file implementation, include every changed `.rpy`, shared mockup, and notes file in validation. After graph generation, run `storyboard_sync` only if `release1_graph_gaps.md` or `release1_graph_audit.md` reports storyboard drift.

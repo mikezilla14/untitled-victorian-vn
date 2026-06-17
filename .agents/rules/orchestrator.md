@@ -43,7 +43,7 @@ If the human uses plain-language scene/choice authoring, route to **Writer's Des
 | F95 / adult VN market viability (read-only) | `market-review` | `adult_market_reviewer` |
 | Tune erotic intensity 1–5 or generate spice variants | `spice-tune` | `spiciness_tuning_agent` |
 | Sandbox Ren'Py for a spec | `implement-spec` | `non_prod_code_agent` |
-| Ship day to `renpy_project` | `promote-day` | `chief_architect` |
+| Ship day to `main-game/prod-game` | `promote-day` | `chief_architect` |
 | Ship classes/screens framework | `promote-framework` | `chief_architect` |
 | Ask a narrow 1891 question | `historical-check` | `victorian_consultant` |
 | Change locked canon | `canon-update` | `lead_narrative_editor` |
@@ -84,7 +84,7 @@ agents to run in what order, and define what each agent should receive and retur
 - "Documentation audit — sync READMEs and refresh the catalogue."
 - "Refresh sprite staging on day 104." (`scene_direction` skill — not a pipeline)
 
-**Sandbox day path (MVP):** `narrative/draft/releases/<release>/non_prod_renpy_project/game/days/dayrdd_non_canon.rpy`
+**Sandbox day path (MVP):** `main-game/draft/releases/<release>/non_prod_main-game/prod-game/game/days/dayrdd_non_canon.rpy`
 
 ---
 
@@ -98,13 +98,13 @@ agents to run in what order, and define what each agent should receive and retur
 
 | Stage | Agent | Input | Pass condition | Failure |
 |-------|-------|-------|----------------|---------|
-| 1. Draft + gates | `writers_room` | Task brief + `story_board.md` + continuity handoff slice | Divergent → convergent → `dayrdd_non_canon.rpy` + convergent report → **`lead_narrative_editor` → `forensic_psychology_consultant` → `victorian_consultant`** (sequential). Workflow **A** in `writers_room.md`. Gate verdict files under `narrative/pipeline/`. | Re-run per writers_room revision paths **B** / brief **D–E2** |
+| 1. Draft + gates | `writers_room` | Task brief + `story_board.md` + continuity handoff slice | Divergent → convergent → `dayrdd_non_canon.rpy` + convergent report → **`lead_narrative_editor` → `forensic_psychology_consultant` → `victorian_consultant`** (sequential). Workflow **A** in `writers_room.md`. Gate verdict files under `main-game/pipeline/`. | Re-run per writers_room revision paths **B** / brief **D–E2** |
 | 1.5. Sprite direction | `scene_direction` | Gated `dayrdd_non_canon.rpy` from Stage 1 | `py scripts/scene_direction.py --files <draft>` adds/updates `[asset auto]` lines; dialogue untouched; idempotent | `# [asset warning]` (>4 cast) → manual staging / human |
 | 2. Draft implement | `non_prod_code_agent` | Directed `dayrdd_non_canon.rpy` from Stage 1.5 | Technical scaffolding added; creative prose/dialogue **verbatim** | Narrative gap → file `dayrdd_narrative_change_brief.md` → `revise-narrative` |
 | 3. Draft code gate | `chief_architect` | Output from Stage 2 | `PASS` | `REJECT`; re-run Stage 2 |
-| 4. Deliver | — | Stage 3 output | Sandbox draft ready in `narrative/draft/` | — |
+| 4. Deliver | — | Stage 3 output | Sandbox draft ready in `main-game/draft/` | — |
 
-**Division of labor:** All three narrative gates run **inside** Stage 1 (`writers_room` orchestration). Stage 1.5 is a deterministic post-process (`scripts/scene_direction.py`) that runs **after** gates pass and **before** `non_prod_code_agent` — it only ever touches `[asset auto]` sprite lines, never gated dialogue. Skip it only if the draft has no scenes. Do **not** schedule duplicate gate-only stages unless Stage 1 failed before gates completed or the human explicitly requests a gate retry on an existing `dayrdd_non_canon.rpy`. `non_prod_code_agent` never runs before gates pass. Do not load `narrative/pipeline/` for new divergent assignments (see `narrative/pipeline/README.md`).
+**Division of labor:** All three narrative gates run **inside** Stage 1 (`writers_room` orchestration). Stage 1.5 is a deterministic post-process (`scripts/scene_direction.py`) that runs **after** gates pass and **before** `non_prod_code_agent` — it only ever touches `[asset auto]` sprite lines, never gated dialogue. Skip it only if the draft has no scenes. Do **not** schedule duplicate gate-only stages unless Stage 1 failed before gates completed or the human explicitly requests a gate retry on an existing `dayrdd_non_canon.rpy`. `non_prod_code_agent` never runs before gates pass. Do not load `main-game/pipeline/` for new divergent assignments (see `main-game/pipeline/README.md`).
 
 ---
 
@@ -136,9 +136,9 @@ agents to run in what order, and define what each agent should receive and retur
 
 **Mode routing:**
 
-- **`assess-prod`**: review `renpy_project/` as the actual playable game.
-- **`assess-draft`**: review `narrative/draft/releases/release-1-mvp/` as malleable pre-production.
-- **`compare-prod-draft`**: compare paired `dayrdd_non_canon.rpy` and `renpy_project/game/dayrdd.rpy` files before promotion or drift repair.
+- **`assess-prod`**: review `main-game/prod-game/` as the actual playable game.
+- **`assess-draft`**: review `main-game/draft/releases/release-1-mvp/` as malleable pre-production.
+- **`compare-prod-draft`**: compare paired `dayrdd_non_canon.rpy` and `main-game/prod-game/game/dayrdd.rpy` files before promotion or drift repair.
 - **`deep-dive`**: review canon, planned MVP, backlog, and runtime together.
 
 **Authority boundary:** `adult_market_reviewer` is read-only. It may recommend rewrite, escalation, cut, defer, or promotion status, but it does not rewrite prose, edit canon, or change production. If the human approves a market rewrite, route to `revise-narrative`, `spice-tune`, or `writer-author` as appropriate — not inline edits by the reviewer.
@@ -163,7 +163,7 @@ agents to run in what order, and define what each agent should receive and retur
 
 Diagnosis-only (stage 1, no prose rewrite) ends at stage 1. When stages 2–5 ran and cast may have changed, run **scene direction post-process** (§ below) before any `non_prod_code_agent` handoff — this is not part of spice tuning logic.
 
-**Variant rule:** If the human requests multiple levels or "all 5", keep outputs as variants in `narrative/pipeline/experiments/` until the human selects one. Do not merge several levels into `dayrdd_non_canon.rpy`.
+**Variant rule:** If the human requests multiple levels or "all 5", keep outputs as variants in `main-game/pipeline/experiments/` until the human selects one. Do not merge several levels into `dayrdd_non_canon.rpy`.
 
 **Interactive style:** The tuning agent should ask what needs changing when scope, level, or output type is unclear, and may do so with light sass. Example: "That is a Level 2 impulse wearing a Level 5 bonnet. Which lie are we telling?"
 
@@ -177,7 +177,7 @@ Diagnosis-only (stage 1, no prose rewrite) ends at stage 1. When stages 2–5 ra
 
 | Stage | Agent | Input | Output |
 |-------|-------|-------|--------|
-| 1 | `non_prod_code_agent` | Approved draft/spec | Draft `_non_canon.rpy` script or classes in `narrative/draft/` |
+| 1 | `non_prod_code_agent` | Approved draft/spec | Draft `_non_canon.rpy` script or classes in `main-game/draft/` |
 | 2 | `chief_architect` | Stage 1 output | `PASS` / `REJECT` |
 | 3 | Deliver | — | Sandbox draft files to human (no production changes) |
 
@@ -189,9 +189,9 @@ Diagnosis-only (stage 1, no prose rewrite) ends at stage 1. When stages 2–5 ra
 
 | Stage | Agent | Input | Output |
 |-------|-------|-------|--------|
-| 1 | `chief_architect` | Draft code in `narrative/draft/` | Verification and validation report (`PASS`/`REJECT`) |
+| 1 | `chief_architect` | Draft code in `main-game/draft/` | Verification and validation report (`PASS`/`REJECT`) |
 | 2 | `forensic_psychology_consultant` | Approved draft code + character profiles + prior psychology gate report | `PSYCHOLOGY PRESERVED` / `PSYCHOLOGY REGRESSION` before prod write |
-| 3 | `prod_code_agent` | Approved draft code | `renpy_project/game/dayrdd.rpy` + manifest updates (verbatim copy of creative content) |
+| 3 | `prod_code_agent` | Approved draft code | `main-game/prod-game/game/dayrdd.rpy` + manifest updates (verbatim copy of creative content) |
 | 4 | `forensic_psychology_consultant` | Stage 3 output + approved draft + character profiles | `PSYCHOLOGY PRESERVED` / `PSYCHOLOGY REGRESSION` |
 | 5 | `chief_architect` | Stage 3 output + Stage 4 verdict | `PASS` / `REJECT` (`renpy lint` check) |
 | 6 | Deliver | — | Promoted episodic production code to human |
@@ -204,8 +204,8 @@ Diagnosis-only (stage 1, no prose rewrite) ends at stage 1. When stages 2–5 ra
 
 | Stage | Agent | Input | Output |
 |-------|-------|-------|--------|
-| 1 | `chief_architect` | Draft mockup files in `narrative/draft/` | Verification and design validation (`PASS`/`REJECT`) |
-| 2 | `prod_code_agent` | Approved framework draft | Updates to `renpy_project/game/classes.rpy` (or other production code files) |
+| 1 | `chief_architect` | Draft mockup files in `main-game/draft/` | Verification and design validation (`PASS`/`REJECT`) |
+| 2 | `prod_code_agent` | Approved framework draft | Updates to `main-game/prod-game/game/classes.rpy` (or other production code files) |
 | 3 | `chief_architect` | Stage 2 output | `PASS` / `REJECT` (`renpy lint` check) |
 | 4 | Deliver | — | Promoted core framework code to human |
 
@@ -227,7 +227,7 @@ No downstream stages. Return directly to human.
 
 **Trigger:** `non_prod_code_agent` blocked on narrative gap; "fix dialogue for day N", "narrative change for [flag/label]"; `lead_narrative_editor` files `dayrdd_narrative_change_brief.md`; human requests prose repair without a full new day.
 
-**Prerequisite:** `narrative/draft/releases/<release>/dayrdd_narrative_change_brief.md` with scale **S / M / L** and `Status: OPEN`.
+**Prerequisite:** `main-game/draft/releases/<release>/dayrdd_narrative_change_brief.md` with scale **S / M / L** and `Status: OPEN`.
 
 | Stage | Agent | Input | Pass condition | Failure |
 |-------|-------|-------|----------------|---------|
@@ -255,11 +255,11 @@ No downstream stages. Return directly to human.
 
 | Stage | Agent | Input | Pass condition | Failure |
 |-------|-------|-------|----------------|---------|
-| 1. Draft + gates | `writers_room` | Rewrite brief detailing targeted file/day/time/event + story_board rows + continuity handoff slice | Divergent → convergent → `dayrdd_non_canon.rpy` (or targeted file) + convergent report → **`lead_narrative_editor` → `forensic_psychology_consultant` → `victorian_consultant`** (sequential). Workflow **A** in `writers_room.md`. Gate verdict files under `narrative/pipeline/`. | Re-run per writers_room revision paths **B** / brief **D–E2** |
+| 1. Draft + gates | `writers_room` | Rewrite brief detailing targeted file/day/time/event + story_board rows + continuity handoff slice | Divergent → convergent → `dayrdd_non_canon.rpy` (or targeted file) + convergent report → **`lead_narrative_editor` → `forensic_psychology_consultant` → `victorian_consultant`** (sequential). Workflow **A** in `writers_room.md`. Gate verdict files under `main-game/pipeline/`. | Re-run per writers_room revision paths **B** / brief **D–E2** |
 | 1.5. Sprite direction | `scene_direction` | Gated draft file from Stage 1 | `scripts/scene_direction.py` updates `[asset auto]` lines; idempotent | `# [asset warning]` → manual staging |
 | 2. Draft implement | `non_prod_code_agent` | Directed draft file from Stage 1.5 | Technical scaffolding added; creative prose/dialogue **verbatim** | Narrative gap → file `dayrdd_narrative_change_brief.md` → `revise-narrative` |
 | 3. Draft code gate | `chief_architect` | Output from Stage 2 | `PASS` | `REJECT`; re-run Stage 2 |
-| 4. Deliver | — | Stage 3 output | Sandbox draft ready in `narrative/draft/` | — |
+| 4. Deliver | — | Stage 3 output | Sandbox draft ready in `main-game/draft/` | — |
 
 **Division of labor:** Stage 1 runs the full divergent pool, convergent synthesis, and sequential specialist gates. `non_prod_code_agent` never runs before gates pass.
 
@@ -395,7 +395,7 @@ When a task arrives, classify it before routing:
 11. Does it ask for code, architecture, Ren'Py, state, routing, lint, or implementation quality review? → `chief_architect`
 12. Does it ask for prod-vs-draft implementation drift before promotion? → `chief_architect` + gates as needed; `adult_market_reviewer` only if market lens is explicit.
 13. Does it draft code for a spec in the sandbox? → `implement-spec` (if blocked on prose → `revise-narrative` first)
-14. Does it promote episodic drafts to `renpy_project`? → `promote-day`
+14. Does it promote episodic drafts to `main-game/prod-game`? → `promote-day`
 15. Does it promote class/framework drafts to production? → `promote-framework`
 16. Is it a narrow historical question? → `historical-check`
 17. Does it modify a locked canon document? → `canon-update`

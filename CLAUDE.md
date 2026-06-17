@@ -11,13 +11,13 @@ An AI-accelerated adult pseudo-sandbox RPG visual novel set at the Savoy Hotel, 
 ### Validation (run before PRs or AI handoffs)
 ```bash
 # Validate specific changed files (CI entry point)
-python scripts/validate.py --profile changed --files "renpy_project/game/day106.rpy,narrative/draft/day106_non_canon.rpy"
+python scripts/validate.py --profile changed --files "main-game/prod-game/game/day106.rpy,main-game/draft/day106_non_canon.rpy"
 
 # Validate only code files
-python scripts/validate.py --profile code --files "renpy_project/game/day106.rpy"
+python scripts/validate.py --profile code --files "main-game/prod-game/game/day106.rpy"
 
 # Validate only narrative drafts
-python scripts/validate.py --profile narrative --files "narrative/draft/day106_non_canon.rpy"
+python scripts/validate.py --profile narrative --files "main-game/draft/day106_non_canon.rpy"
 
 # Full repository audit
 python scripts/validate.py --profile full
@@ -26,28 +26,28 @@ python scripts/validate.py --profile full
 ### Local AI orchestration review
 ```bash
 # Run Code Agent + Chief Architect checks and generate AI remediation prompts
-python scripts/orchestrate_review.py --files narrative/draft/day106_non_canon.rpy,renpy_project/game/day106.rpy
+python scripts/orchestrate_review.py --files main-game/draft/day106_non_canon.rpy,main-game/prod-game/game/day106.rpy
 ```
 
 ### Ren'Py lint (requires Ren'Py SDK on PATH)
 ```bash
-renpy lint renpy_project/
+renpy lint main-game/prod-game/
 ```
 
 ### Historical linter (standalone)
 ```bash
-python scripts/historical_linter.py narrative/draft/day106_non_canon.rpy
+python scripts/historical_linter.py main-game/draft/day106_non_canon.rpy
 ```
 
 ### Run the game
-Launch via the Ren'Py SDK launcher (GUI) pointing at `renpy_project/`, or via the `renpy` CLI. There is no `npm`/`pip install` step — Ren'Py is a standalone runtime.
+Launch via the Ren'Py SDK launcher (GUI) pointing at `main-game/prod-game/`, or via the `renpy` CLI. There is no `npm`/`pip install` step — Ren'Py is a standalone runtime.
 
 ## Repository Architecture
 
 ```
 /
-├── renpy_project/game/     # Playable game — the core MVP deliverable
-├── narrative/
+├── main-game/prod-game/game/     # Playable game — the core MVP deliverable
+├── main-game/
 │   ├── writers_room/       # Non-canon drafts (Writers' Room + Lead Editor)
 │   └── canon/              # Locked truth (Lead Narrative Editor only)
 ├── docs/                   # Mechanics bible, narrative workflow, compliance
@@ -56,7 +56,7 @@ Launch via the Ren'Py SDK launcher (GUI) pointing at `renpy_project/`, or via th
 └── .guardrails.yml         # Domain boundary enforcement
 ```
 
-### Game source structure (`renpy_project/game/`)
+### Game source structure (`main-game/prod-game/game/`)
 
 | File | Role |
 |------|------|
@@ -144,16 +144,16 @@ Keep day scripts free of inline Python logic. If a mechanic is used more than on
 
 Enforced by `scripts/engineering_compliance.py` in CI:
 
-- **Non-canon drafts:** `narrative/draft/releases/<release>/dayrdd_non_canon.rpy`
-- **Runtime episodic scripts:** `renpy_project/game/dayrdd.rpy`
+- **Non-canon drafts:** `main-game/draft/releases/<release>/dayrdd_non_canon.rpy`
+- **Runtime episodic scripts:** `main-game/prod-game/game/dayrdd.rpy`
 
 Where `r` = release number, `dd` = zero-padded day slot. Example: Release 1, Day 6 → `day106_non_canon.rpy` and `day106.rpy`.
 
 ## Narrative → Implementation Workflow
 
-1. **Non-canon draft** — write `dayrdd_non_canon.rpy` in `narrative/draft/`. Use Ren'Py-shaped pseudo-code; state notes like `$ player.raise_suspicion(10)` or plain English descriptions are both fine.
+1. **Non-canon draft** — write `dayrdd_non_canon.rpy` in `main-game/draft/`. Use Ren'Py-shaped pseudo-code; state notes like `$ player.raise_suspicion(10)` or plain English descriptions are both fine.
 2. **Historical pass** — CI runs `scripts/historical_linter.py` on changed `*_non_canon.rpy` files. Fix flagged anachronisms.
-3. **Implementation** — Code Agent promotes the draft to `renpy_project/game/dayrdd.rpy`, using class-backed state and setter APIs.
+3. **Implementation** — Code Agent promotes the draft to `main-game/prod-game/game/dayrdd.rpy`, using class-backed state and setter APIs.
 4. **Architecture review** — Chief Architect checks methodology: class-backed state, whitelisted setters, no raw globals, `renpy lint` passes.
 
 Use the **Orchestrator** for automated pipelines: paste `.agents/rules/orchestrator.md` as system prompt and state the task (e.g., `"Produce day 106: [brief]"`).
@@ -164,10 +164,10 @@ Use the **Orchestrator** for automated pipelines: paste `.agents/rules/orchestra
 |--------|-------|-----------|
 | `framework_code` | `classes.rpy`, `screens.rpy`, `characters.rpy`, `gui.rpy`, `options.rpy`, mechanics bible | `chief_architect`, `human` |
 | `episodic_code` | `day*.rpy`, `endings.rpy`, `functions.rpy`, `script.rpy` | `code_agent`, `chief_architect`, `human` |
-| `production_narrative` | `narrative/draft/**` | `writers_room`, `lead_narrative_editor`, `human` |
-| `canon_lore` | `docs/canon/**`, `narrative/canon/**` | `lead_narrative_editor`, `victorian_consultant`, `human` |
+| `production_narrative` | `main-game/draft/**` | `writers_room`, `lead_narrative_editor`, `human` |
+| `canon_lore` | `main-game/canon/**`, `main-game/canon/**` | `lead_narrative_editor`, `victorian_consultant`, `human` |
 | `repo_operations` | `scripts/**`, `.agents/**`, `docs/*.md`, `.github/**` | `chief_architect`, `gatekeeper_orchestrator`, `human` |
-| `speculative_sandbox` | `narrative/pipeline/**` | `writers_room`, `code_agent`, `human` — no gatekeeping |
+| `speculative_sandbox` | `main-game/pipeline/**` | `writers_room`, `code_agent`, `human` — no gatekeeping |
 
 ## CI
 
@@ -175,7 +175,7 @@ GitHub Actions (`.github/workflows/gatekeeper.yml`) runs on every PR to `develop
 
 ## Narrative Reference
 
-- **Voice guides:** `narrative/canon/voice_guides/<name>_voice_guide.md` — consult for dialogue tone per character.
-- **Character databases:** `narrative/draft/*_character_non_canon.md` (drafts) and `narrative/canon/characters_canon.md` (locked truth).
-- **Locations:** `narrative/draft/locations_non_canon.md` and `narrative/canon/locations_canon.md`.
+- **Voice guides:** `main-game/canon/voice_guides/<name>_voice_guide.md` — consult for dialogue tone per character.
+- **Character databases:** `main-game/draft/*_character_non_canon.md` (drafts) and `main-game/canon/characters_canon.md` (locked truth).
+- **Locations:** `main-game/draft/locations_non_canon.md` and `main-game/canon/locations_canon.md`.
 - **Mechanics:** `docs/game_mechanics_bible.md` — distinguishes active MVP mechanics from deferred post-MVP features.

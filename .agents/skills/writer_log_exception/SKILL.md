@@ -10,7 +10,7 @@ contract objected to. This is how her final editorial control is made auditable.
 2. **Before signing**, present the **possible impact** in plain language (immersion / continuity /
    accuracy). She may amend it.
 3. Capture her acknowledgement **in her own words**, then write the entry to
-   `narrative/draft/releases/<release>/exceptions/contract_exceptions.md` (+ `.json`):
+   `main-game/draft/releases/<release>/exceptions/contract_exceptions.md` (+ `.json`):
 
 ```markdown
 ## EX-<release>-<dd>-<n>

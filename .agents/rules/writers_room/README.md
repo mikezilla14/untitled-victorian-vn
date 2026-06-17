@@ -32,19 +32,19 @@ Writing orchestration rules live in the parent `.agents/rules/` directory (flat 
 
 **Gates (on promotion draft only):** narrative editor first, then forensic psychology consultant, then Victorian consultant.
 
-**Spice tuning:** If a task specifies level 1-5, a subset, or all levels, load [../spiciness_tuning_agent.md](../spiciness_tuning_agent.md). Single-level drafts proceed through normal writers-room gates. Multi-level outputs stay in `narrative/pipeline/experiments/` until the human selects a variant.
+**Spice tuning:** If a task specifies level 1-5, a subset, or all levels, load [../spiciness_tuning_agent.md](../spiciness_tuning_agent.md). Single-level drafts proceed through normal writers-room gates. Multi-level outputs stay in `main-game/pipeline/experiments/` until the human selects a variant.
 
 **Book/chapter writing:** If a task asks to write or rewrite Cora's Book1 manuscript/chapter prose, route through [`../../skills/writer_write_book/SKILL.md`](../../skills/writer_write_book/SKILL.md) or [`../../skills/book_writing_engine/SKILL.md`](../../skills/book_writing_engine/SKILL.md). Book1 uses label-based `book1_block_*` prose, ordinary Ren'Py branching, and explicit image cues for `book1_set_page_image(...)`; do not use inline curly-brace macros.
 
 **Revisions (code, editor, or psychology):** `non_prod_code_agent`, `lead_narrative_editor`, or `forensic_psychology_consultant` files `dayrdd_narrative_change_brief.md` → workflows **D/E/E2** (scale S/M/L). Orchestrator: `revise-narrative`.
 
-## Outputs (see also [narrative/pipeline/README.md](../../../narrative/pipeline/README.md))
+## Outputs (see also [main-game/pipeline/README.md](../../../main-game/pipeline/README.md))
 
-- Spec scripts: `narrative/pipeline/releases/<release>/dayrdd_<persona>_spec.rpy`
-- Brainstorming / idea logs: `narrative/pipeline/releases/<release>/dayrdd_<persona>_ideas.md`
-- Convergent Decision Report: `narrative/pipeline/releases/<release>/dayrdd_convergent_report.md`
-- Continuity handoff: `narrative/draft/releases/planning/continuity_handoff.md` (read current day; write next day after gates)
-- Promotion draft: `narrative/draft/releases/<release>/dayrdd_non_canon.rpy`
+- Spec scripts: `main-game/pipeline/releases/<release>/dayrdd_<persona>_spec.rpy`
+- Brainstorming / idea logs: `main-game/pipeline/releases/<release>/dayrdd_<persona>_ideas.md`
+- Convergent Decision Report: `main-game/pipeline/releases/<release>/dayrdd_convergent_report.md`
+- Continuity handoff: `main-game/draft/releases/planning/continuity_handoff.md` (read current day; write next day after gates)
+- Promotion draft: `main-game/draft/releases/<release>/dayrdd_non_canon.rpy`
 - Gate verdicts: `dayrdd_gate_*.md` + matching `dayrdd_gate_*.json` (see `docs/contracts/`)
 - Psychology profile reports: `dayrdd_forensic_psychology_profile_report.md` when character profiles or voice guides change
 

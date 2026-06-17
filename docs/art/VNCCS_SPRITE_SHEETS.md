@@ -30,7 +30,7 @@ assets_source/
 ```
 
 *Final output destination for Ren'Py deployment:*
-`renpy_project/game/images/sprites/{character}/`
+`main-game/prod-game/game/images/sprites/{character}/`
 
 ---
 

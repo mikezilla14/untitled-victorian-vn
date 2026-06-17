@@ -22,5 +22,5 @@
     "agent": "non_prod_code_agent",
     "pipeline": "implement-spec"
   },
-  "markdown_brief_path": "narrative/draft/releases/release-1-mvp/day103_narrative_change_brief.md"
+  "markdown_brief_path": "main-game/draft/releases/release-1-mvp/day103_narrative_change_brief.md"
 }

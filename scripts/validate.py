@@ -38,7 +38,7 @@ def narrative_files(files):
     for file in files:
         norm = file.replace("//", "/")
         name = Path(norm).name
-        if norm.startswith("narrative/draft/") and (
+        if norm.startswith("main-game/draft/") and (
             name.endswith("_non_canon.rpy") or name.endswith(".md")
         ):
             targets.append(file)
@@ -158,7 +158,7 @@ def main():
 
     if args.profile in {"changed", "code", "full"}:
         target_files = files or all_files_under(
-            ROOT / "renpy_project" / "game",
+            ROOT / "main-game" / "prod-game" / "game",
             lambda path: path.suffix == ".rpy",
         )
         failures |= run_step_chunked(
@@ -183,7 +183,7 @@ def main():
         target_files = narrative_files(files)
         if args.profile == "full":
             target_files = all_files_under(
-                ROOT / "narrative" / "draft",
+                ROOT / "main-game" / "draft",
                 lambda path: path.name.endswith("_non_canon.rpy") or path.suffix == ".md",
             )
 

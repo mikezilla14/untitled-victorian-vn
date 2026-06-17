@@ -25,8 +25,7 @@ DOC_ROOTS = [
     ROOT / ".agents",
     ROOT / "docs",
     ROOT / "assets_source",
-    ROOT / "narrative",
-    ROOT / "renpy_project",
+    ROOT / "main-game",
     ROOT / ".github",
 ]
 IGNORED_PARTS = {".git", ".venv", "__pycache__", ".claude"}
@@ -58,9 +57,9 @@ def should_skip(path: Path) -> bool:
     if any(part in IGNORED_PARTS for part in path.parts):
         return True
     rel_path = path.relative_to(ROOT).as_posix() if path.is_relative_to(ROOT) else ""
-    if rel_path.startswith("narrative/pipeline/releases/"):
+    if rel_path.startswith("main-game/pipeline/releases/"):
         return True
-    if rel_path.startswith("narrative/draft/releases/"):
+    if rel_path.startswith("main-game/draft/releases/"):
         return True
     return False
 
@@ -68,11 +67,11 @@ def should_skip(path: Path) -> bool:
 def skip_readme_requirement(directory: Path) -> bool:
     rel_path = rel(directory)
     parts = directory.relative_to(ROOT).parts
-    if "releases" in parts and ("days" in parts or "non_prod_renpy_project" in parts):
+    if "releases" in parts and ("days" in parts or "non-prod-game" in parts):
         return True
-    if rel_path.startswith("renpy_project/game/gui") or rel_path.startswith("renpy_project/game/images"):
+    if rel_path.startswith("main-game/prod-game/game/gui") or rel_path.startswith("main-game/prod-game/game/images"):
         return True
-    if rel_path.startswith("renpy_project/game/"):
+    if rel_path.startswith("main-game/prod-game/game/"):
         return True
     return False
 
@@ -98,8 +97,7 @@ def iter_candidate_readme_dirs() -> list[Path]:
         ROOT / "docs",
         ROOT / ".agents",
         ROOT / "scripts",
-        ROOT / "narrative",
-        ROOT / "renpy_project",
+        ROOT / "main-game",
         ROOT / "assets_source",
     ]
     candidates: list[Path] = []

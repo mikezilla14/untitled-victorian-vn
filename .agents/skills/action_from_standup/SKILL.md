@@ -2,7 +2,7 @@
 
 Use when the user points a **code** or **prose** agent at the daily standup report and wants work executed — not just status readout.
 
-**Entry document:** `narrative/draft/releases/planning/daily_standup_report.md`  
+**Entry document:** `main-game/draft/releases/planning/daily_standup_report.md`  
 (or dated: `planning/standups/daily_standup_YYYY-MM-DD.md`)
 
 ## What to do
@@ -43,7 +43,7 @@ The output **work packet** lists:
 |------|---------------|-----|
 | `prose` | `writers_room`, consultants | Rewrite dialogue/narrative only in allowed paths; never patch `$ apply_effects` blocks |
 | `code` | `non_prod_code_agent`, `prod_code_agent` | Scaffold/wire only; copy prose verbatim from approved drafts |
-| `gate` | `lead_narrative_editor` + consultants | Write gate verdicts under `narrative/pipeline/.../gates/` |
+| `gate` | `lead_narrative_editor` + consultants | Write gate verdicts under `main-game/pipeline/.../gates/` |
 | `integration` | `non_prod_code_agent` | Systems checklist work in non-prod tree |
 | `audit` | `chief_architect`, `documentation_steward` | Read-only review or manifest/docs sync |
 
@@ -56,7 +56,7 @@ When the packet spec list is thin or a path is missing:
 1. `docs/backlog/mvp_backlog.md` — section matching `[N-x]` / `[C-x]`
 2. `planning/mvp_systems_integration_checklist.md` — matching phase section
 3. `docs/specs/README.md` — pick the relevant spec by keyword
-4. `narrative/pipeline/releases/release-1-mvp/days/dayNN/specs/` — day sandbox specs if the task is day-scoped
+4. `main-game/pipeline/releases/release-1-mvp/days/dayNN/specs/` — day sandbox specs if the task is day-scoped
 5. `.agents/rules/writers_room.md` or `non_prod_code_agent.md` — contracts for prose vs code boundaries
 
 Never skip reading the packet's `specs` that exist on disk.

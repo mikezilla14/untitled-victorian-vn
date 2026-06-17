@@ -11,7 +11,7 @@ Use when she asks "Is this okay historically / in character?" or before any hand
    | Family | Source of truth | Check |
    |--------|-----------------|-------|
    | Prose / structure | `book_writing_contract.md`, writers_room structure & psychological/dialogue gap contracts, voice guides | scaled-down [`lead_narrative_editor`](../../rules/lead_narrative_editor.md) on affected labels |
-   | Historical | `docs/canon/historical_guardrails.md` | real `py scripts/historical_linter.py "<draft>"` |
+   | Historical | `main-game/canon/historical_guardrails.md` | real `py scripts/historical_linter.py "<draft>"` |
    | Psychological | character / forensic profiles | scaled-down [`forensic_psychology_consultant`](../../rules/forensic_psychology_consultant.md) on affected labels |
 3. For each finding, return one of:
    - **PASS** — continue.

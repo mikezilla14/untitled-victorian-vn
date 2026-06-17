@@ -34,7 +34,7 @@ REGISTRY_PATH = ROOT / "docs" / "backlog" / "task_registry.json"
 BACKLOG_PATH = ROOT / "docs" / "backlog" / "mvp_backlog.md"
 DEFAULT_STANDUP = (
     ROOT
-    / "narrative"
+    / "main-game"
     / "draft"
     / "releases"
     / "planning"
@@ -269,7 +269,7 @@ def resolve_task(registry_id: str | None, summary: str = "") -> dict[str, Any]:
                 "resolution": "discovered_format",
                 "deliverables": [],
                 "specs": [
-                    "narrative/draft/releases/planning/mvp_systems_integration_checklist.md"
+                    "main-game/draft/releases/planning/mvp_systems_integration_checklist.md"
                 ],
                 "pipeline": None,
                 "pipeline_stage": None,
@@ -314,7 +314,7 @@ def resolve_task(registry_id: str | None, summary: str = "") -> dict[str, Any]:
             "pipeline_stage": None,
             "specs": [
                 "docs/backlog/mvp_backlog.md",
-                "narrative/draft/releases/planning/mvp_systems_integration_checklist.md",
+                "main-game/draft/releases/planning/mvp_systems_integration_checklist.md",
                 "docs/specs/README.md",
             ],
             "files": [],
@@ -358,7 +358,7 @@ def resolve_task(registry_id: str | None, summary: str = "") -> dict[str, Any]:
         file_match = re.search(r"game/[^\s:]+\.rpy", summary)
         if file_match:
             rel = (
-                "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/"
+                "main-game/non-prod-game/"
                 + file_match.group(0)
             )
             packet["files"] = list(dict.fromkeys([rel, *packet["files"]]))

@@ -9,7 +9,7 @@ Reference: `docs/compliance_checklist.md`
 
 - [ ] Scope supports 5-day MVP (no unrelated feature expansion)
 - [ ] No new mandatory tooling/pipeline outside MVP
-- [ ] No new global `default` outside `renpy_project/game/variables.rpy`
+- [ ] No new global `default` outside `main-game/prod-game/game/variables.rpy`
 - [ ] Avoid direct `player.<stat>` assignments when mutation methods exist
 - [ ] Suspicion guard flow remains safe (`check_suspicion` before passive decay)
 - [ ] `script.rpy` remains thin (entry/guards, no heavy logic)

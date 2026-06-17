@@ -14,7 +14,7 @@ When a PR arrives:
 2. **Route.**
    - Narrative PRs → Lead Narrative Editor (canon + voice + alignment with pseudo-script / game intent) + Forensic Psychology Consultant (player-choice/profile consistency)
    - Production Code PRs (`prod_code_agent`) → Chief Architect (architecture + lint + dependencies + `StoryState` contract compliance + asset manifest + speaker contracts + strict verbatim creative text preservation)
-   - Non-Prod Code PRs (`non_prod_code_agent`) → Chief Architect (verify changes are strictly restricted to `narrative/draft/` or `narrative/pipeline/` domains; validate framework mockup alignment)
+   - Non-Prod Code PRs (`non_prod_code_agent`) → Chief Architect (verify changes are strictly restricted to `main-game/draft/` or `main-game/pipeline/` domains; validate framework mockup alignment)
    - Art PRs → Victorian Consultant (historical visual accuracy) + Chief Architect (asset pipeline integration + any code-side boolean tracked-flag compliance)
    - Character profile / voice-guide PRs → Forensic Psychology Consultant + Lead Narrative Editor; add Victorian Consultant if class, etiquette, or era diction is affected
    - Mixed PRs → Split into sub-reviews per domain
@@ -25,9 +25,9 @@ When a PR arrives:
 ## Required Contract Checks
 
 - Ensure PR outputs respect naming contracts enforced in CI:
-  - `narrative/draft/.../dayrdd_non_canon.rpy`
-  - `renpy_project/game/dayrdd.rpy`
-- Verify that `non_prod_code_agent` PRs contain absolutely zero file modifications to `renpy_project/` or `docs/canon/`.
+  - `main-game/draft/.../dayrdd_non_canon.rpy`
+  - `main-game/prod-game/game/dayrdd.rpy`
+- Verify that `non_prod_code_agent` PRs contain absolutely zero file modifications to `main-game/prod-game/` or `main-game/canon/`.
 - Treat legacy `dayX_non_canon.*` and `dayX.rpy` naming as a blocking contract violation.
 
 ## Tone

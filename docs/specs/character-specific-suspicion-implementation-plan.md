@@ -14,7 +14,7 @@ Implement breakpoint-based, character-specific suspicion feedback without restor
 - `PlayerStats.add_suspicion(char, acute_amount=0, base_amount=0)` already clamps and recalculates anxiety.
 - `apply_effects(...)` already accepts `stern_susp`, `stern_base`, `vance_susp`, `vance_base`, `missy_susp`, `missy_base`, `gideon_susp`, and `gideon_base`.
 - `cora_inner` exists in production but does not use the non-prod thought overlay yet.
-- Non-prod shared files have an auto-highlight system and callbacks; production does not currently have `renpy_project/game/00auto_highlight.rpy`.
+- Non-prod shared files have an auto-highlight system and callbacks; production does not currently have `main-game/prod-game/game/00auto_highlight.rpy`.
 - The old anxiety-scaled `ui_suspicion_vignette` was removed from the HUD and manifest.
 
 ## Implementation Strategy
@@ -61,7 +61,7 @@ Acceptance:
 
 ### Phase 1 - Mechanics And API
 
-- [x] T1.1 Add suspicion constants to `renpy_project/game/functions.rpy` or another runtime utility block:
+- [x] T1.1 Add suspicion constants to `main-game/prod-game/game/functions.rpy` or another runtime utility block:
   - `SUSPICION_BREAKPOINTS = [15, 35, 60, 85]`
   - `SUSPICION_TIERS`
   - `ANXIETY_TIERS`
@@ -77,7 +77,7 @@ Acceptance:
   - skip feedback if total did not change
   - invoke minor feedback for non-zero changes
   - invoke breakpoint feedback only for unseen upward breakpoint crossings
-- [x] T1.7 Mirror the same mechanical changes into `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/classes_non_canon.rpy` and `functions_non_canon.rpy`, preserving non-prod-only writing-gate semantics.
+- [x] T1.7 Mirror the same mechanical changes into `main-game/non-prod-game/game/shared/classes_non_canon.rpy` and `functions_non_canon.rpy`, preserving non-prod-only writing-gate semantics.
 
 Acceptance:
 
@@ -103,8 +103,8 @@ Acceptance:
 ### Phase 3 - Monologue Table
 
 - [x] T3.1 Add `suspicion_monologues` table in a dedicated prose/data file, non-prod first:
-  - `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/suspicion_monologues_non_canon.rpy`
-  - `renpy_project/game/suspicion_monologues.rpy`
+  - `main-game/non-prod-game/game/shared/suspicion_monologues_non_canon.rpy`
+  - `main-game/prod-game/game/suspicion_monologues.rpy`
 - [x] T3.2 Implement `get_suspicion_monologue(character, tier, anxiety, reason=None, scene_context=None)`.
 - [x] T3.3 Implement fallback lookup in this order:
   - character + tier + anxiety + reason + scene context
@@ -185,13 +185,13 @@ Acceptance:
 - [x] T7.7 Run production validation:
 
 ```powershell
-py scripts/validate.py --profile changed --agent human --files "renpy_project/game/classes.rpy,renpy_project/game/functions.rpy,renpy_project/game/variables.rpy,renpy_project/game/screens.rpy,renpy_project/game/script.rpy,renpy_project/game/characters.rpy"
+py scripts/validate.py --profile changed --agent human --files "main-game/prod-game/game/classes.rpy,main-game/prod-game/game/functions.rpy,main-game/prod-game/game/variables.rpy,main-game/prod-game/game/screens.rpy,main-game/prod-game/game/script.rpy,main-game/prod-game/game/characters.rpy"
 ```
 
 - [x] T7.8 Run non-prod validation:
 
 ```powershell
-py scripts/validate.py --profile changed --agent writers_room --skip-gate-checks --files "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/classes_non_canon.rpy,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/functions_non_canon.rpy,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/screens.rpy,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/characters.rpy"
+py scripts/validate.py --profile changed --agent writers_room --skip-gate-checks --files "main-game/non-prod-game/game/shared/classes_non_canon.rpy,main-game/non-prod-game/game/shared/functions_non_canon.rpy,main-game/non-prod-game/game/screens.rpy,main-game/non-prod-game/game/shared/characters.rpy"
 ```
 
 Acceptance:

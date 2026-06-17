@@ -78,7 +78,7 @@ def check_character_card(char_id: str, contract: dict[str, list[str]]) -> list[s
 
 def check_narrative_canon(char_id: str, contract: dict[str, list[str]]) -> list[str]:
     errors = []
-    canon_path = ROOT / "narrative" / "canon" / f"{char_id}_character_canon.md"
+    canon_path = ROOT / "main-game" / "canon" / f"{char_id}_character_canon.md"
     if not canon_path.exists():
         # Fallback to check if characters_canon.md exists but individual doesn't
         return errors
@@ -96,7 +96,7 @@ def check_narrative_canon(char_id: str, contract: dict[str, list[str]]) -> list[
                 # Find line number
                 line_no = content[:match.start()].count("\n") + 1
                 errors.append(
-                    f"narrative/canon/{char_id}_character_canon.md:{line_no} contains forbidden visual contradiction token: {forbidden!r}"
+                    f"main-game/canon/{char_id}_character_canon.md:{line_no} contains forbidden visual contradiction token: {forbidden!r}"
                 )
 
     return errors
@@ -104,7 +104,7 @@ def check_narrative_canon(char_id: str, contract: dict[str, list[str]]) -> list[
 
 def check_draft_scripts(char_id: str, contract: dict[str, list[str]]) -> list[str]:
     errors = []
-    drafts_dir = ROOT / "narrative" / "draft"
+    drafts_dir = ROOT / "main-game" / "draft"
     if not drafts_dir.exists():
         return errors
 

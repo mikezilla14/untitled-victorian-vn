@@ -39,28 +39,28 @@ The previous implementation rendered `ui_suspicion_vignette` in `stats_overlay` 
 
 Runtime implementation targets:
 
-- `renpy_project/game/classes.rpy`
-- `renpy_project/game/functions.rpy`
-- `renpy_project/game/suspicion_monologues.rpy`
-- `renpy_project/game/screens.rpy`
-- `renpy_project/game/assets_manifest.rpy`
-- `renpy_project/game/asset_transforms.rpy`
-- `renpy_project/game/00auto_highlight.rpy`
+- `main-game/prod-game/game/classes.rpy`
+- `main-game/prod-game/game/functions.rpy`
+- `main-game/prod-game/game/suspicion_monologues.rpy`
+- `main-game/prod-game/game/screens.rpy`
+- `main-game/prod-game/game/assets_manifest.rpy`
+- `main-game/prod-game/game/asset_transforms.rpy`
+- `main-game/prod-game/game/00auto_highlight.rpy`
 
 Non-prod mirror targets:
 
-- `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/classes_non_canon.rpy`
-- `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/functions_non_canon.rpy`
-- `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/suspicion_monologues_non_canon.rpy`
-- `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/screens.rpy`
-- `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/assets_manifest.rpy`
-- `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/asset_transforms.rpy`
-- `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/00auto_highlight.rpy`
+- `main-game/non-prod-game/game/shared/classes_non_canon.rpy`
+- `main-game/non-prod-game/game/shared/functions_non_canon.rpy`
+- `main-game/non-prod-game/game/shared/suspicion_monologues_non_canon.rpy`
+- `main-game/non-prod-game/game/screens.rpy`
+- `main-game/non-prod-game/game/shared/assets_manifest.rpy`
+- `main-game/non-prod-game/game/shared/asset_transforms.rpy`
+- `main-game/non-prod-game/game/shared/00auto_highlight.rpy`
 
 Feature CI/CD path:
 
-1. Implement and validate changes in the non-prod Ren'Py project under `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/`.
-2. Promote the validated non-prod shape into `renpy_project/game/`.
+1. Implement and validate changes in the non-prod Ren'Py project under `main-game/non-prod-game/game/`.
+2. Promote the validated non-prod shape into `main-game/prod-game/game/`.
 3. Do not implement new feature behavior in production first.
 
 ## Model
@@ -177,8 +177,8 @@ Monologues are table-driven and hand-authored.
 
 The prose table lives outside the trigger/runtime functions so writers can update authored reaction lines without editing suspicion mechanics:
 
-- Non-prod source: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/suspicion_monologues_non_canon.rpy`
-- Production mirror: `renpy_project/game/suspicion_monologues.rpy`
+- Non-prod source: `main-game/non-prod-game/game/shared/suspicion_monologues_non_canon.rpy`
+- Production mirror: `main-game/prod-game/game/suspicion_monologues.rpy`
 
 Lookup inputs:
 
@@ -235,8 +235,8 @@ Pass 3: Text table
 After implementation:
 
 ```powershell
-py scripts/validate.py --profile changed --agent human --files "renpy_project/game/classes.rpy" "renpy_project/game/functions.rpy" "renpy_project/game/screens.rpy"
-py scripts/validate.py --profile changed --agent writers_room --skip-gate-checks --files "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/classes_non_canon.rpy" "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/functions_non_canon.rpy" "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/screens.rpy"
+py scripts/validate.py --profile changed --agent human --files "main-game/prod-game/game/classes.rpy" "main-game/prod-game/game/functions.rpy" "main-game/prod-game/game/screens.rpy"
+py scripts/validate.py --profile changed --agent writers_room --skip-gate-checks --files "main-game/non-prod-game/game/shared/classes_non_canon.rpy" "main-game/non-prod-game/game/shared/functions_non_canon.rpy" "main-game/non-prod-game/game/screens.rpy"
 ```
 
 Manual smoke checks:

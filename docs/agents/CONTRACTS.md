@@ -71,7 +71,7 @@ Sub-agents (`divergent_writer`, `convergent_writer`) operate under `writers_room
 Implemented in `scripts/writers_room_pipeline.py`:
 
 1. `dayrdd_convergent_report.md` exists and is not a placeholder
-2. At least one `dayrdd_<persona>_spec.rpy` in `narrative/pipeline/`
+2. At least one `dayrdd_<persona>_spec.rpy` in `main-game/pipeline/`
 3. **Gate verdicts** (when any gate file exists for that day, all three are required):
    - `dayrdd_gate_lead_narrative.md` — verdict `PASS` or `REJECT`
    - `dayrdd_gate_forensic_psychology.md` — e.g. `PSYCHOLOGICALLY CONSISTENT`
@@ -116,11 +116,11 @@ py scripts/validate.py --skip-json-contracts --files "..."   # WIP only
 
 For **new** writing assignments, do not load:
 
-- `narrative/pipeline/` (unless human requests archive mining)
+- `main-game/pipeline/` (unless human requests archive mining)
 - Other days' spec scripts
-- `narrative/pipeline/experiments/` (unless brief points there)
+- `main-game/pipeline/experiments/` (unless brief points there)
 
-See [`narrative/pipeline/README.md`](../../narrative/pipeline/README.md).
+See [`main-game/pipeline/README.md`](../../main-game/pipeline/README.md).
 
 ## Gate artifact naming
 

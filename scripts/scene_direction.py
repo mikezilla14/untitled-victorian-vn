@@ -35,15 +35,8 @@ POLICY_PATH = ROOT / "docs" / "contracts" / "sprite_layout_policy.yaml"
 
 # characters.rpy is searched for in a few known locations (prod + non-prod draft).
 CHARACTER_FILE_CANDIDATES = [
-    ROOT / "renpy_project" / "game" / "characters.rpy",
-    ROOT
-    / "narrative"
-    / "draft"
-    / "releases"
-    / "release-1-mvp"
-    / "non_prod_renpy_project"
-    / "game"
-    / "characters.rpy",
+    ROOT / "main-game" / "prod-game" / "game" / "characters.rpy",
+    ROOT / "main-game" / "non-prod-game" / "game" / "characters.rpy",
 ]
 
 SCENE_RE = re.compile(r"^\s*scene\s+\S")

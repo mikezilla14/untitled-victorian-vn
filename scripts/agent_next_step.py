@@ -213,16 +213,16 @@ def print_stage(pipeline: str, step: dict, day: str | None, release: str | None)
         rid = day if day.startswith("day") else f"day{dd}"
         print("\nArtifacts:")
         print(
-            f"  Draft: narrative/draft/releases/{release}/non_prod_renpy_project/game/days/{rid}_non_canon.rpy"
+            f"  Draft: main-game/non-prod-game/game/days/{rid}_non_canon.rpy"
         )
         print(
-            f"  Specs: narrative/pipeline/releases/{release}/days/{rid}/specs/"
+            f"  Specs: main-game/pipeline/releases/{release}/days/{rid}/specs/"
         )
         print(
-            f"  Gates: narrative/pipeline/releases/{release}/days/{rid}/gates/"
+            f"  Gates: main-game/pipeline/releases/{release}/days/{rid}/gates/"
         )
         print(
-            f"  Report: narrative/pipeline/releases/{release}/days/{rid}/synthesis/{rid}_convergent_report.md"
+            f"  Report: main-game/pipeline/releases/{release}/days/{rid}/synthesis/{rid}_convergent_report.md"
         )
     print("\nHandoff: paste the full rule file as system prompt + prior stage verdicts.")
     print('Validate: py scripts/validate.py --profile changed --agent <name> --files "<paths>"')

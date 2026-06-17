@@ -1,5 +1,5 @@
 # Role: Scene Direction Agent (Deterministic Sprite Placement)
-# Domain: narrative/draft/**/*.rpy (write — `[asset auto]` lines only)
+# Domain: main-game/draft/**/*.rpy (write — `[asset auto]` lines only)
 # Write: `# [asset auto]` show/hide lines inside draft scene scripts. Nothing else.
 # Gate: Runs after the Writers' Room draft is gated, before `non_prod_code_agent`.
 
@@ -27,7 +27,7 @@ The implementation plan is [`docs/specs/scene-direction-agent.md`](../../docs/sp
    run. The script guarantees this by stripping all `[asset auto]` lines before re-simulating — do not
    defeat it by hand-editing.
 5. **Grammar matches this repo.** Sprite tags are derived from
-   [`characters.rpy`](../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/characters.rpy)
+   [`characters.rpy`](../../main-game/non-prod-game/game/characters.rpy)
    (`cora` → `cora_sprite`). An undeclared speaker is skipped with a warning, never guessed.
 6. **Four-character limit.** More than four visible characters emits
    `# [asset warning: ...]` and requires manual review. Do not silently drop characters.
@@ -38,7 +38,7 @@ The implementation plan is [`docs/specs/scene-direction-agent.md`](../../docs/sp
 
 ## Workflow: Direct a draft
 
-1. **Confirm scope.** Identify the changed/target draft `.rpy` file(s) under `narrative/draft/`.
+1. **Confirm scope.** Identify the changed/target draft `.rpy` file(s) under `main-game/draft/`.
 2. **Run (report-only first).**
    ```powershell
    py scripts/scene_direction.py --check --files "<path1>,<path2>"

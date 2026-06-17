@@ -12,7 +12,7 @@ Usage:
 Will run all agent contracts on the specified files and generate a remediation report.
 
 Example:
-    py scripts/orchestrate_review.py --files "narrative/draft/releases/release-1-mvp/days/day105/day105_non_canon.rpy"
+    py scripts/orchestrate_review.py --files "main-game/draft/releases/release-1-mvp/days/day105/day105_non_canon.rpy"
 """
 
 import argparse
@@ -99,7 +99,7 @@ class WritersRoomPipelineContract(AgentContract):
         non_canon = [
             f
             for f in files
-            if f.replace("//", "/").startswith("narrative/draft/")
+            if f.replace("//", "/").startswith("main-game/draft/")
             and f.replace("//", "/").endswith("_non_canon.rpy")
         ]
         if not non_canon:

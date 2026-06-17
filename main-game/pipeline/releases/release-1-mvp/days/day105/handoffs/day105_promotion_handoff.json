@@ -1,0 +1,13 @@
+{
+  "contract_version": "1",
+  "day_id": "day105",
+  "release": "release-1-mvp",
+  "source_non_canon": "main-game/non-prod-game/game/days/day105_non_canon.rpy",
+  "target_prod": "main-game/prod-game/game/day105.rpy",
+  "creative_text_preserved": true,
+  "promoted_by": "prod_code_agent",
+  "new_labels": [],
+  "new_assets": [],
+  "psychology_gate_pre": "PSYCHOLOGY_PRESERVED",
+  "psychology_gate_post": "PSYCHOLOGY_PRESERVED"
+}

@@ -1,0 +1,36 @@
+{
+  "contract_version": "1",
+  "character_id": "missy",
+  "day_id": "day105",
+  "release": "release-1-mvp",
+  "verdict": "PROFILE_UPDATE_REQUIRED",
+  "edits": [
+    {
+      "file": "main-game/canon/missy_character_canon.md",
+      "change_type": "refine",
+      "summary": "Rewrote Missy's core character profile to subvert the 'Born Sexy Yesterday' trope, establishing her agency, sheltered guardedness, and romantic trust requirements."
+    },
+    {
+      "file": "main-game/draft/bible/missy_character_non_canon.md",
+      "change_type": "refine",
+      "summary": "Rewrote Missy's draft character profile to match the updated canon psychological profile in sync."
+    },
+    {
+      "file": "main-game/canon/voice_guides/missy_voice_guide.md",
+      "change_type": "refine",
+      "summary": "Refined voice guide registers, transforming her religious vocabulary into a protective social shield and establishing her sovereign sensual register."
+    }
+  ],
+  "carry_forward_traits": [
+    "guarded_mirror",
+    "sheltered_observancy",
+    "latent_agency",
+    "romantic_trust"
+  ],
+  "routing": {
+    "writers_room": true,
+    "lead_narrative_editor": true,
+    "victorian_consultant": true
+  },
+  "markdown_report_path": "main-game/pipeline/character_profile_reports/missy_forensic_psychology_report.md"
+}

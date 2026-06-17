@@ -1,0 +1,27 @@
+{
+  "contract_version": "1",
+  "day_id": "day100",
+  "release": "release-1-mvp",
+  "source_non_canon": "main-game/non-prod-game/game/days/day100_non_canon.rpy",
+  "target_prod": "main-game/prod-game/game/day100.rpy",
+  "creative_text_preserved": true,
+  "promoted_by": "prod_code_agent",
+  "new_labels": [
+    "day100_main",
+    "day100_1_afternoon_boredom_setup",
+    "day100_1_afternoon_boredom",
+    "day100_2_evening_flashback",
+    "day100_2_parlour_branch",
+    "day100_2_desk_branch",
+    "day100_2_reconvergence",
+    "day100_3_night_daydream",
+    "day100_3_arrival"
+  ],
+  "new_assets": [
+    "bg_country_estate_corridor_night",
+    "bg_country_estate_study",
+    "bg_train_carriage_day"
+  ],
+  "psychology_gate_pre": "main-game/pipeline/releases/release-1-mvp/days/day100/gates/day100_gate_forensic_psychology.md",
+  "psychology_gate_post": "main-game/pipeline/releases/release-1-mvp/days/day100/gates/day100_gate_forensic_psychology.md"
+}

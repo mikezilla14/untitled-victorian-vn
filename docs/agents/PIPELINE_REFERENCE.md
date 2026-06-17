@@ -4,7 +4,7 @@ Canonical routing logic lives in [`.agents/rules/orchestrator.md`](../../.agents
 
 **Skill catalogue (invoke by name):** [`SKILL_CATALOG.md`](SKILL_CATALOG.md) — skill → agent → pipeline → contract.
 
-**Sandbox day path (MVP):** `narrative/draft/releases/<release>/non_prod_renpy_project/game/days/dayrdd_non_canon.rpy`
+**Sandbox day path (MVP):** `main-game/draft/releases/<release>/non_prod_main-game/prod-game/game/days/dayrdd_non_canon.rpy`
 
 Stage helper: `py scripts/agent_next_step.py --list-pipelines` · `py scripts/agent_next_step.py --pipeline <name> --stage <n>`
 
@@ -29,7 +29,7 @@ Stage helper: `py scripts/agent_next_step.py --list-pipelines` · `py scripts/ag
 | F95 / adult VN market viability (read-only) | `market-review` | `adult_market_reviewer` |
 | Tune erotic intensity to level 1–5 or generate spice variants | `spice-tune` | `spiciness_tuning_agent` |
 | Sandbox Ren'Py for an approved spec | `implement-spec` | `non_prod_code_agent` |
-| Ship day to `renpy_project` | `promote-day` | `chief_architect` |
+| Ship day to `main-game/prod-game` | `promote-day` | `chief_architect` |
 | Ship classes/screens framework | `promote-framework` | `chief_architect` |
 | Narrow 1891 accuracy question | `historical-check` | `victorian_consultant` |
 | Change locked canon | `canon-update` | `lead_narrative_editor` |
@@ -65,7 +65,7 @@ flowchart LR
 | Step | What Desk does |
 |------|----------------|
 | **1. Intake** | Interview in story terms only (who / where / when, what changes, what a choice *means*). Desk derives release, day, time period, and label scope. Default release: `release-1-mvp`. |
-| **2. Authoring Intent** | Write `narrative/draft/releases/<release>/intents/dayrdd_authoring_intent.md` (+ `.json` per [`authoring_intent.schema.json`](../contracts/authoring_intent.schema.json)). Prose **verbatim**; flags (type + values); effects; branches; scale S/M/L. |
+| **2. Authoring Intent** | Write `main-game/draft/releases/<release>/intents/dayrdd_authoring_intent.md` (+ `.json` per [`authoring_intent.schema.json`](../contracts/authoring_intent.schema.json)). Prose **verbatim**; flags (type + values); effects; branches; scale S/M/L. |
 | **3. Contract pre-check** | Advisory only — scaled-down narrative, `historical_linter.py`, and psychology passes. Findings: **PASS**, **SUGGESTION** (with options), or **EXCEPTION** (logged; Writer self-signs after impact acknowledgement). Never blocks; binding gates remain authoritative. |
 | **4. Route** | Hand Intent + scale to the pipeline in the routing table below. |
 
@@ -92,8 +92,8 @@ Stage helper for new prose: `py scripts/agent_next_step.py --pipeline writer-aut
 
 | Artifact | Path |
 |----------|------|
-| Authoring Intent | `narrative/draft/releases/<release>/intents/dayrdd_authoring_intent.md` (+ `.json`) |
-| Contract exceptions | `narrative/draft/releases/<release>/exceptions/contract_exceptions.md` (+ `.json`) |
+| Authoring Intent | `main-game/draft/releases/<release>/intents/dayrdd_authoring_intent.md` (+ `.json`) |
+| Contract exceptions | `main-game/draft/releases/<release>/exceptions/contract_exceptions.md` (+ `.json`) |
 
 Downstream agents produce promotion drafts, gate verdicts, and shaped `.rpy` — not Desk.
 
@@ -101,7 +101,7 @@ Downstream agents produce promotion drafts, gate verdicts, and shaped `.rpy` —
 
 | Desk may write | Desk never writes |
 |----------------|-------------------|
-| `intents/**`, `exceptions/**` | `dayrdd_non_canon.rpy`, `renpy_project/`, `docs/canon/` |
+| `intents/**`, `exceptions/**` | `dayrdd_non_canon.rpy`, `main-game/prod-game/`, `main-game/canon/` |
 | `writer_*` skill **copy** only (when Writer asks for UX wording) | `classes*.rpy`, `scripts/**`, `.agents/rules/**` |
 
 ### Flag and stat protocols
@@ -184,7 +184,7 @@ Stage helpers: `py scripts/agent_next_step.py --pipeline documentation-audit --s
 | `docs/DOCUMENTATION_CATALOG.md` | Human-readable cross-project documentation index |
 | `docs/DOCUMENTATION_AUDIT.md` | Audit findings and missing README coverage |
 | `docs/documentation_catalog.json` | Machine-readable catalogue ([`documentation_catalog.schema.json`](../contracts/documentation_catalog.schema.json)) |
-| `narrative/draft/releases/planning/story_board.md` | Human planning doc — **derived from** `.rpy` scripts, not graph source of truth |
+| `main-game/draft/releases/planning/story_board.md` | Human planning doc — **derived from** `.rpy` scripts, not graph source of truth |
 
 **Storyboard direction of truth:** `.rpy` drafts (+ optional DAG tags) → graph manifest / audit reports → steward updates `story_board.md` where drift is found.
 
@@ -192,8 +192,8 @@ Stage helpers: `py scripts/agent_next_step.py --pipeline documentation-audit --s
 
 | Steward may write | Steward never writes |
 |-------------------|----------------------|
-| `docs/**`, folder READMEs, `AGENTS.md`, `.agents/README.md`, skill doc copy | `dayrdd_non_canon.rpy` prose, `narrative/canon/**` lore |
-| Generated catalogue/audit JSON + markdown | `renpy_project/` gameplay code |
+| `docs/**`, folder READMEs, `AGENTS.md`, `.agents/README.md`, skill doc copy | `dayrdd_non_canon.rpy` prose, `main-game/canon/**` lore |
+| Generated catalogue/audit JSON + markdown | `main-game/prod-game/` gameplay code |
 | `story_board.md` planning documentation | `[DAG_*]` tags in `.rpy` (that is `non_prod_code_agent` stage 1 of `dag-tag-update`) |
 
 Verdicts: `PASS` · `DOCS STALE` · `NEEDS HUMAN CONFIRMATION`. If a docs fix requires code behavior change first → escalate `chief_architect`.
@@ -319,7 +319,7 @@ Modes: `assess-prod`, `assess-draft`, `compare-prod-draft`, `deep-dive`.
 
 Diagnosis-only (stage 1, no prose rewrite) ends here. When stages 2–5 ran and cast may have changed → [scene direction post-process](#scene-direction-post-process) before any code handoff.
 
-**Variant rule:** multiple levels or "all 5" stay in `narrative/pipeline/experiments/` until the human picks one. Do not merge several levels into `dayrdd_non_canon.rpy`.
+**Variant rule:** multiple levels or "all 5" stay in `main-game/pipeline/experiments/` until the human picks one. Do not merge several levels into `dayrdd_non_canon.rpy`.
 
 **Authority:** may propose non-canon variants and briefs. Does not edit production, canon, or bypass gate order.
 
@@ -339,7 +339,7 @@ If blocked on prose → `revise-narrative` first, then resume.
 |---------|-----------------|
 | **1** | `chief_architect` — pre-promotion validation |
 | **2** | `forensic_psychology_consultant` — pre-prod psychology |
-| **3** | `prod_code_agent` — copy to `renpy_project/game/dayrdd.rpy` (verbatim creative content) |
+| **3** | `prod_code_agent` — copy to `main-game/prod-game/game/dayrdd.rpy` (verbatim creative content) |
 | **4** | `forensic_psychology_consultant` — post-prod psychology |
 | **5** | `chief_architect` — lint / structure |
 | **6** | Deliver |

@@ -22,4 +22,4 @@ Use this skill for **any** cross-repo production task when the user has not alre
 
 - Generate story content or edit files directly as the orchestrator.
 - Skip gate order on new promotion drafts (narrative → forensic psychology → Victorian).
-- Load `narrative/pipeline/**/ideas/` or `synthesis/` for new writing assignments unless the user requests archive mining.
+- Load `main-game/pipeline/**/ideas/` or `synthesis/` for new writing assignments unless the user requests archive mining.

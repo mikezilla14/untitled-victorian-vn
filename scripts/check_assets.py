@@ -13,7 +13,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-GAME_DIR = ROOT / "renpy_project" / "game"
+GAME_DIR = ROOT / "main-game" / "prod-game" / "game"
 MANIFEST_PATH = GAME_DIR / "assets_manifest.rpy"
 
 def load_manifest_declarations():

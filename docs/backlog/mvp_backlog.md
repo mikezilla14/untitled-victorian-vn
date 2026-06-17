@@ -12,13 +12,13 @@ Tasks are pre-formatted for direct allocation to human developers or specific sp
 ### 🟢 [N-1] Historical Linter Anachronisms Cleansing
 * **Description:** Complete (2026-06-10). Replaced modern clinical terms in non-canon character profiles with 1891 period-appropriate vocabulary; `historical_linter.py` clean on all three bible files.
 * **Affected Files:**
-  * [cora_character_non_canon.md](../../narrative/draft/bible/cora_character_non_canon.md) — "trauma" → "grievous shock"
-  * [stern_character_non_canon.md](../../narrative/draft/bible/stern_character_non_canon.md) — "trauma" → "grievous shock"
-  * [vance_character_non_canon.md](../../narrative/draft/bible/vance_character_non_canon.md) — "projecting" → "casting"
+  * [cora_character_non_canon.md](../../main-game/draft/bible/cora_character_non_canon.md) — "trauma" → "grievous shock"
+  * [stern_character_non_canon.md](../../main-game/draft/bible/stern_character_non_canon.md) — "trauma" → "grievous shock"
+  * [vance_character_non_canon.md](../../main-game/draft/bible/vance_character_non_canon.md) — "projecting" → "casting"
 * **Assignee:** `victorian_consultant`
 * **Verification Command:**
   ```powershell
-  py scripts/historical_linter.py --file narrative/draft/bible/cora_character_non_canon.md
+  py scripts/historical_linter.py --file main-game/draft/bible/cora_character_non_canon.md
   ```
 
 ---
@@ -26,7 +26,7 @@ Tasks are pre-formatted for direct allocation to human developers or specific sp
 ### 🟢 [N-2] Day 100 Prologue Specialist Gates Clearance
 * **Description:** Complete (2026-06-10). Rewrote prologue to start in motion, generated all three specialist gates, and validated successfully.
 * **Target Paths:** Write verdict markdown and JSON sidecars inside:
-  * `narrative/pipeline/releases/release-1-mvp/days/day100/gates/`
+  * `main-game/pipeline/releases/release-1-mvp/days/day100/gates/`
 * **Required Gates:**
   * **Lead Narrative Gate:** Check story boarding, stat alignments, and voice guides.
   * **Forensic Psychology Gate:** Verify psychological consistency of the desk search / overheard dialogue choices.
@@ -34,7 +34,7 @@ Tasks are pre-formatted for direct allocation to human developers or specific sp
 * **Assignee:** `lead_narrative_editor` + `forensic_psychology_consultant` + `victorian_consultant`
 * **Verification Command:**
   ```powershell
-  py scripts/validate.py --profile changed --agent human --files "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day100_non_canon.rpy"
+  py scripts/validate.py --profile changed --agent human --files "main-game/non-prod-game/game/days/day100_non_canon.rpy"
   ```
 
 ---
@@ -42,7 +42,7 @@ Tasks are pre-formatted for direct allocation to human developers or specific sp
 ### 🟢 [N-3] Day 103 Writers' Room Pipeline Convergence
 * **Description:** Complete (2026-06-10). All Day 103 Writers' Room pipeline deliverables (convergent report, sandboxed specs, and gate reviews) are generated and validated.
 * **Target Paths:** Create directory and populate:
-  * `narrative/pipeline/releases/release-1-mvp/days/day103/`
+  * `main-game/pipeline/releases/release-1-mvp/days/day103/`
 * **Required Output Deliverables:**
   * `synthesis/day103_convergent_report.md`
   * `specs/` (Sandboxed Ren'Py-shaped spec files)
@@ -58,7 +58,7 @@ Tasks are pre-formatted for direct allocation to human developers or specific sp
 ### 🟢 [N-4] Day 104 Writers' Room Pipeline Convergence
 * **Description:** Complete (2026-06-10). All Day 104 Writers' Room pipeline deliverables (convergent report, sandboxed specs, and gate reviews) are generated and validated.
 * **Target Paths:** Create directory and populate:
-  * `narrative/pipeline/releases/release-1-mvp/days/day104/`
+  * `main-game/pipeline/releases/release-1-mvp/days/day104/`
 * **Required Output Deliverables:**
   * `synthesis/day104_convergent_report.md`
   * `specs/` (Sandboxed Ren'Py-shaped spec files)
@@ -73,7 +73,7 @@ Tasks are pre-formatted for direct allocation to human developers or specific sp
 
 ### 🟡 [N-5] Prose Formatting Repair for Day 102 Draft
 * **Description:** The non-canon formatting check failed for the Day 102 draft file. Standardize its indentation and structure to ensure clean linter compliance.
-* **Affected File:** [day102_non_canon.rpy](../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy)
+* **Affected File:** [day102_non_canon.rpy](../../main-game/non-prod-game/game/days/day102_non_canon.rpy)
 * **Assignee:** `convergent_writer` or Script Tool
 * **Action Command:**
   ```powershell
@@ -84,11 +84,11 @@ Tasks are pre-formatted for direct allocation to human developers or specific sp
 
 ### 🟢 [N-6] Complete Story Chains Rewrite (From Scratch)
 * **Description:** Complete (2026-06-10). Completed, from-scratch rewrite of `story_chains_non_canon.rpy` to transform optional character paths into high-tension, Level 3/4 spicier narrative tracks (Missy, Stern, and Vance) at 2.8 and 2.2-2.5 spice. The chains serve as the primary engine for high-risk stat gains, accommodate dynamic day/time contexts, and force sharp opportunity-cost player decisions with descriptive diegetic locks.
-* **Affected File:** [story_chains_non_canon.rpy](../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy)
+* **Affected File:** [story_chains_non_canon.rpy](../../main-game/non-prod-game/game/shared/story_chains_non_canon.rpy)
 * **Assignee:** `convergent_writer` + specialist editors
 * **Verification Command:**
   ```powershell
-  py scripts/validate.py --profile narrative --files "narrative/draft/releases/release-1-mvp/shared/story_chains_non_canon.rpy"
+  py scripts/validate.py --profile narrative --files "main-game/draft/releases/release-1-mvp/shared/story_chains_non_canon.rpy"
   ```
 
 ---
@@ -98,20 +98,20 @@ Tasks are pre-formatted for direct allocation to human developers or specific sp
 *Focus: Script integration, runtime flow, state discipline, and tool chain repair.*
 
 ### 🟢 [C-1] Day 100 Prologue Production Promotion
-* **Description:** Complete (2026-06-10). Promoted `day100_non_canon.rpy` verbatim into `renpy_project/game/day100.rpy`; added prologue `StoryState` fields (`prologue_why_write`, `prologue_holywell_posture`) and Day 100 asset fallbacks in production manifest; wrote `day100_promotion_handoff.json`.
-* **Source File:** [day100_non_canon.rpy](../../narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day100_non_canon.rpy)
-* **Target File:** `renpy_project/game/day100.rpy`
+* **Description:** Complete (2026-06-10). Promoted `day100_non_canon.rpy` verbatim into `main-game/prod-game/game/day100.rpy`; added prologue `StoryState` fields (`prologue_why_write`, `prologue_holywell_posture`) and Day 100 asset fallbacks in production manifest; wrote `day100_promotion_handoff.json`.
+* **Source File:** [day100_non_canon.rpy](../../main-game/non-prod-game/game/days/day100_non_canon.rpy)
+* **Target File:** `main-game/prod-game/game/day100.rpy`
 * **Assignee:** `prod_code_agent`
 * **Verification Command:**
   ```powershell
-  py scripts/validate.py --profile code --files "renpy_project/game/day100.rpy"
+  py scripts/validate.py --profile code --files "main-game/prod-game/game/day100.rpy"
   ```
 
 ---
 
 ### 🟢 [C-2] Game Start Entry Point Integration
 * **Description:** Complete (2026-06-10). Non-prod `script.rpy` already jumped to `day100_main`; production `script.rpy` updated to match. Added `bg_country_estate_corridor_night` fallback to non-prod manifest.
-* **Affected File:** [script.rpy](../../renpy_project/game/script.rpy#L15)
+* **Affected File:** [script.rpy](../../main-game/prod-game/game/script.rpy#L15)
 * **Assignee:** `prod_code_agent`
 * **Verification Command:**
   ```powershell
@@ -125,7 +125,7 @@ Tasks are pre-formatted for direct allocation to human developers or specific sp
 * **Assignee:** `non_prod_code_agent` → `prod_code_agent`
 * **Verification Command:**
   ```powershell
-  py scripts/validate.py --profile code --files "renpy_project/game/day102.rpy,renpy_project/game/day103.rpy"
+  py scripts/validate.py --profile code --files "main-game/prod-game/game/day102.rpy,main-game/prod-game/game/day103.rpy"
   ```
 
 ---
@@ -135,14 +135,14 @@ Tasks are pre-formatted for direct allocation to human developers or specific sp
 * **Assignee:** `non_prod_code_agent` → `prod_code_agent`
 * **Verification Command:**
   ```powershell
-  py scripts/validate.py --profile code --files "renpy_project/game/day104.rpy"
+  py scripts/validate.py --profile code --files "main-game/prod-game/game/day104.rpy"
   ```
 
 ---
 
 ### 🟢 [C-5] Central Assets Manifest Audit & Verification
 * **Description:** Complete (2026-06-10). Verified that every asset referenced in day files is declared in the Central Assets Manifest, including declaring `cg_manuscript_retelling_d1-d4`, `cg_gideon_photograph`, and `cg_photograph_burning` to prevent future runtime crashes. Compliance check passes.
-* **Affected File:** [assets_manifest.rpy](../../renpy_project/game/assets_manifest.rpy)
+* **Affected File:** [assets_manifest.rpy](../../main-game/prod-game/game/assets_manifest.rpy)
 * **Audit Checklist:** Check references for:
   * Sprite: `vance_sprite mirror_watch_terror`
   * CGs: `cg_manuscript_retelling_d3_brush`, `cg_manuscript_retelling_d4_false_dawn`, `cg_gideon_photograph`

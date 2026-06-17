@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 # Paths
-ROOT = Path(r"c:\Users\mikez\OneDrive\Documents\gh\git\untitled-victorian-vn")
+ROOT = Path(r"c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn")
 GAME_DIR = ROOT / "renpy_project" / "game"
 MANIFEST_PATH = GAME_DIR / "assets_manifest.rpy"
 
@@ -18,7 +18,7 @@ def load_manifest_declarations():
     # Matches: declare_image_with_fallback("image_id", "rel_path", ...)
     image_declarations = {}
     image_pattern = re.compile(
-        r'declare_image_with_fallback\(\s*["\']([^"\']+)["\']\s*,\s*["\']([^"\']+)["\']'
+        r'declare_image_with_fallback/(/s*["/']([^"/']+)["/']/s*,/s*["/']([^"/']+)["/']'
     )
     for match in image_pattern.finditer(text):
         image_id, rel_path = match.groups()
@@ -28,7 +28,7 @@ def load_manifest_declarations():
     # or audio_var = register_audio("alias", "rel_path")
     audio_declarations = {}
     audio_pattern = re.compile(
-        r'(?:audio_[a-zA-Z0-9_]+\s*=\s*)?register_audio\(\s*["\']([^"\']+)["\']\s*,\s*["\']([^"\']+)["\']'
+        r'(?:audio_[a-zA-Z0-9_]+/s*=/s*)?register_audio/(/s*["/']([^"/']+)["/']/s*,/s*["/']([^"/']+)["/']'
     )
     for match in audio_pattern.finditer(text):
         alias, rel_path = match.groups()
@@ -47,14 +47,14 @@ def scan_game_scripts_for_assets():
     
     # Regexes for assets used in dialogue / script lines
     # scene <image_name> [with ...]
-    scene_pattern = re.compile(r'^\s*scene\s+([a-zA-Z0-9_-]+)(?:\s+[a-zA-Z0-9_-]+)*')
+    scene_pattern = re.compile(r'^/s*scene/s+([a-zA-Z0-9_-]+)(?:/s+[a-zA-Z0-9_-]+)*')
     # show <image_name_tag> <pose/attr> [at ...]
-    show_pattern = re.compile(r'^\s*show\s+([a-zA-Z0-9_-]+)(?:\s+([a-zA-Z0-9_-]+))?(?:\s+at|\s+with|\s+as|\s+behind|$)')
+    show_pattern = re.compile(r'^/s*show/s+([a-zA-Z0-9_-]+)(?:/s+([a-zA-Z0-9_-]+))?(?:/s+at|/s+with|/s+as|/s+behind|$)')
     
     # play music / play sound / play audio <alias> (or voice)
-    play_pattern = re.compile(r'^\s*play\s+(music|sound|audio)\s+([a-zA-Z0-9_]+|[a-zA-Z0-9_/.-]+)')
+    play_pattern = re.compile(r'^/s*play/s+(music|sound|audio)/s+([a-zA-Z0-9_]+|[a-zA-Z0-9_/.-]+)')
     # also check if the audio namespace is referenced: audio.xxx or audio_xxx
-    audio_var_pattern = re.compile(r'\b(audio_[a-zA-Z0-9_]+)\b')
+    audio_var_pattern = re.compile(r'/b(audio_[a-zA-Z0-9_]+)/b')
     
     for rpy_path in rpy_files:
         lines = rpy_path.read_text(encoding="utf-8").splitlines()
@@ -100,7 +100,7 @@ def scan_game_scripts_for_assets():
             if play_match:
                 channel, name = play_match.groups()
                 # Remove quotes if any
-                name = name.strip("\"'")
+                name = name.strip("/"'")
                 referenced_audios.add(name)
                 
             # 4. Check audio variables (like audio_themes_savoy_tension)
@@ -115,12 +115,12 @@ def check_sync():
     print(f"Declared Images: {len(manifest_images)}")
     print(f"Declared Audios: {len(manifest_audios)}")
     
-    print("\n=== Scanning Game Scripts for Referenced Assets ===")
+    print("/n=== Scanning Game Scripts for Referenced Assets ===")
     ref_images, ref_audios = scan_game_scripts_for_assets()
     print(f"Referenced Images in code: {len(ref_images)}")
     print(f"Referenced Audios in code: {len(ref_audios)}")
     
-    print("\n=== Checking for Physical Files on Disk ===")
+    print("/n=== Checking for Physical Files on Disk ===")
     missing_physical_images = []
     for img_id, rel_path in manifest_images.items():
         abs_path = GAME_DIR / rel_path
@@ -141,7 +141,7 @@ def check_sync():
     for alias, rel in missing_physical_audios:
         print(f"  - '{alias}' -> '{rel}' (DOES NOT EXIST ON DISK)")
         
-    print("\n=== Checking for Referenced Images Missing in Manifest ===")
+    print("/n=== Checking for Referenced Images Missing in Manifest ===")
     unmanifested_images = []
     for img in sorted(ref_images):
         # Allow transition helpers, expressions, or known build-ins
@@ -154,12 +154,12 @@ def check_sync():
     for img in unmanifested_images:
         print(f"  - '{img}'")
         
-    print("\n=== Checking for Referenced Audios Missing in Manifest ===")
+    print("/n=== Checking for Referenced Audios Missing in Manifest ===")
     unmanifested_audios = []
     
     # Let's find all audio_ variables in assets_manifest.rpy
     manifest_text = MANIFEST_PATH.read_text(encoding="utf-8")
-    manifest_audio_vars = set(re.findall(r'\b(audio_[a-zA-Z0-9_]+)\b', manifest_text))
+    manifest_audio_vars = set(re.findall(r'/b(audio_[a-zA-Z0-9_]+)/b', manifest_text))
     
     for aud in sorted(ref_audios):
         # If it's a standard alias (like "themes/savoy_tension") or variable name (like "audio_themes_savoy_tension")
@@ -174,7 +174,7 @@ def check_sync():
     for aud in unmanifested_audios:
         print(f"  - '{aud}'")
 
-    print("\n=== Checking for Unused Declarations (In Manifest but not in game scripts) ===")
+    print("/n=== Checking for Unused Declarations (In Manifest but not in game scripts) ===")
     unused_images = []
     for img in sorted(manifest_images.keys()):
         # Check if the tag is used, or the full name is used

@@ -3,15 +3,15 @@ I reviewed the repo. The spec should be adjusted quite a bit.
 The important repo reality is this:
 
 1. The project is **documentation-driven prompt chaining**, not an in-repo autonomous pipeline. `AGENTS.md` says there is no in-repo LLM runtime; agents are markdown rule files and the orchestrator routes work by prompt chaining.
-2. The existing narrative workflow says the playable product is `renpy_project/`, and non-canon day scripts in `narrative/draft/` are supporting design/implementation input, “not a parser pipeline.”
-3. The actual draft day path is already standardised as `narrative/draft/releases/<release>/non_prod_renpy_project/game/days/dayrdd_non_canon.rpy`.
-4. `scripts/**`, `.agents/**`, and repo workflow docs are **not** Non-Prod Code Agent territory under guardrails; they sit under repo operations / documentation ownership. Non-prod can write `narrative/draft/**` and `narrative/pipeline/**`.
+2. The existing narrative workflow says the playable product is `main-game/prod-game/`, and non-canon day scripts in `main-game/draft/` are supporting design/implementation input, “not a parser pipeline.”
+3. The actual draft day path is already standardised as `main-game/draft/releases/<release>/non_prod_main-game/prod-game/game/days/dayrdd_non_canon.rpy`.
+4. `scripts/**`, `.agents/**`, and repo workflow docs are **not** Non-Prod Code Agent territory under guardrails; they sit under repo operations / documentation ownership. Non-prod can write `main-game/draft/**` and `main-game/pipeline/**`.
 5. The draft `.rpy` files already have a real marker system: `[ASSET]`, `[STATE]`, `[CHOICE]`, `[BEAT]`, plus scene-direction tags.
 6. The runtime already has useful machine-readable truth: `apply_effects()` has concrete params for `insp`, `corr`, acute suspicion like `stern_susp`, and base suspicion like `stern_base`; generic `susp` is deprecated.
 7. Router outcomes already live in `StoryState.SLOT_EXIT_ROUTES`, and penance routes live in `POST_PENANCE_ROUTES`.
 8. Existing draft scripts already expose lots of graph-relevant structure through labels, menus, `apply_effects()`, setters, `check_confrontations`, `end_slot()`, and `advance_after_confrontation`.
 
-So the new spec should **not** create a grand new architecture. It should add a repo-realistic graph extractor under `narrative/pipeline/`, plus a lightweight tag contract that existing create/rewrite/implement flows can follow.
+So the new spec should **not** create a grand new architecture. It should add a repo-realistic graph extractor under `main-game/pipeline/`, plus a lightweight tag contract that existing create/rewrite/implement flows can follow.
 
 # Spec: Release 1 Graph Manifest Extractor — Repo-Realistic Phase 1
 
@@ -73,16 +73,16 @@ This task spans two ownership zones.
 The extractor itself may be created under:
 
 ```text
-narrative/pipeline/tools/build_story_graph_manifest.py
+main-game/pipeline/tools/build_story_graph_manifest.py
 ```
 
 or:
 
 ```text
-narrative/pipeline/graph/build_story_graph_manifest.py
+main-game/pipeline/graph/build_story_graph_manifest.py
 ```
 
-because `narrative/pipeline/**` is mutable by the Non-Prod Code Agent.
+because `main-game/pipeline/**` is mutable by the Non-Prod Code Agent.
 
 ### Chief Architect / Human must own repo-operation changes
 
@@ -112,21 +112,21 @@ release-1-mvp
 Primary script sources:
 
 ```text
-narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/*.rpy
-narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/*.rpy
+main-game/non-prod-game/game/days/*.rpy
+main-game/non-prod-game/game/shared/*.rpy
 ```
 
 Read-only helper sources:
 
 ```text
-renpy_project/game/functions.rpy
-renpy_project/game/classes.rpy
+main-game/prod-game/game/functions.rpy
+main-game/prod-game/game/classes.rpy
 ```
 
 Optional audit source:
 
 ```text
-narrative/draft/releases/planning/story_board.md
+main-game/draft/releases/planning/story_board.md
 ```
 
 The extractor should default to the canonical release paths already used by `scripts/narrative_paths.py`.
@@ -138,16 +138,16 @@ The extractor should default to the canonical release paths already used by `scr
 Create:
 
 ```text
-narrative/pipeline/tools/build_story_graph_manifest.py
+main-game/pipeline/tools/build_story_graph_manifest.py
 ```
 
 Recommended command:
 
 ```powershell
-py narrative/pipeline/tools/build_story_graph_manifest.py `
+py main-game/pipeline/tools/build_story_graph_manifest.py `
   --release release-1-mvp `
-  --out-dir narrative/pipeline/releases/release-1-mvp/graph `
-  --storyboard narrative/draft/releases/planning/story_board.md
+  --out-dir main-game/pipeline/releases/release-1-mvp/graph `
+  --storyboard main-game/draft/releases/planning/story_board.md
 ```
 
 Optional flags:
@@ -166,7 +166,7 @@ Optional flags:
 Write generated outputs under:
 
 ```text
-narrative/pipeline/releases/release-1-mvp/graph/
+main-game/pipeline/releases/release-1-mvp/graph/
 ```
 
 Required files:
@@ -184,7 +184,7 @@ release1_graph_audit.md
 release1_graph_mermaid.mmd
 ```
 
-Do not write generated graph outputs into `renpy_project/`.
+Do not write generated graph outputs into `main-game/prod-game/`.
 
 Do not write generated graph outputs into `docs/`.
 
@@ -270,7 +270,7 @@ call end_slot(outcome="d1_write_ch1")
 
 ### 9.2 `StoryState.SLOT_EXIT_ROUTES`
 
-Read `renpy_project/game/classes.rpy` and parse the `SLOT_EXIT_ROUTES` dictionary.
+Read `main-game/prod-game/game/classes.rpy` and parse the `SLOT_EXIT_ROUTES` dictionary.
 
 This is allowed as read-only source extraction.
 
@@ -465,7 +465,7 @@ Manual DAG tags may only be overwritten when the human explicitly asks for it.
 Recommended command flag for a future tag updater:
 
 ```powershell
-py narrative/pipeline/tools/update_dag_tags.py `
+py main-game/pipeline/tools/update_dag_tags.py `
   --files "path/to/day102_non_canon.rpy" `
   --overwrite-manual-dag-tags
 ```
@@ -939,22 +939,22 @@ Keep readable. Do not dump every local jump.
 After implementation, run:
 
 ```powershell
-py scripts/validate.py --profile changed --agent non_prod_code_agent --files "narrative/pipeline/tools/build_story_graph_manifest.py"
+py scripts/validate.py --profile changed --agent non_prod_code_agent --files "main-game/pipeline/tools/build_story_graph_manifest.py"
 ```
 
 Then run the tool itself:
 
 ```powershell
-py narrative/pipeline/tools/build_story_graph_manifest.py `
+py main-game/pipeline/tools/build_story_graph_manifest.py `
   --release release-1-mvp `
-  --out-dir narrative/pipeline/releases/release-1-mvp/graph `
-  --storyboard narrative/draft/releases/planning/story_board.md
+  --out-dir main-game/pipeline/releases/release-1-mvp/graph `
+  --storyboard main-game/draft/releases/planning/story_board.md
 ```
 
 Then validate generated files if practical:
 
 ```powershell
-py scripts/validate.py --profile changed --agent non_prod_code_agent --files "narrative/pipeline/releases/release-1-mvp/graph/release1_graph_audit.md,narrative/pipeline/releases/release-1-mvp/graph/release1_graph_gaps.md"
+py scripts/validate.py --profile changed --agent non_prod_code_agent --files "main-game/pipeline/releases/release-1-mvp/graph/release1_graph_audit.md,main-game/pipeline/releases/release-1-mvp/graph/release1_graph_gaps.md"
 ```
 
 Do not require changes to CI in Phase 1.
@@ -966,7 +966,7 @@ Do not require changes to CI in Phase 1.
 Create:
 
 ```text
-narrative/pipeline/releases/release-1-mvp/graph/release1_graph_implementation_report.md
+main-game/pipeline/releases/release-1-mvp/graph/release1_graph_implementation_report.md
 ```
 
 Include:
@@ -1011,7 +1011,7 @@ manual continuity edits affect the spine or scene ledger
 Allowed primary write:
 
 ```text
-narrative/draft/releases/planning/story_board.md
+main-game/draft/releases/planning/story_board.md
 ```
 
 Rules:
@@ -1071,8 +1071,8 @@ This storyboard is a human-readable planning, review, and continuity artifact de
 
 The `.rpy` files are the structural source of truth for graph extraction:
 
-`narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/*.rpy`
-`narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/*.rpy`
+`main-game/non-prod-game/game/days/*.rpy`
+`main-game/non-prod-game/game/shared/*.rpy`
 
 This file must not be treated as the primary machine-readable source for routing, DAG tags, menu structure, gates, stat effects, or graph manifests. Those are extracted from `.rpy` scripts plus optional `[DAG_*]` comments.
 ```
@@ -1088,7 +1088,7 @@ This storyboard remains the human planning and review document. It is used as co
 
 Generated graph outputs live under:
 
-`narrative/pipeline/releases/release-1-mvp/graph/`
+`main-game/pipeline/releases/release-1-mvp/graph/`
 ```
 
 3. In “Coding, Class, and Style Conventions,” add a fifth convention:
@@ -1104,15 +1104,15 @@ Generated graph outputs live under:
 
 Latest generated graph manifest:
 
-`narrative/pipeline/releases/release-1-mvp/graph/release1_graph_manifest.json`
+`main-game/pipeline/releases/release-1-mvp/graph/release1_graph_manifest.json`
 
 Latest graph gaps:
 
-`narrative/pipeline/releases/release-1-mvp/graph/release1_graph_gaps.md`
+`main-game/pipeline/releases/release-1-mvp/graph/release1_graph_gaps.md`
 
 Latest audit:
 
-`narrative/pipeline/releases/release-1-mvp/graph/release1_graph_audit.md`
+`main-game/pipeline/releases/release-1-mvp/graph/release1_graph_audit.md`
 
 Manual `.rpy` rewrites should be followed by `storyboard_sync`, which updates this file from the current scripts and graph audit outputs. This keeps the storyboard current as documentation while preserving the rule that `.rpy` scripts remain the structural source of truth.
 ```
@@ -1121,4 +1121,4 @@ Manual `.rpy` rewrites should be followed by `storyboard_sync`, which updates th
 
 ## One blunt recommendation
 
-Do **not** put this in `scripts/` for the first pass. In this repo, `scripts/**` is repo-operations territory, while `narrative/pipeline/**` is already writable by the Non-Prod Code Agent. Build it in `narrative/pipeline/tools/` first. Promote or mirror it into `scripts/` later only after Chief Architect signs off.
+Do **not** put this in `scripts/` for the first pass. In this repo, `scripts/**` is repo-operations territory, while `main-game/pipeline/**` is already writable by the Non-Prod Code Agent. Build it in `main-game/pipeline/tools/` first. Promote or mirror it into `scripts/` later only after Chief Architect signs off.

@@ -12,9 +12,9 @@ Use this skill when the user requests a **full rewrite** of an existing narrativ
 ## Required context files
 
 - Target file or description of the story chain / time period to rewrite
-- `narrative/draft/releases/planning/story_board.md` (relevant rows)
-- `narrative/draft/releases/planning/continuity_handoff.md` (affected day sections only)
-- Relevant character profiles under `narrative/draft/bible/`
+- `main-game/draft/releases/planning/story_board.md` (relevant rows)
+- `main-game/draft/releases/planning/continuity_handoff.md` (affected day sections only)
+- Relevant character profiles under `main-game/draft/bible/`
 
 ## Outputs
 

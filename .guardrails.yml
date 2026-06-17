@@ -18,32 +18,31 @@ agents:
 domains:
   canon_lore:
     paths:
-      - docs/canon/**
-      - narrative/canon/**
+      - main-game/canon/**
     mutable_by: [lead_narrative_editor, victorian_consultant, prod_code_agent, human]
     agents_read: [all]
-    notes: "Static promoted lore only. Episodic canon is renpy_project/game/day*.rpy."
+    notes: "Static promoted lore only. Episodic canon is main-game/prod-game/game/day*.rpy."
 
   character_psychology:
     paths:
-      - narrative/canon/characters_canon.md
-      - narrative/canon/*_character_canon.md
-      - narrative/draft/bible/*_character_non_canon.md
-      - narrative/draft/bible/characters_non_canon.md
-      - narrative/canon/voice_guides/*_voice_guide.md
-      - narrative/pipeline/releases/**/days/**/gates/day*_gate_forensic_psychology.md
-      - narrative/pipeline/releases/**/days/**/handoffs/day*_forensic_psychology_profile_report.md
+      - main-game/canon/characters_canon.md
+      - main-game/canon/*_character_canon.md
+      - main-game/draft/bible/*_character_non_canon.md
+      - main-game/draft/bible/characters_non_canon.md
+      - main-game/canon/voice_guides/*_voice_guide.md
+      - main-game/pipeline/releases/**/days/**/gates/day*_gate_forensic_psychology.md
+      - main-game/pipeline/releases/**/days/**/handoffs/day*_forensic_psychology_profile_report.md
     mutable_by: [forensic_psychology_consultant, lead_narrative_editor, writers_room, human]
     agents_read: [all]
     notes: "Character psychology, player-choice consistency, profile carry-forward, and voice-guide psychology."
 
   framework_code:
     paths:
-      - renpy_project/game/classes.rpy
-      - renpy_project/game/screens.rpy
-      - renpy_project/game/characters.rpy
-      - renpy_project/game/gui.rpy
-      - renpy_project/game/options.rpy
+      - main-game/prod-game/game/classes.rpy
+      - main-game/prod-game/game/screens.rpy
+      - main-game/prod-game/game/characters.rpy
+      - main-game/prod-game/game/gui.rpy
+      - main-game/prod-game/game/options.rpy
       - docs/dev_bible.md
       - docs/game_mechanics_bible.md
     mutable_by: [chief_architect, prod_code_agent, human]
@@ -51,24 +50,25 @@ domains:
 
   episodic_code:
     paths:
-      - renpy_project/game/day*.rpy
-      - renpy_project/game/endings.rpy
-      - renpy_project/game/functions.rpy
-      - renpy_project/game/script.rpy
+      - main-game/prod-game/game/day*.rpy
+      - main-game/prod-game/game/endings.rpy
+      - main-game/prod-game/game/functions.rpy
+      - main-game/prod-game/game/script.rpy
     mutable_by: [prod_code_agent, chief_architect, human]
     agents_read: [prod_code_agent, non_prod_code_agent, chief_architect, gatekeeper_orchestrator]
     notes: "Shipped episodic canon — sole runtime source of truth for day content."
 
   draft_narrative:
     paths:
-      - narrative/draft/**
+      - main-game/draft/**
+      - main-game/non-prod-game/**
     mutable_by: [writers_room, spiciness_tuning_agent, lead_narrative_editor, forensic_psychology_consultant, non_prod_code_agent, scene_direction, human]
     agents_read: [all]
     notes: "Non-canon promotion drafts, planning, bible, sandbox .rpy. scene_direction writes only `[asset auto]` show/hide lines."
 
   pipeline_artifacts:
     paths:
-      - narrative/pipeline/**
+      - main-game/pipeline/**
     mutable_by: [writers_room, spiciness_tuning_agent, lead_narrative_editor, forensic_psychology_consultant, victorian_consultant, non_prod_code_agent, human]
     agents_read: [all]
     notes: "Pre-draft exploration. ideas/ and synthesis/ are context-firewalled for new assignments."
@@ -76,8 +76,8 @@ domains:
   writer_experience:
     paths:
       - .agents/skills/writer_*/**
-      - narrative/draft/releases/**/intents/**
-      - narrative/draft/releases/**/exceptions/**
+      - main-game/draft/releases/**/intents/**
+      - main-game/draft/releases/**/exceptions/**
     mutable_by: [writers_desk, human, documentation_steward]
     agents_read: [all]
     notes: "Writer-facing skill COPY + Writer's Desk authoring/exception artifacts. Owned by the writing side; copy/wording changes do NOT require chief_architect review. The Desk's routing logic and rule file (.agents/rules/writers_desk.md) stay repo_operations. Precedence caveat: gatekeeper.py grants on ANY matching domain, so chief_architect retains access via repo_operations/documentation; this lane is an additive grant + an ownership convention, not a hard exclusion."
@@ -91,11 +91,11 @@ domains:
       - .vscode/**
       - .guardrails.yml
       - scripts/**
-      - renpy_project/utilities/**
+      - main-game/prod-game/utilities/**
       - docs/*.md
       - docs/backlog/**
-      - narrative/README.md
-      - narrative/pipeline/README.md
+      - main-game/README.md
+      - main-game/pipeline/README.md
     mutable_by: [chief_architect, gatekeeper_orchestrator, human]
     agents_read: [all]
     notes: "Repository workflow, automation, and maintenance files."
@@ -113,8 +113,8 @@ domains:
       - scripts/documentation_audit.py
       - .github/workflows/**
       - assets_source/**/README.md
-      - narrative/**/README.md
-      - renpy_project/README.md
+      - main-game/**/README.md
+      - main-game/prod-game/README.md
     mutable_by: [documentation_steward, chief_architect, gatekeeper_orchestrator, human]
     agents_read: [all]
     notes: "Cross-project documentation catalogue, stale-doc audits, README coverage, and documentation automation."

@@ -1,6 +1,6 @@
 # Savoy Hotel Visual Novel: Active Assets Source Directory
 
-This directory acts as the active workspace and repository for raw assets, generation prompt files, sliced frames, and approved media prior to their integration into the Ren'Py engine under `renpy_project/game/images/`.
+This directory acts as the active workspace and repository for raw assets, generation prompt files, sliced frames, and approved media prior to their integration into the Ren'Py engine under `main-game/prod-game/game/images/`.
 
 ## Directory Structure
 

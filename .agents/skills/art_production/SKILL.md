@@ -32,4 +32,4 @@ Use this skill when you want to **generate visual prompt logs, write character/l
 
 ## Compliance Contract
 
-Any mismatch between character cards, the fidelity database (`docs/contracts/art_fidelity_contract.json`), and narrative files (`narrative/canon/`) is a compliance breach and will block deployment at PR stage.
+Any mismatch between character cards, the fidelity database (`docs/contracts/art_fidelity_contract.json`), and narrative files (`main-game/canon/`) is a compliance breach and will block deployment at PR stage.

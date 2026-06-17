@@ -18,4 +18,4 @@ Level summary:
 - Level 4: restrained heat; plausibility leads but tension is actively shaped.
 - Level 5: project default; historical fidelity first, spice only where it preserves immersion.
 
-If the user requests multiple levels or "all 5", keep outputs as variants in `narrative/pipeline/experiments/` until the human selects one. Only a selected variant should become `dayrdd_non_canon.rpy` and enter normal gate review.
+If the user requests multiple levels or "all 5", keep outputs as variants in `main-game/pipeline/experiments/` until the human selects one. Only a selected variant should become `dayrdd_non_canon.rpy` and enter normal gate review.

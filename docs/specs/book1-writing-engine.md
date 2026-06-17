@@ -17,13 +17,13 @@ Book/chapter writing prompt calls should enter through `writer_write_book` or th
 
 ## Target Scope
 
-- Engine/runtime file: `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/book1_non_canon.rpy`
+- Engine/runtime file: `main-game/non-prod-game/game/days/book1_non_canon.rpy`
 - Per-day prose files:
-  - `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/book1_day101_non_canon.rpy`
-  - `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/book1_day102_non_canon.rpy`
-  - `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/book1_day103_non_canon.rpy`
-  - `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/book1_day104_non_canon.rpy`
-  - `narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/book1_day105_non_canon.rpy`
+  - `main-game/non-prod-game/game/days/book1_day101_non_canon.rpy`
+  - `main-game/non-prod-game/game/days/book1_day102_non_canon.rpy`
+  - `main-game/non-prod-game/game/days/book1_day103_non_canon.rpy`
+  - `main-game/non-prod-game/game/days/book1_day104_non_canon.rpy`
+  - `main-game/non-prod-game/game/days/book1_day105_non_canon.rpy`
 - Gameplay call sites: `day101_non_canon.rpy` through `day105_non_canon.rpy`
 - Direct harness: `test_day2_writing_non_canon.rpy`
 

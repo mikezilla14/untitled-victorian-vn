@@ -23,5 +23,5 @@ Use when drafting or rewriting chapters for Cora's manuscript (`book1`) using th
 5. **Validation**: Validate the final draft using `scripts/validate.py` via the Chief Architect review path.
 
 ```powershell
-py scripts/validate.py --profile changed --agent human --files "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/book1_non_canon.rpy" "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/book1_day101_non_canon.rpy" "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/book1_day102_non_canon.rpy" "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/book1_day103_non_canon.rpy" "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/book1_day104_non_canon.rpy" "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/book1_day105_non_canon.rpy"
+py scripts/validate.py --profile changed --agent human --files "main-game/non-prod-game/game/days/book1_non_canon.rpy" "main-game/non-prod-game/game/days/book1_day101_non_canon.rpy" "main-game/non-prod-game/game/days/book1_day102_non_canon.rpy" "main-game/non-prod-game/game/days/book1_day103_non_canon.rpy" "main-game/non-prod-game/game/days/book1_day104_non_canon.rpy" "main-game/non-prod-game/game/days/book1_day105_non_canon.rpy"
 ```

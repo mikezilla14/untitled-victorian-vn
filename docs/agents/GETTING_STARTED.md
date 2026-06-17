@@ -24,7 +24,7 @@ Full skill index: [`SKILL_CATALOG.md`](SKILL_CATALOG.md). In Cursor, enable proj
 Good prompts include **what**, **where**, and **scope**:
 
 - "Produce **day 106** for release 1: afternoon, Cora confronts Stern about the ledger."
-- "Promote **day 105** non-canon to `renpy_project`."
+- "Promote **day 105** non-canon to `main-game/prod-game`."
 - "Review **`day103_non_canon.rpy`** for canon, psychology, and 1891 accuracy."
 - "Tune the parlour scene in **day 103** to **spice level 3**."
 
@@ -48,12 +48,12 @@ Do not improvise gate order. On new promotion drafts the order is always:
 
 | Artifact | Location |
 |----------|----------|
-| Divergent spec scripts | `narrative/pipeline/releases/<release>/dayrdd_<persona>_spec.rpy` |
-| Idea sidecars (not assignment context) | `narrative/pipeline/releases/<release>/dayrdd_<persona>_ideas.md` |
-| Convergent report | `narrative/pipeline/releases/<release>/dayrdd_convergent_report.md` |
-| Promotion draft (MVP sandbox) | `narrative/draft/releases/<release>/non_prod_renpy_project/game/days/dayrdd_non_canon.rpy` |
-| Gate verdicts | `narrative/pipeline/releases/<release>/dayrdd_gate_*.md` |
-| Production day | `renpy_project/game/dayrdd.rpy` |
+| Divergent spec scripts | `main-game/pipeline/releases/<release>/dayrdd_<persona>_spec.rpy` |
+| Idea sidecars (not assignment context) | `main-game/pipeline/releases/<release>/dayrdd_<persona>_ideas.md` |
+| Convergent report | `main-game/pipeline/releases/<release>/dayrdd_convergent_report.md` |
+| Promotion draft (MVP sandbox) | `main-game/draft/releases/<release>/non_prod_main-game/prod-game/game/days/dayrdd_non_canon.rpy` |
+| Gate verdicts | `main-game/pipeline/releases/<release>/dayrdd_gate_*.md` |
+| Production day | `main-game/prod-game/game/dayrdd.rpy` |
 
 Naming: `r` = release number, `dd` = two-digit day (`00`–`99`).
 
@@ -100,19 +100,19 @@ py scripts/validate.py --profile changed --agent writers_room --skip-gate-checks
 **Before promotion** (requires all gate files):
 
 ```powershell
-py scripts/validate.py --profile changed --agent human --strict-gates --files "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day105_non_canon.rpy"
+py scripts/validate.py --profile changed --agent human --strict-gates --files "main-game/non-prod-game/game/days/day105_non_canon.rpy"
 ```
 
 **Full orchestrated review:**
 
 ```powershell
-py scripts/orchestrate_review.py --files "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day105_non_canon.rpy"
+py scripts/orchestrate_review.py --files "main-game/non-prod-game/game/days/day105_non_canon.rpy"
 ```
 
 For promotion pairs:
 
 ```powershell
-py scripts/orchestrate_review.py --files "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day105_non_canon.rpy,renpy_project/game/day105.rpy"
+py scripts/orchestrate_review.py --files "main-game/non-prod-game/game/days/day105_non_canon.rpy,main-game/prod-game/game/day105.rpy"
 ```
 
 CI runs `scripts/validate.py` on changed paths (see [`.github/workflows/gatekeeper.yml`](../../.github/workflows/gatekeeper.yml)).

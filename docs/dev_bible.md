@@ -15,7 +15,7 @@ This document is split into two parts:
 ## I. MVP Contract (Enforced)
 
 ### 1) Product Focus
-- The deliverable is a **playable 5-day Ren'Py MVP** in `renpy_project/`.
+- The deliverable is a **playable 5-day Ren'Py MVP** in `main-game/prod-game/`.
 - Narrative markdown is design input. Runtime truth is `.rpy` behavior.
 - Any process/tooling that slows completion of the 5-day narrative and asset manifest is out of scope.
 
@@ -27,9 +27,9 @@ This document is split into two parts:
 - New mechanics require explicit approval before implementation.
 
 ### 3) Ways of Work
-- Writing/design happens in non-canon Ren'Py drafts (`narrative/draft/dayrdd_non_canon.rpy`).
+- Writing/design happens in non-canon Ren'Py drafts (`main-game/draft/dayrdd_non_canon.rpy`).
 - Historical checks run through `scripts/historical_linter.py`.
-- Code implementation happens in `renpy_project/game/*.rpy`.
+- Code implementation happens in `main-game/prod-game/game/*.rpy`.
 - Chief Architect enforces code methodology and consistency.
 
 ### 4) MVP Technical Architecture Contract
@@ -55,7 +55,7 @@ This document is split into two parts:
 
 ### 5) Release Cadence (Operational Target)
 - Week 1: script lock (non-canon draft + implementation intent).
-- Week 2: art generation from approved narrative/asset checklist.
+- Week 2: art generation from approved main-game/asset checklist.
 - Week 3: Ren'Py assembly + branch wiring.
 - Week 4: QA and fixes.
 - Week 5: release and marketing.

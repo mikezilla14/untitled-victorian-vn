@@ -25,7 +25,7 @@ For routed pipeline work:
 
 ## Do not
 
-- Load `narrative/pipeline/**/ideas/` or `synthesis/` when starting **new** writing assignments unless the user requests archive mining.
+- Load `main-game/pipeline/**/ideas/` or `synthesis/` when starting **new** writing assignments unless the user requests archive mining.
 - Let code agents rewrite dialogue; route prose gaps to `revise-narrative` via `dayrdd_narrative_change_brief.md`.
 - Use files under `.claude/worktrees/` — stale mirror; repo root is canonical.
 

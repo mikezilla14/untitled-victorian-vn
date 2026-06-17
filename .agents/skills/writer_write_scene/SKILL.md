@@ -10,7 +10,7 @@ touches Ren'Py or Python.
 2. **Interview** in plain language (who / where / when / what changes / what choices mean). Derive
    the technical target yourself.
 3. Capture prose **verbatim** and emit an **Authoring Intent**:
-   `narrative/draft/releases/<release>/intents/dayrdd_authoring_intent.md` (+ `.json`, schema
+   `main-game/draft/releases/<release>/intents/dayrdd_authoring_intent.md` (+ `.json`, schema
    [`docs/contracts/authoring_intent.schema.json`](../../../docs/contracts/authoring_intent.schema.json)).
 4. Run the **full-fidelity contract pre-check** (prose / historical / psychological). Resolve each
    finding as PASS / SUGGESTION / EXCEPTION (see `writer_log_exception`).

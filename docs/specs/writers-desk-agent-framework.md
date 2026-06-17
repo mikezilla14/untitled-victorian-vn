@@ -53,7 +53,7 @@ pipelines and shields the Writer from every technical surface.
 "Scaffolded" means the rule/skill/schema/pipeline files exist and are registered; the workflow has
 not yet been exercised end-to-end with the Writer. This spec adds an authoring **front door** — all
 gate logic, state contracts, the DAG extractor
-(`narrative/pipeline/tools/build_story_graph_manifest.py`), and the asset manifest workflow already
+(`main-game/pipeline/tools/build_story_graph_manifest.py`), and the asset manifest workflow already
 exist and are reused unchanged.
 
 ## 3. Design Principles
@@ -75,8 +75,8 @@ exist and are reused unchanged.
 5. **The Writer has the final word.** No contract can block her. A contract conflict she declines
    to resolve becomes a logged exception with a human-override marker and an impact statement — it
    does not silently disappear and it does not silently ship.
-6. **Everything stays in the sandbox.** All Desk output lands under `narrative/draft/**` and
-   `narrative/pipeline/**`. Promotion to `renpy_project/` remains the `prod_code_agent` path behind
+6. **Everything stays in the sandbox.** All Desk output lands under `main-game/draft/**` and
+   `main-game/pipeline/**`. Promotion to `main-game/prod-game/` remains the `prod_code_agent` path behind
    the Chief Architect gate.
 
 ## 4. Architecture Overview
@@ -116,7 +116,7 @@ exist and are reused unchanged.
               │  check_assets    ── assets_manifest fallback entries  │
               │  scene_direction ── sprite placement tags             │
               │                                                       │
-              │  chief_architect ──► prod_code_agent ──► renpy_project│
+              │  chief_architect ──► prod_code_agent ──► main-game/prod-game│
               └───────────────────────────────────────────────────────┘
 ```
 
@@ -128,9 +128,9 @@ right existing pipeline and scale).
 
 New rule file: `.agents/rules/writers_desk.md`.
 
-**Domain / write boundary:** read `narrative/canon/`, `docs/canon/`, `docs/contracts/`, voice
-guides; write only `narrative/draft/**` and `narrative/pipeline/**`. Never writes
-`renpy_project/`, `docs/canon/`, `classes*.rpy`, `scripts/**`, `.agents/**`.
+**Domain / write boundary:** read `main-game/canon/`, `main-game/canon/`, `docs/contracts/`, voice
+guides; write only `main-game/draft/**` and `main-game/pipeline/**`. Never writes
+`main-game/prod-game/`, `main-game/canon/`, `classes*.rpy`, `scripts/**`, `.agents/**`.
 
 **Responsibilities:**
 
@@ -186,7 +186,7 @@ The single new contract between the prose-first layer and the technical layer. I
 emits and what `non_prod_code_agent` / `writers_room` consume. It is the writer-initiated, prose-first
 sibling of the existing `narrative_change_brief`.
 
-Path: `narrative/draft/releases/<release>/intents/dayrdd_authoring_intent.md` (+ `.json` sidecar).
+Path: `main-game/draft/releases/<release>/intents/dayrdd_authoring_intent.md` (+ `.json` sidecar).
 
 ```markdown
 # Authoring Intent — day[R][dd]
@@ -298,7 +298,7 @@ binding gates.
 | Family | Source of truth | Lightweight check | Binding gate (later) |
 |--------|-----------------|-------------------|----------------------|
 | **Prose / structure** | `book_writing_contract.md`, Writers' Room Day Script Structure Contract, voice guides, Psychological & Dialogue Gap Contract | Voice/POV drift, the Cora "mask vs. inner voice" gap, NVL pagination, cosmetic-menu detection, structural placement | `lead_narrative_editor` |
-| **Historical** | `docs/canon/historical_guardrails.md` | `scripts/historical_linter.py` on the draft → anachronism hints | `victorian_consultant` |
+| **Historical** | `main-game/canon/historical_guardrails.md` | `scripts/historical_linter.py` on the draft → anachronism hints | `victorian_consultant` |
 | **Psychological** | character profiles, forensic profiles | Choice-mode coverage, unearned reversals, NPC-integrity rules (Stern's shield, Gideon's pacing cycle, Vance's projection) | `forensic_psychology_consultant` |
 
 **Interaction model — three outcomes per finding:**
@@ -337,13 +337,13 @@ A self-signed, informed, documented exception is `ACCEPTED` and does **not** blo
 exception missing the impact acknowledgement stays `PROPOSED` and blocks promotion — so the gate is
 not "who signs" but "was she made aware and is it on the record."
 
-Path: `narrative/draft/releases/<release>/exceptions/contract_exceptions.md` (+ `.json`).
+Path: `main-game/draft/releases/<release>/exceptions/contract_exceptions.md` (+ `.json`).
 
 ```markdown
 ## EX-<release>-<dd>-<n>
 - Date: 2026-06-08
 - Contract: historical | prose | psychological
-- Source rule: docs/canon/historical_guardrails.md#<anchor>
+- Source rule: main-game/canon/historical_guardrails.md#<anchor>
 - Location: day103_evening / book1_block_day3_core
 - Contested text (anchor): "<the exact passage the finding objected to, verbatim>"
 - Fingerprint: <stable hash of the normalized contested text>
@@ -410,12 +410,12 @@ The Writer typed no Ren'Py, named no label, and chose no `jump`/`call`.
 - **Reused (read/route):** `.agents/rules/writers_room.md`, `non_prod_code_agent.md`,
   `prod_code_agent.md`, `chief_architect.md`, `orchestrator.md`.
 - **Contracts enforced:** `docs/contracts/book_writing_contract.md`,
-  `docs/canon/historical_guardrails.md`, the Psychological & Dialogue Gap Contract (in
-  `writers_room.md`), voice guides under `narrative/canon/voice_guides/`.
-- **Tooling reused:** `narrative/pipeline/tools/build_story_graph_manifest.py`,
+  `main-game/canon/historical_guardrails.md`, the Psychological & Dialogue Gap Contract (in
+  `writers_room.md`), voice guides under `main-game/canon/voice_guides/`.
+- **Tooling reused:** `main-game/pipeline/tools/build_story_graph_manifest.py`,
   `scripts/historical_linter.py`, `scripts/orchestrate_review.py`, `scripts/validate.py`,
-  `renpy_project/game/assets_manifest.rpy`, `scripts/scene_direction.py`.
-- **State model:** `narrative/draft/.../shared/classes_non_canon.rpy` (+ notes).
+  `main-game/prod-game/game/assets_manifest.rpy`, `scripts/scene_direction.py`.
+- **State model:** `main-game/draft/.../shared/classes_non_canon.rpy` (+ notes).
 
 ## 15. Validation / Review Path
 
@@ -424,9 +424,9 @@ The Writer typed no Ren'Py, named no label, and chose no `jump`/`call`.
 py scripts/orchestrate_review.py --files "<changed non_prod .rpy paths>"
 py scripts/validate.py --profile changed --agent non_prod_code_agent --skip-gate-checks --files "<paths>"
 py scripts/historical_linter.py "<changed *_non_canon.rpy>"
-py narrative/pipeline/tools/build_story_graph_manifest.py --release release-1-mvp `
-   --out-dir narrative/pipeline/releases/release-1-mvp/graph `
-   --storyboard narrative/draft/releases/planning/story_board.md
+py main-game/pipeline/tools/build_story_graph_manifest.py --release release-1-mvp `
+   --out-dir main-game/pipeline/releases/release-1-mvp/graph `
+   --storyboard main-game/draft/releases/planning/story_board.md
 ```
 
 Binding review order is unchanged: convergent → `lead_narrative_editor` →

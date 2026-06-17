@@ -10,7 +10,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-GAME_DIR = ROOT / "renpy_project" / "game"
+GAME_DIR = ROOT / "main-game" / "prod-game" / "game"
 
 ENGINE_SYMBOLS = {
     "abs",
@@ -79,7 +79,7 @@ def changed_game_scripts(files):
         path = resolve_file(file)
         norm = repo_path(path)
         name = path.name
-        if norm.startswith("renpy_project/game/") and name.endswith(".rpy"):
+        if norm.startswith("main-game/prod-game/game/") and name.endswith(".rpy"):
             if name.startswith("day") or name in {"endings.rpy", "script.rpy"}:
                 targets.append(path)
     return [path for path in targets if path.exists()]

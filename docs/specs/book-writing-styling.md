@@ -7,7 +7,7 @@ Define the visual layout, coordinates, styling guidelines, and asset declaration
 ## Current implementation status
 
 Partial. This spec documents the intended visual styling and layout for the book-writing feature;
-confirm current runtime parity in `renpy_project/game/` before treating any individual screen or
+confirm current runtime parity in `main-game/prod-game/game/` before treating any individual screen or
 asset declaration as shipped.
 
 ---
@@ -91,7 +91,7 @@ The screen is designed to capture the intimate, tactile feeling of Cora physical
 
 ## 📦 Asset Allocation
 
-These assets must be added to the assets manifest files (`renpy_project/game/assets_manifest.rpy` and its non-prod draft duplicate).
+These assets must be added to the assets manifest files (`main-game/prod-game/game/assets_manifest.rpy` and its non-prod draft duplicate).
 
 ```renpy
     # ── UI: Book Writing Screen Assets ───────────────────────────

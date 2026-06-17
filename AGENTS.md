@@ -43,7 +43,7 @@ flowchart TD
 ```
 
 - **Orchestrator** — routes only; does not write content.
-- **Writers' room** — owns creative prose in `narrative/draft/` and `narrative/pipeline/`.
+- **Writers' room** — owns creative prose in `main-game/draft/` and `main-game/pipeline/`.
 - **Code agents** — wrap or promote `.rpy` with **verbatim** creative text.
 - **Gates** — narrative, psychology, then Victorian (sequential on promotion drafts).
 - **Scripts** — enforce file permissions and contracts after edits (not model invocation).
@@ -78,7 +78,7 @@ Load the linked `.md` file as the **full system prompt** when the orchestrator n
 | Adult market reviewer | [`.agents/rules/adult_market_reviewer.md`](.agents/rules/adult_market_reviewer.md) | **Read-only** |
 | Non-prod code agent | [`.agents/rules/non_prod_code_agent.md`](.agents/rules/non_prod_code_agent.md) | Sandbox `.rpy` |
 | Scene direction agent | [`.agents/rules/scene_direction_agent.md`](.agents/rules/scene_direction_agent.md) | Sandbox `.rpy` (`[asset auto]` lines only) |
-| Prod code agent | [`.agents/rules/prod_code_agent.md`](.agents/rules/prod_code_agent.md) | `renpy_project/` |
+| Prod code agent | [`.agents/rules/prod_code_agent.md`](.agents/rules/prod_code_agent.md) | `main-game/prod-game/` |
 | Chief architect | [`.agents/rules/chief_architect.md`](.agents/rules/chief_architect.md) | Architecture / review |
 | Gatekeeper orchestrator | [`.agents/rules/gatekeeper_orchestrator.md`](.agents/rules/gatekeeper_orchestrator.md) | PR / domain checks |
 | Documentation steward | [`.agents/rules/documentation_steward.md`](.agents/rules/documentation_steward.md) | README/docs/spec sync + catalogue |
@@ -113,13 +113,13 @@ py scripts/agent_next_step.py --pipeline produce-day --stage 1 --day 105 --relea
 
 ## Standup → action (code & prose agents)
 
-Point agents at `narrative/draft/releases/planning/daily_standup_report.md`, then:
+Point agents at `main-game/draft/releases/planning/daily_standup_report.md`, then:
 
 ```powershell
 py scripts/resolve_work_item.py --from-standup --next
 ```
 
-Maps queue items to specs via [`docs/backlog/task_registry.json`](docs/backlog/task_registry.json). See [`action_from_standup`](.agents/skills/action_from_standup/SKILL.md) and [`planning/standup_agent_contract.md`](narrative/draft/releases/planning/standup_agent_contract.md).
+Maps queue items to specs via [`docs/backlog/task_registry.json`](docs/backlog/task_registry.json). See [`action_from_standup`](.agents/skills/action_from_standup/SKILL.md) and [`planning/standup_agent_contract.md`](main-game/draft/releases/planning/standup_agent_contract.md).
 
 ## Validation (after agents edit files)
 
@@ -157,4 +157,4 @@ Orchestration stays **prompt-chaining** (no in-repo LLM task queue).
 ## Do not use
 
 - **`.claude/worktrees/`** — stale Claude Code mirrors (gitignored). Close Claude Code and delete the folder locally if it still exists; never edit files there.
-- **`narrative/pipeline/**/ideas/`** or **`synthesis/`** for new day assignments — context firewall (see [`narrative/README.md`](narrative/README.md)).
+- **`main-game/pipeline/**/ideas/`** or **`synthesis/`** for new day assignments — context firewall (see [`main-game/README.md`](main-game/README.md)).

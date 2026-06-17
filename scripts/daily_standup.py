@@ -26,12 +26,12 @@ if sys.platform == "win32":
 
 # Paths
 ROOT = Path(__file__).resolve().parents[1]
-PLANNING_DIR = ROOT / "narrative" / "draft" / "releases" / "planning"
+PLANNING_DIR = ROOT / "main-game" / "draft" / "releases" / "planning"
 STANDUP_REPORTS_DIR = PLANNING_DIR / "standups"
 CONFIG_PATH = PLANNING_DIR / "epic_schedule.json"
 CHECKLIST_PATH = PLANNING_DIR / "mvp_systems_integration_checklist.md"
 BACKLOG_PATH = ROOT / "docs" / "backlog" / "mvp_backlog.md"
-NON_PROD_PROJECT_DIR = ROOT / "narrative" / "draft" / "releases" / "release-1-mvp" / "non_prod_renpy_project"
+NON_PROD_PROJECT_DIR = ROOT / "main-game" / "non-prod-game"
 NON_PROD_GAME_DIR = NON_PROD_PROJECT_DIR / "game"
 ERRORS_PATH = NON_PROD_PROJECT_DIR / "errors.txt"
 
@@ -824,7 +824,7 @@ def append_agent_work_queue(markdown_content: str, plain_report: str) -> str:
             "```\n\n"
             "Skill: `.agents/skills/action_from_standup/SKILL.md`  \n"
             "Registry: `docs/backlog/task_registry.json`  \n"
-            "Contract: `narrative/draft/releases/planning/standup_agent_contract.md`\n\n"
+            "Contract: `main-game/draft/releases/planning/standup_agent_contract.md`\n\n"
             f"```json\n{queue_json}\n```\n"
         )
     except Exception as exc:
@@ -901,11 +901,11 @@ def main() -> int:
     asset_data = audit_non_prod_assets()
     
     # Run discovery phase
-    non_prod_game_dir = ROOT / "narrative" / "draft" / "releases" / "release-1-mvp" / "non_prod_renpy_project" / "game"
+    non_prod_game_dir = ROOT / "main-game" / "non-prod-game" / "game"
     rpy_files = sorted(non_prod_game_dir.rglob("*_non_canon.rpy"))
     rpy_paths = [f.relative_to(ROOT).as_posix() for f in rpy_files]
     
-    bible_dir = ROOT / "narrative" / "draft" / "bible"
+    bible_dir = ROOT / "main-game" / "draft" / "bible"
     bible_files = sorted(bible_dir.glob("*.md"))
     bible_paths = [f.relative_to(ROOT).as_posix() for f in bible_files]
     

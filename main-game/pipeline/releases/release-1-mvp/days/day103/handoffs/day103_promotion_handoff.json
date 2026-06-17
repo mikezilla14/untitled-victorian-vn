@@ -1,0 +1,9 @@
+{
+  "contract_version": "1",
+  "day_id": "day103",
+  "release": "release-1-mvp",
+  "source_non_canon": "main-game/non-prod-game/game/days/day103_non_canon.rpy",
+  "target_prod": "main-game/prod-game/game/day103.rpy",
+  "creative_text_preserved": true,
+  "promoted_by": "prod_code_agent"
+}

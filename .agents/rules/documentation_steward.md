@@ -63,8 +63,8 @@ Allowed:
 
 Forbidden:
 
-- Creative story prose in `narrative/draft/**` or `narrative/pipeline/**`.
-- Canon changes in `narrative/canon/**` except README/index text.
+- Creative story prose in `main-game/draft/**` or `main-game/pipeline/**`.
+- Canon changes in `main-game/canon/**` except README/index text.
 - Production Ren'Py code, except when only cited from docs.
 - Generated art assets.
 

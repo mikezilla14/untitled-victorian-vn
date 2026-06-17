@@ -1,12 +1,12 @@
 # Backlog: JSON beat pipeline (deferred)
 
-This repository previously explored a **markdown → JSON beat schema → Ren’Py** path (`validate_beats`, `sync_beats`, `narrative/beats`, etc.). That work is **deferred** so effort stays on **shipping the MVP** in `renpy_project/`.
+This repository previously explored a **markdown → JSON beat schema → Ren’Py** path (`validate_beats`, `sync_beats`, `main-game/beats`, etc.). That work is **deferred** so effort stays on **shipping the MVP** in `main-game/prod-game/`.
 
 ## What was removed from the active toolchain
 
 - Automated beat JSON validation in CI
 - Beat catalog audit and sync/extract scripts
-- `narrative/beats` as a required artifact
+- `main-game/beats` as a required artifact
 
 ## Preserved for future reference
 
