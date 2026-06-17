@@ -241,7 +241,7 @@ Run after implementation:
 ```powershell
 py scripts/orchestrate_review.py --files "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy"
 py scripts/validate.py --profile changed --agent non_prod_code_agent --skip-gate-checks --files "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy"
-py narrative/pipeline/tools/build_story_graph_manifest.py --release release-1-mvp --out-dir narrative/pipeline/releases/release-1-mvp/graph --storyboard narrative/draft/releases/release-1-mvp/planning/story_board.md
+py narrative/pipeline/tools/build_story_graph_manifest.py --release release-1-mvp --out-dir narrative/pipeline/releases/release-1-mvp/graph --storyboard narrative/draft/releases/planning/story_board.md
 ```
 
 For multi-file implementation, include every changed `.rpy`, shared mockup, and notes file in validation. After graph generation, run `storyboard_sync` only if `release1_graph_gaps.md` or `release1_graph_audit.md` reports storyboard drift.

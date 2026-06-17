@@ -14,8 +14,8 @@ Catalogue: [`SKILL_CATALOG.md`](../../../docs/agents/SKILL_CATALOG.md)
 
 ## Required context files
 
-- `narrative/draft/releases/<release>/planning/story_board.md`
-- `narrative/draft/releases/<release>/planning/continuity_handoff.md` (current day section only)
+- `narrative/draft/releases/planning/story_board.md`
+- `narrative/draft/releases/planning/continuity_handoff.md` (current day section only)
 
 ## Outputs
 

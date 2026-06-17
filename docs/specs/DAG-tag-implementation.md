@@ -126,7 +126,7 @@ renpy_project/game/classes.rpy
 Optional audit source:
 
 ```text
-narrative/draft/releases/release-1-mvp/planning/story_board.md
+narrative/draft/releases/planning/story_board.md
 ```
 
 The extractor should default to the canonical release paths already used by `scripts/narrative_paths.py`.
@@ -147,7 +147,7 @@ Recommended command:
 py narrative/pipeline/tools/build_story_graph_manifest.py `
   --release release-1-mvp `
   --out-dir narrative/pipeline/releases/release-1-mvp/graph `
-  --storyboard narrative/draft/releases/release-1-mvp/planning/story_board.md
+  --storyboard narrative/draft/releases/planning/story_board.md
 ```
 
 Optional flags:
@@ -948,7 +948,7 @@ Then run the tool itself:
 py narrative/pipeline/tools/build_story_graph_manifest.py `
   --release release-1-mvp `
   --out-dir narrative/pipeline/releases/release-1-mvp/graph `
-  --storyboard narrative/draft/releases/release-1-mvp/planning/story_board.md
+  --storyboard narrative/draft/releases/planning/story_board.md
 ```
 
 Then validate generated files if practical:
@@ -1011,7 +1011,7 @@ manual continuity edits affect the spine or scene ledger
 Allowed primary write:
 
 ```text
-narrative/draft/releases/release-1-mvp/planning/story_board.md
+narrative/draft/releases/planning/story_board.md
 ```
 
 Rules:

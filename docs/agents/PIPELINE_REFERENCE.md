@@ -184,7 +184,7 @@ Stage helpers: `py scripts/agent_next_step.py --pipeline documentation-audit --s
 | `docs/DOCUMENTATION_CATALOG.md` | Human-readable cross-project documentation index |
 | `docs/DOCUMENTATION_AUDIT.md` | Audit findings and missing README coverage |
 | `docs/documentation_catalog.json` | Machine-readable catalogue ([`documentation_catalog.schema.json`](../contracts/documentation_catalog.schema.json)) |
-| `narrative/draft/releases/<release>/planning/story_board.md` | Human planning doc — **derived from** `.rpy` scripts, not graph source of truth |
+| `narrative/draft/releases/planning/story_board.md` | Human planning doc — **derived from** `.rpy` scripts, not graph source of truth |
 
 **Storyboard direction of truth:** `.rpy` drafts (+ optional DAG tags) → graph manifest / audit reports → steward updates `story_board.md` where drift is found.
 

@@ -7,7 +7,7 @@ Use this when pointing **any** code or prose Cursor agent at today's work.
 Paste or @-reference:
 
 ```
-narrative/draft/releases/release-1-mvp/planning/daily_standup_report.md
+narrative/draft/releases/planning/daily_standup_report.md
 ```
 
 Add:

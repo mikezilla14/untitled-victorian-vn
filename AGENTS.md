@@ -113,13 +113,13 @@ py scripts/agent_next_step.py --pipeline produce-day --stage 1 --day 105 --relea
 
 ## Standup → action (code & prose agents)
 
-Point agents at `narrative/draft/releases/release-1-mvp/planning/daily_standup_report.md`, then:
+Point agents at `narrative/draft/releases/planning/daily_standup_report.md`, then:
 
 ```powershell
 py scripts/resolve_work_item.py --from-standup --next
 ```
 
-Maps queue items to specs via [`docs/backlog/task_registry.json`](docs/backlog/task_registry.json). See [`action_from_standup`](.agents/skills/action_from_standup/SKILL.md) and [`planning/standup_agent_contract.md`](narrative/draft/releases/release-1-mvp/planning/standup_agent_contract.md).
+Maps queue items to specs via [`docs/backlog/task_registry.json`](docs/backlog/task_registry.json). See [`action_from_standup`](.agents/skills/action_from_standup/SKILL.md) and [`planning/standup_agent_contract.md`](narrative/draft/releases/planning/standup_agent_contract.md).
 
 ## Validation (after agents edit files)
 

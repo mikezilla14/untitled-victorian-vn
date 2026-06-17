@@ -26,7 +26,7 @@ if sys.platform == "win32":
 
 # Paths
 ROOT = Path(__file__).resolve().parents[1]
-PLANNING_DIR = ROOT / "narrative" / "draft" / "releases" / "release-1-mvp" / "planning"
+PLANNING_DIR = ROOT / "narrative" / "draft" / "releases" / "planning"
 STANDUP_REPORTS_DIR = PLANNING_DIR / "standups"
 CONFIG_PATH = PLANNING_DIR / "epic_schedule.json"
 CHECKLIST_PATH = PLANNING_DIR / "mvp_systems_integration_checklist.md"
@@ -824,7 +824,7 @@ def append_agent_work_queue(markdown_content: str, plain_report: str) -> str:
             "```\n\n"
             "Skill: `.agents/skills/action_from_standup/SKILL.md`  \n"
             "Registry: `docs/backlog/task_registry.json`  \n"
-            "Contract: `narrative/draft/releases/release-1-mvp/planning/standup_agent_contract.md`\n\n"
+            "Contract: `narrative/draft/releases/planning/standup_agent_contract.md`\n\n"
             f"```json\n{queue_json}\n```\n"
         )
     except Exception as exc:

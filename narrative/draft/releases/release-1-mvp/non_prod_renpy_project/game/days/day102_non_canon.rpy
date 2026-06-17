@@ -1175,7 +1175,7 @@ label day102_4_cora_sneaks_a_feel:
     with dissolve
 
     $ story.set_day2_night_action("indulge")
-    $ apply_effects(susp=10, insp=5, corr=15)
+    $ apply_effects(insp=5, corr=15)
 
     cora_inner "I close the notebook."
     cora_inner "The page has asked for discipline."

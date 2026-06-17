@@ -43,7 +43,7 @@ Writing orchestration rules live in the parent `.agents/rules/` directory (flat 
 - Spec scripts: `narrative/pipeline/releases/<release>/dayrdd_<persona>_spec.rpy`
 - Brainstorming / idea logs: `narrative/pipeline/releases/<release>/dayrdd_<persona>_ideas.md`
 - Convergent Decision Report: `narrative/pipeline/releases/<release>/dayrdd_convergent_report.md`
-- Continuity handoff: `narrative/draft/releases/<release>/planning/continuity_handoff.md` (read current day; write next day after gates)
+- Continuity handoff: `narrative/draft/releases/planning/continuity_handoff.md` (read current day; write next day after gates)
 - Promotion draft: `narrative/draft/releases/<release>/dayrdd_non_canon.rpy`
 - Gate verdicts: `dayrdd_gate_*.md` + matching `dayrdd_gate_*.json` (see `docs/contracts/`)
 - Psychology profile reports: `dayrdd_forensic_psychology_profile_report.md` when character profiles or voice guides change

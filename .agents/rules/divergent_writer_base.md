@@ -31,7 +31,7 @@ You are one voice in a **writers' room brainstorming pool**. Your job is to adva
 
 - Task brief (scene/day/release, narrative problem, constraints)
 - **`continuity_handoff.md` — section `## Handoff → Day [dd]` only** (required for day `dd`)
-- `narrative/draft/releases/<release>/planning/story_board.md` (relevant rows)
+- `narrative/draft/releases/planning/story_board.md` (relevant rows)
 - Character/location non-canon or canon docs as specified
 - **Optional:** other personas' specs from the **same** `dayrdd` only, when orchestrator runs a cross-pollination round
 

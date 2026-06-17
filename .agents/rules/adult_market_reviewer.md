@@ -33,8 +33,8 @@ Read these as malleable design and writing drafts:
 
 - `narrative/draft/`
 - `narrative/draft/releases/release-1-mvp/`
-- `narrative/draft/releases/release-1-mvp/planning/story_board.md`
-- `narrative/draft/releases/release-1-mvp/planning/continuity_handoff.md`
+- `narrative/draft/releases/planning/story_board.md`
+- `narrative/draft/releases/planning/continuity_handoff.md`
 - `narrative/draft/characters_non_canon.md`
 - `narrative/draft/locations_non_canon.md`
 
@@ -93,7 +93,7 @@ Use when the human asks to assess non-canon, planned release content, or the wri
 
 Read:
 
-- `narrative/draft/releases/release-1-mvp/planning/story_board.md`
+- `narrative/draft/releases/planning/story_board.md`
 - Affected `dayrdd_non_canon.rpy` files
 - `continuity_handoff.md` as needed
 - `characters_non_canon.md` and `locations_non_canon.md`

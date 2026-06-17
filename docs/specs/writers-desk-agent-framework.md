@@ -426,7 +426,7 @@ py scripts/validate.py --profile changed --agent non_prod_code_agent --skip-gate
 py scripts/historical_linter.py "<changed *_non_canon.rpy>"
 py narrative/pipeline/tools/build_story_graph_manifest.py --release release-1-mvp `
    --out-dir narrative/pipeline/releases/release-1-mvp/graph `
-   --storyboard narrative/draft/releases/release-1-mvp/planning/story_board.md
+   --storyboard narrative/draft/releases/planning/story_board.md
 ```
 
 Binding review order is unchanged: convergent → `lead_narrative_editor` →

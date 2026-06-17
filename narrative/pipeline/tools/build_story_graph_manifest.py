@@ -743,7 +743,7 @@ def write_outputs(args: argparse.Namespace, data: dict[str, Any], slot_routes: d
         "",
         "## Commands Run",
         "",
-        "- `py narrative/pipeline/tools/build_story_graph_manifest.py --release release-1-mvp --out-dir narrative/pipeline/releases/release-1-mvp/graph --storyboard narrative/draft/releases/release-1-mvp/planning/story_board.md`",
+        "- `py narrative/pipeline/tools/build_story_graph_manifest.py --release release-1-mvp --out-dir narrative/pipeline/releases/release-1-mvp/graph --storyboard narrative/draft/releases/planning/story_board.md`",
         "",
         "## Extraction Counts",
         "",

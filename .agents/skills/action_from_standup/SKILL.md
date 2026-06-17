@@ -2,7 +2,7 @@
 
 Use when the user points a **code** or **prose** agent at the daily standup report and wants work executed — not just status readout.
 
-**Entry document:** `narrative/draft/releases/release-1-mvp/planning/daily_standup_report.md`  
+**Entry document:** `narrative/draft/releases/planning/daily_standup_report.md`  
 (or dated: `planning/standups/daily_standup_YYYY-MM-DD.md`)
 
 ## What to do

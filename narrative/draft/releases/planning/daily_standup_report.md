@@ -78,7 +78,7 @@ py scripts/resolve_work_item.py --from-standup --next
 
 Skill: `.agents/skills/action_from_standup/SKILL.md`  
 Registry: `docs/backlog/task_registry.json`  
-Contract: `narrative/draft/releases/release-1-mvp/planning/standup_agent_contract.md`
+Contract: `narrative/draft/releases/planning/standup_agent_contract.md`
 
 ```json
 {

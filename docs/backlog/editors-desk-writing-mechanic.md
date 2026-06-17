@@ -485,4 +485,4 @@ Prototype first in `narrative/pipeline/code_experiments/desk101.rpy` if `game/` 
 - Runtime baseline: `renpy_project/game/day101.rpy` (`day101_4_write_the_chapter`), `day102.rpy` (`day102_4_cora_writes_a_chapter`); desk modules **proposed** as `desk101.rpy` … `desk105.rpy`.
 - State: `renpy_project/game/classes.rpy` (`StoryState`, `complete_manuscript_chapter`, `VALID_RELEASE1_FLAVOURS`).
 - Gates: `renpy_project/game/functions.rpy` (`has_story_fuel`).
-- Spine: `narrative/draft/releases/release-1-mvp/planning/story_board.md` WRITE rows and router table.
+- Spine: `narrative/draft/releases/planning/story_board.md` WRITE rows and router table.

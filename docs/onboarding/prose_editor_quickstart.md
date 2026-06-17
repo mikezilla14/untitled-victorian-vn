@@ -97,6 +97,6 @@ In the PR description, note what you changed and why (e.g. "softened Cora's line
 
 ## Questions?
 
-- What a scene should contain: check `narrative/draft/releases/release-1-mvp/planning/story_board.md`
+- What a scene should contain: check `narrative/draft/releases/planning/story_board.md`
 - Character voices and traits: check `narrative/canon/characters/`
 - Historical accuracy questions: ask via the Victorian Consultant agent (see `docs/agents/GETTING_STARTED.md`)

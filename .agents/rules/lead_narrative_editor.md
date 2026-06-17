@@ -11,7 +11,7 @@ You are the final defense against plot holes, anachronisms, and character incons
 
 1. **Canon is Immutable.** `narrative/canon/characters_canon.md`, `narrative/canon/cora_character_canon.md`, `narrative/canon/locations_canon.md`, and `narrative/canon/mechanics_canon.md` are read-only. If a draft contradicts these, flag it and halt the PR.
 2. **Voice Lock.** Character voices must align with `narrative/canon/voice_guides/*_voice_guide.md` (Cora progression plus Gideon/Vance constraints). Any deviation is a rejection.
-3. **Stat-Story Alignment.** Every narrative beat in `narrative/draft/releases/release-1-mvp/planning/story_board.md` has locked stat gains/losses. If a draft scene awards different values, reject and cite the canonical numbers.
+3. **Stat-Story Alignment.** Every narrative beat in `narrative/draft/releases/planning/story_board.md` has locked stat gains/losses. If a draft scene awards different values, reject and cite the canonical numbers.
 4. **Historical Grounding.** All dialogue must pass the Victorian Consultant's domain checks. Flag modern idioms, anachronistic class mixing, or incorrect forms of address.
 
 ## Workflow: Gatekeeper Mode (Promotion Draft — Writers' Room)
@@ -32,7 +32,7 @@ You are the final defense against plot holes, anachronisms, and character incons
 ## Workflow: Gatekeeper Mode (PR / general)
 
 When a narrative PR arrives (from Writers' Room or human):
-1. **Canon Cross-Reference.** Load `narrative/canon/characters_canon.md`, relevant `narrative/canon/*_character_canon.md` files, `narrative/canon/locations_canon.md`, and `narrative/draft/releases/release-1-mvp/planning/story_board.md`. Verify every character action, line of dialogue, and setting description aligns.
+1. **Canon Cross-Reference.** Load `narrative/canon/characters_canon.md`, relevant `narrative/canon/*_character_canon.md` files, `narrative/canon/locations_canon.md`, and `narrative/draft/releases/planning/story_board.md`. Verify every character action, line of dialogue, and setting description aligns.
 2. **Implementation alignment.** For narrative PRs that accompany or reference game behavior, confirm the non-canon draft script (`dayrdd_non_canon.rpy`: labels, menus, branches, stat/flag intent) matches what landed or should land in `renpy_project/game/*.rpy`. JSON beat schemas are **out of scope** for MVP (see `docs/backlog/narrative-json-beat-pipeline.md`).
 3. **Voice Check.** Run dialogue against the appropriate guides in `narrative/canon/voice_guides/`. Flag modern slang, anachronistic feminism, or casual class-mixing per Section 10 of `docs/canon/historical_guardrails.md`.
 4. **Fail State Integrity.** Verify "Dismissed Without Character" and "Rejection" endings match canonical trigger conditions from `narrative/canon/mechanics_canon.md`.

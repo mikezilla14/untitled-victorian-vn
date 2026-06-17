@@ -37,7 +37,6 @@ DEFAULT_STANDUP = (
     / "narrative"
     / "draft"
     / "releases"
-    / "release-1-mvp"
     / "planning"
     / "daily_standup_report.md"
 )
@@ -270,7 +269,7 @@ def resolve_task(registry_id: str | None, summary: str = "") -> dict[str, Any]:
                 "resolution": "discovered_format",
                 "deliverables": [],
                 "specs": [
-                    "narrative/draft/releases/release-1-mvp/planning/mvp_systems_integration_checklist.md"
+                    "narrative/draft/releases/planning/mvp_systems_integration_checklist.md"
                 ],
                 "pipeline": None,
                 "pipeline_stage": None,
@@ -315,7 +314,7 @@ def resolve_task(registry_id: str | None, summary: str = "") -> dict[str, Any]:
             "pipeline_stage": None,
             "specs": [
                 "docs/backlog/mvp_backlog.md",
-                "narrative/draft/releases/release-1-mvp/planning/mvp_systems_integration_checklist.md",
+                "narrative/draft/releases/planning/mvp_systems_integration_checklist.md",
                 "docs/specs/README.md",
             ],
             "files": [],

@@ -17,12 +17,13 @@ Use kebab-case folder names, e.g. `release-1-mvp` (not `release 1 - mvp`). JSON 
 ## Per-day structure (MVP)
 
 ```
-narrative/draft/releases/release-1-mvp/
-  planning/          story_board.md, continuity_handoff.md
-  shared/            cross-day sandbox .rpy
-  days/day105/
-    day105_non_canon.rpy
-    briefs/          narrative change briefs (optional)
+narrative/draft/releases/
+  planning/          story_board.md, continuity_handoff.md (shared across releases)
+  release-1-mvp/
+    shared/            cross-day sandbox .rpy
+    days/day105/
+      day105_non_canon.rpy
+      briefs/          narrative change briefs (optional)
 
 narrative/pipeline/releases/release-1-mvp/days/day105/
   specs/             divergent persona spec scripts

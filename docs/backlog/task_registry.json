@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "description": "Maps standup / backlog / checklist items to specs, agent rules, skills, and verification commands.",
-  "standup_entrypoint": "narrative/draft/releases/release-1-mvp/planning/daily_standup_report.md",
+  "standup_entrypoint": "narrative/draft/releases/planning/daily_standup_report.md",
   "phase_defaults": {
     "Phase 1": {
       "lane": "code",
@@ -10,8 +10,8 @@
       "pipeline": "implement-spec",
       "pipeline_stage": 1,
       "specs": [
-        "narrative/draft/releases/release-1-mvp/planning/mvp_systems_integration_checklist.md",
-        "narrative/draft/releases/release-1-mvp/planning/story_board.md",
+        "narrative/draft/releases/planning/mvp_systems_integration_checklist.md",
+        "narrative/draft/releases/planning/story_board.md",
         "docs/specs/book1-writing-engine.md"
       ]
     },
@@ -22,7 +22,7 @@
       "pipeline": "implement-spec",
       "pipeline_stage": 1,
       "specs": [
-        "narrative/draft/releases/release-1-mvp/planning/mvp_systems_integration_checklist.md",
+        "narrative/draft/releases/planning/mvp_systems_integration_checklist.md",
         "docs/specs/story-chain-routing-refactor.md",
         "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/classes_non_canon_notes.md"
       ]
@@ -34,8 +34,8 @@
       "pipeline": "produce-day",
       "pipeline_stage": 2,
       "specs": [
-        "narrative/draft/releases/release-1-mvp/planning/mvp_systems_integration_checklist.md",
-        "narrative/draft/releases/release-1-mvp/planning/story_board.md"
+        "narrative/draft/releases/planning/mvp_systems_integration_checklist.md",
+        "narrative/draft/releases/planning/story_board.md"
       ]
     },
     "Phase 4": {
@@ -45,7 +45,7 @@
       "pipeline": "implement-spec",
       "pipeline_stage": 1,
       "specs": [
-        "narrative/draft/releases/release-1-mvp/planning/mvp_systems_integration_checklist.md",
+        "narrative/draft/releases/planning/mvp_systems_integration_checklist.md",
         "docs/specs/story-chain-routing-refactor.md",
         "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy"
       ]
@@ -57,7 +57,7 @@
       "pipeline": "implement-spec",
       "pipeline_stage": 1,
       "specs": [
-        "narrative/draft/releases/release-1-mvp/planning/mvp_systems_integration_checklist.md",
+        "narrative/draft/releases/planning/mvp_systems_integration_checklist.md",
         "docs/specs/book1-writing-engine.md",
         "docs/specs/book-writing-styling.md",
         "docs/contracts/book_writing_contract.md"
@@ -68,7 +68,7 @@
       "agent": "non_prod_code_agent",
       "skill": "check_assets",
       "specs": [
-        "narrative/draft/releases/release-1-mvp/planning/mvp_systems_integration_checklist.md",
+        "narrative/draft/releases/planning/mvp_systems_integration_checklist.md",
         "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/assets_manifest.rpy"
       ],
       "verify": [
@@ -82,7 +82,7 @@
       "pipeline": "documentation-audit",
       "pipeline_stage": 1,
       "specs": [
-        "narrative/draft/releases/release-1-mvp/planning/mvp_systems_integration_checklist.md",
+        "narrative/draft/releases/planning/mvp_systems_integration_checklist.md",
         "docs/agents/CONTRACTS.md"
       ]
     }
@@ -97,7 +97,7 @@
       "pipeline_stage": 1,
       "standup_kind": "blocked",
       "specs": [
-        "narrative/draft/releases/release-1-mvp/planning/mvp_systems_integration_checklist.md",
+        "narrative/draft/releases/planning/mvp_systems_integration_checklist.md",
         "docs/agents/CONTRACTS.md"
       ],
       "files": [
@@ -353,7 +353,7 @@
       "match_checklist": "confrontation_stern",
       "specs": [
         "docs/specs/story-chain-routing-refactor.md",
-        "narrative/draft/releases/release-1-mvp/planning/mvp_systems_integration_checklist.md",
+        "narrative/draft/releases/planning/mvp_systems_integration_checklist.md",
         "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy"
       ],
       "files": [
@@ -368,7 +368,7 @@
       "match_checklist": "confrontation_vance",
       "specs": [
         "docs/specs/story-chain-routing-refactor.md",
-        "narrative/draft/releases/release-1-mvp/planning/mvp_systems_integration_checklist.md",
+        "narrative/draft/releases/planning/mvp_systems_integration_checklist.md",
         "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy"
       ]
     },
@@ -380,7 +380,7 @@
       "match_checklist": "confrontation_missy",
       "specs": [
         "docs/specs/story-chain-routing-refactor.md",
-        "narrative/draft/releases/release-1-mvp/planning/mvp_systems_integration_checklist.md",
+        "narrative/draft/releases/planning/mvp_systems_integration_checklist.md",
         "narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy"
       ]
     }

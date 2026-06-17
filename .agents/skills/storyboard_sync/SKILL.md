@@ -10,7 +10,7 @@ updated to reflect current script structure.
 3. Read the current storyboard:
 
 ```text
-narrative/draft/releases/release-1-mvp/planning/story_board.md
+narrative/draft/releases/planning/story_board.md
 ```
 
 4. If available, read current graph audit/gap outputs from:

@@ -125,7 +125,7 @@ After gates pass, the technical shape runs without her involvement:
 - `non_prod_code_agent` — wrap prose verbatim into labels/menus, place setters/effects, add
   `[ASSET] [STATE] [CHOICE] [BEAT]` tags where missing.
 - `dag_tag_update` — add/refresh `[DAG_*]` tags (preserve `manual` tags) and run graph sync:
-  `py narrative/pipeline/tools/build_story_graph_manifest.py --release <release> --out-dir narrative/pipeline/releases/<release>/graph --storyboard narrative/draft/releases/<release>/planning/story_board.md`
+  `py narrative/pipeline/tools/build_story_graph_manifest.py --release <release> --out-dir narrative/pipeline/releases/<release>/graph --storyboard narrative/draft/releases/planning/story_board.md`
 - `check_assets` — ensure new backgrounds/sprites/audio have `declare_image_with_fallback` /
   `register_audio` entries in `assets_manifest.rpy`.
 - `scene_direction` — sprite placement tags.

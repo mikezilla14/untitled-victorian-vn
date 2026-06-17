@@ -285,7 +285,7 @@ Path: `narrative/draft/releases/<release>/dayrdd_narrative_change_brief.md`
 | Spec script (per persona) | `narrative/pipeline/releases/<release>/dayrdd_<persona>_spec.rpy` | No — human review |
 | Brainstorming log / idea sidecar (per persona) | `narrative/pipeline/releases/<release>/dayrdd_<persona>_ideas.md` | No — excluded from future context |
 | Convergent Decision Report | `narrative/pipeline/releases/<release>/dayrdd_convergent_report.md` | No — excluded from assignment context; **required** for human audit |
-| Continuity handoff (slice) | `narrative/draft/releases/<release>/planning/continuity_handoff.md` | No — **load current day section only**; full file excluded |
+| Continuity handoff (slice) | `narrative/draft/releases/planning/continuity_handoff.md` | No — **load current day section only**; full file excluded |
 | Continuity handoff (write) | Same file, section `## Handoff → Day [dd+1]` | Updated after gates pass |
 | Promotion draft | `narrative/draft/releases/<release>/dayrdd_non_canon.rpy` | Yes — gates run on this file after convergent |
 | Narrative gate verdict | `dayrdd_gate_lead_narrative.md` + `.json` | No — after convergent |

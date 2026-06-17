@@ -93,7 +93,7 @@ When implementing `docs/specs/story-chain-routing-refactor.md` in non-production
 8. You may remove `call check_confrontations` only when replacing it with an explicit consequence window or when the refactor brief says the checkpoint is deprecated at that site.
 9. You must not invent bridge prose to hide structural seams. If a new transition line is needed, file a narrative change brief.
 10. Any new state field or helper method must be mocked in `classes_non_canon.rpy` and documented in `classes_non_canon_notes.md`.
-11. After `.rpy` edits, run graph sync with `py narrative/pipeline/tools/build_story_graph_manifest.py --release release-1-mvp --out-dir narrative/pipeline/releases/release-1-mvp/graph --storyboard narrative/draft/releases/release-1-mvp/planning/story_board.md`.
+11. After `.rpy` edits, run graph sync with `py narrative/pipeline/tools/build_story_graph_manifest.py --release release-1-mvp --out-dir narrative/pipeline/releases/release-1-mvp/graph --storyboard narrative/draft/releases/planning/story_board.md`.
 12. If graph sync reports storyboard drift, invoke `storyboard_sync` rather than editing graph outputs by hand.
 
 ---

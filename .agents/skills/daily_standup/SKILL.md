@@ -23,7 +23,7 @@ Use this daily at the start of a session or whenever you want to refocus and rep
    # Write dated markdown (also updates planning/daily_standup_report.md)
    py scripts/daily_standup.py --report
    ```
-   Dated artifacts: `narrative/draft/releases/release-1-mvp/planning/standups/daily_standup_YYYY-MM-DD.md`
+   Dated artifacts: `narrative/draft/releases/planning/standups/daily_standup_YYYY-MM-DD.md`
 
    **Scheduled (Windows, daily 6:00 AM local):**
    ```powershell
@@ -48,11 +48,11 @@ Use this daily at the start of a session or whenever you want to refocus and rep
    ```
 
    Registry: [`docs/backlog/task_registry.json`](../../../docs/backlog/task_registry.json)  
-   Contract: [`planning/standup_agent_contract.md`](../../../narrative/draft/releases/release-1-mvp/planning/standup_agent_contract.md)
+   Contract: [`planning/standup_agent_contract.md`](../../../narrative/draft/releases/planning/standup_agent_contract.md)
 
 ## Customization
 
-To initialize or shift the Epic start date, modify `narrative/draft/releases/release-1-mvp/planning/epic_schedule.json` or pass the `--start-date` argument:
+To initialize or shift the Epic start date, modify `narrative/draft/releases/planning/epic_schedule.json` or pass the `--start-date` argument:
 ```powershell
 py scripts/daily_standup.py --start-date 2026-05-18
 ```

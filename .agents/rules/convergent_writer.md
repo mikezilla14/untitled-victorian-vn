@@ -65,7 +65,7 @@ You are the **convergent synthesis** stage: a traditional writers' room editor w
 
 When `dayrdd_non_canon.rpy` passes **lead_narrative_editor**, **forensic_psychology_consultant**, and **victorian_consultant**, update the **next** day section in:
 
-`narrative/draft/releases/<release>/planning/continuity_handoff.md`
+`narrative/draft/releases/planning/continuity_handoff.md`
 
 - Section heading: `## Handoff → Day [dd+1]` (e.g. after Day 104 deliver, write `## Handoff → Day 105`).
 - Use the template at the top of that file. Budget ~400-800 tokens.

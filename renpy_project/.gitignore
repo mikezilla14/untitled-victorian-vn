@@ -35,6 +35,9 @@
 **/*.pyo
 __pycache__/
 
+# IDE extension stubs (VS Code Ren'Py Warp)
+game/libs/
+
 # OS generated files
 .DS_Store
 .DS_Store?
