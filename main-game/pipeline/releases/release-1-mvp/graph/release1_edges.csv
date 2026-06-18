@@ -1,8 +1,8 @@
 edge_id,from_label,to_label,edge_type,condition,branch_option,router_outcome,source_file,line_number,confidence
 edge_0001,day100_main,day100_1_afternoon_boredom_setup,jump,,,,main-game/non-prod-game/game/days/day100_non_canon.rpy,58,high
 edge_0002,day100_1_afternoon_boredom_setup,day100_1_afternoon_boredom,jump,,,,main-game/non-prod-game/game/days/day100_non_canon.rpy,65,high
-edge_0003,day100_1_afternoon_boredom,day100_2_desk_branch,jump,,,,main-game/non-prod-game/game/days/day100_non_canon.rpy,96,high
-edge_0004,day100_1_afternoon_boredom,day100_2_parlour_branch,jump,,,,main-game/non-prod-game/game/days/day100_non_canon.rpy,107,high
+edge_0003,day100_1_afternoon_boredom,day100_2_evening_flashback,jump,,,,main-game/non-prod-game/game/days/day100_non_canon.rpy,96,high
+edge_0004,day100_1_afternoon_boredom,day100_2_evening_flashback,jump,,,,main-game/non-prod-game/game/days/day100_non_canon.rpy,107,high
 edge_0005,day100_2_evening_flashback,day100_2_desk_branch,jump,,,,main-game/non-prod-game/game/days/day100_non_canon.rpy,116,high
 edge_0006,day100_2_evening_flashback,day100_2_parlour_branch,jump,,,,main-game/non-prod-game/game/days/day100_non_canon.rpy,120,high
 edge_0007,day100_2_parlour_branch,day100_2_reconvergence,jump,,,,main-game/non-prod-game/game/days/day100_non_canon.rpy,141,high

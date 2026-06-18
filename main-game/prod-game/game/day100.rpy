@@ -93,7 +93,7 @@ label day100_1_afternoon_boredom:
             cora_inner "The bureau is where his private correspondence lies. Sir John's own secrets."
 
             # [STATE] State/progression update
-            jump day100_2_desk_branch
+            jump day100_2_evening_flashback
 
         "By the parlour settee. [[Search the parlour entrance: +15 Corruption]]":
 
@@ -104,7 +104,7 @@ label day100_1_afternoon_boredom:
             cora_inner "The parlour door. If he took them there, he may have left them on the small table."
 
             # [STATE] State/progression update
-            jump day100_2_parlour_branch
+            jump day100_2_evening_flashback
 
 
 # Compat bridge for routing
