@@ -69,6 +69,11 @@ init -1 python:
             self.inspiration = 0
             self.anxiety = 0
             
+            # Archetype Focus counters
+            self.ghost_focus = 0
+            self.prey_focus = 0
+            self.predator_focus = 0
+            
             # TWO-TIERED SUSPICION: Base (Permanent) + Acute (Temporary Heat)
             self.stern_base_susp = 0
             self.stern_acute_susp = 0
@@ -272,6 +277,10 @@ init -1 python:
 
     class StoryState(object):
 
+        # ── Archetype Focus ────────────────────────────────────────────
+        VALID_ARCHETYPE_SEEDS            = ("none", "ghost", "prey", "predator")
+        VALID_ARCHETYPE_FOCUS_STATES     = ("none", "ghost", "prey", "predator")
+
         # ── Prologue ───────────────────────────────────────────────────
         VALID_PROLOGUE_FOUND_STATES      = ("none", "overheard", "read_letters")
         VALID_PROLOGUE_WHY_WRITE_STATES  = ("none", "money_home", "cataloguer", "scandal_hungry")
@@ -366,6 +375,8 @@ init -1 python:
             self.prologue_found             = "none"
             self.prologue_why_write         = "none"
             self.prologue_holywell_posture  = "none"
+            self.run_archetype_seed         = "none"
+            self.current_archetype_focus    = "none"
 
             # ── Day 1 ──────────────────────────────────────────────────
             self.day1_corridor_state    = "none"
@@ -458,6 +469,14 @@ init -1 python:
 
         def set_prologue_holywell_posture(self, value):
             self._set_string_state("prologue_holywell_posture", value, self.VALID_PROLOGUE_HOLYWELL_STATES)
+
+        # ── Archetype Focus setters ────────────────────────────────────
+
+        def set_run_archetype_seed(self, value):
+            self._set_string_state("run_archetype_seed", value, self.VALID_ARCHETYPE_SEEDS)
+
+        def set_current_archetype_focus(self, value):
+            self._set_string_state("current_archetype_focus", value, self.VALID_ARCHETYPE_FOCUS_STATES)
 
         # ── Day 1 setters ──────────────────────────────────────────────
 

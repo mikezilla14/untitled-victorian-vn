@@ -283,6 +283,36 @@ label day100_3_night_daydream:
     cora_inner "London is not a destination. It is an escape with teeth."
     cora_inner "Wiltshire recedes into the smog. My satchel is at my feet, my manuscript hidden inside."
 
+    cora_inner "To survive there, I must decide what shape I will take. How will I move through the Savoy?"
+
+    # [CHOICE] Archetype seed choice
+    menu:
+        "How will I survive in London?"
+
+        "By becoming unseen, listening, and moving through the gaps. [[Ghost Focus: +1 Ghost]]":
+
+            # [STATE] State/progression update
+            $ story.set_run_archetype_seed("ghost")
+            $ apply_archetype_edge("ghost", 1)
+            cora_inner "Yes. Let them look past me. I will be the shadow that hears everything and says nothing."
+            cora_inner "A ghost is never trapped. A ghost has already escaped."
+
+        "By reading the threat, appeasing them, and redirecting the danger. [[Prey Focus: +1 Prey]]":
+
+            # [STATE] State/progression update
+            $ story.set_run_archetype_seed("prey")
+            $ apply_archetype_edge("prey", 1)
+            cora_inner "Yes. I will know their weight before they swing it. I will bend so I do not break."
+            cora_inner "The prey knows the forest better than the hunter ever will."
+
+        "By testing their boundaries, baiting them, and beginning to use them as material. [[Predator Focus: +1 Predator]]":
+
+            # [STATE] State/progression update
+            $ story.set_run_archetype_seed("predator")
+            $ apply_archetype_edge("predator", 1)
+            cora_inner "Yes. I will find where they are soft. I will provoke them until they show their teeth, and then I will write it."
+            cora_inner "Let them hunt. I will be the one who feeds on the aftermath."
+
     # [BEAT] Daydream: 2.8 spice level reliving the discovery
 
     cora_inner "If I close my eyes, the coal grease smells of the library's velvet heat."

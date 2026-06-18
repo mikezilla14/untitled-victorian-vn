@@ -154,3 +154,25 @@ def clear_penance(self):
 `penance_triggered` and `consume_penance()` remain only as deprecated compatibility infrastructure for old route-owner labels. The migrated non-canon day files now route penance through named consequence windows instead of the bridge.
 
 **Promotion note:** When this refactor is promoted, add `pending_penance` and the queue helper methods to `StoryState` in `main-game/prod-game/game/classes.rpy`. Prefer removing `penance_triggered` once production no longer needs old route-owner compatibility labels.
+
+---
+
+## 7. Archetype Focus System (Ghost / Prey / Predator)
+
+To support the player's choice of survival style and wire behavior patterns cleanly across story edges:
+
+### Added State Variables
+- **Inside `StoryState` (`classes_non_canon.rpy`)**:
+  - `run_archetype_seed`: The starting choice from the prologue ("ghost", "prey", "predator", or "none").
+  - `current_archetype_focus`: The active archetype focus dynamically shaped by decisions.
+  - Setters: `set_run_archetype_seed(value)` and `set_current_archetype_focus(value)`.
+- **Inside `PlayerStats` (`classes_non_canon.rpy`)**:
+  - `ghost_focus`, `prey_focus`, `predator_focus`: Counter fields tracking player choices over time.
+
+### Added Helpers (`functions_non_canon.rpy`)
+- `set_archetype_focus(archetype)`: Modifies active focus.
+- `add_archetype_focus(archetype, amount=1)`: Increases the counter for the given archetype.
+- `apply_archetype_edge(archetype, amount=1)`: Sets the focus and adds focus pressure simultaneously.
+- `get_dominant_archetype()`: Calculates the dominant archetype, tie-breaking with the run seed.
+- `can_choose_archetype_focus(archetype, max_anxiety=None, min_corruption_level=None)`: Checks character constraints.
+- `get_archetype_block_reason(...)`: Explains why a choice is blocked diegetically.

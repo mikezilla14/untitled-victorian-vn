@@ -623,6 +623,7 @@ label day102_3_cora_confesses:
     show vance_sprite angry at right_bust
 
     $ story.set_day2_tea_choice("prey")
+    $ apply_archetype_edge("prey", 1)
     $ apply_effects(stern_susp=20, insp=15, corr=0)
 
     cora_inner "The truth is not safe."
@@ -678,6 +679,7 @@ label day102_3_cora_pretends_to_find_it:
     show vance_sprite angry at right_bust
 
     $ story.set_day2_tea_choice("predator")
+    $ apply_archetype_edge("predator", 1)
     $ apply_effects(stern_susp=10, insp=5, corr=15)
 
     cora_inner "Helpful."
@@ -749,6 +751,7 @@ label day102_3_cora_frames_missy:
 
     $ story.set_day2_tea_choice("ghost")
     $ story.set_missy_day2_trust_break(True)
+    $ apply_archetype_edge("ghost", 1)
     $ apply_effects(vance_susp=0, insp=0, corr=20)
 
     cora_inner "There is a version of me that protects Missy."

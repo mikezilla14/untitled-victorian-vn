@@ -181,3 +181,51 @@ init python:
         Use WRITE_GATE_CH1 / CH2 / CH3 for manuscript slots.
         """
         return player.has_story_fuel(required_insp, required_corr)
+
+    def set_archetype_focus(archetype):
+        story.set_current_archetype_focus(archetype)
+
+    def add_archetype_focus(archetype, amount=1):
+        if archetype == "ghost":
+            player.ghost_focus += amount
+        elif archetype == "prey":
+            player.prey_focus += amount
+        elif archetype == "predator":
+            player.predator_focus += amount
+        elif archetype != "none":
+            raise ValueError("Invalid archetype focus: {}".format(archetype))
+        player.update_stats()
+
+    def apply_archetype_edge(archetype, amount=1):
+        set_archetype_focus(archetype)
+        add_archetype_focus(archetype, amount)
+
+    def get_dominant_archetype():
+        scores = [
+            ("ghost", player.ghost_focus),
+            ("prey", player.prey_focus),
+            ("predator", player.predator_focus),
+        ]
+        max_score = max(score for arch, score in scores)
+        if max_score == 0:
+            if story.run_archetype_seed != "none":
+                return story.run_archetype_seed
+            return "none"
+        candidates = [arch for arch, score in scores if score == max_score]
+        if story.run_archetype_seed in candidates:
+            return story.run_archetype_seed
+        return candidates[0]
+
+    def can_choose_archetype_focus(archetype, max_anxiety=None, min_corruption_level=None):
+        if max_anxiety is not None and player.anxiety > max_anxiety:
+            return False
+        if min_corruption_level is not None and player.corruption_level < min_corruption_level:
+            return False
+        return True
+
+    def get_archetype_block_reason(archetype, max_anxiety=None, min_corruption_level=None):
+        if max_anxiety is not None and player.anxiety > max_anxiety:
+            return "Cora can imagine it. Her body will not carry it out. (Anxiety too high)"
+        if min_corruption_level is not None and player.corruption_level < min_corruption_level:
+            return "Cora lacks the dark resolve required. (Corruption too low)"
+        return ""

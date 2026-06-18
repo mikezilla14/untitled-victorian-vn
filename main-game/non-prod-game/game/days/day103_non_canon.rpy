@@ -374,7 +374,7 @@ label day103_2_suite_cora_vs_gideon:
     menu:
         "How do I answer the test?"
 
-        "Answer like a craftsman. Describe what is visible, not what is wanted. [[Inspiration]]":
+        "Answer like a craftsman. Describe what is visible, not what is wanted. [[Inspiration]]" if can_choose_archetype_focus("predator", max_anxiety=70):
 
             # [STATE] State/progression update
             jump day103_2_cora_vs_gideon_insp
@@ -409,6 +409,7 @@ label day103_2_cora_vs_gideon_insp:
 
     # [STATE] Predator/accomplice angle, but framed through craft rather than cartoon cruelty
     $ story.set_day3_brush_choice("predator")
+    $ apply_archetype_edge("predator", 1)
     $ apply_effects(vance_susp=0, insp=20, corr=5)
 
     cora "Yes, Sir."
@@ -458,6 +459,7 @@ label day103_2_cora_vs_gideon_corr:
 
     # [STATE] Prey/deviant angle. Cora lets desire show and becomes visible
     $ story.set_day3_brush_choice("prey")
+    $ apply_archetype_edge("prey", 1)
     $ apply_effects(vance_susp=5, insp=5, corr=20)
 
     "I look up into the mirror."
@@ -515,6 +517,7 @@ label day103_2_cora_vs_gideon_ghost:
 
     # [STATE] Ghost/mouse angle. Apparent panic, but Cora still records the scene
     $ story.set_day3_brush_choice("ghost")
+    $ apply_archetype_edge("ghost", 1)
     $ apply_effects(vance_susp=15, insp=15, corr=0)
 
     "The brush catches in a knot."

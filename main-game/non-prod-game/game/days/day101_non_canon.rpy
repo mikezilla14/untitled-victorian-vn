@@ -474,6 +474,7 @@ label day101_2_coras_path_choice:
             # [STATE] Cora weaponises plausible concern. Safer physically, morally worse
             $ apply_effects(insp=10, corr=5)
             $ story.set_corridor_state("predator")
+            $ apply_archetype_edge("predator", 1)
 
             cora "You may be right. If she's hurt, someone should check. But you know the house, Missy—if I open the wrong door on my first day, Miss Stern will have my references."
             
@@ -505,6 +506,7 @@ label day101_2_coras_path_choice:
             # [STATE] Cora takes the direct risk. Most dangerous path; strongest sensory material
             $ apply_effects(vance_susp=35, insp=15, corr=5)
             $ story.set_corridor_state("prey")
+            $ apply_archetype_edge("prey", 1)
 
             cora "Stay there. Let me see."
             missy "Cora, no—it's sin to pry into the suites."
@@ -538,6 +540,7 @@ label day101_2_coras_path_choice:
             # [STATE] Cora refuses exposure, keeps the observation abstract, and preserves cover
             $ apply_effects(stern_susp=-5, vance_susp=-5, missy_susp=-5, insp=10, corr=0)
             $ story.set_corridor_state("ghost")
+            $ apply_archetype_edge("ghost", 1)
 
             cora "No. We walk on."
             missy "But if she's in peril—"
@@ -603,6 +606,15 @@ label day101_3_taking_stock_day1:
         cora_inner "The wall gave me less than my hunger wanted and more than my safety deserved."
         cora_inner "A voice can kneel."
         cora_inner "I had not known that before today."
+
+    # [STATE] State/progression update
+    $ _dominant = get_dominant_archetype()
+    if _dominant == "ghost":
+        cora_inner "My style is emerging as that of the unseen observer. A ghost, moving through the Savoy's gaps."
+    elif _dominant == "prey":
+        cora_inner "I survive here by reading threat and adapting. Tactically yielding, like prey that lives to run."
+    elif _dominant == "predator":
+        cora_inner "I find myself looking for leverage. I will bait them, test their lines, and feed on their secrets."
 
     # [STATE] State/progression update
     call day101_night_story_window

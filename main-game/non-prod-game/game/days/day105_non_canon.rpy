@@ -426,6 +426,7 @@ label day105_4_motivation_predator:
 
     $ story.set_day5_dynamic("protege")
     $ story.set_cora_release1_flavour("predator")
+    $ apply_archetype_edge("predator", 1)
     $ apply_effects(insp=5, corr=20)
 
     show cora_sprite base at left_bust with moveinleft # [asset auto]
@@ -474,6 +475,7 @@ label day105_4_motivation_prey:
 
     $ story.set_day5_dynamic("adversary")
     $ story.set_cora_release1_flavour("prey")
+    $ apply_archetype_edge("prey", 1)
     $ apply_effects(vance_susp=5, insp=10, corr=10)
 
     show cora_sprite base at left_bust with moveinleft # [asset auto]
@@ -520,6 +522,7 @@ label day105_4_motivation_ghost:
 
     $ story.set_day5_dynamic("witness")
     $ story.set_cora_release1_flavour("ghost")
+    $ apply_archetype_edge("ghost", 1)
     $ apply_effects(vance_susp=-5, insp=15, corr=5)
 
     show cora_sprite base at left_bust with moveinleft # [asset auto]
