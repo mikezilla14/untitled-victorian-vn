@@ -10,7 +10,9 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-GAME_DIR = ROOT / "main-game" / "prod-game" / "game"
+PROD_GAME_DIR = ROOT / "main-game" / "prod-game" / "game"
+NON_PROD_GAME_DIR = ROOT / "main-game" / "non-prod-game" / "game"
+GAME_DIRS = (PROD_GAME_DIR, NON_PROD_GAME_DIR)
 
 ENGINE_SYMBOLS = {
     "abs",
@@ -19,6 +21,7 @@ ENGINE_SYMBOLS = {
     "False",
     "float",
     "format",
+    "hasattr",
     "int",
     "isinstance",
     "len",
@@ -30,6 +33,7 @@ ENGINE_SYMBOLS = {
     "range",
     "renpy",
     "set",
+    "setattr",
     "str",
     "sum",
     "True",
@@ -37,6 +41,8 @@ ENGINE_SYMBOLS = {
     "TypeError",
     "ValueError",
 }
+
+ENGINE_SPEAKERS = {"nvl_narrator"}
 
 RENPY_KEYWORDS = {
     "call",
@@ -77,58 +83,93 @@ def changed_game_scripts(files):
     targets = []
     for file in files:
         path = resolve_file(file)
-        norm = repo_path(path)
-        name = path.name
-        if norm.startswith("main-game/prod-game/game/") and name.endswith(".rpy"):
-            if name.startswith("day") or name in {"endings.rpy", "script.rpy"}:
-                targets.append(path)
+        if path.suffix != ".rpy":
+            continue
+        game_dir = game_dir_for(path)
+        if game_dir is None:
+            continue
+        relative = path.resolve().relative_to(game_dir.resolve())
+        if relative.parts and relative.parts[0] in {"AEditor", "gui", "tl"}:
+            continue
+        targets.append(path)
     return [path for path in targets if path.exists()]
 
 
-def load_defined_speakers():
-    characters = GAME_DIR / "characters.rpy"
-    if not characters.exists():
-        return set()
-    return set(
-        re.findall(
-            r"^\s*define\s+([A-Za-z_]\w*)\s*=\s*Character\s*\(",
-            read_text(characters),
-            re.MULTILINE,
-        )
-    )
+def game_dir_for(path):
+    resolved = path.resolve()
+    for game_dir in GAME_DIRS:
+        try:
+            resolved.relative_to(game_dir.resolve())
+            return game_dir
+        except ValueError:
+            continue
+    return None
 
 
-def load_defined_symbols():
-    symbols = set(ENGINE_SYMBOLS)
+def definition_files(game_dir):
+    if game_dir == NON_PROD_GAME_DIR:
+        return [
+            game_dir / "shared" / "classes_non_canon.rpy",
+            game_dir / "shared" / "functions_non_canon.rpy",
+            game_dir / "variables.rpy",
+            game_dir / "shared" / "characters.rpy",
+        ]
+    return [
+        game_dir / "classes.rpy",
+        game_dir / "functions.rpy",
+        game_dir / "variables.rpy",
+        game_dir / "characters.rpy",
+    ]
 
-    for path in [
-        GAME_DIR / "classes.rpy",
-        GAME_DIR / "functions.rpy",
-        GAME_DIR / "variables.rpy",
-        GAME_DIR / "characters.rpy",
-    ]:
+
+def load_defined_speakers(game_dir):
+    speakers = set()
+    for path in definition_files(game_dir):
         if not path.exists():
             continue
-        text = read_text(path)
-        symbols.update(re.findall(r"^\s*class\s+([A-Za-z_]\w*)\s*\(", text, re.MULTILINE))
-        symbols.update(re.findall(r"^\s*def\s+([A-Za-z_]\w*)\s*\(", text, re.MULTILINE))
-        symbols.update(re.findall(r"^\s*default\s+([A-Za-z_]\w*)\s*=", text, re.MULTILINE))
-        symbols.update(re.findall(r"^\s*define\s+([A-Za-z_]\w*)\s*=", text, re.MULTILINE))
+        speakers.update(
+            re.findall(
+                r"^\s*define\s+([A-Za-z_]\w*)\s*=\s*Character\s*\(",
+                read_text(path),
+                re.MULTILINE,
+            )
+        )
+    return speakers
+
+
+def symbols_defined_in(path):
+    if not path.exists():
+        return set()
+    text = read_text(path)
+    symbols = set(re.findall(r"^\s*class\s+([A-Za-z_]\w*)\s*\(", text, re.MULTILINE))
+    symbols.update(re.findall(r"^\s*def\s+([A-Za-z_]\w*)\s*\(", text, re.MULTILINE))
+    symbols.update(re.findall(r"^\s*default\s+([A-Za-z_]\w*)\s*=", text, re.MULTILINE))
+    symbols.update(re.findall(r"^\s*define\s+([A-Za-z_]\w*)\s*=", text, re.MULTILINE))
+    return symbols
+
+
+def load_defined_symbols(game_dir):
+    symbols = set(ENGINE_SYMBOLS)
+
+    for path in definition_files(game_dir):
+        symbols.update(symbols_defined_in(path))
 
     return symbols
 
 
 def check_speakers(files):
-    defined = load_defined_speakers()
     violations = []
     dialogue = re.compile(r'^\s*([A-Za-z_]\w*)\s+"')
 
     for path in files:
+        defined = load_defined_speakers(game_dir_for(path)) | ENGINE_SPEAKERS
         for idx, line in enumerate(read_text(path).splitlines(), start=1):
             match = dialogue.match(line)
             if not match:
                 continue
             speaker = match.group(1)
+            if speaker in RENPY_KEYWORDS:
+                continue
             if speaker not in defined:
                 violations.append(
                     f"{repo_path(path)}:{idx} undefined dialogue speaker `{speaker}`; define it in characters.rpy"
@@ -164,11 +205,11 @@ def extract_expression(line):
 
 
 def check_callable_symbols(files):
-    defined = load_defined_symbols()
     violations = []
     bare_call = re.compile(r"(?<![\.\w])([A-Za-z_]\w*)\s*\(")
 
     for path in files:
+        defined = load_defined_symbols(game_dir_for(path)) | symbols_defined_in(path)
         for idx, line in enumerate(read_text(path).splitlines(), start=1):
             expr = extract_expression(line)
             if not expr:
@@ -179,6 +220,51 @@ def check_callable_symbols(files):
                 violations.append(
                     f"{repo_path(path)}:{idx} unresolved callable `{symbol}`; define it in canonical runtime code or qualify it"
                 )
+
+    return violations
+
+
+def check_bracket_interpolation(files):
+    violations = []
+    quoted_string = re.compile(r'"(?:\\.|[^"\\])*"')
+    interpolation = re.compile(r"(?<!\[)\[([A-Z][A-Za-z0-9_]*)\](?!\])")
+
+    for path in files:
+        defined = load_defined_symbols(game_dir_for(path))
+        for idx, line in enumerate(read_text(path).splitlines(), start=1):
+            for string in quoted_string.findall(line):
+                for symbol in interpolation.findall(string):
+                    if symbol in defined:
+                        continue
+                    violations.append(
+                        f"{repo_path(path)}:{idx} unescaped bracket label `[{symbol}]`; "
+                        f"use `[[{symbol}]]` or define the runtime interpolation symbol"
+                    )
+
+    return violations
+
+
+def check_label_naming(files):
+    violations = []
+    label = re.compile(r"^\s*label\s+(day\d{3}(?:_[A-Za-z0-9_]+)?)\s*(?:\([^)]*\))?\s*:")
+    allowed_structural = re.compile(
+        r"^day\d{3}(?:|_main|_(?:morning|afternoon|evening|night)"
+        r"(?:_(?:story|consequence)_window)?)$"
+    )
+    major_scene = re.compile(r"^day\d{3}_[1-9]_[a-z0-9]+(?:_[a-z0-9]+)*$")
+
+    for path in files:
+        for idx, line in enumerate(read_text(path).splitlines(), start=1):
+            match = label.match(line)
+            if not match:
+                continue
+            name = match.group(1)
+            if allowed_structural.fullmatch(name) or major_scene.fullmatch(name):
+                continue
+            violations.append(
+                f"{repo_path(path)}:{idx} label `{name}` does not follow "
+                "`dayRdd_p_location_description` or an approved structural day label"
+            )
 
     return violations
 
@@ -198,6 +284,8 @@ def main():
     violations.extend(check_speakers(targets))
     violations.extend(check_story_flag_assignments(targets))
     violations.extend(check_callable_symbols(targets))
+    violations.extend(check_bracket_interpolation(targets))
+    violations.extend(check_label_naming(targets))
 
     if violations:
         print("REN'PY CONTRACT VIOLATIONS:")

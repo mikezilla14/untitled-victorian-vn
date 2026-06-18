@@ -3,6 +3,12 @@ import re
 import sys
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[1]
+CENTRAL_VARIABLE_FILES = {
+    (ROOT / "main-game" / "prod-game" / "game" / "variables.rpy").resolve(),
+    (ROOT / "main-game" / "non-prod-game" / "game" / "variables.rpy").resolve(),
+}
+
 ALLOWED_TIME_PERIODS = {
     "Early Morning",
     "Morning",
@@ -30,9 +36,12 @@ def check_no_new_defaults_outside_variables(files):
     for file in files:
         if not file.endswith(".rpy"):
             continue
-        if file.replace("\\", "/") == "main-game/prod-game/game/variables.rpy":
-            continue
         full_path = Path(file)
+        if not full_path.is_absolute():
+            full_path = ROOT / full_path
+        full_path = full_path.resolve()
+        if full_path in CENTRAL_VARIABLE_FILES:
+            continue
         if not full_path.exists():
             continue
         for idx, line in enumerate(read_lines(full_path), start=1):

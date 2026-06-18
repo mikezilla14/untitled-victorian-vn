@@ -226,9 +226,9 @@ Story windows: `call story_window_penance_gate(window_id)` at entry; if `_penanc
 
 ### 5.2 Book1 routing
 
-- [ ] Every key in `book1.CHAPTER_BLOCKS` has a reachable `book1_block_*` label
-- [ ] `book1_block_unknown_chapter` is unreachable in normal play
-- [ ] `book1_page_image` store var set per branch when CG art exists (stub acceptable until Phase 6)
+- [x] Every key in `book1.CHAPTER_BLOCKS` has a reachable `book1_block_*` label
+- [x] `book1_block_unknown_chapter` is unreachable in normal play
+- [x] `book1_page_image` store var set per branch when CG art exists (stub acceptable until Phase 6)
 - [x] NVL screen renders without missing-image crashes (fallbacks acceptable)
 - [x] `book1_write_chapter` plays `audio_themes_private_ink` when file present
 
@@ -236,8 +236,8 @@ Story windows: `call story_window_penance_gate(window_id)` at entry; if `_penanc
 
 | Label | Purpose | Done |
 |-------|---------|------|
-| `test_day2_writing_harness` | Branch matrix for book1 | [ ] |
-| `test_book1_render_day*` | Per-chapter render | [ ] |
+| `test_day2_writing_harness` | Branch matrix for book1 | [x] |
+| `test_book1_render_day*` | Per-chapter render | [x] |
 
 **File:** `days/test_day2_writing_non_canon.rpy` — keep for QA; exclude from player `start` path.
 
