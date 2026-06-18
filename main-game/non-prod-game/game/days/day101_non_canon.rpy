@@ -162,9 +162,6 @@ label day101_1_morning_interview:
     stern "Can you be that?"
 
     # [CHOICE] Decision point
-    # This choice currently does not affect story progress there should be tie in to a future narrative flow or remove the flag and ekep the stat changes
-
-    # [CHOICE] Decision point
     # [DAG_CHOICE group=day101_1_morning_interview_menu_1]
     menu:
         "How do I survive Stern's inspection?" 
@@ -174,6 +171,7 @@ label day101_1_morning_interview:
             # [STATE] Low-risk survival posture. Cora hides sharpness, but the performance costs dignity
             $ apply_effects(stern_susp=5, insp=5, corr=0)
             $ story.set_day1_interview_state("meek")
+            $ apply_archetype_edge("prey", 1)
 
             # [ASSET] Visual/staging command
             show cora_sprite guarded_travel at left_reframe
@@ -193,6 +191,7 @@ label day101_1_morning_interview:
             # [STATE] Efficient but conspicuous. Stern notices a mind behind the apron
             $ apply_effects(stern_susp=15, insp=10, corr=0)
             $ story.set_day1_interview_state("competent")
+            $ apply_archetype_edge("ghost", 1)
 
             # [ASSET] Visual/staging command
             show cora_sprite base_travel at left_reframe
@@ -208,6 +207,124 @@ label day101_1_morning_interview:
 
             cora_inner "There."
             cora_inner "She sees it. Not all of it, but enough to dislike me."
+
+    stern "You speak with some polish, Vale. But polish can hide a great deal of dust."
+    
+    "Miss Stern steps forward, closing the distance between us."
+    
+    "The scent of dry lavender and starch fills the narrow space. In the dim office light, her eyes look almost black, assessing."
+    
+    "She reaches out, her fingers brushing the stiff linen of my collar, then tracing down the strap of my apron. Her hand lingers just long enough for the skin of my throat to prickle, a complete display of quiet dominance."
+
+    # [CHOICE] Decision point
+    # [DAG_CHOICE group=day101_1_morning_interview_menu_2]
+    menu:
+        "How do I respond to her invasive touch?"
+
+        "Lower my chin, allowing her fingers to adjust the fabric, matching her slow rhythm.":
+
+            # [STATE] Yielding posture. Proximity accepted to disarm suspicion
+            $ apply_effects(stern_susp=5, insp=0, corr=5)
+            $ story.set_day1_stern_relation("subservient")
+            $ apply_archetype_edge("prey", 1)
+
+            # [ASSET] Visual/staging command
+            show cora_sprite guarded_travel at left_reframe
+            with dissolve
+
+            cora "I... I only wish to give satisfaction, Ma'am."
+            stern "Satisfaction is a transaction, Vale. I buy your labor, and you deliver your silence."
+
+            cora_inner "Her fingers are cold through my collar. My heart hammers against my ribs, but I force my breath to stay shallow, compliant."
+            cora_inner "She wants to feel the shape of my fear. Let her have it."
+
+        "Stand perfectly rigid, holding my breath to mask my pulse, letting her treat me like a mannequin.":
+
+            # [STATE] Defensive wall. Emotionally cold, physically unresponsive
+            $ apply_effects(stern_susp=10, insp=5, corr=0)
+            $ story.set_day1_stern_relation("resistant")
+            $ apply_archetype_edge("ghost", 1)
+
+            # [ASSET] Visual/staging command
+            show cora_sprite base_travel at left_reframe
+            with dissolve
+
+            cora "Yes, Ma'am."
+            stern "A stone does not flinch when it is touched, Vale. But stones have no thoughts of their own. Can you be a stone?"
+            cora "I can, Ma'am."
+
+            cora_inner "I turn my gaze to the brass buttons of her jacket, letting my eyes glaze. My body is a weight she may arrange as she pleases, but my mind is somewhere else entirely."
+            cora_inner "Unseen, untouched. A ghost in her own skin."
+
+        "Meet her gaze directly through the closeness, accepting the intrusion with a steady pulse.":
+
+            # [STATE] Complicit tension. Cora accepts the risk of visual intimacy
+            $ apply_effects(stern_susp=15, insp=10, corr=10)
+            $ story.set_day1_stern_relation("complicit")
+            $ apply_archetype_edge("predator", 1)
+
+            # [ASSET] Visual/staging command
+            show cora_sprite base_travel at left_reframe
+            with dissolve
+
+            cora "I understand the value of a proper fit, Ma'am."
+            stern "Do you?"
+            
+            "Miss Stern's thumb presses against the small hollow of my collarbone, a brief, warning pressure before she lets her hand fall away."
+            
+            stern "A maid who looks back is a maid who wants to be noticed. And noticed maids do not last."
+
+            cora_inner "The touch was hot, deliberate. She wanted to see if I would blink, if my pulse would betray me."
+            cora_inner "I did not look away. We are two women in a locked room, and she has just realized I am measuring her, too."
+
+    stern "The guests here are... particular, Vale. They have expensive tastes and very short memories. Some maids think they can trade their secrets for silk, or their bodies for a gentleman's favor."
+    stern "They always end up on the street, or worse."
+    
+    "She paces behind her desk, her gaze remaining on my lips."
+    
+    stern "If a gentleman offers you a trinket, or asks you to enter his room when his wife is out... do you understand what happens to girls who lose their tongue, or keep it for the wrong price?"
+
+    # [CHOICE] Decision point
+    # [DAG_CHOICE group=day101_1_morning_interview_menu_3]
+    menu:
+        "How do I reply to her warning about guest secrets?"
+
+        "Lower my head, speaking with flat utility: 'I will keep my head down, Ma'am.'":
+
+            # [STATE] Fearful retreat. Deferring to her authority
+            $ apply_effects(stern_susp=5, insp=5, corr=0)
+            $ story.set_day1_stern_secret_bound("fearful")
+            $ apply_archetype_edge("prey", 1)
+
+            cora "I will keep my head down, Ma'am. I have no interest in the guests."
+            stern "Interest is a luxury. Avoidance is a chore. See that you do it."
+
+            cora_inner "The warning works. She sees a frightened country girl who knows her place is a narrow ledge."
+
+        "Keep my tone even, professional, and empty: 'I only see the work, Ma'am.'":
+
+            # [STATE] Pure utility. Cora claims to have no sight or judgment
+            $ apply_effects(stern_susp=5, insp=10, corr=0)
+            $ story.set_day1_stern_secret_bound("loyal")
+            $ apply_archetype_edge("ghost", 1)
+
+            cora "I only see the work, Ma'am. The rooms are empty to me until they are cleaned."
+            stern "An excellent answer. Keep it true, and we shall have no difficulties."
+
+            cora_inner "Empty rooms, empty faces. I will be the draft that blows through them, leaving no trace."
+
+        "Meet her eyes with quiet audacity: 'I know how to keep secrets, Ma'am—and those of the house.'":
+
+            # [STATE] Ruthless understanding. Cora hints she understands the value of secrets
+            $ apply_effects(stern_susp=20, insp=15, corr=10)
+            $ story.set_day1_stern_secret_bound("exploitative")
+            $ apply_archetype_edge("predator", 1)
+
+            cora "I know how to keep secrets, Ma'am—and those of the house." # SLIP: Cora lets slip a hint of inappropriate confidence and education.
+            stern "Secrets? A maid has no secrets, Vale. She only has duties. Remember that, or I will ensure your references become as blank as your future."
+
+            cora_inner "A slip. I let her see the ink beneath the starch."
+            cora_inner "But her eyes flared. She knows now that I am not just a maid; I am a witness. And witnesses can be bought, or they can be feared."
 
     stern "You will report to the laundry first. Missy will show you the necessary route."
     stern "You will not wander. You will not question guests. You will not cultivate opinions."
@@ -232,13 +349,14 @@ label day101_1_vance_throws_toy:
     # [ASSET] Visual/staging command
     scene bg_savoy_corridor_morning:
         zoom 1.00
-        xysize (1920,1080)
+        xysize (1920, 1080)
 
     # [ASSET] Visual/staging command
     with dissolve
 
-    "The corridor outside Stern's office is all gloss and restraint."
-    "Then something small and silver strikes the skirting board and spins across the carpet."
+    "The grand corridor of the guest wing is all gloss, mahogany, and heavy velvet restraint."
+    "I stand momentarily frozen in the transition between the office and the guest stairs, my arms loaded with clean laundry."
+    "Suddenly, a sharp clatter echoes against the polished wainscoting. A heavy, silver-gilt crystal scent-bottle strikes the floor, spinning across the carpet and spilling amber-colored jasmine oil."
 
     # [ASSET] Visual/staging command
     show vance_sprite angry at right_full_body:
@@ -246,32 +364,98 @@ label day101_1_vance_throws_toy:
         yalign 1.1
         zoom 0.8
 
-    vance "Useless creature. I said the blue ribbon, not that vulgar little thing." # this needs rewriting this would be in the lobby it currently makes no sense for her to be standing around shouting about a ribbon.
+    "A footman retreats quickly down the corridor, keeping his eyes lowered as if escaping a blow."
 
-    "The object stops near my shoe. A lady's trinket. Too expensive to be called a toy, too childish to be called anything else." # change or cut this, this is vestigial dialogue from a previous draft where the llm used the prompt of throwing toys literally
-    
-    vance "You. Girl. Pick it up." # like this performative cruelty but needs better context
+    vance "Stupid, useless boy! I said the lavender toilet-water, not this vulgar, suffocating grease!"
+
+    "She paces, her breathing shallow, her cheeks flushed high under her lacquered hair. The spilled scent is already thick and heavy, filling the narrow space with a hot, floral pressure."
+
+    "Her gaze swings wildly, landing directly on me. Her chest rises and falls rapidly against the stiff silk of her bodice."
+
+    vance "You. Girl. Don't just stand there like a wooden post. Pick it up before it ruins the master's carpet."
 
     # [ASSET] Visual/staging command
     show cora_sprite base_travel at left_full_body:
         yalign 1.0
-        xalign 0.2
+        xpos 0.25
         zoom 0.75
 
     # [ASSET] Visual/staging command
     with moveinleft
 
-    "Her voice lands on me before her eyes do."
-    "Velvet. Pearls. A face arranged for admiration and currently sharpened for harm."
+    "Her voice is velvet and grit, arranged for authority but trembling with a petulant irritation."
 
     cora "Yes, Miss."
 
-    "I bend. I retrieve the little silver thing. I do not let my fingers tremble." # take a beat during this to allow the moment to breath and build suspense
+    "I take a slow beat. The jasmine oil has pooled on the red wool carpet. I step forward and bend down, my fingers touching the cold, heavy silver of the bottle."
+    "From this close, the hem of her dark violet gown is inches from my hands. I can hear the sharp, quick drag of her breath and see the nervous tapping of her boot."
 
-    vance "Not like that. Have you never handled anything delicate?" # tone is great but detail needs to be polished with the new context.
+    vance "Careful, you clumsy creature! If you chip the crystal, Miss Stern will hear of it."
 
-    cora_inner "I have handled hunger. Debt. Ink. Men's hands where they were not invited." # take a beat here to let it land
-    cora_inner "I decide not to list them."
+    cora_inner "I have handled worse than broken glass. Debt. Lies. Men who believed my silence was an agreement."
+    cora_inner "I lift the bottle, feeling the warmth of her proximity. I decide not to list them."
+
+    # [CHOICE] Decision point
+    # [DAG_CHOICE group=day101_1_vance_throws_toy_menu_1]
+    menu:
+        "How do I present the scent-bottle back to Miss Vance?"
+
+        "Lower my chin, offering the bottle with a humble, trembling maid's hand. [[Subservient: +Suspicion]]":
+
+            # [STATE] Cora plays the meek servant, giving Vance her dominance back
+            $ apply_effects(vance_susp=5, insp=5, corr=0)
+            $ story.set_day1_vance_relation("subservient")
+
+            # [ASSET] Visual/staging command
+            show cora_sprite guarded_travel at left_full_body
+            with dissolve
+
+            cora "My apologies, Miss. I only wish to be of service."
+
+            "Vance takes the bottle, her fingers brushing mine with a brief, cold swipe. She lifts her chin, her face smoothing as she absorbs the submission."
+
+            vance "At least one of you has some sense of place. Go clean your hands, girl. You smell of the laundry."
+
+            cora_inner "She hears a stupid country maid. Let her keep that version."
+
+        "Stand straight and meet her gaze directly, holding the bottle between us. [[Defiant: +Tension, +Inspiration, +Corruption]]":
+
+            # [STATE] Complicit/defiant tension. Cora challenges her role, provoking Vance
+            $ apply_effects(vance_susp=15, insp=10, corr=5)
+            $ story.set_day1_vance_relation("defiant")
+
+            # [ASSET] Visual/staging command
+            show cora_sprite base_travel at left_full_body
+            with dissolve
+
+            cora "It is not chipped, Miss. The crystal is quite sound. It only needs a steady hand."
+
+            "Vance goes still. Her eyes widen, moving from my cap to my lips, startled by the directness of my tone."
+            "She steps closer, the smell of her jasmine and warm skin pressing into my face. Her breathing is loud in the quiet hall."
+
+            vance "You speak with a great deal of confidence for a girl in a borrowed apron."
+            vance "Do you want me to tell Miss Stern how you look at guests?"
+
+            cora_inner "She is threatening me, but her hand is shaking as she reaches for the bottle."
+            cora_inner "She is not angry; she is exposed."
+
+        "Offer it on my flat palm with a cold, blank face. [[Ghostly: +Inspiration]]":
+
+            # [STATE] Pure observation. Cora remains a mirror, frustrating Vance's attempt to dominate
+            $ apply_effects(vance_susp=10, insp=10, corr=0)
+            $ story.set_day1_vance_relation("ghostly")
+
+            # [ASSET] Visual/staging command
+            show cora_sprite base_travel at left_full_body
+            with dissolve
+
+            cora "The scent-bottle, Miss."
+
+            "Vance snatches it, her expression turning into a scowl of irritation. The complete lack of reaction from me is a wall she cannot climb."
+
+            vance "Useless post. You are like a piece of furniture that has learned to walk."
+
+            cora_inner "A mirror does not apologize when it shows the dust. It only holds the shape."
 
     # [ASSET] Visual/staging command
     show gideon_sprite cold at right_full_body:
@@ -279,72 +463,308 @@ label day101_1_vance_throws_toy:
         yalign 1.0
         zoom 0.8
         
-
     gideon "Vance."
 
     # [ASSET] Visual/staging command
-    hide vance_sprite angry
-    # [ASSET] Visual/staging command
-    hide cora_sprite base_travel
+    hide vance_sprite
+    hide cora_sprite
     # [ASSET] Visual/staging command
     show cora_sprite base_travel at left_bust:
         yalign 1.0
-        xalign 0.2
-
-    # [ASSET] Visual/staging command
-    with dissolve
+        xpos 0.2
     # [ASSET] Visual/staging command
     show vance_sprite submissive at left_bust:
-        xalign 0.5
+        xpos 0.5
         xzoom -1.0
-
-    # [ASSET] Visual/staging command
-    with dissolve
     # [ASSET] Visual/staging command
     show gideon_sprite cold at right_bust:
-        zoom 1
-        xalign 0.75
+        zoom 1.0
+        xpos 0.75
 
     # [ASSET] Visual/staging command
     with dissolve
-            
 
-    cora_inner "One word." # maybe show cora sprite with speech bubble here
-    cora_inner "The corridor changes temperature."
+    "One word. The corridor changes temperature instantly."
+    "Vance's shoulders drop. Her lips part in a quick, swallowed gasp, the petulant fury folding away into a practiced, submissive compliance."
 
-    vance "I was only correcting her..."
+    vance "Gideon. I... I was only correcting the maid. She was careless with the linen."
 
     gideon "You were making yourself visible."
+    gideon "The hallway is for passage, Vance, not for theatre. Do not teach the servants bad habits before luncheon."
 
+    "Vance's mouth closes tightly. She nods once, her eyes fixed on the silver buttons of his vest."
 
-    "Vance's mouth closes." # hopefully the sprite change can tell this story and we can cut some of this narration
-    "The fury does not vanish. It folds itself away, obedient and practiced."
+    vance "Of course, Sir."
 
-    gideon "The girl is new. Do not teach her bad habits before luncheon."
+    cora_inner "Of course. Not yes. Not sorry. Of course."
+    cora_inner "As if obedience were a ceremony, and surrender her only dress."
 
-    vance "Of course."
-
-    cora_inner "Of course. Not yes. Not sorry. Of course." # this should be stronger or cut
-    cora_inner "As if obedience were not surrender, but etiquette."
-
-    gideon "Your name?"
+    gideon "Your name, girl?"
 
     cora "Cora, Sir."
 
-    gideon "Then learn quickly, girl. This house rewards discretion."
+    gideon "Then learn quickly, Cora. This house rewards discretion. If Ms. Vance cannot manage her temper, I expect you to manage your tongue."
 
-    cora_inner "He does not threaten me." # meh
-    cora_inner "That is why it feels like one."
+    cora_inner "He does not threaten me with his voice. That is why it feels like an iron collar."
 
     # [ASSET] Visual/staging command
     hide gideon_sprite
+    with dissolve
+
+    "Mr. Locke turns and walks back toward the Master Suite, his boots striking the floor with quiet, absolute authority."
+    "Vance stays behind for a second, her hands clutching the silver scent-bottle so tightly her knuckles are white."
+    "She turns to me, her voice a low, burning hiss."
+
+    vance "You. Don't think this is finished. Take my lace wrap and bring it to the dressing room. Now."
+
     # [ASSET] Visual/staging command
     hide vance_sprite
+    hide cora_sprite
+    with dissolve
 
-    cora_inner "Vance follows him down the corridor, all silk and swallowed rage."
-    cora_inner "I watch only long enough to know the shape of it." # meh maybe?
-    cora_inner "A command. A yielding. A room full of people pretending not to notice."
-    cora_inner "There is a chapter in that."
+    jump day101_1_vance_dressing_room
+
+
+# ==========================================
+# ADDITIONAL SCENE 1: VANCE'S RETALIATION (DRESSING ROOM)
+# ==========================================
+
+# [DAG_NODE id=day101_1_vance_dressing_room type=work day=101]
+label day101_1_vance_dressing_room:
+
+    # [ASSET] Visual/staging command
+    scene bg_master_suite_day:
+        zoom 1.00
+        xysize (1920, 1080)
+
+    # [ASSET] Visual/staging command
+    with dissolve
+
+    "The private vestibule of the Master Suite is warm, quiet, and smelling of French powder and the heavy spilled jasmine."
+    "Gideon has gone into the inner study, the heavy mahogany door shut behind him."
+    "Miss Vance stands by the vanity, her back to me. She has unpinned her heavy hat, her hair falling in loose red coils over her shoulders."
+
+    # [ASSET] Visual/staging command
+    show vance_sprite angry_dressing_gown at right_full_body:
+        xpos 0.65
+        ypos 1.05
+        zoom 0.8
+
+    vance "Close the door."
+
+    "I step inside, the door latch clicking shut behind me. I set her lace wrap on the velvet bench."
+
+    # [ASSET] Visual/staging command
+    show cora_sprite base_travel at left_full_body:
+        xpos 0.25
+        ypos 1.05
+        zoom 0.75
+
+    # [ASSET] Visual/staging command
+    with dissolve
+
+    cora "The wrap is here, Miss."
+
+    "She turns on me, her eyes bright with a mixture of shame and fury. She is breathing heavily, the laces of her corset visible where her collar has been loosened."
+
+    vance "You saw that. You saw him correct me like a child."
+    vance "Do you think it's amusing? A maid watching from the shadow, counting the master's words?"
+
+    "She steps closer, cornering me against the wardrobe. Our breath mingles, the heat of her skin radiating through the silk dress. She reaches out, her hand catching the strap of my apron, her fingers pressing into my shoulder."
+
+    vance "Help me unpin the collar. My fingers are shaking. {w}Well? Move!"
+
+    "I step behind her. My fingers touch the warm, smooth skin of her neck as I reach for the silver pins of her lace collar."
+    "Her pulse is a frantic, fluttering bird beneath my thumb. I can feel the shiver that runs through her spine as my rough, lye-stained skin rubs against her delicate throat."
+
+    # [CHOICE] Decision point
+    # [DAG_CHOICE group=day101_1_vance_dressing_room_menu_1]
+    menu:
+        "How do I touch Miss Vance's collar?"
+
+        "Handle the lace with gentle, soothing fingers, easing the pressure. [[Protected: +Suspicion]]":
+
+            # [STATE] Cora soothes her tension, offering comfort behind Gideon's back
+            $ apply_effects(vance_susp=5, insp=10, corr=5)
+            $ story.set_day1_vance_relation("protected")
+
+            # [ASSET] Visual/staging command
+            show cora_sprite flushed at left_full_body
+            with dissolve
+
+            "I adjust the lace slowly, my touch light and reassuring against her hot skin."
+
+            cora "He was harsh, Miss. But the wainscoting carries no tales. I have already forgotten his words."
+
+            "Vance lets out a long, trembling sigh, her shoulders dropping. For a fraction of a second, her head tilts back, her soft hair brushing against my apron."
+
+            vance "He... he only wishes me to be perfect. But it is... suffocating."
+            vance "You are surprisingly gentle for a laundry girl."
+
+            cora_inner "She wants shelter. Let me build a small, dark wall around her."
+
+        "Touch the red pressure mark left on her collarbone by Gideon. [[Intimate: +Tension, +Suspicion, +Corruption]]":
+
+            # [STATE] Active desire/corruption. Cora marks her submission, stepping into Gideon's space
+            $ apply_effects(vance_susp=15, insp=10, corr=10)
+            $ story.set_day1_vance_relation("intimate")
+
+            # [ASSET] Visual/staging command
+            show cora_sprite flushed at left_full_body
+            with dissolve
+
+            "My thumb slides down her neck, pressing lightly against the red, flushed mark on her skin."
+
+            cora "The master has a heavy hand, Miss. It must be difficult to wear his marks in public."
+
+            "Vance gasps, her back arching slightly. Her hands grip the vanity table behind her, her knuckles turning red."
+
+            vance "You... you insolent wretch. How dare you touch me there..."
+            vance "Gideon would have you thrown to the streets if he knew you were speaking of his hand."
+
+            cora "But he does not know, Miss. We are alone."
+
+            "She shivers, her eyes dark and wet in the mirror. The physical heat between us is thick, a shared secret of submission and command."
+
+        "Perform the duty with cold, clinical precision. [[Observed: +Inspiration]]":
+
+            # [STATE] Pure observation. Cora remains a cold witness, documenting her vulnerability
+            $ apply_effects(vance_susp=5, insp=10, corr=0)
+            $ story.set_day1_vance_relation("observed")
+
+            # [ASSET] Visual/staging command
+            show cora_sprite base_travel at left_full_body
+            with dissolve
+
+            "I unpin the collar cleanly, stepping back the moment the silk falls open."
+
+            cora "It is undone, Miss. You are free."
+
+            "Vance turns, looking at me with a frustrated scowl. She feels the coldness of my gaze, the way I treat her distress like an entry in a ledger."
+
+            vance "You are like a stone, Cora. Go. Before I find a reason to have Stern inspect your trunk."
+
+            cora_inner "A stone sees the mark. It does not shiver."
+
+    # [ASSET] Visual/staging command
+    hide vance_sprite
+    hide cora_sprite
+    with dissolve
+
+    jump day101_1_vance_stairwell_encounter
+
+
+# ==========================================
+# ADDITIONAL SCENE 2: STAIRWELL CONFRONTATION
+# ==========================================
+
+# [DAG_NODE id=day101_1_vance_stairwell_encounter type=work day=101]
+label day101_1_vance_stairwell_encounter:
+
+    # [ASSET] Visual/staging command
+    scene bg_servants_corridor_dim:
+        zoom 1.00
+        xysize (1920, 1080)
+
+    # [ASSET] Visual/staging command
+    with dissolve
+
+    "I slip out of the suite, my heart beating rapidly in the quiet corridor."
+    "I turn toward the narrow service stairwell that leads down to the laundry, the air growing colder and smelling of damp stone."
+    "Suddenly, the heavy door above creaks open. Footsteps hurry down the stone steps behind me."
+
+    # [ASSET] Visual/staging command
+    show vance_sprite indignant at right_full_body:
+        xpos 0.65
+        ypos 1.05
+        zoom 0.8
+
+    vance "Wait. You."
+
+    "I turn. Vance stands on the step above me. She has not re-laced her collar; the silk is open, exposing her pale neck and the rising flush of her skin."
+
+    # [ASSET] Visual/staging command
+    show cora_sprite base_travel at left_full_body:
+        xpos 0.25
+        ypos 1.05
+        zoom 0.75
+
+    # [ASSET] Visual/staging command
+    with dissolve
+
+    "Before I can bow, she steps down, her hand catching my sleeve and dragging me into the shadow beneath the landing."
+    "She presses me flat against the cold brick wall, her chest pressing against mine. The scent of jasmine is sharp and close, mixed with the sweat of her panic."
+
+    vance "Tell me. Are you going to tell that old crow Stern? Or Missy?"
+    vance "If Gideon thinks I am... compromised. If he thinks the servants are whispering about us..."
+
+    "Her fingers tighten on my arm. She is trying to look threatening, but her chest is heaving, and her lips are trembling."
+
+    # [CHOICE] Decision point
+    # [DAG_CHOICE group=day101_1_vance_stairwell_encounter_menu_1]
+    menu:
+        "How do I reassure Miss Vance?"
+
+        "Assure her of my absolute maid's silence. [[Loyal Witness: +Suspicion]]":
+
+            # [STATE] Safe path. Cora claims to have no voice
+            $ apply_effects(vance_susp=5, insp=5, corr=0)
+            $ story.set_day1_vance_relation("loyal_witness")
+
+            cora "I only see the sheets and the carpets, Miss. I have no time for gossip."
+
+            "Vance studies my face, searchingly. Her breathing slows, her grip on my sleeve loosening."
+
+            vance "Good. Keep it that way. If I hear a single whisper... I will know it was you."
+
+            cora_inner "She is relieved, but the suspicion remains. I am still a witness she must watch."
+
+        "Feed her anxiety, turning the power dynamics. [[Accomplice: +Tension, +Suspicion, +Corruption]]":
+
+            # [STATE] High tension/complicity. Cora whispers Vance's submissive nature back to her
+            $ apply_effects(vance_susp=15, insp=10, corr=10)
+            $ story.set_day1_vance_relation("accomplice")
+
+            # [ASSET] Visual/staging command
+            show cora_sprite flushed at left_full_body
+            with dissolve
+
+            "I lean in close, my lips brushing her ear in the cold stairwell."
+
+            cora "I saw how you looked at him, Miss. I know what it is to want a hand that commands you."
+            cora "I won't tell Stern. But we both know the weight of his shoe."
+
+            "Vance lets out a sharp, wet gasp. Her eyes flare with terror and a sudden, dark arousal. Her head falls back against the brick, her chest pressing hard against my hands."
+
+            vance "You... you are a wicked girl, Cora. A dangerous, wicked girl."
+            vance "If Gideon found you speaking to me like this..."
+
+            cora "But he is in his study, Miss. And you are here. With me."
+
+            "Our skin shivers in the cold draft. She does not pull away. The collusion between us is sealed in the dark stairwell."
+
+        "Detach myself and push past her. [[Silent Observer: +Inspiration]]":
+
+            # [STATE] Cora pulls away, keeping her clinical boundary
+            $ apply_effects(vance_susp=5, insp=10, corr=0)
+            $ story.set_day1_vance_relation("silent_observer")
+
+            cora "Miss Stern is waiting for me in the laundry, Miss. If I am late, she will ask why I was delayed in the guest corridor."
+
+            "That silences her. She pulls her hand back as if burned, her face hardening into her lady's mask."
+
+            vance "Then go. Before I have you dismissed myself."
+
+            cora_inner "I have the shape of her fear. That is all the material I need."
+
+    # [ASSET] Visual/staging command
+    hide vance_sprite
+    hide cora_sprite
+    with dissolve
+
+    cora_inner "She retreats up the stairs, her silk skirt rustling in the dark."
+    cora_inner "I watch her go. A lady of the Savoy, bound in silk and swallowed terror."
+    cora_inner "There is a chapter in that. A very long one."
 
     # [STATE] State/progression update
     jump day101_2_missy_meets_cora

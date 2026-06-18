@@ -289,6 +289,9 @@ init -1 python:
         # ── Day 1 ──────────────────────────────────────────────────────
         VALID_CORRIDOR_STATES        = ("none", "ghost", "predator", "prey")
         VALID_INTERVIEW_STATES       = ("none", "meek", "competent")
+        VALID_STERN_RELATIONS        = ("none", "complicit", "subservient", "resistant")
+        VALID_STERN_SECRETS          = ("none", "loyal", "exploitative", "fearful")
+        VALID_VANCE_RELATIONS        = ("none", "subservient", "defiant", "ghostly", "protected", "intimate", "observed", "loyal_witness", "accomplice", "silent_observer")
         VALID_LEDGER_FOCUS_STATES    = ("none", "inspiration", "corruption")
         VALID_DAY1_NIGHT_ACTIONS     = ("none", "write", "visit_missy")
         VALID_MISSY_DAY1_TRUST_STATES = ("none", "soothed", "unsettled", "warned_cora", "shared_caution")
@@ -381,6 +384,9 @@ init -1 python:
             # ── Day 1 ──────────────────────────────────────────────────
             self.day1_corridor_state    = "none"
             self.day1_interview_state   = "none"
+            self.day1_stern_relation    = "none"
+            self.day1_stern_secret_bound = "none"
+            self.day1_vance_relation    = "none"
             self.day1_ledger_focus      = "none"
             self.day1_night_action      = "none"
             self.has_witnessed_voyeur_scene  = False
@@ -485,6 +491,15 @@ init -1 python:
 
         def set_day1_interview_state(self, value):
             self._set_string_state("day1_interview_state", value, self.VALID_INTERVIEW_STATES)
+
+        def set_day1_stern_relation(self, value):
+            self._set_string_state("day1_stern_relation", value, self.VALID_STERN_RELATIONS)
+
+        def set_day1_vance_relation(self, value):
+            self._set_string_state("day1_vance_relation", value, self.VALID_VANCE_RELATIONS)
+
+        def set_day1_stern_secret_bound(self, value):
+            self._set_string_state("day1_stern_secret_bound", value, self.VALID_STERN_SECRETS)
 
         def set_day1_ledger_focus(self, value):
             self._set_string_state("day1_ledger_focus", value, self.VALID_LEDGER_FOCUS_STATES)

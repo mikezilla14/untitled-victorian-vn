@@ -28,6 +28,9 @@ init python in book1:
             "ghost": "book1_block_day1_ghost_core",
             "predator": "book1_block_day1_predator_core",
             "prey": "book1_block_day1_prey_core",
+            "ghost_subservient": "book1_block_day1_ghost_subservient",
+            "predator_complicit": "book1_block_day1_predator_complicit",
+            "prey_resistant": "book1_block_day1_prey_resistant",
             "default": "book1_block_day1_default_core",
         },
         "day2_chapter": {
@@ -84,7 +87,8 @@ label book1_write_chapter(chapter_key="day1_chapter", current_day=101, word_dela
         call book1_nvl_write_line("Chapter I - The Conservatory Door", word_delay=_book1_word_delay)
 
         # [STATE] State/progression update
-        $ _book1_theme = story.day1_corridor_state
+        $ _combined_theme = "{}_{}".format(story.day1_corridor_state, story.day1_stern_relation)
+        $ _book1_theme = _combined_theme if _combined_theme in book1.CHAPTER_BLOCKS["day1_chapter"] else story.day1_corridor_state
     elif chapter_key == "day2_chapter":
         call book1_nvl_write_line("Chapter II - The Hatbox Oath", word_delay=_book1_word_delay)
 

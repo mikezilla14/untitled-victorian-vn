@@ -68,3 +68,34 @@ label book1_block_day1_common_open:
     return
 
 
+# [DAG_NODE id=book1_block_day1_ghost_subservient type=write]
+label book1_block_day1_ghost_subservient:
+
+    call book1_block_day1_common_open
+    call book1_nvl_write_line("In the draft, Coralie stands like marble under Lady Vayne's critical gaze, yet her thoughts run feverish. She transposes the housekeeper's stiff threat into a dance of silent surrender.", word_delay=_book1_word_delay)
+    call book1_nvl_write_line("Miri's submissive posture is written with thick, liquid ink—a girl who has learned to find a quiet pleasure in being shaped by a stronger hand.", word_delay=_book1_word_delay)
+    if story.day1_ledger_focus == "inspiration":
+        call book1_nvl_write_line("She writes of the invisible observer, who sees all because she claims to feel nothing at all.", word_delay=_book1_word_delay)
+    return
+
+
+# [DAG_NODE id=book1_block_day1_predator_complicit type=write]
+label book1_block_day1_predator_complicit:
+
+    call book1_block_day1_common_open
+    call book1_nvl_write_line("On these pages, the relationship between the governess and Coralie is charged with a dangerous, shared guilt. The governess adjusts her collar, and the touch is described as a brand.", word_delay=_book1_word_delay)
+    call book1_nvl_write_line("The narrative is sharp and heavy with complicity; they are not mistress and servant, but two conspirators measuring each other's appetite in the dark.", word_delay=_book1_word_delay)
+    if story.day1_ledger_focus == "corruption":
+        call book1_nvl_write_line("Every gesture is a barter, every look a silent pact between two women who both plan to consume the house.", word_delay=_book1_word_delay)
+    return
+
+
+# [DAG_NODE id=book1_block_day1_prey_resistant type=write]
+label book1_block_day1_prey_resistant:
+
+    call book1_block_day1_common_open
+    call book1_nvl_write_line("Coralie's resistance is written as a trembling, wild thing. When the housekeeper draws near, she flinches, yet her diary catches the heat of the encounter.", word_delay=_book1_word_delay)
+    call book1_nvl_write_line("She writes of a bird that beats against the cage, not to escape, but because the bars themselves are warm. Desire and danger are bound in the same lock.", word_delay=_book1_word_delay)
+    return
+
+
