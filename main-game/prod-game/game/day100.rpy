@@ -1,11 +1,33 @@
-# day100.rpy
-# Release 1 / Day 00 — Prologue (Wiltshire → London train → Day 101 handoff)
-# Source: main-game/non-prod-game/game/days/day100_non_canon.rpy
+# FORMAT LEGEND:
+# [ASSET] -> backgrounds, sprites, transitions, CG/UI callouts
+# [STATE] -> variable changes, effects, conditions, jumps
+# [CHOICE] -> menu blocks and inflection points
+# [BEAT] -> narrative intent / scene intent notes
+#
+# SPRITE DIRECTION (managed by scripts/scene_direction.py — how to preserve manual staging):
+# [asset auto]              -> auto-placed sprite line; the agent may rewrite/replace it on re-run
+# [asset keep]              -> on a show line: lock THAT line so the agent never edits it
+# [asset lock:scene]        -> before/after a `scene`: the agent skips the entire scene block
+# [asset pin:Name=slot]     -> force Name into slot for the rest of the scene block
+# [enter:Name] / [exit:Name] -> declare cast changes so auto placement stays correct
+# Full policy: docs/contracts/sprite_layout_policy.yaml | spec: docs/specs/scene-direction-agent.md
+
+# ==========================================
+# NODE MAP
+# ==========================================
+# day100_main (Night) — kinetic start in Wiltshire corridor
+# day100_1_afternoon_boredom — study search choices (letters vs overhearing)
+# day100_2_evening_flashback — (compat bridge, routes to search resolution)
+# day100_2_parlour_branch / day100_2_desk_branch → day100_2_reconvergence
+# day100_3_night_daydream — train daydream (~2.8 spice level)
+# day100_3_arrival — Waterloo arrival & Day 101 handoff
+
 
 # ==========================================
 # MAIN ENTRY — WILTSHIRE HOUSE AT NIGHT
 # ==========================================
 
+# [DAG_NODE id=day100_main type=work day=100]
 label day100_main:
 
     # [STATE] State/progression update
@@ -15,7 +37,7 @@ label day100_main:
     with fade
 
     # [BEAT] Kinetic start in motion. Cora is sneaking through the dark hallway
-
+    
     "Cora had three pages in her hand when the door opened."
     "She blew out the candle too late."
 
@@ -36,12 +58,14 @@ label day100_main:
     jump day100_1_afternoon_boredom_setup
 
 
+# Compat stub to keep labels consistent
 label day100_1_afternoon_boredom_setup:
 
     # [STATE] State/progression update
     jump day100_1_afternoon_boredom
 
 
+# [DAG_NODE id=day100_1_afternoon_boredom type=work day=100]
 label day100_1_afternoon_boredom:
 
     # [ASSET] Visual/staging command
@@ -56,6 +80,7 @@ label day100_1_afternoon_boredom:
     cora_inner "They contain details he must never see. Appetite dressed as literature."
 
     # [CHOICE] Search location determines prologue_found flag
+    # [DAG_CHOICE group=day100_1_afternoon_boredom_menu_1]
     menu:
         "Where did he hide them?"
 
@@ -64,7 +89,7 @@ label day100_1_afternoon_boredom:
             # [STATE] State/progression update
             $ apply_effects(insp=15, corr=10)
             $ story.set_prologue_found("read_letters")
-
+            
             cora_inner "The bureau is where his private correspondence lies. Sir John's own secrets."
 
             # [STATE] State/progression update
@@ -82,6 +107,8 @@ label day100_1_afternoon_boredom:
             jump day100_2_parlour_branch
 
 
+# Compat bridge for routing
+# [DAG_NODE id=day100_2_evening_flashback type=work day=100]
 label day100_2_evening_flashback:
     if story.prologue_found == "read_letters":
 
@@ -93,6 +120,7 @@ label day100_2_evening_flashback:
         jump day100_2_parlour_branch
 
 
+# [DAG_NODE id=day100_2_parlour_branch type=work day=100]
 label day100_2_parlour_branch:
 
     # [BEAT] Erotic/Tension: Overhearing the master's private, scandalous affair
@@ -108,11 +136,12 @@ label day100_2_parlour_branch:
     "My thighs press together under rough linen. The door seems to pulse, or my blood does."
 
     cora_inner "Secret rooms, undone collars. I am at the keyhole with a notebook in my bones."
-
+    
     # [STATE] State/progression update
     jump day100_2_reconvergence
 
 
+# [DAG_NODE id=day100_2_desk_branch type=work day=100]
 label day100_2_desk_branch:
 
     # [BEAT] Erotic/Mystery: Reading Sir John's letters containing Strand/Savoy lockbox clues
@@ -130,10 +159,11 @@ label day100_2_desk_branch:
     jump day100_2_reconvergence
 
 
+# [DAG_NODE id=day100_2_reconvergence type=work day=100]
 label day100_2_reconvergence:
 
     # [BEAT] Hiding and Caught. High tension, quiet confrontation
-
+    
     "A key turns in the hallway lock. Footsteps approach."
     "Panic. I slide behind the folding velvet screen, holding my breath, my back pressed against the cold glass."
     "Sir John enters. He has my three missing manuscript pages in his hand."
@@ -145,6 +175,7 @@ label day100_2_reconvergence:
     "I step out from the shadow of the screen."
 
     # [CHOICE] Caught reaction sets the prologue_holywell_posture flag
+    # [DAG_CHOICE group=day100_1_afternoon_boredom_menu_2]
     menu:
         "How do I answer?"
 
@@ -154,7 +185,7 @@ label day100_2_reconvergence:
             $ story.set_prologue_holywell_posture("careful")
 
             cora "There was a draft, sir."
-
+            
             cora_inner "My voice is level, country-flat. Let him hear a simpleton."
             cora_inner "I must protect my secrets. A careful posture is the safest mask."
 
@@ -186,6 +217,7 @@ label day100_2_reconvergence:
     "Sir John" "Why did you write this filth?"
 
     # [CHOICE] Ambition choice sets the prologue_why_write flag
+    # [DAG_CHOICE group=day100_2_evening_flashback_menu_1]
     menu:
         "Why did I write it?"
 
@@ -236,6 +268,7 @@ label day100_2_reconvergence:
 # TRAIN TRANSITION — WATERLOO & DAYDREAM
 # ==========================================
 
+# [DAG_NODE id=day100_3_night_daydream type=work day=100]
 label day100_3_night_daydream:
 
     # [STATE] State/progression update
@@ -278,6 +311,7 @@ label day100_3_night_daydream:
     jump day100_3_arrival
 
 
+# [DAG_NODE id=day100_3_arrival type=work day=100]
 label day100_3_arrival:
 
     "The train whistle screams. A metal throat tearing through the smog."

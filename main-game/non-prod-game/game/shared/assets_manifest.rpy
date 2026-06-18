@@ -14,14 +14,25 @@ init -50 python:
     _missing_image_assets = []
     _missing_audio_assets = []
 
-    def _abs(rel_path):
-        # Assets live under <project>/game/, while config.basedir points to <project>/.
-        return os.path.join(config.basedir, "game", rel_path)
+    def _find_asset(rel_path):
+        paths_to_check = []
+        if hasattr(config, 'searchpath'):
+            for p in config.searchpath:
+                if os.path.isabs(p):
+                    paths_to_check.append(os.path.join(p, rel_path))
+                else:
+                    paths_to_check.append(os.path.join(config.basedir, p, rel_path))
+        paths_to_check.append(os.path.join(config.basedir, "game", rel_path))
+        
+        for p in paths_to_check:
+            if os.path.exists(p):
+                return True
+        return False
 
     def declare_image_with_fallback(image_id, rel_path, color="#222222"):
         is_sprite = "_sprite" in image_id
         
-        if os.path.exists(_abs(rel_path)):
+        if _find_asset(rel_path):
             displayable = renpy.display.im.Image(rel_path)
         else:
             displayable = Solid(color)
@@ -34,7 +45,7 @@ init -50 python:
         renpy.image(image_id, displayable)
 
     def register_audio(name, rel_path):
-        if os.path.exists(_abs(rel_path)):
+        if _find_asset(rel_path):
             return rel_path
         _missing_audio_assets.append((name, rel_path))
         return None

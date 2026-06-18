@@ -28,6 +28,7 @@ When a promotion PR or `promote-day` / `promote-framework` request arrives:
 2. **Psychology gate evidence.** Confirm `forensic_psychology_consultant` has cleared the approved draft and any production implementation under review (`PSYCHOLOGY PRESERVED`), especially when menus, branch routing, or character profile/voice files changed.
 3. **Creative Verification.** Verify character prose and dialogue are copied 100% verbatim from the draft `dayrdd_non_canon.rpy` file.
 4. **Dependency audit.** Episodic scripts use the shared state API; assets referenced exist where expected.
+   - **Asset Promotion audit.** Verify that any new image assets have been promoted from `main-game/non-prod-game/game/images/` to `main-game/prod-game/game/images/` (matching subfolder structure) and deleted from the non-production game.
    - **Asset manifest audit.** Verify that every `scene`, `show`, and audio alias referenced in promoted `.rpy` files has a corresponding `declare_image_with_fallback` or `register_audio` entry in `main-game/prod-game/game/assets_manifest.rpy`. Any new asset reference without a manifest entry is an automatic reject.
 5. **State and branch audit.** Stat changes and flags follow consistent patterns; suspicion/fail logic order is sound; `StoryState` tracked flags remain boolean-only and method-driven.
 6. **Speaker contract audit.** Enumerate speaker tokens used in reviewed `.rpy` files and verify each one has a matching `Character` definition in `main-game/prod-game/game/characters.rpy`.

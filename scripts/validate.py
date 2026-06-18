@@ -38,7 +38,7 @@ def narrative_files(files):
     for file in files:
         norm = file.replace("//", "/")
         name = Path(norm).name
-        if norm.startswith("main-game/draft/") and (
+        if (norm.startswith("main-game/draft/") or norm.startswith("main-game/non-prod-game/game/days/")) and (
             name.endswith("_non_canon.rpy") or name.endswith(".md")
         ):
             targets.append(file)
@@ -184,6 +184,9 @@ def main():
         if args.profile == "full":
             target_files = all_files_under(
                 ROOT / "main-game" / "draft",
+                lambda path: path.name.endswith("_non_canon.rpy") or path.suffix == ".md",
+            ) + all_files_under(
+                ROOT / "main-game" / "non-prod-game" / "game" / "days",
                 lambda path: path.name.endswith("_non_canon.rpy") or path.suffix == ".md",
             )
 

@@ -12,12 +12,8 @@ default story        = StoryState()
 # HUD sidebar visibility (layout in screens.rpy).
 default hud_sidebar_visible = True
 
-# Legacy/alternate sidebar visibility used by screen sidebar().
-default sidebar_open = True
-
-# Auto-highlight speaker tracking.
+# Auto-Highlight speaker tracking
 default speaking_char = None
 
-# Suspicion attention pulse state.
-default suspicion_focus = None
-default suspicion_focus_intensity = 0
+# Set by story_window_penance_gate when pending penance consumes the chain slot.
+default _penance_consumed = False

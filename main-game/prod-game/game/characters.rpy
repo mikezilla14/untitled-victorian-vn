@@ -5,7 +5,7 @@
 # ═══════════════════════════════════════════════════════════════
 
 define cora    = Character("Cora",      color="#d4a574", callback=name_callback, cb_name="cora")
-define cora_inner = Character(None, what_italic=True, what_color="#dfcbb5", callback=name_callback, cb_name=None)
+define cora_inner = Character(None, what_italic=True, what_color="#dfcbb5", screen="thought_overlay", callback=name_callback, cb_name=None)
 define gideon  = Character("Sir Gideon", color="#a30000", callback=name_callback, cb_name="gideon")
 define stern   = Character("Miss Stern", color="#555555", callback=name_callback, cb_name="stern")
 define vance   = Character("Vance",      color="#7b3f98", callback=name_callback, cb_name="vance")

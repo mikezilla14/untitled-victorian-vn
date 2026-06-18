@@ -1,6 +1,24 @@
+# FORMAT LEGEND:
+# [ASSET] -> backgrounds, sprites, transitions, CG/UI callouts
+# [STATE] -> variable changes, effects, conditions, jumps
+# [CHOICE] -> menu blocks and inflection points
+# [BEAT] -> narrative intent / scene intent notes
+#
+# SPRITE DIRECTION (managed by scripts/scene_direction.py — how to preserve manual staging):
+# [asset auto]              -> auto-placed sprite line; the agent may rewrite/replace it on re-run
+# [asset keep]              -> on a show line: lock THAT line so the agent never edits it
+# [asset lock:scene]        -> before/after a `scene`: the agent skips the entire scene block
+# [asset pin:Name=slot]     -> force Name into slot for the rest of the scene block
+# [enter:Name] / [exit:Name] -> declare cast changes so auto placement stays correct
+# Full policy: docs/contracts/sprite_layout_policy.yaml | spec: docs/specs/scene-direction-agent.md
+
 # ═══════════════════════════════════════════════════════════════
-#  classes.rpy
-#  All Python class definitions.
+#  classes_non_canon.rpy
+#  Writers' Room — promotion source for main-game/prod-game/game/classes.rpy
+#
+#  NOT loaded at runtime. During Release 1 promotion, merge this file into
+#  classes.rpy (or diff-merge the marked StoryState chain sections).
+#  Baseline synced from main-game/prod-game/game/classes.rpy at promotion time.
 # ═══════════════════════════════════════════════════════════════
 
 init -1 python:
@@ -86,7 +104,7 @@ init -1 python:
 
         @property
         def inspiration_cap(self):
-            return 20 + (self.corruption_level * 10)
+            return 50
 
         # ── Backward-compatible properties for existing .rpy script checks ──
         @property
@@ -232,8 +250,8 @@ init -1 python:
             
             # If the ghost value drops below 1%, we snap it to 0 for clean UI
             if new_acute < 1.0:
-                 new_acute = 0
-                 
+                new_acute = 0
+                
             setattr(self, "{}_acute_susp".format(char), new_acute)
             self.update_stats()
 
@@ -245,13 +263,12 @@ init -1 python:
             """Returns True if char's total suspicion has reached the confrontation threshold."""
             return self.get_total_suspicion(char) >= self.CONFRONTATION_THRESHOLD
 
-        def has_story_fuel(self, required_total=15):
+        def has_story_fuel(self, required_insp=30, required_corr=3):
             """
-            Read-only writing-gate check.
-            Returns True if (Inspiration + Corruption XP) meets the threshold.
-            Does not spend any resources — use attempt_write() for the actual gate.
+            Read-only writing-gate check (AND, not sum).
+            Returns True only when BOTH inspiration and corruption_level meet their floors.
             """
-            return (self.inspiration + self.corruption_xp) >= required_total
+            return self.inspiration >= required_insp and self.corruption_level >= required_corr
 
     class StoryState(object):
 
@@ -305,9 +322,12 @@ init -1 python:
 
         # Maps (day, time_of_day) → (next_day, next_time, next_label).
         # Used by advance_after_confrontation. Add one entry per new day/slot.
+        # DEPRECATED compatibility route table for the old route-owner pattern.
+        # New time-period routing uses explicit day labels plus dynamic windows
+        # that call optional content and return to the day spine.
         POST_PENANCE_ROUTES = {
             (1, "Morning"):   (1, "Night",     "day101_4_writing_or_visiting"),
-            (1, "Evening"):   (1, "Night",     "day101_4_writing_or_visiting"),
+            (1, "Evening"):   (2, "Morning",   "day102_1_cora_missy_first_shift"),
             (1, "Night"):     (2, "Morning",   "day102_1_cora_missy_first_shift"),
             (2, "Morning"):   (2, "Evening",   "day102_3_stern_fetches_cora"),
             (2, "Afternoon"): (2, "Evening",   "day102_3_stern_fetches_cora"),
@@ -315,7 +335,7 @@ init -1 python:
             (3, "Morning"):   (3, "Afternoon", "day103_2_suite_gideon_tea"),
             (3, "Afternoon"): (3, "Night",     "day103_4_room_stern_suspicion"),
             (3, "Evening"):   (3, "Night",     "day103_4_room_stern_suspicion"),
-            (3, "Night"):     (4, "Morning",   "day104_1"),
+            (3, "Night"):     (4, "Morning",   "day104_1_false_dawn_suite_window"),
             (4, "Evening"):   (4, "Night",     "day104_5_triumphant_chapter"),
             (4, "Night"):     (5, "Morning",   "day105_1_monster_reemerges"),
         }
@@ -323,8 +343,10 @@ init -1 python:
         # Maps outcome string → (next_day_or_None, next_time_or_None, next_label).
         # Used by end_slot. None values mean "leave day/time unchanged".
         # d4_twilight_done is handled in get_slot_exit_target() due to conditional label.
+        # DEPRECATED compatibility route table for old end_slot exits.
+        # Refactored day files should jump directly to the next time period/day.
         SLOT_EXIT_ROUTES = {
-            "d1_reflect_done":   (1, "Night",      "day101_4_writing_or_visiting"),
+            "d1_reflect_done":   (2, "Morning",    "day102_1_cora_missy_first_shift"),
             "d1_write_ch1":      (2, "Morning",    "day102_1_cora_missy_first_shift"),
             "d1_visit_missy":    (2, "Morning",    "day102_1_cora_missy_first_shift"),
             "d2_reflect_done":   (2, "Evening",    "day102_3_stern_fetches_cora"),
@@ -333,7 +355,7 @@ init -1 python:
             "d3_twilight_done":  (None, None,      "day103_4_room_stern_suspicion"),
             "d3_stern_done":     (3, "Night",      "day103_2_suite_night_tea"),
             "d3_ultimatum_done": (None, None,      "day103_3_bedroom_final_write"),
-            "d3_write_night":    (4, "Morning",    "day104_1"),
+            "d3_write_night":    (4, "Morning",    "day104_1_false_dawn_suite_window"),
             "d4_write_night":    (None, None,      "day104_6_false_dawn_ending"),
             "d4_dawn_gate":      (5, "Morning",    "day105_1_monster_reemerges"),
             "d5_write_night":    (5, "Morning",    "day105_7_release_one_ending"),
@@ -605,19 +627,29 @@ init -1 python:
             self._set_chain_level("vance_chain_level", value)
 
         def set_penance_triggered(self, value):
+            """DEPRECATED compatibility bridge; use pending_penance queue helpers."""
             self._set_boolean_flag("penance_triggered", value)
 
         def queue_penance(self, penance_label):
             if penance_label not in self.pending_penance:
                 self.pending_penance.append(penance_label)
+                self.set_penance_triggered(True)
 
         def has_pending_penance(self):
             return len(self.pending_penance) > 0
 
-        def pop_penance_for_window(self, window_id):
+        def consume_penance_at_window(self, window_id):
+            """Pop the next queued penance label for a dynamic window. Clears penance_triggered when queue empties."""
             if not self.pending_penance:
                 return None
-            return self.pending_penance.pop(0)
+            penance_label = self.pending_penance.pop(0)
+            if not self.pending_penance:
+                self.set_penance_triggered(False)
+            return penance_label
+
+        def pop_penance_for_window(self, window_id):
+            """Backward-compatible alias for consume_penance_at_window."""
+            return self.consume_penance_at_window(window_id)
 
         def clear_penance(self):
             self.pending_penance = []
@@ -653,7 +685,7 @@ init -1 python:
             return self.POST_PENANCE_ROUTES.get((current_day, time_of_day))
 
         def consume_penance(self):
-            """Command — clears penance_triggered. Always call explicitly after routing."""
+            """DEPRECATED compatibility shim; migrated windows pop pending_penance directly."""
             self.set_penance_triggered(False)
             self.clear_penance()
 
@@ -662,3 +694,8 @@ init -1 python:
             if outcome == "d4_twilight_done":
                 return None  # handled in end_slot label (requires player.anxiety check)
             return self.SLOT_EXIT_ROUTES.get(outcome)
+
+    # Instantiate global singletons for non-canon sandbox execution/validation
+    player = PlayerStats()
+    story = StoryState()
+    time_manager = TimeManager()

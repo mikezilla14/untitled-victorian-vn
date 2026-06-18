@@ -32,7 +32,7 @@ domains:
       - main-game/canon/voice_guides/*_voice_guide.md
       - main-game/pipeline/releases/**/days/**/gates/day*_gate_forensic_psychology.md
       - main-game/pipeline/releases/**/days/**/handoffs/day*_forensic_psychology_profile_report.md
-    mutable_by: [forensic_psychology_consultant, lead_narrative_editor, writers_room, human]
+    mutable_by: [forensic_psychology_consultant, lead_narrative_editor, writers_room, writers_desk, human]
     agents_read: [all]
     notes: "Character psychology, player-choice consistency, profile carry-forward, and voice-guide psychology."
 
@@ -62,7 +62,7 @@ domains:
     paths:
       - main-game/draft/**
       - main-game/non-prod-game/**
-    mutable_by: [writers_room, spiciness_tuning_agent, lead_narrative_editor, forensic_psychology_consultant, non_prod_code_agent, scene_direction, human]
+    mutable_by: [writers_room, writers_desk, spiciness_tuning_agent, lead_narrative_editor, forensic_psychology_consultant, non_prod_code_agent, scene_direction, human]
     agents_read: [all]
     notes: "Non-canon promotion drafts, planning, bible, sandbox .rpy. scene_direction writes only `[asset auto]` show/hide lines."
 

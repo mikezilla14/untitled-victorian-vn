@@ -311,16 +311,15 @@ label day103_2_suite_gideon_tea:
 
     # [ASSET] Visual/staging command
     with move # [asset keep]
-    show cora_sprite base at left_bust with moveinleft # [asset auto]
     
-    show gideon_sprite neutral at right_bust with move # [asset auto]
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show vance_sprite kneeling_cowed_dressing_gown at centre_bust with move # [asset auto]
     cora "Sir."
 
     "I set the tea tray down."
     "The cups make a small sound against the table. Too loud, sharp in the afternoon quiet."
 
     gideon "Ms. Vance's maid is indisposed. You will assist her."
-    show vance_sprite kneeling_cowed_dressing_gown at centre_bust with move # [asset auto]
     vance "That is not necessary."
 
     gideon "It is not a negotiation."
@@ -412,9 +411,6 @@ label day103_2_cora_vs_gideon_insp:
     $ story.set_day3_brush_choice("predator")
     $ apply_effects(vance_susp=0, insp=20, corr=5)
 
-    show cora_sprite base at left_bust with moveinleft # [asset auto]
-    show vance_sprite neutral_dressing_gown at centre_bust with move # [asset auto]
-    show gideon_sprite neutral at right_bust with move # [asset auto]
     cora "Yes, Sir."
 
     gideon "That is not an answer."
@@ -471,7 +467,6 @@ label day103_2_cora_vs_gideon_corr:
     # [ASSET] Visual/staging command
     show cora_sprite base at left_bust with moveinleft # [asset auto]
     show vance_sprite submissive at centre_bust with move # [asset auto]
-    show gideon_sprite neutral at right_bust with move # [asset auto]
     cora "Yes, Sir."
 
     gideon "Why?"
@@ -534,7 +529,6 @@ label day103_2_cora_vs_gideon_ghost:
     # [ASSET] Visual/staging command
     show cora_sprite base at left_bust with moveinleft # [asset auto]
     show vance_sprite submissive at centre_bust with move # [asset auto]
-    show gideon_sprite neutral at right_bust with move # [asset auto]
     cora "Forgive me, Sir."
 
     "I drop immediately to retrieve it, my uniform skirt catching against the leather of Gideon's boots."
@@ -584,7 +578,6 @@ label day103_2_suite_gideon_beat:
 
     # [ASSET] Visual/staging command
     show cora_sprite base at left_bust with moveinleft # [asset auto]
-    show vance_sprite submissive at centre_bust with move # [asset auto]
     show gideon_sprite dominant at right_bust with move # [asset auto]
     cora "I try to be useful, Sir."
 

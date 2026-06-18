@@ -43,6 +43,7 @@ Use this exact standard for every episode promotion from non-canon draft to exec
    - Run the pre-promotion **bracket interpolation check** to escape unresolved PascalCase bracket substitutions.
 5. **Asset and Flow Safety.**
    - Validate referenced scene/sprite/CG/audio assets; if unavailable, use safe fallback narration and report the gap.
+   - **Asset Promotion (mandatory).** Move new image assets from non-prod to prod and delete them from non-prod by running the asset promotion script: `py scripts/promote_assets.py`.
    - **Manifest update (mandatory).** Every new background, sprite state, or audio alias introduced in the promoted file must have a corresponding entry in `main-game/prod-game/game/assets_manifest.rpy` using `declare_image_with_fallback` or `register_audio`.
 6. **Validation Evidence.**
    - `renpy lint` must pass with zero errors.

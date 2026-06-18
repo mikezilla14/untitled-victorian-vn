@@ -1,8 +1,16 @@
-﻿## This file contains options that can be changed to customize your game.
+## This file contains options that can be changed to customize your game.
 ##
 ## Lines beginning with two '#' marks are comments, and you shouldn't uncomment
 ## them. Lines beginning with a single '#' mark are commented-out code, and you
 ## may want to uncomment them when appropriate.
+
+
+init -60 python:
+    import os
+    # Add production game directory to search path so we can resolve production assets without duplicating them
+    prod_game_dir = os.path.abspath(os.path.join(config.basedir, "..", "prod-game", "game"))
+    if prod_game_dir not in config.searchpath:
+        config.searchpath.append(prod_game_dir)
 
 
 ## Basics ######################################################################

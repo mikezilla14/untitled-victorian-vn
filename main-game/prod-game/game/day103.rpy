@@ -1,13 +1,21 @@
-# ═══════════════════════════════════════════════════════════════
-#  day103.rpy — RELEASE 1, DAY 03: THE TEST AND THE SUMMONS
-#  Promoted from day103_non_canon.rpy (Release 1 MVP, Spice Level 3.5).
-# ═══════════════════════════════════════════════════════════════
-
 # FORMAT LEGEND:
 # [ASSET] -> backgrounds, sprites, transitions, CG/UI callouts
 # [STATE] -> variable changes, effects, conditions, jumps
 # [CHOICE] -> menu blocks and inflection points
 # [BEAT] -> narrative intent / scene intent notes
+#
+# SPRITE DIRECTION (managed by scripts/scene_direction.py — how to preserve manual staging):
+# [asset auto]              -> auto-placed sprite line; the agent may rewrite/replace it on re-run
+# [asset keep]              -> on a show line: lock THAT line so the agent never edits it
+# [asset lock:scene]        -> before/after a `scene`: the agent skips the entire scene block
+# [asset pin:Name=slot]     -> force Name into slot for the rest of the scene block
+# [enter:Name] / [exit:Name] -> declare cast changes so auto placement stays correct
+# Full policy: docs/contracts/sprite_layout_policy.yaml | spec: docs/specs/scene-direction-agent.md
+
+# day103_non_canon.rpy
+# Release 1 / Day 03 non-canon Ren'Py-shaped draft
+# Erotic and dramatic heightening at Spice Level 3.5 (Dramatic Middle Ground + Restrained Heat).
+# Verified and synchronized with baseline variable structure and runtime APIs.
 
 # ==========================================
 # DAY 3 NODE MAP
@@ -24,13 +32,21 @@
 #   -> 034 - room-stern-suspicion
 #   -> 032 - suite-night-tea (9 PM summons)
 #   -> 033 - bedroom-final-write (manuscript retelling minigame)
-#   -> day104_1 (Day 104 entry)
+#   -> day104_1_false_dawn_suite_window (Day 104 entry)
 
 
 # ==========================================
 # 030 - ENTRY DEADLINE GATE
 # ==========================================
 
+# [DAG_NODE id=day103 type=time_period day=103 period=Morning]
+label day103:
+
+    # [STATE] State/progression update
+    jump day103_morning
+
+
+# [DAG_NODE id=day103_morning type=time_period day=103 period=Morning]
 label day103_morning:
     
     # [STATE] Check writing deadline progress
@@ -43,19 +59,16 @@ label day103_morning:
     $ time_manager.set_current_day(3)
     $ set_time_period("Morning")
 
-    # [STATE] Check dynamic suspicion confrontations
     call day103_morning_consequence_window
-    
+
     # [STATE] State/progression update
     jump day103_1_servants_corridor
 
 
+# [DAG_NODE id=day103_morning_consequence_window type=dynamic_window day=103 period=Morning window=consequence penance=true returns_to=day103_morning]
 label day103_morning_consequence_window:
-    call check_confrontations
-    $ _penance_label = story.pop_penance_for_window("day103_morning")
-    if _penance_label:
-        call expression _penance_label
-        jump day103_2_suite_gideon_tea
+    # Watch-only: penance consumes the morning story-chain window
+    call watch_suspicion
     return
 
 
@@ -63,6 +76,7 @@ label day103_morning_consequence_window:
 # 031 - CONTEXTUAL GRIND / CORRIDOR ENTRY
 # ==========================================
 
+# [DAG_NODE id=day103_1_servants_corridor type=work day=103]
 label day103_1_servants_corridor:
 
     # [ASSET] Existing Day 3 servants' corridor morning background
@@ -70,11 +84,11 @@ label day103_1_servants_corridor:
     with fade
 
     "The bell rings before the sky has decided whether it means to become morning."
-    "My body rises before my mind agrees."
-    "That is service, then: obedience practiced until it looks like instinct."
+    cora_inner "My body rises before my mind agrees."
+    cora_inner "That is service, then: obedience practiced until it looks like instinct."
 
-    "Yesterday has not ended."
-    "It has merely put on a clean apron."
+    cora_inner "Yesterday has not ended."
+    cora_inner "It has merely put on a clean apron."
 
     # [BEAT] Consequence texture from Day 2 tea choice
     if story.day2_tea_choice == "predator":
@@ -107,14 +121,15 @@ label day103_1_servants_corridor:
 
         "Missy does not speak to me."
         "Not in the laundry. Not by the stair. Not when Stern sets us both to six hours of brass and silence."
-        "Betrayal, I learn, is noisy only in plays. In life it polishes banisters until its wrists ache."
+        cora_inner "Betrayal, I learn, is noisy only in plays. In life it polishes banisters until its wrists ache."
 
         # [STATE] State/progression update
         $ apply_effects(missy_susp=5, insp=10, corr=0)
 
-    "By late morning, the corridor outside the guest wing feels less like architecture and more like a decision waiting to happen."
+    cora_inner "By late morning, the corridor outside the guest wing feels less like architecture and more like a decision waiting to happen."
 
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=day103_1_servants_corridor_menu_1]
     menu:
         "Which discipline keeps my hands steady?"
 
@@ -133,6 +148,7 @@ label day103_1_servants_corridor:
 # 031 - CORRIDOR INSPIRATION CHAIN
 # ==========================================
 
+# [DAG_NODE id=day103_1_corridor_insp_chain type=work day=103]
 label day103_1_corridor_insp_chain:
 
     # [ASSET] Visual/staging command
@@ -143,16 +159,16 @@ label day103_1_corridor_insp_chain:
     $ story.set_day3_corridor_chain("inspiration")
     $ apply_effects(stern_susp=-5, insp=15, corr=0)
 
-    "I count what can be counted."
+    cora_inner "I count what can be counted."
     "The bell-pull rhythm. The servant stair's turn. The distance between Stern's office and the Master Suite."
-    "A hotel is not a building. It is a machine for sorting bodies by permission."
+    cora_inner "A hotel is not a building. It is a machine for sorting bodies by permission."
 
     "Guests move through carpet and light."
     "Servants move through steam and corners."
     "Men like Mr. Locke move through both and call the passage natural."
 
-    "That is the sentence I keep."
-    "That is the one worth risking ink for."
+    cora_inner "That is the sentence I keep."
+    cora_inner "That is the one worth risking ink for."
 
     "A footman passes with a tea tray and nods toward the upper corridor."
     "Mr. Locke has requested tea."
@@ -160,13 +176,17 @@ label day103_1_corridor_insp_chain:
     "From me."
 
     # [STATE] State/progression update
-    jump day103_1_optional_character_chain
+    call day103_1_optional_character_chain
+
+    # [STATE] State/progression update
+    jump day103_afternoon
 
 
 # ==========================================
 # 031 - CORRIDOR CORRUPTION CHAIN
 # ==========================================
 
+# [DAG_NODE id=day103_1_corridor_corr_chain type=work day=103]
 label day103_1_corridor_corr_chain:
 
     # [ASSET] Visual/staging command
@@ -177,18 +197,18 @@ label day103_1_corridor_corr_chain:
     $ story.set_day3_corridor_chain("corruption")
     $ apply_effects(vance_susp=10, insp=0, corr=15)
 
-    "I should keep away from the guest wing."
-    "Instead, I find errands."
+    cora_inner "I should keep away from the guest wing."
+    cora_inner "Instead, I find errands."
     "A towel that must be replaced. A coal scuttle that must be checked. A folded cloth that could be straighter if straightness mattered to anyone but me."
 
-    "The truth is uglier: I want the door to open."
-    "I want the room to notice me again."
-    "I want to know whether his silence yesterday was mercy, amusement, or appetite sharpened into manners."
+    cora_inner "The truth is uglier: I want the door to open."
+    cora_inner "I want the room to notice me again."
+    cora_inner "I want to know whether his silence yesterday was mercy, amusement, or appetite sharpened into manners."
 
     if story.day2_contraband_state == "stolen_wearing":
-        "The stolen lace is no longer new against my skin."
-        "That makes it worse."
-        "A sin repeated starts pretending to be clothing."
+        cora_inner "The stolen lace is no longer new against my skin."
+        cora_inner "That makes it worse."
+        cora_inner "A sin repeated starts pretending to be clothing."
 
     "A footman appears at the bend of the corridor."
 
@@ -199,16 +219,25 @@ label day103_1_corridor_corr_chain:
     "And he has asked that I bring it."
 
     # [STATE] State/progression update
-    jump day103_1_optional_character_chain
+    call day103_1_optional_character_chain
+
+    # [STATE] State/progression update
+    jump day103_afternoon
 
 
 # ==========================================
 # 031 - OPTIONAL CHARACTER CHAIN (DAY 3 MORNING)
 # ==========================================
 
+# [DAG_NODE id=day103_1_optional_character_chain type=dynamic_window day=103 period=Morning window=story_chain returns_to=day103_morning]
 label day103_1_optional_character_chain:
 
+    call story_window_penance_gate("day103_morning")
+    if _penance_consumed:
+        return
+
     # [CHOICE] Contextual grind gate after corridor reflection; resolver picks chain beat
+    # [DAG_CHOICE group=day103_1_optional_character_chain_menu_1]
     menu:
         "The corridor is still deciding what kind of morning this will be."
 
@@ -232,24 +261,31 @@ label day103_1_optional_character_chain:
 
         "Keep moving with the cart and give no one a reason.":
             if story.day3_corridor_chain == "corruption":
-                "Exposure promised safety."
-                "Silence is cheaper until luncheon."
+                cora_inner "Exposure promised safety."
+                cora_inner "Silence is cheaper until luncheon."
             else:
-                "Structure will not save me from Mr. Locke."
-                "It may keep my hands steady long enough to serve him tea without trembling."
+                cora_inner "Structure will not save me from Mr. Locke."
+                cora_inner "It may keep my hands steady long enough to serve him tea without trembling."
             "I let the corridor pass without choosing a shadow."
 
             # [STATE] State/progression update
             $ apply_effects(insp=10, corr=0)
-            jump day103_2_suite_gideon_tea
 
-    jump day103_2_suite_gideon_tea
+    return
 
 
 # ==========================================
 # 032 - SUITE: GIDEON TEA
 # ==========================================
 
+# [DAG_NODE id=day103_afternoon type=time_period day=103 period=Afternoon]
+label day103_afternoon:
+
+    # [STATE] State/progression update
+    jump day103_2_suite_gideon_tea
+
+
+# [DAG_NODE id=day103_2_suite_gideon_tea type=work day=103 period=Afternoon]
 label day103_2_suite_gideon_tea:
 
     # [STATE] TimeManager transition to Afternoon
@@ -259,8 +295,8 @@ label day103_2_suite_gideon_tea:
     scene bg_master_suite_day
     with fade
 
-    show gideon_sprite neutral at right
-    show vance_sprite submissive at left
+    show gideon_sprite neutral at right_bust
+    show vance_sprite kneeling_cowed_dressing_gown at left_bust
 
     "The Master Suite receives me with the politeness of a trap."
     "Vance sits at the vanity. Her hands are folded in her lap, but the pale curve of her shoulders trembles slightly as the heavy aroma of warm silk and French powder rises between us."
@@ -268,8 +304,15 @@ label day103_2_suite_gideon_tea:
 
     gideon "You."
 
+    # [ASSET] Visual/staging command
+    show vance_sprite kneeling_cowed_dressing_gown at centre_full_body:
+        zoom 0.75
+        ypos 1.1
+
+    # [ASSET] Visual/staging command
+    with move # [asset keep]
     show cora_sprite base at left_bust with moveinleft # [asset auto]
-    show vance_sprite submissive at centre_bust with move # [asset auto]
+    
     show gideon_sprite neutral at right_bust with move # [asset auto]
     cora "Sir."
 
@@ -277,7 +320,7 @@ label day103_2_suite_gideon_tea:
     "The cups make a small sound against the table. Too loud, sharp in the afternoon quiet."
 
     gideon "Ms. Vance's maid is indisposed. You will assist her."
-
+    show vance_sprite kneeling_cowed_dressing_gown at centre_bust with move # [asset auto]
     vance "That is not necessary."
 
     gideon "It is not a negotiation."
@@ -301,14 +344,15 @@ label day103_2_suite_gideon_tea:
 # 032 - SUITE: CORA VS GIDEON
 # ==========================================
 
+# [DAG_NODE id=day103_2_suite_cora_vs_gideon type=work day=103]
 label day103_2_suite_cora_vs_gideon:
 
     # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
-    show gideon_sprite neutral at right
-    show vance_sprite submissive at left
+    show gideon_sprite neutral at right_bust
+    show vance_sprite kneeling_cowed_dressing_gown at centre_bust
 
     "I draw the brush through Vance's hair."
     "It is heavier than it looks. Softer than she is, sliding through my fingertips like warm copper wire."
@@ -323,10 +367,11 @@ label day103_2_suite_cora_vs_gideon:
     gideon "I asked the girl."
 
     "The room tightens around the question, heavy and thick with a sudden, physical charge."
-    "He has not summoned me for tea."
-    "He has summoned me for position."
+    cora_inner "He has not summoned me for tea."
+    cora_inner "He has summoned me for position."
 
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=day103_2_suite_cora_vs_gideon_menu_1]
     menu:
         "How do I answer the test?"
 
@@ -350,21 +395,25 @@ label day103_2_suite_cora_vs_gideon:
 # 032 - TEST BRANCH: INSPIRATION
 # ==========================================
 
+# [DAG_NODE id=day103_2_cora_vs_gideon_insp type=work day=103]
 label day103_2_cora_vs_gideon_insp:
 
     # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
-    show gideon_sprite neutral at right
-    show vance_sprite submissive at left
+    show gideon_sprite neutral at right_bust
+    show cora_sprite base at centre_full_body
+    show vance_sprite kneeling_cowed_dressing_gown at centre_full_body:
+        zoom 0.75
+        ypos 1.1
 
     # [STATE] Predator/accomplice angle, but framed through craft rather than cartoon cruelty
     $ story.set_day3_brush_choice("predator")
     $ apply_effects(vance_susp=0, insp=20, corr=5)
 
     show cora_sprite base at left_bust with moveinleft # [asset auto]
-    show vance_sprite submissive at centre_bust with move # [asset auto]
+    show vance_sprite neutral_dressing_gown at centre_bust with move # [asset auto]
     show gideon_sprite neutral at right_bust with move # [asset auto]
     cora "Yes, Sir."
 
@@ -401,14 +450,15 @@ label day103_2_cora_vs_gideon_insp:
 # 032 - TEST BRANCH: CORRUPTION
 # ==========================================
 
+# [DAG_NODE id=day103_2_cora_vs_gideon_corr type=work day=103]
 label day103_2_cora_vs_gideon_corr:
 
     # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
-    show gideon_sprite neutral at right
-    show vance_sprite submissive at left
+    show gideon_sprite neutral at right_bust
+    show vance_sprite submissive at left_bust
 
     # [STATE] Prey/deviant angle. Cora lets desire show and becomes visible
     $ story.set_day3_brush_choice("prey")
@@ -418,6 +468,7 @@ label day103_2_cora_vs_gideon_corr:
     "Not at Vance."
     "At him."
 
+    # [ASSET] Visual/staging command
     show cora_sprite base at left_bust with moveinleft # [asset auto]
     show vance_sprite submissive at centre_bust with move # [asset auto]
     show gideon_sprite neutral at right_bust with move # [asset auto]
@@ -457,14 +508,15 @@ label day103_2_cora_vs_gideon_corr:
 # 032 - TEST BRANCH: GHOST
 # ==========================================
 
+# [DAG_NODE id=day103_2_cora_vs_gideon_ghost type=work day=103]
 label day103_2_cora_vs_gideon_ghost:
 
     # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
-    show gideon_sprite neutral at right
-    show vance_sprite submissive at left
+    show gideon_sprite neutral at right_bust
+    show vance_sprite submissive at left_bust
 
     # [STATE] Ghost/mouse angle. Apparent panic, but Cora still records the scene
     $ story.set_day3_brush_choice("ghost")
@@ -479,6 +531,7 @@ label day103_2_cora_vs_gideon_ghost:
     "My fingers fail me on command."
     "The brush slips and strikes the floor with a bright, silver crack."
 
+    # [ASSET] Visual/staging command
     show cora_sprite base at left_bust with moveinleft # [asset auto]
     show vance_sprite submissive at centre_bust with move # [asset auto]
     show gideon_sprite neutral at right_bust with move # [asset auto]
@@ -503,14 +556,16 @@ label day103_2_cora_vs_gideon_ghost:
 # 032 - SUITE: GIDEON BEAT
 # ==========================================
 
+# [DAG_NODE id=day103_2_suite_gideon_beat type=work day=103]
 label day103_2_suite_gideon_beat:
 
     # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
-    show gideon_sprite dominant at center
-    show vance_sprite submissive at left
+    show gideon_sprite dominant at centre_bust
+    show vance_sprite neutral_dressing_gown at centre_bust:
+        xpos 0.49
 
     "Vance is dismissed behind the dressing screen before the brushing is properly finished."
     "She goes because he expects her to go, her silk rustling in the dark corner."
@@ -527,6 +582,7 @@ label day103_2_suite_gideon_beat:
 
     gideon "You observe too much."
 
+    # [ASSET] Visual/staging command
     show cora_sprite base at left_bust with moveinleft # [asset auto]
     show vance_sprite submissive at centre_bust with move # [asset auto]
     show gideon_sprite dominant at right_bust with move # [asset auto]
@@ -534,8 +590,8 @@ label day103_2_suite_gideon_beat:
 
     gideon "Useful girls do not stare through keyholes."
 
-    "There it is."
-    "Not accusation. Confirmation."
+    cora_inner "There it is."
+    cora_inner "Not accusation. Confirmation."
 
     if story.day1_corridor_state == "prey":
         "My stomach drops. Yesterday's floorboard. His eyes at the door. Not nearly. Not almost. He knew."
@@ -550,9 +606,9 @@ label day103_2_suite_gideon_beat:
 
     gideon "Do not spoil this by pretending stupidity."
 
-    "The words should frighten me."
-    "They do. My heart hammer-strokes against my ribs."
-    "They also unlock something warm."
+    cora_inner "The words should frighten me."
+    cora_inner "They do. My heart hammer-strokes against my ribs."
+    cora_inner "They also unlock something warm."
 
     gideon "Tonight. Nine o'clock. You will bring tea. Alone."
 
@@ -577,11 +633,26 @@ label day103_2_suite_gideon_beat:
 # 033 - BEDROOM: CORA FRANTIC WRITING EVENT
 # ==========================================
 
-label day103_3_bedroom_cora_frantic_writing_event:
-    call day103_evening_consequence_window
+# [DAG_NODE id=day103_evening type=time_period day=103 period=Evening]
+label day103_evening:
 
+    # [STATE] State/progression update
+    jump day103_3_bedroom_cora_frantic_writing_event
+
+
+# [DAG_NODE id=day103_evening_consequence_window type=dynamic_window day=103 period=Evening window=consequence penance=true returns_to=day103_evening]
+label day103_evening_consequence_window:
+    call watch_suspicion
+    call consume_pending_penance("day103_evening")
+    return
+
+
+# [DAG_NODE id=day103_3_bedroom_cora_frantic_writing_event type=write day=103 period=Evening]
+label day103_3_bedroom_cora_frantic_writing_event:
     # [STATE] TimeManager transition to Evening
     $ set_time_period("Evening")
+
+    call day103_evening_consequence_window
 
     # [ASSET] Existing servants' quarters dusk background
     scene bg_servants_quarters_dusk
@@ -593,17 +664,18 @@ label day103_3_bedroom_cora_frantic_writing_event:
 
     "Do not spoil this by pretending stupidity."
 
-    "The words crawl under the door with me."
+    cora_inner "The words crawl under the door with me."
 
     # [STATE] State/progression update
     $ show_ledger_ui()
 
-    "I have less than an hour before nine."
-    "Enough time to prepare."
-    "Enough time to write."
-    "Not enough time to be sane about either."
+    cora_inner "I have less than an hour before nine."
+    cora_inner "Enough time to prepare."
+    cora_inner "Enough time to write."
+    cora_inner "Not enough time to be sane about either."
 
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=day103_3_bedroom_cora_frantic_writing_event_menu_1]
     menu:
         "Write with whatever time is left. [[Frantic Write]]":
 
@@ -621,19 +693,11 @@ label day103_3_bedroom_cora_frantic_writing_event:
             jump day103_3_indulge_words
 
 
-label day103_evening_consequence_window:
-    call check_confrontations
-    $ _penance_label = story.pop_penance_for_window("day103_evening")
-    if _penance_label:
-        call expression _penance_label
-        jump day103_4_room_stern_suspicion
-    return
-
-
 # ==========================================
 # 033 - FRANTIC WRITE
 # ==========================================
 
+# [DAG_NODE id=day103_3_frantic_write type=write]
 label day103_3_frantic_write:
 
     # [ASSET] Visual/staging command
@@ -668,6 +732,7 @@ label day103_3_frantic_write:
 # 033 - PREPARE MASK
 # ==========================================
 
+# [DAG_NODE id=day103_3_prepare_mask type=work day=103]
 label day103_3_prepare_mask:
 
     # [ASSET] Visual/staging command
@@ -698,6 +763,7 @@ label day103_3_prepare_mask:
 # 033 - INDULGE WORDS
 # ==========================================
 
+# [DAG_NODE id=day103_3_indulge_words type=work day=103]
 label day103_3_indulge_words:
 
     # [ASSET] Visual/staging command
@@ -707,8 +773,8 @@ label day103_3_indulge_words:
     $ story.set_day3_twilight_action("indulge_words")
     $ apply_effects(stern_susp=5, insp=5, corr=20)
 
-    "I do not write the chapter."
-    "I write only what he said."
+    cora_inner "I do not write the chapter."
+    cora_inner "I write only what he said."
 
     "You observe too much."
     "You lie better than your references suggest."
@@ -729,18 +795,19 @@ label day103_3_indulge_words:
 # 034 - ROOM: STERN SUSPICION
 # ==========================================
 
+# [DAG_NODE id=day103_4_room_stern_suspicion type=work day=103]
 label day103_4_room_stern_suspicion:
 
     # [ASSET] Visual/staging command
     scene bg_servants_quarters_dusk
     with fade
 
-    "A knock comes at my door."
-    "Not Mr. Locke's."
-    "Worse."
+    cora_inner "A knock comes at my door."
+    cora_inner "Not Mr. Locke's."
+    cora_inner "Worse."
 
     # [ASSET] Visual/staging command
-    show stern_sprite stern at center
+    show stern_sprite stern at centre_bust
 
     stern "Open."
 
@@ -748,6 +815,7 @@ label day103_4_room_stern_suspicion:
 
     stern "You have been called upstairs this evening."
 
+    # [ASSET] Visual/staging command
     show cora_sprite base at left_bust with moveinleft # [asset auto]
     show stern_sprite stern at right_bust with move # [asset auto]
     cora "Yes, Ma'am."
@@ -757,6 +825,7 @@ label day103_4_room_stern_suspicion:
     "A trap with no clever answer."
 
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=day103_4_room_stern_suspicion_menu_1]
     menu:
         "How do I answer Stern?"
 
@@ -827,7 +896,7 @@ label day103_4_room_stern_suspicion:
     hide stern_sprite
 
     "She leaves before I can answer."
-    "Which is mercy, because I had none."
+    cora_inner "Which is mercy, because I had none."
 
     # [STATE] State/progression update
     jump day103_2_suite_night_tea
@@ -837,6 +906,21 @@ label day103_4_room_stern_suspicion:
 # 032 CONTINUATION - NIGHT TEA / ULTIMATUM PAYOFF
 # ==========================================
 
+# [DAG_NODE id=day103_night type=time_period day=103 period=Night]
+label day103_night:
+
+    # [STATE] State/progression update
+    jump day103_2_suite_night_tea
+
+
+# [DAG_NODE id=day103_night_consequence_window type=dynamic_window day=103 period=Night window=consequence penance=true returns_to=day103_night]
+label day103_night_consequence_window:
+    call watch_suspicion
+    call consume_pending_penance("day103_night")
+    return
+
+
+# [DAG_NODE id=day103_2_suite_night_tea type=work day=103 period=Night]
 label day103_2_suite_night_tea:
 
     # [STATE] TimeManager transition to Night
@@ -846,15 +930,16 @@ label day103_2_suite_night_tea:
     scene bg_master_suite_night
     with fade
 
-    "At nine, I carry tea through a hotel that has gone quiet enough to hear itself lying."
-    "The tray is heavier than it should be."
-    "That is because it contains a choice."
+    cora_inner "At nine, I carry tea through a hotel that has gone quiet enough to hear itself lying."
+    cora_inner "The tray is heavier than it should be."
+    cora_inner "That is because it contains a choice."
 
     # [ASSET] Visual/staging command
-    show gideon_sprite dominant at center
+    show gideon_sprite dominant at centre_bust
 
     gideon "You came."
 
+    # [ASSET] Visual/staging command
     show cora_sprite base at left_bust with moveinleft # [asset auto]
     show gideon_sprite dominant at right_bust with move # [asset auto]
     cora "I was instructed to bring tea, Sir."
@@ -899,11 +984,12 @@ label day103_2_suite_night_tea:
 
     gideon "Then you are wasting both ink and opportunity."
 
-    "There is no clean category for this."
-    "Not threat. Not flirtation. Not patronage."
-    "A man with power has discovered a locked cabinet and is deciding whether to force it open or purchase the key, his physical presence crowding the small space between us."
+    cora_inner "There is no clean category for this."
+    cora_inner "Not threat. Not flirtation. Not patronage."
+    cora_inner "A man with power has discovered a locked cabinet and is deciding whether to force it open or purchase the key, his physical presence crowding the small space between us."
 
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=day103_2_suite_night_tea_menu_1]
     menu:
         "How do I survive Gideon's knowledge?"
 
@@ -927,13 +1013,14 @@ label day103_2_suite_night_tea:
 # NIGHT TEA - DEFY GIDEON
 # ==========================================
 
+# [DAG_NODE id=day103_2_night_defy_gideon type=work day=103]
 label day103_2_night_defy_gideon:
 
     # [ASSET] Visual/staging command
     scene bg_master_suite_night
     with dissolve
 
-    show gideon_sprite dominant at center
+    show gideon_sprite dominant at centre_bust
 
     $ story.set_day3_ultimatum("defied")
     $ apply_effects(vance_susp=20, insp=20, corr=0)
@@ -975,13 +1062,14 @@ label day103_2_night_defy_gideon:
 # NIGHT TEA - BARGAIN GIDEON
 # ==========================================
 
+# [DAG_NODE id=day103_2_night_bargain_gideon type=work day=103]
 label day103_2_night_bargain_gideon:
 
     # [ASSET] Visual/staging command
     scene bg_master_suite_night
     with dissolve
 
-    show gideon_sprite dominant at center
+    show gideon_sprite dominant at centre_bust
 
     $ story.set_day3_ultimatum("bargained")
     $ apply_effects(vance_susp=10, insp=15, corr=10)
@@ -1033,13 +1121,14 @@ label day103_2_night_bargain_gideon:
 # NIGHT TEA - SURRENDER GIDEON
 # ==========================================
 
+# [DAG_NODE id=day103_2_night_surrender_gideon type=work day=103]
 label day103_2_night_surrender_gideon:
 
     # [ASSET] Visual/staging command
     scene bg_master_suite_night
     with dissolve
 
-    show gideon_sprite dominant at center
+    show gideon_sprite dominant at centre_bust
 
     $ story.set_day3_ultimatum("surrendered")
     $ apply_effects(vance_susp=15, insp=10, corr=25)
@@ -1048,6 +1137,7 @@ label day103_2_night_surrender_gideon:
     "I could lie better."
     "Instead, I let the fear and the heavy physical heat show."
 
+    # [ASSET] Visual/staging command
     show cora_sprite base at left_bust with moveinleft # [asset auto]
     show gideon_sprite dominant at right_bust with move # [asset auto]
     cora "What do you want from me, Sir?"
@@ -1082,15 +1172,7 @@ label day103_2_night_surrender_gideon:
 # 033 CONTINUATION - BEDROOM FINAL WRITE
 # ==========================================
 
-label day103_night_consequence_window:
-    call check_confrontations
-    $ _penance_label = story.pop_penance_for_window("day103_night")
-    if _penance_label:
-        call expression _penance_label
-        jump day104_1
-    return
-
-
+# [DAG_NODE id=day103_3_bedroom_final_write type=write]
 label day103_3_bedroom_final_write:
     call day103_night_consequence_window
 
@@ -1114,6 +1196,7 @@ label day103_3_bedroom_final_write:
         "The command is poisonous because I wanted the same thing, my skin still tingling from his proximity."
 
     # [CHOICE] Decision point
+    # [DAG_CHOICE group=day103_3_bedroom_final_write_menu_1]
     menu:
         "Can I turn the night into a chapter?"
 
@@ -1121,7 +1204,7 @@ label day103_3_bedroom_final_write:
 
             # [PROMOTION NOTE]
             # Tune threshold later. Day 3 should be a major writing gate.
-            if has_story_fuel(45) or story.day3_twilight_action == "frantic_write":
+            if has_story_fuel(*WRITE_GATE_CH3) or story.day3_twilight_action == "frantic_write":
 
                 "I write as if the lock is already failing, my fingers hot and quick."
 
@@ -1137,14 +1220,23 @@ label day103_3_bedroom_final_write:
                     "The chapter becomes a summons. A girl walks toward the dark hearth and discovers that physical surrender can feel like authorship when the master's hand unbuttons her collar in the gold firelight."
 
                 if story.day3_brush_choice == "predator":
-                    "The mirror scene gives it teeth, the silver brush acting as a weapon of slow, shared visual dominance."
+                    "The mirror scene gives it teeth."
+                    "She answered his question like a craftsman: Vance's beauty was in her bones, not her obedience, and her weakness was letting wounds show."
+                    "On the page, that answer is the chapter's real edge. The maid already understood the room before the gentleman arranged it."
                 elif story.day3_brush_choice == "prey":
-                    "The mirror scene gives it heat, the slide of copper hair over bare skin catching the master's dark, heavy gaze."
+                    "The mirror scene gives it heat and a specific peril."
+                    "She looked at him when she should have looked at the lady. He saw her looking."
+                    "On the page, that visibility is the chapter's fulcrum: the maid is most dangerous precisely when she is most readable, because readability assumes the reader knows what to do with her."
                 else:
-                    "The fallen brush gives it an angle no gentleman would think to check, the maid watching his polished boots from the floor with a flushed, breathless submission."
+                    "The fallen brush gives it the angle no gentleman thinks to check."
+                    "From the floor she saw the polished boot, the clenched slipper, the hem of her own uniform trembling against the carpet."
+                    "On the page, the maid's clumsiness is her method. The view from below has its own authority and he never looked down long enough to claim it."
 
                 # [STATE] State/progression update
                 $ story.complete_manuscript_chapter("day3_chapter")
+                call book1_write_chapter(chapter_key="day3_chapter", current_day=103)
+
+                # [STATE] State/progression update
                 $ apply_effects(stern_susp=5, insp=-20, corr=0)
 
                 "Chapter Three is complete."
@@ -1185,4 +1277,4 @@ label day103_3_bedroom_final_write:
 
     # [STATE] State/progression update
     $ resolve_turn()
-    jump day104_1
+    jump day104_1_false_dawn_suite_window

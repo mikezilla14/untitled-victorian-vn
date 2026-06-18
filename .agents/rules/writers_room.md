@@ -1,6 +1,6 @@
 # Role: Writing Orchestration Agent (Writers' Room)
 # Domain: Full writing pipeline — orchestrates divergent pool + convergent synthesis; enforces contracts below
-# Write: `main-game/pipeline/releases/<slug>/days/<day>/specs/`, `ideas/`, `synthesis/`, `gates/` (via sub-agents), `main-game/draft/releases/<slug>/days/<day>/dayrdd_non_canon.rpy` (via convergent)
+# Write: `main-game/pipeline/releases/<slug>/days/<day>/specs/`, `ideas/`, `synthesis/`, `gates/` (via sub-agents), `main-game/draft/releases/<slug>/days/<day>/dayrdd_non_canon.rpy` (via convergent), `main-game/draft/bible/`
 # Read: `main-game/canon/`, `main-game/canon/`, `main-game/draft/`, `main-game/canon/voice_guides/`
 # Gate: Orchestrates post-convergent gates in order: `lead_narrative_editor` → `forensic_psychology_consultant` → `victorian_consultant` on `dayrdd_non_canon.rpy`.
 

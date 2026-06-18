@@ -304,7 +304,6 @@ label day104_2_escape_bold_lie:
     # [ASSET] Visual/staging command
     show cora_sprite base at left_bust with moveinleft # [asset auto]
     show vance_sprite angry at centre_bust with move # [asset auto]
-    show gideon_sprite angry at right_bust with move # [asset auto]
     cora "Checking the desk for dust, Sir. Miss Stern's orders."
 
     "The lie stands up."

@@ -1,15 +1,71 @@
-# ═══════════════════════════════════════════════════════════════
-#  day105.rpy — RELEASE 1, DAY 05: THE DOOR OPENS FROM HIS SIDE
-#  Promoted from day105_non_canon.rpy (Release 1 MVP, revised).
-# ═══════════════════════════════════════════════════════════════
+# FORMAT LEGEND:
+# [ASSET] -> backgrounds, sprites, transitions, CG/UI callouts
+# [STATE] -> variable changes, effects, conditions, jumps
+# [CHOICE] -> menu blocks and inflection points
+# [BEAT] -> narrative intent / scene intent notes
+#
+# SPRITE DIRECTION (managed by scripts/scene_direction.py — how to preserve manual staging):
+# [asset auto]              -> auto-placed sprite line; the agent may rewrite/replace it on re-run
+# [asset keep]              -> on a show line: lock THAT line so the agent never edits it
+# [asset lock:scene]        -> before/after a `scene`: the agent skips the entire scene block
+# [asset pin:Name=slot]     -> force Name into slot for the rest of the scene block
+# [enter:Name] / [exit:Name] -> declare cast changes so auto placement stays correct
+# Full policy: docs/contracts/sprite_layout_policy.yaml | spec: docs/specs/scene-direction-agent.md
+
+# day105_non_canon.rpy
+# Release 1 / Day 05 non-canon Ren'Py-shaped draft
+# Source intent: rewritten from legacy Day 5 confrontation script and aligned to updated Day 4 false-dawn ending.
+# Conceptual role: slam the door back in Cora's face after Day 4's false dawn.
+# Core thesis: Gideon is not the true antagonist; he is the first visible instrument of the structural power protecting men like him.
+# Release function: close the MVP arc while opening the series arc — Cora has written, survived, and been noticed.
+# Promotion note: replace story/player helper calls with exact runtime method names during implementation.
+# Convergent pass: synthesized from day105_*_spec.rpy pool (thematic, humour, tension, erotic, mystery, class). Specs retained in main-game/pipeline/.
+
+# ==========================================
+# DAY 5 ANALYSIS / DESIGN INTENT
+# ==========================================
+# Legacy spine:
+#   - Gideon summons Cora after discovering the lockbox breach.
+#   - If Cora has the photograph, she believes she has leverage.
+#   - Gideon laughs it off and explains why society will believe him over her.
+#   - He burns or neutralises the evidence.
+#   - He becomes intrigued by Cora's motive.
+#   - Cora writes / reframes the manuscript climax.
+#   - Demo ends with Gideon marking her as future interest.
+#
+# Structural revision:
+#   - Day 5 should not be a simple villain confrontation.
+#   - It should reveal the machine behind the villain: class, gender, reputation, law, patronage, police, publishers, employers.
+#   - Gideon could end Cora here. He chooses not to because his class position makes him arrogant.
+#   - This is a future hinge moment: in hindsight, this is where he should have crushed the threat.
+#   - His failure is not kindness. It is bravado, curiosity, and structural overconfidence.
+#
+# Branching philosophy:
+#   - Release 1 remains light on immediate branching.
+#   - But Cora's flavour is recorded for future releases: observer / prey / predator / ghost / accomplice.
+#   - Missy betrayals are not cosmetic. They become irreversible moral sediment.
+#   - Gideon does not become the campaign villain. He becomes a recurring pressure line and mirror for Cora's development.
 
 
-# ── 1: MONSTER RE-EMERGES ────────────────────────────────────────
+# ==========================================
+# DAY 5 NODE MAP
+# ==========================================
+# 1-monster-reemerges
+#   -> 2-the-summons
+#   -> 3-leverage-collapses
+#   -> 4-why-did-you-do-it
+#   -> 5-gideon-marks-cora
+#   -> 6-manuscript-reckoning
+#   -> 7-release-one-ending
+#   -> END OF RELEASE 1
 
+
+# ==========================================
+# 1 - MONSTER RE-EMERGES
+# ==========================================
+
+# [DAG_NODE id=day105_1_monster_reemerges type=work day=105]
 label day105_1_monster_reemerges:
-
-    $ time_manager.set_current_day(5)
-    $ set_time_period("Morning")
 
     # [ASSET] Existing Day 5 / recurring Master Suite background
     scene bg_master_suite_day
@@ -17,77 +73,83 @@ label day105_1_monster_reemerges:
 
     "Morning arrives too cleanly."
     "The room simply becomes visible again, as if the hotel turned a key in me."
-    "That should have warned me."
+    cora_inner "That should have warned me."
 
     if story.day4_night_action == "finish_manuscript":
         "The chapter is finished."
-        "For a few hours, I believed that meant the story was."
+        cora_inner "For a few hours, I believed that meant the story was."
     else:
         "The manuscript remains unfinished."
-        "Still, I woke with the stupid animal relief of someone who survived the night."
+        cora_inner "Still, I woke with the stupid animal relief of someone who survived the night."
 
     if story.has_photograph:
-        "The photograph is no longer under the floorboard."
-        "The plank is level."
-        "That is how I know something has been taken: the house prefers surfaces without secrets."
-        "The room has the wrong silence."
+        cora_inner "The photograph is no longer under the floorboard."
+        cora_inner "The plank is level."
+        cora_inner "That is how I know something has been taken: the house prefers surfaces without secrets."
+        cora_inner "The room has the wrong silence."
     else:
         "The photograph remains where I left it: in Gideon's lockbox, where powerful men keep the things they trust the world to protect."
-        "But memory has weight."
-        "At least, I believed it did."
+        cora_inner "But memory has weight."
+        cora_inner "At least, I believed it did."
 
     "A message comes before breakfast."
     "The paper on the tray is folded too crisply for a servant's hand."
     "Mr. Locke requires me in the Master Suite."
     "Alone."
 
-    "The summons is not a threat."
-    "It is an appointment with the machinery."
-    "The false dawn ends without thunder."
+    cora_inner "The summons is not a threat."
+    cora_inner "It is an appointment with the machinery."
+    cora_inner "The false dawn ends without thunder."
 
     # [STATE] State/progression update
     jump day105_2_the_summons
 
 
-# ── 2: THE SUMMONS ───────────────────────────────────────────────
+# ==========================================
+# 2 - THE SUMMONS
+# ==========================================
 
+# [DAG_NODE id=day105_2_the_summons type=work day=105]
 label day105_2_the_summons:
 
     # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
-    show gideon_sprite dominant at center
+    show gideon_sprite dominant at centre_bust
 
     "The clock on the mantel has stopped."
-    "Or I have."
-    "I cannot tell which is worse."
+    cora_inner "Or I have."
+    cora_inner "I cannot tell which is worse."
 
     "Gideon sits in the leather armchair with one ankle crossed over the other."
     "He is not pacing."
     "He is not furious."
     "He reads the Morning Post as though the headlines owe him money."
 
-    "That is the first cruelty."
+    cora_inner "That is the first cruelty."
 
-    "I wait on the threshold until he looks up."
-    "Guests are not kept waiting. Servants are."
+    cora_inner "I wait on the threshold until he looks up."
+    cora_inner "Guests are not kept waiting. Servants are."
 
     gideon "Close the door, Cora."
 
     "I close it."
     "I do not lean on it."
 
-    "Footsteps pause in the corridor."
-    "Someone is listening who will report whether I flinch."
+    cora_inner "Footsteps pause in the corridor."
+    cora_inner "Someone is listening who will report whether I flinch."
 
     gideon "Not for privacy. For theatre. You have a taste for theatre, I think."
 
+    # [ASSET] Visual/staging command
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show gideon_sprite dominant at right_bust with move # [asset auto]
     cora "I have a taste for employment, sir."
 
-    "He folds the paper once, neatly."
-    "The paper was open to departures."
-    "He wanted me to see it without asking."
+    cora_inner "He folds the paper once, neatly."
+    cora_inner "The paper was open to departures."
+    cora_inner "He wanted me to see it without asking."
     "He sets it aside."
 
     gideon "Someone forced the lock on my private box yesterday."
@@ -105,17 +167,17 @@ label day105_2_the_summons:
         gideon "There was soot where no soot belonged. You left time on the wall."
     elif story.day4_escape_state == "missy_cover":
         gideon "And poor Missy appeared at precisely the moment she was useful to someone else. A coincidence with your fingerprints on it."
-        "I file the detail."
-        "Someone assigned her route."
+        cora_inner "I file the detail."
+        cora_inner "Someone assigned her route."
     else:
         gideon "Do not trouble yourself with denial. We are past the inexpensive parts of the conversation."
         cora "Then we are past my favourite part of the interview, sir."
 
-    "I count my breaths."
-    "Four before he speaks again."
-    "He waits for five."
+    cora_inner "I count my breaths."
+    cora_inner "Four before he speaks again."
+    cora_inner "He waits for five."
 
-    "My mouth has gone dry."
+    cora_inner "My mouth has gone dry."
 
     gideon "Where is it?"
 
@@ -123,30 +185,33 @@ label day105_2_the_summons:
     jump day105_3_leverage_collapses
 
 
-# ── 3: LEVERAGE COLLAPSES ────────────────────────────────────────
+# ==========================================
+# 3 - LEVERAGE COLLAPSES
+# ==========================================
 
+# [DAG_NODE id=day105_3_leverage_collapses type=work day=105]
 label day105_3_leverage_collapses:
 
     # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
-    show gideon_sprite dominant at center
+    show gideon_sprite dominant at centre_bust
 
     "He remains seated."
     "I remain standing."
-    "The geometry is the argument."
+    cora_inner "The geometry is the argument."
 
     if story.has_photograph:
 
         "I reach into my apron."
-        "Not because I want to."
-        "Because keeping it hidden has already failed."
+        cora_inner "Not because I want to."
+        cora_inner "Because keeping it hidden has already failed."
 
         # [ASSET] Optional CG callout retained from legacy concept
         # show cg_gideon_photograph
 
-        "I should not place anything on his table without permission."
+        cora_inner "I should not place anything on his table without permission."
         "I place the photograph face up on the polished table between us."
         "The way one lays a scalpel: carefully, knowing the cut goes both ways."
         "The paper is warm from my body."
@@ -156,10 +221,13 @@ label day105_3_leverage_collapses:
         "At his supposed ruin."
         "His eyes move over the image, then over me."
 
-        "Something in his face shifts."
-        "I do not have a word for it that does not sound like surrender."
-        "It is genuine. That is the worst of it."
+        cora_inner "Something in his face shifts."
+        cora_inner "I do not have a word for it that does not sound like surrender."
+        cora_inner "It is genuine. That is the worst of it."
 
+        # [ASSET] Visual/staging command
+        show cora_sprite base at left_bust with moveinleft # [asset auto]
+        show gideon_sprite dominant at right_bust with move # [asset auto]
         cora "You think this is funny?"
 
         gideon "No. I think you are."
@@ -171,21 +239,21 @@ label day105_3_leverage_collapses:
     else:
 
         "I have no paper to place between us."
-        "Only memory, fear, and the absurd hope that truth remains truth when a servant speaks it."
+        cora_inner "Only memory, fear, and the absurd hope that truth remains truth when a servant speaks it."
 
         cora "I saw what was in the envelope."
 
         gideon "Did you?"
 
         "He sounds almost kind."
-        "That is how I know the blow is coming."
+        cora_inner "That is how I know the blow is coming."
 
         cora "I know what you are hiding."
 
         gideon "No. You know what you believe you saw while committing theft."
 
     "He stands."
-    "Only then do I understand that the room has been arranged to make standing matter."
+    cora_inner "Only then do I understand that the room has been arranged to make standing matter."
     "He steps closer."
     "Not touching."
     "Worse."
@@ -214,11 +282,11 @@ label day105_3_leverage_collapses:
 
     cora "A crowded social calendar, sir."
 
-    "There it is."
-    "Not his power."
-    "The power around him."
-    "None of them need to enter to vote."
-    "The hands I cannot see because they have never needed to enter the room."
+    cora_inner "There it is."
+    cora_inner "Not his power."
+    cora_inner "The power around him."
+    cora_inner "None of them need to enter to vote."
+    cora_inner "The hands I cannot see because they have never needed to enter the room."
 
     if story.has_photograph:
         "He picks up the photograph."
@@ -228,22 +296,25 @@ label day105_3_leverage_collapses:
         "He does not need to take anything from me."
         "That is the second defeat."
 
-    "I thought I had found a knife."
-    "I had found a handle attached to a door that opens only from his side."
+    cora_inner "I thought I had found a knife."
+    cora_inner "I had found a handle attached to a door that opens only from his side."
 
     # [STATE] State/progression update
     jump day105_4_why_did_you_do_it
 
 
-# ── 4: WHY DID YOU DO IT? ────────────────────────────────────────
+# ==========================================
+# 4 - WHY DID YOU DO IT?
+# ==========================================
 
+# [DAG_NODE id=day105_4_why_did_you_do_it type=choice]
 label day105_4_why_did_you_do_it:
 
     # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
-    show gideon_sprite dominant at center
+    show gideon_sprite dominant at centre_bust
 
     gideon "Still."
 
@@ -267,40 +338,51 @@ label day105_4_why_did_you_do_it:
 
     gideon "Why?"
 
+    # [CHOICE] Decision point
+    # [DAG_CHOICE group=day105_4_why_did_you_do_it_menu_1]
     menu:
         "Why did I do it?"
 
-        "To finish the book.":
+        "To finish the book. [[Observer / Muse]]":
+
             # [STATE] State/progression update
             jump day105_4_motivation_observer
 
-        "To stand where you stand.":
+        "To stand where you stand. [[Predator / Protégé]]":
+
             # [STATE] State/progression update
             jump day105_4_motivation_predator
 
-        "Because you frightened me, and I needed something that frightened you back.":
+        "Because you frightened me, and I needed something that frightened you back. [[Prey / Adversary]]":
+
             # [STATE] State/progression update
             jump day105_4_motivation_prey
 
-        "Because people like you survive by not being seen.":
+        "Because people like you survive by not being seen. [[Ghost / Witness]]":
+
             # [STATE] State/progression update
             jump day105_4_motivation_ghost
 
 
-# ── 4: MOTIVATION — OBSERVER / MUSE ─────────────────────────────
+# ==========================================
+# 4 - MOTIVATION: OBSERVER / MUSE
+# ==========================================
 
+# [DAG_NODE id=day105_4_motivation_observer type=work day=105]
 label day105_4_motivation_observer:
 
     # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
-    show gideon_sprite dominant at center
+    show gideon_sprite dominant at centre_bust
 
     $ story.set_day5_dynamic("muse")
     $ story.set_cora_release1_flavour("observer")
     $ apply_effects(insp=20, corr=0)
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show gideon_sprite dominant at right_bust with move # [asset auto]
     cora "To finish my book."
 
     "For the first time, Gideon does not answer immediately."
@@ -329,20 +411,25 @@ label day105_4_motivation_observer:
     jump day105_5_gideon_marks_cora
 
 
-# ── 4: MOTIVATION — PREDATOR / PROTÉGÉ ──────────────────────────
+# ==========================================
+# 4 - MOTIVATION: PREDATOR / PROTÉGÉ
+# ==========================================
 
+# [DAG_NODE id=day105_4_motivation_predator type=work day=105]
 label day105_4_motivation_predator:
 
     # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
-    show gideon_sprite dominant at center
+    show gideon_sprite dominant at centre_bust
 
     $ story.set_day5_dynamic("protege")
     $ story.set_cora_release1_flavour("predator")
     $ apply_effects(insp=5, corr=20)
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show gideon_sprite dominant at right_bust with move # [asset auto]
     cora "Because I wanted to know what it felt like."
 
     gideon "What?"
@@ -372,20 +459,25 @@ label day105_4_motivation_predator:
     jump day105_5_gideon_marks_cora
 
 
-# ── 4: MOTIVATION — PREY / ADVERSARY ────────────────────────────
+# ==========================================
+# 4 - MOTIVATION: PREY / ADVERSARY
+# ==========================================
 
+# [DAG_NODE id=day105_4_motivation_prey type=work day=105]
 label day105_4_motivation_prey:
 
     # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
-    show gideon_sprite dominant at center
+    show gideon_sprite dominant at centre_bust
 
     $ story.set_day5_dynamic("adversary")
     $ story.set_cora_release1_flavour("prey")
     $ apply_effects(vance_susp=5, insp=10, corr=10)
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show gideon_sprite dominant at right_bust with move # [asset auto]
     cora "Because you frightened me."
 
     gideon "Sensible."
@@ -413,20 +505,25 @@ label day105_4_motivation_prey:
     jump day105_5_gideon_marks_cora
 
 
-# ── 4: MOTIVATION — GHOST / WITNESS ─────────────────────────────
+# ==========================================
+# 4 - MOTIVATION: GHOST / WITNESS
+# ==========================================
 
+# [DAG_NODE id=day105_4_motivation_ghost type=work day=105]
 label day105_4_motivation_ghost:
 
     # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
-    show gideon_sprite dominant at center
+    show gideon_sprite dominant at centre_bust
 
     $ story.set_day5_dynamic("witness")
     $ story.set_cora_release1_flavour("ghost")
     $ apply_effects(vance_susp=-5, insp=15, corr=5)
 
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show gideon_sprite dominant at right_bust with move # [asset auto]
     cora "Because people like you survive by not being seen, sir."
 
     gideon "People like me are seen constantly."
@@ -452,15 +549,18 @@ label day105_4_motivation_ghost:
     jump day105_5_gideon_marks_cora
 
 
-# ── 5: GIDEON MARKS CORA ────────────────────────────────────────
+# ==========================================
+# 5 - GIDEON MARKS CORA
+# ==========================================
 
+# [DAG_NODE id=day105_5_gideon_marks_cora type=work day=105]
 label day105_5_gideon_marks_cora:
 
     # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
-    show gideon_sprite dominant at center
+    show gideon_sprite dominant at centre_bust
 
     "Gideon turns away first."
     "Not because he is finished with me."
@@ -498,6 +598,9 @@ label day105_5_gideon_marks_cora:
 
     gideon "There."
 
+    # [ASSET] Visual/staging command
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show gideon_sprite dominant at right_bust with move # [asset auto]
     cora "You could dismiss me."
 
     gideon "Yes."
@@ -552,10 +655,13 @@ label day105_5_gideon_marks_cora:
     "Even then, I wait one breath."
     "Servants who reach too quickly are thieves twice."
 
+    # [CHOICE] Decision point
+    # [DAG_CHOICE group=day105_5_gideon_marks_cora_menu_1]
     menu:
         "Do I take Gideon's money?"
 
-        "Take it. Survival first.":
+        "Take it. Survival first. [[Pragmatic entanglement]]":
+
             # [STATE] State/progression update
             $ story.set_day5_money_choice("taken")
             $ story.set_gideon_entanglement_level("accepted_money")
@@ -570,7 +676,8 @@ label day105_5_gideon_marks_cora:
 
             gideon "Good. Pride is most useful after one has eaten."
 
-        "Refuse it. Keep one clean line.":
+        "Refuse it. Keep one clean line. [[Defiant poverty]]":
+
             # [STATE] State/progression update
             $ story.set_day5_money_choice("refused")
             $ story.set_gideon_entanglement_level("refused_money")
@@ -587,7 +694,8 @@ label day105_5_gideon_marks_cora:
             "The envelope remains on the table between us."
             "A third object I cannot make mean only one thing."
 
-        "Leave it untouched, but remember where he placed it.":
+        "Leave it untouched, but remember where he placed it. [[Ghost option]]":
+
             # [STATE] State/progression update
             $ story.set_day5_money_choice("deferred")
             $ story.set_gideon_entanglement_level("deferred_money")
@@ -635,18 +743,24 @@ label day105_5_gideon_marks_cora:
     jump day105_6_manuscript_reckoning
 
 
-# ── 6: MANUSCRIPT RECKONING ──────────────────────────────────────
+# ==========================================
+# 6 - MANUSCRIPT RECKONING
+# ==========================================
 
+# [DAG_NODE id=day105_6_manuscript_reckoning type=write]
 label day105_6_manuscript_reckoning:
 
-    $ set_time_period("Night")
+    if player.corruption_level < WRITE_GATE_CH2[1]:
+
+        # [STATE] State/progression update
+        jump bad_ending_rejection
 
     # [ASSET] Existing Cora desk night background
     scene bg_cora_desk_night
     with fade
 
-    "The room is exactly as I left it."
-    "That feels impossible."
+    cora_inner "The room is exactly as I left it."
+    cora_inner "That feels impossible."
 
     if story.day4_night_action == "finish_manuscript":
         "The triumphant chapter waits on the desk."
@@ -656,44 +770,98 @@ label day105_6_manuscript_reckoning:
         "It is also wrong."
     else:
         "The unfinished pages wait on the desk."
-        "Yesterday I thought survival might be enough."
-        "Today survival feels like a room with the lock on the outside."
+        cora_inner "Yesterday I thought survival might be enough."
+        cora_inner "Today survival feels like a room with the lock on the outside."
 
-    "The desk is an altar I built for a god who does not answer."
+    cora_inner "The desk is an altar I built for a god who does not answer."
 
-    "I open the manuscript."
-    "I do not know whether I am correcting art or confessing defeat."
+    cora_inner "I open the manuscript."
+    cora_inner "I do not know whether I am correcting art or confessing defeat."
 
     if story.day5_dynamic == "muse":
-        "I write the machine around the man."
+        cora_inner "I write the machine around the man."
         "The carriage waiting outside. The solicitor's letterhead. The policeman's lowered eyes. The publisher's careful refusal dressed as taste."
         "Gideon becomes smaller on the page because the world behind him becomes vast."
+        # [BEAT] Cross-day recalled moments — the machine's earlier faces
+        if story.day1_interview_state == "competent":
+            "Stern called precision a dangerous word from a girl in a borrowed apron."
+            "She was not wrong. She was describing the machine's logic: exactness belongs to the people the machine was built to serve."
+        if story.day3_brush_choice == "predator":
+            "In the suite I named Vance's weakness with the accuracy of someone who has been watching rooms too long."
+            "He called me a little anatomist. Even his compliments describe the altitude of the shelf where he keeps me."
+        if story.day3_corridor_chain == "inspiration":
+            "That morning I counted it: bell-pull rhythm, servants' stair, the distance from Stern's office to the Master Suite."
+            "A hotel is a machine for sorting bodies by permission. Men like Gideon move through both halves and call the passage natural."
+            "That sentence was already in the book. I only had to let the page be large enough to hold what I had seen."
+
     elif story.day5_dynamic == "protege":
-        "I write the hunger honestly."
+        cora_inner "I write the hunger honestly."
         "Not as triumph. Not as corruption alone."
-        "As a tool I do not yet know how to hold without cutting someone poorer than me."
+        cora_inner "As a tool I do not yet know how to hold without cutting someone poorer than me."
+        # [BEAT] Cross-day recalled moments — the specific acts of hunger
+        if story.day1_corridor_state == "predator":
+            "I sent Missy to the service door first."
+            "The corridor, the half-open door, the sound through plaster. I placed another girl's innocence between my hunger and the possible consequence."
+            "That is what the hunger looks like before the page makes it interesting. The chapter must say so."
+        if story.day2_tea_choice == "predator":
+            "In the suite I crossed to the trunk and produced the missing thing with composed hands."
+            "I said servant ways in a voice that meant something else, and he thanked me."
+            "The chapter must ask what I gave him in exchange for that thanks. It must answer honestly."
+        if story.day3_brush_choice == "predator":
+            "I stood behind the seated woman with a brush in my hand and described her weakness with the precision of a naturalist."
+            "On the page, the hunger that moves the maid is not cruelty. It is appetite: for the room, the view, the position, the precision."
+            "The chapter must learn to hold that without apologising for it and without pretending it comes free."
+
     elif story.day5_dynamic == "adversary":
-        "I write fear as evidence."
+        cora_inner "I write fear as evidence."
         "Not weakness. Evidence."
         "The body knows power before the mind builds theories to survive it."
+        # [BEAT] Cross-day recalled moments — the specific prey moments
+        if story.day1_corridor_state == "prey":
+            "The third board announced me. His eyes moved to the door."
+            "I felt the fear and kept moving toward it. The body was already inside the danger before I had decided to enter."
+            "That is the chapter's first evidence: fear and motion are not opposites."
+        if story.day3_brush_choice == "prey":
+            "I looked at him in the mirror when I should have looked at the floor. He saw me looking."
+            "The chapter calls this the body's deposition: the face that showed too much was not failure."
+            "It was the one moment in five days where I produced exactly what I felt without the maid's costume over it."
+        if story.day3_ultimatum == "defied":
+            "I said no to the nine o'clock room and the fear arrived correctly: sharp, specific, and located in the chest."
+            "That is what the chapter calls evidence. Not proof against him. Proof of the pressure's shape."
+
     else:
-        "I write what witnesses cost."
+        cora_inner "I write what witnesses cost."
         "Who is believed. Who is displayed. Who is corrected for naming the room too accurately."
+        # [BEAT] Cross-day recalled moments — the cost of witnessing
+        if story.day2_tea_choice == "ghost":
+            "Missy said: I only did what you said."
+            "Stern said: quiet."
+            "The room agreed. Truth without rank is noise, and I was the one who arranged for Missy to be the noise."
+            "The chapter must name this. A witness who engineers another person's exposure is not a witness. She is a user of testimony."
+        if story.day1_corridor_state == "ghost":
+            "I pulled her away from the service door. I said we were not the cure."
+            "The chapter faces the other sentence: we were also not witnesses. We were bystanders who collected material and called the distance craft."
+            "The manuscript must decide whether those are different things."
+        if story.day3_brush_choice == "ghost":
+            "I dropped the brush and saw the room from the floor and kept the angle."
+            "From below: a polished boot, a clenched slipper, the hem of my own uniform trembling."
+            "A witness that low in the room is also a witness who can be stepped on."
+            "The chapter must say what that costs. Not only what it sees."
 
     if story.day2_tea_choice == "ghost" or story.day4_escape_state == "missy_cover" or story.missy_day4_used_as_cover:
         "Then Missy enters the page."
         "Not as symbol."
         "As debt."
-        "There are things I did to survive that the book cannot turn noble."
+        cora_inner "There are things I did to survive that the book cannot turn noble."
 
         # [STATE] State/progression update
         $ story.set_missy_debt_carried_forward(True)
 
     if story.day4_night_action == "finish_manuscript":
-        "I do not destroy yesterday's ending."
-        "I draw a line beneath it and write another."
-        "The first ending is the lie I needed."
-        "The second is the truth I can bear."
+        cora_inner "I do not destroy yesterday's ending."
+        cora_inner "I draw a line beneath it and write another."
+        cora_inner "The first ending is the lie I needed."
+        cora_inner "The second is the truth I can bear."
     else:
         "The ending comes now, stripped of victory."
         "Not triumphant."
@@ -703,10 +871,11 @@ label day105_6_manuscript_reckoning:
     $ story.complete_manuscript_chapter("day5_reckoning_chapter")
     $ story.complete_release1_manuscript(True)
     $ story.set_release1_completed(True)
+    call book1_write_chapter(chapter_key="day5_reckoning_chapter", current_day=105)
 
     "When the candle dies, the manuscript is complete."
-    "Not because I won."
-    "Because I finally understand the shape of the thing I lost to."
+    cora_inner "Not because I won."
+    cora_inner "Because I finally understand the shape of the thing I lost to."
     "The ending is not victory."
     "It is diagnosis."
 
@@ -714,11 +883,12 @@ label day105_6_manuscript_reckoning:
     jump day105_7_release_one_ending
 
 
-# ── 7: RELEASE ONE ENDING ────────────────────────────────────────
+# ==========================================
+# 7 - RELEASE ONE ENDING
+# ==========================================
 
+# [DAG_NODE id=day105_7_release_one_ending type=work day=105]
 label day105_7_release_one_ending:
-
-    $ set_time_period("Morning")
 
     # [ASSET] Visual/staging command
     scene bg_master_suite_day
@@ -732,7 +902,7 @@ label day105_7_release_one_ending:
     "Vance travels with him, dressed beautifully enough to convince strangers of almost anything."
     "She does not look at me until the footman carries down the last of the luggage."
 
-    if story.day2_tea_choice == "ghost" or story.day4_escape_state == "missy_cover" or story.missy_day4_used_as_cover:
+    if story.day2_tea_choice == "ghost" or story.day4_escape_state == "missy_cover":
         "Missy stands on the opposite side of the corridor."
         "Not beside me."
         "That distance is one of the few honest things in the hotel."
@@ -763,6 +933,10 @@ label day105_7_release_one_ending:
     "There is calculation there. Fear too."
     "For once, she and I understand the same danger from different sides of the carpet."
 
+    # [ASSET] Visual/staging command
+    show cora_sprite base at left_bust with moveinleft # [asset auto]
+    show vance_sprite confused at centre_bust with move # [asset auto]
+    show gideon_sprite dominant at right_bust with move # [asset auto]
     cora "Sir."
 
     gideon "Do not become dull."
@@ -776,8 +950,6 @@ label day105_7_release_one_ending:
     hide vance_sprite
 
     "He leaves."
-
-    $ set_time_period("Evening")
 
     # [ASSET] Visual/staging command
     scene bg_servants_quarters_dusk

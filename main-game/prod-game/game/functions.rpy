@@ -1,9 +1,24 @@
+# FORMAT LEGEND:
+# [ASSET] -> backgrounds, sprites, transitions, CG/UI callouts
+# [STATE] -> variable changes, effects, conditions, jumps
+# [CHOICE] -> menu blocks and inflection points
+# [BEAT] -> narrative intent / scene intent notes
+#
+# SPRITE DIRECTION (managed by scripts/scene_direction.py — how to preserve manual staging):
+# [asset auto]              -> auto-placed sprite line; the agent may rewrite/replace it on re-run
+# [asset keep]              -> on a show line: lock THAT line so the agent never edits it
+# [asset lock:scene]        -> before/after a `scene`: the agent skips the entire scene block
+# [asset pin:Name=slot]     -> force Name into slot for the rest of the scene block
+# [enter:Name] / [exit:Name] -> declare cast changes so auto placement stays correct
+# Full policy: docs/contracts/sprite_layout_policy.yaml | spec: docs/specs/scene-direction-agent.md
+
 # ═══════════════════════════════════════════════════════════════
-#  functions.rpy
-#  All Python-side game logic.
-#  Keep Ren'Py script files free of inline Python wherever possible.
-#  If you need a new mechanic, add a function here and call it
-#  from the narrative with a $ prefix.
+#  functions_non_canon.rpy
+#  Writers' Room — promotion source for main-game/prod-game/game/functions.rpy
+#
+#  NOT loaded at runtime. During Release 1 promotion, merge this file into
+#  functions.rpy (or diff-merge the marked sections).
+#  Baseline synced from main-game/prod-game/game/functions.rpy at promotion time.
 # ═══════════════════════════════════════════════════════════════
 
 init python:
@@ -74,11 +89,26 @@ init python:
 
         return new
 
+    # Writing gates use AND semantics: inspiration AND corruption_level must both clear.
+    # (required_insp, required_corr) — not a sum.
+    WRITE_GATE_CH1 = (15, 2)
+    WRITE_GATE_CH2 = (30, 3)
+    WRITE_GATE_CH3 = (45, 3)
+    # Day 101 quality: below this corruption level → slop chapter (no manuscript_progress).
+    WRITE_SLOP_MAX_CORRUPTION_LEVEL = 2
+
+    # Consolidated anxiety blocks triumphant write at Day 104 twilight.
+    ANXIETY_WRITE_PARALYSIS = 85
+
+    def missy_repair_available():
+        """Missy repair twilight option — only after Day 4 cover betrayal, once."""
+        return story.missy_day4_used_as_cover and story.missy_day4_repair_state == "none"
+
     def apply_effects(insp=0, corr=0, susp=0, 
-                      stern_susp=0, stern_base=0, 
-                      vance_susp=0, vance_base=0, 
-                      missy_susp=0, missy_base=0,
-                      gideon_susp=0, gideon_base=0):
+                        stern_susp=0, stern_base=0, 
+                        vance_susp=0, vance_base=0, 
+                        missy_susp=0, missy_base=0,
+                        gideon_susp=0, gideon_base=0):
         success = True
 
         # Inspiration:
@@ -111,13 +141,14 @@ init python:
             raise_suspicion("missy", amount=missy_susp, base_amount=missy_base)
 
         player.update_stats()
+        renpy.call("watch_suspicion")
         return success
 
     def resolve_turn():
         """
         Enforce safe turn ordering: fail-state check before passive decay.
         """
-        renpy.call("check_suspicion")
+        renpy.call("watch_suspicion")
         player.update_stats()
 
     def set_time_period(period):
@@ -126,11 +157,11 @@ init python:
         """
         time_manager.set_time_of_day(period)
 
-    def attempt_write(required_insp=30, cost=20):
+    def attempt_write(required_insp=30, cost=20, required_corr=3):
         """
         Shared writing-gate helper.
         """
-        if player.inspiration < required_insp:
+        if player.inspiration < required_insp or player.corruption_level < required_corr:
             return False
         return player.spend_inspiration(cost)
 
@@ -141,10 +172,12 @@ init python:
         """
         renpy.call_screen("ledger_ui")
 
-    def has_story_fuel(required_total=15):
+    def has_story_fuel(required_insp=30, required_corr=3):
         """
-        Read-only writing-gate check.
-        Returns True if (Inspiration + Corruption XP) meets the threshold.
-        Does not spend any resources — use attempt_write() for the actual gate.
+        Read-only writing-gate check (AND, not sum).
+        Returns True only when BOTH:
+            player.inspiration >= required_insp
+            player.corruption_level >= required_corr
+        Use WRITE_GATE_CH1 / CH2 / CH3 for manuscript slots.
         """
-        return (player.inspiration + player.corruption_xp) >= required_total
+        return player.has_story_fuel(required_insp, required_corr)

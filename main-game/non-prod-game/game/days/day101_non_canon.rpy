@@ -301,7 +301,7 @@ label day101_1_vance_throws_toy:
     # [ASSET] Visual/staging command
     with dissolve
     # [ASSET] Visual/staging command
-    show gideon_sprite at right_bust:
+    show gideon_sprite cold at right_bust:
         zoom 1
         xalign 0.75
 

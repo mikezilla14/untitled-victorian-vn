@@ -1,28 +1,98 @@
-# ═══════════════════════════════════════════════════════════════
-#  day104.rpy — RELEASE 1, DAY 04: THE FALSE DAWN
-#  Promoted from day104_non_canon.rpy (Release 1 MVP, revised).
-# ═══════════════════════════════════════════════════════════════
+# FORMAT LEGEND:
+# [ASSET] -> backgrounds, sprites, transitions, CG/UI callouts
+# [STATE] -> variable changes, effects, conditions, jumps
+# [CHOICE] -> menu blocks and inflection points
+# [BEAT] -> narrative intent / scene intent notes
+#
+# SPRITE DIRECTION (managed by scripts/scene_direction.py — how to preserve manual staging):
+# [asset auto]              -> auto-placed sprite line; the agent may rewrite/replace it on re-run
+# [asset keep]              -> on a show line: lock THAT line so the agent never edits it
+# [asset lock:scene]        -> before/after a `scene`: the agent skips the entire scene block
+# [asset pin:Name=slot]     -> force Name into slot for the rest of the scene block
+# [enter:Name] / [exit:Name] -> declare cast changes so auto placement stays correct
+# Full policy: docs/contracts/sprite_layout_policy.yaml | spec: docs/specs/scene-direction-agent.md
+
+# day104_non_canon.rpy
+# Release 1 / Day 04 non-canon Ren'Py-shaped draft
+# Source intent: parsed from legacy Day 4 heist script and reframed as the false dawn / tension-release day.
+# Conceptual role: Cora survives the monster's house in daylight, finishes the manuscript, and believes she has gained decisive leverage.
+# Day 5 should puncture that belief: Gideon is not the true invulnerable enemy; the society protecting him is.
+# Asset constraint: uses assets already present in the supplied Day 4 draft plus recurring character sprites from earlier Day drafts.
+# Promotion note: replace story/player helper calls with exact runtime method names during implementation.
+
+# ==========================================
+# DAY 4 ANALYSIS / DESIGN INTENT
+# ==========================================
+# Legacy spine:
+#   - Cora enters Gideon's empty suite while he and Vance are out.
+#   - She opens the lockbox and finds compromising evidence.
+#   - Gideon and Vance return early.
+#   - Cora must escape with or without the evidence.
+#   - Twilight becomes a suspicion-management trap.
+#   - Night branches into exhaustion or writing.
+#
+# Structural revision:
+#   - Day 4 should not feel like escalation into the finale. It should feel like relief earned through terror.
+#   - This is the horror-film false dawn: the final girl finds the weapon, escapes the house, finishes the work.
+#   - The player should feel: "I did it. I have the book. I have leverage. Tomorrow I can change everything."
+#   - Day 5 then proves that individual leverage is not enough against class, gender, law, money, and reputation.
+#
+# Key correction:
+#   - The photograph is not truly "ultimate leverage." It is Cora's believed leverage.
+#   - It can ruin Gideon only if the world agrees to treat Cora as credible, safe, and worth hearing.
+#   - Day 4 lets her believe that. Day 5 breaks it.
 
 
-# ── 1: FALSE DAWN / SUITE WINDOW ────────────────────────────────
+# ==========================================
+# DAY 4 NODE MAP
+# ==========================================
+# 4_false_dawn_suite_window
+#   -> 1_lockbox_evidence
+#   -> 2_return_early
+#   -> 2_escape_fireplace / 2_escape_bold_lie / 2_escape_missy_cover
+#   -> 3_stern_pressure
+#   -> 4_twilight_ledger_false_dawn
+#   -> 5_triumphant_chapter
+#   -> 6_false_dawn_ending
+#   -> day105_1_monster_reemerges (Day 105 entry)
 
-label day104_1:
 
+# ==========================================
+# 1 - FALSE DAWN / SUITE WINDOW
+# ==========================================
+
+# [DAG_NODE id=day104 type=time_period day=104 period=Morning]
+label day104:
+
+    # [STATE] State/progression update
+    jump day104_morning
+
+
+# [DAG_NODE id=day104_morning type=time_period day=104 period=Morning]
+label day104_morning:
+
+    # [STATE] State/progression update
     $ time_manager.set_current_day(4)
     $ set_time_period("Morning")
+    jump day104_1_false_dawn_suite_window
 
+
+# [DAG_NODE id=day104_1_false_dawn_suite_window type=work day=104 period=Morning]
+label day104_1_false_dawn_suite_window:
+
+    # [ASSET] Existing Day 4 Master Suite day background
     scene bg_master_suite_day
     with fade
 
     "Morning enters the Master Suite as if nothing terrible has ever happened there."
-    "That is the talent of expensive rooms."
-    "They reset themselves."
+    cora_inner "That is the talent of expensive rooms."
+    cora_inner "They reset themselves."
 
     "Gideon and Vance have gone to a matinee in the West End."
-    "Stern believes I am polishing silver on the ground floor."
-    "Missy believes I am avoiding her because guilt has finally made me decent."
+    cora_inner "Stern believes I am polishing silver on the ground floor."
+    cora_inner "Missy believes I am avoiding her because guilt has finally made me decent."
 
-    "Everyone is wrong in a useful direction."
+    cora_inner "Everyone is wrong in a useful direction."
 
     if story.day3_ultimatum == "defied":
         "Last night I told Gideon that my writing was not part of my service."
@@ -37,93 +107,121 @@ label day104_1:
         "Last night left me with too many questions and not enough power."
         "Today I come looking for the thing powerful men hide from one another."
 
-    "The manuscript needs an ending."
-    "Not a pretty one. Not a moral one."
-    "An ending with enough truth inside it to bite."
+    cora_inner "The manuscript needs an ending."
+    cora_inner "Not a pretty one. Not a moral one."
+    cora_inner "An ending with enough truth inside it to bite."
 
     "I cross to the heavy oak writing desk."
-    "The lockbox waits beneath a stack of correspondence, exactly where a careless man would not hide it and a confident man would."
+    cora_inner "The lockbox waits beneath a stack of correspondence, exactly where a careless man would not hide it and a confident man would."
 
+    # [STATE] State/progression update
     jump day104_1_lockbox_evidence
 
 
-# ── 1: LOCKBOX / EVIDENCE ───────────────────────────────────────
+# ==========================================
+# 1 - LOCKBOX / EVIDENCE
+# ==========================================
 
+# [DAG_NODE id=day104_1_lockbox_evidence type=work day=104]
 label day104_1_lockbox_evidence:
 
+    # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
     "The hairpin bends before the lock does."
-    "My hands are slick. My breath is too loud."
-    "Every sound in the room becomes Stern's footstep, Gideon's voice, Vance's laugh returning early down the hall."
+    cora_inner "My hands are slick. My breath is too loud."
+    cora_inner "Every sound in the room becomes Stern's footstep, Gideon's voice, Vance's laugh returning early down the hall."
 
     "Then the lock gives."
 
     "Inside: bank notes, a theatre programme, two folded letters, and an envelope stiff with photographic paper."
 
-    "The photograph is not large."
-    "That feels obscene somehow."
-    "A life can fit on paper smaller than a prayer book."
+    # [ASSET] CG callout retained from legacy draft
+    # show cg_gideon_photograph
+
+    cora_inner "The photograph is not large."
+    cora_inner "That feels obscene somehow."
+    cora_inner "A life can fit on paper smaller than a prayer book."
 
     "Gideon. Another gentleman."
     "Not merely friendly. Not deniable in any honest room."
 
-    "My first feeling is triumph."
-    "My second is fear."
-    "My third is the writer's monstrous little gratitude."
+    cora_inner "My first feeling is triumph."
+    cora_inner "My second is fear."
+    cora_inner "My third is the writer's monstrous little gratitude."
 
-    "Here is the ending."
-    "Here is the proof."
-    "Here is the thing even Gideon Locke cannot smooth over with a quiet voice and a better coat."
+    cora_inner "Here is the ending."
+    cora_inner "Here is the proof."
+    cora_inner "Here is the thing even Gideon Locke cannot smooth over with a quiet voice and a better coat."
 
+    # [STATE] Cora has discovered the leverage. She has not necessarily escaped with it yet
     $ story.set_day4_evidence_discovered(True)
     $ apply_effects(vance_susp=15, insp=20, corr=0)
 
     "I slide the photograph beneath my bodice."
     "It scratches once against my skin and becomes real."
 
+    # [STATE] State/progression update
     jump day104_2_return_early
 
 
-# ── 2: RETURN EARLY ─────────────────────────────────────────────
+# ==========================================
+# 2 - RETURN EARLY
+# ==========================================
 
+# [DAG_NODE id=day104_2_return_early type=work day=104]
 label day104_2_return_early:
 
+    # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
     "A key turns in the outer door."
 
+    # [ASSET] Visual/staging command
     show vance_sprite neutral at centre_bust with moveinright # [asset auto]
     vance "—and I will not tolerate that tone from her again. Not from a dresser, not from a maid, not from anyone."
 
-    "They are early."
-    "Of course they are early."
-    "False dawns do not announce the trap. They simply let the sun in first."
+    cora_inner "They are early."
+    cora_inner "Of course they are early."
+    cora_inner "False dawns do not announce the trap. They simply let the sun in first."
 
-    "I am standing beside Gideon's desk with his lockbox open and his ruin pressed against my ribs."
+    cora_inner "I am standing beside Gideon's desk with his lockbox open and his ruin pressed against my ribs."
 
+    # [CHOICE] Decision point
+    # [DAG_CHOICE group=day104_2_return_early_menu_1]
     menu:
         "Sixty seconds. How do I survive?"
 
         "Hide in the cold hearth. Keep the evidence. [[Ghost escape: high suspicion]]":
+
+            # [STATE] State/progression update
             jump day104_2_escape_fireplace
 
         "Stand in the room and lie cleanly. Keep the evidence. [[Prey escape: high visibility]]":
+
+            # [STATE] State/progression update
             jump day104_2_escape_bold_lie
 
         "Use Missy as cover. Lose the evidence, preserve the alibi. [[Predator escape: low suspicion, moral cost]]":
+
+            # [STATE] State/progression update
             jump day104_2_escape_missy_cover
 
 
-# ── 2: ESCAPE — FIREPLACE ───────────────────────────────────────
+# ==========================================
+# 2 - ESCAPE: FIREPLACE
+# ==========================================
 
+# [DAG_NODE id=day104_2_escape_fireplace type=work day=104]
 label day104_2_escape_fireplace:
 
+    # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
+    # [STATE] Keeps photograph, but creates visible physical evidence on uniform
     $ story.set_day4_escape_state("fireplace")
     $ story.set_has_photograph(True)
     $ apply_effects(stern_susp=35, insp=5, corr=0)
@@ -134,8 +232,9 @@ label day104_2_escape_fireplace:
 
     "I close the lockbox, shove it beneath the correspondence, and crawl into the cold soot with the photograph against my chest."
 
-    show gideon_sprite angry at right
-    show vance_sprite angry at left
+    # [ASSET] Visual/staging command
+    show gideon_sprite angry at right_bust
+    show vance_sprite angry at left_bust
 
     "They enter arguing."
     "Vance first, bright with grievance. Gideon behind her, quiet enough to make the silence arrange itself around him."
@@ -159,6 +258,7 @@ label day104_2_escape_fireplace:
     "At last they move into the bedchamber."
     "At last the sitting room is empty."
 
+    # [ASSET] Visual/staging command
     hide gideon_sprite
     hide vance_sprite
 
@@ -166,16 +266,22 @@ label day104_2_escape_fireplace:
     "The photograph is still mine."
     "So is the soot."
 
-    jump day104_3_stern_pressure
+    # [STATE] State/progression update
+    jump day104_evening
 
 
-# ── 2: ESCAPE — BOLD LIE ────────────────────────────────────────
+# ==========================================
+# 2 - ESCAPE: BOLD LIE
+# ==========================================
 
+# [DAG_NODE id=day104_2_escape_bold_lie type=work day=104]
 label day104_2_escape_bold_lie:
 
+    # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
+    # [STATE] Keeps photograph, but Gideon has seen her too near the desk
     $ story.set_day4_escape_state("bold_lie")
     $ story.set_has_photograph(True)
     $ apply_effects(vance_susp=40, insp=10, corr=5)
@@ -183,8 +289,9 @@ label day104_2_escape_bold_lie:
     "I close the lockbox with one hand and seize the dust cloth with the other."
     "By the time the door opens, I am wiping the desk as if mahogany has personally insulted Miss Stern."
 
-    show vance_sprite angry at left
-    show gideon_sprite angry at right
+    # [ASSET] Visual/staging command
+    show vance_sprite angry at left_bust
+    show gideon_sprite angry at right_bust
 
     vance "What is she doing here?"
 
@@ -194,6 +301,7 @@ label day104_2_escape_bold_lie:
 
     gideon "That is my question."
 
+    # [ASSET] Visual/staging command
     show cora_sprite base at left_bust with moveinleft # [asset auto]
     show vance_sprite angry at centre_bust with move # [asset auto]
     show gideon_sprite angry at right_bust with move # [asset auto]
@@ -233,78 +341,140 @@ label day104_2_escape_bold_lie:
 
     gideon "Go."
 
+    # [ASSET] Visual/staging command
     hide gideon_sprite
     hide vance_sprite
 
     "I go before my courage notices what it has done."
 
-    jump day104_3_stern_pressure
+    # [STATE] State/progression update
+    jump day104_evening
 
 
-# ── 2: ESCAPE — MISSY COVER ─────────────────────────────────────
+# ==========================================
+# 2 - ESCAPE: MISSY COVER
+# ==========================================
 
+# [DAG_NODE id=day104_2_escape_missy_cover type=work day=104]
 label day104_2_escape_missy_cover:
 
+    # [ASSET] Visual/staging command
     scene bg_master_suite_day
     with dissolve
 
+    # [STATE] Lowest suspicion path, but Cora extracts the physical leverage and ruthlessly harms Missy
     $ story.set_day4_escape_state("missy_cover")
     $ story.set_has_photograph(True)
     $ story.set_missy_day4_used_as_cover(True)
     $ apply_effects(vance_susp=-15, missy_susp=20, insp=5, corr=20)
 
-    "Panic makes the first decision."
-    "Ambition improves it."
+    cora_inner "Panic makes the first decision."
+    cora_inner "Ambition improves it."
 
     "I slide the photograph into my bodice and close the lockbox, leaving everything else exactly as I found it."
     "I have the proof."
 
     "I slip through the servants' door as the outer door opens."
 
+    # [ASSET] Visual/staging command
     scene bg_servants_corridor_day
     with fade
 
-    show missy_sprite shocked at center
+
+    show missy_sprite shocked at centre_bust
 
     "Missy is in the corridor with a stack of towels."
-    "Wrong place. Right time."
-    "For me."
+    cora_inner "Wrong place. Right time."
+    cora_inner "For me."
 
+    # [ASSET] Visual/staging command
     show cora_sprite base at left_bust with moveinleft # [asset auto]
     show missy_sprite shocked at right_bust with move # [asset auto]
     cora "They need you in the suite. Now. Take this."
 
     "I push the dust cloth into her hands."
 
-    missy "What? Who?"
+    missy "What? Cora... why are you so pale? Is there..."
 
-    cora "Vance. She's asking for the room to be checked again. Hurry before she comes looking."
+    cora "Vance is asking for the room to be checked again. Hurry before she comes looking and Miss Stern hears the noise."
 
-    "Missy looks toward the door."
-    "She believes me because she still wants the world to contain fewer traps than it does."
+    "Missy's eyes flick to my hands, then to the heavy master suite door. Her sharp observancy senses the transgressive panic in my chest."
+    "She hesitates, her defensive moral guard up, but the threat of Stern and the sheer habit of class-duty make her step forward."
 
-    missy "All right."
+    missy "All right. But don't you wander off, Cora. It isn't proper."
 
-    "She goes in."
+    "She goes in, her shoulders squared against the impending storm."
     "The door closes."
 
-    "I stand in the corridor with empty hands and a perfect alibi."
-    "I have survived."
-    "I have also failed the part of me that came for a weapon."
+    "Instead of running, I find myself frozen against the mahogany paneling."
+    "The wood is cold, but the keyhole is a hot eye, a direct conduit to the danger inside."
+    "I press my ear to the crack of the service door, holding my breath."
 
+    "Within the Master Suite, the air is thick and heavy. I hear the slow, rhythmic click of Mr. Locke's walking stick against the polished floorboards."
+    "He is circling her."
+
+    # [ASSET] Visual/staging command
+    show missy_sprite shocked at centre_bust with move # [asset auto]
+    show gideon_sprite neutral at right_bust with moveinright # [asset auto]
+    gideon "And what, pray tell, are you doing in my quarters, girl? Miss Stern was quite specific about who was to clear these rooms."
+
+    "His voice is a low, silk-wrapped growl, vibrating through the wood. Missy's reply is barely a whisper, yet steady, carrying that active, unyielding moral shield."
+
+    missy "The towels, Mr. Locke. They were reported damp. I was sent to change them."
+
+    "The click of the walking stick stops. Through the gap, I can see Gideon step directly into her space, his towering frame casting a shadow that completely swallows her."
+    "He raises his silver-headed walking stick, the polished wood gliding slowly, suggestively up the front of her uniform. The tip rests beneath her chin, tilting it upward, forcing her head back."
+    "Missy's breath catches. Her hands clench the damp towels against her chest as if they are a shield."
+
+    gideon "Damp, you say? And who, Missy, gave you that report? A maid does not walk into a gentleman's study without a very specific command."
+
+    "He steps closer, his boots almost touching the hem of her skirt. He leans down, his face inches from hers, his free hand rising to trail the starched edge of her collar, his fingers brushing the sensitive skin of her jaw. The class terror is absolute, yet the physical proximity burns with a dark, forbidden heat."
+
+    gideon "Is there someone else here? Someone who sent you to find what does not belong to you?"
+
+    "For a terrible second, I am sure she will speak my name. My pulse beats like a trapped bird in my ears."
+    "But Missy does not flinch from his touch. Her chin remains high against the silver tip of his cane, her dark eyes locking onto his with a quiet, sovereign courage that defies the terror of his touch."
+
+    missy "I was sent by the service board, Sir. No one else."
+
+    "Gideon's thumb traces the edge of her jaw, his eyes narrowing as he studies her flushed face, her parted lips. The silence between them is taut, charged with a heavy, dangerous intimacy."
+
+    gideon "You are either very loyal, or very foolish, Missy. Both are expensive qualities in this house."
+
+    "He slowly lowers the cane, his fingers sliding off her jaw with a lingering touch that leaves Missy trembling yet unbowed."
+
+    gideon "Change the towels. Then leave. Before I decide to charge you for the privilege of your presence."
+
+    "I step back from the door, my hands trembling, my chest tight with a sudden, devastating wave of shame."
+    cora_inner "I have survived."
+    cora_inner "But Missy has paid for my survival in currency I did not have the courage to spend."
+
+    # [STATE] State/progression update
+    jump day104_evening
+
+
+# ==========================================
+# 3 - STERN PRESSURE
+# ==========================================
+
+# [DAG_NODE id=day104_evening type=time_period day=104 period=Evening]
+label day104_evening:
+
+    # [STATE] State/progression update
     jump day104_3_stern_pressure
 
 
-# ── 3: STERN PRESSURE ───────────────────────────────────────────
-
+# [DAG_NODE id=day104_3_stern_pressure type=work day=104 period=Evening]
 label day104_3_stern_pressure:
 
+    # [STATE] State/progression update
     $ set_time_period("Evening")
 
+    # [ASSET] Existing servants' quarters / corridor-adjacent pressure scene
     scene bg_servants_quarters_dusk
     with fade
 
-    "By twilight, survival has begun charging interest."
+    cora_inner "By twilight, survival has begun charging interest."
 
     if story.day4_escape_state == "fireplace":
         "Soot sits beneath my nails, in the seams of my cuffs, along the hem where the apron should be clean."
@@ -315,10 +485,11 @@ label day104_3_stern_pressure:
         "He knows I took the right kind of risk."
     else:
         "Missy returned from the suite with red eyes and a voice pressed flat."
-        "Vance had found shadow. Of course Vance had found shadow."  # (Note: revised to keep consistent text formatting)
+        "Vance had found fault. Of course Vance had found fault."
         "I had handed her a target and called it haste."
 
-    show stern_sprite stern at center
+    # [ASSET] Visual/staging command
+    show stern_sprite stern at centre_bust
 
     stern "Cora."
 
@@ -327,11 +498,14 @@ label day104_3_stern_pressure:
 
     stern "You were difficult to locate this afternoon."
 
+    # [CHOICE] Decision point
+    # [DAG_CHOICE group=day104_3_stern_pressure_menu_1]
     menu:
         "How do I handle Stern's pressure?"
 
         "Give her the boring servant answer. [[-Suspicion]]":
 
+            # [STATE] State/progression update
             $ story.set_day4_stern_response("boring")
             $ apply_effects(stern_susp=-15, insp=0, corr=0)
 
@@ -347,6 +521,7 @@ label day104_3_stern_pressure:
 
         "Let her see I am frightened, not guilty. [[+Inspiration, small suspicion]]":
 
+            # [STATE] State/progression update
             $ story.set_day4_stern_response("frightened")
             $ apply_effects(stern_susp=5, insp=10, corr=0)
 
@@ -362,6 +537,7 @@ label day104_3_stern_pressure:
 
         "Hide behind Missy if she was used. [[Conditional moral cost]]" if story.day4_escape_state == "missy_cover":
 
+            # [STATE] State/progression update
             $ story.set_day4_stern_response("missy_cover")
             $ apply_effects(stern_susp=-10, missy_susp=10, insp=0, corr=10)
 
@@ -381,19 +557,25 @@ label day104_3_stern_pressure:
 
     stern "Do not mistake a guest's notice for fortune. That lesson ruins girls."
 
+    # [ASSET] Visual/staging command
     hide stern_sprite
 
     "She leaves me with the warning and no proof."
-    "Tonight, no proof is beginning to feel like grace."
+    cora_inner "Tonight, no proof is beginning to feel like grace."
 
+    # [STATE] State/progression update
     jump day104_4_twilight_ledger_false_dawn
 
 
-# ── 4: TWILIGHT LEDGER / FALSE DAWN ─────────────────────────────
+# ==========================================
+# 4 - TWILIGHT LEDGER / FALSE DAWN
+# ==========================================
 
+# [DAG_NODE id=day104_4_twilight_ledger_false_dawn type=work day=104]
 label day104_4_twilight_ledger_false_dawn:
     call day104_evening_consequence_window
 
+    # [ASSET] Visual/staging command
     scene bg_servants_quarters_dusk
     with dissolve
 
@@ -401,54 +583,71 @@ label day104_4_twilight_ledger_false_dawn:
 
     "The ledger sits open on my desk."
     "My hands have stopped shaking."
-    "This feels like improvement until I realise they have only gone numb."
+    cora_inner "This feels like improvement until I realise they have only gone numb."
 
-    "The photograph is hidden beneath the loose board under my bed."
-    "Not safe."
-    "Safer than my skin."
-    "I have evidence."
-    "I have leverage."
-    "I have, for the first time since arriving, something Gideon Locke does not want me to have."
+    if story.has_photograph:
+        "The photograph is hidden beneath the loose board under my bed."
+        "Not safe."
+        "Safer than my skin."
+        cora_inner "I have evidence."
+        cora_inner "I have leverage."
+        cora_inner "I have, for the first time since arriving, something Gideon Locke does not want me to have."
+    else:
+        cora_inner "The lockbox still holds what I could not carry."
+        cora_inner "I have memory, appetite, and a manuscript — not yet a weapon."
 
-    "The manuscript waits."
-    "Not for more material."
-    "For courage."
+    cora_inner "The manuscript waits."
+    cora_inner "Not for more material."
+    cora_inner "For courage."
 
+    # [CHOICE] Decision point
+    # [DAG_CHOICE group=day104_4_twilight_ledger_false_dawn_menu_1]
     menu:
         "Perform visible penance to lower their guard. [[Atonement]]":
+
+            # [STATE] State/progression update
             jump day104_4_atonement
 
-        "Risk the dark room to write the triumphant chapter. [[Triumphant Write]]" if player.anxiety < 85:
-            jump day104_5_triumphant_chapter
+        "Risk the dark room to write the triumphant chapter. [[Triumphant Write]]":
 
-        "Risk the dark room to write the triumphant chapter. [[Triumphant Write]]" if player.anxiety >= 85:
-            "My hand shakes too violently to hold the pen. The hotel feels alive, every creaking floorboard a footstep, every shadow a reaching hand."
-            "At this level of anxiety, my panic blocks the pen."
-            jump day104_4_twilight_ledger_false_dawn
+            if player.anxiety >= ANXIETY_WRITE_PARALYSIS:
+                "My hand shakes too violently to hold the pen. The hotel feels alive, every creaking floorboard a footstep, every shadow a reaching hand."
+                "At this level of anxiety, my panic blocks the pen."
 
-        "Find Missy and salvage what remains of her trust. [[Missy Repair]]" if getattr(story, "missy_day4_repair_state", "") == "":
+                # [STATE] State/progression update
+                jump day104_4_twilight_ledger_false_dawn
+
+            jump day104_night
+
+        "Find Missy and salvage what remains of her trust. [[Missy Repair]]" if missy_repair_available():
+
+            # [STATE] State/progression update
             jump day104_4_missy_repair
 
 
-# ── 4: ATONEMENT / SAFETY FIRST ─────────────────────────────────
-
+# [DAG_NODE id=day104_evening_consequence_window type=dynamic_window day=104 period=Evening window=consequence penance=true returns_to=day104_4_twilight_ledger_false_dawn]
 label day104_evening_consequence_window:
-    call check_confrontations
-    $ _penance_label = story.pop_penance_for_window("day104_evening")
-    if _penance_label:
-        call expression _penance_label
-        jump day104_6_false_dawn_ending
+    call watch_suspicion
+    call consume_pending_penance("day104_evening")
     return
 
 
+# ==========================================
+# 4 - ATONEMENT / SAFETY FIRST
+# ==========================================
+
+# [DAG_NODE id=day104_4_atonement type=work day=104]
 label day104_4_atonement:
 
+    # [ASSET] Visual/staging command
     scene bg_servants_quarters_dusk
     with dissolve
 
     $ story.set_day4_twilight_action("atonement")
 
     if story.day4_escape_state == "fireplace":
+
+        # [STATE] State/progression update
         $ apply_effects(stern_susp=-30, insp=0, corr=0)
 
         "I scrub soot from my apron until the water turns grey, then black, then grey again."
@@ -456,6 +655,8 @@ label day104_4_atonement:
         "Good. Blood is easier to explain than chimney dust."
 
     elif story.day4_escape_state == "bold_lie":
+
+        # [STATE] State/progression update
         $ apply_effects(stern_susp=-25, insp=0, corr=0)
 
         "I sit in the laundry corner and mend cuffs with saintly dullness."
@@ -463,6 +664,8 @@ label day104_4_atonement:
         "That is the point."
 
     else:
+
+        # [STATE] State/progression update
         $ apply_effects(stern_susp=-10, insp=0, corr=0)
 
         "I fold linens."
@@ -473,91 +676,117 @@ label day104_4_atonement:
     "It lowers the heat on my neck."
     "But the manuscript remains untouched. I am too exhausted to write."
 
+    # [STATE] State/progression update
     jump day104_6_false_dawn_ending
 
 
-# ── 4: MISSY REPAIR ─────────────────────────────────────────────
+# ==========================================
+# 4 - MISSY REPAIR
+# ==========================================
 
+# [DAG_NODE id=day104_4_missy_repair type=work day=104]
 label day104_4_missy_repair:
 
+    # [ASSET] Visual/staging command
     scene bg_servants_quarters_dusk
     with dissolve
 
-    show missy_sprite shocked at center
+    show missy_sprite shocked at centre_bust
 
     $ story.set_day4_twilight_action("missy_repair")
     $ apply_effects(missy_susp=-15, insp=5, corr=0)
 
-    "Missy sits on the edge of her bed, twisting a handkerchief until it looks strangled."
+    "Missy sits on the edge of her narrow iron bed, twisting her linen handkerchief until her knuckles are as white as the cloth."
+    "She doesn't look like a simple country girl caught in a mistake tonight. Her eyes are quiet, exceptionally focused, and dangerous with what they have resolved."
 
-    missy "You sent me in there."
+    missy "You sent me in there, Cora Vale."
 
+    # [ASSET] Visual/staging command
     show cora_sprite base at left_bust with moveinleft # [asset auto]
     show missy_sprite shocked at right_bust with move # [asset auto]
-    cora "Yes."
+    cora "I did."
 
-    "The word is smaller than the harm."
+    "The word is smaller than the betrayal. It hangs in the narrow space between us, smelling of cedar oil and grey twilight."
 
-    missy "You knew they were angry."
+    missy "You knew they were returning. You knew Mr. Locke was angry. You were standing by his open desk, your hands clean, while I was sent into the suite to take the blow."
 
-    cora "Yes."
+    "She rises, her posture rigid, her voice losing every trace of its deferential junior maid register."
 
-    "No lie comes."
-    "That may be decency."
-    "It may be exhaustion."
+    missy "You're a spy, aren't you? Prying into the suites, stealing Mr. Locke's letters... and you used me as a shield because you thought I was too stupid to see the joints in your performance."
 
-    missy "Why?"
+    cora_inner "She has decoded it. Not with empty-headed curiosity, but with a sharp, sovereign intellect."
 
+    missy "Why, Cora? I trusted you. I thought... I thought you were the only righteous thing in this terrible hotel."
+
+    # [CHOICE] Decision point
+    # [DAG_CHOICE group=day104_4_missy_repair_menu_1]
     menu:
-        "How much truth do I give her?"
+        "Give her the raw, romantic truth. Offer my vulnerability. [[Tender Romance / Path B Intimacy]]":
 
-        "Enough to keep her from hating me completely.":
-
+            # [STATE] Rebuilds trust, progresses Path B romantic intimacy
             $ story.set_missy_day4_repair_state("partial_truth")
-            $ apply_effects(missy_susp=-10, vance_susp=5, insp=10, corr=0)
+            $ apply_effects(missy_susp=-25, vance_susp=5, insp=15, corr=10)
 
-            cora "Because I found something I should not have found. And I panicked."
+            cora "Because I was cornered, and I was terrified of losing the only thing that keeps me alive in this place. My writing. My book."
+            cora "And because when I am terrified, I am a monster. But I would rather be dismissed a hundred times than see you look at me with that wall between us."
 
-            missy "Something of his?"
+            "I step closer, crossing the narrow floorboards, my hands reaching out to cover her raw, trembling fingers."
+            "Missy flinches, her breath catching, but she does not step back. The proximity between us is suffocating, thick with lye-steam and the scent of cedar."
 
-            cora "Yes."
+            cora "I do not see you as a shield, Missy. I see you as the only beautiful thing in this hotel that isn't a lie."
 
-            missy "Was it worth it?"
+            "I raise my hand, my thumb tracing the damp, flushed skin of her cheek, my voice dropping the maid's mask entirely. It is a quiet, sovereign register of deep romantic tenderness."
+            "Missy's eyes widen, her breathing turning shallow, her chest rising against my hands."
 
-            "No answer is safe."
+            missy "Cora... your touch is like... it's like a sin I want to keep."
+            cora "Then let us keep it together. No more shields, Missy. Only this."
 
-            cora "I don't know yet."
+            "She leans her forehead against my shoulder, her body trembling with a self-possessed, deliberate yielding."
+            "The physical heat between us is a dramatic middle ground—restrained, dangerous, but born of absolute romantic trust."
 
-        "Keep the truth. Offer comfort instead.":
+        "Keep the truth. Offer a coward's comfort. [[Guarded Distance]]":
 
+            # [STATE] Safe but keeps Missy guarded, locks out Path B intimacy
             $ story.set_missy_day4_repair_state("comfort_lie")
-            $ apply_effects(missy_susp=-15, insp=0, corr=5)
+            $ apply_effects(missy_susp=-10, insp=0, corr=5)
 
-            cora "Because I am a coward when cornered."
+            cora "Because I am a coward when cornered, Missy. I saw the door, I saw the threat, and I used what was closest. It was cruel, and I cannot justify it."
 
-            missy "That is not an answer."
+            missy "That is a confession, Cora. It is not an apology."
 
-            cora "No. But it is true."
+            cora "No. But it is the only honest thing I have left to give you."
 
-            "She lets me sit beside her."
-            "Not forgiveness."
-            "A pause before judgment."
+            "I sit on the edge of the bed, leaving a cold foot of cedar wood between us."
+            "She does not ask me to leave, but her defensive moral shield is up, her posture guarded."
+            "We are safe from Miss Stern tonight, but the book has lost its partner."
 
+    # [ASSET] Visual/staging command
     hide missy_sprite
 
     "When I return to my room, the emotional toll weighs heavier than the fear."
     "I am safe, but the pen refuses to move. I cannot write tonight."
 
+    # [STATE] State/progression update
     jump day104_6_false_dawn_ending
 
 
-# ── 5: TRIUMPHANT CHAPTER ───────────────────────────────────────
+# ==========================================
+# 5 - TRIUMPHANT CHAPTER
+# ==========================================
 
+# [DAG_NODE id=day104_night type=time_period day=104 period=Night]
+label day104_night:
+
+    # [STATE] State/progression update
+    $ set_time_period("Night")
+    jump day104_5_triumphant_chapter
+
+
+# [DAG_NODE id=day104_5_triumphant_chapter type=work day=104 period=Night]
 label day104_5_triumphant_chapter:
     call day104_night_consequence_window
 
-    $ set_time_period("Night")
-
+    # [ASSET] Visual/staging command
     scene bg_cora_desk_night
     with fade
 
@@ -572,15 +801,102 @@ label day104_5_triumphant_chapter:
 
     "Only the candle, the page, and everything I have stolen without permission."
 
+    # [BEAT] Recalled escape moment — the method of survival shapes what "having the knife" means
+    if story.day4_escape_state == "fireplace":
+        "I still feel the grate. Cold stone. Soot. The particular humiliation of pressing myself smaller than a flue."
+        "I made myself nothing and emerged on the far side of the corridor with charcoal on my apron and the chapter already complete in my head."
+        "The book was always going to come out of that contraction."
+    elif story.day4_escape_state == "bold_lie":
+        "I said something outrageous and watched it land."
+        "Not because they believed me. Because challenging it required effort, and men in that room reserved effort for things that mattered."
+        "I was not yet a thing that mattered enough to disprove. That is the armour this chapter writes itself inside."
+    elif story.day4_escape_state == "missy_cover":
+        "I sent her in first."
+        "The corridor, the door, the timing."
+        "The manuscript gets the chapter it demanded. Missy got the corridor she did not ask for."
+        "That sentence must go somewhere. Here, in this chapter, it becomes a flaw with a purpose. Whether that is craft or rationalisation the page has not yet decided."
+    else:
+        "The escape has already become story."
+        "The fear is still here. But the shape of it is cleaner now."
+
+    # [BEAT] The knife — physical evidence vs memory
+    if story.has_photograph:
+        "The photograph is under the loose board beneath my bed."
+        "Physical evidence. Something that can be held, shown, placed on a table and left to do its own harm."
+        "I have a knife. Tonight I write what it looks like when a maid who has a knife is not afraid of it."
+    else:
+        "I have no paper to place between us. Only the image I carried out in my head instead of my apron pocket."
+        "Memory without documentation. The chapter must convince itself that this is enough."
+        "Tonight it will manage. Tomorrow Gideon will explain otherwise."
+
     "The chapter comes all at once."
     "Not because it is easy."
-    "Because I finally have the knife shaped correctly."
+    "Because I finally understand the shape of the threat, and understanding is a kind of violence."
 
-    "In this chapter, the lord's secret is not named."
-    "It is placed on a table in a sealed envelope and allowed to poison every polite sentence around it."
+    # [BEAT] The chapter's content — archetype-specific false triumph
+    # Primary branch on day2_tea_choice as the dominant moral frame for the story Cora is telling herself
+    if story.day2_tea_choice == "predator":
+        "In this chapter, the maid's composed lie becomes the only true sentence in the room."
+        "She placed the dangerous thing where the dangerous man could find it and be grateful to her for finding it."
+        "She said servant ways in a voice that meant something else, and he heard both meanings and chose the useful one."
+        if story.day3_brush_choice == "predator":
+            "In the mirror she named the seated woman's weakness with the precision of a naturalist."
+            "On the page, that answer is her origin: the maid already understood the room before the gentleman finished furnishing it."
+        elif story.day3_brush_choice == "prey":
+            "She looked at him in the mirror when she should have looked at the lady, and the chapter decides this was strategy too."
+            "The chapter is not entirely honest with itself here. Neither is she."
+        else:
+            "She dropped the brush and saw the room from the floor, and the chapter finds this consistent: she collects views that polished boots cannot reach."
+        "The heroine in this chapter wins by being too useful to destroy and too observant to lie to without cost."
+
+    elif story.day2_tea_choice == "prey":
+        "In this chapter, the maid's partial truth becomes the sharper weapon."
+        "She admitted what she saw and did not admit where she had stood to see it."
+        "The gentleman recognised the gap and called it interesting. The chapter calls the gap the entire point."
+        if story.day3_brush_choice == "predator":
+            "In the mirror she answered clinically and he called it well. The heroine in this chapter wins through accuracy: her eye is better than his secrets."
+        elif story.day3_brush_choice == "prey":
+            "She was seen and let herself be seen, and this chapter insists that visibility chosen is different from visibility imposed."
+            "That may even be true. The chapter believes it with more conviction than Cora does, tonight, writing it."
+        else:
+            "She retrieved the brush and called herself clumsy and kept the low angle. The chapter calls her restraint precision."
+        "The heroine in this chapter wins because her honesty is more carefully edited than his lies."
+
+    elif story.day2_tea_choice == "ghost":
+        "In this chapter, the maid disappears between the accusation and the conviction."
+        "Her hands are empty. Another girl's hands are where the blame landed."
+        "She moved through the room like weather and the room forgot she had a shape."
+        if story.day3_brush_choice == "predator":
+            "In the mirror she was composed and direct, and in the corridor she was nowhere."
+            "The chapter finds no contradiction in this. It may be wrong."
+        elif story.day3_brush_choice == "prey":
+            "She was too visible in the mirror and too absent in the corridor. The chapter says this is her range: she can be whatever the room requires."
+        else:
+            "She dropped the brush and vanished below the line of sight. The chapter calls both moments the same technique at different scales."
+        "The heroine in this chapter wins because she is never precisely where the accusation points."
+
+    else:
+        "In this chapter, the maid uses what she found."
+        "She gathered it, kept it, brought it out into the light, and named it correctly."
+        "The chapter calls this sufficient."
+
+    # [BEAT] The photograph in the chapter — the specific weapon and its specific limit
+    if story.has_photograph:
+        "The lord's sealed secret. The maid carrying it out in an apron pocket."
+        "In this chapter, this is enough. The evidence is categorical. His denial would require an audience willing to call it perjury."
+        "The chapter does not yet know that the audience must also be willing to hear the maid."
+    else:
+        "The lord's secret is real. The maid knows it, remembers it, has written it in clean declarative sentences."
+        "In this chapter, memory is the same as evidence."
+        "The chapter believes this completely. Tomorrow will be the first test of whether the world agrees."
+
     "The heroine defeats him completely. She is untouchable. She has won."
 
+    # [STATE] State/progression update
     $ story.complete_manuscript_chapter("day4_triumphant_chapter")
+    call book1_write_chapter(chapter_key="day4_triumphant_chapter", current_day=104)
+
+    # [STATE] State/progression update
     $ apply_effects(stern_susp=15, insp=-15, corr=0)
 
     "The final sentence lands just before the candle dies."
@@ -588,24 +904,28 @@ label day104_5_triumphant_chapter:
     "It feels triumphant. It feels like an ending."
     "I mistake fiction for reality, believing that writing the victory makes it absolute."
 
+    # [STATE] State/progression update
     jump day104_6_false_dawn_ending
 
 
-# ── 6: FALSE DAWN ENDING ────────────────────────────────────────
-
+# [DAG_NODE id=day104_night_consequence_window type=dynamic_window day=104 period=Night window=consequence penance=true returns_to=day104_5_triumphant_chapter]
 label day104_night_consequence_window:
-    call check_confrontations
-    $ _penance_label = story.pop_penance_for_window("day104_night")
-    if _penance_label:
-        call expression _penance_label
-        jump day104_6_false_dawn_ending
+    call watch_suspicion
+    call consume_pending_penance("day104_night")
     return
 
 
+# ==========================================
+# 6 - FALSE DAWN ENDING
+# ==========================================
+
+# [DAG_NODE id=day104_6_false_dawn_ending type=work day=104]
 label day104_6_false_dawn_ending:
 
+    # [STATE] State/progression update
     $ set_time_period("Night")
 
+    # [ASSET] Visual/staging command
     scene bg_cora_desk_night
     with dissolve
 
@@ -616,11 +936,15 @@ label day104_6_false_dawn_ending:
         "The manuscript remains untouched."
         "But the danger has passed. I am still here. I have survived the day."
 
-    "Beneath the loose floorboard, Gideon's photograph waits in the dark."
-    "My leverage. My absolute proof."
+    if story.has_photograph:
+        "Beneath the loose floorboard, Gideon's photograph waits in the dark."
+        "My leverage. My absolute proof."
+        "Tomorrow I will decide how to use it."
+        "Tomorrow Gideon Locke will learn that servants can keep evidence."
+    else:
+        "Tomorrow I will decide what survives of today's theft."
+        "Tomorrow Gideon Locke will still own the rooms I cleaned."
 
-    "Tomorrow I will decide how to use it."
-    "Tomorrow Gideon Locke will learn that servants can keep evidence."
     "Tomorrow the balance changes."
 
     "For the first time since I arrived, sleep comes without asking permission."
@@ -631,9 +955,12 @@ label day104_6_false_dawn_ending:
 
     "I mistake the difference for victory."
 
+    # [STATE] State/progression update
     $ resolve_turn()
 
     if story.manuscript_progress < 2:
+
+        # [STATE] State/progression update
         jump game_over_deadline_2
 
     jump day105_1_monster_reemerges
