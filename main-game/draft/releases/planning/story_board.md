@@ -39,14 +39,14 @@ The storyboard may guide human planning, but future agents must not reverse the 
 
 ---
 
-# Untitled Victorian VN â€” Storyboard (Release 1 - MVP)
+# Untitled Victorian VN — Storyboard (Release 1 - MVP)
 
 > **Legend**
-> ðŸ“Œ Notes Â· ðŸš© Flag Seeded Â· âš–ï¸ Stat Gated Â· ðŸšª Branch Point
+> 📌 Notes · 🚩 Flag Seeded · ⚖️ Stat Gated · 🚪 Branch Point
 
 ---
 
-## Story Structure â€” MVP Path
+## Story Structure — MVP Path
 
 ```mermaid
 flowchart TD
@@ -87,36 +87,36 @@ flowchart TD
 
 ## Global State Tracking (Day 100-105)
 
-### ðŸš© Key Narrative Flags
+### 🚩 Key Narrative Flags
 
 | Flag Name | Set In | Function / Forward Impact |
 |-----------|--------|---------------------------|
-| `prologue_found` | Day 100 | `"overheard"` or `"read_letters"` â€” seeds Cora's initial thematic inclination. |
-| `prologue_why_write` | Day 100 | `"money_home"` / `"cataloguer"` / `"scandal_hungry"` â€” seeds manuscript motive for book1. |
-| `prologue_holywell_posture` | Day 100 | `"careful"` / `"eager"` / `"desperate"` â€” seeds illicit-publisher risk appetite. |
-| story.day1_interview_state | Day 101 | `"meek"` / `"competent"` â€” early suspicion shaping with Stern. |
-| story.day1_corridor_state | Day 101 | `"predator"` / `"prey"` / `"ghost"` â€” determines Chapter 1 prose and Day 2's contraband branch. |
-| story.day1_ledger_focus | Day 101 | `"inspiration"` / `"corruption"` â€” dictates the framing of the writing or indulgence. |
-| story.missy_day1_trust_state | Day 101 | `"soothed"` / `"unsettled"` / `"warned_cora"` / `"shared_caution"` â€” tracks early relationship with Missy. |
-| story.day2_contraband_state | Day 102 | `"stolen_wearing"` / `"planted_in_trunk"` â€” outcome of the morning discovery; shapes the tea crisis. |
-| story.day2_tea_choice | Day 102 | `"prey"` (confess) / `"predator"` (pretend to find) / `"ghost"` (frame Missy) â€” drives the Day 3 consequence. |
-| story.missy_day2_trust_break | Day 102 | Boolean â€” True if Missy is framed (`"ghost"`). |
-| story.day3_brush_choice | Day 103 | `"predator"` (accomplice) / `"prey"` (deviant) / `"ghost"` (mouse) â€” Gideon mirror test. |
-| story.day3_ultimatum | Day 103 | `"defied"` / `"bargained"` / `"surrendered"` â€” response to Gideon's 9 PM demand. |
-| story.day4_escape_state | Day 104 | `"fireplace"` / `"bold_lie"` / `"missy_cover"` â€” survival method affecting suspicion and Missy. |
-| story.has_photograph | Day 104 | Boolean â€” True if Cora escaped with the evidence. |
-| story.day5_dynamic | Day 105 | `"muse"` / `"protege"` / `"adversary"` / `"witness"` â€” Gideon's assessment of Cora's true motivation. |
-| story.day5_money_choice | Day 105 | `"taken"` / `"refused"` / `"deferred"` â€” affects entanglement for Release 2. |
-| story.gideon_entanglement_level | Day 105 | `"accepted_money"` / `"refused_money"` / `"deferred_money"` â€” tracks Gideon leverage/money status for Release 2. |
-| story.cora_release1_flavour | Day 105 | `"observer"` / `"predator"` / `"prey"` / `"ghost"` â€” carries forward Cora's accumulated archetype. |
-| story.stern_chain_level | Day 101-104 | Integer `[0, 3]` â€” tracks Cora's optional relationship progression with Miss Stern. |
-| story.missy_chain_level | Day 101-104 | Integer `[0, 3]` â€” tracks Cora's optional relationship progression with Missy. |
-| story.vance_chain_level | Day 101-104 | Integer `[0, 3]` â€” tracks Cora's optional relationship progression with Vance. |
-| story.penance_triggered | Day 101-104 | Boolean â€” True when a personal character confrontation is triggered by combined suspicion â‰¥ 50. |
+| `prologue_found` | Day 100 | `"overheard"` or `"read_letters"` — seeds Cora's initial thematic inclination. |
+| `prologue_why_write` | Day 100 | `"money_home"` / `"cataloguer"` / `"scandal_hungry"` — seeds manuscript motive for book1. |
+| `prologue_holywell_posture` | Day 100 | `"careful"` / `"eager"` / `"desperate"` — seeds illicit-publisher risk appetite. |
+| story.day1_interview_state | Day 101 | `"meek"` / `"competent"` — early suspicion shaping with Stern. |
+| story.day1_corridor_state | Day 101 | `"predator"` / `"prey"` / `"ghost"` — determines Chapter 1 prose and Day 2's contraband branch. |
+| story.day1_ledger_focus | Day 101 | `"inspiration"` / `"corruption"` — dictates the framing of the writing or indulgence. |
+| story.missy_day1_trust_state | Day 101 | `"soothed"` / `"unsettled"` / `"warned_cora"` / `"shared_caution"` — tracks early relationship with Missy. |
+| story.day2_contraband_state | Day 102 | `"stolen_wearing"` / `"planted_in_trunk"` — outcome of the morning discovery; shapes the tea crisis. |
+| story.day2_tea_choice | Day 102 | `"prey"` (confess) / `"predator"` (pretend to find) / `"ghost"` (frame Missy) — drives the Day 3 consequence. |
+| story.missy_day2_trust_break | Day 102 | Boolean — True if Missy is framed (`"ghost"`). |
+| story.day3_brush_choice | Day 103 | `"predator"` (accomplice) / `"prey"` (deviant) / `"ghost"` (mouse) — Gideon mirror test. |
+| story.day3_ultimatum | Day 103 | `"defied"` / `"bargained"` / `"surrendered"` — response to Gideon's 9 PM demand. |
+| story.day4_escape_state | Day 104 | `"fireplace"` / `"bold_lie"` / `"missy_cover"` — survival method affecting suspicion and Missy. |
+| story.has_photograph | Day 104 | Boolean — True if Cora escaped with the evidence. |
+| story.day5_dynamic | Day 105 | `"muse"` / `"protege"` / `"adversary"` / `"witness"` — Gideon's assessment of Cora's true motivation. |
+| story.day5_money_choice | Day 105 | `"taken"` / `"refused"` / `"deferred"` — affects entanglement for Release 2. |
+| story.gideon_entanglement_level | Day 105 | `"accepted_money"` / `"refused_money"` / `"deferred_money"` — tracks Gideon leverage/money status for Release 2. |
+| story.cora_release1_flavour | Day 105 | `"observer"` / `"predator"` / `"prey"` / `"ghost"` — carries forward Cora's accumulated archetype. |
+| story.stern_chain_level | Day 101-104 | Integer `[0, 3]` — tracks Cora's optional relationship progression with Miss Stern. |
+| story.missy_chain_level | Day 101-104 | Integer `[0, 3]` — tracks Cora's optional relationship progression with Missy. |
+| story.vance_chain_level | Day 101-104 | Integer `[0, 3]` — tracks Cora's optional relationship progression with Vance. |
+| story.penance_triggered | Day 101-104 | Boolean — True when a personal character confrontation is triggered by combined suspicion ≥ 50. |
 
-### âš–ï¸ Hard Mechanic Gates
+### ⚖️ Hard Mechanic Gates
 
-#### ðŸ§  The Accumulated Anxiety Design (Option B)
+#### 🧠 The Accumulated Anxiety Design (Option B)
 * **Two-Tiered Suspicion State**: Each tracked character (Stern, Vance, Gideon, Missy) maintains two independent pools of suspicion:
   * **Base Suspicion (`base_susp`)**: Permanent, established suspicion level reflecting structural plot events. Base suspicion is never naturally decayed.
   * **Acute Suspicion (`acute_susp`)**: Volatile, temporary heat generated by suspicious interactions (lies, snooping, wearing contraband). Acute suspicion is managed through gameplay actions.
@@ -134,22 +134,22 @@ flowchart TD
 * **Confrontation & Penance Check**: Named consequence windows call `check_confrontations`. If any individual combined suspicion is $/ge 50$, the check queues a concrete personal confrontation label. The window consumes the queue with `story.pop_penance_for_window(...)`, calls that confrontation, and returns to the day-owned spine.
   1. Consumes the active consequence window, not the global route table.
   2. Reduces that character's acute suspicion by 35, providing immediate anxiety relief.
-* **Vigilance / Breakdown Gate (Game Over)**: Reaching 100 consolidated Anxiety (either through a single combined suspicion hitting 100 or the compounded pressure of multiple suspicious observers) immediately triggers the game_over_dismissed fail-stateâ€”a nervous breakdown where Cora's mask cracks and she is dismissed by Miss Stern.
+* **Vigilance / Breakdown Gate (Game Over)**: Reaching 100 consolidated Anxiety (either through a single combined suspicion hitting 100 or the compounded pressure of multiple suspicious observers) immediately triggers the game_over_dismissed fail-state—a nervous breakdown where Cora's mask cracks and she is dismissed by Miss Stern.
 * **Day 4 Write Paralysis**: Reaching 85 consolidated Anxiety during Day 4 Twilight blocks the Triumphant Write due to internal panic.
 
-#### ðŸ“… Two-Step Slot Integration
+#### 📅 Two-Step Slot Integration
 To preserve crucial narrative forks and chapter variants without sacrificing optional grinds, active slots utilize a two-step flow:
 1. **Reflection Step**: The ledger or afternoon chore choice is presented first, setting essential focus flags (day1_ledger_focus, day2_chore_focus, day3_corridor_chain).
 2. **Optional Grind Step**: The day file presents a **contextual** story window. Each option resolves the next relationship beat with `story.resolve_chain_label(character)`, calls that beat, and then returns to the day spine. Relationship chains have 3 levels and are gated by `story.chain_available(character)`. Desk retreat and normal exits now jump directly where the next day-owned label is obvious.
 
-#### ðŸŽ¯ Daily Story Gates
+#### 🎯 Daily Story Gates
 
 Writing gates use **AND** semantics (`has_story_fuel` in `functions_non_canon.rpy`): both inspiration and corruption_level must meet their floors. Constants: `WRITE_GATE_CH1` (15, 2), `WRITE_GATE_CH2` (30, 3), `WRITE_GATE_CH3` (45, 3).
 
-- **Day 101 Night:** Write menu and Chapter One require **CH1 gate** (inspiration â‰¥ 15 **and** corruption_level â‰¥ 2). Below corruption_level 3 on the page â†’ slop draft (no `manuscript_progress`); at or above â†’ real Ch1 + progress.
+- **Day 101 Night:** Write menu and Chapter One require **CH1 gate** (inspiration ≥ 15 **and** corruption_level ≥ 2). Below corruption_level 3 on the page → slop draft (no `manuscript_progress`); at or above → real Ch1 + progress.
 - **Day 102 Night:** Ch1 catch-up requires **CH1 gate** (if missed); Ch2 requires **CH2 gate** (30 / 3). Alternative indulgence trades manuscript progress for stats.
 - **Day 103 Night:** Chapter Three requires **CH3 gate** (45 / 3), or frantic_write bypass.
-- **Day 104 Twilight:** If **Anxiety â‰¥ 85** (`ANXIETY_WRITE_PARALYSIS`), triumphant write is blocked. Atonement always available; Missy repair when `missy_day4_used_as_cover`.
+- **Day 104 Twilight:** If **Anxiety ≥ 85** (`ANXIETY_WRITE_PARALYSIS`), triumphant write is blocked. Atonement always available; Missy repair when `missy_day4_used_as_cover`.
 - **Day 105 Morning:** Leverage defusal is structural. The photograph cannot defeat Gideon's class privilege, but the motivation confessed shapes Cora's arc and ending manuscript reckoning.
 
 #### Adult Payoff Structure: Manuscript Retelling Minigame
