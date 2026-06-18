@@ -2,25 +2,25 @@
 
 ## Missing DAG Tags
 
-### gap_0007 - missing_dag_gate_tag
+### gap_0001 - missing_dag_choice_tag
 
-- Source: `main-game/non-prod-game/game/days/day102_non_canon.rpy:1020`
-- Label: `day102_3_gideon_interrupts_controls_vance`
-- Description: Flow-affecting condition has no DAG_GATE tag.
+- Source: `main-game/non-prod-game/game/days/day100_non_canon.rpy:289`
+- Label: `day100_3_night_daydream`
+- Description: Menu has no adjacent DAG_CHOICE tag.
 - Recommended owner: Create/Rewrite Day Workflow
-- Recommended next action: Add DAG_GATE metadata if this gate is balancing-relevant.
+- Recommended next action: Add DAG_CHOICE beside the existing CHOICE marker.
 
 ### gap_0008 - missing_dag_gate_tag
 
-- Source: `main-game/non-prod-game/game/days/day102_non_canon.rpy:1092`
-- Label: `day102_4_cora_writes_a_chapter`
+- Source: `main-game/non-prod-game/game/days/day102_non_canon.rpy:1023`
+- Label: `day102_3_gideon_interrupts_controls_vance`
 - Description: Flow-affecting condition has no DAG_GATE tag.
 - Recommended owner: Create/Rewrite Day Workflow
 - Recommended next action: Add DAG_GATE metadata if this gate is balancing-relevant.
 
 ### gap_0009 - missing_dag_gate_tag
 
-- Source: `main-game/non-prod-game/game/days/day102_non_canon.rpy:1094`
+- Source: `main-game/non-prod-game/game/days/day102_non_canon.rpy:1088`
 - Label: `day102_4_cora_writes_a_chapter`
 - Description: Flow-affecting condition has no DAG_GATE tag.
 - Recommended owner: Create/Rewrite Day Workflow
@@ -28,13 +28,21 @@
 
 ### gap_0010 - missing_dag_gate_tag
 
-- Source: `main-game/non-prod-game/game/days/day102_non_canon.rpy:1132`
+- Source: `main-game/non-prod-game/game/days/day102_non_canon.rpy:1090`
 - Label: `day102_4_cora_writes_a_chapter`
 - Description: Flow-affecting condition has no DAG_GATE tag.
 - Recommended owner: Create/Rewrite Day Workflow
 - Recommended next action: Add DAG_GATE metadata if this gate is balancing-relevant.
 
-### gap_0013 - missing_dag_gate_tag
+### gap_0011 - missing_dag_gate_tag
+
+- Source: `main-game/non-prod-game/game/days/day102_non_canon.rpy:1128`
+- Label: `day102_4_cora_writes_a_chapter`
+- Description: Flow-affecting condition has no DAG_GATE tag.
+- Recommended owner: Create/Rewrite Day Workflow
+- Recommended next action: Add DAG_GATE metadata if this gate is balancing-relevant.
+
+### gap_0012 - missing_dag_gate_tag
 
 - Source: `main-game/non-prod-game/game/days/day103_non_canon.rpy:53`
 - Label: `day103_morning`
@@ -42,17 +50,25 @@
 - Recommended owner: Create/Rewrite Day Workflow
 - Recommended next action: Add DAG_GATE metadata if this gate is balancing-relevant.
 
+### gap_0016 - missing_dag_gate_tag
+
+- Source: `main-game/non-prod-game/game/days/day103_non_canon.rpy:1203`
+- Label: `day103_3_bedroom_final_write`
+- Description: Flow-affecting condition has no DAG_GATE tag.
+- Recommended owner: Create/Rewrite Day Workflow
+- Recommended next action: Add DAG_GATE metadata if this gate is balancing-relevant.
+
 ### gap_0017 - missing_dag_gate_tag
 
-- Source: `main-game/non-prod-game/game/days/day103_non_canon.rpy:1216`
-- Label: `day103_3_bedroom_final_write`
+- Source: `main-game/non-prod-game/game/days/day104_non_canon.rpy:612`
+- Label: `day104_4_twilight_ledger_false_dawn`
 - Description: Flow-affecting condition has no DAG_GATE tag.
 - Recommended owner: Create/Rewrite Day Workflow
 - Recommended next action: Add DAG_GATE metadata if this gate is balancing-relevant.
 
 ### gap_0018 - missing_dag_gate_tag
 
-- Source: `main-game/non-prod-game/game/days/day104_non_canon.rpy:964`
+- Source: `main-game/non-prod-game/game/days/day104_non_canon.rpy:960`
 - Label: `day104_6_false_dawn_ending`
 - Description: Flow-affecting condition has no DAG_GATE tag.
 - Recommended owner: Create/Rewrite Day Workflow
@@ -68,48 +84,56 @@
 
 ### gap_0020 - missing_dag_gate_tag
 
-- Source: `main-game/non-prod-game/game/shared/functions_non_canon.rpy:82`
+- Source: `main-game/non-prod-game/game/shared/functions_non_canon.rpy:164`
 - Label: `file`
 - Description: Flow-affecting condition has no DAG_GATE tag.
 - Recommended owner: Create/Rewrite Day Workflow
 - Recommended next action: Add DAG_GATE metadata if this gate is balancing-relevant.
 
-### gap_0030 - missing_dag_gate_tag
+### gap_0021 - missing_dag_gate_tag
 
-- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:26`
-- Label: `check_confrontations`
+- Source: `main-game/non-prod-game/game/shared/functions_non_canon.rpy:220`
+- Label: `file`
 - Description: Flow-affecting condition has no DAG_GATE tag.
 - Recommended owner: Create/Rewrite Day Workflow
 - Recommended next action: Add DAG_GATE metadata if this gate is balancing-relevant.
 
-### gap_0031 - missing_dag_gate_tag
+### gap_0022 - missing_dag_gate_tag
 
-- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:33`
-- Label: `check_confrontations`
+- Source: `main-game/non-prod-game/game/shared/functions_non_canon.rpy:227`
+- Label: `file`
 - Description: Flow-affecting condition has no DAG_GATE tag.
 - Recommended owner: Create/Rewrite Day Workflow
 - Recommended next action: Add DAG_GATE metadata if this gate is balancing-relevant.
 
 ### gap_0032 - missing_dag_gate_tag
 
-- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:37`
-- Label: `check_confrontations`
+- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:26`
+- Label: `watch_suspicion`
 - Description: Flow-affecting condition has no DAG_GATE tag.
 - Recommended owner: Create/Rewrite Day Workflow
 - Recommended next action: Add DAG_GATE metadata if this gate is balancing-relevant.
 
 ### gap_0033 - missing_dag_gate_tag
 
-- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:41`
-- Label: `check_confrontations`
+- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:32`
+- Label: `watch_suspicion`
+- Description: Flow-affecting condition has no DAG_GATE tag.
+- Recommended owner: Create/Rewrite Day Workflow
+- Recommended next action: Add DAG_GATE metadata if this gate is balancing-relevant.
+
+### gap_0034 - missing_dag_gate_tag
+
+- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:36`
+- Label: `watch_suspicion`
 - Description: Flow-affecting condition has no DAG_GATE tag.
 - Recommended owner: Create/Rewrite Day Workflow
 - Recommended next action: Add DAG_GATE metadata if this gate is balancing-relevant.
 
 ### gap_0035 - missing_dag_gate_tag
 
-- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:797`
-- Label: `end_slot`
+- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:40`
+- Label: `watch_suspicion`
 - Description: Flow-affecting condition has no DAG_GATE tag.
 - Recommended owner: Create/Rewrite Day Workflow
 - Recommended next action: Add DAG_GATE metadata if this gate is balancing-relevant.
@@ -124,23 +148,11 @@ No findings.
 
 ## Deprecated Generic Suspicion Usage
 
-### gap_0011 - deprecated_generic_suspicion_usage
-
-- Source: `main-game/non-prod-game/game/days/day102_non_canon.rpy:1185`
-- Label: `day102_4_cora_sneaks_a_feel`
-- Description: apply_effects() uses deprecated generic susp field.
-- Recommended owner: Non-Prod Code Agent
-- Recommended next action: Replace with character-specific suspicion field.
+No findings.
 
 ## Unmapped Effect Fields
 
-### gap_0012 - unmapped_effect_fields
-
-- Source: `main-game/non-prod-game/game/days/day102_non_canon.rpy:1185`
-- Label: `day102_4_cora_sneaks_a_feel`
-- Description: Unmapped apply_effects fields: susp.
-- Recommended owner: Balancing Pass
-- Recommended next action: Confirm runtime effect mapping.
+No findings.
 
 ## Router Outcome Mismatches
 
@@ -250,17 +262,9 @@ No findings.
 
 ## Dynamic Jump Targets
 
-### gap_0001 - dynamic_jump_targets
-
-- Source: `main-game/non-prod-game/game/days/day101_non_canon.rpy:630`
-- Label: `day101_night_story_window`
-- Description: story.resolve_chain_label() creates dynamic chain target.
-- Recommended owner: Chief Architect
-- Recommended next action: Resolve dynamically in future simulator.
-
 ### gap_0002 - dynamic_jump_targets
 
-- Source: `main-game/non-prod-game/game/days/day101_non_canon.rpy:636`
+- Source: `main-game/non-prod-game/game/days/day101_non_canon.rpy:1069`
 - Label: `day101_night_story_window`
 - Description: story.resolve_chain_label() creates dynamic chain target.
 - Recommended owner: Chief Architect
@@ -268,7 +272,7 @@ No findings.
 
 ### gap_0003 - dynamic_jump_targets
 
-- Source: `main-game/non-prod-game/game/days/day101_non_canon.rpy:642`
+- Source: `main-game/non-prod-game/game/days/day101_non_canon.rpy:1075`
 - Label: `day101_night_story_window`
 - Description: story.resolve_chain_label() creates dynamic chain target.
 - Recommended owner: Chief Architect
@@ -276,15 +280,15 @@ No findings.
 
 ### gap_0004 - dynamic_jump_targets
 
-- Source: `main-game/non-prod-game/game/days/day102_non_canon.rpy:420`
-- Label: `day102_afternoon_story_window`
+- Source: `main-game/non-prod-game/game/days/day101_non_canon.rpy:1081`
+- Label: `day101_night_story_window`
 - Description: story.resolve_chain_label() creates dynamic chain target.
 - Recommended owner: Chief Architect
 - Recommended next action: Resolve dynamically in future simulator.
 
 ### gap_0005 - dynamic_jump_targets
 
-- Source: `main-game/non-prod-game/game/days/day102_non_canon.rpy:426`
+- Source: `main-game/non-prod-game/game/days/day102_non_canon.rpy:430`
 - Label: `day102_afternoon_story_window`
 - Description: story.resolve_chain_label() creates dynamic chain target.
 - Recommended owner: Chief Architect
@@ -292,15 +296,31 @@ No findings.
 
 ### gap_0006 - dynamic_jump_targets
 
-- Source: `main-game/non-prod-game/game/days/day102_non_canon.rpy:432`
+- Source: `main-game/non-prod-game/game/days/day102_non_canon.rpy:436`
 - Label: `day102_afternoon_story_window`
+- Description: story.resolve_chain_label() creates dynamic chain target.
+- Recommended owner: Chief Architect
+- Recommended next action: Resolve dynamically in future simulator.
+
+### gap_0007 - dynamic_jump_targets
+
+- Source: `main-game/non-prod-game/game/days/day102_non_canon.rpy:442`
+- Label: `day102_afternoon_story_window`
+- Description: story.resolve_chain_label() creates dynamic chain target.
+- Recommended owner: Chief Architect
+- Recommended next action: Resolve dynamically in future simulator.
+
+### gap_0013 - dynamic_jump_targets
+
+- Source: `main-game/non-prod-game/game/days/day103_non_canon.rpy:247`
+- Label: `day103_1_optional_character_chain`
 - Description: story.resolve_chain_label() creates dynamic chain target.
 - Recommended owner: Chief Architect
 - Recommended next action: Resolve dynamically in future simulator.
 
 ### gap_0014 - dynamic_jump_targets
 
-- Source: `main-game/non-prod-game/game/days/day103_non_canon.rpy:244`
+- Source: `main-game/non-prod-game/game/days/day103_non_canon.rpy:253`
 - Label: `day103_1_optional_character_chain`
 - Description: story.resolve_chain_label() creates dynamic chain target.
 - Recommended owner: Chief Architect
@@ -308,32 +328,16 @@ No findings.
 
 ### gap_0015 - dynamic_jump_targets
 
-- Source: `main-game/non-prod-game/game/days/day103_non_canon.rpy:250`
+- Source: `main-game/non-prod-game/game/days/day103_non_canon.rpy:259`
 - Label: `day103_1_optional_character_chain`
 - Description: story.resolve_chain_label() creates dynamic chain target.
 - Recommended owner: Chief Architect
 - Recommended next action: Resolve dynamically in future simulator.
-
-### gap_0016 - dynamic_jump_targets
-
-- Source: `main-game/non-prod-game/game/days/day103_non_canon.rpy:256`
-- Label: `day103_1_optional_character_chain`
-- Description: story.resolve_chain_label() creates dynamic chain target.
-- Recommended owner: Chief Architect
-- Recommended next action: Resolve dynamically in future simulator.
-
-### gap_0034 - dynamic_jump_targets
-
-- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:61`
-- Label: `advance_after_confrontation`
-- Description: Dynamic jump target: _target[2].
-- Recommended owner: Chief Architect
-- Recommended next action: Confirm extractor/simulator can resolve this dynamic edge.
 
 ### gap_0036 - dynamic_jump_targets
 
-- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:818`
-- Label: `end_slot`
+- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:95`
+- Label: `advance_after_confrontation`
 - Description: Dynamic jump target: _target[2].
 - Recommended owner: Chief Architect
 - Recommended next action: Confirm extractor/simulator can resolve this dynamic edge.
@@ -344,73 +348,73 @@ No findings.
 
 ## Optional Chain Window Gaps
 
-### gap_0021 - chain label has no explicit slot availability/window
-
-- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:69`
-- Label: `stern_chain_1`
-- Description: Phase 1 cannot infer appointment windows from chain labels alone.
-- Recommended owner: Human Designer
-- Recommended next action: Document slot availability or add DAG metadata.
-
-### gap_0022 - chain label has no explicit slot availability/window
-
-- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:137`
-- Label: `stern_chain_2`
-- Description: Phase 1 cannot infer appointment windows from chain labels alone.
-- Recommended owner: Human Designer
-- Recommended next action: Document slot availability or add DAG metadata.
-
 ### gap_0023 - chain label has no explicit slot availability/window
 
-- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:202`
-- Label: `stern_chain_3`
+- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:103`
+- Label: `stern_chain_1`
 - Description: Phase 1 cannot infer appointment windows from chain labels alone.
 - Recommended owner: Human Designer
 - Recommended next action: Document slot availability or add DAG metadata.
 
 ### gap_0024 - chain label has no explicit slot availability/window
 
-- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:277`
-- Label: `missy_chain_1`
+- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:171`
+- Label: `stern_chain_2`
 - Description: Phase 1 cannot infer appointment windows from chain labels alone.
 - Recommended owner: Human Designer
 - Recommended next action: Document slot availability or add DAG metadata.
 
 ### gap_0025 - chain label has no explicit slot availability/window
 
-- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:342`
-- Label: `missy_chain_2`
+- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:236`
+- Label: `stern_chain_3`
 - Description: Phase 1 cannot infer appointment windows from chain labels alone.
 - Recommended owner: Human Designer
 - Recommended next action: Document slot availability or add DAG metadata.
 
 ### gap_0026 - chain label has no explicit slot availability/window
 
-- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:405`
-- Label: `missy_chain_3`
+- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:322`
+- Label: `missy_chain_1`
 - Description: Phase 1 cannot infer appointment windows from chain labels alone.
 - Recommended owner: Human Designer
 - Recommended next action: Document slot availability or add DAG metadata.
 
 ### gap_0027 - chain label has no explicit slot availability/window
 
-- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:478`
-- Label: `vance_chain_1`
+- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:387`
+- Label: `missy_chain_2`
 - Description: Phase 1 cannot infer appointment windows from chain labels alone.
 - Recommended owner: Human Designer
 - Recommended next action: Document slot availability or add DAG metadata.
 
 ### gap_0028 - chain label has no explicit slot availability/window
 
-- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:535`
-- Label: `vance_chain_2`
+- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:450`
+- Label: `missy_chain_3`
 - Description: Phase 1 cannot infer appointment windows from chain labels alone.
 - Recommended owner: Human Designer
 - Recommended next action: Document slot availability or add DAG metadata.
 
 ### gap_0029 - chain label has no explicit slot availability/window
 
-- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:596`
+- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:529`
+- Label: `vance_chain_1`
+- Description: Phase 1 cannot infer appointment windows from chain labels alone.
+- Recommended owner: Human Designer
+- Recommended next action: Document slot availability or add DAG metadata.
+
+### gap_0030 - chain label has no explicit slot availability/window
+
+- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:586`
+- Label: `vance_chain_2`
+- Description: Phase 1 cannot infer appointment windows from chain labels alone.
+- Recommended owner: Human Designer
+- Recommended next action: Document slot availability or add DAG metadata.
+
+### gap_0031 - chain label has no explicit slot availability/window
+
+- Source: `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy:647`
 - Label: `vance_chain_3`
 - Description: Phase 1 cannot infer appointment windows from chain labels alone.
 - Recommended owner: Human Designer
@@ -422,18 +426,18 @@ No findings.
 
 ## Storyboard Drift Notes
 
-### gap_0050 - script_label_missing_from_storyboard
+### gap_0050 - storyboard_label_missing_from_scripts
 
-- Source: `n/a:0`
-- Label: `day100_2_desk_branch`
-- Description: Script label not referenced in storyboard.
+- Source: `main-game/draft/releases/planning/story_board.md:0`
+- Label: `missy_day4_used_as_cover`
+- Description: Storyboard references a label not extracted from scripts.
 - Recommended owner: Documentation Steward
-- Recommended next action: Run storyboard_sync if this label is planning-relevant.
+- Recommended next action: Run storyboard_sync or correct the storyboard reference.
 
 ### gap_0051 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day100_2_parlour_branch`
+- Label: `day100_1_afternoon_boredom_setup`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -441,7 +445,7 @@ No findings.
 ### gap_0052 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day100_2_reconvergence`
+- Label: `day100_2_desk_branch`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -449,7 +453,7 @@ No findings.
 ### gap_0053 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day102_2_day2_corr_choice`
+- Label: `day100_2_parlour_branch`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -457,7 +461,7 @@ No findings.
 ### gap_0054 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day102_2_day2_insp_choice`
+- Label: `day100_2_reconvergence`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -465,7 +469,7 @@ No findings.
 ### gap_0055 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day102_3_cora_confesses`
+- Label: `day101_1_vance_dressing_room`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -473,7 +477,7 @@ No findings.
 ### gap_0056 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day102_3_cora_frames_missy`
+- Label: `day101_1_vance_stairwell_encounter`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -481,7 +485,7 @@ No findings.
 ### gap_0057 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day102_3_cora_pretends_to_find_it`
+- Label: `day102_2_day2_corr_choice`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -489,7 +493,7 @@ No findings.
 ### gap_0058 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day103`
+- Label: `day102_2_day2_insp_choice`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -497,7 +501,7 @@ No findings.
 ### gap_0059 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day103_1_corridor_corr_chain`
+- Label: `day102_3_cora_confesses`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -505,7 +509,7 @@ No findings.
 ### gap_0060 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day103_1_corridor_insp_chain`
+- Label: `day102_3_cora_frames_missy`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -513,7 +517,7 @@ No findings.
 ### gap_0061 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day103_2_cora_vs_gideon_corr`
+- Label: `day102_3_cora_pretends_to_find_it`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -521,7 +525,7 @@ No findings.
 ### gap_0062 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day103_2_cora_vs_gideon_ghost`
+- Label: `day103`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -529,7 +533,7 @@ No findings.
 ### gap_0063 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day103_2_cora_vs_gideon_insp`
+- Label: `day103_1_corridor_corr_chain`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -537,7 +541,7 @@ No findings.
 ### gap_0064 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day103_2_night_bargain_gideon`
+- Label: `day103_1_corridor_insp_chain`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -545,7 +549,7 @@ No findings.
 ### gap_0065 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day103_2_night_defy_gideon`
+- Label: `day103_2_cora_vs_gideon_corr`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -553,7 +557,7 @@ No findings.
 ### gap_0066 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day103_2_night_surrender_gideon`
+- Label: `day103_2_cora_vs_gideon_ghost`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -561,7 +565,7 @@ No findings.
 ### gap_0067 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day103_2_suite_cora_vs_gideon`
+- Label: `day103_2_cora_vs_gideon_insp`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -569,7 +573,7 @@ No findings.
 ### gap_0068 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day103_3_frantic_write`
+- Label: `day103_2_night_bargain_gideon`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -577,7 +581,7 @@ No findings.
 ### gap_0069 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day103_3_indulge_words`
+- Label: `day103_2_night_defy_gideon`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -585,7 +589,7 @@ No findings.
 ### gap_0070 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day103_3_prepare_mask`
+- Label: `day103_2_night_surrender_gideon`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -593,7 +597,7 @@ No findings.
 ### gap_0071 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day104_1`
+- Label: `day103_2_suite_cora_vs_gideon`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -601,7 +605,7 @@ No findings.
 ### gap_0072 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day104_2_escape_bold_lie`
+- Label: `day103_3_frantic_write`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -609,7 +613,7 @@ No findings.
 ### gap_0073 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day104_2_escape_fireplace`
+- Label: `day103_3_indulge_words`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -617,7 +621,7 @@ No findings.
 ### gap_0074 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day104_2_escape_missy_cover`
+- Label: `day103_3_prepare_mask`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -625,7 +629,7 @@ No findings.
 ### gap_0075 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day104_4_atonement`
+- Label: `day104_2_escape_bold_lie`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -633,7 +637,7 @@ No findings.
 ### gap_0076 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day104_4_missy_repair`
+- Label: `day104_2_escape_fireplace`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -641,7 +645,7 @@ No findings.
 ### gap_0077 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day105_2_the_summons`
+- Label: `day104_2_escape_missy_cover`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -649,7 +653,7 @@ No findings.
 ### gap_0078 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day105_4_motivation_ghost`
+- Label: `day104_4_atonement`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -657,7 +661,7 @@ No findings.
 ### gap_0079 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day105_4_motivation_observer`
+- Label: `day104_4_missy_repair`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
@@ -665,12 +669,36 @@ No findings.
 ### gap_0080 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
-- Label: `day105_4_motivation_predator`
+- Label: `day105_2_the_summons`
 - Description: Script label not referenced in storyboard.
 - Recommended owner: Documentation Steward
 - Recommended next action: Run storyboard_sync if this label is planning-relevant.
 
 ### gap_0081 - script_label_missing_from_storyboard
+
+- Source: `n/a:0`
+- Label: `day105_4_motivation_ghost`
+- Description: Script label not referenced in storyboard.
+- Recommended owner: Documentation Steward
+- Recommended next action: Run storyboard_sync if this label is planning-relevant.
+
+### gap_0082 - script_label_missing_from_storyboard
+
+- Source: `n/a:0`
+- Label: `day105_4_motivation_observer`
+- Description: Script label not referenced in storyboard.
+- Recommended owner: Documentation Steward
+- Recommended next action: Run storyboard_sync if this label is planning-relevant.
+
+### gap_0083 - script_label_missing_from_storyboard
+
+- Source: `n/a:0`
+- Label: `day105_4_motivation_predator`
+- Description: Script label not referenced in storyboard.
+- Recommended owner: Documentation Steward
+- Recommended next action: Run storyboard_sync if this label is planning-relevant.
+
+### gap_0084 - script_label_missing_from_storyboard
 
 - Source: `n/a:0`
 - Label: `day105_4_motivation_prey`

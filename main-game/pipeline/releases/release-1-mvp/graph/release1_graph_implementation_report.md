@@ -16,6 +16,11 @@
 
 ## Files Scanned
 
+- `main-game/non-prod-game/game/days/book1_day101_non_canon.rpy`
+- `main-game/non-prod-game/game/days/book1_day102_non_canon.rpy`
+- `main-game/non-prod-game/game/days/book1_day103_non_canon.rpy`
+- `main-game/non-prod-game/game/days/book1_day104_non_canon.rpy`
+- `main-game/non-prod-game/game/days/book1_day105_non_canon.rpy`
 - `main-game/non-prod-game/game/days/book1_non_canon.rpy`
 - `main-game/non-prod-game/game/days/day100_non_canon.rpy`
 - `main-game/non-prod-game/game/days/day101_non_canon.rpy`
@@ -24,9 +29,15 @@
 - `main-game/non-prod-game/game/days/day104_non_canon.rpy`
 - `main-game/non-prod-game/game/days/day105_non_canon.rpy`
 - `main-game/non-prod-game/game/days/test_day2_writing_non_canon.rpy`
+- `main-game/non-prod-game/game/shared/00auto_highlight.rpy`
+- `main-game/non-prod-game/game/shared/asset_transforms.rpy`
+- `main-game/non-prod-game/game/shared/assets_manifest.rpy`
+- `main-game/non-prod-game/game/shared/characters.rpy`
 - `main-game/non-prod-game/game/shared/classes_non_canon.rpy`
+- `main-game/non-prod-game/game/shared/endings.rpy`
 - `main-game/non-prod-game/game/shared/functions_non_canon.rpy`
 - `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy`
+- `main-game/non-prod-game/game/shared/suspicion_monologues_non_canon.rpy`
 
 ## Commands Run
 
@@ -34,12 +45,12 @@
 
 ## Extraction Counts
 
-- Nodes: 169
-- Edges: 149
-- Choices: 97
-- Gates: 13
-- Effects: 92
-- Gaps: 81
+- Nodes: 181
+- Edges: 133
+- Choices: 117
+- Gates: 15
+- Effects: 106
+- Gaps: 84
 
 ## Storyboard Audit
 

@@ -1,93 +1,107 @@
 effect_id,label,branch_option,raw_call,inspiration_delta,corruption_delta,stern_acute_susp_delta,stern_base_susp_delta,vance_acute_susp_delta,vance_base_susp_delta,missy_acute_susp_delta,missy_base_susp_delta,gideon_acute_susp_delta,gideon_base_susp_delta,unmapped_fields,source_file,line_number,confidence
-effect_0001,day100_main,,apply_effects(insp=5),5,,,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day100_non_canon.rpy,68,medium
-effect_0002,day100_1_afternoon_boredom,5_inspiration,apply_effects(insp=5),5,,,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day100_non_canon.rpy,116,medium
-effect_0003,day100_1_afternoon_boredom,5_inspiration_5_corruption,"apply_effects(insp=5, corr=5)",5,5,,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day100_non_canon.rpy,124,medium
-effect_0004,day100_1_afternoon_boredom,10_corruption,apply_effects(corr=10),,10,,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day100_non_canon.rpy,132,medium
-effect_0005,day100_1_afternoon_boredom,holywell_eager_5_inspiration,apply_effects(insp=5),5,,,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day100_non_canon.rpy,151,medium
-effect_0006,day100_1_afternoon_boredom,holywell_desperate_5_corruption,apply_effects(corr=5),,5,,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day100_non_canon.rpy,158,medium
-effect_0007,day100_2_evening_flashback,overhear_15_corruption,apply_effects(corr=15),,15,,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day100_non_canon.rpy,207,medium
-effect_0008,day100_2_evening_flashback,read_letters_15_inspiration_10_corruption,"apply_effects(insp=15, corr=10)",15,10,,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day100_non_canon.rpy,214,medium
-effect_0009,day101_1_morning_interview,option_1,"apply_effects(stern_susp=5, insp=5, corr=0)",5,0,5,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day101_non_canon.rpy,175,medium
-effect_0010,day101_1_morning_interview,option_2,"apply_effects(stern_susp=15, insp=10, corr=0)",10,0,15,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day101_non_canon.rpy,194,medium
-effect_0011,day101_2_coras_path_choice,predator_path_inspiration_corruption,"apply_effects(insp=10, corr=5)",10,5,,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day101_non_canon.rpy,475,medium
-effect_0012,day101_2_coras_path_choice,prey_path_inspiration_suspicion,"apply_effects(vance_susp=35, insp=15, corr=5)",15,5,,,35,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day101_non_canon.rpy,506,medium
-effect_0013,day101_2_coras_path_choice,ghost_path_inspiration_suspicion,"apply_effects(stern_susp=-5, vance_susp=-5, missy_susp=-5, insp=10, corr=0)",10,0,-5,,-5,,-5,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day101_non_canon.rpy,539,medium
-effect_0014,day101_night_story_window,inspiration,"apply_effects(insp=15, corr=0)",15,0,,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day101_non_canon.rpy,655,medium
-effect_0015,day101_night_story_window,corruption,"apply_effects(vance_susp=5, insp=5, corr=10)",5,10,,,5,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day101_non_canon.rpy,671,medium
-effect_0016,day101_night_story_window,corruption,"apply_effects(insp=10, corr=0)",10,0,,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day101_non_canon.rpy,688,medium
-effect_0017,day101_4_write_the_chapter,inspiration,"apply_effects(insp=15, corr=0)",15,0,,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day101_non_canon.rpy,735,medium
-effect_0018,day101_4_write_the_chapter,corruption,"apply_effects(vance_susp=5, insp=5, corr=10)",5,10,,,5,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day101_non_canon.rpy,745,medium
-effect_0019,day101_4_write_the_chapter,corruption,"apply_effects(insp=-10, corr=0)",-10,0,,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day101_non_canon.rpy,802,medium
-effect_0020,day102_1_cora_takes_the_thing,,"apply_effects(vance_susp=5, insp=0, corr=15)",0,15,,,5,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy,159,medium
-effect_0021,day102_1_cora_deceives_missy,,"apply_effects(vance_susp=0, insp=5, corr=10)",5,10,,,0,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy,217,medium
-effect_0022,day102_2_day2_insp_choice,,"apply_effects(stern_susp=-5, insp=15, corr=0)",15,0,-5,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy,332,medium
-effect_0023,day102_2_day2_corr_choice,,"apply_effects(vance_susp=10, insp=0, corr=15)",0,15,,,10,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy,371,medium
-effect_0024,day102_3_cora_confesses,,"apply_effects(stern_susp=20, insp=15, corr=0)",15,0,20,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy,626,medium
-effect_0025,day102_3_cora_pretends_to_find_it,,"apply_effects(stern_susp=10, insp=5, corr=15)",5,15,10,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy,681,medium
-effect_0026,day102_3_cora_frames_missy,,"apply_effects(vance_susp=0, insp=0, corr=20)",0,20,,,0,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy,752,medium
-effect_0027,day102_4_cora_writes_a_chapter,,"apply_effects(vance_susp=0, insp=-10, corr=0)",-10,0,,,0,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy,1113,medium
-effect_0028,day102_4_cora_writes_a_chapter,,"apply_effects(vance_susp=0, insp=-15, corr=0)",-15,0,,,0,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy,1159,medium
-effect_0029,day102_4_cora_sneaks_a_feel,,"apply_effects(susp=10, insp=5, corr=15)",5,15,,,,,,,,,susp,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day102_non_canon.rpy,1185,medium
-effect_0030,day103_1_servants_corridor,,"apply_effects(vance_susp=10, insp=0, corr=0)",0,0,,,10,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,109,medium
-effect_0031,day103_1_servants_corridor,,"apply_effects(stern_susp=15, insp=0, corr=0)",0,0,15,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,125,medium
-effect_0032,day103_1_servants_corridor,,"apply_effects(missy_susp=5, insp=10, corr=0)",10,0,,,,,5,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,134,medium
-effect_0033,day103_1_corridor_insp_chain,,"apply_effects(stern_susp=-5, insp=15, corr=0)",15,0,-5,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,167,medium
-effect_0034,day103_1_corridor_corr_chain,,"apply_effects(vance_susp=10, insp=0, corr=15)",0,15,,,10,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,202,medium
-effect_0035,day103_1_optional_character_chain,option_4,"apply_effects(insp=10, corr=0)",10,0,,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,269,medium
-effect_0036,day103_2_cora_vs_gideon_insp,,"apply_effects(vance_susp=0, insp=20, corr=5)",20,5,,,0,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,409,medium
-effect_0037,day103_2_cora_vs_gideon_corr,,"apply_effects(vance_susp=5, insp=5, corr=20)",5,20,,,5,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,461,medium
-effect_0038,day103_2_cora_vs_gideon_ghost,,"apply_effects(vance_susp=15, insp=15, corr=0)",15,0,,,15,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,519,medium
-effect_0039,day103_3_frantic_write,,"apply_effects(stern_susp=10, insp=20, corr=0)",20,0,10,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,710,medium
-effect_0040,day103_3_prepare_mask,,"apply_effects(stern_susp=-20, insp=0, corr=0)",0,0,-20,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,745,medium
-effect_0041,day103_3_indulge_words,,"apply_effects(stern_susp=5, insp=5, corr=20)",5,20,5,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,776,medium
-effect_0042,day103_4_room_stern_suspicion,suspicion,"apply_effects(stern_susp=-10, insp=0, corr=0)",0,0,-10,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,838,medium
-effect_0043,day103_4_room_stern_suspicion,inspiration_mixed_risk,"apply_effects(stern_susp=5, insp=10, corr=0)",10,0,5,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,857,medium
-effect_0044,day103_4_room_stern_suspicion,suspicion_if_she_sees_through_it,"apply_effects(stern_susp=10, insp=0, corr=5)",0,5,10,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,877,medium
-effect_0045,day103_2_night_defy_gideon,,"apply_effects(vance_susp=20, insp=20, corr=0)",20,0,,,20,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,1035,medium
-effect_0046,day103_2_night_bargain_gideon,,"apply_effects(vance_susp=10, insp=15, corr=10)",15,10,,,10,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,1084,medium
-effect_0047,day103_2_night_surrender_gideon,,"apply_effects(vance_susp=15, insp=10, corr=25)",10,25,,,15,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,1143,medium
-effect_0048,day103_3_bedroom_final_write,chapter_gate,"apply_effects(stern_susp=5, insp=-20, corr=0)",-20,0,5,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,1249,medium
-effect_0049,day103_3_bedroom_final_write,chapter_gate,"apply_effects(stern_susp=0, insp=5, corr=5)",5,5,0,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,1268,medium
-effect_0050,day103_3_bedroom_final_write,safety_over_progress,"apply_effects(stern_susp=10, insp=0, corr=0)",0,0,10,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day103_non_canon.rpy,1274,medium
-effect_0051,day104_1_lockbox_evidence,,"apply_effects(vance_susp=15, insp=20, corr=0)",20,0,,,15,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day104_non_canon.rpy,161,medium
-effect_0052,day104_2_escape_fireplace,,"apply_effects(stern_susp=35, insp=5, corr=0)",5,0,35,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day104_non_canon.rpy,228,medium
-effect_0053,day104_2_escape_bold_lie,,"apply_effects(vance_susp=40, insp=10, corr=5)",10,5,,,40,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day104_non_canon.rpy,288,medium
-effect_0054,day104_2_escape_missy_cover,,"apply_effects(vance_susp=-15, missy_susp=20, insp=5, corr=20)",5,20,,,-15,,20,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day104_non_canon.rpy,370,medium
-effect_0055,day104_3_stern_pressure,suspicion,"apply_effects(stern_susp=-15, insp=0, corr=0)",0,0,-15,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day104_non_canon.rpy,511,medium
-effect_0056,day104_3_stern_pressure,inspiration_small_suspicion,"apply_effects(stern_susp=5, insp=10, corr=0)",10,0,5,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day104_non_canon.rpy,527,medium
-effect_0057,day104_3_stern_pressure,conditional_moral_cost,"apply_effects(stern_susp=-10, missy_susp=10, insp=0, corr=10)",0,10,-10,,,,10,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day104_non_canon.rpy,543,medium
-effect_0058,day104_4_atonement,,"apply_effects(stern_susp=-30, insp=0, corr=0)",0,0,-30,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day104_non_canon.rpy,656,medium
-effect_0059,day104_4_atonement,,"apply_effects(stern_susp=-25, insp=0, corr=0)",0,0,-25,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day104_non_canon.rpy,665,medium
-effect_0060,day104_4_atonement,,"apply_effects(stern_susp=-10, insp=0, corr=0)",0,0,-10,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day104_non_canon.rpy,674,medium
-effect_0061,day104_4_missy_repair,,"apply_effects(missy_susp=-15, insp=5, corr=0)",5,0,,,,,-15,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day104_non_canon.rpy,702,medium
-effect_0062,day104_4_missy_repair,tender_romance_path_b_intimacy,"apply_effects(missy_susp=-25, vance_susp=5, insp=15, corr=10)",15,10,,,5,,-25,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day104_non_canon.rpy,733,medium
-effect_0063,day104_4_missy_repair,guarded_distance,"apply_effects(missy_susp=-10, insp=0, corr=5)",0,5,,,,,-10,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day104_non_canon.rpy,756,medium
-effect_0064,day104_5_triumphant_chapter,,"apply_effects(stern_susp=15, insp=-15, corr=0)",-15,0,15,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day104_non_canon.rpy,905,medium
-effect_0065,day105_4_motivation_observer,,"apply_effects(insp=20, corr=0)",20,0,,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day105_non_canon.rpy,383,medium
-effect_0066,day105_4_motivation_predator,,"apply_effects(insp=5, corr=20)",5,20,,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day105_non_canon.rpy,430,medium
-effect_0067,day105_4_motivation_prey,,"apply_effects(vance_susp=5, insp=10, corr=10)",10,10,,,5,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day105_non_canon.rpy,478,medium
-effect_0068,day105_4_motivation_ghost,,"apply_effects(vance_susp=-5, insp=15, corr=5)",15,5,,,-5,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day105_non_canon.rpy,524,medium
-effect_0069,day105_5_gideon_marks_cora,pragmatic_entanglement,"apply_effects(insp=5, corr=10)",5,10,,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day105_non_canon.rpy,669,medium
-effect_0070,day105_5_gideon_marks_cora,defiant_poverty,"apply_effects(vance_susp=5, insp=10, corr=0)",10,0,,,5,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day105_non_canon.rpy,685,medium
-effect_0071,day105_5_gideon_marks_cora,ghost_option,"apply_effects(vance_susp=-5, insp=5, corr=5)",5,5,,,-5,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/days/day105_non_canon.rpy,703,medium
-effect_0072,stern_chain_1,shed_suspicion_break_chain,"apply_effects(stern_susp=-10, insp=5, corr=0)",5,0,-10,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy,99,medium
-effect_0073,stern_chain_1,lean_into_tension_progress_chain,"apply_effects(stern_susp=15, insp=15, corr=5)",15,5,15,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy,113,medium
-effect_0074,stern_chain_2,shed_suspicion_break_chain,"apply_effects(stern_susp=-10, insp=5, corr=0)",5,0,-10,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy,163,medium
-effect_0075,stern_chain_2,progress_chain,"apply_effects(stern_susp=20, insp=20, corr=10)",20,10,20,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy,176,medium
-effect_0076,stern_chain_3,shed_suspicion_break_chain,"apply_effects(stern_susp=-15, insp=5, corr=0)",5,0,-15,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy,228,medium
-effect_0077,stern_chain_3,progress_chain_level_4_tease,"apply_effects(stern_susp=20, insp=20, corr=20)",20,20,20,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy,242,medium
-effect_0078,missy_chain_1,shed_suspicion_break_chain,"apply_effects(missy_susp=-10, insp=10, corr=0)",10,0,,,,,-10,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy,307,medium
-effect_0079,missy_chain_1,progress_chain,"apply_effects(missy_susp=10, insp=10, corr=5)",10,5,,,,,10,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy,322,medium
-effect_0080,missy_chain_2,shed_suspicion_break_chain,"apply_effects(missy_susp=-15, insp=10, corr=0)",10,0,,,,,-15,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy,370,medium
-effect_0081,missy_chain_2,progress_chain,"apply_effects(missy_susp=15, insp=15, corr=10)",15,10,,,,,15,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy,383,medium
-effect_0082,missy_chain_3,shed_suspicion_break_chain,"apply_effects(missy_susp=-20, insp=5, corr=0)",5,0,,,,,-20,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy,431,medium
-effect_0083,missy_chain_3,progress_chain_level_3_climax,"apply_effects(missy_susp=20, insp=20, corr=20)",20,20,,,,,20,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy,445,medium
-effect_0084,vance_chain_1,shed_suspicion_break_chain,"apply_effects(vance_susp=-10, insp=5, corr=0)",5,0,,,-10,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy,506,medium
-effect_0085,vance_chain_1,progress_chain,"apply_effects(vance_susp=15, insp=15, corr=5)",15,5,,,15,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy,521,medium
-effect_0086,vance_chain_2,shed_suspicion_break_chain,"apply_effects(vance_susp=-15, insp=5, corr=0)",5,0,,,-15,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy,559,medium
-effect_0087,vance_chain_2,progress_chain,"apply_effects(vance_susp=15, insp=20, corr=10)",20,10,,,15,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy,568,medium
-effect_0088,vance_chain_3,shed_suspicion_break_chain,"apply_effects(vance_susp=-20, insp=5, corr=0)",5,0,,,-20,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy,622,medium
-effect_0089,vance_chain_3,progress_chain_level_4_tease,"apply_effects(vance_susp=20, insp=20, corr=20)",20,20,,,20,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy,635,medium
-effect_0090,confrontation_stern,,"apply_effects(stern_susp=-35, insp=0, corr=5)",0,5,-35,,,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy,693,medium
-effect_0091,confrontation_vance,,"apply_effects(vance_susp=-35, insp=0, corr=5)",0,5,,,-35,,,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy,730,medium
-effect_0092,confrontation_missy,,"apply_effects(missy_susp=-35, insp=5)",5,,,,,,-35,,,,,narrative/draft/releases/release-1-mvp/non_prod_renpy_project/game/shared/story_chains_non_canon.rpy,749,medium
+effect_0001,day100_1_afternoon_boredom,search_the_bureau_15_inspiration_10_corruption,"apply_effects(insp=15, corr=10)",15,10,,,,,,,,,,main-game/non-prod-game/game/days/day100_non_canon.rpy,90,medium
+effect_0002,day100_1_afternoon_boredom,search_the_parlour_entrance_15_corruption,apply_effects(corr=15),,15,,,,,,,,,,main-game/non-prod-game/game/days/day100_non_canon.rpy,101,medium
+effect_0003,day100_2_reconvergence,eager_posture,apply_effects(insp=5),5,,,,,,,,,,,main-game/non-prod-game/game/days/day100_non_canon.rpy,195,medium
+effect_0004,day100_2_reconvergence,desperate_posture,apply_effects(corr=5),,5,,,,,,,,,,main-game/non-prod-game/game/days/day100_non_canon.rpy,206,medium
+effect_0005,day100_2_reconvergence,5_inspiration,apply_effects(insp=5),5,,,,,,,,,,,main-game/non-prod-game/game/days/day100_non_canon.rpy,227,medium
+effect_0006,day100_2_reconvergence,5_inspiration_5_corruption,"apply_effects(insp=5, corr=5)",5,5,,,,,,,,,,main-game/non-prod-game/game/days/day100_non_canon.rpy,236,medium
+effect_0007,day100_2_reconvergence,10_corruption,apply_effects(corr=10),,10,,,,,,,,,,main-game/non-prod-game/game/days/day100_non_canon.rpy,245,medium
+effect_0008,day101_1_morning_interview,option_1,"apply_effects(stern_susp=5, insp=5, corr=0)",5,0,5,,,,,,,,,main-game/non-prod-game/game/days/day101_non_canon.rpy,172,medium
+effect_0009,day101_1_morning_interview,option_2,"apply_effects(stern_susp=15, insp=10, corr=0)",10,0,15,,,,,,,,,main-game/non-prod-game/game/days/day101_non_canon.rpy,192,medium
+effect_0010,day101_1_morning_interview,option_1,"apply_effects(stern_susp=5, insp=0, corr=5)",0,5,5,,,,,,,,,main-game/non-prod-game/game/days/day101_non_canon.rpy,227,medium
+effect_0011,day101_1_morning_interview,option_2,"apply_effects(stern_susp=10, insp=5, corr=0)",5,0,10,,,,,,,,,main-game/non-prod-game/game/days/day101_non_canon.rpy,244,medium
+effect_0012,day101_1_morning_interview,option_3,"apply_effects(stern_susp=15, insp=10, corr=10)",10,10,15,,,,,,,,,main-game/non-prod-game/game/days/day101_non_canon.rpy,262,medium
+effect_0013,day101_1_morning_interview,option_1,"apply_effects(stern_susp=5, insp=5, corr=0)",5,0,5,,,,,,,,,main-game/non-prod-game/game/days/day101_non_canon.rpy,295,medium
+effect_0014,day101_1_morning_interview,option_2,"apply_effects(stern_susp=5, insp=10, corr=0)",10,0,5,,,,,,,,,main-game/non-prod-game/game/days/day101_non_canon.rpy,307,medium
+effect_0015,day101_1_morning_interview,option_3,"apply_effects(stern_susp=20, insp=15, corr=10)",15,10,20,,,,,,,,,main-game/non-prod-game/game/days/day101_non_canon.rpy,319,medium
+effect_0016,day101_1_vance_throws_toy,subservient_suspicion,"apply_effects(vance_susp=5, insp=5, corr=0)",5,0,,,5,,,,,,,main-game/non-prod-game/game/days/day101_non_canon.rpy,406,medium
+effect_0017,day101_1_vance_throws_toy,defiant_tension_inspiration_corruption,"apply_effects(vance_susp=15, insp=10, corr=5)",10,5,,,15,,,,,,,main-game/non-prod-game/game/days/day101_non_canon.rpy,424,medium
+effect_0018,day101_1_vance_throws_toy,ghostly_inspiration,"apply_effects(vance_susp=10, insp=10, corr=0)",10,0,,,10,,,,,,,main-game/non-prod-game/game/days/day101_non_canon.rpy,445,medium
+effect_0019,day101_1_vance_dressing_room,protected_suspicion,"apply_effects(vance_susp=5, insp=10, corr=5)",10,5,,,5,,,,,,,main-game/non-prod-game/game/days/day101_non_canon.rpy,588,medium
+effect_0020,day101_1_vance_dressing_room,intimate_tension_suspicion_corruption,"apply_effects(vance_susp=15, insp=10, corr=10)",10,10,,,15,,,,,,,main-game/non-prod-game/game/days/day101_non_canon.rpy,609,medium
+effect_0021,day101_1_vance_dressing_room,observed_inspiration,"apply_effects(vance_susp=5, insp=10, corr=0)",10,0,,,5,,,,,,,main-game/non-prod-game/game/days/day101_non_canon.rpy,632,medium
+effect_0022,day101_1_vance_stairwell_encounter,loyal_witness_suspicion,"apply_effects(vance_susp=5, insp=5, corr=0)",5,0,,,5,,,,,,,main-game/non-prod-game/game/days/day101_non_canon.rpy,711,medium
+effect_0023,day101_1_vance_stairwell_encounter,accomplice_tension_suspicion_corruption,"apply_effects(vance_susp=15, insp=10, corr=10)",10,10,,,15,,,,,,,main-game/non-prod-game/game/days/day101_non_canon.rpy,725,medium
+effect_0024,day101_1_vance_stairwell_encounter,silent_observer_inspiration,"apply_effects(vance_susp=5, insp=10, corr=0)",10,0,,,5,,,,,,,main-game/non-prod-game/game/days/day101_non_canon.rpy,749,medium
+effect_0025,day101_2_coras_path_choice,predator_path_inspiration_corruption,"apply_effects(insp=10, corr=5)",10,5,,,,,,,,,,main-game/non-prod-game/game/days/day101_non_canon.rpy,895,medium
+effect_0026,day101_2_coras_path_choice,prey_path_inspiration_suspicion,"apply_effects(vance_susp=35, insp=15, corr=5)",15,5,,,35,,,,,,,main-game/non-prod-game/game/days/day101_non_canon.rpy,927,medium
+effect_0027,day101_2_coras_path_choice,ghost_path_inspiration_suspicion,"apply_effects(stern_susp=-5, vance_susp=-5, missy_susp=-5, insp=10, corr=0)",10,0,-5,,-5,,-5,,,,,main-game/non-prod-game/game/days/day101_non_canon.rpy,961,medium
+effect_0028,day101_night_story_window,inspiration,"apply_effects(insp=15, corr=0)",15,0,,,,,,,,,,main-game/non-prod-game/game/days/day101_non_canon.rpy,1094,medium
+effect_0029,day101_night_story_window,corruption,"apply_effects(vance_susp=5, insp=5, corr=10)",5,10,,,5,,,,,,,main-game/non-prod-game/game/days/day101_non_canon.rpy,1110,medium
+effect_0030,day101_night_story_window,corruption,"apply_effects(insp=10, corr=0)",10,0,,,,,,,,,,main-game/non-prod-game/game/days/day101_non_canon.rpy,1127,medium
+effect_0031,day101_4_write_the_chapter,inspiration,"apply_effects(insp=15, corr=0)",15,0,,,,,,,,,,main-game/non-prod-game/game/days/day101_non_canon.rpy,1164,medium
+effect_0032,day101_4_write_the_chapter,corruption,"apply_effects(vance_susp=5, insp=5, corr=10)",5,10,,,5,,,,,,,main-game/non-prod-game/game/days/day101_non_canon.rpy,1174,medium
+effect_0033,day101_4_write_the_chapter,corruption,"apply_effects(insp=-10, corr=0)",-10,0,,,,,,,,,,main-game/non-prod-game/game/days/day101_non_canon.rpy,1234,medium
+effect_0034,day102_1_cora_takes_the_thing,,"apply_effects(vance_susp=5, insp=0, corr=15)",0,15,,,5,,,,,,,main-game/non-prod-game/game/days/day102_non_canon.rpy,159,medium
+effect_0035,day102_1_cora_deceives_missy,,"apply_effects(vance_susp=0, insp=5, corr=10)",5,10,,,0,,,,,,,main-game/non-prod-game/game/days/day102_non_canon.rpy,217,medium
+effect_0036,day102_2_day2_insp_choice,,"apply_effects(stern_susp=-5, insp=15, corr=0)",15,0,-5,,,,,,,,,main-game/non-prod-game/game/days/day102_non_canon.rpy,330,medium
+effect_0037,day102_2_day2_corr_choice,,"apply_effects(vance_susp=10, insp=0, corr=15)",0,15,,,10,,,,,,,main-game/non-prod-game/game/days/day102_non_canon.rpy,373,medium
+effect_0038,day102_3_cora_confesses,,"apply_effects(stern_susp=20, insp=15, corr=0)",15,0,20,,,,,,,,,main-game/non-prod-game/game/days/day102_non_canon.rpy,627,medium
+effect_0039,day102_3_cora_pretends_to_find_it,,"apply_effects(stern_susp=10, insp=5, corr=15)",5,15,10,,,,,,,,,main-game/non-prod-game/game/days/day102_non_canon.rpy,683,medium
+effect_0040,day102_3_cora_frames_missy,,"apply_effects(vance_susp=0, insp=0, corr=20)",0,20,,,0,,,,,,,main-game/non-prod-game/game/days/day102_non_canon.rpy,755,medium
+effect_0041,day102_4_cora_writes_a_chapter,,"apply_effects(vance_susp=0, insp=-10, corr=0)",-10,0,,,0,,,,,,,main-game/non-prod-game/game/days/day102_non_canon.rpy,1109,medium
+effect_0042,day102_4_cora_writes_a_chapter,,"apply_effects(vance_susp=0, insp=-15, corr=0)",-15,0,,,0,,,,,,,main-game/non-prod-game/game/days/day102_non_canon.rpy,1155,medium
+effect_0043,day102_4_cora_sneaks_a_feel,,"apply_effects(insp=5, corr=15)",5,15,,,,,,,,,,main-game/non-prod-game/game/days/day102_non_canon.rpy,1181,medium
+effect_0044,day103_1_servants_corridor,,"apply_effects(vance_susp=10, insp=0, corr=0)",0,0,,,10,,,,,,,main-game/non-prod-game/game/days/day103_non_canon.rpy,102,medium
+effect_0045,day103_1_servants_corridor,,"apply_effects(stern_susp=15, insp=0, corr=0)",0,0,15,,,,,,,,,main-game/non-prod-game/game/days/day103_non_canon.rpy,118,medium
+effect_0046,day103_1_servants_corridor,,"apply_effects(missy_susp=5, insp=10, corr=0)",10,0,,,,,5,,,,,main-game/non-prod-game/game/days/day103_non_canon.rpy,127,medium
+effect_0047,day103_1_corridor_insp_chain,,"apply_effects(stern_susp=-5, insp=15, corr=0)",15,0,-5,,,,,,,,,main-game/non-prod-game/game/days/day103_non_canon.rpy,160,medium
+effect_0048,day103_1_corridor_corr_chain,,"apply_effects(vance_susp=10, insp=0, corr=15)",0,15,,,10,,,,,,,main-game/non-prod-game/game/days/day103_non_canon.rpy,198,medium
+effect_0049,day103_1_optional_character_chain,option_4,"apply_effects(insp=10, corr=0)",10,0,,,,,,,,,,main-game/non-prod-game/game/days/day103_non_canon.rpy,272,medium
+effect_0050,day103_2_cora_vs_gideon_insp,,"apply_effects(vance_susp=0, insp=20, corr=5)",20,5,,,0,,,,,,,main-game/non-prod-game/game/days/day103_non_canon.rpy,413,medium
+effect_0051,day103_2_cora_vs_gideon_corr,,"apply_effects(vance_susp=5, insp=5, corr=20)",5,20,,,5,,,,,,,main-game/non-prod-game/game/days/day103_non_canon.rpy,463,medium
+effect_0052,day103_2_cora_vs_gideon_ghost,,"apply_effects(vance_susp=15, insp=15, corr=0)",15,0,,,15,,,,,,,main-game/non-prod-game/game/days/day103_non_canon.rpy,521,medium
+effect_0053,day103_3_frantic_write,,"apply_effects(stern_susp=10, insp=20, corr=0)",20,0,10,,,,,,,,,main-game/non-prod-game/game/days/day103_non_canon.rpy,704,medium
+effect_0054,day103_3_prepare_mask,,"apply_effects(stern_susp=-20, insp=0, corr=0)",0,0,-20,,,,,,,,,main-game/non-prod-game/game/days/day103_non_canon.rpy,739,medium
+effect_0055,day103_3_indulge_words,,"apply_effects(stern_susp=5, insp=5, corr=20)",5,20,5,,,,,,,,,main-game/non-prod-game/game/days/day103_non_canon.rpy,770,medium
+effect_0056,day103_4_room_stern_suspicion,suspicion,"apply_effects(stern_susp=-10, insp=0, corr=0)",0,0,-10,,,,,,,,,main-game/non-prod-game/game/days/day103_non_canon.rpy,832,medium
+effect_0057,day103_4_room_stern_suspicion,inspiration_mixed_risk,"apply_effects(stern_susp=5, insp=10, corr=0)",10,0,5,,,,,,,,,main-game/non-prod-game/game/days/day103_non_canon.rpy,851,medium
+effect_0058,day103_4_room_stern_suspicion,suspicion_if_she_sees_through_it,"apply_effects(stern_susp=10, insp=0, corr=5)",0,5,10,,,,,,,,,main-game/non-prod-game/game/days/day103_non_canon.rpy,871,medium
+effect_0059,day103_2_night_defy_gideon,,"apply_effects(vance_susp=20, insp=20, corr=0)",20,0,,,20,,,,,,,main-game/non-prod-game/game/days/day103_non_canon.rpy,1022,medium
+effect_0060,day103_2_night_bargain_gideon,,"apply_effects(vance_susp=10, insp=15, corr=10)",15,10,,,10,,,,,,,main-game/non-prod-game/game/days/day103_non_canon.rpy,1071,medium
+effect_0061,day103_2_night_surrender_gideon,,"apply_effects(vance_susp=15, insp=10, corr=25)",10,25,,,15,,,,,,,main-game/non-prod-game/game/days/day103_non_canon.rpy,1130,medium
+effect_0062,day103_3_bedroom_final_write,chapter_gate,"apply_effects(stern_susp=5, insp=-20, corr=0)",-20,0,5,,,,,,,,,main-game/non-prod-game/game/days/day103_non_canon.rpy,1236,medium
+effect_0063,day103_3_bedroom_final_write,chapter_gate,"apply_effects(stern_susp=0, insp=5, corr=5)",5,5,0,,,,,,,,,main-game/non-prod-game/game/days/day103_non_canon.rpy,1255,medium
+effect_0064,day103_3_bedroom_final_write,safety_over_progress,"apply_effects(stern_susp=10, insp=0, corr=0)",0,0,10,,,,,,,,,main-game/non-prod-game/game/days/day103_non_canon.rpy,1261,medium
+effect_0065,day104_1_lockbox_evidence,,"apply_effects(vance_susp=15, insp=20, corr=0)",20,0,,,15,,,,,,,main-game/non-prod-game/game/days/day104_non_canon.rpy,160,medium
+effect_0066,day104_2_escape_fireplace,,"apply_effects(stern_susp=35, insp=5, corr=0)",5,0,35,,,,,,,,,main-game/non-prod-game/game/days/day104_non_canon.rpy,227,medium
+effect_0067,day104_2_escape_bold_lie,,"apply_effects(vance_susp=40, insp=10, corr=5)",10,5,,,40,,,,,,,main-game/non-prod-game/game/days/day104_non_canon.rpy,287,medium
+effect_0068,day104_2_escape_missy_cover,,"apply_effects(vance_susp=-15, missy_susp=20, insp=5, corr=20)",5,20,,,-15,,20,,,,,main-game/non-prod-game/game/days/day104_non_canon.rpy,368,medium
+effect_0069,day104_3_stern_pressure,suspicion,"apply_effects(stern_susp=-15, insp=0, corr=0)",0,0,-15,,,,,,,,,main-game/non-prod-game/game/days/day104_non_canon.rpy,509,medium
+effect_0070,day104_3_stern_pressure,inspiration_small_suspicion,"apply_effects(stern_susp=5, insp=10, corr=0)",10,0,5,,,,,,,,,main-game/non-prod-game/game/days/day104_non_canon.rpy,525,medium
+effect_0071,day104_3_stern_pressure,conditional_moral_cost,"apply_effects(stern_susp=-10, missy_susp=10, insp=0, corr=10)",0,10,-10,,,,10,,,,,main-game/non-prod-game/game/days/day104_non_canon.rpy,541,medium
+effect_0072,day104_4_atonement,,"apply_effects(stern_susp=-30, insp=0, corr=0)",0,0,-30,,,,,,,,,main-game/non-prod-game/game/days/day104_non_canon.rpy,650,medium
+effect_0073,day104_4_atonement,,"apply_effects(stern_susp=-25, insp=0, corr=0)",0,0,-25,,,,,,,,,main-game/non-prod-game/game/days/day104_non_canon.rpy,659,medium
+effect_0074,day104_4_atonement,,"apply_effects(stern_susp=-10, insp=0, corr=0)",0,0,-10,,,,,,,,,main-game/non-prod-game/game/days/day104_non_canon.rpy,668,medium
+effect_0075,day104_4_missy_repair,,"apply_effects(missy_susp=-15, insp=5, corr=0)",5,0,,,,,-15,,,,,main-game/non-prod-game/game/days/day104_non_canon.rpy,696,medium
+effect_0076,day104_4_missy_repair,tender_romance_path_b_intimacy,"apply_effects(missy_susp=-25, vance_susp=5, insp=15, corr=10)",15,10,,,5,,-25,,,,,main-game/non-prod-game/game/days/day104_non_canon.rpy,727,medium
+effect_0077,day104_4_missy_repair,guarded_distance,"apply_effects(missy_susp=-10, insp=0, corr=5)",0,5,,,,,-10,,,,,main-game/non-prod-game/game/days/day104_non_canon.rpy,750,medium
+effect_0078,day104_5_triumphant_chapter,,"apply_effects(stern_susp=15, insp=-15, corr=0)",-15,0,15,,,,,,,,,main-game/non-prod-game/game/days/day104_non_canon.rpy,899,medium
+effect_0079,day105_4_motivation_observer,,"apply_effects(insp=20, corr=0)",20,0,,,,,,,,,,main-game/non-prod-game/game/days/day105_non_canon.rpy,382,medium
+effect_0080,day105_4_motivation_predator,,"apply_effects(insp=5, corr=20)",5,20,,,,,,,,,,main-game/non-prod-game/game/days/day105_non_canon.rpy,430,medium
+effect_0081,day105_4_motivation_prey,,"apply_effects(vance_susp=5, insp=10, corr=10)",10,10,,,5,,,,,,,main-game/non-prod-game/game/days/day105_non_canon.rpy,479,medium
+effect_0082,day105_4_motivation_ghost,,"apply_effects(vance_susp=-5, insp=15, corr=5)",15,5,,,-5,,,,,,,main-game/non-prod-game/game/days/day105_non_canon.rpy,526,medium
+effect_0083,day105_5_gideon_marks_cora,pragmatic_entanglement,"apply_effects(insp=5, corr=10)",5,10,,,,,,,,,,main-game/non-prod-game/game/days/day105_non_canon.rpy,671,medium
+effect_0084,day105_5_gideon_marks_cora,defiant_poverty,"apply_effects(vance_susp=5, insp=10, corr=0)",10,0,,,5,,,,,,,main-game/non-prod-game/game/days/day105_non_canon.rpy,687,medium
+effect_0085,day105_5_gideon_marks_cora,ghost_option,"apply_effects(vance_susp=-5, insp=5, corr=5)",5,5,,,-5,,,,,,,main-game/non-prod-game/game/days/day105_non_canon.rpy,705,medium
+effect_0086,stern_chain_1,shed_suspicion_break_chain,"apply_effects(stern_susp=-10, insp=5, corr=0)",5,0,-10,,,,,,,,,main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,133,medium
+effect_0087,stern_chain_1,lean_into_tension_progress_chain,"apply_effects(stern_susp=15, insp=15, corr=5)",15,5,15,,,,,,,,,main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,147,medium
+effect_0088,stern_chain_2,shed_suspicion_break_chain,"apply_effects(stern_susp=-10, insp=5, corr=0)",5,0,-10,,,,,,,,,main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,197,medium
+effect_0089,stern_chain_2,progress_chain,"apply_effects(stern_susp=20, insp=20, corr=10)",20,10,20,,,,,,,,,main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,210,medium
+effect_0090,stern_chain_3,shed_suspicion_lost_opportunity_safe_option_but_,"apply_effects(stern_susp=-15, insp=5, corr=0)",5,0,-15,,,,,,,,,main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,262,medium
+effect_0091,stern_chain_3,climax_2_2_spice_spikes_suspicion_25_and_corrupt,"apply_effects(stern_susp=25, insp=20, corr=20)",20,20,25,,,,,,,,,main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,276,medium
+effect_0092,missy_chain_1,shed_suspicion_break_chain,"apply_effects(missy_susp=-10, insp=10, corr=0)",10,0,,,,,-10,,,,,main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,352,medium
+effect_0093,missy_chain_1,progress_chain,"apply_effects(missy_susp=10, insp=10, corr=5)",10,5,,,,,10,,,,,main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,367,medium
+effect_0094,missy_chain_2,shed_suspicion_break_chain,"apply_effects(missy_susp=-15, insp=10, corr=0)",10,0,,,,,-15,,,,,main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,415,medium
+effect_0095,missy_chain_2,progress_chain,"apply_effects(missy_susp=15, insp=15, corr=10)",15,10,,,,,15,,,,,main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,428,medium
+effect_0096,missy_chain_3,shed_suspicion_lost_opportunity_safe_option_but_,"apply_effects(missy_susp=-20, insp=5, corr=0)",5,0,,,,,-20,,,,,main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,476,medium
+effect_0097,missy_chain_3,climax_2_2_spice_spikes_suspicion_20_and_corrupt,"apply_effects(missy_susp=20, insp=20, corr=20)",20,20,,,,,20,,,,,main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,490,medium
+effect_0098,vance_chain_1,shed_suspicion_break_chain,"apply_effects(vance_susp=-10, insp=5, corr=0)",5,0,,,-10,,,,,,,main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,557,medium
+effect_0099,vance_chain_1,progress_chain,"apply_effects(vance_susp=15, insp=15, corr=5)",15,5,,,15,,,,,,,main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,572,medium
+effect_0100,vance_chain_2,shed_suspicion_break_chain,"apply_effects(vance_susp=-15, insp=5, corr=0)",5,0,,,-15,,,,,,,main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,610,medium
+effect_0101,vance_chain_2,progress_chain,"apply_effects(vance_susp=15, insp=20, corr=10)",20,10,,,15,,,,,,,main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,619,medium
+effect_0102,vance_chain_3,shed_suspicion_lost_opportunity_safe_option_but_,"apply_effects(vance_susp=-20, insp=5, corr=0)",5,0,,,-20,,,,,,,main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,673,medium
+effect_0103,vance_chain_3,climax_2_2_spice_spikes_suspicion_20_and_corrupt,"apply_effects(vance_susp=20, insp=20, corr=20)",20,20,,,20,,,,,,,main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,686,medium
+effect_0104,confrontation_stern,,"apply_effects(stern_susp=-35, insp=0, corr=5)",0,5,-35,,,,,,,,,main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,750,medium
+effect_0105,confrontation_vance,,"apply_effects(vance_susp=-35, insp=0, corr=5)",0,5,,,-35,,,,,,,main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,787,medium
+effect_0106,confrontation_missy,,"apply_effects(missy_susp=-35, insp=5)",5,,,,,,-35,,,,,main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,806,medium

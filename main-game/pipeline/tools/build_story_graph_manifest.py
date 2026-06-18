@@ -22,22 +22,22 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_RELEASE = "release-1-mvp"
 
-LABEL_RE = re.compile(r"^label/s+([A-Za-z_]/w*)(?:/([^)]*/))?:")
-DAG_RE = re.compile(r"#/s*/[(DAG_[A-Z_]+)/s+([^/]]*)/]")
-MENU_RE = re.compile(r"^(?P<indent>/s*)menu/s*:")
-MENU_OPTION_RE = re.compile(r'^(?P<indent>/s*)"(?P<text>[^"]+)"(?:/s+if/s+(?P<condition>[^:]+))?:/s*$')
-JUMP_RE = re.compile(r"^/s*jump/s+([A-Za-z_]/w*)/s*$")
-JUMP_EXPR_RE = re.compile(r"^/s*jump/s+expression/s+(.+)$")
-CALL_RE = re.compile(r"^/s*call/s+([A-Za-z_]/w*)(?:/((.*)/))?")
-END_SLOT_RE = re.compile(r'^/s*call/s+end_slot/(outcome="([^"]+)"/)')
-APPLY_RE = re.compile(r"/$?/s*apply_effects/((.*)/)")
-SETTER_RE = re.compile(r'/$?/s*story/.(set_[A-Za-z_]/w*)/(([^)]*)/)')
-CHAIN_AVAILABLE_RE = re.compile(r'story/.chain_available/("([^"]+)"/)')
-RESOLVE_CHAIN_RE = re.compile(r'story/.resolve_chain_label/("([^"]+)"/)')
-COMPLETE_CHAIN_RE = re.compile(r'story/.complete_chain_beat/("([^"]+)"/)')
-IF_RE = re.compile(r"^/s*(if|elif)/s+(.+):/s*$")
-ROUTE_ENTRY_RE = re.compile(r'"([^"]+)":/s*/(([^)]*)/)')
-PENANCE_ENTRY_RE = re.compile(r'/((/d+),/s*"([^"]+)"/):/s*/(([^)]*)/)')
+LABEL_RE = re.compile(r"^label\s+([A-Za-z_]\w*)(?:\(([^)]*)\))?:")
+DAG_RE = re.compile(r"#\s*\[(DAG_[A-Z_]+)\s+([^\]]*)\]")
+MENU_RE = re.compile(r"^(?P<indent>\s*)menu\s*:")
+MENU_OPTION_RE = re.compile(r'^(?P<indent>\s*)"(?P<text>[^"]+)"(?:\s+if\s+(?P<condition>[^:]+))?:\s*$')
+JUMP_RE = re.compile(r"^\s*jump\s+([A-Za-z_]\w*)\s*$")
+JUMP_EXPR_RE = re.compile(r"^\s*jump\s+expression\s+(.+)$")
+CALL_RE = re.compile(r"^\s*call\s+([A-Za-z_]\w*)(?:\((.*)\))?")
+END_SLOT_RE = re.compile(r'^\s*call\s+end_slot\(outcome="([^"]+)"\)')
+APPLY_RE = re.compile(r"\$?\s*apply_effects\((.*)\)")
+SETTER_RE = re.compile(r'\$?\s*story\.(set_[A-Za-z_]\w*)\(([^)]*)\)')
+CHAIN_AVAILABLE_RE = re.compile(r'story\.chain_available\("([^"]+)"\)')
+RESOLVE_CHAIN_RE = re.compile(r'story\.resolve_chain_label\("([^"]+)"\)')
+COMPLETE_CHAIN_RE = re.compile(r'story\.complete_chain_beat\("([^"]+)"\)')
+IF_RE = re.compile(r"^\s*(if|elif)\s+(.+):\s*$")
+ROUTE_ENTRY_RE = re.compile(r'"([^"]+)":\s*\(([^)]*)\)')
+PENANCE_ENTRY_RE = re.compile(r'\(((\d+),\s*"([^"]+)")\):\s*\(([^)]*)\)')
 
 EFFECT_FIELD_MAP = {
     "insp": "inspiration_delta",
@@ -161,9 +161,9 @@ def rel(path: Path) -> str:
 
 def parse_dag_attrs(raw: str) -> dict[str, str | bool]:
     attrs: dict[str, str | bool] = {}
-    for token in re.findall(r'(/w+)="[^"]*"|/w+=[^/s]+|/w+', raw):
+    for token in re.findall(r'(\w+)="[^"]*"|\w+=[^\s]+|\w+', raw):
         pass
-    for match in re.finditer(r'(/w+)="([^"]*)"|(/w+)=([^/s]+)|(/w+)', raw):
+    for match in re.finditer(r'(\w+)="([^"]*)"|(\w+)=([^\s]+)|(\w+)', raw):
         if match.group(1):
             attrs[match.group(1)] = match.group(2)
         elif match.group(3):
@@ -175,7 +175,7 @@ def parse_dag_attrs(raw: str) -> dict[str, str | bool]:
 
 def split_args(raw: str) -> dict[str, str]:
     values: dict[str, str] = {}
-    for part in re.split(r",(?![^/(]*/))", raw):
+    for part in re.split(r",(?![^\(]*\))", raw):
         part = part.strip()
         if not part or "=" not in part:
             continue
@@ -197,9 +197,9 @@ def infer_node_type(label: str, dag_attrs: dict[str, Any], lines: list[str], sta
         return "hard_fail"
     if label.startswith("confrontation_"):
         return "penance"
-    if re.match(r"^(stern|missy|vance)_chain_/d+$", label):
+    if re.match(r"^(stern|missy|vance)_chain_\d+$", label):
         return "chain"
-    block = "/n".join(lines[start:end])
+    block = "\n".join(lines[start:end])
     if "book1_write_chapter" in block or "manuscript" in label or "write" in label or "writing" in label:
         return "write"
     if "menu:" in block or "choice" in label or "coras_choice" in label:
@@ -229,7 +229,7 @@ def extract_routes(classes_path: Path) -> tuple[dict[str, tuple[str, str, str]],
         start = text.find(name + " = {")
         if start < 0:
             continue
-        end = text.find("/n        }", start)
+        end = text.find("\n        }", start)
         block = text[start:end]
         for match in regex.finditer(block):
             if name == "SLOT_EXIT_ROUTES":
@@ -318,7 +318,7 @@ def scan_scripts(files: list[Path]) -> dict[str, Any]:
                         has_dag = True
             day = str(dag_attrs.get("day", ""))
             if not day:
-                day_match = re.match(r"day(/d{3})", label)
+                day_match = re.match(r"day(\d{3})", label)
                 day = day_match.group(1) if day_match else ""
             block = lines[start:end]
             node = Node(
@@ -376,9 +376,9 @@ def scan_scripts(files: list[Path]) -> dict[str, Any]:
             option_match = MENU_OPTION_RE.match(line)
             if option_match and current_menu_group:
                 option_key = f"option_{len([c for c in choices if c.label == current_label and c.choice_group == current_menu_group]) + 1}"
-                hint = re.search(r"/[/[([^/]]+)/]/]", option_match.group("text"))
+                hint = re.search(r"\[\[([^\]]+)\]\]", option_match.group("text"))
                 if hint:
-                    option_key = re.sub(r"/W+", "_", hint.group(1).strip().lower()).strip("_")[:48] or option_key
+                    option_key = re.sub(r"\W+", "_", hint.group(1).strip().lower()).strip("_")[:48] or option_key
                 branch_attrs = pending_dag.pop("DAG_BRANCH", {})
                 if branch_attrs.get("option"):
                     option_key = str(branch_attrs["option"])
@@ -501,7 +501,7 @@ def scan_scripts(files: list[Path]) -> dict[str, Any]:
                 if "player.anxiety >= 100" in line:
                     penance_summary["trigger"] = "anxiety >= 100 or individual character confrontation threshold"
                 if 'player.is_confrontation_ready("' in line:
-                    char = re.search(r'player/.is_confrontation_ready/("([^"]+)"/)', line)
+                    char = re.search(r'player\.is_confrontation_ready\("([^"]+)"\)', line)
                     if char:
                         penance_summary["confrontation_targets"].append(char.group(1))
                 if "jump game_over_dismissed" in line:
@@ -525,7 +525,7 @@ def storyboard_labels(storyboard: Path) -> set[str]:
     if not storyboard or not storyboard.exists():
         return set()
     text = storyboard.read_text(encoding="utf-8")
-    return set(re.findall(r"`([A-Za-z_]/w*)`", text))
+    return set(re.findall(r"`([A-Za-z_]\w*)`", text))
 
 
 def write_csv(path: Path, fieldnames: list[str], rows: list[dict[str, Any]]) -> None:
@@ -584,7 +584,7 @@ def write_outputs(args: argparse.Namespace, data: dict[str, Any], slot_routes: d
         "dag_tags": dict(data["dag_counts"]),
         "markers": dict(data["marker_counts"]),
     }
-    (out_dir / f"{prefix}_graph_manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "/n", encoding="utf-8")
+    (out_dir / f"{prefix}_graph_manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
     write_csv(
         out_dir / f"{prefix}_nodes.csv",
@@ -682,7 +682,7 @@ def write_outputs(args: argparse.Namespace, data: dict[str, Any], slot_routes: d
                     "",
                 ]
             )
-    (out_dir / f"{prefix}_graph_gaps.md").write_text("/n".join(gap_md), encoding="utf-8")
+    (out_dir / f"{prefix}_graph_gaps.md").write_text("\n".join(gap_md), encoding="utf-8")
 
     readiness = "Ready for first balancing spreadsheet skeleton" if nodes and effects and not any(g.gap_type == "router_outcome_mismatches" and "called but not defined" in g.description for g in gaps) else "Partial - graph skeleton usable, balancing inputs incomplete"
     audit = [
@@ -703,20 +703,20 @@ def write_outputs(args: argparse.Namespace, data: dict[str, Any], slot_routes: d
         f"- Readiness assessment: {readiness}",
         "",
     ]
-    (out_dir / f"{prefix}_graph_audit.md").write_text("/n".join(audit), encoding="utf-8")
+    (out_dir / f"{prefix}_graph_audit.md").write_text("\n".join(audit), encoding="utf-8")
 
     mermaid = ["flowchart TD"]
     for edge in edges:
         if edge.edge_type not in {"jump", "router", "penance", "jump_expression"}:
             continue
-        from_id = re.sub(r"/W+", "_", edge.from_label)
-        to_id = re.sub(r"/W+", "_", edge.to_label)
+        from_id = re.sub(r"\W+", "_", edge.from_label)
+        to_id = re.sub(r"\W+", "_", edge.to_label)
         label = edge.router_outcome or edge.edge_type
         mermaid.append(f'  {from_id}["{edge.from_label}"] -->|"{label}"| {to_id}["{edge.to_label}"]')
         if len(mermaid) > 240:
             mermaid.append("  %% truncated for readability")
             break
-    (out_dir / f"{prefix}_graph_mermaid.mmd").write_text("/n".join(mermaid) + "/n", encoding="utf-8")
+    (out_dir / f"{prefix}_graph_mermaid.mmd").write_text("\n".join(mermaid) + "\n", encoding="utf-8")
 
     report = [
         "# Release 1 Graph Implementation Report",
@@ -763,7 +763,7 @@ def write_outputs(args: argparse.Namespace, data: dict[str, Any], slot_routes: d
         "- Balancing Pass / Human Designer for gap triage.",
         "",
     ]
-    (out_dir / f"{prefix}_graph_implementation_report.md").write_text("/n".join(report), encoding="utf-8")
+    (out_dir / f"{prefix}_graph_implementation_report.md").write_text("\n".join(report), encoding="utf-8")
 
 
 def main() -> int:
