@@ -1685,7 +1685,7 @@ init -997 python in _viewers:
                 v = renpy.python.py_eval(v)
                 v = to_changed_value(v, force_plus, use_wide_range)
             except Exception as e:
-                message = _("Please type value") + "/n" /
+                message = _("Please type value") + "\n" \
                 + format_exc()
                 renpy.notify(message)
                 return
@@ -1701,7 +1701,7 @@ init -997 python in _viewers:
                 try:
                     renpy.python.py_eval(v)
                 except Exception as e:
-                    message = _("Please Input Transition") + "/n" /
+                    message = _("Please Input Transition") + "\n" \
                     + format_exc()
                     renpy.notify(message)
                     return
@@ -1732,7 +1732,7 @@ init -997 python in _viewers:
                 try:
                     renpy.python.py_eval(v)
                 except Exception as e:
-                    message = _("Please Input Transition") + "/n" /
+                    message = _("Please Input Transition") + "\n" \
                     + format_exc()
                     renpy.notify(message)
                     return
@@ -1898,7 +1898,7 @@ init -997 python in _viewers:
                         renpy.notify(_(value + " is not callable."))
                         return
                 except Exception as e:
-                    message = _("Please type a valid data") + "/n" /
+                    message = _("Please type a valid data") + "\n" \
                     + format_exc()
                     renpy.notify(message)
                     return
@@ -1927,7 +1927,7 @@ init -997 python in _viewers:
                         renpy.notify(_("{} is an invalid data".format(value)))
                         return
                 except Exception as e:
-                    message = _("Please type a valid data") + "/n" /
+                    message = _("Please type a valid data") + "\n" \
                     + format_exc()
                     renpy.notify(message)
                     return
@@ -2175,25 +2175,25 @@ camera"""
             string += " {layer}".format(layer=layer)
         for p, cs in x_and_y_to_xy([(p, camera_keyframes[p]) for p in camera_properties if p in camera_keyframes], layer):
             if string.find(":") < 0:
-                string += ":/n        "
+                string += ":\n        "
             string += "{property} {value}".format(property=p, value=cs[0][0])
             if persistent._one_line_one_prop:
-                string += "/n        "
+                string += "\n        "
             else:
                 string += " "
 
-        string = '/n'.join(filter(lambda x: x.strip(), string.split('/n')))
-        string = "/n"+ string + "/n/n"
+        string = '\n'.join(filter(lambda x: x.strip(), string.split('\n')))
+        string = "\n"+ string + "\n\n"
 
         try:
             from pygame import scrap, locals
             scrap.put(locals.SCRAP_TEXT, string.encode("utf-8"))
         except Exception as e:
-            message = _("Can't open clipboard") + "/n" /
+            message = _("Can't open clipboard") + "\n" \
             + format_exc()
             renpy.notify(message)
         else:
-            renpy.notify(__('Placed /n"%s"/n on clipboard') % string)
+            renpy.notify(__('Placed \n"%s"\n on clipboard') % string)
 
 
     def put_image_clipboard(tag, layer):
@@ -2230,30 +2230,30 @@ show {imagename}""".format(imagename=child)
                 string += " onlayer {layer}".format(layer=layer)
         for p, cs in x_and_y_to_xy([(p, image_keyframes[p]) for p in image_properties if p in image_keyframes], layer):
             if string.find(":") < 0:
-                string += ":/n        "
+                string += ":\n        "
             string += "{property} {value}".format(property=p, value=cs[0][0])
             if persistent._one_line_one_prop:
-                string += "/n        "
+                string += "\n        "
             else:
                 string += " "
         if check_focusing_used(layer):
             focus = get_value((None, layer, "focusing"), current_time, True)
             dof = get_value((None, layer, "dof"), current_time, True)
             result = "function camera_blur({'focusing':[({}, 0, None)], 'dof':[({}, 0, None)]})".format(focus, dof)
-            string += "/n        "
+            string += "\n        "
             string += result
 
-        string = '/n'.join(filter(lambda x: x.strip(), string.split('/n')))
-        string = "/n"+ string + "/n/n"
+        string = '\n'.join(filter(lambda x: x.strip(), string.split('\n')))
+        string = "\n"+ string + "\n\n"
         try:
             from pygame import scrap, locals
             scrap.put(locals.SCRAP_TEXT, string.encode("utf-8"))
         except Exception as e:
-            message = _("Can't open clipboard") + "/n" /
+            message = _("Can't open clipboard") + "\n" \
             + format_exc()
             renpy.notify(message)
         else:
-            renpy.notify(__('Placed /n"%s"/n on clipboard') % string)
+            renpy.notify(__('Placed \n"%s"\n on clipboard') % string)
 
 
     def put_sound_clipboard():
@@ -2261,33 +2261,33 @@ show {imagename}""".format(imagename=child)
         string = ""
         for channel, times in sound_keyframes.items():
             time = 0
-            files = "[/n        " #]"
+            files = "[\n        " #]"
             sorted_times = sorted(list(times.keys()))
             if sorted_times:
                 for t in sorted_times:
                     duration = t - time
                     if duration > 0:
-                        files += "'<silence {}>',/n        ".format(duration)
+                        files += "'<silence {}>',\n        ".format(duration)
                     fs = times[t]
-                    files += fs[1:-1] + ",/n        "
+                    files += fs[1:-1] + ",\n        "
 
                     file = get_sound_files(fs)
                     time = t
                     for f in file:
                         time += get_file_duration(f)
-                files = files[:-4] + "]/n"
-                string += "/n    play {} {}".format(channel, files)
+                files = files[:-4] + "]\n"
+                string += "\n    play {} {}".format(channel, files)
 
         string = string.replace("u'", "'", 999)
         try:
             from pygame import scrap, locals
             scrap.put(locals.SCRAP_TEXT, string.encode("utf-8"))
         except Exception as e:
-            message = _("Can't open clipboard") + "/n" /
+            message = _("Can't open clipboard") + "\n" \
             + format_exc()
             renpy.notify(message)
         else:
-            renpy.notify(__('Placed /n"%s"/n on clipboard') % string)
+            renpy.notify(__('Placed \n"%s"\n on clipboard') % string)
 
 
     def get_sound_files(fs):
@@ -2327,7 +2327,7 @@ show {imagename}""".format(imagename=child)
                     keys = [keys]
                 move_keyframe(v, old, keys, is_sound)
             except Exception as e:
-                message = _("Please type value") + "/n" /
+                message = _("Please type value") + "\n" \
                 + format_exc()
                 renpy.notify(message)
 
@@ -2341,7 +2341,7 @@ show {imagename}""".format(imagename=child)
                     return
                 move_all_keyframe(v, moved_time)
             except Exception as e:
-                message = _("Please type value") + "/n" /
+                message = _("Please type value") + "\n" \
                 + format_exc()
                 renpy.notify(message)
 
@@ -2355,7 +2355,7 @@ show {imagename}""".format(imagename=child)
                     return
                 change_time(v)
             except Exception as e:
-                message = _("Please type value") + "/n" /
+                message = _("Please type value") + "\n" \
                 + format_exc()
                 renpy.notify(message)
 
@@ -2376,7 +2376,7 @@ show {imagename}""".format(imagename=child)
                     else:
                         renpy.notify(_("Please type int value"))
             except Exception as e:
-                message = _("Please type value") + "/n" /
+                message = _("Please type value") + "\n" \
                 + format_exc()
                 renpy.notify(message)
 
@@ -2580,7 +2580,7 @@ show {imagename}""".format(imagename=child)
                     return
                 move_scene(v, scene_num)
             except Exception as e:
-                message = _("Please type value") + "/n" /
+                message = _("Please type value") + "\n" \
                 + format_exc()
                 renpy.notify(message)
 
@@ -2595,7 +2595,7 @@ show {imagename}""".format(imagename=child)
                 try:
                     renpy.python.py_eval(v)
                 except Exception as e:
-                    message = _("Please Input Transition") + "/n" /
+                    message = _("Please Input Transition") + "\n" \
                     + format_exc()
                     renpy.notify(message)
                     return
@@ -2631,7 +2631,7 @@ show {imagename}""".format(imagename=child)
                     if not renpy.loadable(evaled):
                         raise
         except Exception as e:
-            message = _("Please Input filenames") + "/n" /
+            message = _("Please Input filenames") + "\n" \
             + format_exc()
             renpy.notify(message)
             return
@@ -2672,7 +2672,7 @@ show {imagename}""".format(imagename=child)
             else:
                 if k in all_keyframes[current_scene]:
                     for (v, t, w) in all_keyframes[current_scene][k][:]:
-                        if (t == remove_time) and (remove_time != scene_keyframes[current_scene][1] /
+                        if (t == remove_time) and (remove_time != scene_keyframes[current_scene][1] \
                             or (remove_time == scene_keyframes[current_scene][1] and len(all_keyframes[current_scene][k]) == 1)):
                             all_keyframes[current_scene][k].remove((v, t, w))
                             if not all_keyframes[current_scene][k]:
@@ -3218,22 +3218,22 @@ show {imagename}""".format(imagename=child)
     {} hide""".format(window_mode)
         for channel, times in sound_keyframes.items():
             time = 0
-            files = "[/n        " #]"
+            files = "[\n        " #]"
             sorted_times = sorted(list(times.keys()))
             if sorted_times:
                 for t in sorted_times:
                     duration = t - time
                     if duration > 0:
-                        files += "'<silence {}>',/n        ".format(duration)
+                        files += "'<silence {}>',\n        ".format(duration)
                     fs = times[t]
-                    files += fs[1:-1] + ",/n        "
+                    files += fs[1:-1] + ",\n        "
 
                     file = get_sound_files(fs)
                     time = t
                     for f in file:
                         time += get_file_duration(f)
-                files = files[:-4] + "]/n"
-                string += "/n    play {} {}".format(channel, files)
+                files = files[:-4] + "]\n"
+                string += "\n    play {} {}".format(channel, files)
         for s, (scene_tran, scene_start, _) in enumerate(scene_keyframes):
             for layer in get_layers():
                 if s > 0:
@@ -3275,7 +3275,7 @@ show {imagename}""".format(imagename=child)
                     if "crop" in camera_keyframes:
                         string += " crop_relative True"
                     if persistent._one_line_one_prop:
-                        string += "/n        "
+                        string += "\n        "
                     else:
                         string += " "
                     #デフォルトと違っても出力しない方が以前の状態の変化に柔軟だが、
@@ -3285,7 +3285,7 @@ show {imagename}""".format(imagename=child)
                     for p, cs in x_and_y_to_xy([(p, camera_keyframes[p]) for p in camera_properties if p in camera_keyframes and len(camera_keyframes[p]) == 1], layer):
                         string += "{property} {value}".format(property=p, value=cs[0][0])
                         if persistent._one_line_one_prop:
-                            string += "/n        "
+                            string += "\n        "
                         else:
                             string += " "
                     sorted_list = put_prop_togetter(camera_keyframes, layer=layer)
@@ -3326,7 +3326,7 @@ show {imagename}""".format(imagename=child)
             """
                                 break
                         else:
-                            string += "/n        "
+                            string += "\n        "
                         string += "function {} ".format(camera_keyframes["function"][0][0][0])
 
 
@@ -3378,16 +3378,16 @@ show {imagename}""".format(imagename=child)
                         string += """:
         """
                         if tag in image_state[s][layer]:
-                            string += "default/n        "
+                            string += "default\n        "
                         string += "subpixel True "
                         if "crop" in image_keyframes:
                             string += "crop_relative True "
                         if persistent._one_line_one_prop:
-                            string += "/n        "
+                            string += "\n        "
                         for p, cs in x_and_y_to_xy([(p, image_keyframes[p]) for p in image_properties if p in image_keyframes and len(image_keyframes[p]) == 1], layer, tag):
                                 string += "{property} {value}".format(property=p, value=cs[0][0])
                                 if persistent._one_line_one_prop:
-                                    string += "/n        "
+                                    string += "\n        "
                                 else:
                                     string += " "
                         sorted_list = put_prop_togetter(image_keyframes, layer, tag)
@@ -3439,7 +3439,7 @@ show {imagename}""".format(imagename=child)
             repeat"""
                         if len(sorted_list):
                             for same_time_set in sorted_list:
-                                if len(sorted_list) > 1 or loops[s][(tag, layer, xy_to_x(sorted_list[0][0][0]))] /
+                                if len(sorted_list) > 1 or loops[s][(tag, layer, xy_to_x(sorted_list[0][0][0]))] \
                                     or "child" in image_keyframes  or check_focusing_used(layer, s) or "function" in image_keyframes:
                                     add_tab = "    "
                                     string += """
@@ -3475,7 +3475,7 @@ show {imagename}""".format(imagename=child)
             """
                                     break
                             else:
-                                string += "/n        "
+                                string += "\n        "
                             if check_focusing_used(layer, s):
                                 focusing_cs = {"focusing":[(get_default("focusing"), 0, None)], "dof":[(get_default("dof"), 0, None)]}
                                 for p in props_groups["focusing"]:
@@ -3514,11 +3514,11 @@ show {imagename}""".format(imagename=child)
         if (persistent._viewer_hide_window and get_animation_delay() > 0) and len(scene_keyframes) == 1:
             string += """
     with Pause({:.2f})""".format(get_animation_delay()+0.1)
-        if (persistent._viewer_hide_window and get_animation_delay() > 0 and persistent._viewer_allow_skip) /
+        if (persistent._viewer_hide_window and get_animation_delay() > 0 and persistent._viewer_allow_skip) \
             or len(scene_keyframes) > 1:
             for channel, times in sound_keyframes.items():
                 if times:
-                    string += "/n    stop {}".format(channel)
+                    string += "\n    stop {}".format(channel)
 
             for layer in get_layers():
                 for i in range(-1, -len(scene_keyframes)-1, -1):
@@ -3562,7 +3562,7 @@ show {imagename}""".format(imagename=child)
         """
                                 string += "{property} {value}".format(property=p, value=cs[-1][0])
                                 if persistent._one_line_one_prop:
-                                    string += "/n        "
+                                    string += "\n        "
                                 else:
                                     string += " "
 
@@ -3663,7 +3663,7 @@ show {imagename}""".format(imagename=child)
         """
                                 string += "{property} {value}".format(property=p, value=cs[-1][0])
                                 if persistent._one_line_one_prop:
-                                    string += "/n        "
+                                    string += "\n        "
                                 else:
                                     string += " "
 
@@ -3770,12 +3770,12 @@ show {imagename}""".format(imagename=child)
                         # else:
                         #     string += "{} {} ".format("function", image_keyframes["function"][0][0][0])
 
-        if (persistent._viewer_hide_window and get_animation_delay() > 0 and len(scene_keyframes) == 1) /
+        if (persistent._viewer_hide_window and get_animation_delay() > 0 and len(scene_keyframes) == 1) \
             or len(scene_keyframes) > 1:
             string += """
     {} show""".format(window_mode)
-        string = '/n'.join(filter(lambda x: x.strip(), string.split('/n')))
-        string = "/n"+ string + "/n/n"
+        string = '\n'.join(filter(lambda x: x.strip(), string.split('\n')))
+        string = "\n"+ string + "\n\n"
 
         if string:
             string = string.replace("u'", "'", 999)
@@ -3783,12 +3783,12 @@ show {imagename}""".format(imagename=child)
                 from pygame import scrap, locals
                 scrap.put(locals.SCRAP_TEXT, string.encode("utf-8"))
             except Exception as e:
-                message = _("Can't open clip board") + "/n" /
+                message = _("Can't open clip board") + "\n" \
                 + format_exc()
                 renpy.notify(message)
             else:
                 #syntax hilight error in vim
-                renpy.notify("Placed/n{}/n/non clipboard".format(string).replace("{", "{{").replace("[", "[["))  #]"
+                renpy.notify("Placed\n{}\n\non clipboard".format(string).replace("{", "{{").replace("[", "[["))  #]"
         else:
             renpy.notify(_("Nothing to put"))
 

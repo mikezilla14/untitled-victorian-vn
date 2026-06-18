@@ -36,8 +36,8 @@ init python:
         for f in list:
             if re.match(dir,f):
                 if f.lower().endswith(tuple(ext)):
-                    if not renpy.python.store_dicts["store.audio"].get("/""+str(f[(len(dir)):])+"/""):
-                        renpy.python.store_dicts["store.audio"]["/""+str(f[(len(dir)):])+"/""] = str(f[(len(dir)):])
+                    if not renpy.python.store_dicts["store.audio"].get('"' + str(f[(len(dir)):]) + '"'):
+                        renpy.python.store_dicts["store.audio"]['"' + str(f[(len(dir)):]) + '"'] = str(f[(len(dir)):])
         return
         
     # Load all audio into Store.Audio
@@ -92,7 +92,7 @@ init -999 python in _viewers:
     def put_clipboard_text(s):
         from pygame import scrap, locals
         scrap.put(locals.SCRAP_TEXT, s.encode("utf-8"))
-        renpy.notify("'{}'/nis copied to clipboard".format(s))
+        renpy.notify("'{}'\nis copied to clipboard".format(s))
 
     def completion(filter_string, filtered_list):
         if "," in filter_string:

@@ -88,7 +88,7 @@ init -999 python in _viewers:
     def put_clipboard_text(s):
         from pygame import scrap, locals
         scrap.put(locals.SCRAP_TEXT, s.encode("utf-8"))
-        renpy.notify("'{}'/nis copied to clipboard".format(s))
+        renpy.notify("'{}'\nis copied to clipboard".format(s))
 
     def tag_completion(filter_string, filtered_list):
         if filter_string and filter_string[-1] != " ":

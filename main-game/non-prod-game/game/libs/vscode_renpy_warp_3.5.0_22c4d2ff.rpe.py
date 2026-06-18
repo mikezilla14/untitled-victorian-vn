@@ -44,7 +44,7 @@ original_quit_action = renpy.config.quit_action
 
 def get_meta():
     RPE_FILE_PATTERN = re.compile(
-        r"(?:vscode_)?renpy_warp_(?P<version>/d+/./d+/./d+)(?:_(?P<checksum>[a-z0-9]+))?/.rpe(?:/.py)?")
+        r"(?:vscode_)?renpy_warp_(?P<version>\d+\.\d+\.\d+)(?:_(?P<checksum>[a-z0-9]+))?\.rpe(?:\.py)?")
 
     file = Path(__file__) if __file__.endswith(
         '.rpe.py') else Path(__file__).parent
@@ -198,7 +198,7 @@ def socket_service(port, version, checksum):
             renpy.config.quit_action = RenpyWarpQuitAction()
 
             logger.info(f"connected to renpy warp socket server on :{port}")
-            py_exec("renpy.notify(/"Connected to Ren'Py Launch and Sync/")")
+            py_exec("renpy.notify(\"Connected to Ren'Py Launch and Sync\")")
 
             socket_producer(websocket)
             socket_listener(websocket)  # this blocks until socket is closed
@@ -209,7 +209,7 @@ def socket_service(port, version, checksum):
 
             if not quitting:
                 py_exec(
-                    "renpy.notify(/"Disconnected from  Ren'Py Launch and Sync/")")
+                    "renpy.notify(\"Disconnected from  Ren'Py Launch and Sync\")")
 
     except ConnectionClosedOK:
         logger.info(f"socket service on :{port} was terminated by server")

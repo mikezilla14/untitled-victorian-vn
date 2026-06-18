@@ -93,17 +93,17 @@ screen _new_action_editor(opened=None, time=0, previous_time=None, in_graphic_mo
         key "rollforward" action Function(generate_changed((None, layer, "zpos")), get_value((None, layer, "zpos"), default=True)-100+persistent._wide_range)
 
     if time:
-        timer time+_viewers.return_margin action [Show("_new_action_editor", opened=opened, in_graphic_mode=in_graphic_mode, layer=layer), /
+        timer time+_viewers.return_margin action [Show("_new_action_editor", opened=opened, in_graphic_mode=in_graphic_mode, layer=layer), \
                             Function(_viewers.return_start_time, previous_time)]
-        key "game_menu" action [Show("_new_action_editor", opened=opened, in_graphic_mode=in_graphic_mode, layer=layer), /
+        key "game_menu" action [Show("_new_action_editor", opened=opened, in_graphic_mode=in_graphic_mode, layer=layer), \
                             Function(change_time, previous_time)]
-        $play_action = [SensitiveIf(len(get_sorted_keyframes(current_scene)) > 0 or len(scene_keyframes) > 1), SelectedIf(time > 0), /
-            _viewers.pause, /
+        $play_action = [SensitiveIf(len(get_sorted_keyframes(current_scene)) > 0 or len(scene_keyframes) > 1), SelectedIf(time > 0), \
+            _viewers.pause, \
             Show("_new_action_editor", opened=opened, in_graphic_mode=in_graphic_mode, layer=layer)]
     else:
         key "game_menu" action Confirm("Close Editor?", Return())
-        $play_action = [SensitiveIf(len(get_sorted_keyframes(current_scene)) > 0 or len(scene_keyframes) > 1), SelectedIf(time > 0), /
-            [If(get_sorted_keyframes(current_scene) or len(scene_keyframes) > 1, Function(_viewers.play, play=True))], /
+        $play_action = [SensitiveIf(len(get_sorted_keyframes(current_scene)) > 0 or len(scene_keyframes) > 1), SelectedIf(time > 0), \
+            [If(get_sorted_keyframes(current_scene) or len(scene_keyframes) > 1, Function(_viewers.play, play=True))], \
             Show("_new_action_editor", opened=opened, time=_viewers.get_animation_delay(), previous_time=current_time, in_graphic_mode=in_graphic_mode, layer=layer)]
 
         if persistent._show_camera_icon:
@@ -694,8 +694,8 @@ screen _action_editor(tab="camera", layer="master", opened=0, time=0, page=0):
         check_new_position_type = _viewers.check_new_position_type
         exclusive_check = _viewers.exclusive_check
 
-        play_action = [SensitiveIf(len(get_sorted_keyframes(current_scene)) > 0 or len(scene_keyframes) > 1), /
-            SelectedIf(False), Function(_viewers.play, play=True), /
+        play_action = [SensitiveIf(len(get_sorted_keyframes(current_scene)) > 0 or len(scene_keyframes) > 1), \
+            SelectedIf(False), Function(_viewers.play, play=True), \
             Show("_action_editor", tab=tab, layer=layer, opened=opened, page=page, time=_viewers.get_animation_delay())]
 
         xpos, ypos = get_value((None, layer, "xpos"), default=True), get_value((None, layer, "ypos"), default=True)
@@ -742,9 +742,9 @@ screen _action_editor(tab="camera", layer="master", opened=0, time=0, page=0):
         key "rollforward" action Function(generate_changed((None, layer, "zpos")), get_value((None, layer, "zpos"), default=True)-100+persistent._wide_range)
 
     if time:
-        timer time+1 action [Show("_action_editor", tab=tab, layer=layer, opened=opened, page=page), /
+        timer time+1 action [Show("_action_editor", tab=tab, layer=layer, opened=opened, page=page), \
                             Function(change_time, current_time), renpy.restart_interaction]
-        key "game_menu" action [Show("_action_editor", tab=tab, layer=layer, opened=opened, page=page), /
+        key "game_menu" action [Show("_action_editor", tab=tab, layer=layer, opened=opened, page=page), \
                             Function(change_time, current_time)]
         key "hide_windows" action NullAction()
     else:
@@ -782,10 +782,10 @@ screen _action_editor(tab="camera", layer="master", opened=0, time=0, page=0):
             style_group "action_editor_a"
             textbutton _("option") action Show("_action_editor_option")
             textbutton _("remove keyframes"):
-                action [SensitiveIf(current_time in get_sorted_keyframes(current_scene)), /
+                action [SensitiveIf(current_time in get_sorted_keyframes(current_scene)), \
                 Function(_viewers.remove_all_keyframe, current_time), renpy.restart_interaction]
             textbutton _("move keyframes"):
-                action [SensitiveIf(current_time in get_sorted_keyframes(current_scene)), /
+                action [SensitiveIf(current_time in get_sorted_keyframes(current_scene)), \
                 SelectedIf(False), SetField(_viewers, "moved_time", current_time), Show("_move_keyframes")]
             textbutton _("hide") action HideInterface()
             textbutton _("clipboard") action Function(_viewers.put_clipboard)
@@ -1204,8 +1204,8 @@ screen _edit_keyframe(key, change_func=None):
                         textbutton _("{}".format(w)) action None
                         if _viewers.check_props_group(key) is None:
                             textbutton _("spline") action None
-                        textbutton _("{}".format(v)) action [/
-                            Function(_viewers.edit_value, change_func, default=v, use_wide_range=use_wide_range, force_plus=_viewers.is_force_plus(p), time=t), /
+                        textbutton _("{}".format(v)) action [\
+                            Function(_viewers.edit_value, change_func, default=v, use_wide_range=use_wide_range, force_plus=_viewers.is_force_plus(p), time=t), \
                             Function(_viewers.change_time, t)]
                     textbutton _("[t:>05.2f] s") action None
             else:
@@ -1218,13 +1218,13 @@ screen _edit_keyframe(key, change_func=None):
                     else:
                         textbutton _("{}".format(w)) action Function(_viewers.edit_warper, check_points=check_points_list, old=t, value_org=w)
                         if (_viewers.check_props_group(key) is None and p not in _viewers.disallow_spline) or (_viewers.check_props_group(key)[0] not in _viewers.disallow_spline):
-                            textbutton _("spline") action [/
-                                SelectedIf(t in _viewers.splines[_viewers.current_scene][key]), /
-                                Show("_spline_editor", change_func=change_func, /
-                                    key=key, pre=check_points[i-1], post=check_points[i], default=v, /
+                            textbutton _("spline") action [\
+                                SelectedIf(t in _viewers.splines[_viewers.current_scene][key]), \
+                                Show("_spline_editor", change_func=change_func, \
+                                    key=key, pre=check_points[i-1], post=check_points[i], default=v, \
                                     force_plus=_viewers.is_force_plus(p), time=t)]
-                        textbutton _("{}".format(v)) action [/
-                            Function(_viewers.edit_value, change_func, default=v, use_wide_range=use_wide_range, force_plus=_viewers.is_force_plus(p), time=t), /
+                        textbutton _("{}".format(v)) action [\
+                            Function(_viewers.edit_value, change_func, default=v, use_wide_range=use_wide_range, force_plus=_viewers.is_force_plus(p), time=t), \
                             Function(_viewers.change_time, t)]
                     textbutton _("[t:>05.2f] s") action Function(_viewers.edit_move_keyframe, keys=k_list, old=t)
                     bar adjustment ui.adjustment(range=persistent._time_range, value=t, changed=renpy.curry(_viewers.move_keyframe)(old=t, keys=k_list)):
@@ -1744,7 +1744,7 @@ init 1 python in _viewers:
                 new_children.append(child)
                 for key, cs in all_keyframes[self.scene].items():
                     p = key[2]
-                    if p not in props_groups["focusing"] or /
+                    if p not in props_groups["focusing"] or \
                         (persistent._viewer_focusing and perspective_enabled(key[1], self.scene)):
                         for c in cs:
                             _, t, _ = c
@@ -1761,7 +1761,7 @@ init 1 python in _viewers:
             elif self.kind == "camera" and self.props_set is not None:
                 _all_keyframes = all_keyframes[self.scene]
                 for p in self.props_set:
-                    if (p not in props_groups["focusing"] or /
+                    if (p not in props_groups["focusing"] or \
                         (persistent._viewer_focusing and perspective_enabled(self.key[1], self.scene))):
                         for _, t, _ in _all_keyframes.get((None, self.key[1], p), []):
                             child = KeyFrame(insensitive_key_child, t, insensitive_key_hovere_child, False, key=None, clicked=Function(change_time, t))
@@ -2052,12 +2052,12 @@ init 1 python in _viewers:
                     to_y = (y - self.last_y)*self.speed + self.last_ypos
                     pos = (to_x, to_y)
                 last_time = self.time
-                self.time = key_drag_changed(pos, self.key, self.time, /
+                self.time = key_drag_changed(pos, self.key, self.time, \
                     is_sound=self.is_sound, in_graphic_mode=self.in_graphic_mode)
 
             self.hovered = False
-            if not self.dragging and /
-                x >= self.xpos - self.width/2. and x <= self.width/2.+self.xpos and /
+            if not self.dragging and \
+                x >= self.xpos - self.width/2. and x <= self.width/2.+self.xpos and \
                 y >= self.ypos - self.yoffset and y <= self.height - self.yoffset +self.ypos:
                 self.hovered = True
                 if ((check_version(23032500) and renpy.map_event(ev, "ctrl_mousedown_1")) or renpy.map_event(ev, "mousedown_1")) and not out_of_viewport():
@@ -2178,8 +2178,8 @@ init 1 python in _viewers:
                 return True
 
             self.hovered = False
-            if not self.dragging and /
-                x >= self.xpos - self.width/2. and x <= self.width/2.+self.xpos and /
+            if not self.dragging and \
+                x >= self.xpos - self.width/2. and x <= self.width/2.+self.xpos and \
                 y >= self.ypos - self.yoffset and y <= self.height - self.yoffset +self.ypos:
                 self.hovered = True
                 if renpy.map_event(ev, "mousedown_1") and not out_of_viewport():
@@ -2317,8 +2317,8 @@ init 1 python in _viewers:
                 return True
 
             self.hovered = False
-            if not self.dragging and /
-                x >= self.xpos - self.width/2. and x <= self.width/2.+self.xpos and /
+            if not self.dragging and \
+                x >= self.xpos - self.width/2. and x <= self.width/2.+self.xpos and \
                 y >= self.ypos - self.yoffset and y <= self.height - self.yoffset +self.ypos:
                 self.hovered = True
                 if renpy.map_event(ev, "mousedown_1") and not out_of_viewport():
@@ -2401,7 +2401,7 @@ init 1 python in _viewers:
                 self.dragging = True
 
             self.hovered = False
-            if not self.dragging and x >= self.xpos and x <= self.width + self.xpos /
+            if not self.dragging and x >= self.xpos and x <= self.width + self.xpos \
                 and y >= self.ypos and y <= self.height + self.ypos:
                 self.hovered = True
                 if renpy.map_event(ev, "mousedown_1") and not out_of_viewport():
@@ -2810,10 +2810,10 @@ init 1 python in _viewers:
                 
 
             self.hovered = False
-            if not self.dragging and /
-                x >= self.xpos - self.width/2. and x <= self.width/2.+self.xpos and /
-                y >= self.ypos - self.height/2. and y <= self.height/2.+self.ypos and /
-                self.xpos + self.width/2. > 0 and self.xpos - self.width/2. < config.screen_width * preview_size and /
+            if not self.dragging and \
+                x >= self.xpos - self.width/2. and x <= self.width/2.+self.xpos and \
+                y >= self.ypos - self.height/2. and y <= self.height/2.+self.ypos and \
+                self.xpos + self.width/2. > 0 and self.xpos - self.width/2. < config.screen_width * preview_size and \
                 self.ypos + self.height/2. > 0 and self.ypos - self.height/2. < config.screen_height * preview_size:
                 self.hovered = True
                 if ((check_version(23032500) and renpy.map_event(ev, "ctrl_mousedown_1")) or renpy.map_event(ev, "mousedown_1")):
@@ -3066,10 +3066,10 @@ init 1 python in _viewers:
                 self.pos_to_value(x, y)
 
             self.hovered = False
-            if not self.dragging and /
-                x >= self.xpos - self.width/2. and x <= self.width/2.+self.xpos and /
-                y >= self.ypos - self.height/2. and y <= self.height/2.+self.ypos and /
-                self.xpos + self.width/2. > 0 and self.xpos - self.width/2. < config.screen_width * preview_size and /
+            if not self.dragging and \
+                x >= self.xpos - self.width/2. and x <= self.width/2.+self.xpos and \
+                y >= self.ypos - self.height/2. and y <= self.height/2.+self.ypos and \
+                self.xpos + self.width/2. > 0 and self.xpos - self.width/2. < config.screen_width * preview_size and \
                 self.ypos + self.height/2. > 0 and self.ypos - self.height/2. < config.screen_height * preview_size:
                 self.hovered = True
                 if ((check_version(23032500) and renpy.map_event(ev, "ctrl_mousedown_1")) or renpy.map_event(ev, "mousedown_1")):
