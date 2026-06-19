@@ -57,6 +57,7 @@ The everyday agent menu should stay small. Features below may be numerous, but d
 | Documentation audit/catalogue | `active-support` | No | `scripts/documentation_audit.py`, `docs/DOCUMENTATION_AUDIT.md`, `docs/DOCUMENTATION_CATALOG.md`, `docs/documentation_catalog.json` | `documentation_audit` | `documentation_audit.py --check` | Keep. Documentation steward must update this registry before regenerating catalogue/audit files. |
 | Feature lifecycle registry | `active-support` | No | `docs/architecture/feature_lifecycle_registry.md` | `documentation_audit`, `daily_standup`, `chief_architect` | Human review plus documentation audit | Keep. This is the source of truth for feature status/deprecation decisions. |
 | Active processes guide | `active-support` | No | `docs/architecture/active_processes.md` | Orchestrator, documentation steward | Human routing review | Keep. Update when the everyday agent menu changes. |
+| Scripts refactor map | `active-support` | No | `docs/architecture/scripts_refactor_map.md`, `scripts/README.md` | Chief architect, documentation steward | Documentation audit plus wrapper-backed migration checks | Keep. Use as migration contract before any physical `scripts/` move. |
 | Writer's Desk | `active-support` | No | `.agents/rules/writers_desk.md`, `.agents/skills/writer_*`, authoring intent schemas | Writer-facing entry lane | `authoring_intent` contract validation | Keep. It captures intent and routes; it does not write runtime scripts directly. |
 | Daily standup | `optional-dev` | No | `scripts/daily_standup.py`, planning standup reports | `daily_standup` | Human triage | Keep, but non-blocking for ship. Any task it surfaces must route through an active process. |
 | Action from standup | `optional-dev` | No | `scripts/resolve_work_item.py`, `docs/backlog/task_registry.json`, `action_from_standup` skill | `action_from_standup` | Human review of selected work item | Keep as a planning accelerator, not default task routing. |
@@ -86,9 +87,9 @@ When running `documentation-audit`, the steward must check this registry before 
 - Registry says `optional-dev`, `experimental`, or `deprecated-retained` but an active process routes through it by default → escalate to human.
 - Registry says `remove-candidate` and no process references it after one audit cycle → propose archive/delete PR.
 
-## Current pass-2 notes
+## Current pass-3 notes
 
-- This pass operationalizes the registry and wires it into agent/process docs.
-- It still does not move folders or delete compatibility labels.
-- Physical folder refactoring should wait until path drift, README coverage, and generated documentation audits are stable.
-- `scripts/narrative_paths.py` remains the source of truth for active day paths.
+- This pass creates the safe `scripts/` migration contract and expands the script command index.
+- It still does not physically move scripts.
+- Any future physical `scripts/` move must preserve root wrappers for public commands and run local validation.
+- `scripts/narrative_paths.py` remains the source of truth for active day paths and should move last, if ever.
