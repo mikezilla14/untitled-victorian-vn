@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-06-19T21:42:35+00:00",
+  "generated_at": "2026-06-19T22:56:21+00:00",
   "repo_root": "untitled-victorian-vn",
   "entries": [
     {
@@ -3327,6 +3327,11 @@
     {
       "severity": "warning",
       "path": "main-game/non-prod-game/game/audio",
+      "message": "Complex folder has no README.md index."
+    },
+    {
+      "severity": "warning",
+      "path": "main-game/pipeline/tools",
       "message": "Complex folder has no README.md index."
     }
   ]

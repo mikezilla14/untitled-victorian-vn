@@ -225,6 +225,13 @@ BALANCE_MODEL_FILES: tuple[tuple[str, str], ...] = (
     ("balance/gate_catalogue.csv", "gate_catalogue"),
     ("balance/run_policies.csv", "run_policies"),
     ("balance/balance_targets.yaml", "balance_targets"),
+    ("balance/choice_catalogue.csv", "choice_catalogue"),
+)
+
+SIMULATION_OUTPUTS: tuple[tuple[str, str], ...] = (
+    ("balance/simulation_report.md", "simulation_report"),
+    ("balance/policy_results.csv", "policy_results"),
+    ("balance/gate_results.csv", "gate_results"),
 )
 
 EXPECTED_CATALOGUE_GATES = (
@@ -436,10 +443,12 @@ def _check_framework_artifacts(release_slug: str, root: Path) -> tuple[list[Chec
 
     choice_catalogue = balance_dir / "choice_catalogue.csv"
     if choice_catalogue.exists():
+        with choice_catalogue.open(encoding="utf-8", newline="") as handle:
+            choice_count = sum(1 for _ in csv.DictReader(handle))
         checks.append(
             CheckResult(
                 Severity.PASS,
-                "Choice catalogue present",
+                f"Choice catalogue present ({choice_count} rows)",
                 _rel(choice_catalogue, root),
             )
         )
@@ -451,7 +460,22 @@ def _check_framework_artifacts(release_slug: str, root: Path) -> tuple[list[Chec
                 _rel(balance_dir, root),
             )
         )
-        missing.append("Choice catalogue CSV not yet authored — dominance/simulation still blocked.")
+        missing.append("Choice catalogue CSV not yet authored — run build_choice_catalogue.py.")
+
+    pipeline_balance = pipeline_release_root(release_slug) / "balance"
+    for rel_path, label in SIMULATION_OUTPUTS:
+        path = pipeline_balance / rel_path.split("/", 1)[1]
+        rel = _rel(path, root)
+        if path.exists():
+            checks.append(CheckResult(Severity.PASS, f"Simulation output present: {label}", rel))
+        else:
+            checks.append(
+                CheckResult(
+                    Severity.INCOMPLETE,
+                    f"Simulation output missing: {label} — run simulate_balance.py",
+                    rel,
+                )
+            )
 
     missing.extend(
         [
@@ -462,9 +486,9 @@ def _check_framework_artifacts(release_slug: str, root: Path) -> tuple[list[Chec
     )
     next_tests.extend(
         [
-            "Populate `choice_catalogue.csv` from graph/grain manifests.",
-            "Run P1 corruption-forward and P2 cautious playthroughs when capture harness lands.",
-            "Implement deterministic policy simulator (Phase 5).",
+            "Review `main-game/pipeline/releases/release-1-mvp/balance/simulation_report.md` matrix gaps before tuning numbers.",
+            "Run P1/P2 runtime captures when JSONL harness lands; compare to abstract sim.",
+            "Implement graph-walk simulator or expand catalogue coverage for P1/P2/P3 precision.",
         ]
     )
     return checks, missing, next_tests

@@ -1022,7 +1022,12 @@ py main-game/pipeline/tools/build_grain_manifest.py --release release-1-mvp
 py scripts/balance_report.py --release release-1-mvp
 ```
 
-`balance_report.py` cross-checks grain manifest presence, catalogue rows, and static sandbox gate wiring. `choice_catalogue.csv` and the policy simulator remain future work.
+`balance_report.py` cross-checks grain manifest presence, catalogue rows, simulation outputs, and static sandbox gate wiring. `choice_catalogue.csv` and the policy simulator remain abstract until runtime capture validates them.
+
+```powershell
+py main-game/pipeline/tools/build_choice_catalogue.py --release release-1-mvp
+py main-game/pipeline/tools/simulate_balance.py --release release-1-mvp
+```
 
 ---
 
@@ -1035,6 +1040,14 @@ py scripts/balance_report.py --release release-1-mvp
 ```
 
 **Planned (pipeline tools):**
+
+```powershell
+py main-game/pipeline/tools/build_choice_catalogue.py --release release-1-mvp
+py main-game/pipeline/tools/simulate_balance.py --release release-1-mvp
+py main-game/pipeline/tools/simulate_balance.py --release release-1-mvp --deep
+```
+
+**Still planned:**
 
 ```powershell
 py main-game/pipeline/tools/build_grain_manifest.py --release release-1-mvp

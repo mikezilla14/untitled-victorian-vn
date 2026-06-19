@@ -1,7 +1,7 @@
 # Testing and balance report
 
 **Release:** `release-1-mvp`
-**Generated:** 2026-06-19 21:42 UTC
+**Generated:** 2026-06-19 22:56 UTC
 
 ## Verdict
 
@@ -99,6 +99,7 @@
 - ✓ **PASS** — Balance model file present: gate_catalogue (`main-game/draft/releases/planning/balance/gate_catalogue.csv`)
 - ✓ **PASS** — Balance model file present: run_policies (`main-game/draft/releases/planning/balance/run_policies.csv`)
 - ✓ **PASS** — Balance model file present: balance_targets (`main-game/draft/releases/planning/balance/balance_targets.yaml`)
+- ✓ **PASS** — Balance model file present: choice_catalogue (`main-game/draft/releases/planning/balance/choice_catalogue.csv`)
 - ✓ **PASS** — Gate catalogue row present: `ch1_write_gate` (`main-game/draft/releases/planning/balance/gate_catalogue.csv`)
 - ✓ **PASS** — Gate catalogue row present: `ch2_write_gate` (`main-game/draft/releases/planning/balance/gate_catalogue.csv`)
 - ✓ **PASS** — Gate catalogue row present: `ch3_write_gate` (`main-game/draft/releases/planning/balance/gate_catalogue.csv`)
@@ -106,7 +107,10 @@
 - ✓ **PASS** — Gate catalogue row present: `deadline_ch2` (`main-game/draft/releases/planning/balance/gate_catalogue.csv`)
 - ✓ **PASS** — Gate catalogue row present: `soft_fail_rejection` (`main-game/draft/releases/planning/balance/gate_catalogue.csv`)
 - ✓ **PASS** — Gate catalogue row present: `anxiety_dismissal` (`main-game/draft/releases/planning/balance/gate_catalogue.csv`)
-- … **INCOMPLETE** — Choice catalogue not yet authored (`choice_catalogue.csv`) (`main-game/draft/releases/planning/balance`)
+- ✓ **PASS** — Choice catalogue present (117 rows) (`main-game/draft/releases/planning/balance/choice_catalogue.csv`)
+- ✓ **PASS** — Simulation output present: simulation_report (`main-game/pipeline/releases/release-1-mvp/balance/simulation_report.md`)
+- ✓ **PASS** — Simulation output present: policy_results (`main-game/pipeline/releases/release-1-mvp/balance/policy_results.csv`)
+- ✓ **PASS** — Simulation output present: gate_results (`main-game/pipeline/releases/release-1-mvp/balance/gate_results.csv`)
 
 ## Required day files
 
@@ -118,15 +122,14 @@
 
 ## Missing evidence
 
-- Choice catalogue CSV not yet authored — dominance/simulation still blocked.
 - No Python route simulator yet — cannot prove optimized/cautious/passive paths reach intended stats.
 - No runtime JSONL captures — cannot verify gate pass/fail at play time.
 - Corruption Level 4 milestone by Day 4 end is design intent only until simulation exists.
 
 ## Recommended next tests
 
-- Populate `choice_catalogue.csv` from graph/grain manifests.
-- Run P1 corruption-forward and P2 cautious playthroughs when capture harness lands.
-- Implement deterministic policy simulator (Phase 5).
+- Review `main-game/pipeline/releases/release-1-mvp/balance/simulation_report.md` matrix gaps before tuning numbers.
+- Run P1/P2 runtime captures when JSONL harness lands; compare to abstract sim.
+- Implement graph-walk simulator or expand catalogue coverage for P1/P2/P3 precision.
 - Smoke-test hard fails: skip all writing → `game_over_deadline_1`; Ch1 only → `game_over_deadline_2`; anxiety 100 → `game_over_dismissed`.
 - Verify cautious Day 101 slop path still advances spine without bricking deadline gates.
