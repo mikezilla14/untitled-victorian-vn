@@ -173,10 +173,11 @@ screen stats_overlay():
                         add Transform(
                             "ui_inkwell_full",
                             crop=(0.0, 1.0 - _insp_fill, 1.0, _insp_fill),
-                            xysize=(_ink_w, _ink_h),
+                            xsize=_ink_w,
+                            ysize=int(_ink_h * _insp_fill),
                         ):
                             xalign 0.5
-                            yalign 0.5
+                            yalign 1.0
 
         textbutton "◂":
             style "hud_sidebar_tab"

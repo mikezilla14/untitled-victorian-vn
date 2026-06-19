@@ -45,8 +45,23 @@ init -50 python:
         renpy.image(image_id, displayable)
 
     def register_audio(name, rel_path):
-        if _find_asset(rel_path):
+        # 1. Check local game directory first
+        local_path = os.path.join(config.basedir, "game", rel_path)
+        if os.path.exists(local_path):
             return rel_path
+            
+        # 2. Check search path (e.g. prod-game)
+        if hasattr(config, 'searchpath'):
+            for p in config.searchpath:
+                if os.path.isabs(p):
+                    full_path = os.path.join(p, rel_path)
+                else:
+                    full_path = os.path.join(config.basedir, p, rel_path)
+                if os.path.exists(full_path):
+                    # Return absolute path so Ren'Py can locate and play the file
+                    return os.path.abspath(full_path)
+                    
+        # 3. Mark as missing
         _missing_audio_assets.append((name, rel_path))
         return None
 
@@ -71,7 +86,6 @@ init -40 python:
     declare_image_with_fallback("bg_servants_corridor_dim", "images/backgrounds/bg_servants_corridor_dim.webp")
     declare_image_with_fallback("bg_servants_quarters_dusk", "images/backgrounds/bg_servants_quarters_dusk.webp")
     declare_image_with_fallback("bg_servants_quarters_dusk side", "images/backgrounds/bg_servants_quarters_side_dusk.webp")
-    declare_image_with_fallback("bg_servants_quarters_dusk 45 degrees", "images/backgrounds/bg_servants_quarters_side_dusk_45.webp")
     declare_image_with_fallback("bg_cora_desk_night", "images/backgrounds/bg_cora_desk_night.webp")
     declare_image_with_fallback("bg_master_suite_day", "images/backgrounds/bg_master_suite_day.webp")
     declare_image_with_fallback("bg_master_suite_tea", "images/backgrounds/bg_master_suite_tea.webp")
@@ -83,8 +97,6 @@ init -40 python:
     declare_image_with_fallback("bg_stern_office_reverse", "images/backgrounds/bg_stern_office_reverse.webp")
     declare_image_with_fallback("bg_savoy_corridor_right_morning", "images/backgrounds/bg_savoy_corridor_right_morning.webp")
     declare_image_with_fallback("bg_servants_corridor_dusk", "images/backgrounds/bg_servants_corridor_dusk.webp")
-    declare_image_with_fallback("bg_savoy_corridor_morning_", "images/backgrounds/bg_savoy_corridor_morning_.webp")
-    declare_image_with_fallback("bg_savoy_front_facade_", "images/backgrounds/bg_savoy_front_facade_.webp")
     declare_image_with_fallback("bg_country_estate_corridor_night", "images/backgrounds/bg_country_estate_corridor_night.webp", "#141210")
     declare_image_with_fallback("bg_train_carriage_day", "images/backgrounds/bg_train_carriage_day.webp", "#2a2520")
     declare_image_with_fallback("bg_country_estate_study", "images/backgrounds/bg_country_estate_study.webp", "#1e1810")
@@ -109,6 +121,10 @@ init -40 python:
     declare_image_with_fallback("vance_sprite mirror_watch_terror", "images/sprites/vance/mirror_watch_terror.png", "#7b3f98")
     declare_image_with_fallback("vance_sprite confused", "images/sprites/vance/confused.png", "#7b3f98")
     declare_image_with_fallback("vance_sprite shocked", "images/sprites/vance/shocked.png", "#7b3f98")
+    declare_image_with_fallback("vance_sprite indignant_dressing_gown", "images/sprites/vance/indignant_dressing_gown.png", "#7b3f98")
+    declare_image_with_fallback("vance_sprite mirror_watch_terror_dressing_gown", "images/sprites/vance/mirror_watch_terror_dressing_gown.png", "#7b3f98")
+    declare_image_with_fallback("vance_sprite confused_dressing_gown", "images/sprites/vance/confused_dressing_gown.png", "#7b3f98")
+    declare_image_with_fallback("vance_sprite shocked_gown", "images/sprites/vance/shocked_dressing_gown.png", "#7b3f98")    
     declare_image_with_fallback("vance_sprite angry_cowed_dressing_gown", "images/sprites/vance/angry_cowed_dressing_gown.png", "#7b3f98")
     declare_image_with_fallback("vance_sprite angry_dressing_gown", "images/sprites/vance/angry_dressing_gown.png", "#7b3f98")
     declare_image_with_fallback("vance_sprite angry_dressing_gown_hair_down", "images/sprites/vance/angry_dressing_gown_hair_down.png", "#7b3f98")
@@ -159,13 +175,13 @@ init -40 python:
     #   [268 × 190 px]  Exact display size in sidebar (HUD_SIDEBAR_WIDTH - 32 × 190).
     #   Design at 2× (536 × 380 px) and let Ren'Py scale down for sharpness.
     #   Cora portrait, framed bust shot. Used at corruption_level 1–2.
-    declare_image_with_fallback("ui_cora_base", "images/sprites/cora/ui/ui_cora_base.png", "#d4a574")
+    declare_image_with_fallback("ui_cora_base", "images/sprites/cora/ui/ui_cora_base.webp", "#d4a574")
     #
     # ui_cora_corrupted:
     #   [268 × 190 px]  Same dimensions as ui_cora_base (design at 2×: 536 × 380 px).
     #   Swapped in at corruption_level >= 3. Should read as visibly changed — colder,
     #   more controlled, slight desaturation or shadow shift.
-    declare_image_with_fallback("ui_cora_corrupted", "images/sprites/cora/ui/ui_cora_corrupted.png", "#8b2942")
+    declare_image_with_fallback("ui_cora_corrupted", "images/sprites/cora/ui/ui_cora_corrupted.webp", "#8b2942")
     #
     # ui_sidebar_bg:
     #   [300 × 1080 px]  Full sidebar at canvas height.
@@ -179,12 +195,6 @@ init -40 python:
     #   ink smear, ruled-ledger line, or aged parchment crease. Subtle, not overwrought.
     declare_image_with_fallback("ui_sidebar_divider", "images/ui/ui_sidebar_divider.png", "#2a1e0f")
     #
-    # ui_vignette_ambient:
-    #   [1920 × 1080 px]  Full canvas. Displayed scaled to the story viewport
-    #   (1620 × 1080 px at runtime). Radial darkening at edges, ~20–30% max opacity.
-    #   Provides constant cinematic framing, independent of suspicion feedback.
-    #   Fallback is transparent — missing asset produces no visible effect.
-    declare_image_with_fallback("ui_vignette_ambient", "images/ui/ui_vignette_ambient.png", "#00000000")
     #
     # ui_inkwell_empty / ui_inkwell_full:
     #   [64 × 110 px]  Exact display size in sidebar.
@@ -199,38 +209,38 @@ init -40 python:
     declare_image_with_fallback("ui_inkwell_full", "images/ui/ui_inkwell_full.png", "#1e5a8a")
 
     # ── UI: Book Writing Screen Assets ───────────────────────────
-    declare_image_with_fallback("ui_book_writing_paper", "images/ui/book_writing_paper.png", "#f4efe2")
-    declare_image_with_fallback("ui_book_cover", "images/ui/book_cover.png", "#3d2314")
+    declare_image_with_fallback("ui_book_writing_paper", "images/ui/book_writing_paper.webp", "#f4efe2")
+    declare_image_with_fallback("ui_book_cover", "images/ui/book_cover.webp", "#3d2314")
     declare_image_with_fallback("ui_book_ui_bg", "images/ui/book_ui_bg.png", "#1c1410")
-    declare_image_with_fallback("ui_cora_mini_base", "images/ui/ui_cora_mini_base.png", "#d4a574")
-    declare_image_with_fallback("ui_cora_mini_corrupted", "images/ui/ui_cora_mini_corrupted.png", "#8b2942")
+    declare_image_with_fallback("ui_cora_mini_base", "images/sprites/cora/ui/ui_cora_mini_base.webp", "#d4a574")
+    declare_image_with_fallback("ui_cora_mini_corrupted", "images/sprites/cora/ui/ui_cora_mini_corrupted.webp", "#8b2942")
     declare_image_with_fallback("ui_illustration_border", "images/ui/illustration_border.png", "#5a5a5a")
     declare_image_with_fallback("ui_price_badge", "images/ui/price_badge.png", "#3a1a0a")
 
     # ── Audio aliases (None when missing; guard before play) ──────
-    audio_themes_melancholy = register_audio("themes/melancholy", "audio/themes/melancholy.ogg")
-    audio_sfx_train_whistle = register_audio("sfx/train_whistle", "audio/sfx/train_whistle.ogg")
+    audio_themes_melancholy = register_audio("themes/melancholy", "audio/themes/focus-serious-piano-solo-background-mysterious-SBA-300514033-preview.mp3")
+    audio_sfx_train_whistle = register_audio("sfx/train_whistle", "audio/sfx/train-whistle-1-SBA-300283834-preview.mp3")
     audio_themes_savoy_tension = register_audio("themes/savoy_tension", "audio/themes/intrigue-and-mystery-SBA-300554190-preview.mp3")
     audio_themes_servants_floor_unease = register_audio("themes/servants_floor_unease", "audio/themes/intrigue-and-mystery-slow-SBA-352126014-preview.mp3")
     audio_themes_private_ink = register_audio("themes/private_ink", "audio/themes/hidden-corridors-SBA-346515348-preview.mp3")
     audio_themes_master_suite_pressure = register_audio("themes/master_suite_pressure", "audio/themes/book-of-secrets-mysterious-and-magical-orchestra-fantasy-SBA-347739672-preview.mp3")
-    audio_themes_predator_game = register_audio("themes/predator_game", "audio/themes/predator_game.ogg")
+    audio_themes_predator_game = register_audio("themes/predator_game", "audio/themes/somethings-happening-uneasy-chamber-strings-SBA-352568742-preview.mp3")
     audio_themes_defiance_and_dread = register_audio("themes/defiance_and_dread", "audio/themes/missteps-plucked-string-quartet-murder-mystery-podcast-secretive-quirky-and-ee-SBA-347666668-preview.mp3")
 
-    audio_ambient_laundry_steam = register_audio("ambient/laundry_steam", "audio/ambient/laundry_steam.ogg")
-    audio_ambient_hotel_corridor_muffled = register_audio("ambient/hotel_corridor_muffled", "audio/ambient/hotel_corridor_muffled.ogg")
-    audio_ambient_servants_quarters_dusk = register_audio("ambient/servants_quarters_dusk", "audio/ambient/servants_quarters_dusk.ogg")
-    audio_ambient_master_suite_quiet = register_audio("ambient/master_suite_quiet", "audio/ambient/master_suite_quiet.ogg")
-    audio_ambient_fireplace_low = register_audio("ambient/fireplace_low", "audio/ambient/fireplace_low.ogg")
+    audio_ambient_laundry_steam = register_audio("ambient/laundry_steam", "audio/ambient/steam-rise-fall-SBA-300024143-preview.mp3")
+    audio_ambient_hotel_corridor_muffled = register_audio("ambient/hotel_corridor_muffled", "audio/ambient/footsteps-soft-sole-shoes-carpet-walking-SBA-300082366-preview.mp3")
+    audio_ambient_servants_quarters_dusk = register_audio("ambient/servants_quarters_dusk", "audio/ambient/fireplace-crackling-ambience-01-SBA-300282371-preview.mp3")
+    audio_ambient_master_suite_quiet = register_audio("ambient/master_suite_quiet", "audio/ambient/fireplace-crackling-ambience-01-SBA-300282371-preview.mp3")
+    audio_ambient_fireplace_low = register_audio("ambient/fireplace_low", "audio/ambient/fireplace-crackling-ambience-01-SBA-300282371-preview.mp3")
 
-    audio_sfx_corridor_slap_muffled = register_audio("sfx/corridor_slap_muffled", "audio/sfx/corridor_slap_muffled.ogg")
-    audio_sfx_floorboard_creak = register_audio("sfx/floorboard_creak", "audio/sfx/floorboard_creak.ogg")
-    audio_sfx_ink_scratch = register_audio("sfx/ink_scratch", "audio/sfx/ink_scratch.ogg")
-    audio_sfx_washbasin_clatter = register_audio("sfx/washbasin_clatter", "audio/sfx/washbasin_clatter.ogg")
-    audio_sfx_lockpick_tension = register_audio("sfx/lockpick_tension", "audio/sfx/lockpick_tension.ogg")
-    audio_sfx_key_in_door = register_audio("sfx/key_in_door", "audio/sfx/key_in_door.ogg")
-    audio_sfx_brush_drop_clatter = register_audio("sfx/brush_drop_clatter", "audio/sfx/brush_drop_clatter.ogg")
-    audio_sfx_door_handle_jiggle = register_audio("sfx/door_handle_jiggle", "audio/sfx/door_handle_jiggle.ogg")
+    audio_sfx_corridor_slap_muffled = register_audio("sfx/corridor_slap_muffled", "audio/sfx/slap-SBA-300025105-preview.mp3")
+    audio_sfx_floorboard_creak = register_audio("sfx/floorboard_creak", "audio/sfx/floor-creak-2-SBA-300025818-preview.mp3")
+    audio_sfx_ink_scratch = register_audio("sfx/ink_scratch", "audio/sfx/pencil-writing-words-on-paper-2-SBA-300421138-preview.mp3")
+    audio_sfx_washbasin_clatter = register_audio("sfx/washbasin_clatter", "audio/sfx/wire-cutters-drop-slide-metal-surface-SBA-300148274-preview.mp3")
+    audio_sfx_lockpick_tension = register_audio("sfx/lockpick_tension", "audio/sfx/key-door-entrance-SBA-300020884-preview.mp3")
+    audio_sfx_key_in_door = register_audio("sfx/key_in_door", "audio/sfx/locking-door-with-key-SBA-300055511-preview.mp3")
+    audio_sfx_brush_drop_clatter = register_audio("sfx/brush_drop_clatter", "audio/sfx/sink-clatter-1-SBA-300021334-preview.mp3")
+    audio_sfx_door_handle_jiggle = register_audio("sfx/door_handle_jiggle", "audio/sfx/locked-wooden-door-handle-moves-SBA-300055693-preview.mp3")
 
     # Thought overlay UI — mc_sprite_thought_icon is a placeholder until final art is created.
     declare_image_with_fallback("mc_sprite_thought_icon", "images/sprites/cora/ui/mc_sprite_thought_icon.png", "#d4a574")

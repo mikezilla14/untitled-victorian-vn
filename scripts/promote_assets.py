@@ -8,6 +8,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 non_prod_img_dir = ROOT / "main-game" / "non-prod-game" / "game" / "images"
 prod_img_dir = ROOT / "main-game" / "prod-game" / "game" / "images"
+non_prod_audio_dir = ROOT / "main-game" / "non-prod-game" / "game" / "audio"
+prod_audio_dir = ROOT / "main-game" / "prod-game" / "game" / "audio"
 
 def promote_images():
     if not non_prod_img_dir.exists():
@@ -37,6 +39,34 @@ def promote_images():
     else:
         print(f"Successfully promoted {len(moved)} images.")
 
+def promote_audio():
+    if not non_prod_audio_dir.exists():
+        print("Non-production audio directory does not exist. Nothing to promote.")
+        return
+        
+    moved = []
+    for root, _, files in os.walk(non_prod_audio_dir):
+        for file in files:
+            src_path = Path(root) / file
+            rel_path = src_path.relative_to(non_prod_audio_dir)
+            dest_path = prod_audio_dir / rel_path
+            
+            # Ensure target directories exist
+            dest_path.parent.mkdir(parents=True, exist_ok=True)
+            
+            # Move the file
+            print(f"Moving: {rel_path} -> prod-game/game/audio/{rel_path}")
+            shutil.move(str(src_path), str(dest_path))
+            moved.append(rel_path)
+            
+    # Clean up empty directories in non-prod
+    clean_empty_dirs(non_prod_audio_dir)
+    
+    if not moved:
+        print("No new audio to promote in non-prod-game/game/audio.")
+    else:
+        print(f"Successfully promoted {len(moved)} audio files.")
+
 def clean_empty_dirs(path: Path):
     if not path.exists():
         return
@@ -51,3 +81,5 @@ def clean_empty_dirs(path: Path):
 
 if __name__ == "__main__":
     promote_images()
+    promote_audio()
+

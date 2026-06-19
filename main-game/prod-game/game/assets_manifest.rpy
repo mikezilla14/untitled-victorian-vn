@@ -71,7 +71,6 @@ init -40 python:
     declare_image_with_fallback("bg_servants_corridor_dim", "images/backgrounds/bg_servants_corridor_dim.webp")
     declare_image_with_fallback("bg_servants_quarters_dusk", "images/backgrounds/bg_servants_quarters_dusk.webp")
     declare_image_with_fallback("bg_servants_quarters_dusk side", "images/backgrounds/bg_servants_quarters_side_dusk.webp")
-    declare_image_with_fallback("bg_servants_quarters_dusk 45 degrees", "images/backgrounds/bg_servants_quarters_side_dusk_45.webp")
     declare_image_with_fallback("bg_cora_desk_night", "images/backgrounds/bg_cora_desk_night.webp")
     declare_image_with_fallback("bg_master_suite_day", "images/backgrounds/bg_master_suite_day.webp")
     declare_image_with_fallback("bg_master_suite_tea", "images/backgrounds/bg_master_suite_tea.webp")
@@ -83,8 +82,6 @@ init -40 python:
     declare_image_with_fallback("bg_stern_office_reverse", "images/backgrounds/bg_stern_office_reverse.webp")
     declare_image_with_fallback("bg_savoy_corridor_right_morning", "images/backgrounds/bg_savoy_corridor_right_morning.webp")
     declare_image_with_fallback("bg_servants_corridor_dusk", "images/backgrounds/bg_servants_corridor_dusk.webp")
-    declare_image_with_fallback("bg_savoy_corridor_morning_", "images/backgrounds/bg_savoy_corridor_morning_.webp")
-    declare_image_with_fallback("bg_savoy_front_facade_", "images/backgrounds/bg_savoy_front_facade_.webp")
     declare_image_with_fallback("bg_country_estate_corridor_night", "images/backgrounds/bg_country_estate_corridor_night.webp", "#141210")
     declare_image_with_fallback("bg_train_carriage_day", "images/backgrounds/bg_train_carriage_day.webp", "#2a2520")
     declare_image_with_fallback("bg_country_estate_study", "images/backgrounds/bg_country_estate_study.webp", "#1e1810")
@@ -159,13 +156,13 @@ init -40 python:
     #   [268 × 190 px]  Exact display size in sidebar (HUD_SIDEBAR_WIDTH - 32 × 190).
     #   Design at 2× (536 × 380 px) and let Ren'Py scale down for sharpness.
     #   Cora portrait, framed bust shot. Used at corruption_level 1–2.
-    declare_image_with_fallback("ui_cora_base", "images/sprites/cora/ui/ui_cora_base.png", "#d4a574")
+    declare_image_with_fallback("ui_cora_base", "images/sprites/cora/ui/ui_cora_base.webp", "#d4a574")
     #
     # ui_cora_corrupted:
     #   [268 × 190 px]  Same dimensions as ui_cora_base (design at 2×: 536 × 380 px).
     #   Swapped in at corruption_level >= 3. Should read as visibly changed — colder,
     #   more controlled, slight desaturation or shadow shift.
-    declare_image_with_fallback("ui_cora_corrupted", "images/sprites/cora/ui/ui_cora_corrupted.png", "#8b2942")
+    declare_image_with_fallback("ui_cora_corrupted", "images/sprites/cora/ui/ui_cora_corrupted.webp", "#8b2942")
     #
     # ui_sidebar_bg:
     #   [300 × 1080 px]  Full sidebar at canvas height.
@@ -179,12 +176,6 @@ init -40 python:
     #   ink smear, ruled-ledger line, or aged parchment crease. Subtle, not overwrought.
     declare_image_with_fallback("ui_sidebar_divider", "images/ui/ui_sidebar_divider.png", "#2a1e0f")
     #
-    # ui_vignette_ambient:
-    #   [1920 × 1080 px]  Full canvas. Displayed scaled to the story viewport
-    #   (1620 × 1080 px at runtime). Radial darkening at edges, ~20–30% max opacity.
-    #   Provides constant cinematic framing, independent of suspicion feedback.
-    #   Fallback is transparent — missing asset produces no visible effect.
-    declare_image_with_fallback("ui_vignette_ambient", "images/ui/ui_vignette_ambient.png", "#00000000")
     #
     # ui_inkwell_empty / ui_inkwell_full:
     #   [64 × 110 px]  Exact display size in sidebar.
@@ -199,12 +190,12 @@ init -40 python:
     declare_image_with_fallback("ui_inkwell_full", "images/ui/ui_inkwell_full.png", "#1e5a8a")
 
     # ── UI: Book Writing Screen Assets ───────────────────────────
-    declare_image_with_fallback("ui_book_writing_paper", "images/ui/book_writing_paper.png", "#f4efe2")
-    declare_image_with_fallback("ui_book_cover", "images/ui/book_cover.png", "#3d2314")
-    declare_image_with_fallback("ui_book_ui_bg", "images/ui/book_ui_bg.png", "#1c1410")
-    declare_image_with_fallback("ui_cora_mini_base", "images/ui/ui_cora_mini_base.png", "#d4a574")
-    declare_image_with_fallback("ui_cora_mini_corrupted", "images/ui/ui_cora_mini_corrupted.png", "#8b2942")
-    declare_image_with_fallback("ui_illustration_border", "images/ui/illustration_border.png", "#5a5a5a")
+    declare_image_with_fallback("ui_book_writing_paper", "images/ui/book_writing_paper.webp", "#f4efe2")
+    declare_image_with_fallback("ui_book_cover", "images/ui/book_cover.webp", "#3d2314")
+    declare_image_with_fallback("ui_book_ui_bg", "images/ui/book_ui_bg.webp", "#1c1410")
+    declare_image_with_fallback("ui_cora_mini_base", "images/sprites/cora/ui/ui_cora_mini_base.webp", "#d4a574")
+    declare_image_with_fallback("ui_cora_mini_corrupted", "images/sprites/cora/ui/ui_cora_mini_corrupted.webp", "#8b2942")
+    declare_image_with_fallback("ui_illustration_border", "images/ui/illustration_border.webp", "#5a5a5a")
     declare_image_with_fallback("ui_price_badge", "images/ui/price_badge.png", "#3a1a0a")
 
     # ── Audio aliases (None when missing; guard before play) ──────
