@@ -1,106 +1,101 @@
-# Untitled Victorian VN
+# Non-production Ren'Py sandbox
 
-A visual novel developed in Ren'Py, set in the historic Savoy Hotel, London, during the winter of 1891.
+This is the playable sandbox Ren'Py project for the MVP. It is where non-canon day drafts, shared sandbox systems, UI, assets, and development-only tools can run before promotion to `main-game/prod-game/`.
+
+For repo-level workflow rules, start at [`../../AGENTS.md`](../../AGENTS.md). For the source-of-truth path contract, see [`../../scripts/narrative_paths.py`](../../scripts/narrative_paths.py) and [`../README.md`](../README.md).
 
 ## Human contributor quickstarts
 
 - Prose/editorial contributors: `docs/onboarding/prose_editor_quickstart.md`
 - Agent workflow contributors: `AGENTS.md`
+- Current MVP checklist: `main-game/draft/releases/planning/mvp_systems_integration_checklist.md`
 
-## Synopsis
+## Source-of-truth status
 
-Play as **Cora**, a young village girl and board school graduate working as a chambermaid at the newly opened Savoy Hotel. While attempting to maintain a spotless record under the tyrannical eye of housekeeper **Miss Stern**, Cora harbors a secret ambition: writing scandalous stories for a publisher on Holywell Street to send money back home.
+This folder is **not production canon**.
 
-Navigate the treacherous balance of your duties, the curiosity surrounding the enigmatic VIP guest **Sir Gideon Locke**, and your own burgeoning career as a writer of forbidden tales.
+| Area | Status | Notes |
+|------|--------|-------|
+| `game/days/` | Active sandbox day drafts | Use `dayNNN_non_canon.rpy`; these are the source drafts for future promotion. |
+| `game/shared/` | Active sandbox support code | Shared non-prod classes, functions, story chains, and support labels. |
+| `game/images/`, `game/audio/`, `game/gui/` | Sandbox runtime assets | May contain missing/fallback assets while MVP content is still being assembled. |
+| `game/AEditor/` | Optional dev tooling | Development-only. Not part of the player path. |
+| `../prod-game/` | Production runtime | Only promotion agents should copy approved content there. |
 
-## Characters
+## Current narrative shape
 
-| Character | Role | Colour |
-|---|---|---|
-| **Cora** | Protagonist — chambermaid & aspiring writer | Gold `#d4a574` |
-| **Sir Gideon Locke** | Enigmatic VIP guest on the upper floor | Crimson `#a30000` |
-| **Miss Stern** | Tyrannical housekeeper | Grey `#555555` |
+The MVP is a five-day Ren'Py visual novel arc about Cora, a chambermaid at an 1891 London hotel, trying to survive staff scrutiny while gathering enough experience and manuscript material for Holywell Street.
 
-## Features
+The active non-prod day-file naming contract is:
 
-- **Object-Oriented Architecture**: Game state, time management, and story flags are centralized using custom Python classes (`TimeManager`, `PlayerStats`, `StoryState`).
-- **Dynamic Character Assembly**: Characters utilize Ren'Py's `layeredimage` functionality to dynamically update their appearance based on their internal class properties.
-- **Pseudo-Sandbox Navigation**: Progress is driven by interactive UI screens and imagebuttons for a point-and-click feel within the hub.
-- **Resource Management & Stats**: Three core statistics are tracked via a persistent HUD:
-  - **Inspiration** — A spendable currency collected through actions and spent to write chapters. The cap scales with your Corruption Level (`20 + level × 10`), preventing grinding and encouraging narrative progression.
-  - **Corruption** — Earned as XP during interactions (20 XP = 1 level). Higher levels unlock bolder choices, raise your Inspiration cap, and determine which ending you reach.
-  - **Suspicion** — A risk/heat meter (0–100). Rises from risky choices and decays passively by 5 per time slot. Hitting 100 triggers an immediate game over.
-- **Day/Time System**: The story progresses through five days, each divided into time slots (Morning, Afternoon, Evening). The current day and period are managed by the `TimeManager` and visible in the stat overlay.
-- **Narrative Flags**: Key story beats are tracked via `StoryState` booleans. These gate character moments and branching choices throughout the five days.
-- **Multiple Endings**: Your Corruption level and choices determine your fate. Currently implemented endings:
-  - **Game Over — Dismissed Without Character**: Suspicion reaches 100. Cora is fired and left with nothing.
-  - **Bad Ending — Rejection**: Corruption level too low by Day 5. Cora's manuscript is returned — "We asked for fire. You sent us porridge."
-  - **Cliffhanger** *(Day 5)*: The MVP arc concludes on a cliffhanger, pending future chapters.
+```text
+main-game/non-prod-game/game/days/dayNNN_non_canon.rpy
+```
 
-## Narrative Structure
+For release 1, current day identifiers normally follow:
 
-The story is split across five episodic day files, loaded alphabetically by Ren'Py. The naming contract is `dayrxx.rpy` where `r` is release number and `xx` is 2-digit day:
+| Day | Sandbox draft path | Production promotion target |
+|-----|--------------------|-----------------------------|
+| Day 1 | `game/days/day101_non_canon.rpy` | `main-game/prod-game/game/day101.rpy` |
+| Day 2 | `game/days/day102_non_canon.rpy` | `main-game/prod-game/game/day102.rpy` |
+| Day 3 | `game/days/day103_non_canon.rpy` | `main-game/prod-game/game/day103.rpy` |
+| Day 4 | `game/days/day104_non_canon.rpy` | `main-game/prod-game/game/day104.rpy` |
+| Day 5 | `game/days/day105_non_canon.rpy` | `main-game/prod-game/game/day105.rpy` |
 
-| File | Content |
-|---|---|
-| `script.rpy` | Entry point — intro monologue, jumps to Day 1 labels |
-| `day101.rpy` | Release 1, Day 1 — Cora's first shift; meeting the hotel |
-| `day102.rpy` | Release 1, Day 2 — Gideon initiates conversation |
-| `day103.rpy` | Release 1, Day 3 — The grate scene; Stern's hidden vulnerability |
-| `day104.rpy` | Release 1, Day 4 — Gideon's loneliness revealed; the passage choice |
-| `day105.rpy` | Release 1, Day 5 — Climax and cliffhanger |
-| `endings.rpy` | Fail states and bad endings branching out of the main flow |
+## Core systems in scope
 
-## Narrative Flags
+The sandbox currently supports or is expected to support these MVP systems:
 
-| Flag | Meaning |
-|---|---|
-| `read_letters` | Cora glimpsed Gideon's private correspondence |
-| `saw_voyeur_scene` | Cora witnessed a scene through the grate (Day 3) |
-| `heard_stern_humming` | Cora saw Stern's hidden vulnerability (Day 3) |
-| `gideon_spoke_day2` | Gideon initiated a conversation (Day 2) |
-| `gideon_showed_depth` | Gideon's loneliness was revealed (Day 4) |
-| `manuscript_sent` | Any chapter dispatched to Holywell Street |
-| `payment_received` | Publisher's payment arrived |
-| `wrote_chapter_1` | First chapter completed |
-| `wrote_chapter_2` | Second chapter completed |
-| `chose_bold_day4` | Cora held her nerve in the passage (Day 4) |
+- manuscript fuel gates and chapter progress;
+- corruption/inspiration progression;
+- suspicion/anxiety and character-specific pressure;
+- story chains and consequence windows;
+- penance/confrontation routing;
+- Book1 manuscript writing blocks;
+- fail states and soft-fail/rejection ending routes;
+- structural asset manifest checks and fallback visibility.
 
-## Development
+For lifecycle status, use [`../../docs/architecture/feature_lifecycle_registry.md`](../../docs/architecture/feature_lifecycle_registry.md).
 
-- Built with **Ren'Py Visual Novel Engine**
-- Core Architecture: **Object-Oriented State Tracking** migrated from global variables to centralized Python classes.
-- Current status: **MVP Gray-Box Skeleton v2.0** — all five days scripted with placeholder prose, UI overrides fixed, and stat systems fully wired via singletons.
-- Publisher: **Holywell Street Studios** *(working title)*
-
-## Repository Structure
+## Repository structure
 
 ```text
 main-game/non-prod-game/
-├── game/                    # Sandbox drafts and full asset set
-│   ├── audio/               # Sound effects and music
-│   ├── gui/                 # UI graphics and assets
-│   ├── images/              # Character sprites and backgrounds
-│   ├── saves/               # Local save files (git-ignored)
-│   ├── classes.rpy          # Object-Oriented Python classes (TimeManager, PlayerStats, StoryState)
-│   ├── characters.rpy       # All character definitions
-│   ├── variables.rpy        # Instantiates singleton objects for persistent state
-│   ├── functions.rpy        # Python-side game logic (stat helpers)
-│   ├── screens.rpy          # UI screen definitions (HUD overlay)
-│   ├── gui.rpy              # Ren'Py UI configuration variables
-│   ├── options.rpy          # Ren'Py project configuration
-│   ├── script.rpy           # Entry point — launches the game
-│   ├── day101.rpy           # Release 1, Day 1 narrative
-│   ├── day102.rpy           # Release 1, Day 2 narrative
-│   ├── day103.rpy           # Release 1, Day 3 narrative
-│   ├── day104.rpy           # Release 1, Day 4 narrative
-│   ├── day105.rpy           # Release 1, Day 5 narrative & cliffhanger
-│   └── endings.rpy          # Fail states and bad endings
-├── utilities/
-│   └── stats_refactor.py    # Dev script used to refactor stat mechanics
-└── .gitignore               # Git ignore rules for Ren'Py
+├── README.md
+├── game/
+│   ├── README.md
+│   ├── AEditor/              # Optional ActionEditor/dev tooling
+│   ├── audio/                # Sandbox audio assets
+│   ├── days/                 # Non-canon day drafts and Book1 writing labels
+│   ├── gui/                  # Ren'Py GUI assets/config support
+│   ├── images/               # Backgrounds, sprites, UI images
+│   ├── shared/               # Shared non-prod classes/functions/story chains
+│   ├── saves/                # Local save files; should remain git-ignored
+│   ├── gui.rpy               # Ren'Py UI configuration
+│   ├── options.rpy           # Ren'Py project configuration
+│   ├── screens.rpy           # Sandbox screens/HUD/UI definitions
+│   └── script.rpy            # Sandbox entry point
+└── utilities/                # Local development utilities, if present
 ```
 
-## Running the Game
+## Agent rules
 
-Open the project in the **Ren'Py launcher** and point it at `main-game/non-prod-game/`. Requires Ren'Py 7.x or 8.x.
+- Prose changes normally target `game/days/*_non_canon.rpy` through Writer's Desk, Writers' Room, or the approved narrative pipelines.
+- Shared mechanics belong in `game/shared/` or the relevant sandbox support file, not directly in promoted prod files.
+- Do not write production files from this folder except through `promote-day` or `promote-framework`.
+- Do not route normal work through `game/AEditor/` unless the task explicitly targets ActionEditor tooling.
+- Do not revive old root-level day paths such as `game/day101.rpy`; use `game/days/day101_non_canon.rpy` instead.
+
+## Common validation
+
+Run commands from the repository root:
+
+```powershell
+py scripts/validate.py --profile changed --agent human --files "main-game/non-prod-game/game/days/day105_non_canon.rpy"
+py scripts/scene_direction.py --check --files "main-game/non-prod-game/game/days/day105_non_canon.rpy"
+py scripts/documentation_audit.py --check
+```
+
+## Running the game
+
+Open the project in the Ren'Py launcher and point it at `main-game/non-prod-game/`. Requires Ren'Py 7.x or 8.x.
