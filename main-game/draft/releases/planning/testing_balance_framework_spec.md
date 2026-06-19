@@ -2,7 +2,7 @@
 
 > **Owner:** Technical / systems
 > **Target tree:** `main-game/non-prod-game/`
-> **Support tooling:** `main-game/pipeline/tools/`, `main-game/pipeline/releases/release-1-mvp/graph/`
+> **Support tooling:** `main-game/pipeline/tools/`, `main-game/pipeline/releases/release-1-mvp/`
 > **Design references:** `story_board.md`, `continuity_handoff.md`, `mvp_systems_integration_checklist.md`, Release 1 graph artifacts
 > **Purpose:** Turn Release 1 MVP testing and economy balance from manual route guessing into a repeatable agentic workflow using static grain extraction, Ren'Py runtime capture, Python simulation, and human review.
 
@@ -22,7 +22,7 @@ This framework exists to answer four questions with evidence:
    - Corruption-forward, cautious, passive, reckless, recovery, deadline-fail, and anxiety-fail routes produce distinct, intended outcomes.
 
 4. **Does the implemented Ren'Py route match the static model?**
-   - Static grain/DAG model, Python balance simulator, and runtime capture should broadly agree. Mismatches become implementation or model defects.
+   - Static grain/DAG model, Python balance simulator, and runtime capture should broadly agree. Mismatches become implementation, model, tagging, or test-procedure defects.
 
 The framework must not become a second storyboard. It must remain a practical test and balance layer.
 
@@ -38,6 +38,7 @@ Do **not** build:
 - A replacement for human playtesting.
 - A new gameplay system.
 - A second source of truth for narrative structure.
+- A direct-write LLM agent that freely edits narrative `.rpy` files.
 
 The framework tests and balances the existing release structure. It does not design the game for the writer.
 
@@ -88,7 +89,29 @@ Use a hybrid approach:
 2. use DAG tags for choices and gates;
 3. add one explicit `DAG_GRAIN` tag only where a spreadsheet/runtime capture boundary matters.
 
-### 4.1 `DAG_GRAIN`
+### 4.1 Tag placement rule
+
+Tags are structural metadata. They must be placed only where the parser expects them.
+
+Allowed placements:
+
+- directly above a `label` statement;
+- directly above a `menu:` block;
+- directly above a balancing-relevant `if` / `elif` statement;
+- directly above a `call` / `jump` only when the call/jump is the grain boundary.
+
+Forbidden placements:
+
+- inside Ren'Py `init python:` blocks;
+- inside Python functions/classes;
+- inside multiline Python statements;
+- inside string literals;
+- between a Ren'Py statement and its required indented block;
+- inside nested conditionals unless the grain is explicitly scoped to that nested branch.
+
+All tag insertion patches must pass the syntax gate in Phase 7 before merge.
+
+### 4.2 `DAG_GRAIN`
 
 Add `DAG_GRAIN` beside balance-critical labels or blocks.
 
@@ -107,7 +130,7 @@ Required fields:
 | `period` | recommended | `prologue`, `morning`, `afternoon`, `evening`, `night`, `manuscript`, `ending` |
 | `capture` | optional | `start_stats`, `start_end_stats`, `gate_result`, `choice_path` |
 
-### 4.2 `DAG_CHOICE`
+### 4.3 `DAG_CHOICE`
 
 Use for player-facing route axes and menu groups.
 
@@ -125,12 +148,12 @@ Required/expected fields:
 | `values` | recommended | valid branch values |
 | `grain` | recommended | parent grain ID |
 
-### 4.3 `DAG_GATE`
+### 4.4 `DAG_GATE`
 
 Use for balancing-relevant `if` conditions.
 
 ```renpy
-# DAG_GATE id=ch2_write_gate grain=day102_night_write_slot type=write_gate requires="insp>=30,corr>=3"
+# DAG_GATE id=ch2_write_gate grain=day102_night_write_slot type=write_gate
 if has_story_fuel(*WRITE_GATE_CH2):
 ```
 
@@ -141,7 +164,26 @@ Required/expected fields:
 | `id` | yes | stable gate ID |
 | `grain` | recommended | parent grain ID |
 | `type` | yes | `write_gate`, `deadline_gate`, `anxiety_gate`, `chain_gate`, `ending_gate` |
-| `requires` | recommended | human-readable requirement |
+
+Do **not** treat free-text `requires="insp>=30,corr>=3"` as machine truth. If a human-readable `requires_note` is included, it is documentation only. Machine requirements must come from normalized extraction or `gate_catalogue.csv` numeric columns.
+
+### 4.5 Condition normalization
+
+The manifest builder must normalize gate expressions instead of relying on raw text equality.
+
+Required behavior:
+
+- Extract the Ren'Py `if` expression following a `DAG_GATE`.
+- Normalize supported Python expressions with `ast.parse(..., mode="eval")` where the condition is Python-compatible.
+- Canonicalize equivalent forms where feasible:
+  - `inspiration > 29` and `inspiration >= 30` may normalize to the same numeric floor if the variable and literal are known integer domains.
+  - `has_story_fuel(*WRITE_GATE_CH2)` resolves through known constants when available.
+- Preserve both:
+  - `raw_condition`: exact source text;
+  - `normalized_condition`: parsed/evaluated canonical form;
+  - `condition_confidence`: `high`, `medium`, `low`, `unknown`.
+
+Unsupported or dynamic expressions must become `condition_confidence: unknown`, not fake certainty.
 
 ---
 
@@ -150,9 +192,9 @@ Required/expected fields:
 | Layer | Source of truth | Notes |
 |---|---|---|
 | Narrative design | `story_board.md`, day scripts | What should happen dramatically |
-| Structural graph | generated graph manifest | What static extraction sees |
+| Structural graph | generated graph/grain manifests | What static extraction sees |
 | Runtime truth | Ren'Py capture logs | What actually happened in play |
-| Balance intent | spreadsheet/CSV archetype definitions | What outcomes are desired |
+| Balance intent | CSV/YAML archetype definitions | What outcomes are desired |
 | Balance proof | Python simulator report | Whether the numbers support the intent |
 | Feel/pacing | human playtest notes | Whether it feels fair, hot, tense, readable |
 
@@ -177,10 +219,12 @@ No single layer is enough by itself.
   - chain/confrontation helpers
 - [ ] Confirm non-prod target remains `main-game/non-prod-game/`.
 - [ ] Confirm test harnesses remain excluded from official route captures.
+- [ ] Establish patch-only workflow for agents touching narrative `.rpy` files.
 
 ### Acceptance
 
 - A partner prose rewrite can change wording inside labels, but cannot change branch structure without explicit technical review.
+- Agentic edits to narrative-touching `.rpy` files are proposed as unified diffs or patch files, not applied directly.
 
 ---
 
@@ -224,6 +268,7 @@ Infer grain candidates from:
 - `DAG_GRAIN` overrides inferred grain type/day/period.
 - `DAG_CHOICE` attaches menu to route axis.
 - `DAG_GATE` attaches condition to gate metadata.
+- Normalized gate conditions are stored separately from human notes.
 
 ### Gap report rules
 
@@ -232,19 +277,155 @@ Flag:
 - untagged menus affecting route state;
 - untagged balancing-relevant gates;
 - duplicate grain IDs;
+- illegal tag placement;
 - grain IDs missing from runtime instrumentation;
 - dynamic call sites without declared possible outcomes;
-- labels with multiple write/deadline gates but no sub-grain tags.
+- labels with multiple write/deadline gates but no sub-grain tags;
+- gates whose conditions cannot be normalized and have no catalogue row.
 
 ### Acceptance
 
 - Manifest generated without duplicate IDs.
 - All write gates, deadline gates, consequence windows, optional chain windows, and ending gates have stable grain IDs.
 - Gap report separates blockers from warnings.
+- Tag placement validation passes before any narrative `.rpy` patch is merged.
 
 ---
 
-## Phase 2 — Debug overlay and runtime capture
+## Phase 2 — Balance model inputs
+
+**Goal:** Create machine-readable economy data before runtime overlay instrumentation depends on it.
+
+### New files
+
+- `main-game/draft/releases/planning/balance/choice_catalogue.csv`
+- `main-game/draft/releases/planning/balance/gate_catalogue.csv`
+- `main-game/draft/releases/planning/balance/run_policies.csv`
+- `main-game/draft/releases/planning/balance/balance_targets.yaml`
+
+### `choice_catalogue.csv`
+
+Columns:
+
+```csv
+grain_id,choice_group,choice_id,next_grain,insp_delta,corr_xp_delta,corr_level_delta,anxiety_delta,stern_susp_delta,missy_susp_delta,vance_susp_delta,gideon_susp_delta,manuscript_delta,sets_flag,unique_unlock,risk_tier,design_note
+```
+
+Notes:
+
+- Keep this as the designer-editable control panel.
+- Do not include prose.
+- Do not include sprite/background data.
+- `sets_flag` and `unique_unlock` are part of dominance analysis, not decoration.
+
+### `gate_catalogue.csv`
+
+Columns:
+
+```csv
+gate_id,grain_id,gate_type,required_insp,required_corr_level,required_manuscript_progress,required_anxiety_max,required_anxiety_min,on_pass,on_fail,design_note
+```
+
+### `run_policies.csv`
+
+Columns:
+
+```csv
+policy_id,description,choice_rule,write_rule,risk_rule,expected_result
+```
+
+Example policies:
+
+| Policy | Rule |
+|---|---|
+| `corruption_forward` | maximize corruption while writing when possible |
+| `cautious` | minimize suspicion/anxiety, prefer inspiration |
+| `passive` | minimize corruption and avoid risky writes |
+| `reckless` | maximize corruption regardless of suspicion |
+| `recovery` | cautious Day 1-2, risky Day 3 |
+| `deadline_skip` | skip writing |
+| `anxiety_push` | maximize suspicion/anxiety |
+
+### `balance_targets.yaml`
+
+Example:
+
+```yaml
+release: release-1-mvp
+
+matrix_execution_mapping:
+  - run_id: P1_corruption_forward
+    policy_target: corruption_forward
+    runtime_entry: label_start
+    assertions:
+      - assert_ending: day105_7_release_one_ending
+      - assert_stat_floor: { manuscript_progress: 5 }
+  - run_id: P2_cautious
+    policy_target: cautious
+    runtime_entry: label_start
+    assertions:
+      - assert_reaches_day_at_least: 105
+  - run_id: P3_low_corruption
+    policy_target: passive
+    runtime_entry: label_start
+    assertions:
+      - assert_ending_one_of:
+          - bad_ending_rejection
+          - respectable_writer_soft_fail
+  - run_id: P4_deadline_1
+    policy_target: deadline_skip
+    runtime_entry: label_start
+    assertions:
+      - assert_ending: game_over_deadline_1
+  - run_id: P5_deadline_2
+    policy_target: ch1_only
+    runtime_entry: label_start
+    assertions:
+      - assert_ending: game_over_deadline_2
+  - run_id: P6_anxiety_collapse
+    policy_target: anxiety_push
+    runtime_entry: label_start
+    assertions:
+      - assert_ending: game_over_dismissed
+  - run_id: P7_penance
+    policy_target: penance_force
+    runtime_entry: label_start
+    assertions:
+      - assert_event_seen: confrontation
+
+thresholds:
+  ch1_gate:
+    intended_pass:
+      - corruption_forward
+    intended_maybe_fail:
+      - cautious
+      - passive
+  ch2_gate:
+    intended_pass:
+      - corruption_forward
+      - recovery
+  ch3_gate:
+    intended_pass:
+      - corruption_forward
+      - reckless
+    intended_recoverable_fail:
+      - cautious
+
+fuzz:
+  local_default_runs: 100
+  deep_runs: 10000
+```
+
+### Acceptance
+
+- Python can load all input files without manual cleanup.
+- Each choice group in the grain manifest has matching rows in `choice_catalogue.csv`, or is explicitly marked non-balance.
+- Each balancing gate has a row in `gate_catalogue.csv` or a high-confidence normalized condition extracted from source.
+- Every required runtime run ID maps to a policy target and assertions.
+
+---
+
+## Phase 3 — Debug overlay and runtime capture
 
 **Goal:** Ren'Py records real playtest paths automatically.
 
@@ -266,6 +447,7 @@ Log these event types:
 | `gate` | gate ID, pass/fail, requirements, actual stats |
 | `flag` | flag/state mutation where useful |
 | `grain_exit` | result, next label, end stats |
+| `rollback_event` | rollback marker, target checkpoint if available, pre/post event sequence |
 | `ending` | ending ID, final stats |
 | `run_end` | completion note |
 
@@ -316,27 +498,31 @@ main-game/non-prod-game/debug_captures/P1_corruption_forward.jsonl
 
 One event per line.
 
-### Rollback policy
+### Rollback-aware telemetry policy
 
-Official capture runs are forward-only.
+Official capture runs should prefer forward-only play, but rollback must not destroy a run. Human testers reread, misclick, and back up. The telemetry stream must handle that.
 
-Rules:
+Required behavior:
 
-- do not use rollback during official capture;
-- do not skip backward;
-- start each test path from a fresh run ID;
-- if rollback is used, discard the capture file and rerun.
+- If rollback happens, append `rollback_event` to the JSONL stream instead of discarding the capture.
+- The event must include the last known grain ID, event sequence before rollback, and target/checkpoint metadata if available.
+- Runtime capture must use Ren'Py rollback-safe side-effect handling where feasible, such as `config.rollback_side_effects`, or a custom rollback-aware logging object.
+- The comparison tool must be able to either:
+  - truncate superseded event spans; or
+  - replay the JSONL stream while respecting rollback vectors.
+- Capture files with rollback are valid but marked `contains_rollback: true` in summary reports.
 
 ### Acceptance
 
 - A P1 test run creates a JSONL file.
 - File contains `run_start`, multiple `grain_enter`, at least one `choice`, at least one `gate`, and either `ending` or `run_end`.
+- A rollback during capture appends `rollback_event` and does not force run discard.
 - Debug overlay can be toggled without affecting route logic.
 - Capture tooling is clearly non-prod and excluded from public build profile.
 
 ---
 
-## Phase 3 — Route test matrix execution
+## Phase 4 — Route test matrix execution
 
 **Goal:** Prove the spine and fail states at runtime before deep balancing.
 
@@ -352,6 +538,8 @@ Rules:
 | `P6_anxiety_collapse` | maximizes exposure/suspicion | `game_over_dismissed` |
 | `P7_penance` | forces confrontations | Stern/Missy/Vance confrontation paths across runs |
 
+The executable mapping and assertions live in `balance_targets.yaml` under `matrix_execution_mapping`.
+
 ### Runtime capture checklist
 
 For each run:
@@ -359,8 +547,8 @@ For each run:
 - [ ] starts from `label start`;
 - [ ] no test harness;
 - [ ] no debug stat cheats;
-- [ ] no rollback;
 - [ ] JSONL capture saved;
+- [ ] rollback events are either absent or explicitly summarized;
 - [ ] ending/result matches expected route intent;
 - [ ] save/load smoke-tested separately for day boundary and Book 1 screen.
 
@@ -368,105 +556,6 @@ For each run:
 
 - At least P1, P2, and one fail path complete before balance tuning begins.
 - All seven required paths complete before Release 1 promotion.
-
----
-
-## Phase 4 — Balance model inputs
-
-**Goal:** Create machine-readable economy data for Python simulation.
-
-### New files
-
-- `main-game/draft/releases/planning/balance/choice_catalogue.csv`
-- `main-game/draft/releases/planning/balance/gate_catalogue.csv`
-- `main-game/draft/releases/planning/balance/run_policies.csv`
-- `main-game/draft/releases/planning/balance/balance_targets.yaml`
-
-### `choice_catalogue.csv`
-
-Columns:
-
-```csv
-grain_id,choice_group,choice_id,next_grain,insp_delta,corr_xp_delta,corr_level_delta,anxiety_delta,stern_susp_delta,missy_susp_delta,vance_susp_delta,gideon_susp_delta,manuscript_delta,sets_flag,risk_tier,design_note
-```
-
-Notes:
-
-- Keep this as the designer-editable control panel.
-- Do not include prose.
-- Do not include sprite/background data.
-
-### `gate_catalogue.csv`
-
-Columns:
-
-```csv
-gate_id,grain_id,gate_type,required_insp,required_corr_level,required_manuscript_progress,required_anxiety_max,required_anxiety_min,on_pass,on_fail,design_note
-```
-
-### `run_policies.csv`
-
-Columns:
-
-```csv
-policy_id,description,choice_rule,write_rule,risk_rule,expected_result
-```
-
-Example policies:
-
-| Policy | Rule |
-|---|---|
-| `corruption_forward` | maximize corruption while writing when possible |
-| `cautious` | minimize suspicion/anxiety, prefer inspiration |
-| `passive` | minimize corruption and avoid risky writes |
-| `reckless` | maximize corruption regardless of suspicion |
-| `recovery` | cautious Day 1-2, risky Day 3 |
-| `deadline_skip` | skip writing |
-| `anxiety_push` | maximize suspicion/anxiety |
-
-### `balance_targets.yaml`
-
-Example:
-
-```yaml
-release: release-1-mvp
-must_pass:
-  - policy: corruption_forward
-    reaches: day105_7_release_one_ending
-  - policy: cautious
-    reaches_day_at_least: 105
-  - policy: passive
-    reaches_one_of:
-      - bad_ending_rejection
-      - respectable_writer_soft_fail
-  - policy: deadline_skip
-    reaches: game_over_deadline_1
-  - policy: anxiety_push
-    reaches: game_over_dismissed
-thresholds:
-  ch1_gate:
-    intended_pass:
-      - corruption_forward
-    intended_maybe_fail:
-      - cautious
-      - passive
-  ch2_gate:
-    intended_pass:
-      - corruption_forward
-      - recovery
-  ch3_gate:
-    intended_pass:
-      - corruption_forward
-      - reckless
-    intended_recoverable_fail:
-      - cautious
-```
-
-### Acceptance
-
-- Python can load all input files without manual cleanup.
-- Each choice group in the grain manifest has matching rows in `choice_catalogue.csv`, or is explicitly marked non-balance.
-- Each balancing gate has a row in `gate_catalogue.csv`.
 
 ---
 
@@ -543,11 +632,17 @@ For each gate:
 
 #### 5.3 Dominant choice report
 
-Flag choices that are strictly worse than another option in the same group unless protected by design note.
+Flag choices that are strictly worse than another option in the same group unless protected by narrative state or design note.
 
-Potential rule:
+Correct dominance rule:
 
-- A choice is dominated when another option gives equal or better inspiration/corruption and equal or lower anxiety/suspicion, with no unique flag/unlock.
+- Choice A is mechanically dominated by Choice B only when all are true:
+  - B gives equal or better positive economy on relevant dimensions;
+  - B gives equal or lower pressure/cost on relevant dimensions;
+  - A sets no unique narrative flag, route axis value, unlock, relationship state, or future gate modifier that B does not also provide;
+  - A has no explicit `design_note` marking it as a deliberate flavour, roleplay, fail-state, or foreshadowing option.
+
+A numerically bad choice that sets `day3_ultimatum=defied`, unlocks a confrontation, changes Day 105 dynamics, or creates a planned soft-fail route is not dominated. It is a narrative gateway.
 
 #### 5.4 Cliff report
 
@@ -562,13 +657,21 @@ Examples:
 
 #### 5.5 Random/fuzz route report
 
-Generate N random policy-weighted runs.
+Generate random policy-weighted runs.
 
-Default:
+Default modes:
 
 ```text
-N = 10000
+local/default: N = 100
+deep/release:  N = 10000
 ```
+
+Rules:
+
+- `simulate_balance.py --release release-1-mvp` uses local/default count.
+- `simulate_balance.py --release release-1-mvp --deep` uses deep/release count.
+- Pre-commit hooks must never run the deep count.
+- `run_release1_balance_check.py --deep` may run full Monte Carlo for release verification.
 
 Report ending distribution:
 
@@ -587,7 +690,8 @@ Report ending distribution:
 - `simulate_balance.py` runs from command line.
 - Reports generated without manual intervention.
 - Must-pass targets clearly PASS/FAIL.
-- At least one deterministic policy and random fuzz run are supported.
+- At least one deterministic policy and local random fuzz run are supported.
+- Deep fuzz is available but not part of local default checks.
 
 ---
 
@@ -607,6 +711,7 @@ Report ending distribution:
 - grain manifest
 - policy simulation results
 - gate catalogue
+- `balance_targets.yaml` matrix execution mapping
 
 ### Compare
 
@@ -618,8 +723,9 @@ For each runtime capture:
 | manifest grain never reached | untested or impossible route |
 | runtime gate result differs from simulator | model or implementation bug |
 | runtime stat deltas differ from catalogue | spreadsheet/model stale |
-| runtime ending differs from target | balance or implementation issue |
+| runtime ending differs from target assertion | balance or implementation issue |
 | runtime unknown branch flag | missing catalogue entry |
+| rollback span unresolved | log replay/truncation issue |
 
 ### Mismatch classes
 
@@ -629,53 +735,84 @@ For each runtime capture:
 | `IMPLEMENTATION_BUG` | Ren'Py route/state behavior contradicts intended model |
 | `TAG_DRIFT` | grain/DAG tags are missing or stale |
 | `TEST_DEVIATION` | human route did not follow declared policy |
+| `ROLLBACK_REPLAY_REQUIRED` | runtime log contains rollback spans not resolved by comparison |
 | `DESIGN_DECISION_REQUIRED` | model and runtime agree, but outcome conflicts with design target |
 
 ### Acceptance
 
 - P1 and P2 runtime captures can be compared to simulated policies.
 - Mismatches are written to CSV with grain/gate IDs.
+- Rollback-containing logs are accepted if replay/truncation resolves them.
 - No blocker mismatches remain before promotion.
 
 ---
 
-## Phase 7 — Agentic workflow integration
+## Phase 7 — Agentic workflow integration and safety gate
 
-**Goal:** Make the testing framework usable by agents without letting agents rewrite the game accidentally.
+**Goal:** Make the testing framework usable by agents without allowing structural hallucinations to corrupt scripts or telemetry.
 
-### Agent roles
+### 7.1 Core safety rule
 
-| Agent role | Allowed actions | Forbidden actions |
+Agents that touch narrative `.rpy` files do **not** write directly to `main-game/non-prod-game/`.
+
+They may produce only:
+
+- unified diffs;
+- `.patch` files;
+- structured patch proposals;
+- report files;
+- CSV/YAML model changes where explicitly allowed.
+
+A human or controlled merge tool applies the patch only after syntax and contract gates pass.
+
+### 7.2 Required patch gate
+
+Any patch touching `.rpy` files under `main-game/non-prod-game/game/days/` or `main-game/non-prod-game/game/shared/` must pass:
+
+1. patch applies cleanly to current branch;
+2. no prose/routing/stat changes unless task explicitly permits them;
+3. tag placement validator passes;
+4. grain manifest rebuild succeeds;
+5. Ren'Py syntax check passes, using the available project command for non-prod script validation;
+6. contract/lint validation passes where tooling recognizes the current layout;
+7. generated gap report has no new blockers.
+
+The command name may vary by environment, but the gate must include a Ren'Py script syntax check equivalent to `renpy --check-script` / `renpy lint` for the non-prod project.
+
+### 7.3 Agent roles
+
+| Agent role | Allowed outputs | Forbidden actions |
 |---|---|---|
-| Grain Tagger | add/update `DAG_GRAIN`, `DAG_CHOICE`, `DAG_GATE` comments | rewrite prose, change route logic |
-| Manifest Builder | run extraction, produce gap reports | edit scripts directly |
-| Runtime Instrumenter | add debug capture calls at grain boundaries | alter player-facing copy or branch outcomes |
-| Balance Modeler | update CSV/YAML model files | change `.rpy` scripts |
-| Balance Analyst | run simulator, summarize failures/cliffs | tune numbers without explicit task |
-| Runtime QA Agent | inspect capture logs and compare to model | infer feel/pacing without human notes |
+| Grain Tagger | patch proposal adding/updating `DAG_GRAIN`, `DAG_CHOICE`, `DAG_GATE` comments | direct file writes, prose rewrite, route logic change |
+| Manifest Builder | generated manifests and gap reports | edit scripts directly |
+| Runtime Instrumenter | patch proposal adding debug capture calls | alter player-facing copy or branch outcomes |
+| Balance Modeler | CSV/YAML model changes | change `.rpy` scripts |
+| Balance Analyst | reports and tuning proposals | tune numbers without explicit task |
+| Runtime QA Agent | capture/log comparison reports | infer feel/pacing without human notes |
 | Human Designer | approve tuning changes and design exceptions | none |
 
-### Agent task sequence
+### 7.4 Agent task sequence
 
-1. **Grain extraction pass**
+1. **Static extraction pass**
    - Run manifest builder.
    - Produce gap report.
 
-2. **Tagging pass**
-   - Add missing `DAG_GRAIN` / `DAG_CHOICE` / `DAG_GATE` only where required.
-   - Do not change routing.
+2. **Catalogue pass**
+   - Build/update choice/gate catalogues.
+   - Define run-policy mapping and assertions.
 
-3. **Instrumentation pass**
-   - Add `debug_enter_grain`, `debug_choice`, `debug_gate`, `debug_exit_grain`, `debug_ending` calls.
-   - Do not change player-facing content.
+3. **Patch proposal pass**
+   - Tagger/instrumenter outputs unified diff only.
+   - No direct write to narrative `.rpy` files.
 
-4. **Model build pass**
-   - Populate choice/gate catalogues.
-   - Define policy targets.
+4. **Patch gate pass**
+   - Apply patch in a disposable working copy or branch.
+   - Run syntax/manifest/contract gates.
+   - Merge only if green or explicitly human-approved.
 
 5. **Simulation pass**
    - Run deterministic policies.
-   - Run random fuzz.
+   - Run local fuzz.
    - Generate reports.
 
 6. **Runtime QA pass**
@@ -690,7 +827,7 @@ For each runtime capture:
    - Re-run simulator.
    - Re-run impacted runtime captures.
 
-### PR/review contract
+### 7.5 PR/review contract
 
 Every testing-framework PR must declare:
 
@@ -698,9 +835,11 @@ Every testing-framework PR must declare:
 - whether routing changed;
 - whether prose changed;
 - whether stat deltas changed;
+- whether tags were inserted or moved;
 - commands run;
 - generated report paths;
-- remaining blockers.
+- remaining blockers;
+- whether Ren'Py syntax check passed.
 
 ---
 
@@ -716,7 +855,7 @@ Every testing-framework PR must declare:
    - policy pass/fail;
    - gate ranges;
    - cliffs;
-   - dominant choices;
+   - dominance report;
    - ending distribution.
 4. Apply minimal tuning change.
 5. Re-run simulator.
@@ -742,7 +881,7 @@ For each gate:
 - [ ] intended fail policies fail clearly;
 - [ ] recovery path is possible if designed;
 - [ ] one-point misses are intentional or smoothed;
-- [ ] no dominant choice invalidates the menu;
+- [ ] no mechanically dead choice invalidates the menu;
 - [ ] suspicion/anxiety pressure matters.
 
 ---
@@ -774,15 +913,15 @@ main-game/pipeline/releases/release-1-mvp/qa/release1_route_matrix_results.md
 
 Include:
 
-| Run | Expected | Actual | Pass/fail | Notes |
-|---|---|---|---|---|
-| P1 | Day 105 MVP ending | | | |
-| P2 | cautious completion/weak path | | | |
-| P3 | rejection/soft fail | | | |
-| P4 | deadline fail 1 | | | |
-| P5 | deadline fail 2 | | | |
-| P6 | anxiety dismissal | | | |
-| P7 | confrontations/penance | | | |
+| Run | Expected | Actual | Pass/fail | Rollback? | Notes |
+|---|---|---|---|---|---|
+| P1 | Day 105 MVP ending | | | | |
+| P2 | cautious completion/weak path | | | | |
+| P3 | rejection/soft fail | | | | |
+| P4 | deadline fail 1 | | | | |
+| P5 | deadline fail 2 | | | | |
+| P6 | anxiety dismissal | | | | |
+| P7 | confrontations/penance | | | | |
 
 ### Acceptance
 
@@ -824,6 +963,7 @@ Suggested command names:
 ```powershell
 py main-game/pipeline/tools/build_grain_manifest.py --release release-1-mvp
 py main-game/pipeline/tools/simulate_balance.py --release release-1-mvp
+py main-game/pipeline/tools/simulate_balance.py --release release-1-mvp --deep
 py main-game/pipeline/tools/compare_runtime_to_model.py --release release-1-mvp
 ```
 
@@ -831,15 +971,23 @@ Optional all-in-one command:
 
 ```powershell
 py main-game/pipeline/tools/run_release1_balance_check.py
+py main-game/pipeline/tools/run_release1_balance_check.py --deep
 ```
 
-This should run:
+Default local check should run:
 
 1. grain manifest build;
 2. grain gap report;
-3. balance simulation;
-4. runtime/model comparison if capture logs exist;
-5. final summary.
+3. deterministic balance simulation;
+4. local fuzz only, default `N=100`;
+5. runtime/model comparison if capture logs exist;
+6. final summary.
+
+Deep release check may additionally run:
+
+- full fuzz, default `N=10000`;
+- complete runtime/model comparison for all P1-P7 logs;
+- promotion evidence package generation.
 
 ---
 
@@ -851,19 +999,26 @@ This should run:
 - Do not include prose snippets in IDs.
 - Do not rename IDs once runtime captures exist unless migration is intentional.
 
+### Tags
+
+- Tags must obey placement rules.
+- Tags cannot be moved by an agent without patch-gate validation.
+- `requires_note` is documentation only. Machine requirements live in normalized conditions and catalogues.
+
 ### CSV/YAML
 
 - No blank required fields.
 - No duplicate choice IDs within a choice group.
 - No duplicate gate IDs.
-- Every gate ID in runtime logs must exist in `gate_catalogue.csv`.
+- Every gate ID in runtime logs must exist in `gate_catalogue.csv` or normalized manifest output.
 - Every balance-critical choice group must exist in `choice_catalogue.csv`.
+- Every required run ID must exist in `matrix_execution_mapping`.
 
 ### Runtime logs
 
 - One run ID per official attempt.
-- Official runs are forward-only.
 - Failed/abandoned captures are retained but marked invalid.
+- Rollback-containing logs are valid when replay/truncation succeeds.
 
 ---
 
@@ -871,9 +1026,9 @@ This should run:
 
 | Severity | Meaning | Examples |
 |---|---|---|
-| Blocker | prevents promotion/testing proof | crash, soft lock, impossible P1, missing ending, unknown runtime route |
-| Major | breaks intended economy | cautious always hard-fails, reckless never punished, corruption choice dominates all |
-| Medium | confusing or brittle | one-point gate miss with poor feedback, unclear rejection cause |
+| Blocker | prevents promotion/testing proof | crash, soft lock, impossible P1, missing ending, unknown runtime route, syntax-breaking tag patch |
+| Major | breaks intended economy | cautious always hard-fails, reckless never punished, corruption choice dominates all non-flagged alternatives |
+| Medium | confusing or brittle | one-point gate miss with poor feedback, unclear rejection cause, rollback log needs manual replay |
 | Minor | polish/tooling | missing note, non-blocking tag drift, report formatting |
 
 ---
@@ -883,10 +1038,13 @@ This should run:
 The testing/balance framework is complete for Release 1 MVP when:
 
 - [ ] grain manifest exists and covers all balancing-critical labels;
-- [ ] debug overlay and runtime capture work in non-prod;
+- [ ] tag placement/syntax gates exist for agent-produced `.rpy` patches;
+- [ ] balance catalogues and `balance_targets.yaml` matrix mapping exist;
+- [ ] debug overlay and rollback-aware runtime capture work in non-prod;
 - [ ] route captures exist for P1-P7;
 - [ ] Python simulator runs deterministic policies;
-- [ ] random fuzz report exists;
+- [ ] local fuzz report exists;
+- [ ] deep fuzz report exists for promotion;
 - [ ] runtime/model comparison report exists;
 - [ ] balance report lists pass/fail against explicit design targets;
 - [ ] no blocker issues remain;
@@ -894,21 +1052,22 @@ The testing/balance framework is complete for Release 1 MVP when:
 
 ---
 
-## 11. Recommended build order
+## 11. Revised recommended build order
 
 Implement in this order:
 
-1. `DAG_GRAIN` convention and grain manifest builder.
-2. Minimal debug overlay.
-3. Runtime JSONL capture.
-4. P1/P2/P4 thin route captures.
-5. Choice/gate catalogue CSVs.
-6. Deterministic policy simulator.
-7. Gate range and cliff reports.
-8. Runtime/model comparison.
-9. Random fuzz runs.
-10. Full P1-P7 capture matrix.
-11. Promotion evidence package.
-12. Public build exclusion profile.
+1. **Scope freeze and patch-only agent policy.**
+2. **Static manifest builder and tag placement validator.**
+3. **Choice/gate catalogue CSVs and `balance_targets.yaml` run mapping.**
+4. **Minimal debug overlay and rollback-aware JSONL telemetry.**
+5. **P1/P2/P4 thin runtime captures.**
+6. **Deterministic policy simulator.**
+7. **Gate range, dominance, and cliff reports.**
+8. **Runtime/model comparison.**
+9. **Local fuzz runs (`N=100`).**
+10. **Full P1-P7 capture matrix.**
+11. **Deep fuzz release run (`N=10000`).**
+12. **Promotion evidence package.**
+13. **Public build exclusion profile.**
 
-This order prevents overbuilding the simulator before the game can prove basic runtime completion.
+This order prevents overbuilding runtime capture before grains and catalogues exist, while still proving the actual game before deep balance tuning.
