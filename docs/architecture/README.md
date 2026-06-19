@@ -8,6 +8,7 @@ This folder holds repo-level architecture and process documents that sit above i
 |----------|---------|
 | [`active_processes.md`](active_processes.md) | Everyday process menu: which lane to use, who owns it, and what not to bypass. |
 | [`feature_lifecycle_registry.md`](feature_lifecycle_registry.md) | Feature status, ownership, validation, deprecation, and removal decisions. |
+| [`path_contract.md`](path_contract.md) | Active path contract and stale path patterns agents should not reintroduce. |
 | [`scripts_refactor_map.md`](scripts_refactor_map.md) | Safe migration contract for reorganising `scripts/` without breaking agent commands. |
 
 ## Rules
