@@ -351,6 +351,7 @@ Run from `label start` with **no test harness** and no debug cheats.
 
 ### Manuscript verification per path
 
+- [ ] balance report static pass — `py scripts/balance_report.py --release release-1-mvp` (no `FAIL`; `INCOMPLETE` expected until simulator/captures exist)
 - [ ] P1: `manuscript_progress >= 2` before Day 104 false-dawn gate
 - [ ] P1: `book1_write_chapter` fires at least 3 times with distinct theme keys
 - [ ] P2: Story completes with lower corruption without dead-ending on deadlines unintentionally
@@ -370,6 +371,7 @@ Run from `label start` with **no test harness** and no debug cheats.
 | HUD / NVL / ledger | `game/screens.rpy` |
 | Asset declarations | `game/assets_manifest.rpy` |
 | Day scripts | `game/days/day100_non_canon.rpy` … `day105_non_canon.rpy` |
+| Testing / balance (static) | `scripts/balance_report.py` → `main-game/pipeline/releases/release-1-mvp/reports/balance_report.md` |
 | Design gates | `planning/story_board.md` |
 | Continuity | `planning/continuity_handoff.md` |
 | Graph audit | `main-game/pipeline/releases/release-1-mvp/graph/release1_graph_audit.md` |

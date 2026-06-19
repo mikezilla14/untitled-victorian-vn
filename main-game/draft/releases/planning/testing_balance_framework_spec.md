@@ -956,9 +956,68 @@ Exclude:
 
 ---
 
+## 6.5 First-pass static report (implemented)
+
+A narrow static harness exists before grain manifests, simulators, or runtime capture land.
+
+| Item | Path |
+|------|------|
+| CLI entry | `scripts/balance_report.py` |
+| Implementation | `scripts/validation/balance_report_impl.py` |
+| Default output | `main-game/pipeline/releases/release-1-mvp/reports/balance_report.md` |
+
+### Run
+
+```powershell
+# Full Release 1 MVP sandbox scan (days 101–105 + shared gates/endings)
+py scripts/balance_report.py --release release-1-mvp
+
+# Single-day scope (plus shared dependencies)
+py scripts/balance_report.py --day day105 --release release-1-mvp
+
+# Print to console
+py scripts/balance_report.py --release release-1-mvp --stdout
+```
+
+### What it checks now
+
+- Required non-prod day files (`day101_non_canon.rpy` … `day105_non_canon.rpy`)
+- `WRITE_GATE_CH1/2/3` constants and `has_story_fuel` hook sites per MVP checklist
+- Book1 write labels and `complete_manuscript_chapter` hooks
+- Hard/soft fail label definitions and jump references
+- Deprecated-router guard (`jump end_slot`, `jump advance_after_confrontation`)
+- Documented balance assumptions (corruption milestones, archetype intent)
+
+### What it does not check yet
+
+- Full route execution or stat simulation
+- Policy matrix P1–P7 outcomes
+- Runtime JSONL capture comparison
+- Grain manifest / gate catalogue normalization
+- Dominance, cliff, or fuzz reports
+
+### Verdict meanings
+
+| Verdict | Meaning |
+|---------|---------|
+| `PASS` | All static checks green; no incomplete simulation gaps flagged |
+| `WARN` | Static drift or missing optional evidence; review before promotion |
+| `FAIL` | Missing required files, gates, or fail-state wiring |
+| `INCOMPLETE` | Static checks mostly green but simulation/playtest proof still required (expected for this pass) |
+
+Exit code: `1` only on `FAIL`; `INCOMPLETE` and `WARN` return `0` so local runs can feed human review without blocking unrelated work.
+
+---
+
 ## 7. Command design
 
-Suggested command names:
+**Implemented (static report):**
+
+```powershell
+py scripts/balance_report.py --release release-1-mvp
+```
+
+**Planned (pipeline tools):**
 
 ```powershell
 py main-game/pipeline/tools/build_grain_manifest.py --release release-1-mvp

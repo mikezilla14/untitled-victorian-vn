@@ -15,6 +15,7 @@ See also: [`docs/architecture/scripts_refactor_map.md`](../docs/architecture/scr
 | `py scripts/format_non_canon.py <paths>` | Normalize non-canon script formatting/staging markers. | Non-prod code / scene direction |
 | `py scripts/documentation_audit.py --write` | Refresh documentation catalogue and audit artifacts. | Documentation steward |
 | `py scripts/documentation_audit.py --check` | Fail when generated documentation catalogue artifacts are stale. | Documentation steward |
+| `py scripts/balance_report.py --release release-1-mvp` | Static testing/balance report for non-prod sandbox (gates, fail states, deprecated routers). | Chief architect |
 | `py scripts/agent_next_step.py --pipeline <name> --stage <n>` | Print the next agent/rule for a pipeline stage. | Orchestrator |
 | `py scripts/resolve_work_item.py --from-standup --next` | Turn a standup work item into the next routed task. | Daily standup / action-from-standup |
 
@@ -31,6 +32,7 @@ The current folder is intentionally still mostly flat. Do not infer that every f
 | `scene/` | Scene-direction and non-canon formatting implementation. | Keep staging/prose boundaries intact. |
 | `assets/` | Asset manifest checks, asset promotion helpers, image/audio utility scripts. | Runtime asset validation remains separate from source art workflows. |
 | `graph/` | Story graph and DAG manifest helpers. | Audit support only; not storyboard source of truth. |
+| `validation/` | Testing/balance static reports and future validation internals. | Root `scripts/balance_report.py` stays the stable wrapper. |
 | `archive/one_off_migrations/` | One-off migration scripts. | Never route normal agent work through archive. |
 
 ## Compatibility policy
