@@ -1,7 +1,7 @@
 # Testing and balance report
 
 **Release:** `release-1-mvp`
-**Generated:** 2026-06-19 22:56 UTC
+**Generated:** 2026-06-19 22:58 UTC
 
 ## Verdict
 
@@ -111,6 +111,10 @@
 - ✓ **PASS** — Simulation output present: simulation_report (`main-game/pipeline/releases/release-1-mvp/balance/simulation_report.md`)
 - ✓ **PASS** — Simulation output present: policy_results (`main-game/pipeline/releases/release-1-mvp/balance/policy_results.csv`)
 - ✓ **PASS** — Simulation output present: gate_results (`main-game/pipeline/releases/release-1-mvp/balance/gate_results.csv`)
+- ✓ **PASS** — Runtime capture harness present: debug_run_capture (`main-game/non-prod-game/game/shared/debug_run_capture.rpy`)
+- ✓ **PASS** — Runtime capture overlay screens present in screens.rpy (`main-game/non-prod-game/game/screens.rpy`)
+- … **INCOMPLETE** — No P1–P7 JSONL captures yet — playtest non-prod with F10 overlay or debug_capture_start (`main-game/non-prod-game/debug_captures`)
+- ✓ **PASS** — Runtime comparison tool present (`main-game/pipeline/tools/compare_runtime_to_model.py`)
 
 ## Required day files
 
@@ -122,14 +126,13 @@
 
 ## Missing evidence
 
-- No Python route simulator yet — cannot prove optimized/cautious/passive paths reach intended stats.
-- No runtime JSONL captures — cannot verify gate pass/fail at play time.
-- Corruption Level 4 milestone by Day 4 end is design intent only until simulation exists.
+- No runtime JSONL captures — play non-prod and save under debug_captures/ before promotion proof.
+- Abstract simulator does not walk labels — P2/P3/P7 need runtime captures or graph walk.
+- Corruption Level 4 milestone by Day 4 end is design intent until playtest proof exists.
 
 ## Recommended next tests
 
 - Review `main-game/pipeline/releases/release-1-mvp/balance/simulation_report.md` matrix gaps before tuning numbers.
-- Run P1/P2 runtime captures when JSONL harness lands; compare to abstract sim.
-- Implement graph-walk simulator or expand catalogue coverage for P1/P2/P3 precision.
+- Record P1/P2/P4 JSONL captures first; run compare_runtime_to_model.py.
 - Smoke-test hard fails: skip all writing → `game_over_deadline_1`; Ch1 only → `game_over_deadline_2`; anxiety 100 → `game_over_dismissed`.
 - Verify cautious Day 101 slop path still advances spine without bricking deadline gates.

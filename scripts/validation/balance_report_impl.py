@@ -234,6 +234,21 @@ SIMULATION_OUTPUTS: tuple[tuple[str, str], ...] = (
     ("balance/gate_results.csv", "gate_results"),
 )
 
+RUNTIME_CAPTURE_FILES: tuple[tuple[str, str], ...] = (
+    ("shared/debug_run_capture.rpy", "debug_run_capture"),
+    ("screens.rpy", "debug_grain_overlay_screens"),
+)
+
+MATRIX_CAPTURE_IDS = (
+    "P1_corruption_forward",
+    "P2_cautious",
+    "P3_low_corruption",
+    "P4_deadline_1",
+    "P5_deadline_2",
+    "P6_anxiety_collapse",
+    "P7_penance",
+)
+
 EXPECTED_CATALOGUE_GATES = (
     "ch1_write_gate",
     "ch2_write_gate",
@@ -477,18 +492,97 @@ def _check_framework_artifacts(release_slug: str, root: Path) -> tuple[list[Chec
                 )
             )
 
+    non_prod = non_prod_game_dir()
+    for rel_path, label in RUNTIME_CAPTURE_FILES:
+        path = non_prod / "game" / rel_path
+        rel = _rel(path, root)
+        if path.exists():
+            if label == "debug_grain_overlay_screens":
+                ok = "screen debug_grain_overlay" in _read(path)
+                checks.append(
+                    CheckResult(
+                        Severity.PASS if ok else Severity.INCOMPLETE,
+                        f"Runtime capture overlay screens {'present' if ok else 'missing'} in screens.rpy",
+                        rel,
+                    )
+                )
+                continue
+            checks.append(
+                CheckResult(Severity.PASS, f"Runtime capture harness present: {label}", rel)
+            )
+        else:
+            checks.append(
+                CheckResult(
+                    Severity.INCOMPLETE,
+                    f"Runtime capture harness missing: {label}",
+                    rel,
+                )
+            )
+
+    capture_dir = non_prod / "debug_captures"
+    present_captures = [
+        run_id for run_id in MATRIX_CAPTURE_IDS if (capture_dir / f"{run_id}.jsonl").exists()
+    ]
+    if present_captures:
+        checks.append(
+            CheckResult(
+                Severity.PASS,
+                f"Runtime JSONL captures present ({len(present_captures)}/{len(MATRIX_CAPTURE_IDS)})",
+                ", ".join(present_captures),
+            )
+        )
+        comparison = pipeline_release_root(release_slug) / "qa" / "runtime_model_comparison.md"
+        if comparison.exists():
+            checks.append(
+                CheckResult(
+                    Severity.PASS,
+                    "Runtime/model comparison report present",
+                    _rel(comparison, root),
+                )
+            )
+        else:
+            checks.append(
+                CheckResult(
+                    Severity.INCOMPLETE,
+                    "Run compare_runtime_to_model.py after captures exist",
+                    _rel(comparison, root),
+                )
+            )
+            next_tests.append(
+                "Run `py main-game/pipeline/tools/compare_runtime_to_model.py --release release-1-mvp`."
+            )
+    else:
+        checks.append(
+            CheckResult(
+                Severity.INCOMPLETE,
+                "No P1–P7 JSONL captures yet — playtest non-prod with F10 overlay or debug_capture_start",
+                _rel(capture_dir, root),
+            )
+        )
+        missing.append(
+            "No runtime JSONL captures — play non-prod and save under debug_captures/ before promotion proof."
+        )
+
+    compare_tool = root / "main-game" / "pipeline" / "tools" / "compare_runtime_to_model.py"
+    if compare_tool.exists():
+        checks.append(
+            CheckResult(
+                Severity.PASS,
+                "Runtime comparison tool present",
+                _rel(compare_tool, root),
+            )
+        )
+
     missing.extend(
         [
-            "No Python route simulator yet — cannot prove optimized/cautious/passive paths reach intended stats.",
-            "No runtime JSONL captures — cannot verify gate pass/fail at play time.",
-            "Corruption Level 4 milestone by Day 4 end is design intent only until simulation exists.",
+            "Abstract simulator does not walk labels — P2/P3/P7 need runtime captures or graph walk.",
+            "Corruption Level 4 milestone by Day 4 end is design intent until playtest proof exists.",
         ]
     )
     next_tests.extend(
         [
             "Review `main-game/pipeline/releases/release-1-mvp/balance/simulation_report.md` matrix gaps before tuning numbers.",
-            "Run P1/P2 runtime captures when JSONL harness lands; compare to abstract sim.",
-            "Implement graph-walk simulator or expand catalogue coverage for P1/P2/P3 precision.",
+            "Record P1/P2/P4 JSONL captures first; run compare_runtime_to_model.py.",
         ]
     )
     return checks, missing, next_tests

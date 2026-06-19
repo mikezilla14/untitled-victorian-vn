@@ -17,3 +17,7 @@ default speaking_char = None
 
 # Set by story_window_penance_gate when pending penance consumes the chain slot.
 default _penance_consumed = False
+
+# Non-prod balance capture (debug_run_capture.rpy defines BalanceCapture at init -5).
+default balance_capture = BalanceCapture()
+default debug_grain_overlay_visible = False

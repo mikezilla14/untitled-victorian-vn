@@ -19,6 +19,7 @@ See also: [`docs/architecture/scripts_refactor_map.md`](../docs/architecture/scr
 | `py main-game/pipeline/tools/build_grain_manifest.py --release release-1-mvp` | Extract balance grains and gap report from sandbox `.rpy` files. | Chief architect / dag_tag_update |
 | `py main-game/pipeline/tools/build_choice_catalogue.py --release release-1-mvp` | Import graph choices/effects into `choice_catalogue.csv`. | Chief architect |
 | `py main-game/pipeline/tools/simulate_balance.py --release release-1-mvp` | Abstract policy/gate simulation and fuzz distribution report. | Chief architect |
+| `py main-game/pipeline/tools/compare_runtime_to_model.py --release release-1-mvp` | Compare JSONL playtest captures to balance_targets matrix. | Chief architect |
 | `py scripts/agent_next_step.py --pipeline <name> --stage <n>` | Print the next agent/rule for a pipeline stage. | Orchestrator |
 | `py scripts/resolve_work_item.py --from-standup --next` | Turn a standup work item into the next routed task. | Daily standup / action-from-standup |
 

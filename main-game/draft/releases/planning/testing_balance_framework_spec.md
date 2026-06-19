@@ -990,11 +990,27 @@ py scripts/balance_report.py --release release-1-mvp --stdout
 
 ### What it does not check yet
 
-- Full route execution or stat simulation
-- Policy matrix P1–P7 outcomes
-- Runtime JSONL capture comparison
-- Grain manifest / gate catalogue normalization
-- Dominance, cliff, or fuzz reports
+- Full label-walk route execution (abstract sim uses day budgets)
+- Complete P1–P7 runtime capture matrix (harness exists; playtests required)
+- Rollback vector replay in comparison tool
+- Dominance, cliff, or deep fuzz promotion reports
+
+### Phase 3 runtime capture (implemented 2026-06-20)
+
+| Item | Path |
+|------|------|
+| JSONL capture hooks | `main-game/non-prod-game/game/shared/debug_run_capture.rpy` |
+| Debug overlay (F10) | `main-game/non-prod-game/game/screens.rpy` (`debug_grain_overlay`) |
+| Capture output dir | `main-game/non-prod-game/debug_captures/` |
+| Runtime comparison | `main-game/pipeline/tools/compare_runtime_to_model.py` |
+
+```powershell
+# In non-prod Ren'Py: F10 overlay → P1, or:
+# $ _capture_run_id = "P2_cautious"
+# jump debug_capture_start
+
+py main-game/pipeline/tools/compare_runtime_to_model.py --release release-1-mvp
+```
 
 ### Verdict meanings
 

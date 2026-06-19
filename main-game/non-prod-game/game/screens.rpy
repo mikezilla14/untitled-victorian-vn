@@ -548,4 +548,36 @@ screen nvl(dialogue, items=None):
                             justify True
 
 
-            
+# ── BALANCE DEBUG OVERLAY (non-prod only; F10) ─────────────────
+screen debug_grain_overlay_toggle():
+    zorder 200
+    key "toggle_debug_grain_overlay" action Function(toggle_debug_grain_overlay)
+
+
+screen debug_grain_overlay():
+    zorder 199
+    if debug_grain_overlay_visible:
+        frame:
+            xalign 1.0
+            yalign 0.0
+            xpadding 12
+            ypadding 8
+            background "#000000aa"
+
+            vbox:
+                spacing 4
+                text "Balance debug (F10)" size 14 color "#ffd166" bold True
+                text "Label: [balance_capture.current_label]" size 13 color "#ffffff"
+                text "Day [time_manager.current_day] · [time_manager.time_of_day]" size 13 color "#cccccc"
+                text "Insp [player.inspiration]/[player.inspiration_cap] · Corr L[player.corruption_level] · MS [story.manuscript_progress]" size 13 color "#cccccc"
+                if balance_capture.active:
+                    text "CAPTURE: [balance_capture.run_id] (#[balance_capture.sequence])" size 13 color "#06d6a0"
+                else:
+                    text "Capture off — use debug menu or `jump debug_capture_start`" size 12 color "#888888"
+
+                hbox:
+                    spacing 8
+                    textbutton "P1" action [Function(balance_capture.start, "P1_corruption_forward"), Jump("start")] text_size 12
+                    textbutton "Stop" action Function(balance_capture.stop, "overlay_stop") text_size 12
+                    textbutton "Hide" action [SetVariable("debug_grain_overlay_visible", False), Hide("debug_grain_overlay")] text_size 12
+

@@ -1,3 +1,6 @@
+# Ignore local playtest telemetry (regenerate per run)
+main-game/non-prod-game/debug_captures/*.jsonl
+
 __pycache__/
 *.py[cod]
 *.pyc.*

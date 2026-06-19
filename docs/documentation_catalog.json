@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-06-19T22:56:21+00:00",
+  "generated_at": "2026-06-19T22:58:13+00:00",
   "repo_root": "untitled-victorian-vn",
   "entries": [
     {
@@ -3015,6 +3015,15 @@
       "title": "Vance Character Non Canon",
       "area": "main-game",
       "summary": "Project: Untitled Victorian VN",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "main-game/non-prod-game/debug_captures/README.md",
+      "kind": "readme",
+      "title": "Runtime balance captures (non-prod only)",
+      "area": "main-game",
+      "summary": "JSONL playtest telemetry for the Release 1 MVP route matrix (P1–P7).",
       "links": [],
       "findings": []
     },
