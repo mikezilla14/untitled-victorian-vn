@@ -1007,6 +1007,23 @@ py scripts/balance_report.py --release release-1-mvp --stdout
 
 Exit code: `1` only on `FAIL`; `INCOMPLETE` and `WARN` return `0` so local runs can feed human review without blocking unrelated work.
 
+### Companion tools (Phase 1–2, implemented 2026-06-19)
+
+| Item | Path |
+|------|------|
+| Grain manifest builder | `main-game/pipeline/tools/build_grain_manifest.py` |
+| Grain outputs | `main-game/pipeline/releases/release-1-mvp/grain/release1_grain_manifest.json`, `release1_grains.csv`, `release1_grain_gaps.md` |
+| Gate catalogue | `main-game/draft/releases/planning/balance/gate_catalogue.csv` |
+| Run policies | `main-game/draft/releases/planning/balance/run_policies.csv` |
+| Balance targets | `main-game/draft/releases/planning/balance/balance_targets.yaml` |
+
+```powershell
+py main-game/pipeline/tools/build_grain_manifest.py --release release-1-mvp
+py scripts/balance_report.py --release release-1-mvp
+```
+
+`balance_report.py` cross-checks grain manifest presence, catalogue rows, and static sandbox gate wiring. `choice_catalogue.csv` and the policy simulator remain future work.
+
 ---
 
 ## 7. Command design

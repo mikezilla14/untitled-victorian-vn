@@ -1,0 +1,68 @@
+release: release-1-mvp
+
+matrix_execution_mapping:
+  - run_id: P1_corruption_forward
+    policy_target: corruption_forward
+    runtime_entry: label_start
+    assertions:
+      - assert_ending: day105_7_release_one_ending
+      - assert_stat_floor: { manuscript_progress: 5 }
+  - run_id: P2_cautious
+    policy_target: cautious
+    runtime_entry: label_start
+    assertions:
+      - assert_reaches_day_at_least: 105
+  - run_id: P3_low_corruption
+    policy_target: passive
+    runtime_entry: label_start
+    assertions:
+      - assert_ending_one_of:
+          - bad_ending_rejection
+  - run_id: P4_deadline_1
+    policy_target: deadline_skip
+    runtime_entry: label_start
+    assertions:
+      - assert_ending: game_over_deadline_1
+  - run_id: P5_deadline_2
+    policy_target: ch1_only
+    runtime_entry: label_start
+    assertions:
+      - assert_ending: game_over_deadline_2
+  - run_id: P6_anxiety_collapse
+    policy_target: anxiety_push
+    runtime_entry: label_start
+    assertions:
+      - assert_ending: game_over_dismissed
+  - run_id: P7_penance
+    policy_target: penance_force
+    runtime_entry: label_start
+    assertions:
+      - assert_event_seen: confrontation
+
+thresholds:
+  ch1_gate:
+    intended_pass:
+      - corruption_forward
+    intended_maybe_fail:
+      - cautious
+      - passive
+  ch2_gate:
+    intended_pass:
+      - corruption_forward
+      - recovery
+  ch3_gate:
+    intended_pass:
+      - corruption_forward
+      - reckless
+    intended_recoverable_fail:
+      - cautious
+
+corruption_milestones:
+  prologue_end: 1
+  before_day2_write: 2
+  end_of_day3: 3
+  end_of_day4_optimized: 4
+
+fuzz:
+  local_default_runs: 100
+  deep_runs: 10000

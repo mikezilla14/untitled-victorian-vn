@@ -8,6 +8,8 @@ simulate full route execution or replace the storyboard.
 
 from __future__ import annotations
 
+import csv
+import json
 import re
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
@@ -30,6 +32,7 @@ from narrative_paths import (  # noqa: E402
     non_prod_game_dir,
     normalize_release_slug,
     pipeline_release_root,
+    planning_dir,
 )
 
 
@@ -68,6 +71,7 @@ class BalanceReport:
     fail_states: list[CheckResult] = field(default_factory=list)
     soft_fail: list[CheckResult] = field(default_factory=list)
     deprecated_routers: list[CheckResult] = field(default_factory=list)
+    framework_artifacts: list[CheckResult] = field(default_factory=list)
     missing_evidence: list[str] = field(default_factory=list)
     recommended_next: list[str] = field(default_factory=list)
 
@@ -79,6 +83,7 @@ class BalanceReport:
             + self.fail_states
             + self.soft_fail
             + self.deprecated_routers
+            + self.framework_artifacts
         )
         if any(c.severity == Severity.FAIL for c in all_checks):
             return Severity.FAIL
@@ -127,6 +132,7 @@ class BalanceReport:
             ("Fail-state checks", self.fail_states),
             ("Soft-fail checks", self.soft_fail),
             ("Deprecated-router checks", self.deprecated_routers),
+            ("Grain manifest and balance model checks", self.framework_artifacts),
         ):
             lines.extend(["", f"## {title}", ""])
             if checks:
@@ -215,6 +221,29 @@ MANUSCRIPT_CHAPTERS: tuple[tuple[str, str], ...] = (
     ("day105_non_canon.rpy", "day5_reckoning_chapter"),
 )
 
+BALANCE_MODEL_FILES: tuple[tuple[str, str], ...] = (
+    ("balance/gate_catalogue.csv", "gate_catalogue"),
+    ("balance/run_policies.csv", "run_policies"),
+    ("balance/balance_targets.yaml", "balance_targets"),
+)
+
+EXPECTED_CATALOGUE_GATES = (
+    "ch1_write_gate",
+    "ch2_write_gate",
+    "ch3_write_gate",
+    "deadline_ch1",
+    "deadline_ch2",
+    "soft_fail_rejection",
+    "anxiety_dismissal",
+)
+
+EXPECTED_GRAIN_TYPES = (
+    "write_gate",
+    "deadline_gate",
+    "ending",
+    "book1",
+)
+
 
 def _rel(path: Path, root: Path) -> str:
     return path.relative_to(root).as_posix()
@@ -299,6 +328,148 @@ def _scan_deprecated_jumps(paths: Iterable[Path], root: Path) -> list[CheckResul
     return results
 
 
+def _check_framework_artifacts(release_slug: str, root: Path) -> tuple[list[CheckResult], list[str], list[str]]:
+    """Return checks, updated missing evidence, and recommended next tests."""
+    checks: list[CheckResult] = []
+    missing: list[str] = []
+    next_tests: list[str] = []
+
+    grain_dir = pipeline_release_root(release_slug) / "grain"
+    manifest_path = grain_dir / "release1_grain_manifest.json"
+    gaps_path = grain_dir / "release1_grain_gaps.md"
+    balance_dir = planning_dir() / "balance"
+
+    if manifest_path.exists():
+        data = json.loads(_read(manifest_path))
+        rel = _rel(manifest_path, root)
+        grain_count = data.get("grain_count", 0)
+        gap_count = data.get("gap_count", 0)
+        by_type = data.get("counts", {}).get("by_type", {})
+        checks.append(
+            CheckResult(
+                Severity.PASS,
+                f"Grain manifest present ({grain_count} grains, {gap_count} gaps)",
+                rel,
+            )
+        )
+        for grain_type in EXPECTED_GRAIN_TYPES:
+            count = by_type.get(grain_type, 0)
+            if count:
+                checks.append(
+                    CheckResult(
+                        Severity.PASS,
+                        f"Grain type `{grain_type}` inferred ({count} grains)",
+                        rel,
+                    )
+                )
+            else:
+                checks.append(
+                    CheckResult(
+                        Severity.WARN,
+                        f"Grain type `{grain_type}` not found in manifest",
+                        rel,
+                    )
+                )
+        if gaps_path.exists():
+            gaps_text = _read(gaps_path)
+            blockers_block = ""
+            if "## Blockers" in gaps_text:
+                blockers_block = gaps_text.split("## Blockers", 1)[1].split("## Major", 1)[0]
+            if "### grain_gap_" in blockers_block:
+                checks.append(
+                    CheckResult(
+                        Severity.FAIL,
+                        "Grain gap report lists blocker findings",
+                        _rel(gaps_path, root),
+                    )
+                )
+            elif "### grain_gap_" in gaps_text:
+                checks.append(
+                    CheckResult(
+                        Severity.WARN,
+                        "Grain gap report lists major/warning findings (untagged gates expected for now)",
+                        _rel(gaps_path, root),
+                    )
+                )
+            else:
+                checks.append(
+                    CheckResult(
+                        Severity.PASS,
+                        "Grain gap report has no blocker findings",
+                        _rel(gaps_path, root),
+                    )
+                )
+    else:
+        checks.append(
+            CheckResult(
+                Severity.WARN,
+                "Grain manifest missing — run `py main-game/pipeline/tools/build_grain_manifest.py`",
+                _rel(grain_dir, root),
+            )
+        )
+        missing.append("Grain manifest not generated — run build_grain_manifest before promotion prep.")
+        next_tests.append("Run `py main-game/pipeline/tools/build_grain_manifest.py --release release-1-mvp`.")
+
+    for rel_path, label in BALANCE_MODEL_FILES:
+        path = balance_dir / rel_path.split("/", 1)[1]
+        rel = _rel(path, root)
+        if path.exists():
+            checks.append(CheckResult(Severity.PASS, f"Balance model file present: {label}", rel))
+        else:
+            checks.append(CheckResult(Severity.WARN, f"Balance model file missing: {label}", rel))
+
+    gate_catalogue = balance_dir / "gate_catalogue.csv"
+    if gate_catalogue.exists():
+        with gate_catalogue.open(encoding="utf-8", newline="") as handle:
+            rows = list(csv.DictReader(handle))
+        gate_ids = {row["gate_id"] for row in rows if row.get("gate_id")}
+        rel = _rel(gate_catalogue, root)
+        for gate_id in EXPECTED_CATALOGUE_GATES:
+            if gate_id in gate_ids:
+                checks.append(
+                    CheckResult(Severity.PASS, f"Gate catalogue row present: `{gate_id}`", rel)
+                )
+            else:
+                checks.append(
+                    CheckResult(Severity.WARN, f"Gate catalogue missing row: `{gate_id}`", rel)
+                )
+
+    choice_catalogue = balance_dir / "choice_catalogue.csv"
+    if choice_catalogue.exists():
+        checks.append(
+            CheckResult(
+                Severity.PASS,
+                "Choice catalogue present",
+                _rel(choice_catalogue, root),
+            )
+        )
+    else:
+        checks.append(
+            CheckResult(
+                Severity.INCOMPLETE,
+                "Choice catalogue not yet authored (`choice_catalogue.csv`)",
+                _rel(balance_dir, root),
+            )
+        )
+        missing.append("Choice catalogue CSV not yet authored — dominance/simulation still blocked.")
+
+    missing.extend(
+        [
+            "No Python route simulator yet — cannot prove optimized/cautious/passive paths reach intended stats.",
+            "No runtime JSONL captures — cannot verify gate pass/fail at play time.",
+            "Corruption Level 4 milestone by Day 4 end is design intent only until simulation exists.",
+        ]
+    )
+    next_tests.extend(
+        [
+            "Populate `choice_catalogue.csv` from graph/grain manifests.",
+            "Run P1 corruption-forward and P2 cautious playthroughs when capture harness lands.",
+            "Implement deterministic policy simulator (Phase 5).",
+        ]
+    )
+    return checks, missing, next_tests
+
+
 def build_balance_report(
     release: str = DEFAULT_RELEASE_SLUG,
     day_filter: str | None = None,
@@ -313,20 +484,16 @@ def build_balance_report(
         day_filter=day_filter,
         generated_at=datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
         assumptions=list(BALANCE_ASSUMPTIONS),
-        missing_evidence=[
-            "No Python route simulator or choice catalogue yet — cannot prove optimized/cautious/passive paths reach intended stats.",
-            "No runtime JSONL captures — cannot verify gate pass/fail at play time.",
-            "No grain manifest or gate catalogue CSV — normalized condition extraction not wired.",
-            "Corruption Level 4 milestone by Day 4 end is design intent only until simulation exists.",
-        ],
-        recommended_next=[
-            "Run P1 corruption-forward and P2 cautious playthroughs; save JSONL when capture harness lands.",
-            "Build `choice_catalogue.csv` / `gate_catalogue.csv` and deterministic policy simulator (Phase 2/5 of spec).",
-            "Add grain manifest builder to cross-check DAG tags against write/deadline gates.",
-            "Smoke-test hard fails: skip all writing → `game_over_deadline_1`; Ch1 only → `game_over_deadline_2`; anxiety 100 → `game_over_dismissed`.",
-            "Verify cautious Day 101 slop path still advances spine without bricking deadline gates.",
-        ],
     )
+
+    artifact_checks, missing_evidence, recommended_next = _check_framework_artifacts(release_slug, root)
+    if day_filter is None:
+        report.framework_artifacts = artifact_checks
+    report.missing_evidence = missing_evidence
+    report.recommended_next = recommended_next + [
+        "Smoke-test hard fails: skip all writing → `game_over_deadline_1`; Ch1 only → `game_over_deadline_2`; anxiety 100 → `game_over_dismissed`.",
+        "Verify cautious Day 101 slop path still advances spine without bricking deadline gates.",
+    ]
 
     report.checked_files = sorted(
         _rel(p, root) for p in scan_files if p.exists()

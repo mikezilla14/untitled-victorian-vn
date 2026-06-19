@@ -1,7 +1,7 @@
 # Testing and balance report
 
 **Release:** `release-1-mvp`
-**Generated:** 2026-06-19 21:31 UTC
+**Generated:** 2026-06-19 21:42 UTC
 
 ## Verdict
 
@@ -88,6 +88,26 @@
 - ✓ **PASS** — No new `jump end_slot` or `jump advance_after_confrontation` in scanned files
 - ✓ **PASS** — Compatibility label `advance_after_confrontation` retained but not jumped from active work (`main-game/non-prod-game/game/shared/story_chains_non_canon.rpy`)
 
+## Grain manifest and balance model checks
+
+- ✓ **PASS** — Grain manifest present (237 grains, 8 gaps) (`main-game/pipeline/releases/release-1-mvp/grain/release1_grain_manifest.json`)
+- ✓ **PASS** — Grain type `write_gate` inferred (6 grains) (`main-game/pipeline/releases/release-1-mvp/grain/release1_grain_manifest.json`)
+- ✓ **PASS** — Grain type `deadline_gate` inferred (8 grains) (`main-game/pipeline/releases/release-1-mvp/grain/release1_grain_manifest.json`)
+- ✓ **PASS** — Grain type `ending` inferred (8 grains) (`main-game/pipeline/releases/release-1-mvp/grain/release1_grain_manifest.json`)
+- ✓ **PASS** — Grain type `book1` inferred (67 grains) (`main-game/pipeline/releases/release-1-mvp/grain/release1_grain_manifest.json`)
+- ⚠ **WARN** — Grain gap report lists major/warning findings (untagged gates expected for now) (`main-game/pipeline/releases/release-1-mvp/grain/release1_grain_gaps.md`)
+- ✓ **PASS** — Balance model file present: gate_catalogue (`main-game/draft/releases/planning/balance/gate_catalogue.csv`)
+- ✓ **PASS** — Balance model file present: run_policies (`main-game/draft/releases/planning/balance/run_policies.csv`)
+- ✓ **PASS** — Balance model file present: balance_targets (`main-game/draft/releases/planning/balance/balance_targets.yaml`)
+- ✓ **PASS** — Gate catalogue row present: `ch1_write_gate` (`main-game/draft/releases/planning/balance/gate_catalogue.csv`)
+- ✓ **PASS** — Gate catalogue row present: `ch2_write_gate` (`main-game/draft/releases/planning/balance/gate_catalogue.csv`)
+- ✓ **PASS** — Gate catalogue row present: `ch3_write_gate` (`main-game/draft/releases/planning/balance/gate_catalogue.csv`)
+- ✓ **PASS** — Gate catalogue row present: `deadline_ch1` (`main-game/draft/releases/planning/balance/gate_catalogue.csv`)
+- ✓ **PASS** — Gate catalogue row present: `deadline_ch2` (`main-game/draft/releases/planning/balance/gate_catalogue.csv`)
+- ✓ **PASS** — Gate catalogue row present: `soft_fail_rejection` (`main-game/draft/releases/planning/balance/gate_catalogue.csv`)
+- ✓ **PASS** — Gate catalogue row present: `anxiety_dismissal` (`main-game/draft/releases/planning/balance/gate_catalogue.csv`)
+- … **INCOMPLETE** — Choice catalogue not yet authored (`choice_catalogue.csv`) (`main-game/draft/releases/planning/balance`)
+
 ## Required day files
 
 - ✓ **PASS** — Required sandbox day file present: day101 (`main-game/non-prod-game/game/days/day101_non_canon.rpy`)
@@ -98,15 +118,15 @@
 
 ## Missing evidence
 
-- No Python route simulator or choice catalogue yet — cannot prove optimized/cautious/passive paths reach intended stats.
+- Choice catalogue CSV not yet authored — dominance/simulation still blocked.
+- No Python route simulator yet — cannot prove optimized/cautious/passive paths reach intended stats.
 - No runtime JSONL captures — cannot verify gate pass/fail at play time.
-- No grain manifest or gate catalogue CSV — normalized condition extraction not wired.
 - Corruption Level 4 milestone by Day 4 end is design intent only until simulation exists.
 
 ## Recommended next tests
 
-- Run P1 corruption-forward and P2 cautious playthroughs; save JSONL when capture harness lands.
-- Build `choice_catalogue.csv` / `gate_catalogue.csv` and deterministic policy simulator (Phase 2/5 of spec).
-- Add grain manifest builder to cross-check DAG tags against write/deadline gates.
+- Populate `choice_catalogue.csv` from graph/grain manifests.
+- Run P1 corruption-forward and P2 cautious playthroughs when capture harness lands.
+- Implement deterministic policy simulator (Phase 5).
 - Smoke-test hard fails: skip all writing → `game_over_deadline_1`; Ch1 only → `game_over_deadline_2`; anxiety 100 → `game_over_dismissed`.
 - Verify cautious Day 101 slop path still advances spine without bricking deadline gates.

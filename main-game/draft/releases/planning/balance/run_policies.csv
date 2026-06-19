@@ -1,0 +1,10 @@
+policy_id,description,choice_rule,write_rule,risk_rule,expected_result
+corruption_forward,Maximize corruption while writing when possible,maximize_corr,write_when_gate_passes,accept_suspicion,day105_7_release_one_ending
+cautious,Minimize suspicion/anxiety; prefer inspiration,safe_choices,write_when_gate_passes,avoid_suspicion,weak_completion_or_mvp
+passive,Minimize corruption; avoid risky writes,avoid_corr,write_only_if_required,avoid_risk,bad_ending_rejection
+reckless,Maximize corruption regardless of suspicion,maximize_corr,write_when_possible,ignore_suspicion,high_anxiety_or_mvp
+recovery,Cautious Day 1-2 then risky Day 3,safe_then_risky,write_catch_up,risk_day3,mvp_or_recoverable_fail
+deadline_skip,Skip writing,skip_writes,never_write,none,game_over_deadline_1
+ch1_only,Complete Ch1 only then stall,minimal_write,ch1_only,low_risk,game_over_deadline_2
+anxiety_push,Maximize suspicion/anxiety exposure,risky_choices,defer_writes,max_suspicion,game_over_dismissed
+penance_force,Force confrontation windows when available,confrontation_first,write_when_gate_passes,accept_penance,confrontation_seen

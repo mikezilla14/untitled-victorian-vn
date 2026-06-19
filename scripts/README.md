@@ -15,7 +15,8 @@ See also: [`docs/architecture/scripts_refactor_map.md`](../docs/architecture/scr
 | `py scripts/format_non_canon.py <paths>` | Normalize non-canon script formatting/staging markers. | Non-prod code / scene direction |
 | `py scripts/documentation_audit.py --write` | Refresh documentation catalogue and audit artifacts. | Documentation steward |
 | `py scripts/documentation_audit.py --check` | Fail when generated documentation catalogue artifacts are stale. | Documentation steward |
-| `py scripts/balance_report.py --release release-1-mvp` | Static testing/balance report for non-prod sandbox (gates, fail states, deprecated routers). | Chief architect |
+| `py scripts/balance_report.py --release release-1-mvp` | Static testing/balance report for non-prod sandbox (gates, fail states, grain manifest, catalogues). | Chief architect |
+| `py main-game/pipeline/tools/build_grain_manifest.py --release release-1-mvp` | Extract balance grains and gap report from sandbox `.rpy` files. | Chief architect / dag_tag_update |
 | `py scripts/agent_next_step.py --pipeline <name> --stage <n>` | Print the next agent/rule for a pipeline stage. | Orchestrator |
 | `py scripts/resolve_work_item.py --from-standup --next` | Turn a standup work item into the next routed task. | Daily standup / action-from-standup |
 
