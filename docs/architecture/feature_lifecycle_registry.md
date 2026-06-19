@@ -15,31 +15,58 @@ Use it during documentation audits, standups, promotion prep, and agent routing 
 | `deprecated-retained` | Compatibility or historical support only. | Do not use in new code; preserve only until removal criteria are met. |
 | `remove-candidate` | Safe candidate for archive or deletion after one audit cycle. | Do not use. |
 
+## Required lifecycle gates
+
+Every new feature, system, agent, or sizeable process document must pass through this registry.
+
+| Gate | Required answer |
+|------|-----------------|
+| **Add** | What feature exists, where does it live, and which status does it start with? |
+| **Wire** | Which process or agent may invoke it? What validation proves it is safe? |
+| **Review** | Does it still match current repo structure, MVP scope, and agent routing? |
+| **Promote / demote** | Should it become required, remain support-only, become optional, or be deprecated? |
+| **Remove / archive** | What evidence proves no current process depends on it? |
+
+## Active process menu
+
+The everyday agent menu should stay small. Features below may be numerous, but day-to-day routing should normally collapse to these processes.
+
+| Human wants to... | Default process | Lifecycle expectation |
+|-------------------|-----------------|----------------------|
+| Write or change prose | Writer's Desk → `writer-author`, `revise-narrative`, or `rewrite-narrative` | Any new flags/effects are captured in Authoring Intent before code wiring. |
+| Implement or wire a system | Orchestrator → `implement-spec` | Feature row must exist or be added in this registry. |
+| Promote draft to runtime | `promote-day` or `promote-framework` | Required-MVP and active-support features must have validation evidence. |
+| Check readiness | MVP checklist + validation scripts | Registry statuses should match actual checklist and test evidence. |
+| Clean docs/process drift | `documentation-audit` | Documentation steward updates this registry before regenerating catalogues. |
+
 ## Active feature inventory
 
-| Feature | Status | Runtime? | Primary files | Agent/process entry | Validation / evidence | Decision |
-|---------|--------|----------|---------------|---------------------|-----------------------|----------|
-| Manuscript fuel gates | `required-mvp` | Yes | `main-game/non-prod-game/game/shared/functions_non_canon.rpy`, `main-game/non-prod-game/game/shared/classes_non_canon.rpy`, day scripts | `produce_day`, `implement_spec`, `promote_day` | `main-game/draft/releases/planning/mvp_systems_integration_checklist.md` Phase 1 | Keep and verify in playtest matrix. |
-| Manuscript progress / chapter completion | `required-mvp` | Yes | day scripts, `book1_non_canon.rpy`, `screens.rpy` | `produce_day`, `writer_write_book`, `promote_day` | MVP checklist Phase 1.3 and Phase 5 | Keep; every write slot must update or intentionally skip progress. |
-| Hard fail states | `required-mvp` | Yes | `endings.rpy`, day scripts, `script.rpy`, story chains | `implement_spec`, `promote_day` | MVP checklist Phase 2 and playtest matrix | Keep; must be smoke-tested from `start`. |
-| Soft fail / rejection ending | `required-mvp` | Yes | `day105_non_canon.rpy`, `endings.rpy` | `produce_day`, `promote_day` | MVP checklist Phase 2.2 | Keep unless design explicitly replaces it. |
-| Story chains | `required-mvp` | Yes | `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy`, day scripts | `produce_day`, `implement_spec`, `review_scene` | MVP checklist Phase 4 | Keep; spine owns jumps, chains return to caller. |
-| Penance / confrontation routing | `required-mvp` | Yes | `story_chains_non_canon.rpy`, day scripts | `produce_day`, `implement_spec`, `review_scene` | MVP checklist Phase 4.3 | Keep; verify one confrontation per character across runs. |
-| Book1 writing engine | `required-mvp` | Yes | `main-game/non-prod-game/game/days/book1_non_canon.rpy`, write slots, `screens.rpy` | `writer_write_book`, `produce_day`, `promote_day` | MVP checklist Phase 5 | Keep; label-based manuscript prose remains separate from hotel prose. |
-| Structural asset manifest / asset checking | `required-mvp` | Yes | `assets_manifest.rpy`, `scripts/check_assets.py`, image/audio folders | `check_assets`, `promote_day` | MVP checklist Phase 6 | Keep; missing files may fallback, but manifest drift must be visible. |
-| Scene direction | `active-support` | No direct prose/runtime logic | `scripts/scene_direction.py`, `.agents/rules/scene_direction_agent.md`, `.agents/skills/scene_direction/SKILL.md`, `docs/contracts/sprite_layout_policy.yaml` | `scene_direction`; post-gate hook from prose-changing pipelines | `scene_direction.py --check`; documentation audit link checks | Keep as deterministic post-processor; it only owns `[asset auto]` show/hide lines. |
-| DAG tags / graph manifest | `active-support` | No direct runtime logic | `.rpy` `[DAG_*]` comments, `main-game/pipeline/tools/build_story_graph_manifest.py`, graph outputs | `dag_tag_update`, `storyboard_sync` | Graph audit outputs | Keep as audit/balancing support, not as a replacement for storyboard or script structure. |
-| Documentation audit/catalogue | `active-support` | No | `scripts/documentation_audit.py`, `docs/DOCUMENTATION_AUDIT.md`, `docs/DOCUMENTATION_CATALOG.md`, `docs/documentation_catalog.json` | `documentation_audit` | `documentation_audit.py --check` | Keep; run after source doc changes. |
-| Writer's Desk | `active-support` | No | `.agents/rules/writers_desk.md`, `.agents/skills/writer_*`, authoring intent schemas | Writer-facing entry lane | `authoring_intent` contract validation | Keep; it captures intent and routes, it does not write runtime scripts directly. |
-| Daily standup | `optional-dev` | No | `scripts/daily_standup.py`, planning standup reports | `daily_standup` | Human triage | Keep, but non-blocking for ship. |
+| Feature | Status | Runtime? | Primary files | Agent/process entry | Validation / evidence | Decision / next review |
+|---------|--------|----------|---------------|---------------------|-----------------------|------------------------|
+| Manuscript fuel gates | `required-mvp` | Yes | `main-game/non-prod-game/game/shared/functions_non_canon.rpy`, `main-game/non-prod-game/game/shared/classes_non_canon.rpy`, day scripts | `produce_day`, `implement_spec`, `promote_day` | `main-game/draft/releases/planning/mvp_systems_integration_checklist.md` Phase 1 | Keep. Next review: confirm all player write slots use the same gate semantics. |
+| Manuscript progress / chapter completion | `required-mvp` | Yes | day scripts, `book1_non_canon.rpy`, `screens.rpy` | `produce_day`, `writer_write_book`, `promote_day` | MVP checklist Phase 1.3 and Phase 5 | Keep. Next review: verify every successful write has progress, feedback, and failure routing. |
+| Hard fail states | `required-mvp` | Yes | `endings.rpy`, day scripts, `script.rpy`, story chains | `implement_spec`, `promote_day` | MVP checklist Phase 2 and playtest matrix | Keep. Next review: smoke-test dismissed/deadline endings from `start`. |
+| Soft fail / rejection ending | `required-mvp` | Yes | `day105_non_canon.rpy`, `endings.rpy` | `produce_day`, `promote_day` | MVP checklist Phase 2.2 | Keep. Next review: ensure cautious playthrough feedback points to life-experience/writing-quality cause. |
+| Story chains | `required-mvp` | Yes | `main-game/non-prod-game/game/shared/story_chains_non_canon.rpy`, day scripts | `produce_day`, `implement_spec`, `review_scene` | MVP checklist Phase 4 | Keep. Next review: confirm chains return to caller and spine owns time progression. |
+| Penance / confrontation routing | `required-mvp` | Yes | `story_chains_non_canon.rpy`, day scripts | `produce_day`, `implement_spec`, `review_scene` | MVP checklist Phase 4.3 | Keep. Next review: verify one confrontation per character across intended runs. |
+| Book1 writing engine | `required-mvp` | Yes | `main-game/non-prod-game/game/days/book1_non_canon.rpy`, write slots, `screens.rpy` | `writer_write_book`, `produce_day`, `promote_day` | MVP checklist Phase 5 | Keep. Next review: validate label-based manuscript prose remains separate from hotel prose. |
+| Structural asset manifest / asset checking | `required-mvp` | Yes | `assets_manifest.rpy`, `scripts/check_assets.py`, image/audio folders | `check_assets`, `promote_day` | MVP checklist Phase 6 | Keep. Next review: missing structural UI/audio assets must be manifest-visible before ship. |
+| Testing and balance framework | `required-mvp` | No direct runtime logic until harnessed | `main-game/draft/releases/planning/testing_balance_framework_spec.md`, DAG tags, route matrices, telemetry/harness outputs | `chief_architect`, `dag_tag_update`, documentation steward | Spec plus route matrix / simulation evidence | Keep. Next review: connect registry rows to route-matrix readiness once harness outputs exist. |
+| Scene direction | `active-support` | No direct prose/runtime logic | `scripts/scene_direction.py`, `.agents/rules/scene_direction_agent.md`, `.agents/skills/scene_direction/SKILL.md`, `docs/contracts/sprite_layout_policy.yaml` | `scene_direction`; post-gate hook from prose-changing pipelines | `scene_direction.py --check`; documentation audit link checks | Keep. Next review: confirm no manual staging is overwritten and four-character overflow is surfaced. |
+| DAG tags / graph manifest | `active-support` | No direct runtime logic | `.rpy` `[DAG_*]` comments, `main-game/pipeline/tools/build_story_graph_manifest.py`, graph outputs | `dag_tag_update`, `storyboard_sync` | Graph audit outputs | Keep. Not a second storyboard; use to confirm implementation-level structure. |
+| Documentation audit/catalogue | `active-support` | No | `scripts/documentation_audit.py`, `docs/DOCUMENTATION_AUDIT.md`, `docs/DOCUMENTATION_CATALOG.md`, `docs/documentation_catalog.json` | `documentation_audit` | `documentation_audit.py --check` | Keep. Documentation steward must update this registry before regenerating catalogue/audit files. |
+| Feature lifecycle registry | `active-support` | No | `docs/architecture/feature_lifecycle_registry.md` | `documentation_audit`, `daily_standup`, `chief_architect` | Human review plus documentation audit | Keep. This is the source of truth for feature status/deprecation decisions. |
+| Active processes guide | `active-support` | No | `docs/architecture/active_processes.md` | Orchestrator, documentation steward | Human routing review | Keep. Update when the everyday agent menu changes. |
+| Writer's Desk | `active-support` | No | `.agents/rules/writers_desk.md`, `.agents/skills/writer_*`, authoring intent schemas | Writer-facing entry lane | `authoring_intent` contract validation | Keep. It captures intent and routes; it does not write runtime scripts directly. |
+| Daily standup | `optional-dev` | No | `scripts/daily_standup.py`, planning standup reports | `daily_standup` | Human triage | Keep, but non-blocking for ship. Any task it surfaces must route through an active process. |
 | Action from standup | `optional-dev` | No | `scripts/resolve_work_item.py`, `docs/backlog/task_registry.json`, `action_from_standup` skill | `action_from_standup` | Human review of selected work item | Keep as a planning accelerator, not default task routing. |
-| Market review | `optional-dev` | No | `.agents/rules/adult_market_reviewer.md`, `market_review` skill | `market_review` | Read-only report | Keep read-only; approved changes route through narrative/spice pipelines. |
-| Art production skill | `optional-dev` | No direct runtime logic | `.agents/skills/art_production/SKILL.md`, art docs, asset source files | `art_production` | Asset cards / manifest checks | Keep separate from runtime asset validation. |
-| ActionEditor (`AEditor`) | `optional-dev` | Dev-only | `main-game/non-prod-game/game/AEditor/` | Manual dev tooling | README boundary | Keep dev-only; not part of player path. |
-| Deprecated story routers | `deprecated-retained` | Compatibility only | compatibility labels in story chain / day routing | None for new work | Grep guard: no new `jump end_slot` or `jump advance_after_confrontation` | Retain temporarily; no new calls. |
-| Legacy narrative path parser | `deprecated-retained` | No | `scripts/narrative_paths.py` legacy parser and prefixes | Migration/debug only | No new docs should point at legacy paths | Retain until no docs/scripts reference legacy folders. |
-| One-off migration scripts | `remove-candidate` | No | `scripts/archive/one_off_migrations/` | None | Archive-only | Keep archived; never route normal agent work through them. |
-| Dev debris in image folders | `remove-candidate` | No | generated scratch files under image folders | None | MVP checklist Phase 7.6 | Remove or gitignore in cleanup pass. |
+| Market review | `optional-dev` | No | `.agents/rules/adult_market_reviewer.md`, `market_review` skill | `market_review` | Read-only report | Keep read-only. Approved changes route through narrative/spice pipelines. |
+| Art production skill | `optional-dev` | No direct runtime logic | `.agents/skills/art_production/SKILL.md`, art docs, asset source files | `art_production` | Asset cards / manifest checks | Keep separate from runtime asset validation. Runtime assets still validate through manifest/check-assets. |
+| ActionEditor (`AEditor`) | `optional-dev` | Dev-only | `main-game/non-prod-game/game/AEditor/` | Manual dev tooling | README boundary | Keep dev-only. Not part of player path or normal agent route. |
+| Deprecated story routers | `deprecated-retained` | Compatibility only | compatibility labels in story chain / day routing | None for new work | Grep guard: no new `jump end_slot` or `jump advance_after_confrontation` | Retain temporarily. Removal requires proof no current day jumps to them. |
+| Legacy narrative path parser | `deprecated-retained` | No | `scripts/narrative_paths.py` legacy parser and prefixes | Migration/debug only | No new docs should point at legacy paths | Retain until docs/scripts no longer reference `narrative/`, `renpy_project/`, or old non-prod path forms. |
+| One-off migration scripts | `remove-candidate` | No | `scripts/archive/one_off_migrations/` | None | Archive-only | Keep archived. Never route normal agent work through them. |
+| Dev debris in image folders | `remove-candidate` | No | generated scratch files under image folders | None | MVP checklist Phase 7.6 | Remove or gitignore in cleanup pass after confirming nothing is manifest-referenced. |
 
 ## Rules for adding a feature
 
@@ -47,9 +74,21 @@ Use it during documentation audits, standups, promotion prep, and agent routing 
 2. Give it one status, one owner/process entry, and one validation signal.
 3. If the feature is `experimental`, say what would promote it to `active-support` or `required-mvp`.
 4. If the feature is `deprecated-retained`, say what proves it can be removed.
+5. If the feature is `remove-candidate`, do not delete it in the same PR that first marks it removable unless the human explicitly approves removal.
 
-## Current pass-1 notes
+## Documentation steward checklist
 
-- This registry is intentionally conservative: it does not move files or delete legacy compatibility code.
-- Physical folder refactoring should wait until path drift and README coverage are stable.
+When running `documentation-audit`, the steward must check this registry before regenerating catalogue/audit outputs:
+
+- New feature/spec/agent exists but no row here → add row or mark `NEEDS HUMAN CONFIRMATION`.
+- Registry row points to missing files → fix row or route to `chief_architect` if implementation moved.
+- Registry says `required-mvp` but checklist/test evidence is missing → leave status, add next-review note.
+- Registry says `optional-dev`, `experimental`, or `deprecated-retained` but an active process routes through it by default → escalate to human.
+- Registry says `remove-candidate` and no process references it after one audit cycle → propose archive/delete PR.
+
+## Current pass-2 notes
+
+- This pass operationalizes the registry and wires it into agent/process docs.
+- It still does not move folders or delete compatibility labels.
+- Physical folder refactoring should wait until path drift, README coverage, and generated documentation audits are stable.
 - `scripts/narrative_paths.py` remains the source of truth for active day paths.

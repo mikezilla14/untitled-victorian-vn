@@ -14,6 +14,8 @@ Pick an **entry lane**, paste the rule file (or enable the matching skill), desc
 
 **Full skill index:** [`docs/agents/SKILL_CATALOG.md`](docs/agents/SKILL_CATALOG.md) (skill → agent → pipeline → contract).
 
+**Feature/process lifecycle:** [`docs/architecture/feature_lifecycle_registry.md`](docs/architecture/feature_lifecycle_registry.md) (feature status, owner, validation, deprecation decision) and [`docs/architecture/active_processes.md`](docs/architecture/active_processes.md) (small everyday process menu).
+
 **More examples (technical lane via orchestrator):**
 
 | You say | Pipeline |
@@ -47,6 +49,7 @@ flowchart TD
 - **Code agents** — wrap or promote `.rpy` with **verbatim** creative text.
 - **Gates** — narrative, psychology, then Victorian (sequential on promotion drafts).
 - **Scripts** — enforce file permissions and contracts after edits (not model invocation).
+- **Architecture docs** — keep the agent menu small and track feature lifecycle status.
 
 ## Documentation map
 
@@ -58,6 +61,8 @@ flowchart TD
 | [`docs/agents/SKILL_CATALOG.md`](docs/agents/SKILL_CATALOG.md) | **Canonical** skill → agent → pipeline → contract index |
 | [`docs/agents/CONTRACTS.md`](docs/agents/CONTRACTS.md) | Handoffs, guardrails, validation tools |
 | [`docs/agents/BRANCH_WORKFLOW_CONTRACT.md`](docs/agents/BRANCH_WORKFLOW_CONTRACT.md) | Branch/worktree hygiene for multi-tool agent handoffs |
+| [`docs/architecture/active_processes.md`](docs/architecture/active_processes.md) | Small everyday process menu and ownership boundaries |
+| [`docs/architecture/feature_lifecycle_registry.md`](docs/architecture/feature_lifecycle_registry.md) | Feature status, owner, validation, deprecation/removal decisions |
 | [`docs/narrative_workflow.md`](docs/narrative_workflow.md) | MVP narrative loop (human-readable) |
 | [`.guardrails.yml`](.guardrails.yml) | Which agent may edit which paths |
 
@@ -81,7 +86,7 @@ Load the linked `.md` file as the **full system prompt** when the orchestrator n
 | Prod code agent | [`.agents/rules/prod_code_agent.md`](.agents/rules/prod_code_agent.md) | `main-game/prod-game/` |
 | Chief architect | [`.agents/rules/chief_architect.md`](.agents/rules/chief_architect.md) | Architecture / review |
 | Gatekeeper orchestrator | [`.agents/rules/gatekeeper_orchestrator.md`](.agents/rules/gatekeeper_orchestrator.md) | PR / domain checks |
-| Documentation steward | [`.agents/rules/documentation_steward.md`](.agents/rules/documentation_steward.md) | README/docs/spec sync + catalogue |
+| Documentation steward | [`.agents/rules/documentation_steward.md`](.agents/rules/documentation_steward.md) | README/docs/spec sync + lifecycle registry + catalogue |
 | Writer's Desk (prose-first concierge) | [`.agents/rules/writers_desk.md`](.agents/rules/writers_desk.md) | `intents/**`, `exceptions/**` only — routes to `writer-author`, `revise-narrative`, `rewrite-narrative`, `flag-wiring-only` |
 
 Writers' room sub-index: [`.agents/rules/writers_room/README.md`](.agents/rules/writers_room/README.md).
@@ -101,7 +106,6 @@ Skills under [`.agents/skills/`](.agents/skills/) are thin wrappers: each loads 
 | **Planning** | `daily_standup`, `action_from_standup` |
 | **Specialist** | `book_writing_engine`, `art_production` |
 
-
 ## Pipeline helper (manual chaining)
 
 Print which rule file to load next:
@@ -120,6 +124,12 @@ py scripts/resolve_work_item.py --from-standup --next
 ```
 
 Maps queue items to specs via [`docs/backlog/task_registry.json`](docs/backlog/task_registry.json). See [`action_from_standup`](.agents/skills/action_from_standup/SKILL.md) and [`planning/standup_agent_contract.md`](main-game/draft/releases/planning/standup_agent_contract.md).
+
+## Feature lifecycle rule
+
+When an agent adds, wires, promotes, deprecates, or removes a feature/process, it must update or confirm [`docs/architecture/feature_lifecycle_registry.md`](docs/architecture/feature_lifecycle_registry.md). If it cannot determine status from repo files, it should mark the item `NEEDS HUMAN CONFIRMATION` in its handoff instead of guessing.
+
+Everyday routing should prefer [`docs/architecture/active_processes.md`](docs/architecture/active_processes.md) over inventing new lanes.
 
 ## Validation (after agents edit files)
 
