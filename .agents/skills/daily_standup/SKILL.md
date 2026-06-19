@@ -41,7 +41,7 @@ Use this daily at the start of a session or whenever you want to refocus and rep
    Prioritize "Today's Critical Actions" printed by the script, beginning with compile blockers and high-priority backlog tasks.
 
 5. **Hand off to code / prose agents**:
-   Reports include an **Agent work queue** (JSON). Agents use [`.agents/skills/action_from_standup/SKILL.md`](../../action_from_standup/SKILL.md):
+   Reports include an **Agent work queue** (JSON). Agents use [`.agents/skills/action_from_standup/SKILL.md`](../action_from_standup/SKILL.md):
 
    ```powershell
    py scripts/resolve_work_item.py --from-standup --next
