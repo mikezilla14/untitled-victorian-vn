@@ -26,8 +26,8 @@ The implementation plan is [`docs/specs/scene-direction-agent.md`](../../docs/sp
 4. **Idempotence is mandatory.** Running twice on the same file must produce zero diff on the second
    run. The script guarantees this by stripping all `[asset auto]` lines before re-simulating — do not
    defeat it by hand-editing.
-5. **Grammar matches this repo.** Sprite tags are derived from
-   [`characters.rpy`](../../main-game/non-prod-game/game/characters.rpy)
+5. **Grammar matches this repo.** Sprite tags are derived from the active asset declarations and
+   existing show-line conventions, including [`assets_manifest.rpy`](../../main-game/prod-game/game/assets_manifest.rpy)
    (`cora` → `cora_sprite`). An undeclared speaker is skipped with a warning, never guessed.
 6. **Four-character limit.** More than four visible characters emits
    `# [asset warning: ...]` and requires manual review. Do not silently drop characters.
