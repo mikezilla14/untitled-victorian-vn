@@ -4,7 +4,7 @@ Canonical routing logic lives in [`.agents/rules/orchestrator.md`](../../.agents
 
 **Skill catalogue (invoke by name):** [`SKILL_CATALOG.md`](SKILL_CATALOG.md) — skill → agent → pipeline → contract.
 
-**Sandbox day path (MVP):** `main-game/draft/releases/<release>/non_prod_main-game/prod-game/game/days/dayrdd_non_canon.rpy`
+**Sandbox day path (MVP):** `main-game/non-prod-game/game/days/dayNNN_non_canon.rpy`
 
 Stage helper: `py scripts/agent_next_step.py --list-pipelines` · `py scripts/agent_next_step.py --pipeline <name> --stage <n>`
 

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-06-18T15:04:05+00:00",
+  "generated_at": "2026-06-19T20:59:38+00:00",
   "repo_root": "untitled-victorian-vn",
   "entries": [
     {
@@ -155,7 +155,12 @@
       "title": "Role: Documentation Steward",
       "area": ".agents/rules/documentation_steward.md",
       "summary": "You keep the repository's documentation synchronized with the current project state.",
-      "links": [],
+      "links": [
+        {
+          "target": "../../docs/architecture/feature_lifecycle_registry.md",
+          "status": "ok"
+        }
+      ],
       "findings": []
     },
     {
@@ -316,17 +321,15 @@
           "status": "ok"
         },
         {
-          "target": "../../main-game/non-prod-game/game/characters.rpy",
-          "status": "missing"
+          "target": "../../main-game/prod-game/game/assets_manifest.rpy",
+          "status": "ok"
         },
         {
           "target": "art_agent.md",
           "status": "ok"
         }
       ],
-      "findings": [
-        "Broken relative link: ../../main-game/non-prod-game/game/characters.rpy"
-      ]
+      "findings": []
     },
     {
       "path": ".agents/rules/spiciness_tuning_agent.md",
@@ -530,8 +533,8 @@
       "summary": "Simulates a daily check-in ceremony to refocus on the MVP systems integration checklist, project backlog, and codebase health. It coordinates the reports and letter grades of the **Chief Architect**, **Adult Market Revie",
       "links": [
         {
-          "target": "../../action_from_standup/SKILL.md",
-          "status": "missing"
+          "target": "../action_from_standup/SKILL.md",
+          "status": "ok"
         },
         {
           "target": "../../../docs/backlog/task_registry.json",
@@ -542,9 +545,7 @@
           "status": "ok"
         }
       ],
-      "findings": [
-        "Broken relative link: ../../action_from_standup/SKILL.md"
-      ]
+      "findings": []
     },
     {
       "path": ".agents/skills/divergent_writer/SKILL.md",
@@ -1095,6 +1096,14 @@
           "status": "ok"
         },
         {
+          "target": "docs/architecture/feature_lifecycle_registry.md",
+          "status": "ok"
+        },
+        {
+          "target": "docs/architecture/active_processes.md",
+          "status": "ok"
+        },
+        {
           "target": ".agents/README.md",
           "status": "ok"
         },
@@ -1116,6 +1125,14 @@
         },
         {
           "target": "docs/agents/BRANCH_WORKFLOW_CONTRACT.md",
+          "status": "ok"
+        },
+        {
+          "target": "docs/architecture/active_processes.md",
+          "status": "ok"
+        },
+        {
+          "target": "docs/architecture/feature_lifecycle_registry.md",
           "status": "ok"
         },
         {
@@ -1219,6 +1236,14 @@
           "status": "ok"
         },
         {
+          "target": "docs/architecture/feature_lifecycle_registry.md",
+          "status": "ok"
+        },
+        {
+          "target": "docs/architecture/active_processes.md",
+          "status": "ok"
+        },
+        {
           "target": "docs/contracts/README.md",
           "status": "ok"
         },
@@ -1240,6 +1265,26 @@
         }
       ],
       "findings": []
+    },
+    {
+      "path": "assets_source/approved_assets/daily_asset_manifest.md",
+      "kind": "reference",
+      "title": "Daily Asset Manifest & Reconciliation Report",
+      "area": "assets_source",
+      "summary": "**Generated on:** 2026-06-19",
+      "links": [
+        {
+          "target": "file:///C:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/prod-game/game/assets_manifest.rpy",
+          "status": "external"
+        },
+        {
+          "target": "file:///C:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/non-prod-game/game/shared/assets_manifest.rpy",
+          "status": "external"
+        }
+      ],
+      "findings": [
+        "Possible stale reference (absolute local file URL): file:///"
+      ]
     },
     {
       "path": "assets_source/approved_assets/README.md",
@@ -1852,12 +1897,12 @@
           "status": "ok"
         },
         {
-          "target": "../../.agents/skills/revise_main-game/SKILL.md",
-          "status": "missing"
+          "target": "../../.agents/skills/revise_narrative/SKILL.md",
+          "status": "ok"
         },
         {
-          "target": "../../.agents/skills/rewrite_main-game/SKILL.md",
-          "status": "missing"
+          "target": "../../.agents/skills/rewrite_narrative/SKILL.md",
+          "status": "ok"
         },
         {
           "target": "../../.agents/skills/implement_spec/SKILL.md",
@@ -1968,10 +2013,83 @@
           "status": "ok"
         }
       ],
-      "findings": [
-        "Broken relative link: ../../.agents/skills/revise_main-game/SKILL.md",
-        "Broken relative link: ../../.agents/skills/rewrite_main-game/SKILL.md"
-      ]
+      "findings": []
+    },
+    {
+      "path": "docs/architecture/active_processes.md",
+      "kind": "reference",
+      "title": "Active processes",
+      "area": "docs/architecture",
+      "summary": "This document is the short operational menu for everyday work. It keeps the agent system from becoming a pile of individually plausible but overlapping lanes.",
+      "links": [
+        {
+          "target": "feature_lifecycle_registry.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "docs/architecture/feature_lifecycle_registry.md",
+      "kind": "reference",
+      "title": "Feature lifecycle registry",
+      "area": "docs/architecture",
+      "summary": "This registry is the repo-level answer to: **does this feature still exist, who owns it, and should agents use it by default?**",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "docs/architecture/path_contract.md",
+      "kind": "reference",
+      "title": "Active path contract",
+      "area": "docs/architecture",
+      "summary": "This document records the current active repo paths that agents should use. It exists to stop old generated or migrated path fragments from becoming instructions.",
+      "links": [
+        {
+          "target": "../../scripts/narrative_paths.py",
+          "status": "ok"
+        },
+        {
+          "target": "../agents/PIPELINE_REFERENCE.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "docs/architecture/README.md",
+      "kind": "readme",
+      "title": "Architecture documentation",
+      "area": "docs/architecture",
+      "summary": "This folder holds repo-level architecture and process documents that sit above individual agent, narrative, contract, and runtime docs.",
+      "links": [
+        {
+          "target": "active_processes.md",
+          "status": "ok"
+        },
+        {
+          "target": "feature_lifecycle_registry.md",
+          "status": "ok"
+        },
+        {
+          "target": "path_contract.md",
+          "status": "ok"
+        },
+        {
+          "target": "scripts_refactor_map.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "docs/architecture/scripts_refactor_map.md",
+      "kind": "reference",
+      "title": "Scripts refactor map",
+      "area": "docs/architecture",
+      "summary": "This document is pass 3 of the repo audit: classify the current `scripts/` surface and define a safe migration path before any physical file movement.",
+      "links": [],
+      "findings": []
     },
     {
       "path": "docs/art/ASSET_CARD_SCHEMA.md",
@@ -2901,11 +3019,92 @@
       "findings": []
     },
     {
+      "path": "main-game/non-prod-game/game/AEditor/README.md",
+      "kind": "readme",
+      "title": "ActionEditor",
+      "area": "main-game",
+      "summary": "This folder contains Ren'Py ActionEditor/dev tooling for in-engine animation or staging support.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "main-game/non-prod-game/game/days/README.md",
+      "kind": "readme",
+      "title": "Day drafts",
+      "area": "main-game",
+      "summary": "This folder contains non-canon day scripts used as the source for future promotion.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "main-game/non-prod-game/game/gui/phone/README.md",
+      "kind": "readme",
+      "title": "Phone GUI assets",
+      "area": "main-game",
+      "summary": "This is a Ren'Py GUI support folder inherited from the project template or UI framework.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "main-game/non-prod-game/game/gui/README.md",
+      "kind": "readme",
+      "title": "Ren'Py GUI assets",
+      "area": "main-game",
+      "summary": "This folder contains Ren'Py GUI image assets and framework-adjacent UI resources for the non-production project.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "main-game/non-prod-game/game/images/README.md",
+      "kind": "readme",
+      "title": "Runtime image assets",
+      "area": "main-game",
+      "summary": "This folder contains image assets loaded by the non-production Ren'Py project.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "main-game/non-prod-game/game/images/sprites/README.md",
+      "kind": "readme",
+      "title": "Sprite assets",
+      "area": "main-game",
+      "summary": "Character and UI sprite images for the non-production Ren'Py project live here.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "main-game/non-prod-game/game/images/ui/README.md",
+      "kind": "readme",
+      "title": "UI image assets",
+      "area": "main-game",
+      "summary": "This folder contains runtime UI images for the non-production Ren'Py project: overlays, manuscript UI, badges, paper textures, sidebars, suspicion vignettes, and related interface art.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "main-game/non-prod-game/game/README.md",
+      "kind": "readme",
+      "title": "Non-prod Ren'Py `game/` folder",
+      "area": "main-game",
+      "summary": "This is the sandbox Ren'Py `game/` directory. It is loaded by Ren'Py during non-production runs, but it is **not** the shipping canon source.",
+      "links": [],
+      "findings": []
+    },
+    {
       "path": "main-game/non-prod-game/game/shared/classes_non_canon_notes.md",
       "kind": "reference",
       "title": "Technical Documentation: Refined Writing Gate Mechanics & Flat Inkwell Cap",
       "area": "main-game",
       "summary": "This document details the architectural updates implemented in the Release 1 sandbox (`main-game/draft/releases/release-1-mvp/`) to support the refined writing gate mechanics, flat inspiration capacity, and separated res",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "main-game/non-prod-game/game/shared/README.md",
+      "kind": "readme",
+      "title": "Shared sandbox systems",
+      "area": "main-game",
+      "summary": "This folder contains non-canon shared Ren'Py/Python systems used by the draft day scripts.",
       "links": [],
       "findings": []
     },
@@ -2921,10 +3120,27 @@
     {
       "path": "main-game/non-prod-game/README.md",
       "kind": "readme",
-      "title": "Untitled Victorian VN",
+      "title": "Non-production Ren'Py sandbox",
       "area": "main-game",
-      "summary": "A visual novel developed in Ren'Py, set in the historic Savoy Hotel, London, during the winter of 1891.",
-      "links": [],
+      "summary": "This is the playable sandbox Ren'Py project for the MVP. It is where non-canon day drafts, shared sandbox systems, UI, assets, and development-only tools can run before promotion to `main-game/prod-game/`.",
+      "links": [
+        {
+          "target": "../../AGENTS.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../scripts/narrative_paths.py",
+          "status": "ok"
+        },
+        {
+          "target": "../README.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../docs/architecture/feature_lifecycle_registry.md",
+          "status": "ok"
+        }
+      ],
       "findings": []
     },
     {
@@ -3079,24 +3295,9 @@
   ],
   "findings": [
     {
-      "severity": "error",
-      "path": ".agents/rules/scene_direction_agent.md",
-      "message": "Broken relative link: ../../main-game/non-prod-game/game/characters.rpy"
-    },
-    {
-      "severity": "error",
-      "path": ".agents/skills/daily_standup/SKILL.md",
-      "message": "Broken relative link: ../../action_from_standup/SKILL.md"
-    },
-    {
-      "severity": "error",
-      "path": "docs/agents/SKILL_CATALOG.md",
-      "message": "Broken relative link: ../../.agents/skills/revise_main-game/SKILL.md"
-    },
-    {
-      "severity": "error",
-      "path": "docs/agents/SKILL_CATALOG.md",
-      "message": "Broken relative link: ../../.agents/skills/rewrite_main-game/SKILL.md"
+      "severity": "warning",
+      "path": "assets_source/approved_assets/daily_asset_manifest.md",
+      "message": "Possible stale reference (absolute local file URL): file:///"
     },
     {
       "severity": "warning",
@@ -3125,47 +3326,7 @@
     },
     {
       "severity": "warning",
-      "path": "main-game/non-prod-game/game",
-      "message": "Complex folder has no README.md index."
-    },
-    {
-      "severity": "warning",
-      "path": "main-game/non-prod-game/game/AEditor",
-      "message": "Complex folder has no README.md index."
-    },
-    {
-      "severity": "warning",
-      "path": "main-game/non-prod-game/game/days",
-      "message": "Complex folder has no README.md index."
-    },
-    {
-      "severity": "warning",
-      "path": "main-game/non-prod-game/game/gui",
-      "message": "Complex folder has no README.md index."
-    },
-    {
-      "severity": "warning",
-      "path": "main-game/non-prod-game/game/gui/phone",
-      "message": "Complex folder has no README.md index."
-    },
-    {
-      "severity": "warning",
-      "path": "main-game/non-prod-game/game/images",
-      "message": "Complex folder has no README.md index."
-    },
-    {
-      "severity": "warning",
-      "path": "main-game/non-prod-game/game/images/sprites",
-      "message": "Complex folder has no README.md index."
-    },
-    {
-      "severity": "warning",
-      "path": "main-game/non-prod-game/game/images/ui",
-      "message": "Complex folder has no README.md index."
-    },
-    {
-      "severity": "warning",
-      "path": "main-game/non-prod-game/game/shared",
+      "path": "main-game/non-prod-game/game/audio",
       "message": "Complex folder has no README.md index."
     }
   ]

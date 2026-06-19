@@ -43,6 +43,6 @@ Do not add new docs or code that point at these patterns:
 - Do not invent mixed paths by combining draft release paths with Ren'Py project paths.
 - If a generated catalogue still contains stale paths, regenerate it locally after source docs are fixed.
 
-## Known follow-up
+## Related docs
 
-`docs/agents/PIPELINE_REFERENCE.md` still contains at least one stale sandbox path in older generated text. Because the GitHub connector performs whole-file replacement for edits, patch it locally or regenerate that file during a documentation-steward pass rather than doing a risky partial reconstruction by hand.
+- [`docs/agents/PIPELINE_REFERENCE.md`](../agents/PIPELINE_REFERENCE.md) — pipeline index; sandbox day path matches this contract.
