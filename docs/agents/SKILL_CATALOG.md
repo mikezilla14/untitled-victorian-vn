@@ -2,7 +2,7 @@
 
 **Single index** for skill → agent rule → pipeline → contract. If any other doc disagrees, update the outlier to match this table and [PIPELINE_REFERENCE.md](PIPELINE_REFERENCE.md).
 
-**Sandbox day path (MVP):** `main-game/draft/releases/<release>/non_prod_main-game/prod-game/game/days/dayrdd_non_canon.rpy`
+**Sandbox day path (MVP):** `main-game/non-prod-game/game/days/dayNNN_non_canon.rpy`
 
 ## How to invoke (any skill)
 
@@ -31,8 +31,8 @@
 | [`writer_write_scene`](../../.agents/skills/writer_write_scene/SKILL.md) | "Write the corridor scene…" (plain language) | `writers_desk.md` → … | `writer-author` | `authoring_intent` | `contract_validate.py` |
 | [`promote_day`](../../.agents/skills/promote_day/SKILL.md) | "Promote day N to production" | `chief_architect.md` → … | `promote-day` | `promotion_handoff`, gates | `--strict-gates` |
 | [`review_scene`](../../.agents/skills/review_scene/SKILL.md) | "Review day N for canon/psych/history" | gate rules (parallel) | `review-scene` | gate verdicts (read-only) | — |
-| [`revise_narrative`](../../.agents/skills/revise_main-game/SKILL.md) | Brief OPEN; localized prose repair | `writers_room.md` → … | `revise-narrative` | `narrative_change_brief`, gates | `contract_validate.py` |
-| [`rewrite_narrative`](../../.agents/skills/rewrite_main-game/SKILL.md) | "Full rewrite day N afternoon" | `writers_room.md` → … | `rewrite-narrative` | gates, convergent report | `contract_validate.py` |
+| [`revise_narrative`](../../.agents/skills/revise_narrative/SKILL.md) | Brief OPEN; localized prose repair | `writers_room.md` → … | `revise-narrative` | `narrative_change_brief`, gates | `contract_validate.py` |
+| [`rewrite_narrative`](../../.agents/skills/rewrite_narrative/SKILL.md) | "Full rewrite day N afternoon" | `writers_room.md` → … | `rewrite-narrative` | gates, convergent report | `contract_validate.py` |
 | [`implement_spec`](../../.agents/skills/implement_spec/SKILL.md) | "Implement spec X" | `non_prod_code_agent.md` → … | `implement-spec` | engineering compliance | `validate.py --profile code` |
 | [`market_review`](../../.agents/skills/market_review/SKILL.md) | "F95 review", "market viability" | `adult_market_reviewer.md` | `market-review` | *(read-only)* | — |
 | [`spiciness_tuner`](../../.agents/skills/spiciness_tuner/SKILL.md) | "Tune to spice level 3", "hotter/milder" | `spiciness_tuning_agent.md` → … | `spice-tune` | variants in `pipeline/experiments/` | gates if prose changes |
