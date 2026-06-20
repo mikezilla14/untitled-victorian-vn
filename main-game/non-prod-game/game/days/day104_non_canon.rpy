@@ -957,7 +957,7 @@ label day104_6_false_dawn_ending:
     # [STATE] State/progression update
     $ resolve_turn()
 
-    if story.manuscript_progress < 2:
+    if not story.has_manuscript_chapter("day2_chapter"):
 
         # [STATE] State/progression update
         jump game_over_deadline_2

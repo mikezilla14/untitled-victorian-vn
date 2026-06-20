@@ -182,6 +182,16 @@ init python:
         """
         return player.has_story_fuel(required_insp, required_corr)
 
+    def has_manuscript_chapter(chapter_id):
+        """True when the given manuscript chapter id is in completed_chapters."""
+        return story.has_manuscript_chapter(chapter_id)
+
+    def can_write_ch3_manuscript():
+        """Chapter 3 requires day2_chapter plus CH3 fuel or a frantic-write setup."""
+        if not story.has_manuscript_chapter("day2_chapter"):
+            return False
+        return has_story_fuel(*WRITE_GATE_CH3) or story.day3_twilight_action == "frantic_write"
+
     def set_archetype_focus(archetype):
         story.set_current_archetype_focus(archetype)
 

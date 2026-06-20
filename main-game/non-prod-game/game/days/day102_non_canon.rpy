@@ -1020,11 +1020,14 @@ label day102_3_gideon_interrupts_controls_vance:
     cora_inner "The heavy atmosphere of the house seems to cling to my throat like soot."
     cora_inner "There is a dark, heavy chapter in that—the invisible chains that bind the prey and the protector in this building."
 
-    if story.manuscript_progress == 0:
+    if not story.has_manuscript_chapter("day1_chapter"):
         cora_inner "Tonight I must write."
         cora_inner "Two days inside the machine and not a single finished chapter would be its own kind of defeat."
+    elif not story.has_manuscript_chapter("day2_chapter"):
+        cora_inner "Tonight the fuel is finally high enough for something better than survival prose."
+        cora_inner "Chapter Two cannot wait for a braver version of me."
     else:
-        cora_inner "Tonight I must decide whether the second chapter deserves the truth or the better lie."
+        cora_inner "Both opening chapters exist. Tonight I can afford to choose what the third will cost."
 
     # [STATE] State/progression update
     jump day102_4_night
@@ -1076,6 +1079,53 @@ label day102_night_consequence_window:
     return
 
 
+# [DAG_NODE id=manuscript_slot_ch2_write type=write]
+label manuscript_slot_ch2_write:
+
+    if has_story_fuel(*WRITE_GATE_CH2):
+
+        cora_inner "Chapter Two begins with a hatbox."
+        cora_inner "Not the object inside."
+        cora_inner "The pause before it is opened."
+
+        if story.day2_tea_choice == "prey":
+            cora_inner "I write a woman who tells one clean portion of the truth and lets everyone mistake that portion for the whole."
+            cora_inner "Her honesty does not save her."
+            cora_inner "It places her exactly where the dangerous man can see her."
+
+        elif story.day2_tea_choice == "predator":
+            cora_inner "I write a woman who discovers that a lie told calmly can become furniture."
+            cora_inner "People walk around it. Lean on it. Arrange the room to suit it."
+            cora_inner "By the end of the chapter, even the gentleman is using her falsehood as if he ordered it built."
+
+        else:
+            cora_inner "I write a woman who survives by leaving fingerprints on other people."
+            cora_inner "No blood on her cuffs."
+            cora_inner "No proof in her pocket."
+            cora_inner "Only a girl in the corridor learning what betrayal sounds like when it does not raise its voice."
+
+        # [STATE] State/progression update
+        $ story.complete_manuscript_chapter("day2_chapter")
+        call book1_write_chapter(chapter_key="day2_chapter", current_day=time_manager.current_day)
+
+        # [STATE] State/progression update
+        $ apply_effects(vance_susp=0, insp=-15, corr=0)
+
+        cora_inner "By the time the candle shortens, the second chapter exists."
+        cora_inner "It is better than the first."
+        cora_inner "That is not comforting."
+
+    else:
+
+        cora_inner "I write three sentences and cross them out."
+        cora_inner "The scene is still too close to me."
+        cora_inner "Vance's fury. Gideon's correction. Missy's face. The lace under cloth or hidden in the trunk."
+        cora_inner "None of it has become art yet."
+        cora_inner "It remains appetite and consequence."
+
+    return
+
+
 # [DAG_NODE id=day102_4_cora_writes_a_chapter type=write]
 label day102_4_cora_writes_a_chapter:
 
@@ -1085,7 +1135,7 @@ label day102_4_cora_writes_a_chapter:
 
     $ story.set_day2_night_action("write")
 
-    if story.manuscript_progress == 0:
+    if not story.has_manuscript_chapter("day1_chapter"):
 
         if has_story_fuel(*WRITE_GATE_CH1):
 
@@ -1123,48 +1173,9 @@ label day102_4_cora_writes_a_chapter:
             cora_inner "Or I have too much and no discipline."
             cora_inner "The page does not care which excuse I prefer."
 
-    else:
+    if not story.has_manuscript_chapter("day2_chapter"):
 
-        if has_story_fuel(*WRITE_GATE_CH2):
-
-            cora_inner "Chapter Two begins with a hatbox."
-            cora_inner "Not the object inside."
-            cora_inner "The pause before it is opened."
-
-            if story.day2_tea_choice == "prey":
-                cora_inner "I write a woman who tells one clean portion of the truth and lets everyone mistake that portion for the whole."
-                cora_inner "Her honesty does not save her."
-                cora_inner "It places her exactly where the dangerous man can see her."
-
-            elif story.day2_tea_choice == "predator":
-                cora_inner "I write a woman who discovers that a lie told calmly can become furniture."
-                cora_inner "People walk around it. Lean on it. Arrange the room to suit it."
-                cora_inner "By the end of the chapter, even the gentleman is using her falsehood as if he ordered it built."
-
-            else:
-                cora_inner "I write a woman who survives by leaving fingerprints on other people."
-                cora_inner "No blood on her cuffs."
-                cora_inner "No proof in her pocket."
-                cora_inner "Only a girl in the corridor learning what betrayal sounds like when it does not raise its voice."
-
-            # [STATE] State/progression update
-            $ story.complete_manuscript_chapter("day2_chapter")
-            call book1_write_chapter(chapter_key="day2_chapter", current_day=102)
-
-            # [STATE] State/progression update
-            $ apply_effects(vance_susp=0, insp=-15, corr=0)
-
-            cora_inner "By the time the candle shortens, the second chapter exists."
-            cora_inner "It is better than the first."
-            cora_inner "That is not comforting."
-
-        else:
-
-            cora_inner "I write three sentences and cross them out."
-            cora_inner "The scene is still too close to me."
-            cora_inner "Vance's fury. Gideon's correction. Missy's face. The lace under cloth or hidden in the trunk."
-            cora_inner "None of it has become art yet."
-            cora_inner "It remains appetite and consequence."
+        call manuscript_slot_ch2_write
 
     # [STATE] State/progression update
     jump day103_morning

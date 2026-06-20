@@ -50,7 +50,7 @@ label day103:
 label day103_morning:
     
     # [STATE] Check writing deadline progress
-    if story.manuscript_progress == 0:
+    if not story.has_manuscript_chapter("day1_chapter"):
 
         # [STATE] State/progression update
         jump game_over_deadline_1
@@ -1198,9 +1198,16 @@ label day103_3_bedroom_final_write:
 
         "Write until the candle dies. [[Chapter gate]]":
 
+            if not story.has_manuscript_chapter("day2_chapter"):
+
+                cora_inner "Chapter Two never left the hatbox."
+                cora_inner "I cannot leap to the mirror scene while the second chapter is still only appetite."
+
+                call manuscript_slot_ch2_write
+
             # [PROMOTION NOTE]
             # Tune threshold later. Day 3 should be a major writing gate.
-            if has_story_fuel(*WRITE_GATE_CH3) or story.day3_twilight_action == "frantic_write":
+            if can_write_ch3_manuscript():
 
                 "I write as if the lock is already failing, my fingers hot and quick."
 
@@ -1239,7 +1246,7 @@ label day103_3_bedroom_final_write:
                 "I do not feel safer."
                 "I feel more legible, exposed on my own pages."
 
-            else:
+            elif story.has_manuscript_chapter("day2_chapter"):
 
                 "I try."
                 "That is the most humiliating phrase in the English language."

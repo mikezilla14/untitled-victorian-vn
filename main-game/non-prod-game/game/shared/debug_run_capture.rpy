@@ -189,37 +189,73 @@ init python:
             renpy.hide_screen("debug_grain_overlay")
 
     config.keymap["toggle_debug_grain_overlay"] = ["K_F10"]
-    config.underlay.append("debug_grain_overlay_toggle")
+    config.underlay.append(renpy.Keymap(
+        toggle_debug_grain_overlay=toggle_debug_grain_overlay,
+    ))
 
 
 init 999 python:
+    def _balance_capture_instance():
+        return getattr(store, "balance_capture", None)
+
     def _balance_capture_label_callback(name, abnormal):
-        store.balance_capture.on_label(name, abnormal)
+        bc = _balance_capture_instance()
+        if bc is not None:
+            bc.on_label(name, abnormal)
         if store._balance_capture_prev_label_callback is not None:
             store._balance_capture_prev_label_callback(name, abnormal)
 
     store._balance_capture_prev_label_callback = config.label_callback
     config.label_callback = _balance_capture_label_callback
 
-    def _balance_capture_rollback_callback():
-        store.balance_capture.on_rollback()
+    # Ren'Py 8.5 has no config.rollback_callbacks; detect rollback via interact hook.
+    store._balance_capture_prev_in_rollback = False
 
-    if _balance_capture_rollback_callback not in config.rollback_callbacks:
-        config.rollback_callbacks.append(_balance_capture_rollback_callback)
+    def _balance_capture_interact_callback():
+        bc = _balance_capture_instance()
+        if bc is None:
+            return
+        in_rb = renpy.in_rollback()
+        if in_rb and not store._balance_capture_prev_in_rollback:
+            bc.on_rollback()
+        store._balance_capture_prev_in_rollback = in_rb
 
-    def _balance_capture_menu_arguments_callback(items):
-        store.balance_capture.on_menu_arguments(items)
+    if _balance_capture_interact_callback not in config.interact_callbacks:
+        config.interact_callbacks.append(_balance_capture_interact_callback)
+
+    def _balance_capture_menu_arguments_callback(*args, **kwargs):
         if store._balance_capture_prev_menu_arguments_callback is not None:
-            store._balance_capture_prev_menu_arguments_callback(items)
+            args, kwargs = store._balance_capture_prev_menu_arguments_callback(*args, **kwargs)
+        return args, kwargs
 
-    store._balance_capture_prev_menu_arguments_callback = getattr(config, "menu_arguments_callback", None)
+    store._balance_capture_prev_menu_arguments_callback = config.menu_arguments_callback
     config.menu_arguments_callback = _balance_capture_menu_arguments_callback
+
+    def _balance_capture_note_menu_items(items):
+        bc = _balance_capture_instance()
+        if bc is not None:
+            bc.on_menu_arguments(items)
+
+    _orig_display_menu = renpy.exports.display_menu
+
+    def _balance_capture_display_menu(items, *args, **kwargs):
+        _balance_capture_note_menu_items(items)
+        result = _orig_display_menu(items, *args, **kwargs)
+        bc = _balance_capture_instance()
+        if bc is not None:
+            bc.on_menu_choice(result)
+        return result
+
+    renpy.exports.display_menu = _balance_capture_display_menu
+    renpy.store.menu = _balance_capture_display_menu
 
     _orig_apply_effects = apply_effects
 
     def apply_effects(*args, **kwargs):
         result = _orig_apply_effects(*args, **kwargs)
-        store.balance_capture.on_apply_effects(dict(kwargs), result)
+        bc = _balance_capture_instance()
+        if bc is not None:
+            bc.on_apply_effects(dict(kwargs), result)
         return result
 
     _orig_has_story_fuel = has_story_fuel
@@ -237,7 +273,9 @@ init 999 python:
                 break
         if gate_id is None:
             gate_id = "write_gate_{}_{}".format(required_insp, required_corr)
-        store.balance_capture.on_gate(gate_id, result, required_insp, required_corr)
+        bc = _balance_capture_instance()
+        if bc is not None:
+            bc.on_gate(gate_id, result, required_insp, required_corr)
         return result
 
     _orig_attempt_write = attempt_write
@@ -245,19 +283,10 @@ init 999 python:
     def attempt_write(required_insp=30, cost=20, required_corr=3):
         result = _orig_attempt_write(required_insp, cost, required_corr)
         gate_id = "attempt_write_{}_{}".format(required_insp, required_corr)
-        store.balance_capture.on_gate(gate_id, result, required_insp, required_corr)
+        bc = _balance_capture_instance()
+        if bc is not None:
+            bc.on_gate(gate_id, result, required_insp, required_corr)
         return result
-
-    import renpy.display_menu as _display_menu
-
-    _orig_display_menu = _display_menu.menu
-
-    def _capture_display_menu(items, *args, **kwargs):
-        result = _orig_display_menu(items, *args, **kwargs)
-        store.balance_capture.on_menu_choice(result)
-        return result
-
-    _display_menu.menu = _capture_display_menu
 
 
 label debug_capture_start:

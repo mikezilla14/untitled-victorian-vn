@@ -541,6 +541,9 @@ init -1 python:
 
         # ── Manuscript ─────────────────────────────────────────────────
 
+        def has_manuscript_chapter(self, chapter_id):
+            return chapter_id in self.completed_chapters
+
         def complete_manuscript_chapter(self, chapter_id):
             if chapter_id not in self.completed_chapters:
                 self.completed_chapters.add(chapter_id)
