@@ -36,6 +36,9 @@ label day100_main:
     scene bg_country_estate_corridor_night
     with fade
 
+    # [enter:Cora]
+    show cora_sprite base at centre_bust with moveinright # [asset auto]
+    show cora_sprite guarded_travel at left_bust # [asset keep]
     # [BEAT] Kinetic start in motion. Cora hunts confiscated manuscript pages before dawn
 
     "Cora had three pages in her hand when the door opened."
@@ -77,6 +80,9 @@ label day100_1_afternoon_boredom:
     scene bg_country_estate_study
     with dissolve
 
+    # [enter:Cora]
+    show cora_sprite base at centre_bust with moveinright # [asset auto]
+    show cora_sprite guarded_travel at left_bust # [asset keep]
     # [BEAT] Entering Lady Eleanor's private study to retrieve confiscated pages
 
     cora_inner "Lady Eleanor's withdrawing room. The door stands open by a finger's width."
@@ -130,6 +136,8 @@ label day100_2_parlour_branch:
 
     # [BEAT] Erotic/Tension: Cora witnesses Lady Eleanor's illicit encounter with the under-housemaid Margaret
 
+    show cora_sprite flushed at left_bust # [asset keep]
+
     "I press my forehead to the cold paneling, my eye aligned with the keyhole's narrow slit."
     "The air through the wood is hot — damp skin, crushed violets, the iron sweetness of fear."
 
@@ -159,6 +167,8 @@ label day100_2_desk_branch:
 
     # [BEAT] Erotic/Mystery: Lady Eleanor's letters to Margaret; Sir John's Savoy lockbox clue among the papers
 
+    show cora_sprite focused at left_bust # [asset keep]
+
     "My fingers slide through the drawers like a thief in the night, paper rustling under my nails."
     "Deep beneath charity ledgers, wrapped in soiled ribbon, I find a packet in Lady Eleanor's elegant sloped hand."
 
@@ -182,22 +192,29 @@ label day100_2_reconvergence:
 
     # [BEAT] Lady catches Cora; Sir John dismisses at his wife's behest
 
+    show cora_sprite guarded_travel at left_bust # [asset keep]
+
     "A sharp rustle behind me. The door swings wide."
     "Lady Eleanor stands in the threshold. Her hair is wild, her collar crooked, her eyes wide with manic terror."
     "She has my three missing manuscript pages clutched in her hand. She knows what I have seen."
 
-    "Lady Eleanor" "You... you Irish guttersnipe."
-    "Lady Eleanor" "You dare search my rooms? You dare write this filth about flesh and touch?"
+    # [enter:Lady_eleanor]
+    show lady_eleanor_sprite panicked at right_bust with moveinright # [asset auto]
+    lady_eleanor "You... you Irish guttersnipe."
+    lady_eleanor "You dare search my rooms? You dare write this filth about flesh and touch?"
 
     cora_inner "Careful. My head screams in my mother's soft, looping lilt. Swallow it. Choke it down."
     cora_inner "Flat tongue. English country girl. She must not hear the Cork in my throat."
 
-    "Lady Eleanor" "I will not have your eyes in this house another hour. Sir John! Sir John!"
+    lady_eleanor "I will not have your eyes in this house another hour. Sir John! Sir John!"
 
     "Footsteps in the hall. Sir John enters — collar straight, face grey, authority intact."
     "He takes the manuscript pages from his wife's shaking hand. His gaze finds me."
 
-    "Sir John" "Come out, Vale."
+    # [enter:Sir_john]
+    show lady_eleanor_sprite panicked at centre_bust with move # [asset auto]
+    show sir_john_sprite cold at right_bust with moveinright # [asset auto]
+    sir_john "Come out, Vale."
 
     "The quietness of his voice is worse than a shout. It is the absolute authority of the house."
     "I step out from beside the bureau."
@@ -239,12 +256,12 @@ label day100_2_reconvergence:
             cora_inner "I bend my neck. Let him believe the submission is real."
             cora_inner "I am desperate. I will pay whatever price London demands."
 
-    "Lady Eleanor" "Send her away. Tonight. Before she breathes a word in the village."
+    lady_eleanor "Send her away. Tonight. Before she breathes a word in the village."
 
     "Sir John looks at the pages. His chest rises once — controlled, cold."
-    "Sir John" "You write of skin. Of touch. Of things a decent housemaid should not name."
-    "Sir John" "You observed too clearly, Vale. And you wrote too well."
-    "Sir John" "Why did you write this filth?"
+    sir_john "You write of skin. Of touch. Of things a decent housemaid should not name."
+    sir_john "You observed too clearly, Vale. And you wrote too well."
+    sir_john "Why did you write this filth?"
 
     # [CHOICE] Ambition choice sets the prologue_why_write flag
     # [DAG_CHOICE group=day100_2_evening_flashback_menu_1]
@@ -279,12 +296,12 @@ label day100_2_reconvergence:
             cora_inner "Wiltshire taught me appetite. London will teach me price."
 
     "Sir John crumples the three pages into his pocket. Lady Eleanor watches, white as flour."
-    "Sir John" "My wife is correct. Pack your trunk. You leave on the morning train."
+    sir_john "My wife is correct. Pack your trunk. You leave on the morning train."
 
     cora "I understand, sir."
 
-    "Sir John" "I will give you a reference for the Savoy, Vale. But if a word of what you have seen — or written — leaves your mouth, no decent house in England will have you."
-    "Sir John" "Your name will be blackened. You will be in the gutter."
+    sir_john "I will give you a reference for the Savoy, Vale. But if a word of what you have seen — or written — leaves your mouth, no decent house in England will have you."
+    sir_john "Your name will be blackened. You will be in the gutter."
 
     cora_inner "Threat and thrill share a pulse. A Lady's ruin is absolute; a Lord's is negotiable."
     cora_inner "If their secrets have weight, perhaps mine will too — one day. Not tonight."
@@ -309,6 +326,9 @@ label day100_3_night_daydream:
     scene bg_train_carriage_day
     with dissolve
 
+    # [enter:Cora]
+    show cora_sprite base at centre_bust with moveinright # [asset auto]
+    show cora_sprite base_travel at left_bust # [asset keep]
     "The train pulls east. Iron joints click like latches closing behind me."
     "Coal smoke, damp wool, rain on glass. The third-class bench is hard."
 

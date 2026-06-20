@@ -7,7 +7,7 @@
   "creative_text_preserved": true,
   "promoted_by": "prod_code_agent",
   "promoted_at": "2026-06-20",
-  "revision": "editor-revision-1",
+  "revision": "editor-revision-1-staging",
   "new_labels": [
     "day100_main",
     "day100_1_afternoon_boredom_setup",
@@ -22,7 +22,20 @@
   "new_assets": [
     "bg_country_estate_corridor_night",
     "bg_country_estate_study",
-    "bg_train_carriage_day"
+    "bg_train_carriage_day",
+    "cora_sprite guarded_travel",
+    "cora_sprite base_travel",
+    "cora_sprite focused",
+    "cora_sprite flushed",
+    "lady_eleanor_sprite panicked",
+    "lady_eleanor_sprite furious",
+    "lady_eleanor_sprite composed",
+    "margaret_sprite neutral",
+    "margaret_sprite bold",
+    "margaret_sprite yielding",
+    "sir_john_sprite cold",
+    "sir_john_sprite stern",
+    "sir_john_sprite neutral"
   ],
   "narrative_change_brief": "main-game/draft/releases/release-1-mvp/day100_narrative_change_brief.md",
   "lead_narrative_gate": "main-game/pipeline/releases/release-1-mvp/days/day100/gates/day100_gate_lead_narrative.md",
