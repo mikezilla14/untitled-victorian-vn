@@ -14,6 +14,7 @@
 
 # day101_non_canon.rpy
 # Release 1 / Day 01 non-canon Ren'Py-shaped draft
+# Pass: editor-revision-1 — selective merge per day101_narrative_change_brief.md
 # Source intent: rewritten from Twine node map and existing Day 1 script.
 # Asset constraint: uses only assets already present in the supplied Day 1 Ren'Py draft.
 # Promotion note: replace story/player helper calls with the exact project runtime method names during implementation.
@@ -42,7 +43,7 @@
 # [DAG_NODE id=day101_main type=work day=101]
 label day101_main:
 
-    # [BEAT] Narrator's intro. Keep brief; the horror pressure comes from Cora being trapped in procedure
+    # [BEAT] Arrival precarity — Irish mask, ruin geometry, performed Wiltshire identity
     scene bg_savoy_corridor_morning:
         zoom 1.0
         xysize (1920,1080)
@@ -50,9 +51,11 @@ label day101_main:
     # [ASSET] Visual/staging command
     with fade
 
-    cora_inner "The Savoy Hotel did not welcome girls like me."
-    cora_inner "It consumed them quietly, polished the brass after, and called the result service." # menace is a bit opaque can be rewritten
-    cora_inner "I had forged my references with a steady hand. I had not accounted for the waiting."
+    cora_inner "The Savoy does not merely employ girls like me. It strips them of their names, swallows them down, and polishes the brass with whatever is left."
+    cora_inner "I hold my breath against the heavy, suffocating scent of expensive coal smoke, gas lamps, and the wet lavender water used to mask the smell of London's rot."
+    cora_inner "Behind my teeth, my mother's soft, looping Cork lilt scrambles to escape. I force it down. Deep. Below the floorboards."
+    cora_inner "Here, I must speak with the rounded, flat, hollow vowels of a Wiltshire parson's daughter. A single slip—one wild, soft Irish consonant—and my papers will be matches for the grate."
+    cora_inner "And after the grate? The workhouse. Or the damp, gas-lit alleys of Holywell Street, selling my skin where I once hoped to sell my words."
 
     # [STATE] State/progression update
     jump day101_1_cora_waiting
@@ -83,17 +86,15 @@ label day101_1_cora_waiting:
     # [ASSET] Visual/staging command
     with dissolve
 
-    cora_inner "I stand outside Miss Stern's office with my hands folded and my pulse behaving badly."
-    
-    "Behind the heavy mahogany door, a clock ticks with paid machinery." # sound effect?
-    
-    cora_inner "My references sit in my apron pocket." # camera?
-    cora_inner "Good paper. Good ink. Better lies."
+    cora_inner "I stand outside Miss Stern's door, my traveling dress damp at the hem, my palms sweating against my small valise."
+    cora_inner "Sir John's reference sits in my pocket like a blade with his name on the handle. He gave it cold, conditional, already regretted. If Stern smells the ink of my lies, the trap slams shut before I begin."
 
-    "A maid passes carrying towels white enough to blind. A footman steps past with a silver tray." # silohuette image? 
+    "From behind the heavy mahogany door, a clock ticks with a heavy, metallic precision—the heartbeat of a house that owns every second of my day."
+
+    "A maid passes carrying towels white enough to blind. A footman steps past with a silver tray."
 
     cora_inner "No one asks who I am."
-    cora_inner "That is the first rule of this place, then. Be useful enough to ignore."
+    cora_inner "That is the first rule of this place. Be useful enough to ignore."
 
     stern "Enter." 
 
@@ -151,6 +152,13 @@ label day101_1_morning_interview:
     with moveinleft
 
     cora "Yes, Ma'am."
+
+    stern "Sir John's reference speaks to your quiet nature. Your lack of curiosity."
+
+    cora_inner "The paper is his leash. Wiltshire ended in dismissal at his wife's behest—not in my triumph."
+
+    cora "I keep my eyes on my work, Ma'am."
+
     stern "You have worked in service before."
 
     cora_inner "The lie is waiting for me, neat as a folded sheet."
@@ -209,12 +217,10 @@ label day101_1_morning_interview:
             cora_inner "She sees it. Not all of it, but enough to dislike me."
 
     stern "You speak with some polish, Vale. But polish can hide a great deal of dust."
-    
-    "Miss Stern steps forward, closing the distance between us."
-    
-    "The scent of dry lavender and starch fills the narrow space. In the dim office light, her eyes look almost black, assessing."
-    
-    "She reaches out, her fingers brushing the stiff linen of my collar, then tracing down the strap of my apron. Her hand lingers just long enough for the skin of my throat to prickle, a complete display of quiet dominance."
+
+    "Miss Stern steps from behind her desk. Her leather boots click with slow, deliberate pacing."
+    "The scent of starch, vinegar, and cold lavender presses into my space. She stops inches from me, her height casting a long shadow over my face."
+    "With a slow, clinical movement, she reaches out. Her fingers—dry, firm, and smelling faintly of carbolic soap—brush the collar of my traveling dress, tracing the line of my throat with a lingering, diagnostic pressure."
 
     # [CHOICE] Decision point
     # [DAG_CHOICE group=day101_1_morning_interview_menu_2]
@@ -233,10 +239,9 @@ label day101_1_morning_interview:
             with dissolve
 
             cora "I... I only wish to give satisfaction, Ma'am."
-            stern "Satisfaction is a transaction, Vale. I buy your labor, and you deliver your silence."
+            stern "Satisfaction is a transaction, Vale. I buy your silence and your labor. See that you do not default on either."
 
-            cora_inner "Her fingers are cold through my collar. My heart hammers against my ribs, but I force my breath to stay shallow, compliant."
-            cora_inner "She wants to feel the shape of my fear. Let her have it."
+            cora_inner "Her fingers are cold against my neck, a physical threat dressed as administrative care. I keep my breathing shallow, letting her feel the tremor she expects."
 
         "Stand perfectly rigid, holding my breath to mask my pulse, letting her treat me like a mannequin.":
 
@@ -270,12 +275,12 @@ label day101_1_morning_interview:
             cora "I understand the value of a proper fit, Ma'am."
             stern "Do you?"
             
-            "Miss Stern's thumb presses against the small hollow of my collarbone, a brief, warning pressure before she lets her hand fall away."
-            
-            stern "A maid who looks back is a maid who wants to be noticed. And noticed maids do not last."
+            "Miss Stern's thumb presses hard against the hollow above my collarbone, a brief, sharp warning before she slowly slides her hand down to lift my chin."
 
-            cora_inner "The touch was hot, deliberate. She wanted to see if I would blink, if my pulse would betray me."
-            cora_inner "I did not look away. We are two women in a locked room, and she has just realized I am measuring her, too."
+            stern "A maid who looks back is a maid who wants to be noticed, Vale. And noticed maids in the Savoy do not last long enough to collect their first quarter's wages."
+
+            cora_inner "Her touch is hot, deliberate. It is not morality that guides her hand—it is the sheer, intoxicating pleasure of absolute control."
+            cora_inner "I did not look away. She knows now I am measuring her, too."
 
     stern "The guests here are... particular, Vale. They have expensive tastes and very short memories. Some maids think they can trade their secrets for silk, or their bodies for a gentleman's favor."
     stern "They always end up on the street, or worse."
@@ -834,6 +839,27 @@ label day101_2_missy_meets_cora:
 
     missy "Well. There was a silver spoon Miss Stern threw out because the silver-plate was peeling and it looked improper for the suites. I kept it to stir my tea. But that's salvage, not sin."
 
+    missy "And where are you from, Cora? Your papers say Wiltshire."
+
+    cora "A small village. Near Fovant."
+
+    "Missy's eyes light up with sudden, beautiful, and terrifying recognition."
+
+    missy "Wiltshire! Oh, bless you, I'm from Hindon myself! Just three miles down the road!"
+    missy "You must know the old oak by the mill? And the curate, Mr. Harrison? He has the most wonderful, proper sermons on Sundays."
+
+    cora_inner "My heart stops. A physical blow to my chest."
+    cora_inner "She is the real thing—the innocent, pious English country girl I am pretending to be."
+    cora_inner "If I slip now, if I name the wrong lane or mispronounce the local grange, she will know. And her concern will destroy me."
+
+    cora "The old mill is quite beautiful in spring, Missy."
+    cora "We lived closer to the parish line."
+    cora "We did not often travel to Hindon."
+
+    missy "Ah, that's a pity. The curate's wife was always so good to the girls in service. Such a righteous place."
+
+    cora_inner "The irony is a cold weight. Missy is the very life I claimed to have lived, purely to get this position."
+    cora_inner "We are two halves of a lie, and she has no idea she is holding the knife."
     cora_inner "I almost like her immediately. Her country armor is thicker than mine, but she knows exactly where the joints are."
 
     # [STATE] State/progression update
@@ -921,6 +947,9 @@ label day101_2_coras_path_choice:
             "I say it to soothe her, but she is already retreating, her defensive propriety locking down like iron."
             cora_inner "I have seen enough. And I have used her to get it."
 
+            # [STATE] State/progression update
+            $ story.set_missy_day1_trust_state("unsettled")
+
         "Look for myself. [[Prey path]]":
 
             # [STATE] Semantic balance profile: Cora takes direct corridor risk for the image
@@ -955,6 +984,9 @@ label day101_2_coras_path_choice:
             "She is terrified, but her rescue was swift and observant."
             cora_inner "I have the image. The terrible, beautiful image."
 
+            # [STATE] State/progression update
+            $ story.set_missy_day1_trust_state("shared_caution")
+
         "Pull Missy away. [[Ghost path]]":
 
             # [STATE bespoke] Multi-witness suspicion reduction; cannot map to one profile
@@ -973,6 +1005,9 @@ label day101_2_coras_path_choice:
             cora_inner "I collect the rhythm. The pause. The absolute yielding."
             cora_inner "A writer does not always need the picture."
             cora_inner "Sometimes the wall tells the truer story."
+
+            # [STATE] State/progression update
+            $ story.set_missy_day1_trust_state("soothed")
 
     # [ASSET] Visual/staging command
     hide missy_sprite
@@ -1008,13 +1043,12 @@ label day101_3_taking_stock_day1:
     # [STATE] State/progression update
     $ show_ledger_ui()
 
-    cora_inner "I open the ledger and set down the day's useful damages."
+    cora_inner "I open my ledger, the ink wet, and record the day's useful damages."
 
     if story.day1_corridor_state == "predator":
-        cora_inner "Missy's shocked face returns first."
+        cora_inner "Missy's shocked, wounded face returns first. I used her decency as a blunt instrument."
         cora_inner "Then Vance's hand on the carpet. Mr. Locke's shoe. The walking stick."
-        cora_inner "I used the girl because she was available."
-        cora_inner "The sentence looks uglier once written down."
+        cora_inner "The sentence looks uglier once written down, but it is real."
 
     elif story.day1_corridor_state == "prey":
         cora_inner "I can still feel the corridor board shift beneath my shoe."
@@ -1178,7 +1212,7 @@ label day101_4_write_the_chapter:
             cora_inner "I think of the way she yielded and hated him for making her yield."
             cora_inner "I think of Missy reaching for the latch because I placed fear in her hand."
 
-    cora_inner "The first sentence arrives like a servant entering the wrong room: terrified, necessary, unable to retreat."
+    cora_inner "The first sentence arrives like a servant entering the wrong room: terrified, many-layered, and unable to retreat."
 
     if story.day1_corridor_state == "predator":
 

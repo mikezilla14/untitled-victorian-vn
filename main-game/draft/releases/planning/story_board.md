@@ -95,9 +95,12 @@ flowchart TD
 | `prologue_why_write` | Day 100 | `"money_home"` / `"cataloguer"` / `"scandal_hungry"` — seeds manuscript motive for book1 (set in reconvergence menu). |
 | `prologue_holywell_posture` | Day 100 | `"careful"` / `"eager"` / `"desperate"` — seeds illicit-publisher risk appetite (Sir John caught-reaction menu). |
 | story.day1_interview_state | Day 101 | `"meek"` / `"competent"` — early suspicion shaping with Stern. |
-| story.day1_corridor_state | Day 101 | `"predator"` / `"prey"` / `"ghost"` — determines Chapter 1 prose and Day 2's contraband branch. |
+| story.day1_stern_relation | Day 101 | `"subservient"` / `"resistant"` / `"complicit"` — Stern invasive-touch menu. |
+| story.day1_stern_secret_bound | Day 101 | `"fearful"` / `"loyal"` / `"exploitative"` — Stern guest-secrets warning menu. |
+| story.day1_vance_relation | Day 101 | Extended tree: corridor posture (`subservient` / `defiant` / `ghostly`) plus dressing-room and stairwell arms (`protected`, `intimate`, `observed`, `loyal_witness`, `accomplice`, `silent_observer`). |
+| story.day1_corridor_state | Day 101 | `"predator"` / `"prey"` / `"ghost"` — determines Chapter 1 prose and Day 2's contraband branch. Ghost = walk-on / wall rhythm (no direct suite entry). |
 | story.day1_ledger_focus | Day 101 | `"inspiration"` / `"corruption"` — dictates the framing of the writing or indulgence. |
-| story.missy_day1_trust_state | Day 101 | `"soothed"` / `"unsettled"` / `"warned_cora"` / `"shared_caution"` — tracks early relationship with Missy. |
+| story.missy_day1_trust_state | Day 101 | Set on corridor exit: predator → `"unsettled"`; prey → `"shared_caution"`; ghost → `"soothed"`. (`"warned_cora"` reserved for later beats.) |
 | story.day2_contraband_state | Day 102 | `"stolen_wearing"` / `"planted_in_trunk"` — outcome of the morning discovery; shapes the tea crisis. |
 | story.day2_tea_choice | Day 102 | `"prey"` (confess) / `"predator"` (pretend to find) / `"ghost"` (frame Missy) — drives the Day 3 consequence. |
 | story.missy_day2_trust_break | Day 102 | Boolean — True if Missy is framed (`"ghost"`). |
@@ -200,8 +203,8 @@ Penance is queued in story.pending_penance and consumed by named consequence win
 | Step | Day | Period | Type | Enter label | Sets / gates |
 |------|-----|--------|------|-------------|--------------|
 | 0 | 100 | Night → Morning | WORK | `day100_main` | `prologue_found`, `prologue_holywell_posture`, `prologue_why_write`, `run_archetype_seed` → D101 |
-| 1 | 101 | Morning | WORK | `day101_main` -> `day101_1_cora_waiting` -> `day101_1_morning_interview` -> `day101_1_vance_throws_toy` | day1_interview_state |
-| 2 | 101 | Afternoon | WORK | `day101_2_missy_meets_cora` -> `day101_2_coras_path_choice` | day1_corridor_state |
+| 1 | 101 | Morning | WORK | `day101_main` → `day101_1_cora_waiting` → `day101_1_morning_interview` → `day101_1_vance_throws_toy` → `day101_1_vance_dressing_room` → `day101_1_vance_stairwell_encounter` | `day1_interview_state`, `day1_stern_relation`, `day1_stern_secret_bound`, `day1_vance_relation` |
+| 2 | 101 | Afternoon | WORK | `day101_2_missy_meets_cora` → `day101_2_coras_path_choice` | `day1_corridor_state`, `missy_day1_trust_state` |
 | 3 | 101 | Evening | CONSEQUENCE | `day101_evening_consequence_window` | Queues and consumes confrontation labels before ledger prose continues. |
 | 4 | 101 | Night | STORY WINDOW / WRITE | `day101_night_story_window` -> `day101_4_write_the_chapter` or direct D102 handoff | Ch1 fuel gate; candidate first manuscript retelling minigame. |
 | 5 | 102 | Morning | WORK | `day102_1_cora_missy_first_shift` -> `day102_1_missy_finds_a_thing` -> takes/deceives | day2_contraband_state |
@@ -335,12 +338,23 @@ flowchart LR
 - **`day100_3_arrival`**: Waterloo manuscript spill; English country mask holds; handoff to `day101_main`.
 
 ### Day 101
-*Source: day101_non_canon.rpy*
-- **`day101_1_cora_waiting` & `day101_1_morning_interview`**: First encounter with Stern. Choice between "meek" or "competent".
-- **`day101_1_vance_throws_toy`**: Initial corridor collision with Vance and Gideon.
-- **`day101_2_missy_meets_cora` & `day101_2_coras_path_choice`**: Laundry room intro. The eavesdrop event branches day1_corridor_state ("predator", "prey", "ghost").
-- **`day101_3_taking_stock_day1`**: Ledger choice between "inspiration" (structural) or "corruption" (appetite), preceded by `day101_evening_consequence_window`.
-- **`day101_night_story_window` & `day101_4_write_the_chapter`**: Night story-chain window and Chapter 1 writing path. Cora eroticises the corridor eavesdrop according to day1_corridor_state and day1_ledger_focus, with CG edits that distinguish imagined manuscript content from literal hotel events.
+*Source: `main-game/non-prod-game/game/days/day101_non_canon.rpy` · Pass: `editor-revision-1` (2026-06-21)*
+
+**Exit:** Cora survives first shift with a corridor identity (`predator` / `prey` / `ghost`), ledger focus (`inspiration` / `corruption`), and optional Ch1 draft. She carries the Irish mask under performed Wiltshire cover; Sir John's reference feels like a conditional leash. Missy trust is `unsettled`, `shared_caution`, or `soothed`; Hindon/Fovant local-detail trap is open (cover not resolved). Vance/Gideon intimacy seeded via corridor, dressing room, and stairwell.
+
+**Flags set today:** `day1_interview_state`, `day1_stern_relation`, `day1_stern_secret_bound`, `day1_vance_relation`, `day1_corridor_state`, `day1_ledger_focus`, `missy_day1_trust_state`; optional `day1_night_action` (`write`) + manuscript progress if CH1 gate met.
+
+**Callbacks from Day 100:** Sir John dismissal reference (not blackmail); Cork vs English mask; Lady Eleanor scandal as interior echo only unless player chose overheard branch.
+
+- **`day101_main` & `day101_1_cora_waiting`**: Arrival precarity — Irish erasure, Holywell ruin geometry, Sir John reference as conditional leash.
+- **`day101_1_morning_interview`**: Stern interview menus (meek/competent; touch triad; secret-bound triad); Sir John reference cited; clinical carbolic inspection beat.
+- **`day101_1_vance_throws_toy` → `day101_1_vance_dressing_room` → `day101_1_vance_stairwell_encounter`**: Scent-bottle corridor; Gideon naming/discretion; extended `day1_vance_relation` tree (dressing + stairwell intimacy beats).
+- **`day101_2_missy_meets_cora`**: Laundry intro; **Hindon/Fovant identity trap** (peer tests forged Wiltshire cover — Fovant claim ~3 mi from Hindon).
+- **`day101_2_coras_path_choice`**: IRL-restrained eavesdrop; branches `day1_corridor_state` and `missy_day1_trust_state` (predator/prey/ghost).
+- **`day101_3_taking_stock_day1`**: `day101_evening_consequence_window` → ledger reflection → `day101_night_story_window` (optional chains) / `day101_4_write_the_chapter` (CH1 gate; manuscript retelling layer for explicit heat).
+- **Handoff:** `day102_1_cora_missy_first_shift` — contraband branch reads `day1_corridor_state`.
+
+**Brief / gates:** `day101_narrative_change_brief.md` (CLOSED); lead narrative + forensic psychology + Victorian gates PASS (2026-06-21).
 
 ### Day 102
 *Source: day102_non_canon.rpy*

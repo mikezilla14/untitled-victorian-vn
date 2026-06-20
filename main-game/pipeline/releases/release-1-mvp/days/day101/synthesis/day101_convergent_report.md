@@ -1,9 +1,10 @@
 # Convergent Decision Report — day101
 # Release: Release 1 - MVP
-# Pass: revision-1
-# Personas considered: thematic, tension, class, mystery, erotic
+# Pass: editor-revision-1
+# Prior pass: revision-1
+# Personas considered (editor-revision-1): tension, class, thematic, erotic (selective merge per day101_narrative_change_brief.md)
 # Draft output: main-game/non-prod-game/game/days/day101_non_canon.rpy
-# Spec inputs: main-game/pipeline/releases/release-1-mvp/day101_*_spec.rpy
+# Spec inputs: narrative/draft/releases/release-1-mvp/planning/day101_non_canon_draft_rewrite.rpy (donor); live sandbox baseline
 
 ## 1. Considered (inventory)
 | Persona | Spec file | Labels / beats reviewed | Notes |
@@ -39,3 +40,23 @@
 ## 5. Downstream gate notes
 - **Lead Narrative Editor:** Strict Day 1 voice locks applied to all of Cora's dialogue with superiors: sentences are <= 8 words and contain no contractions.
 - **Victorian Consultant:** Formal register and historical framing preserved. Cora utilizes formal titles (Ma'am, Sir, Miss) when addressing superiors.
+
+---
+
+## 6. Editor-revision-1 (2026-06-21) — dark-romance selective merge
+
+**Trigger:** `day101_narrative_change_brief.md` (lead_narrative_editor, scale M).
+
+| Donor beat | Target label | Disposition |
+|------------|--------------|-------------|
+| Opening precarity (Cork lilt, Holywell, Savoy consumption) | `day101_main` | **Merged** |
+| Sir John reference leash (not Eleanor blackmail) | `day101_1_cora_waiting`, `day101_1_morning_interview` | **Merged** |
+| Stern clinical inspection (carbolic, boots, throat trace) | `day101_1_morning_interview` | **Merged** |
+| Missy Hindon / East Knoyle identity trap | `day101_2_missy_meets_cora` | **Merged** |
+| `set_missy_day1_trust_state` on corridor branches | `day101_2_coras_path_choice` | **Merged** (`unsettled` / `shared_caution` / `soothed`) |
+| Ledger + write-chapter reflection polish | `day101_3_taking_stock_day1`, `day101_4_write_the_chapter` | **Partial merge** |
+| Vance-Missy corridor cold open | `day101_1_vance_throws_toy` | **Rejected** — preserves Gideon naming + dressing room spine |
+| Ghost knock-and-enter | `day101_2_coras_path_choice` | **Rejected** — live walk-on/wall path retained |
+| IRL explicit corridor anatomy | corridor branches | **Rejected** — manuscript layer only |
+
+**Spine preserved:** `day101_1_vance_dressing_room`, `day101_1_vance_stairwell_encounter`, full `day1_vance_relation` tree, all menu/setter contracts unchanged.

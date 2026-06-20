@@ -5,7 +5,7 @@
   "gate": "lead_narrative",
   "verdict": "PASS",
   "blocking": false,
-  "reviewed_at": "2026-05-22",
+  "reviewed_at": "2026-06-21",
   "reviewed_files": [
     "main-game/non-prod-game/game/days/day101_non_canon.rpy"
   ],
@@ -14,7 +14,7 @@
     "writers_room": false,
     "lead_narrative_editor": false,
     "forensic_psychology_consultant": true,
-    "victorian_consultant": false,
+    "victorian_consultant": true,
     "profile_update": false
   }
 }

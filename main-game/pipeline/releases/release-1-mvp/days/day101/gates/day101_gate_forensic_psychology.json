@@ -5,7 +5,7 @@
   "gate": "forensic_psychology",
   "verdict": "PSYCHOLOGICALLY_CONSISTENT",
   "blocking": false,
-  "reviewed_at": "2026-05-23",
+  "reviewed_at": "2026-06-21",
   "reviewed_files": [
     "main-game/non-prod-game/game/days/day101_non_canon.rpy"
   ],
@@ -16,5 +16,6 @@
     "forensic_psychology_consultant": false,
     "victorian_consultant": true,
     "profile_update": false
-  }
+  },
+  "notes": "editor-revision-1 merge; missy_day1_trust_state wired; Hindon/Fovant identity trap"
 }

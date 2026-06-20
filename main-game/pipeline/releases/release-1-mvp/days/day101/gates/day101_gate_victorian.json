@@ -5,7 +5,7 @@
   "gate": "victorian",
   "verdict": "HISTORICALLY_SOUND",
   "blocking": false,
-  "reviewed_at": "2026-05-22",
+  "reviewed_at": "2026-06-21",
   "reviewed_files": [
     "main-game/non-prod-game/game/days/day101_non_canon.rpy"
   ],
@@ -16,5 +16,6 @@
     "forensic_psychology_consultant": false,
     "victorian_consultant": false,
     "profile_update": false
-  }
+  },
+  "notes": "Fovant substituted for East Knoyle during review for parish distance accuracy"
 }

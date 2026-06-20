@@ -52,15 +52,15 @@
 
 ## Handoff → Day 102
 
-**Exit state (Day 101):** Cora survived Day 1 with a corridor identity (`predator` / `prey` / `ghost`) and ledger focus (`inspiration` / `corruption`). She may have written Chapter 1 or visited Missy. The hotel is now a system she is learning to game.
+**Exit state (Day 101):** Cora survived Day 1 with a corridor identity (`predator` / `prey` / `ghost`), ledger focus (`inspiration` / `corruption`), and the hotel re-scaled as a machine that consumes names. She carries Irish erasure under a Wiltshire mask; Sir John's reference feels like a conditional leash, not triumph. Missy may trust, doubt, or share caution — and may still believe Cora is a neighbouring country girl (Fovant vs Hindon test unresolved). Vance/Gideon intimacy seeded via corridor, dressing room, and stairwell. She may have written Chapter 1 (slop or real) or spent the night on optional chains.
 
-**Flags that matter today:** `day1_interview_state`, `day1_corridor_state`, `day1_ledger_focus`, `missy_day1_trust_state`; whether Ch1 was written (manuscript progress).
+**Flags that matter today:** `day1_interview_state`, `day1_corridor_state`, `day1_ledger_focus`, `missy_day1_trust_state` (`soothed` / `unsettled` / `shared_caution`); `day1_vance_relation`; whether Ch1 was written (manuscript progress).
 
-**Relationships:** Missy — soothed, unsettled, warned, or shared caution; Stern — meek vs competent impression; Gideon — first real notice via corridor.
+**Relationships:** Missy — soothed (ghost), unsettled (predator), or shared caution (prey); Hindon/Fovant cover wound open. Stern — meek vs competent + secret-bound posture. Gideon — naming beat + corridor notice; Vance — extended relation tree from dressing/stairwell.
 
 **Voice today:** Cora **Day 2** (thought sharper; speech still formal). Gideon **Day 2 — Observer**.
 
-**Callbacks required:** Chapter 1 prose flavour tied to corridor state; eavesdrop choice; ledger metaphor (fuel vs appetite).
+**Callbacks required:** Chapter 1 prose flavour tied to corridor state; eavesdrop choice; ledger metaphor (fuel vs appetite); Sir John reference / dismissal echo; Hindon local-detail exposure risk (do not resolve cover in one line).
 
 **Forbidden:** Lockbox; photograph; false dawn triumph.
 

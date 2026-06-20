@@ -2,46 +2,54 @@
 # dayrdd: day101
 # Release: release 1 - mvp
 # Draft: main-game/non-prod-game/game/days/day101_non_canon.rpy
-# Reviewed: 2026-05-22
-# Prerequisite: day101_gate_lead_narrative.md — **PASS**
+# Reviewed: 2026-06-21
+# Prerequisite: day101_gate_lead_narrative.md — **PASS**; day101_gate_forensic_psychology.md — **PSYCHOLOGICALLY CONSISTENT**
 # Policy: main-game/canon/historical_guardrails.md (1891 Savoy baseline)
 
 ## Verdict
 
 **HISTORICALLY SOUND**
 
-The promotion draft of Day 101 contains no major anachronisms, class violations, or modern idiom slips. The draft presents an authentic and highly accurate depiction of late-Victorian domestic service dynamics within London's premiere luxury establishment in 1891.
+Editor-revision-1 merge introduces no major class violations or modern idiom. One geographic correction applied during review (Fovant for East Knoyle — see below). All other new material is period-plausible for 1891 London hotel service.
 
 ## Societal audit
 
 | Element | Assessment |
 |---------|------------|
-| Servant-guest geometry (dropped item, spatial waiting, standing interview) | **Historically accurate.** Miss Stern standing rather than sitting is typical of Victorian institutional management, reinforcing status hierarchy. Cora waiting in the corridor without being addressed matches the "useful enough to ignore" reality. |
-| Class address and protocols | **Excellent.** Cora properly employs "Ma'am" for Miss Stern, "Miss" for Vance, and "Sir" for Gideon. Gideon and Vance address Cora in the strict surname-only or non-person command register ("You. Girl. Pick it up."). |
-| Eavesdropping and service space boundaries | **Highly authentic.** The physical division between the grand guest corridor (electric light, gold leaf, carpeted) and the narrow servant corridor (dim gas, bare plaster, complaints of the floorboard) beautifully maps late-Victorian architectural class segregation. |
-| The Savoy laundry context | **Authentic.** Commercial hotel laundry in 1891 relied heavily on coal-fired steam boilers, soda, and lye (sodium hydroxide). The hazard of lye spit or boiler failure was a real risk for the lower ranks of hotel staff. |
+| Sir John reference via Stern | **Accurate.** Country gentleman’s reference carried weight; housekeeper validates papers before hire. "Sir John" without title inflation is correct for a maid citing her former master. |
+| Stern clinical inspection | **Plausible.** Carbolic soap was in domestic/hospital use by 1891 (Listerian hygiene culture). Housekeeper’s physical inspection of uniform/person maps to institutional servant management — invasive but not fantastical. |
+| Irish erasure / Holywell Street ruin | **Accurate.** Anti-Irish prejudice in hiring; Holywell Street as illicit publishing/red-light geography pre-1901 demolition. |
+| Hindon / Fovant parish test | **Accurate after fix.** Fovant and Hindon are neighbouring Wiltshire parishes (~3 miles). Missy’s local landmarks (mill oak, curate) fit rural deanery gossip culture. |
+| Servant corridor / laundry / Savoy hierarchy | **Unchanged and sound** from prior pass. |
 
 ## Linguistic audit
 
 | Line / pattern | Assessment |
 |----------------|------------|
-| Cora's Wiltshire country identity | Wiltshire is a highly appropriate rural baseline for a constructed country-girl reference in London. |
-| "Wishing is for girls with leisure" | Perfect expression of Victorian attitudes toward labor and the working poor. |
-| "A dangerous word from a girl in a borrowed apron" | Miss Stern's resentment of Cora using the word "exact" is a superb class-conscious touch. Language was heavily policed; a maid showing intellectual precision was viewed with suspicion. |
-| "Dismissed... to the Strand" | Structurally accurate. The Savoy's main service entrance faced the Strand, and being dismissed to the Strand is a common late-Victorian idiom for falling into homelessness and destitution. |
-| "Birmingham... lady's trinket" | Historically plausible. Birmingham's Jewellery Quarter was the largest manufacturing center of silver and metal trinkets, toys, and small luxury items in the late 19th century. |
+| "Sir John's reference speaks to your quiet nature" | Formal housekeeper register; appropriate deference to gentry authority on paper. |
+| "quarter's wages" (Stern complicit branch) | Period-accurate payment interval for domestic staff. |
+| Cora Hindon evasion lines | Short service register; no contractions to peer in stress — acceptable (Missy uses mild contractions; Cora maintains mask). |
+| "carbolic soap" | Victorian disinfectant vocabulary — correct era. |
+| "gas-lit alleys of Holywell Street" | Correct lighting idiom for street trade zones. |
 
-**No modern slang, psych jargon, or casual cross-class familiarity** was identified in any dialogue line.
+**No modern slang, psych jargon, or casual cross-class familiarity** in merged lines.
 
 ## Technology & setting
 
-- The contrast between the electric-lit public areas of the Savoy (which was famously the first public building in the world to be entirely lit by electricity, starting from its opening in 1889) and the candle-lit, cramped servants' quarters is historically exact for 1891.
-- No telephones, modern cleaning equipment, or other anachronistic technologies are present in the servant spaces.
+- Gas lamps + expensive coal smoke in public corridors; servant spaces remain dimmer — consistent with 1891 Savoy (electric light in guest areas, older service infrastructure).
+- No anachronistic technology introduced in merge.
+
+## Correction applied (editor-revision-1 review)
+
+| Issue | Resolution |
+|-------|------------|
+| **East Knoyle ↔ Hindon distance** | Original donor text implied ~3 miles between East Knoyle and Hindon; actual road distance is ~14 miles. **Fixed in draft:** Cora claims **Fovant** (neighbouring parish to Hindon). Missy's "three miles down the road" now geographically valid. |
 
 ## Optional polish (non-blocking)
 
-No optional polish is requested. The historical framing is tight and serves the dramatic needs of the scene beautifully.
+- "Mr. Harrison" as curate name is generic and acceptable; if a future pass wants sharper Wiltshire colour, prefer a composite rural incumbent rather than a famous historical incumbent tied to another parish.
+- Stern's "livestock" diagnostic framing in inner narration is metaphorical — keep out of Stern's spoken dialogue if expanded later (class contempt has limits in employer speech).
 
 ## Resubmission gate
 
-N/A — Initial pass. No violations flagged.
+N/A — Cleared for promotion pipeline when human requests. Prior optional polish items remain non-blocking.

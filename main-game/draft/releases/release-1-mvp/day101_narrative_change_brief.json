@@ -1,0 +1,48 @@
+{
+  "contract_version": "1",
+  "day_id": "day101",
+  "release": "release-1-mvp",
+  "status": "CLOSED",
+  "scale": "M",
+  "invoked_by": "lead_narrative_editor",
+  "affected_labels": [
+    "day101_main",
+    "day101_1_cora_waiting",
+    "day101_1_morning_interview",
+    "day101_1_vance_throws_toy",
+    "day101_1_vance_dressing_room",
+    "day101_1_vance_stairwell_encounter",
+    "day101_2_missy_meets_cora",
+    "day101_2_coras_path_choice",
+    "day101_3_taking_stock_day1",
+    "day101_night_story_window",
+    "day101_4_write_the_chapter"
+  ],
+  "affected_setters": [
+    "story.set_day1_interview_state",
+    "story.set_day1_stern_relation",
+    "story.set_day1_stern_secret_bound",
+    "story.set_day1_vance_relation",
+    "story.set_corridor_state",
+    "story.set_day1_ledger_focus",
+    "story.set_day1_night_action",
+    "story.set_missy_day1_trust_state"
+  ],
+  "story_board_rows": [
+    "Global State Tracking — day1_interview_state, day1_corridor_state, day1_ledger_focus, missy_day1_trust_state",
+    "Adult Payoff Structure — IRL corridor restrained; manuscript retelling explicit",
+    "Scene Ledger — Day 101",
+    "Spine sequence steps 1–4 — day101_main through day101_night_story_window"
+  ],
+  "personas": [
+    "tension",
+    "class",
+    "thematic",
+    "erotic"
+  ],
+  "return_to": {
+    "agent": "writers_room",
+    "pipeline": "revise-narrative"
+  },
+  "markdown_brief_path": "main-game/draft/releases/release-1-mvp/day101_narrative_change_brief.md"
+}
