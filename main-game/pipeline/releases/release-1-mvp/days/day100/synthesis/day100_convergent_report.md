@@ -1,46 +1,69 @@
 # Convergent Decision Report — day100
 # Release: Release 1 - MVP
-# Pass: rewrite-narrative-synthesis
-# Personas considered: thematic, tension, class, mystery, erotic
+# Pass: editor-revision-1
+# Trigger: day100_narrative_change_brief.md (Option B hybrid merge)
+# Personas considered: erotic, class, tension, thematic, mystery
 # Draft output: main-game/non-prod-game/game/days/day100_non_canon.rpy
-# Spec inputs: main-game/pipeline/releases/release-1-mvp/days/day100/specs/day100_*_spec.rpy
+# Prior pass: rewrite-narrative-synthesis (2026-06-10 — superseded for discovery/reconvergence prose)
+
+## Revision delta (editor-revision-1)
+
+| Area | Prior draft | This revision |
+|------|-------------|---------------|
+| Inciting scandal | Sir John / George (master–stableman) | **Lady Eleanor Wiltshire + under-housemaid Margaret** (sapphic, class-coded) |
+| Discovery spice | ~2.5 live / 2.8 daydream | **~3.0–3.2 live** (keyhole / letters); **2.8–3.0 daydream** echo |
+| Reconvergence | Sir John catches Cora alone | **Lady catches Cora first** → demands expulsion → **Sir John dismisses at wife's behest** |
+| Irish erasure | Ambient | **Explicit** Cork-lilt vigilance (main, reconvergence, train, Waterloo) |
+| False Dawn | Implicit | **Interior only** after dismissal — secrets may have price someday |
+| Exit | Dismissal + Savoy threat | **Unchanged outcome** |
+| Mystery hook | Savoy lockbox / Strand in Sir John letter | **Preserved** — Sir John sheet among Lady Eleanor's papers |
+| Flags / menus | All three prologue flags | **Preserved** — `prologue_found`, `prologue_holywell_posture`, `prologue_why_write` |
+| `# CANON FLAG` | None | **NEEDS HUMAN CONFIRMATION** — Lady Eleanor Wiltshire + Margaret are one-scene Wiltshire NPCs; not yet in `main-game/canon/` |
 
 ## 1. Considered (inventory)
-| Persona | Spec file | Labels / beats reviewed | Notes |
-|---------|-----------|-------------------------|-------|
-| thematic | day100_thematic_spec.rpy | `day100_main`, `day100_1_afternoon_boredom`, `day100_2_reconvergence` | Metaphors of country house stone, soot-stained carriage, and stolen currency of ink. |
-| tension | day100_tension_spec.rpy | `day100_main`, `day100_2_reconvergence`, `day100_3_night_daydream` | Suspense of crawling the corridor, hiding behind folding screen, and Waterloo arrival. |
-| class | day100_class_spec.rpy | `day100_main`, `day100_2_reconvergence`, `day100_3_night_daydream` | Master-servant geometry, Sir John's absolute social weight, and threat of the gutter. |
-| mystery | day100_mystery_spec.rpy | `day100_2_desk_mystery`, `day100_2_parlour_mystery` | Savoy lockbox clue, Strand solicitor, and forged reference liability. |
-| erotic | day100_erotic_spec.rpy | `day100_2_desk_erotic`, `day100_2_parlour_erotic`, `day100_2_reconvergence_erotic`, `day100_3_night_daydream` | Sensory details of letters, parlour sounds, Sir John's undone collar, and 2.8 spice train daydream. |
+
+| Persona | Focus | Labels |
+|---------|-------|--------|
+| erotic | Lady + Margaret live discovery; daydream echo | `day100_2_parlour_branch`, `day100_2_desk_branch`, `day100_3_night_daydream` |
+| class | Lady's behest; Sir John's dismissal authority; maid speech lock | `day100_2_reconvergence`, `day100_3_arrival` |
+| tension | Night crawl; caught sequence; Waterloo spill | `day100_main`, `day100_2_reconvergence`, `day100_3_arrival` |
+| thematic | Hypocrisy; Irish erasure; ink as currency (interior) | `day100_main`, `day100_2_reconvergence` |
+| mystery | Savoy lockbox / Strand in desk branch | `day100_2_desk_branch` |
 
 ## 2. Included (merged into draft)
-| Persona | Source (spec label / line) | Target (draft label) | What changed (1 line) |
-|---------|---------------------------|----------------------|------------------------|
-| tension | day100_tension_spec:5 | `day100_main` | Opening in motion with candle and three pages. |
-| class | day100_class_spec:10 | `day100_main` | Cora's interiority of country maid training and trespass. |
-| thematic | day100_thematic_spec:25 | `day100_1_afternoon_boredom` | Description of study, smell of dried roses, and master desk. |
-| erotic | day100_erotic_spec:45 | `day100_2_parlour_branch` | Rhythmic damp gasp and buckle release heard through parlour door. |
-| erotic | day100_erotic_spec:55 | `day100_2_desk_branch` | Erotic, wild handwriting in Sir John's letter to George. |
-| mystery | day100_mystery_spec:45 | `day100_2_desk_branch` / `day100_2_parlour_branch` | lockbox key at Strand / Savoy hotel hooks. |
-| tension | day100_tension_spec:45 | `day100_2_reconvergence` | Step-by-step hiding behind folding screen and caught moment. |
-| class | day100_class_spec:60 | `day100_2_reconvergence` | Defining choices: Lie/Deflect/Submit and Why Write. |
-| erotic | day100_erotic_spec:65 | `day100_2_reconvergence` | Sir John's state of disarray (loose collar, breathing). |
-| tension | day100_tension_spec:80 | `day100_3_night_daydream` | Coal smoke, damp wool train atmosphere, and satchel spill at Waterloo. |
-| erotic | day100_erotic_spec:75 | `day100_3_night_daydream` | Daydream details (parlour breath vs letters' ink) reflecting 2.8 spice rating. |
+
+| Persona | Target label | What changed |
+|---------|--------------|--------------|
+| erotic | `day100_2_parlour_branch` | Keyhole voyeur beat — Lady Eleanor and Margaret; spice floor 3.0+ |
+| erotic | `day100_2_desk_branch` | Lady's explicit letters to Margaret |
+| mystery | `day100_2_desk_branch` | Sir John's Savoy lockbox letter slipped under Lady's packet |
+| class | `day100_2_reconvergence` | Lady Irish slur → linguistic vigilance; Sir John "My wife is correct" dismissal |
+| thematic | `day100_main` | Cork lilt swallowed; English maid mask |
+| thematic | `day100_2_reconvergence` | Gendered ruin observation; False-Dawn interior seed (no blackmail) |
+| tension | `day100_3_arrival` | Manuscript spill; accent mask at Waterloo |
+| erotic | `day100_3_night_daydream` | Branch daydream retuned to Lady/Margaret; posture Holywell tempo preserved |
 
 ## 3. Cut (not in draft)
-| Persona | Idea / beat | Rationale | Disposition (parked / rejected) |
-|---------|-------------|-----------|----------------------------------|
-| thematic | Extended description of carriage passenger | Distracted from the immediate tension of the satchel spill. | Rejected |
-| mystery | Detailed name of solicitor on the Strand | Too much detail for a prologue; can be resolved in Day 101/102. | Parked |
+
+| Idea | Rationale | Disposition |
+|------|-----------|-------------|
+| Cora blackmails Eleanor for sovereigns + reference | Contradicts `cora_character_canon.md` Breaking Point | Rejected (per brief) |
+| Sir John / George scandal | Replaced per brief | Rejected |
+| Folding-screen hide beat | Lady catches Cora at bureau post-discovery — cleaner cause chain | Rejected |
+| Lady Eleanor / George stableman (donor rewrite) | Wrong scandal geometry | Rejected |
 
 ## 4. Structural & canon decisions
-- **Spine preserved / altered:** Labels fully preserved to match Twine-mapped spine and downstream files.
-- **Branching / flags touched:** Maps to `prologue_found` (`"read_letters"` / `"overheard"`), `prologue_why_write` (`"money_home"` / `"cataloguer"` / `"scandal_hungry"`), and `prologue_holywell_posture` (`"careful"` / `"eager"` / `"desperate"`).
-- **`# CANON FLAG` items:** None.
+
+- **Spine preserved:** All eight labels; all flag setters; `jump day101_main` handoff unchanged.
+- **Balance:** All stat choices use `apply_balanced_effect()` — 7 profile calls, 0 bespoke.
+- **Voice lock:** Spoken Cora to Sir John ≤8 words, no contractions (verified at authoring).
 
 ## 5. Downstream gate notes
-- **Lead Narrative Editor:** Check Cora's speech lock in the dialogue with Sir John (strict cap of <= 8 words, no contractions).
-- **Forensic Psychology Gate:** Verify the psychological consistency of the three confrontation postures (Lie, Deflect, Submit) with early-game Cora.
-- **Victorian Consultant:** Verify period terms (walnut bureau, grandfather clock, third-class train carriage, Strand solicitor, lye, coal smoke).
+
+- **Lead Narrative Editor:** Re-review required — prior `day100_gate_lead_narrative.md` (2026-06-10) invalidated.
+- **Forensic Psychology:** Verify Lady-first / Sir John-second confrontation; posture menus still map to early-game survival modes; False-Dawn interior does not over-seed Predator before Day 101.
+- **Victorian Consultant:** Lady + Margaret sapphic scandal; Irish slur; Margaret's speech to Lady — period register check.
+
+## 6. Validation
+
+- `py scripts/validate.py --profile changed --agent writers_room --skip-gate-checks` — **PASS** (2026-06-20)

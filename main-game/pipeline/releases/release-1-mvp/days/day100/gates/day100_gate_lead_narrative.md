@@ -1,58 +1,53 @@
 # Narrative Gate — Lead Narrative Editor
 # dayrdd: day100
-# Release: release 1 - mvp
+# Release: release-1-mvp
 # Draft: main-game/non-prod-game/game/days/day100_non_canon.rpy
-# Reviewed: 2026-06-10
-# Reference: day100_convergent_report.md, story_board.md
+# Reviewed: 2026-06-20
+# Reference: day100_narrative_change_brief.md, day100_convergent_report.md (Pass: editor-revision-1), story_board.md
 
 ## Verdict
 
 **PASS**
 
-The rewritten promotion draft of the Day 100 Prologue is structurally excellent and fully matches the new creative specifications. The transition to a leaner, more immediate opening starts in motion with high tension and avoids dry lore dumps. The script successfully sets all required global StoryState variables and meets Cora's early-game voice lock requirements.
+The editor-revision-1 prologue satisfies the Option B hybrid merge brief. Inciting scandal now centres on Lady Eleanor Wiltshire and under-housemaid Margaret; exit condition remains Sir John's dismissal at his wife's behest with Savoy reference under threat. All locked spine flags fire; Cora voice lock holds on spoken lines to Sir John.
 
 ## Canon cross-reference
 
 | Check | Result |
 |-------|--------|
-| Story board spine (labels, menus, flags) | OK — All eight labels (`day100_main` through `day100_3_arrival`) are correctly preserved and correctly jump to `day101_main`. |
-| Performed Self backstory / references | OK — Cora's Wiltshire domestic service background is properly woven into her interior dialogue and the confrontation with Sir John. |
-| Sir John's role and tone | OK — Sir John is presented as a quiet, authoritative figure whose social power does not need to raise its voice. |
-| Choice-state integration | OK — Correctly sets `prologue_found`, `prologue_why_write`, and `prologue_holywell_posture`. |
+| Breaking Point (`cora_character_canon.md`) | OK — Absolute dismissal after impropriety proximity; no blackmail exit. |
+| Story board spine (labels, menus, flags) | OK — All eight labels through `day101_main`; `prologue_found`, `prologue_why_write`, `prologue_holywell_posture` all set. |
+| Irish erasure / performed self | OK — Cork lilt vs flat English mask in main, reconvergence, train, Waterloo. |
+| False Dawn foreshadow | OK — Interior only (`day100_2_reconvergence`, lines 289–290); tempered by dismissal, not triumph. |
+| Mystery hook | OK — Savoy lockbox / Strand solicitor preserved in desk branch via Sir John's sheet among Lady's papers. |
 
 ## Stat-story alignment
 
-- Search choices correctly apply inspiration, corruption, and suspicion stats:
-  - walnut bureau search: `$ apply_effects(insp=15, corr=10)`
-  - parlour entrance search: `$ apply_effects(corr=15)`
-- Why Write choices correctly distribute stat effects:
-  - money_home: `$ apply_effects(insp=5)`
-  - cataloguer: `$ apply_effects(insp=5, corr=5)`
-  - scandal_hungry: `$ apply_effects(corr=10)`
-- Caught reaction choices correctly map to posture flags:
-  - Lie: `careful`
-  - Deflect: `eager` (`$ apply_effects(insp=5)`)
-  - Submit: `desperate` (`$ apply_effects(corr=5)`)
+- Search choices use `apply_balanced_effect("curious", major)` and `apply_balanced_effect("transgressive", major)`.
+- Posture menu: `careful` (no stat), `eager` (`observant` minor), `desperate` (`obedient` minor).
+- Why-write menu: `money_home` (`safe` minor), `cataloguer` (`curious` minor), `scandal_hungry` (`transgressive` standard).
+- Archetype seed menu unchanged; `apply_archetype_edge` on train.
 
 ## Implementation alignment
 
-- **Centralized Exit Routing**: The script exits via `jump day101_main` after setting the day to 1 and time to "Morning" via the `time_manager` API, complying with the exit router contract.
-- **State Management**: Uses only approved whitelisted StoryState setters (`set_prologue_found`, `set_prologue_why_write`, `set_prologue_holywell_posture`).
+- Exit via `jump day101_main` after `time_manager.set_current_day(1)` and `set_time_period("Morning")`.
+- Approved StoryState setters only; `renpy.block_rollback()` before train transition preserved.
 
 ## Voice check
 
 | Character | Assessment |
 |-----------|------------|
-| Cora (Wiltshire maid mask) | **Strict Voice Lock**. Cora's spoken lines to Sir John (`cora "I was only seeking ink, sir."`, `cora "They are my pages, sir."`, `cora "Forgive me, sir."`, `cora "I understand, sir."`) strictly respect the cap of <= 8 words per line and contain zero contractions. The gap between her hyper-literate, sensory thoughts and her simple spoken mask is beautifully executed. |
-| Sir John | Sir John speaks with cold, quiet authority ("Come out, Vale."). His dialogue conveys absolute power without shouting. |
+| Cora (spoken to Sir John) | **Voice lock.** `"There was a draft, sir."` (5), `"They are my pages, sir."` (5), `"Forgive me, sir."` (3), `"I understand, sir."` (3), Waterloo `"Forgive me, sir."` (3) — all ≤8 words, no contractions. |
+| Cora (inner) | Hyper-literate, sensory, Irish vigilance; Gap intact under Lady's slur beat. |
+| Sir John | Cold authority; performs dismissal validating wife (`"My wife is correct."`). |
+| Lady Eleanor | Class venom under panic; one-scene Wiltshire NPC — see editorial note. |
 
 ## Editorial notes (non-blocking)
 
-1. **Adrenaline flow**:
-   The transition from the tense cupboard hiding beat to the quiet caught moment works exceptionally well to establish the social geometry of the house.
-2. **Spice integration**:
-   The 2.8 spice rating is achieved perfectly through Cora's sensory daydream in the train carriage, reflecting the branch choices in a highly responsive manner.
+1. **Lady Eleanor + Margaret:** Flagged `NEEDS HUMAN CONFIRMATION` for canon registry — acceptable as one-scene prologue NPCs until human adds to draft bible or canon.
+2. **Spice elevation:** Live discovery branches meet brief's ~3.0 marketing floor; reconvergence stays class-tension only (≤2.5 live).
+3. **Prior gate (2026-06-10):** Superseded by this revision; Sir John/George scandal removed.
 
 ## Resubmission gate
 
-N/A — Approved for the forensic psychology gate.
+N/A — Approved for forensic psychology gate.

@@ -5,7 +5,7 @@
   "gate": "victorian",
   "verdict": "HISTORICALLY_SOUND",
   "blocking": false,
-  "reviewed_at": "2026-06-10",
+  "reviewed_at": "2026-06-20",
   "reviewed_files": [
     "main-game/non-prod-game/game/days/day100_non_canon.rpy"
   ],
@@ -16,5 +16,6 @@
     "forensic_psychology_consultant": false,
     "victorian_consultant": false,
     "profile_update": false
-  }
+  },
+  "notes": "editor-revision-1; supersedes 2026-06-10 verdict"
 }

@@ -169,6 +169,24 @@ init -40 python:
     declare_image_with_fallback("cora_sprite flushed", "images/sprites/cora/flushed.png", "#d4a574")
     declare_image_with_fallback("cora_sprite collar_travel", "images/sprites/cora/collar_travel.png", "#d4a574")
 
+    # ── Sprites: Lady Eleanor Wiltshire (Day 100 prologue) ─────────
+    # PLACEHOLDER: Cora art pass until bespoke Wiltshire mistress sprites.
+    declare_image_with_fallback("lady_eleanor_sprite panicked", "images/sprites/cora/flushed.png", "#c9a0dc")
+    declare_image_with_fallback("lady_eleanor_sprite furious", "images/sprites/cora/guarded.png", "#c9a0dc")
+    declare_image_with_fallback("lady_eleanor_sprite composed", "images/sprites/cora/focused.png", "#c9a0dc")
+
+    # ── Sprites: Margaret Pryce (Day 100 prologue) ─────────────────
+    # PLACEHOLDER: Cora art pass until bespoke under-housemaid sprites.
+    declare_image_with_fallback("margaret_sprite neutral", "images/sprites/cora/base.png", "#8a9eb5")
+    declare_image_with_fallback("margaret_sprite bold", "images/sprites/cora/guarded.png", "#8a9eb5")
+    declare_image_with_fallback("margaret_sprite yielding", "images/sprites/cora/flushed.png", "#8a9eb5")
+
+    # ── Sprites: Sir John Wiltshire (Day 100 prologue) ─────────────
+    # PLACEHOLDER: Cora art pass until bespoke country-gentleman sprites.
+    declare_image_with_fallback("sir_john_sprite cold", "images/sprites/cora/focused.png", "#4a5568")
+    declare_image_with_fallback("sir_john_sprite stern", "images/sprites/cora/guarded.png", "#4a5568")
+    declare_image_with_fallback("sir_john_sprite neutral", "images/sprites/cora/base.png", "#4a5568")
+
     # ── UI: persistent HUD (stats_overlay) ───────────────────────
     #
     # ui_cora_base:

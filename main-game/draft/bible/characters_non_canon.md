@@ -8,6 +8,7 @@ Main-character profiles live in dedicated files:
 - `main-game/draft/bible/stern_character_non_canon.md`
 - `main-game/draft/bible/missy_character_non_canon.md`
 - `main-game/draft/bible/vance_character_non_canon.md`
+- **Minor cast:** `main-game/draft/bible/characters_minor_non_canon.md` (synced to `main-game/canon/characters_minor_canon.md`)
 - Additional main-character files should follow: `<name>_character_non_canon.md`
 
 ---

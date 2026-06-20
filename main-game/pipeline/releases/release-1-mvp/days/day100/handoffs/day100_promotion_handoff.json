@@ -6,6 +6,8 @@
   "target_prod": "main-game/prod-game/game/day100.rpy",
   "creative_text_preserved": true,
   "promoted_by": "prod_code_agent",
+  "promoted_at": "2026-06-20",
+  "revision": "editor-revision-1",
   "new_labels": [
     "day100_main",
     "day100_1_afternoon_boredom_setup",
@@ -22,6 +24,9 @@
     "bg_country_estate_study",
     "bg_train_carriage_day"
   ],
+  "narrative_change_brief": "main-game/draft/releases/release-1-mvp/day100_narrative_change_brief.md",
+  "lead_narrative_gate": "main-game/pipeline/releases/release-1-mvp/days/day100/gates/day100_gate_lead_narrative.md",
   "psychology_gate_pre": "main-game/pipeline/releases/release-1-mvp/days/day100/gates/day100_gate_forensic_psychology.md",
-  "psychology_gate_post": "main-game/pipeline/releases/release-1-mvp/days/day100/gates/day100_gate_forensic_psychology.md"
+  "psychology_gate_post": "main-game/pipeline/releases/release-1-mvp/days/day100/gates/day100_gate_forensic_psychology.md",
+  "victorian_gate": "main-game/pipeline/releases/release-1-mvp/days/day100/gates/day100_gate_victorian.md"
 }

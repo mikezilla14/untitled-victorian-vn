@@ -50,7 +50,7 @@ The storyboard may guide human planning, but future agents must not reverse the 
 
 ```mermaid
 flowchart TD
-    D100[Day 100 Prologue: The Train & The Discovery] --> D101M[Day 101 Morning: Interview & Collision]
+    D100[Day 100 Prologue: Wiltshire Ruin & The Train] --> D101M[Day 101 Morning: Interview & Collision]
     D101M --> D101A[Day 101 Afternoon: Corridor Eavesdrop]
     D101A --> D101T[Day 101 Twilight: The Ledger]
     D101T --> D101N[Day 101 Night: The Manuscript]
@@ -91,9 +91,9 @@ flowchart TD
 
 | Flag Name | Set In | Function / Forward Impact |
 |-----------|--------|---------------------------|
-| `prologue_found` | Day 100 | `"overheard"` or `"read_letters"` — seeds Cora's initial thematic inclination. |
-| `prologue_why_write` | Day 100 | `"money_home"` / `"cataloguer"` / `"scandal_hungry"` — seeds manuscript motive for book1. |
-| `prologue_holywell_posture` | Day 100 | `"careful"` / `"eager"` / `"desperate"` — seeds illicit-publisher risk appetite. |
+| `prologue_found` | Day 100 | `"overheard"` or `"read_letters"` — Lady Eleanor + Margaret scandal branch; seeds Cora's initial thematic inclination. |
+| `prologue_why_write` | Day 100 | `"money_home"` / `"cataloguer"` / `"scandal_hungry"` — seeds manuscript motive for book1 (set in reconvergence menu). |
+| `prologue_holywell_posture` | Day 100 | `"careful"` / `"eager"` / `"desperate"` — seeds illicit-publisher risk appetite (Sir John caught-reaction menu). |
 | story.day1_interview_state | Day 101 | `"meek"` / `"competent"` — early suspicion shaping with Stern. |
 | story.day1_corridor_state | Day 101 | `"predator"` / `"prey"` / `"ghost"` — determines Chapter 1 prose and Day 2's contraband branch. |
 | story.day1_ledger_focus | Day 101 | `"inspiration"` / `"corruption"` — dictates the framing of the writing or indulgence. |
@@ -199,7 +199,7 @@ Penance is queued in story.pending_penance and consumed by named consequence win
 
 | Step | Day | Period | Type | Enter label | Sets / gates |
 |------|-----|--------|------|-------------|--------------|
-| 0 | 100 | - | WORK | `day100_main` | prologue_found -> D1 |
+| 0 | 100 | Night → Morning | WORK | `day100_main` | `prologue_found`, `prologue_holywell_posture`, `prologue_why_write`, `run_archetype_seed` → D101 |
 | 1 | 101 | Morning | WORK | `day101_main` -> `day101_1_cora_waiting` -> `day101_1_morning_interview` -> `day101_1_vance_throws_toy` | day1_interview_state |
 | 2 | 101 | Afternoon | WORK | `day101_2_missy_meets_cora` -> `day101_2_coras_path_choice` | day1_corridor_state |
 | 3 | 101 | Evening | CONSEQUENCE | `day101_evening_consequence_window` | Queues and consumes confrontation labels before ledger prose continues. |
@@ -319,13 +319,20 @@ flowchart LR
 
 ## Scene Ledger & Passage Flow
 
-### Day 100 (Prologue / Tutorial)
-*Source: `day100_non_canon.rpy`*
-- **`day100_main` (Morning)**: Third-class train; voice tutorial (narrator / `cora_inner` / `cora`); stat sidebar intro.
-- **`day100_1_afternoon_boredom`**: Boredom reading; Holywell handbill; `prologue_why_write` + `prologue_holywell_posture`.
-- **`day100_2_evening_flashback`**: Wiltshire discovery (`prologue_found`: overheard / read_letters).
-- **`day100_3_night_daydream`**: Daydream-framed spice (~2.8) toward Holywell / authorship.
-- **`day100_3_arrival`**: Waterloo; handoff to Day 101.
+### Day 100 (Prologue)
+*Source: `main-game/non-prod-game/game/days/day100_non_canon.rpy` · Canon: `editor-revision-1` (2026-06-20)*
+
+**Exit:** Sir John dismisses Cora at Lady Eleanor's behest; Savoy reference under gutter threat. Cora leaves expelled (not blackmail-victorious). Irish linguistic mask + False-Dawn interior seed only.
+
+**Minor cast:** Lady Eleanor Wiltshire, Margaret Pryce (under-housemaid), Sir John Wiltshire — see `main-game/canon/characters_minor_canon.md`.
+
+- **`day100_main` (Night)**: Wiltshire corridor crawl; confiscated manuscript pages; Irish erasure beat; `[enter:Cora]` / `guarded_travel`.
+- **`day100_1_afternoon_boredom`**: Lady Eleanor's withdrawing room search menu → `prologue_found` (`read_letters` bureau / `overheard` parlour); `apply_balanced_effect` on search arms.
+- **`day100_2_parlour_branch`**: Keyhole voyeur — Lady Eleanor + Margaret (live spice ~3.0); string-speaker overheard lines; Cora `flushed` keep.
+- **`day100_2_desk_branch`**: Lady Eleanor's letters to Margaret + Sir John Savoy lockbox / Strand clue; Cora `focused` keep.
+- **`day100_2_reconvergence`**: Lady catches Cora → demands expulsion → Sir John performs dismissal. Menus: `prologue_holywell_posture` (Lie / Deflect / Submit) then `prologue_why_write` (money / catalogue / scandal). Sprites: Cora + Lady Eleanor + Sir John.
+- **`day100_3_night_daydream`**: Train; `run_archetype_seed` menu (ghost / prey / predator); branch-conditioned daydream (~2.8–3.0); posture-conditioned Holywell tempo lines.
+- **`day100_3_arrival`**: Waterloo manuscript spill; English country mask holds; handoff to `day101_main`.
 
 ### Day 101
 *Source: day101_non_canon.rpy*
@@ -377,8 +384,17 @@ flowchart LR
 ## Assets Checklist
 
 ### Backgrounds
-- `interior/train_carriage (day)` (Day 100)
-- `interior/country_estate_study` (Day 100)
+- `bg_country_estate_corridor_night` (Day 100 — Wiltshire night crawl)
+- `bg_country_estate_study` (Day 100 — Lady Eleanor's withdrawing room)
+- `bg_train_carriage_day` (Day 100 — train / Waterloo approach)
+
+### Sprites (Day 100 prologue — placeholder pass)
+- `cora_sprite` — `guarded_travel`, `base_travel`, `flushed`, `focused`
+- `lady_eleanor_sprite` — `panicked`, `furious`, `composed` (Cora PNG placeholders)
+- `margaret_sprite` — `neutral`, `bold`, `yielding` (Cora PNG placeholders; parlour overheard may omit sprite)
+- `sir_john_sprite` — `cold`, `stern`, `neutral` (Cora PNG placeholders)
+
+### Backgrounds (hotel — Day 101+)
 - `bg_savoy_corridor (morning)`
 - `bg_laundry_room (day)`
 - `bg_servants_corridor (dim, day, morning)`

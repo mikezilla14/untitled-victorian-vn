@@ -1,30 +1,37 @@
 # Psychology Gate — Forensic Psychology Consultant
 # dayrdd: day100
-# Release: release 1 - mvp
+# Release: release-1-mvp
 # Draft: main-game/non-prod-game/game/days/day100_non_canon.rpy
-# Reviewed: 2026-06-10
+# Reviewed: 2026-06-20
 # Prerequisite: day100_gate_lead_narrative.md — **PASS**
-# Reference: cora_character_canon.md, main-game/canon/voice_guides/cora_voice_guide.md
+# Reference: cora_character_canon.md, day100_narrative_change_brief.md
 
 ## Verdict
 
 **PSYCHOLOGICALLY CONSISTENT**
 
-The rewritten prologue is highly consistent with Cora's profile as a high-functioning observer driven by hidden ambition and intense social pressure. By putting her under immediate threat (desk search and confrontation), her survival strategies (Lie/Deflect/Submit) read as authentic adaptive responses rather than dry explanations.
+The Lady-first / Sir John-second reconvergence reads as authentic stress choreography for early-game Cora. Discovery arousal + tactical observation in the parlour/desk branches align with her transgression fascination and taxonomic intelligence. Dismissal tempers the False-Dawn interior seed — she leaves expelled, not empowered — so Predator archetype seed on the train remains a player choice, not a foregone prologue outcome.
 
 ## Choice-profile coherence
 
 | Check | Result |
 |-------|--------|
-| Search choices (Walnut bureau vs Parlour settee) | Coherent — reflects the dichotomy between Cora's analytical/literary focus (drawer letters) and voyeuristic curiosity (parlour voices). |
-| Caught reactions (Lie/Deflect/Submit) | Coherent — aligns directly with her performed maid voice and maps to standard class compliance vs defiance modes. |
-| Ambition choices (Money/Catalogue/Scandal) | Coherent — maps logically to her motivations (familial duty, social diagnostic curiosity, or appetite for thrill). |
+| Search (bureau vs parlour) | Coherent — literary/analytical (`curious`) vs voyeuristic risk (`transgressive`). |
+| Posture (Lie / Deflect / Submit) | Coherent — performed maid survival modes under Sir John's authority after Lady's panic. |
+| Why write (Money / Catalogue / Scandal) | Coherent — maps to familial duty, power-mapping, appetite; inner-only responses appropriate. |
+| Archetype seed (Ghost / Prey / Predator) | Coherent — post-dismissal identity fork; not over-determined by scandal content. |
 
 ## Character action logic
 
-- **Cora**: Her physical actions—sneaking boots-in-hand, hiding behind the folding screen, and quickly gathering pages from the train floorboards—illustrate a high level of situational control mixed with acute physiological anxiety.
-- **Sir John**: His refusal to raise his voice during the caught moment demonstrates typical late-Victorian paternalistic management. His anger is silent and heavy, motivated by a desire to bury his own exposure (as witnessed in the letter/parlour branches).
+- **Cora:** Linguistic vigilance after Irish slur is consistent with canon national erasure. Power tally at keyhole (`"blinding tally of power"`) matches observer/arousal profile without collapsing into prologue blackmail (brief-compliant).
+- **Lady Eleanor:** Panic-driven expulsion demand fits gendered ruin stakes; venom toward Irish maid is structurally plausible ambient prejudice + personal terror.
+- **Sir John:** Performs master dismissal validating wife — protects household, buries Lady's exposure, maintains reference leverage. Controlled affect (collar straight) contrasts Lady's disarray — psychologically credible compartmentalisation.
 
 ## Carry-forward
 
-Ensure the transition into Day 101 maintains her performed humility while her interior monologue carries the adrenaline of the Wiltshire dismissal. No profile updates are required.
+- Day 101 entry should assume **dismissed** posture (not hubris). Interior may carry scandal imagery branch-conditionally; do not have NPCs reference Margaret unless future brief wires it.
+- No profile updates required. Lady Eleanor / Margaret remain one-scene NPCs — no profile files needed until human canonises.
+
+## Resubmission gate
+
+N/A — Approved for Victorian historical gate.

@@ -1,42 +1,46 @@
 # Historical Gate — Victorian Consultant
 # dayrdd: day100
-# Release: release 1 - mvp
+# Release: release-1-mvp
 # Draft: main-game/non-prod-game/game/days/day100_non_canon.rpy
-# Reviewed: 2026-06-10
-# Prerequisite: day100_gate_lead_narrative.md — **PASS**
-# Policy: main-game/canon/historical_guardrails.md (1891 Savoy baseline)
+# Reviewed: 2026-06-20
+# Prerequisite: day100_gate_lead_narrative.md — **PASS**; day100_gate_forensic_psychology.md — **PSYCHOLOGICALLY CONSISTENT**
+# Policy: main-game/canon/historical_guardrails.md (1891 baseline)
 
 ## Verdict
 
 **HISTORICALLY SOUND**
 
-The rewritten Day 100 Prologue contains no anachronisms, class address violations, or modern idioms. The text captures the late-Victorian domestic setting and early train travel realities with exceptional period accuracy.
+No blocking anachronisms, class violations, or modern idioms detected. Automated historical linter passes clean (2026-06-20 validation).
 
 ## Societal audit
 
 | Element | Assessment |
 |---------|------------|
-| Master-servant spatial trespass | **Highly accurate.** A maid entering the master's study at night is a severe class boundary violation. Cora's intense spatial caution reflects the severe penalties associated with domestic trespass. |
-| Class address and protocols | **Excellent.** Cora addresses Sir John as "sir" in every instance. Sir John calls her by her surname "Vale" or full name "Cora Vale", enforcing the standard social distance of 1891 service. |
-| The threat of the gutter | **Authentic.** Being dismissed without a character reference meant immediate ruin and destitution for working-class girls in late-Victorian England. Sir John's leverage is historically plausible and severe. |
+| Lady + under-housemaid intimacy | **Plausible.** Close-quarter service relationships and coded "romantic friendship" idioms were documented in Victorian domestic contexts; scandal stakes for a mistress are historically severe (children, name, exile). |
+| Lady's expulsion demand | **Accurate.** Mistress of house could insist on immediate removal of a trespassing maid; master performs formal dismissal and reference leverage. |
+| Irish slur ("guttersnipe") | **Period-appropriate.** Anti-Irish servant prejudice ambient in English country-house employ; triggers Cora's mask without author endorsement. |
+| Sir John dismissal + Savoy reference | **Unchanged and sound.** Luxury hotels recruited from large estates; threat of gutter without character is authentic leverage. |
+| Gendered ruin observation (inner) | **Historically legible.** A Lady's reputation more brittle than a Lord's in adultery-adjacent scandal — supports False-Dawn thesis without anachronistic feminism in dialogue. |
 
 ## Linguistic audit
 
 | Line / pattern | Assessment |
 |----------------|------------|
-| "Wiltshire at night is a cold vault" | Wiltshire is a historically appropriate rural estate location. |
-| "A writing maid is a monster in the house" | Perfect capture of the mid-to-late Victorian middle-class anxiety regarding servant literacy and potential subversion. |
-| "A reference for the Savoy, Vale." | Historically plausible. Luxury hotels like the Savoy recruited experienced staff from large country estates. |
-| "Strand" and "gutter" | Strand is the street adjacent to the Savoy, associated with both luxury and, in its back alleys, deep destitution, making it a perfect double-edged metaphor for her dismissal. |
-
-**No modern slang, clinical jargon, or contemporary contractions** appear in the dialogue.
+| Cora spoken lines to Sir John | Short, deferential, "sir" — correct service register. |
+| `"cold paneling"` | Replaces flagged modern "cool" — clean. |
+| Margaret `"Then let him wake, my Lady"` | Bold for a junior maid in extremis; acceptable in private parlour overheard beat — monitor if Margaret speaks again elsewhere. |
+| `"third-class bench"`, grandfather clock, walnut bureau | Correct late-Victorian domestic and rail vocabulary. |
+| Savoy lockbox / Strand solicitor / photographic plates | Consistent with 1891 dry-plate photography and London hotel culture. |
 
 ## Technology & setting
 
-- The third-class train carriage carriage details (iron rattle, coal smoke, soot-stained wood, hard bench) are accurate for late-Victorian rail travel.
-- The grandfather clock, walnut bureau drawers, and folding velvet screen are classic period furnishings.
-- The mention of a "locked box of photographic plates" at the Savoy fits the 1891 context of dry-plate photography, which was popular among amateur gentry.
+- Night crawl at 3 AM; morning train dismissal — plausible timeline.
+- Waterloo third-class arrival — accurate for Irish/ country maids entering London employ.
+
+## Editorial notes (non-blocking)
+
+- Margaret's direct speech to Lady Eleanor is slightly elevated for rank — justified as overheard private intimacy; not repeated in player-facing dialogue from Cora.
 
 ## Resubmission gate
 
-N/A — No violations flagged. Approved for promotion.
+N/A — Approved for promotion implementation.

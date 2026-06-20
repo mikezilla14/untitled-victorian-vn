@@ -34,7 +34,7 @@
 
 ## Handoff → Day 101
 
-**Exit state (Day 100):** Cora steps off the train at Waterloo with manuscript, forged references, and the gap between performed maid and inner author established. Prologue seeds discovery (`overheard` / `read_letters`), why she writes (`money_home` / `cataloguer` / `scandal_hungry`), and Holywell posture (`careful` / `eager` / `desperate`). Still country grief in a London smog body — not yet hotel-shaped.
+**Exit state (Day 100):** Cora steps off the train at Waterloo dismissed — not victorious. She carries manuscript pages, a Savoy reference won under threat, and the English country-girl mask held flat at the throat (Cork swallowed, never spoken). Prologue seeds discovery of Lady Eleanor's ruin with under-housemaid Margaret (`overheard` / `read_letters`), why she writes (`money_home` / `cataloguer` / `scandal_hungry`), and Holywell posture (`careful` / `eager` / `desperate`). Sir John expelled her at his wife's behest after Cora trespassed in Eleanor's rooms. Interior False-Dawn seed only: a Lady's ruin is total; a Lord's is negotiable — secrets may have price someday, not tonight. Country grief in a London smog body — not yet hotel-shaped.
 
 **Flags that matter today:** `prologue_found`; `prologue_why_write`; `prologue_holywell_posture` (echo in dialogue/thought only until book1 wiring).
 
@@ -42,7 +42,7 @@
 
 **Voice today:** Cora **Day 1 — Performed Self** (wide speech/thought gap, 8-word spoken lines, no contractions to superiors). Gideon **Day 1 — Instrument** (does not see maids).
 
-**Callbacks required:** Manuscript as liability; forged references; improper subject matter; London smoke vs country estate.
+**Callbacks required:** Manuscript as liability; Savoy reference under threat; Irish linguistic mask; Lady Eleanor scandal (do not name Margaret unless player chose overheard branch); London smoke vs Wiltshire estate dismissal.
 
 **Forbidden:** Hotel mastery; Gideon intimacy; Missy debt.
 

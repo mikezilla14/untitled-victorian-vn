@@ -31,6 +31,9 @@ sprite_scene_direction_agent:
       Stern: neutral
       Vance: neutral
       Missy: neutral
+      Lady_eleanor: panicked
+      Margaret: neutral
+      Sir_john: cold
 
   # ── Transitions (resolves brief §11) ──
   transitions:
@@ -56,7 +59,6 @@ sprite_scene_direction_agent:
 
   # Files the agent must never auto-direct (hand-directed; left as-is).
   excluded_files:
-    - days/day100_non_canon.rpy
     - days/day101_non_canon.rpy
 
   slot_sets:

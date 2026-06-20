@@ -31,8 +31,7 @@ The implementation plan is [`docs/specs/scene-direction-agent.md`](../../docs/sp
    (`cora` → `cora_sprite`). An undeclared speaker is skipped with a warning, never guessed.
 6. **Four-character limit.** More than four visible characters emits
    `# [asset warning: ...]` and requires manual review. Do not silently drop characters.
-7. **Excluded files are off-limits.** `day100_non_canon.rpy` and `day101_non_canon.rpy` are
-   hand-directed (see `excluded_files` in the policy). Never auto-direct them.
+7. **Excluded files are off-limits.** `day101_non_canon.rpy` is hand-directed (see `excluded_files` in the policy). `day100_non_canon.rpy` is scene-direction eligible as of editor-revision-1 (2026-06-20).
 
 ---
 
