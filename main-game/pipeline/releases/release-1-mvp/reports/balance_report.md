@@ -1,7 +1,7 @@
 # Testing and balance report
 
 **Release:** `release-1-mvp`
-**Generated:** 2026-06-19 22:58 UTC
+**Generated:** 2026-06-20 11:40 UTC
 
 ## Verdict
 
@@ -44,7 +44,7 @@
 - ✓ **PASS** — Day 101 night write menu uses `has_story_fuel(*WRITE_GATE_CH1)` (`main-game/non-prod-game/game/days/day101_non_canon.rpy`)
 - ✓ **PASS** — Day 102 Ch1 catch-up uses `has_story_fuel(*WRITE_GATE_CH1)` (`main-game/non-prod-game/game/days/day102_non_canon.rpy`)
 - ✓ **PASS** — Day 102 Ch2 write uses `has_story_fuel(*WRITE_GATE_CH2)` (`main-game/non-prod-game/game/days/day102_non_canon.rpy`)
-- ✓ **PASS** — Day 103 Ch3 write uses `has_story_fuel(*WRITE_GATE_CH3)` (`main-game/non-prod-game/game/days/day103_non_canon.rpy`)
+- ⚠ **WARN** — Day 103 Ch3 write: expected `has_story_fuel(*WRITE_GATE_CH3)` not found (`main-game/non-prod-game/game/days/day103_non_canon.rpy`)
 - ✓ **PASS** — `label book1_write_chapter` found in book1_non_canon.rpy (`main-game/non-prod-game/game/days/book1_non_canon.rpy`)
 - ✓ **PASS** — `call book1_write_chapter` found in day101_non_canon.rpy (`main-game/non-prod-game/game/days/day101_non_canon.rpy`)
 - ✓ **PASS** — `call book1_write_chapter` found in day102_non_canon.rpy (`main-game/non-prod-game/game/days/day102_non_canon.rpy`)
@@ -96,6 +96,7 @@
 - ✓ **PASS** — Grain type `ending` inferred (8 grains) (`main-game/pipeline/releases/release-1-mvp/grain/release1_grain_manifest.json`)
 - ✓ **PASS** — Grain type `book1` inferred (67 grains) (`main-game/pipeline/releases/release-1-mvp/grain/release1_grain_manifest.json`)
 - ⚠ **WARN** — Grain gap report lists major/warning findings (untagged gates expected for now) (`main-game/pipeline/releases/release-1-mvp/grain/release1_grain_gaps.md`)
+- ✓ **PASS** — Balance model file present: effect_profiles (`main-game/draft/releases/planning/balance/effect_profiles.yaml`)
 - ✓ **PASS** — Balance model file present: gate_catalogue (`main-game/draft/releases/planning/balance/gate_catalogue.csv`)
 - ✓ **PASS** — Balance model file present: run_policies (`main-game/draft/releases/planning/balance/run_policies.csv`)
 - ✓ **PASS** — Balance model file present: balance_targets (`main-game/draft/releases/planning/balance/balance_targets.yaml`)
@@ -113,8 +114,40 @@
 - ✓ **PASS** — Simulation output present: gate_results (`main-game/pipeline/releases/release-1-mvp/balance/gate_results.csv`)
 - ✓ **PASS** — Runtime capture harness present: debug_run_capture (`main-game/non-prod-game/game/shared/debug_run_capture.rpy`)
 - ✓ **PASS** — Runtime capture overlay screens present in screens.rpy (`main-game/non-prod-game/game/screens.rpy`)
-- … **INCOMPLETE** — No P1–P7 JSONL captures yet — playtest non-prod with F10 overlay or debug_capture_start (`main-game/non-prod-game/debug_captures`)
+- ✓ **PASS** — Runtime JSONL captures present (1/7) (`P1_corruption_forward`)
+- ✓ **PASS** — Runtime/model comparison report present (`main-game/pipeline/releases/release-1-mvp/qa/runtime_model_comparison.md`)
 - ✓ **PASS** — Runtime comparison tool present (`main-game/pipeline/tools/compare_runtime_to_model.py`)
+
+## Semantic effect profile checks
+
+- ✓ **PASS** — Effect profile source file present (`main-game/draft/releases/planning/balance/effect_profiles.yaml`)
+- ✓ **PASS** — Runtime balance profile file present (`main-game/non-prod-game/game/shared/balance_profiles_non_canon.rpy`)
+- ✓ **PASS** — Choice catalogue profile rows match resolved profile deltas (`main-game/draft/releases/planning/balance/choice_catalogue.csv`)
+- ✓ **PASS** — Profile usage captured (45 profile-mapped choices) (`main-game/draft/releases/planning/balance/choice_catalogue.csv`)
+- ✓ **PASS** — No direct player stat mutations in scoped day scripts (`non-prod day scripts`)
+- ✓ **PASS** — Semantic profile calls valid (62 call(s)) (`non-prod day scripts`)
+- ✓ **PASS** — Bespoke apply_effects marked (23 call(s)) (`non-prod day scripts`)
+
+## Profile usage summary
+
+- `creative_major`: 5
+- `curious_major`: 1
+- `curious_minor`: 1
+- `defiant_major`: 2
+- `defiant_standard`: 4
+- `obedient_minor`: 1
+- `obedient_standard`: 2
+- `observant_minor`: 1
+- `observant_standard`: 8
+- `predatory_standard`: 1
+- `reckless_1.4`: 3
+- `reckless_major`: 1
+- `reckless_standard`: 1
+- `safe_minor`: 1
+- `self_protective_standard`: 1
+- `submissive_standard`: 5
+- `transgressive_major`: 3
+- `transgressive_standard`: 4
 
 ## Required day files
 
@@ -126,7 +159,6 @@
 
 ## Missing evidence
 
-- No runtime JSONL captures — play non-prod and save under debug_captures/ before promotion proof.
 - Abstract simulator does not walk labels — P2/P3/P7 need runtime captures or graph walk.
 - Corruption Level 4 milestone by Day 4 end is design intent until playtest proof exists.
 

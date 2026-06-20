@@ -22,6 +22,16 @@ You implement approved drafts and explore new mechanics strictly inside the non-
    - **Binary flags:** Simple yes/no events use `bool` attributes and typed setters (e.g. `story.set_has_read_gideon_letters(True)`). Do not assign flags directly.
    - **Mutually exclusive branches:** Do not model one-of-N outcomes with several booleans. Use a single string field with a default sentinel (e.g. `day1_corridor_state = "none"`) and a designated whitelist + setter (e.g. `VALID_CORRIDOR_STATES` + `set_corridor_state(...)`).
    - **String state updates in scripts:** Never assign a whitelisted branch string directly (e.g. `story.day1_corridor_state = "predator"`). Use only the designated setter: `story.set_corridor_state("predator")`.
+   - **Stat effects (semantic balance profiles):** When Authoring Intent or a spec lists
+     `requested_effects` with a `profile`, emit:
+     ```renpy
+     # [STATE] Semantic balance profile: <narrative_meaning>
+     $ apply_balanced_effect("<profile>", intensity="<intensity>", witness="<witness>")
+     ```
+     Use `witness=` only when the profile requires it. Use `base_witness=True` only when intent
+     specifies durable base suspicion. For `kind: bespoke` intent entries, emit `# [STATE bespoke]`
+     and raw `apply_effects(...)` with the documented deltas. Never reconstruct profile kwargs by
+     hand and never mutate `player.*` directly.
 5. **Bracket Interpolation Check.** Scan every menu caption and dialogue string in your draft files for `[Word]` patterns where `Word` is a single CamelCase or PascalCase token that is not a defined runtime variable. These must be escaped to `[[Word]]` to prevent runtime `NameError` exceptions.
 6. **Book Writing Context Packet.** When the Writers' Room requests or works on new `book1` manuscript chapters (such as Day 2 chapters) or rewrites, you must compile a comprehensive writer-facing context packet for the target chapter/day. Supply it to the Writers' Room before prose drafting. The packet must include:
    - all active `story` flags, whitelisted string states, player stats, and gameplay states available up to that chapter;

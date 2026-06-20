@@ -1,0 +1,67 @@
+# Source of truth for semantic balance profiles (non-prod sandbox).
+# Regenerate runtime tables: py scripts/generate_balance_profiles_rpy.py
+
+stat_units:
+  insp: 50
+  corr: 20
+  susp: 100
+
+intensities:
+  trace: 0.05
+  minor: 0.10
+  standard: 0.25
+  major: 0.40
+  severe: 0.60
+
+valid_witnesses:
+  - stern
+  - vance
+  - gideon
+  - missy
+
+profiles:
+  safe:
+    insp: trace
+
+  observant:
+    insp: minor
+
+  curious:
+    insp: standard
+    corr: minor
+
+  obedient:
+    corr: minor
+    insp: trace
+
+  submissive:
+    corr: standard
+    insp: minor
+
+  defiant:
+    insp: standard
+    witness_susp: minor
+
+  deceptive:
+    insp: minor
+    witness_susp: standard
+
+  transgressive:
+    corr: standard
+    insp: standard
+
+  reckless:
+    corr: major
+    insp: standard
+    witness_susp: standard
+
+  predatory:
+    corr: major
+    insp: minor
+    witness_susp: minor
+
+  self_protective:
+    insp: minor
+
+  creative:
+    insp: standard

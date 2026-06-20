@@ -212,6 +212,12 @@ def main():
                 non_canon_rpy,
                 use_list=True
             )
+            failures |= run_step_chunked(
+                "Balance profile lint",
+                [py, "scripts/balance_profile_lint.py"],
+                non_canon_rpy,
+                file_arg_name="--files",
+            )
             for file in non_canon_rpy:
                 failures |= run_writers_room_pipeline_check(
                     file,

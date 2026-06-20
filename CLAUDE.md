@@ -63,6 +63,7 @@ Launch via the Ren'Py SDK launcher (GUI) pointing at `main-game/prod-game/`, or 
 | `classes.rpy` | All Python class definitions: `TimeManager`, `PlayerStats`, `StoryState` |
 | `variables.rpy` | Singleton instantiation only — one `default` declaration per class |
 | `functions.rpy` | Shared game logic helpers called from narrative scripts |
+| `balance_profiles.rpy` | Generated semantic balance profiles (`init -1 python in balance_resolver:`); regen via `py scripts/generate_balance_profiles_rpy.py` |
 | `script.rpy` | Thin entry point; jumps to `day101_main` |
 | `characters.rpy` | Character sprite definitions (`define speaker = Character(...)`) |
 | `assets_manifest.rpy` | Centralized asset declarations with fallback placeholders |
@@ -101,6 +102,7 @@ Reading state directly in `if` conditions is always allowed.
 | Function | Purpose |
 |----------|---------|
 | `apply_effects(insp=0, corr=0, susp=0)` | Combined stat delta. Positive `insp` = gain; negative = spend (returns bool). Corruption never decreases. |
+| `apply_balanced_effect(profile, intensity="standard", witness=None, base_witness=False)` | Resolve semantic profile → `apply_effects` kwargs (preferred for new economy branches) |
 | `attempt_write(required_insp=30, cost=20)` | Writing-gate check + spend. Returns `True` if passed. |
 | `has_story_fuel(required_total=15)` | Read-only fuel check (inspiration + corruption_xp). |
 | `resolve_turn()` | Calls `check_suspicion` label then `update_stats()` — always in this order. |
@@ -163,7 +165,7 @@ Use the **Orchestrator** for automated pipelines: paste `.agents/rules/orchestra
 | Domain | Paths | Mutable By |
 |--------|-------|-----------|
 | `framework_code` | `classes.rpy`, `screens.rpy`, `characters.rpy`, `gui.rpy`, `options.rpy`, mechanics bible | `chief_architect`, `human` |
-| `episodic_code` | `day*.rpy`, `endings.rpy`, `functions.rpy`, `script.rpy` | `code_agent`, `chief_architect`, `human` |
+| `episodic_code` | `day*.rpy`, `balance_profiles.rpy`, `endings.rpy`, `functions.rpy`, `script.rpy` | `code_agent`, `chief_architect`, `human` |
 | `production_narrative` | `main-game/draft/**` | `writers_room`, `lead_narrative_editor`, `human` |
 | `canon_lore` | `main-game/canon/**`, `main-game/canon/**` | `lead_narrative_editor`, `victorian_consultant`, `human` |
 | `repo_operations` | `scripts/**`, `.agents/**`, `docs/*.md`, `.github/**` | `chief_architect`, `gatekeeper_orchestrator`, `human` |

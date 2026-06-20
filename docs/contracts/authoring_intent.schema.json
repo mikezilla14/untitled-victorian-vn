@@ -64,16 +64,10 @@
     "requested_effects": {
       "type": "array",
       "items": {
-        "type": "object",
-        "required": ["trigger", "deltas"],
-        "additionalProperties": false,
-        "properties": {
-          "trigger": { "type": "string", "minLength": 1 },
-          "deltas": {
-            "type": "object",
-            "additionalProperties": { "type": "integer" }
-          }
-        }
+        "oneOf": [
+          { "$ref": "#/$defs/semantic_effect" },
+          { "$ref": "#/$defs/bespoke_effect" }
+        ]
       }
     },
     "requested_branches": {
@@ -98,7 +92,11 @@
                   "enum": ["observer", "predator", "prey", "ghost"]
                 },
                 "sets": { "type": "string" },
-                "effects": { "type": "string" }
+                "effects": {
+                  "type": "string",
+                  "description": "Deprecated shorthand. Prefer nested semantic effect fields or a requested_effects trigger reference."
+                },
+                "effect": { "$ref": "#/$defs/semantic_effect" }
               }
             }
           }
@@ -136,6 +134,74 @@
     }
   },
   "$defs": {
+    "balance_profile": {
+      "type": "string",
+      "enum": [
+        "safe",
+        "observant",
+        "curious",
+        "obedient",
+        "submissive",
+        "defiant",
+        "deceptive",
+        "transgressive",
+        "reckless",
+        "predatory",
+        "self_protective",
+        "creative"
+      ]
+    },
+    "balance_intensity_name": {
+      "type": "string",
+      "enum": ["trace", "minor", "standard", "major", "severe"]
+    },
+    "balance_witness": {
+      "type": "string",
+      "enum": ["stern", "vance", "gideon", "missy"]
+    },
+    "semantic_effect": {
+      "type": "object",
+      "required": ["trigger", "profile", "narrative_meaning"],
+      "additionalProperties": false,
+      "properties": {
+        "trigger": { "type": "string", "minLength": 1 },
+        "profile": { "$ref": "#/$defs/balance_profile" },
+        "intensity": {
+          "oneOf": [
+            { "$ref": "#/$defs/balance_intensity_name" },
+            { "type": "number", "exclusiveMinimum": 0 }
+          ],
+          "default": "standard"
+        },
+        "witness": { "$ref": "#/$defs/balance_witness" },
+        "base_witness": { "type": "boolean", "default": false },
+        "narrative_meaning": { "type": "string", "minLength": 1 }
+      }
+    },
+    "bespoke_effect": {
+      "type": "object",
+      "required": ["trigger", "kind", "deltas", "narrative_meaning", "bespoke_reason"],
+      "additionalProperties": false,
+      "properties": {
+        "trigger": { "type": "string", "minLength": 1 },
+        "kind": { "type": "string", "const": "bespoke" },
+        "bespoke_reason": {
+          "type": "string",
+          "enum": [
+            "write_spend",
+            "negative_suspicion",
+            "recovery_mix",
+            "fixed_reward",
+            "other"
+          ]
+        },
+        "deltas": {
+          "type": "object",
+          "additionalProperties": { "type": "integer" }
+        },
+        "narrative_meaning": { "type": "string", "minLength": 1 }
+      }
+    },
     "precheck_result": {
       "type": "object",
       "required": ["verdict"],

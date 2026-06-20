@@ -51,6 +51,7 @@ domains:
   episodic_code:
     paths:
       - main-game/prod-game/game/day*.rpy
+      - main-game/prod-game/game/balance_profiles.rpy
       - main-game/prod-game/game/endings.rpy
       - main-game/prod-game/game/functions.rpy
       - main-game/prod-game/game/script.rpy

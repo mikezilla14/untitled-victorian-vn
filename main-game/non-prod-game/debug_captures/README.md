@@ -14,10 +14,10 @@ Example: `P1_corruption_forward.jsonl`
 
 1. Launch the **non-prod** Ren'Py project (`main-game/non-prod-game/`).
 2. Press **F10** to show the balance debug overlay.
-3. Click **P1** (or start a run from the Ren'Py console):
+3. Click a matrix button (**P1**–**P7**) in the overlay, or start from the Ren'Py console:
 
    ```renpy
-   $ _capture_run_id = "P2_cautious"
+   $ _capture_run_id = "P4_deadline_1"
    jump debug_capture_start
    ```
 
@@ -26,7 +26,9 @@ Example: `P1_corruption_forward.jsonl`
 
 ## Event types
 
-Each line is one JSON object: `run_start`, `grain_enter`, `choice`, `gate`, `flag`, `rollback_event`, `ending`, `run_end`.
+Each line is one JSON object: `run_start`, `grain_enter`, `choice`, `gate`, `balanced_effect`, `flag`, `rollback_event`, `ending`, `run_end`.
+
+Semantic profile mutations emit `balanced_effect` (profile + resolved kwargs). Bespoke `apply_effects` still emit `flag` with `mutation=apply_effects`.
 
 Every event includes a stats/suspicion snapshot per `testing_balance_framework_spec.md` Phase 3.
 
@@ -37,7 +39,7 @@ py main-game/pipeline/tools/compare_runtime_to_model.py --release release-1-mvp
 py main-game/pipeline/tools/compare_runtime_to_model.py --release release-1-mvp --capture P1_corruption_forward
 ```
 
-Captures with rollback are valid; summary reports mark `contains_rollback: true`.
+Captures with rollback remain in the JSONL stream for debugging, but **`compare_runtime_to_model.py` rejects rollback-contaminated files for balance proof** unless you pass `--allow-rollback`. Prefer forward-only play for official P1–P7 matrix captures.
 
 ## Public build
 

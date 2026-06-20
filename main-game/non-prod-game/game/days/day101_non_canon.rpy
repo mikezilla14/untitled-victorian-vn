@@ -168,8 +168,8 @@ label day101_1_morning_interview:
 
         "Lower my eyes. Let her mistake fear for obedience.":
 
-            # [STATE] Low-risk survival posture. Cora hides sharpness, but the performance costs dignity
-            $ apply_effects(stern_susp=5, insp=5, corr=0)
+            # [STATE] Semantic balance profile: Cora survives Stern by performing meek obedience
+            $ apply_balanced_effect("submissive", intensity="standard")
             $ story.set_day1_interview_state("meek")
             $ apply_archetype_edge("prey", 1)
 
@@ -188,8 +188,8 @@ label day101_1_morning_interview:
 
         "Answer cleanly. Let competence do what meekness cannot.":
 
-            # [STATE] Efficient but conspicuous. Stern notices a mind behind the apron
-            $ apply_effects(stern_susp=15, insp=10, corr=0)
+            # [STATE] Semantic balance profile: Competence draws Stern's scrutiny
+            $ apply_balanced_effect("defiant", intensity="standard", witness="stern")
             $ story.set_day1_interview_state("competent")
             $ apply_archetype_edge("ghost", 1)
 
@@ -223,8 +223,8 @@ label day101_1_morning_interview:
 
         "Lower my chin, allowing her fingers to adjust the fabric, matching her slow rhythm.":
 
-            # [STATE] Yielding posture. Proximity accepted to disarm suspicion
-            $ apply_effects(stern_susp=5, insp=0, corr=5)
+            # [STATE] Semantic balance profile: Cora yields to Stern's invasive touch
+            $ apply_balanced_effect("obedient", intensity="standard")
             $ story.set_day1_stern_relation("subservient")
             $ apply_archetype_edge("prey", 1)
 
@@ -240,8 +240,8 @@ label day101_1_morning_interview:
 
         "Stand perfectly rigid, holding my breath to mask my pulse, letting her treat me like a mannequin.":
 
-            # [STATE] Defensive wall. Emotionally cold, physically unresponsive
-            $ apply_effects(stern_susp=10, insp=5, corr=0)
+            # [STATE] Semantic balance profile: Cora holds rigid, unreadable stillness
+            $ apply_balanced_effect("defiant", intensity="standard", witness="stern")
             $ story.set_day1_stern_relation("resistant")
             $ apply_archetype_edge("ghost", 1)
 
@@ -258,8 +258,8 @@ label day101_1_morning_interview:
 
         "Meet her gaze directly through the closeness, accepting the intrusion with a steady pulse.":
 
-            # [STATE] Complicit tension. Cora accepts the risk of visual intimacy
-            $ apply_effects(stern_susp=15, insp=10, corr=10)
+            # [STATE] Semantic balance profile: Cora meets Stern's gaze through the closeness
+            $ apply_balanced_effect("transgressive", intensity="major")
             $ story.set_day1_stern_relation("complicit")
             $ apply_archetype_edge("predator", 1)
 
@@ -291,8 +291,8 @@ label day101_1_morning_interview:
 
         "Lower my head, speaking with flat utility: 'I will keep my head down, Ma'am.'":
 
-            # [STATE] Fearful retreat. Deferring to her authority
-            $ apply_effects(stern_susp=5, insp=5, corr=0)
+            # [STATE] Semantic balance profile: Fearful retreat before Stern's warning
+            $ apply_balanced_effect("submissive", intensity="standard")
             $ story.set_day1_stern_secret_bound("fearful")
             $ apply_archetype_edge("prey", 1)
 
@@ -303,8 +303,8 @@ label day101_1_morning_interview:
 
         "Keep my tone even, professional, and empty: 'I only see the work, Ma'am.'":
 
-            # [STATE] Pure utility. Cora claims to have no sight or judgment
-            $ apply_effects(stern_susp=5, insp=10, corr=0)
+            # [STATE] Semantic balance profile: Cora claims rooms are empty until cleaned
+            $ apply_balanced_effect("observant", intensity="standard")
             $ story.set_day1_stern_secret_bound("loyal")
             $ apply_archetype_edge("ghost", 1)
 
@@ -315,8 +315,8 @@ label day101_1_morning_interview:
 
         "Meet her eyes with quiet audacity: 'I know how to keep secrets, Ma'am—and those of the house.'":
 
-            # [STATE] Ruthless understanding. Cora hints she understands the value of secrets
-            $ apply_effects(stern_susp=20, insp=15, corr=10)
+            # [STATE] Semantic balance profile: Cora hints she trades in house secrets
+            $ apply_balanced_effect("reckless", intensity="major", witness="stern")
             $ story.set_day1_stern_secret_bound("exploitative")
             $ apply_archetype_edge("predator", 1)
 
@@ -400,10 +400,10 @@ label day101_1_vance_throws_toy:
     menu:
         "How do I present the scent-bottle back to Miss Vance?"
 
-        "Lower my chin, offering the bottle with a humble, trembling maid's hand. [[Subservient: +Suspicion]]":
+        "Lower my chin, offering the bottle with a humble, trembling maid's hand. [[Subservient posture]]":
 
-            # [STATE] Cora plays the meek servant, giving Vance her dominance back
-            $ apply_effects(vance_susp=5, insp=5, corr=0)
+            # [STATE] Semantic balance profile: Cora plays the meek servant for Vance
+            $ apply_balanced_effect("submissive", intensity="standard", witness="vance")
             $ story.set_day1_vance_relation("subservient")
 
             # [ASSET] Visual/staging command
@@ -418,10 +418,10 @@ label day101_1_vance_throws_toy:
 
             cora_inner "She hears a stupid country maid. Let her keep that version."
 
-        "Stand straight and meet her gaze directly, holding the bottle between us. [[Defiant: +Tension, +Inspiration, +Corruption]]":
+        "Stand straight and meet her gaze directly, holding the bottle between us. [[Defiant posture]]":
 
-            # [STATE] Complicit/defiant tension. Cora challenges her role, provoking Vance
-            $ apply_effects(vance_susp=15, insp=10, corr=5)
+            # [STATE] Semantic balance profile: Cora challenges Vance with direct tone
+            $ apply_balanced_effect("defiant", intensity="standard", witness="vance")
             $ story.set_day1_vance_relation("defiant")
 
             # [ASSET] Visual/staging command
@@ -439,10 +439,10 @@ label day101_1_vance_throws_toy:
             cora_inner "She is threatening me, but her hand is shaking as she reaches for the bottle."
             cora_inner "She is not angry; she is exposed."
 
-        "Offer it on my flat palm with a cold, blank face. [[Ghostly: +Inspiration]]":
+        "Offer it on my flat palm with a cold, blank face. [[Ghostly posture]]":
 
-            # [STATE] Pure observation. Cora remains a mirror, frustrating Vance's attempt to dominate
-            $ apply_effects(vance_susp=10, insp=10, corr=0)
+            # [STATE] Semantic balance profile: Cora remains a blank mirror to Vance
+            $ apply_balanced_effect("self_protective", intensity="standard", witness="vance")
             $ story.set_day1_vance_relation("ghostly")
 
             # [ASSET] Visual/staging command
@@ -582,10 +582,10 @@ label day101_1_vance_dressing_room:
     menu:
         "How do I touch Miss Vance's collar?"
 
-        "Handle the lace with gentle, soothing fingers, easing the pressure. [[Protected: +Suspicion]]":
+        "Handle the lace with gentle, soothing fingers, easing the pressure. [[Protected posture]]":
 
-            # [STATE] Cora soothes her tension, offering comfort behind Gideon's back
-            $ apply_effects(vance_susp=5, insp=10, corr=5)
+            # [STATE] Semantic balance profile: Cora soothes Vance behind Gideon's back
+            $ apply_balanced_effect("submissive", intensity="standard", witness="vance")
             $ story.set_day1_vance_relation("protected")
 
             # [ASSET] Visual/staging command
@@ -603,10 +603,10 @@ label day101_1_vance_dressing_room:
 
             cora_inner "She wants shelter. Let me build a small, dark wall around her."
 
-        "Touch the red pressure mark left on her collarbone by Gideon. [[Intimate: +Tension, +Suspicion, +Corruption]]":
+        "Touch the red pressure mark left on her collarbone by Gideon. [[Intimate posture]]":
 
-            # [STATE] Active desire/corruption. Cora marks her submission, stepping into Gideon's space
-            $ apply_effects(vance_susp=15, insp=10, corr=10)
+            # [STATE] Semantic balance profile: Cora marks Vance's submission in private
+            $ apply_balanced_effect("transgressive", intensity="major", witness="vance")
             $ story.set_day1_vance_relation("intimate")
 
             # [ASSET] Visual/staging command
@@ -626,10 +626,10 @@ label day101_1_vance_dressing_room:
 
             "She shivers, her eyes dark and wet in the mirror. The physical heat between us is thick, a shared secret of submission and command."
 
-        "Perform the duty with cold, clinical precision. [[Observed: +Inspiration]]":
+        "Perform the duty with cold, clinical precision. [[Observed posture]]":
 
-            # [STATE] Pure observation. Cora remains a cold witness, documenting her vulnerability
-            $ apply_effects(vance_susp=5, insp=10, corr=0)
+            # [STATE] Semantic balance profile: Cora documents Vance's vulnerability coldly
+            $ apply_balanced_effect("observant", intensity="standard", witness="vance")
             $ story.set_day1_vance_relation("observed")
 
             # [ASSET] Visual/staging command
@@ -705,10 +705,10 @@ label day101_1_vance_stairwell_encounter:
     menu:
         "How do I reassure Miss Vance?"
 
-        "Assure her of my absolute maid's silence. [[Loyal Witness: +Suspicion]]":
+        "Assure her of my absolute maid's silence. [[Loyal witness]]":
 
-            # [STATE] Safe path. Cora claims to have no voice
-            $ apply_effects(vance_susp=5, insp=5, corr=0)
+            # [STATE] Semantic balance profile: Cora pledges maid's silence in the stairwell
+            $ apply_balanced_effect("obedient", intensity="standard", witness="vance")
             $ story.set_day1_vance_relation("loyal_witness")
 
             cora "I only see the sheets and the carpets, Miss. I have no time for gossip."
@@ -719,10 +719,10 @@ label day101_1_vance_stairwell_encounter:
 
             cora_inner "She is relieved, but the suspicion remains. I am still a witness she must watch."
 
-        "Feed her anxiety, turning the power dynamics. [[Accomplice: +Tension, +Suspicion, +Corruption]]":
+        "Feed her anxiety, turning the power dynamics. [[Accomplice posture]]":
 
-            # [STATE] High tension/complicity. Cora whispers Vance's submissive nature back to her
-            $ apply_effects(vance_susp=15, insp=10, corr=10)
+            # [STATE] Semantic balance profile: Cora whispers complicity into Vance's fear
+            $ apply_balanced_effect("reckless", intensity="standard", witness="vance")
             $ story.set_day1_vance_relation("accomplice")
 
             # [ASSET] Visual/staging command
@@ -743,10 +743,10 @@ label day101_1_vance_stairwell_encounter:
 
             "Our skin shivers in the cold draft. She does not pull away. The collusion between us is sealed in the dark stairwell."
 
-        "Detach myself and push past her. [[Silent Observer: +Inspiration]]":
+        "Detach myself and push past her. [[Silent observer]]":
 
-            # [STATE] Cora pulls away, keeping her clinical boundary
-            $ apply_effects(vance_susp=5, insp=10, corr=0)
+            # [STATE] Semantic balance profile: Cora keeps clinical distance from Vance
+            $ apply_balanced_effect("observant", intensity="standard", witness="vance")
             $ story.set_day1_vance_relation("silent_observer")
 
             cora "Miss Stern is waiting for me in the laundry, Miss. If I am late, she will ask why I was delayed in the guest corridor."
@@ -889,10 +889,10 @@ label day101_2_coras_path_choice:
     menu:
         "How do I take the material?"
 
-        "Let Missy's concern open the door. [[Predator path: +Inspiration, +Corruption]]":
+        "Let Missy's concern open the door. [[Predator path]]":
 
-            # [STATE] Cora weaponises plausible concern. Safer physically, morally worse
-            $ apply_effects(insp=10, corr=5)
+            # [STATE] Semantic balance profile: Cora weaponises Missy's concern for material
+            $ apply_balanced_effect("predatory", intensity="standard", witness="vance")
             $ story.set_corridor_state("predator")
             $ apply_archetype_edge("predator", 1)
 
@@ -921,10 +921,10 @@ label day101_2_coras_path_choice:
             "I say it to soothe her, but she is already retreating, her defensive propriety locking down like iron."
             cora_inner "I have seen enough. And I have used her to get it."
 
-        "Look for myself. [[Prey path: +Inspiration, +Suspicion]]":
+        "Look for myself. [[Prey path]]":
 
-            # [STATE] Cora takes the direct risk. Most dangerous path; strongest sensory material
-            $ apply_effects(vance_susp=35, insp=15, corr=5)
+            # [STATE] Semantic balance profile: Cora takes direct corridor risk for the image
+            $ apply_balanced_effect("reckless", intensity=1.4, witness="vance")
             $ story.set_corridor_state("prey")
             $ apply_archetype_edge("prey", 1)
 
@@ -955,9 +955,9 @@ label day101_2_coras_path_choice:
             "She is terrified, but her rescue was swift and observant."
             cora_inner "I have the image. The terrible, beautiful image."
 
-        "Pull Missy away. [[Ghost path: +Inspiration, -Suspicion]]":
+        "Pull Missy away. [[Ghost path]]":
 
-            # [STATE] Cora refuses exposure, keeps the observation abstract, and preserves cover
+            # [STATE bespoke] Multi-witness suspicion reduction; cannot map to one profile
             $ apply_effects(stern_susp=-5, vance_susp=-5, missy_susp=-5, insp=10, corr=0)
             $ story.set_corridor_state("ghost")
             $ apply_archetype_edge("ghost", 1)
@@ -1088,10 +1088,10 @@ label day101_night_story_window:
             menu:
                 "Which discipline keeps my hands steady?"
 
-                "Order. Safety in structure. [[Inspiration]]":
+                "Order. Safety in structure. [[Creative discipline]]":
 
-                    # [STATE] Inspiration focus
-                    $ apply_effects(insp=15, corr=0)
+                    # [STATE] Semantic balance profile: Cora orders the ledger into structure
+                    $ apply_balanced_effect("creative", intensity="major")
                     $ story.set_day1_ledger_focus("inspiration")
 
                     cora_inner "I draw three columns in the ledger."
@@ -1104,10 +1104,10 @@ label day101_night_story_window:
                     cora_inner "Not a confession."
                     cora_inner "Not yet."
 
-                "Exposure. Safety in knowing the threat. [[Corruption]]":
+                "Exposure. Safety in knowing the threat. [[Transgressive discipline]]":
 
-                    # [STATE] Corruption focus
-                    $ apply_effects(vance_susp=5, insp=5, corr=10)
+                    # [STATE] Semantic balance profile: Cora writes want instead of structure
+                    $ apply_balanced_effect("transgressive", intensity="standard", witness="vance")
                     $ story.set_day1_ledger_focus("corruption")
 
                     cora_inner "I try to write command, witness, consequence."
@@ -1123,8 +1123,8 @@ label day101_night_story_window:
                     cora_inner "The ledger does not forgive me."
                     cora_inner "It records beautifully."
 
-            # [STATE] Apply final reflection effects and end the slot
-            $ apply_effects(insp=10, corr=0)
+            # [STATE] Semantic balance profile: Reflection consolidates the day's observations
+            $ apply_balanced_effect("observant", intensity="standard")
 
     return
 
@@ -1158,20 +1158,20 @@ label day101_4_write_the_chapter:
     menu:
         "How do I frame the first chapter of my novel?"
 
-        "Frame it with order and structure. I must write what is safe. [[Inspiration]]":
+        "Frame it with order and structure. I must write what is safe. [[Creative framing]]":
 
-            # [STATE] Inspiration choice
-            $ apply_effects(insp=15, corr=0)
+            # [STATE] Semantic balance profile: Cora frames the chapter with structure
+            $ apply_balanced_effect("creative", intensity="major")
             $ story.set_day1_ledger_focus("inspiration")
 
             cora_inner "I draw three columns in the ledger and let the structure guide my hand."
             cora_inner "The shape of the scene matters more than the appetite of it."
             cora_inner "A woman attacks downward because she cannot attack upward. A man corrects her, not from kindness, but ownership."
 
-        "Frame it with exposure and appetite. I must write the truth. [[Corruption]]":
+        "Frame it with exposure and appetite. I must write the truth. [[Transgressive framing]]":
 
-            # [STATE] Corruption choice
-            $ apply_effects(vance_susp=5, insp=5, corr=10)
+            # [STATE] Semantic balance profile: Cora frames the chapter with appetite
+            $ apply_balanced_effect("transgressive", intensity="standard", witness="vance")
             $ story.set_day1_ledger_focus("corruption")
 
             cora_inner "I try to write command, witness, consequence, but my hand writes want."
@@ -1230,7 +1230,7 @@ label day101_4_write_the_chapter:
         cora_inner "There is a shape worth keeping, but it still feels premature."
         cora_inner "Tomorrow's material will decide whether this becomes a chapter or kindling."
 
-    # [STATE] State/progression update
+    # [STATE bespoke] Fixed write spend; negative inspiration not profile-scaled
     $ apply_effects(insp=-10, corr=0)
 
     cora_inner "I press the pages flat beneath the ledger."

@@ -67,6 +67,10 @@
 # [DAG_NODE id=day105_1_monster_reemerges type=work day=105]
 label day105_1_monster_reemerges:
 
+    # [STATE] TimeManager initializations
+    $ time_manager.set_current_day(5)
+    $ set_time_period("Morning")
+
     # [ASSET] Existing Day 5 / recurring Master Suite background
     scene bg_master_suite_day
     with fade
@@ -379,7 +383,8 @@ label day105_4_motivation_observer:
 
     $ story.set_day5_dynamic("muse")
     $ story.set_cora_release1_flavour("observer")
-    $ apply_effects(insp=20, corr=0)
+    # [STATE] Semantic balance profile: Cora admits the book drove the theft
+    $ apply_balanced_effect("creative", intensity="major")
 
     show cora_sprite base at left_bust with moveinleft # [asset auto]
     show gideon_sprite dominant at right_bust with move # [asset auto]
@@ -427,7 +432,8 @@ label day105_4_motivation_predator:
     $ story.set_day5_dynamic("protege")
     $ story.set_cora_release1_flavour("predator")
     $ apply_archetype_edge("predator", 1)
-    $ apply_effects(insp=5, corr=20)
+    # [STATE] Semantic balance profile: Cora confesses hunger for leverage over others
+    $ apply_balanced_effect("transgressive", intensity="major")
 
     show cora_sprite base at left_bust with moveinleft # [asset auto]
     show gideon_sprite dominant at right_bust with move # [asset auto]
@@ -476,7 +482,8 @@ label day105_4_motivation_prey:
     $ story.set_day5_dynamic("adversary")
     $ story.set_cora_release1_flavour("prey")
     $ apply_archetype_edge("prey", 1)
-    $ apply_effects(vance_susp=5, insp=10, corr=10)
+    # [STATE] Semantic balance profile: Cora names fear and failed retaliation to Gideon
+    $ apply_balanced_effect("transgressive", intensity="standard", witness="vance")
 
     show cora_sprite base at left_bust with moveinleft # [asset auto]
     show gideon_sprite dominant at right_bust with move # [asset auto]
@@ -523,6 +530,7 @@ label day105_4_motivation_ghost:
     $ story.set_day5_dynamic("witness")
     $ story.set_cora_release1_flavour("ghost")
     $ apply_archetype_edge("ghost", 1)
+    # [STATE bespoke] Negative Vance suspicion: ghost witness names the unseen machinery
     $ apply_effects(vance_susp=-5, insp=15, corr=5)
 
     show cora_sprite base at left_bust with moveinleft # [asset auto]
@@ -668,7 +676,8 @@ label day105_5_gideon_marks_cora:
             # [STATE] State/progression update
             $ story.set_day5_money_choice("taken")
             $ story.set_gideon_entanglement_level("accepted_money")
-            $ apply_effects(insp=5, corr=10)
+            # [STATE] Semantic balance profile: Cora takes Gideon's money for survival
+            $ apply_balanced_effect("transgressive", intensity="standard")
 
             "I take the envelope."
             "My hand does not shake."
@@ -684,7 +693,8 @@ label day105_5_gideon_marks_cora:
             # [STATE] State/progression update
             $ story.set_day5_money_choice("refused")
             $ story.set_gideon_entanglement_level("refused_money")
-            $ apply_effects(vance_susp=5, insp=10, corr=0)
+            # [STATE] Semantic balance profile: Cora refuses the envelope while Vance watches
+            $ apply_balanced_effect("observant", intensity="standard", witness="vance")
 
             cora "I will not take your money, sir."
 
@@ -702,6 +712,7 @@ label day105_5_gideon_marks_cora:
             # [STATE] State/progression update
             $ story.set_day5_money_choice("deferred")
             $ story.set_gideon_entanglement_level("deferred_money")
+            # [STATE bespoke] Negative Vance suspicion: ghost deferral without refusal
             $ apply_effects(vance_susp=-5, insp=5, corr=5)
 
             "I do not touch the envelope."

@@ -575,9 +575,20 @@ screen debug_grain_overlay():
                 else:
                     text "Capture off — use debug menu or `jump debug_capture_start`" size 12 color "#888888"
 
+                text "Matrix runs (restart from prologue):" size 11 color "#888888"
+                hbox:
+                    spacing 6
+                    textbutton "P1" action [Function(balance_capture.start, "P1_corruption_forward"), Jump("start")] text_size 11
+                    textbutton "P2" action [Function(balance_capture.start, "P2_cautious"), Jump("start")] text_size 11
+                    textbutton "P3" action [Function(balance_capture.start, "P3_low_corruption"), Jump("start")] text_size 11
+                    textbutton "P4" action [Function(balance_capture.start, "P4_deadline_1"), Jump("start")] text_size 11
+                hbox:
+                    spacing 6
+                    textbutton "P5" action [Function(balance_capture.start, "P5_deadline_2"), Jump("start")] text_size 11
+                    textbutton "P6" action [Function(balance_capture.start, "P6_anxiety_collapse"), Jump("start")] text_size 11
+                    textbutton "P7" action [Function(balance_capture.start, "P7_penance"), Jump("start")] text_size 11
                 hbox:
                     spacing 8
-                    textbutton "P1" action [Function(balance_capture.start, "P1_corruption_forward"), Jump("start")] text_size 12
                     textbutton "Stop" action Function(balance_capture.stop, "overlay_stop") text_size 12
                     textbutton "Hide" action [SetVariable("debug_grain_overlay_visible", False), Hide("debug_grain_overlay")] text_size 12
 

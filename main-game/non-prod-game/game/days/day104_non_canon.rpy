@@ -157,7 +157,8 @@ label day104_1_lockbox_evidence:
 
     # [STATE] Cora has discovered the leverage. She has not necessarily escaped with it yet
     $ story.set_day4_evidence_discovered(True)
-    $ apply_effects(vance_susp=15, insp=20, corr=0)
+    # [STATE] Semantic balance profile: Cora finds the manuscript ending in Gideon's ruin
+    $ apply_balanced_effect("creative", intensity="major")
 
     "I slide the photograph beneath my bodice."
     "It scratches once against my skin and becomes real."
@@ -224,7 +225,8 @@ label day104_2_escape_fireplace:
     # [STATE] Keeps photograph, but creates visible physical evidence on uniform
     $ story.set_day4_escape_state("fireplace")
     $ story.set_has_photograph(True)
-    $ apply_effects(stern_susp=35, insp=5, corr=0)
+    # [STATE] Semantic balance profile: Cora hides in the hearth and leaves soot Stern will notice
+    $ apply_balanced_effect("reckless", intensity=1.4, witness="stern")
 
     "The hearth is enormous, black, and unlit."
     "A servant could disappear there."
@@ -284,7 +286,8 @@ label day104_2_escape_bold_lie:
     # [STATE] Keeps photograph, but Gideon has seen her too near the desk
     $ story.set_day4_escape_state("bold_lie")
     $ story.set_has_photograph(True)
-    $ apply_effects(vance_susp=40, insp=10, corr=5)
+    # [STATE] Semantic balance profile: Cora lies in plain sight while Vance watches
+    $ apply_balanced_effect("reckless", intensity=1.6, witness="vance")
 
     "I close the lockbox with one hand and seize the dust cloth with the other."
     "By the time the door opens, I am wiping the desk as if mahogany has personally insulted Miss Stern."
@@ -365,6 +368,7 @@ label day104_2_escape_missy_cover:
     $ story.set_day4_escape_state("missy_cover")
     $ story.set_has_photograph(True)
     $ story.set_missy_day4_used_as_cover(True)
+    # [STATE bespoke] Multi-witness mixed deltas: Vance suspicion drops, Missy pays the cost
     $ apply_effects(vance_susp=-15, missy_susp=20, insp=5, corr=20)
 
     cora_inner "Panic makes the first decision."
@@ -504,7 +508,7 @@ label day104_3_stern_pressure:
 
         "Give her the boring servant answer. [[-Suspicion]]":
 
-            # [STATE] State/progression update
+            # [STATE bespoke] Negative suspicion relief: boring servant answer lowers Stern's heat
             $ story.set_day4_stern_response("boring")
             $ apply_effects(stern_susp=-15, insp=0, corr=0)
 
@@ -520,9 +524,9 @@ label day104_3_stern_pressure:
 
         "Let her see I am frightened, not guilty. [[+Inspiration, small suspicion]]":
 
-            # [STATE] State/progression update
+            # [STATE] Semantic balance profile: Cora shows fear without confessing guilt
             $ story.set_day4_stern_response("frightened")
-            $ apply_effects(stern_susp=5, insp=10, corr=0)
+            $ apply_balanced_effect("submissive", intensity="standard", witness="stern")
 
             cora "I am trying not to make mistakes, Ma'am. That is making me slower."
 
@@ -536,7 +540,7 @@ label day104_3_stern_pressure:
 
         "Hide behind Missy if she was used. [[Conditional moral cost]]" if story.day4_escape_state == "missy_cover":
 
-            # [STATE] State/progression update
+            # [STATE bespoke] Mixed witness deltas: deflect suspicion onto Missy after cover escape
             $ story.set_day4_stern_response("missy_cover")
             $ apply_effects(stern_susp=-10, missy_susp=10, insp=0, corr=10)
 
@@ -646,7 +650,7 @@ label day104_4_atonement:
 
     if story.day4_escape_state == "fireplace":
 
-        # [STATE] State/progression update
+        # [STATE bespoke] Negative suspicion relief: visible soot penance after fireplace escape
         $ apply_effects(stern_susp=-30, insp=0, corr=0)
 
         "I scrub soot from my apron until the water turns grey, then black, then grey again."
@@ -655,7 +659,7 @@ label day104_4_atonement:
 
     elif story.day4_escape_state == "bold_lie":
 
-        # [STATE] State/progression update
+        # [STATE bespoke] Negative suspicion relief: saintly dullness after bold-lie escape
         $ apply_effects(stern_susp=-25, insp=0, corr=0)
 
         "I sit in the laundry corner and mend cuffs with saintly dullness."
@@ -664,7 +668,7 @@ label day104_4_atonement:
 
     else:
 
-        # [STATE] State/progression update
+        # [STATE bespoke] Negative suspicion relief: visible usefulness after missy-cover escape
         $ apply_effects(stern_susp=-10, insp=0, corr=0)
 
         "I fold linens."
@@ -693,6 +697,7 @@ label day104_4_missy_repair:
     show missy_sprite shocked at centre_bust
 
     $ story.set_day4_twilight_action("missy_repair")
+    # [STATE bespoke] Negative Missy suspicion: opening the repair conversation
     $ apply_effects(missy_susp=-15, insp=5, corr=0)
 
     "Missy sits on the edge of her narrow iron bed, twisting her linen handkerchief until her knuckles are as white as the cloth."
@@ -722,7 +727,7 @@ label day104_4_missy_repair:
     menu:
         "Give her the raw, romantic truth. Offer my vulnerability. [[Tender Romance / Path B Intimacy]]":
 
-            # [STATE] Rebuilds trust, progresses Path B romantic intimacy
+            # [STATE bespoke] Mixed witness repair: romantic truth rebuilds Missy, costs Vance
             $ story.set_missy_day4_repair_state("partial_truth")
             $ apply_effects(missy_susp=-25, vance_susp=5, insp=15, corr=10)
 
@@ -745,7 +750,7 @@ label day104_4_missy_repair:
 
         "Keep the truth. Offer a coward's comfort. [[Guarded Distance]]":
 
-            # [STATE] Safe but keeps Missy guarded, locks out Path B intimacy
+            # [STATE bespoke] Negative Missy suspicion: coward's comfort without real repair
             $ story.set_missy_day4_repair_state("comfort_lie")
             $ apply_effects(missy_susp=-10, insp=0, corr=5)
 
@@ -895,7 +900,7 @@ label day104_5_triumphant_chapter:
     $ story.complete_manuscript_chapter("day4_triumphant_chapter")
     call book1_write_chapter(chapter_key="day4_triumphant_chapter", current_day=104)
 
-    # [STATE] State/progression update
+    # [STATE bespoke] Triumphant write cost: inspiration spend with Stern suspicion spike
     $ apply_effects(stern_susp=15, insp=-15, corr=0)
 
     "The final sentence lands just before the candle dies."

@@ -229,3 +229,16 @@ init python:
         if min_corruption_level is not None and player.corruption_level < min_corruption_level:
             return "Cora lacks the dark resolve required. (Corruption too low)"
         return ""
+
+    def apply_balanced_effect(profile, intensity="standard", witness=None, base_witness=False):
+        """
+        Resolve a semantic profile and apply it through the existing mutation gateway.
+        Must never mutate PlayerStats directly.
+        """
+        kwargs = balance_resolver.resolve_balanced_effect(
+            profile,
+            intensity_override=intensity,
+            witness=witness,
+            base_witness=base_witness,
+        )
+        return apply_effects(**kwargs)

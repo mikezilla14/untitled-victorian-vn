@@ -104,15 +104,43 @@ Scale routing matches the writers_room S/M/L table; when unsure between S and M,
      gates/promotion so no queued flag is forgotten.
 
 ## Stat Delta Protocol
-Map her emotional intent onto the **existing** vocabulary only: `insp`, `corr`, `anxiety`, and
-two-tier per-character suspicion `<char>_acute_susp` / `<char>_base_susp` for
-`stern`/`vance`/`gideon`/`missy`. Generic `susp` is deprecated — steer to acute/base. Emit
-`apply_effects(...)`-shaped deltas in the Intent. A genuinely new stat/mechanic → **stop and
-escalate to `chief_architect`**; never fabricate a counter.
+
+Map her emotional intent onto **semantic balance profiles** — not raw stat numbers. The balance
+table in
+[`effect_profiles.yaml`](../../main-game/draft/releases/planning/balance/effect_profiles.yaml)
+resolves profiles to `apply_effects` kwargs at runtime; the Writer never chooses those numbers.
+
+**Closed profile vocabulary (do not extend without Chief Architect):**
+`safe`, `observant`, `curious`, `obedient`, `submissive`, `defiant`, `deceptive`, `transgressive`,
+`reckless`, `predatory`, `self_protective`, `creative`.
+
+**Desk captures per effect:**
+- `profile` — which emotional/economic mix
+- `intensity` — `trace` | `minor` | `standard` | `major` | `severe` (default `standard`)
+- `witness` — required when profile includes witness suspicion: `stern` | `vance` | `gideon` | `missy`
+- `base_witness` — `true` only for durable base suspicion (rare)
+- `narrative_meaning` — one plain sentence of design intent
+
+Emit semantic entries in Authoring Intent `requested_effects`. The code agent writes
+`apply_balanced_effect(...)` in draft `.rpy` — **not** reconstructed numeric kwargs.
+
+**Bespoke exceptions** (`kind: bespoke` + `deltas` + `bespoke_reason`): negative suspicion
+recovery, write-gate inspiration spends (`insp` negative), multi-witness recovery mixes, or fixed
+rewards that must not scale with the balance table. Mark script lines `# [STATE bespoke]`.
+
+**Never:**
+- Ask the Writer for `insp=10` / `corr=5` style numbers for standard choices
+- Emit direct `player.*` stat mutations
+- Add direct anxiety deltas (anxiety remains derived from witness suspicion)
+
+A genuinely new stat/mechanic → **stop and escalate to `chief_architect`**; never fabricate a counter.
+
+**Mapping aid:** [`profile_migration_worksheet.md`](../../main-game/draft/releases/planning/balance/profile_migration_worksheet.md)
 
 ## Branching Path Protocol
 Capture each arm by *meaning*: player-facing text, psychological mode (**Observer / Predator / Prey
-/ Ghost** — cosmetic-only menus are forbidden), flag it sets, effects it applies. Structure follows
+/ Ghost** — cosmetic-only menus are forbidden), flag it sets, **semantic effect profile** it applies
+(profile + intensity + witness + narrative_meaning — not raw stat numbers). Structure follows
 the routing-refactor contract: fixed forks in time-period spines; optional content in a **named
 dynamic window** that is called and returns; queued consequences in authored consequence windows.
 You derive the structure; she never picks `jump`/`call` or names a label.
@@ -120,7 +148,9 @@ You derive the structure; she never picks `jump`/`call` or names a label.
 ## Shaping (automatic, downstream)
 After gates pass, the technical shape runs without her involvement:
 - `non_prod_code_agent` — wrap prose verbatim into labels/menus, place setters/effects, add
-  `[ASSET] [STATE] [CHOICE] [BEAT]` tags where missing.
+  `[ASSET] [STATE] [CHOICE] [BEAT]` tags where missing. **Effects:** emit
+  `apply_balanced_effect(...)` from semantic Authoring Intent; emit `# [STATE bespoke]` +
+  `apply_effects(...)` only for bespoke entries.
 - `dag_tag_update` — add/refresh `[DAG_*]` tags (preserve `manual` tags) and run graph sync:
   `py main-game/pipeline/tools/build_story_graph_manifest.py --release <release> --out-dir main-game/pipeline/releases/<release>/graph --storyboard main-game/draft/releases/planning/story_board.md`
 - `check_assets` — ensure new backgrounds/sprites/audio have `declare_image_with_fallback` /

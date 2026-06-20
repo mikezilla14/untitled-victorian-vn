@@ -212,13 +212,24 @@ Path: `main-game/draft/releases/<release>/intents/dayrdd_authoring_intent.md` (+
 
 ## Requested effects
 - trigger: choice/label
-  deltas: insp=+10, corr=+5, stern_acute_susp=+5, anxiety=-2
+  profile: submissive
+  intensity: standard          # trace | minor | standard | major | severe
+  witness: stern                 # required for defiant / deceptive / reckless / predatory
+  base_witness: false
+  narrative_meaning: "Cora accepts authority to survive the interview."
+
+# Bespoke only (negative susp, write spend, fixed reward):
+- trigger: ch3_write_complete
+  kind: bespoke
+  bespoke_reason: write_spend
+  deltas: { insp: -20 }
+  narrative_meaning: "Fixed chapter write cost."
 
 ## Requested branches
 - menu at: <window/label>
   arms:
-    - text: "Warn Missy."        meaning: prey/protective    sets: ...   effects: ...
-    - text: "Say nothing."       meaning: ghost              sets: ...   effects: ...
+    - text: "Warn Missy."        meaning: prey/protective    sets: ...   effect: { profile: self_protective, witness: missy, ... }
+    - text: "Say nothing."       meaning: ghost              sets: ...   effect: { profile: observant, ... }
 
 ## Contract pre-check result
 - prose | historical | psychological: PASS | SUGGESTION | EXCEPTION (ids)
@@ -263,23 +274,53 @@ When the Writer asks to track something:
 ## 9. New Stat Delta Protocol
 
 The Writer expresses consequences emotionally ("this should drain her, but feed the corruption").
-The Desk maps to the **existing** effect vocabulary — it never invents counters:
+The Desk maps to a **semantic balance profile** from
+[`effect_profiles.yaml`](../../main-game/draft/releases/planning/balance/effect_profiles.yaml) —
+it never asks for raw numbers and never invents counters.
 
-- `insp` (inspiration, capped), `corr` (corruption_xp), `anxiety`;
-- two-tier per-character suspicion: `<char>_acute_susp` (temporary heat) and `<char>_base_susp`
-  (permanent), for `stern` / `vance` / `gideon` / `missy`. Generic `susp` is deprecated and the
-  Desk will steer the Writer to acute/base instead.
+**Profiles (closed set):** `safe`, `observant`, `curious`, `obedient`, `submissive`, `defiant`,
+`deceptive`, `transgressive`, `reckless`, `predatory`, `self_protective`, `creative`.
 
-It emits `apply_effects(...)`-shaped deltas in the Authoring Intent and lets the code agent place
-them. If the Writer requests a genuinely new stat or mechanic, the Desk **stops and escalates to
-Chief Architect** (new mechanics are framework changes) rather than fabricating one.
+**Per effect, capture:**
+| Field | When |
+|-------|------|
+| `profile` | Always |
+| `intensity` | Default `standard`; soften/harden with `minor` / `major` / etc. |
+| `witness` | When profile can raise suspicion (`defiant`, `deceptive`, `reckless`, `predatory`) |
+| `base_witness` | Rare; durable recognition only |
+| `narrative_meaning` | Always — one sentence of design intent |
+
+The Desk emits semantic entries in Authoring Intent `requested_effects`. The code agent places:
+
+```renpy
+# [STATE] Semantic balance profile: <narrative_meaning>
+$ apply_balanced_effect("submissive", intensity="standard", witness="stern")
+```
+
+**Bespoke path** — use only when profiles cannot express the beat (negative suspicion, write spends,
+fixed rewards, recovery mixes):
+
+```yaml
+kind: bespoke
+bespoke_reason: write_spend | negative_suspicion | recovery_mix | fixed_reward | other
+deltas: { insp: -20 }
+```
+
+Script marker: `# [STATE bespoke]`. Do **not** add direct anxiety deltas.
+
+If the Writer requests a genuinely new stat or mechanic, the Desk **stops and escalates to Chief
+Architect** rather than fabricating one.
+
+**Reference:** [`profile_migration_worksheet.md`](../../main-game/draft/releases/planning/balance/profile_migration_worksheet.md),
+[`semantic-balance-profiles-implementation-plan.md`](semantic-balance-profiles-implementation-plan.md)
 
 ## 10. New Branching Path Protocol
 
 The Writer describes a fork by its *meaning*, not its syntax. The Desk captures, per arm: the
 player-facing text, the **psychological mode** it expresses (Observer / Predator / Prey / Ghost —
 cosmetic-only menus are forbidden per the psychological contract), the flag it sets, and the
-effects it applies. Structural placement follows the routing refactor contract:
+**semantic effect** (`profile`, `intensity`, `witness`, `narrative_meaning`). Structural placement
+follows the routing refactor contract:
 
 - fixed/core forks live in time-period spine labels;
 - optional content lives in a **named dynamic window** that is *called* and *returns*;
@@ -387,15 +428,17 @@ Rules:
 1. `writer_write_scene` loads `writers_desk.md`.
 2. **Interview:** target = Day 103, evening, hotel layer. New flag "kept the brooch" → Desk asks
    "yes/no or several outcomes?" Writer: *"she keeps it, returns it, or it gets planted on her."* →
-   `one_of`, values `("none","kept","returned","planted")`, default `none`. Effects: `insp=+10`,
-   `vance_acute_susp=+8`. New branch with Predator/Prey/Ghost arms.
+   `one_of`, values `("none","kept","returned","planted")`, default `none`. Effects: profile
+   `curious` / intensity `minor` / witness `vance` / narrative "pocketing the brooch feeds the
+   manuscript but sharpens Vance's attention." New branch with Predator/Prey/Ghost arms.
 3. **Prose capture:** verbatim into the Authoring Intent.
 4. **Contract pre-check:** historical linter clean; psychology flags that a "Ghost" arm needs a
    non-cosmetic consequence → SUGGESTION; Writer accepts a tweak. Prose voice check passes.
 5. **Authoring Intent** emitted (scale **M**), routed to `revise-narrative` (partial pool for the
    new branch arms) → gates.
 6. **Shape:** `non_prod_code_agent` wires `VALID_BROOCH_STATES` + `set_brooch_state` into
-   `classes_non_canon.rpy`, places the dynamic window + `apply_effects`, copies prose verbatim,
+   `classes_non_canon.rpy`, places the dynamic window + `apply_balanced_effect(...)` (or bespoke
+   `apply_effects` when flagged), copies prose verbatim,
    adds `[CHOICE]/[STATE]/[BEAT]` tags; `dag_tag_update` refreshes DAG tags + runs graph sync;
    `check_assets` confirms the brooch close-up CG has a manifest fallback (adds one if missing).
 7. **Status:** `writer_status` reports gates green, zero open exceptions → "safe to hand to

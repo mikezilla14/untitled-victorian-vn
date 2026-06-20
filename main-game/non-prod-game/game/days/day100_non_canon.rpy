@@ -84,10 +84,10 @@ label day100_1_afternoon_boredom:
     menu:
         "Where did he hide them?"
 
-        "In the walnut bureau drawer. [[Search the bureau: +15 Inspiration, +10 Corruption]]":
+        "In the walnut bureau drawer. [[Search the bureau: Careful, corrupting]]":
 
-            # [STATE] State/progression update
-            $ apply_effects(insp=15, corr=10)
+            # [STATE] Semantic balance profile: Cora snoops through Sir John's private correspondence
+            $ apply_balanced_effect("curious", intensity="major")
             $ story.set_prologue_found("read_letters")
             
             cora_inner "The bureau is where his private correspondence lies. Sir John's own secrets."
@@ -95,10 +95,10 @@ label day100_1_afternoon_boredom:
             # [STATE] State/progression update
             jump day100_2_evening_flashback
 
-        "By the parlour settee. [[Search the parlour entrance: +15 Corruption]]":
+        "By the parlour settee. [[Search the parlour entrance: Transgressive]]":
 
-            # [STATE] State/progression update
-            $ apply_effects(corr=15)
+            # [STATE] Semantic balance profile: Cora chooses the riskier entrance to eavesdrop
+            $ apply_balanced_effect("transgressive", intensity="major")
             $ story.set_prologue_found("overheard")
 
             cora_inner "The parlour door. If he took them there, he may have left them on the small table."
@@ -191,8 +191,8 @@ label day100_2_reconvergence:
 
         "Deflect — they are my pages. [[Eager posture]]":
 
-            # [STATE] State/progression update
-            $ apply_effects(insp=5)
+            # [STATE] Semantic balance profile: Cora asserts herself without full submission
+            $ apply_balanced_effect("observant", intensity="minor")
             $ story.set_prologue_holywell_posture("eager")
 
             cora "They are my pages, sir."
@@ -202,8 +202,8 @@ label day100_2_reconvergence:
 
         "Submit — throw myself on his mercy. [[Desperate posture]]":
 
-            # [STATE] State/progression update
-            $ apply_effects(corr=5)
+            # [STATE] Semantic balance profile: Cora performs surrender to survive dismissal
+            $ apply_balanced_effect("obedient", intensity="minor")
             $ story.set_prologue_holywell_posture("desperate")
 
             cora "Forgive me, sir."
@@ -221,28 +221,28 @@ label day100_2_reconvergence:
     menu:
         "Why did I write it?"
 
-        "For the shillings home. [[+5 Inspiration]]":
+        "For the shillings home. [[Practical ambition]]":
 
-            # [STATE] State/progression update
-            $ apply_effects(insp=5)
+            # [STATE] Semantic balance profile: Cora frames writing as household necessity
+            $ apply_balanced_effect("safe", intensity="minor")
             $ story.set_prologue_why_write("money_home")
 
             cora_inner "Mother's cough. Father's pride. Shillings are the only language they understand."
             cora_inner "Sentiment is a luxury. Rent is not."
 
-        "To catalogue what power hides. [[+5 Inspiration, +5 Corruption]]":
+        "To catalogue what power hides. [[Curious, corrupting]]":
 
-            # [STATE] State/progression update
-            $ apply_effects(insp=5, corr=5)
+            # [STATE] Semantic balance profile: Cora admits she maps power for the manuscript
+            $ apply_balanced_effect("curious", intensity="minor")
             $ story.set_prologue_why_write("cataloguer")
 
             cora_inner "I want the machine on paper—who kneels, who commands, who pretends."
             cora_inner "Truth is a weapon even when I am too small to swing it."
 
-        "Because scandal tastes better than porridge. [[+10 Corruption]]":
+        "Because scandal tastes better than porridge. [[Transgressive]]":
 
-            # [STATE] State/progression update
-            $ apply_effects(corr=10)
+            # [STATE] Semantic balance profile: Cora embraces scandal as appetite
+            $ apply_balanced_effect("transgressive", intensity="standard")
             $ story.set_prologue_why_write("scandal_hungry")
 
             cora_inner "I will not pretend innocence is a meal."

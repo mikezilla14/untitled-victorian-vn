@@ -72,6 +72,8 @@ class BalanceReport:
     soft_fail: list[CheckResult] = field(default_factory=list)
     deprecated_routers: list[CheckResult] = field(default_factory=list)
     framework_artifacts: list[CheckResult] = field(default_factory=list)
+    semantic_profile_checks: list[CheckResult] = field(default_factory=list)
+    profile_usage_summary: dict[str, int] = field(default_factory=dict)
     missing_evidence: list[str] = field(default_factory=list)
     recommended_next: list[str] = field(default_factory=list)
 
@@ -84,6 +86,7 @@ class BalanceReport:
             + self.soft_fail
             + self.deprecated_routers
             + self.framework_artifacts
+            + self.semantic_profile_checks
         )
         if any(c.severity == Severity.FAIL for c in all_checks):
             return Severity.FAIL
@@ -133,6 +136,7 @@ class BalanceReport:
             ("Soft-fail checks", self.soft_fail),
             ("Deprecated-router checks", self.deprecated_routers),
             ("Grain manifest and balance model checks", self.framework_artifacts),
+            ("Semantic effect profile checks", self.semantic_profile_checks),
         ):
             lines.extend(["", f"## {title}", ""])
             if checks:
@@ -143,6 +147,11 @@ class BalanceReport:
                     lines.append(line)
             else:
                 lines.append("- _(no checks in scope)_")
+
+        if self.profile_usage_summary:
+            lines.extend(["", "## Profile usage summary", ""])
+            for key, count in self.profile_usage_summary.items():
+                lines.append(f"- `{key}`: {count}")
 
         lines.extend(["", "## Required day files", ""])
         for check in self.required_files:
@@ -222,6 +231,7 @@ MANUSCRIPT_CHAPTERS: tuple[tuple[str, str], ...] = (
 )
 
 BALANCE_MODEL_FILES: tuple[tuple[str, str], ...] = (
+    ("balance/effect_profiles.yaml", "effect_profiles"),
     ("balance/gate_catalogue.csv", "gate_catalogue"),
     ("balance/run_policies.csv", "run_policies"),
     ("balance/balance_targets.yaml", "balance_targets"),
@@ -588,6 +598,117 @@ def _check_framework_artifacts(release_slug: str, root: Path) -> tuple[list[Chec
     return checks, missing, next_tests
 
 
+def _check_semantic_profiles(balance_dir: Path, root: Path) -> tuple[list[CheckResult], dict[str, int]]:
+    checks: list[CheckResult] = []
+    profiles_yaml = balance_dir / "effect_profiles.yaml"
+    runtime_profiles = non_prod_game_dir() / "game" / "shared" / "balance_profiles_non_canon.rpy"
+
+    if profiles_yaml.exists():
+        checks.append(
+            CheckResult(
+                Severity.PASS,
+                "Effect profile source file present",
+                _rel(profiles_yaml, root),
+            )
+        )
+    else:
+        checks.append(
+            CheckResult(
+                Severity.FAIL,
+                "Effect profile source file missing (`effect_profiles.yaml`)",
+                _rel(balance_dir, root),
+            )
+        )
+
+    if runtime_profiles.exists():
+        checks.append(
+            CheckResult(
+                Severity.PASS,
+                "Runtime balance profile file present",
+                _rel(runtime_profiles, root),
+            )
+        )
+    else:
+        checks.append(
+            CheckResult(
+                Severity.FAIL,
+                "Runtime balance profile file missing (`balance_profiles_non_canon.rpy`)",
+                _rel(runtime_profiles.parent, root),
+            )
+        )
+
+    choice_catalogue = balance_dir / "choice_catalogue.csv"
+    usage: dict[str, int] = {}
+    if not choice_catalogue.exists():
+        checks.append(
+            CheckResult(
+                Severity.INCOMPLETE,
+                "Choice catalogue missing — run build_choice_catalogue.py",
+                _rel(balance_dir, root),
+            )
+        )
+        return checks, usage
+
+    try:
+        from balance_catalogue import profile_usage_summary, validate_choice_catalogue
+
+        usage = profile_usage_summary(choice_catalogue)
+        errors = validate_choice_catalogue(choice_catalogue)
+        if errors:
+            checks.append(
+                CheckResult(
+                    Severity.FAIL,
+                    f"Choice catalogue profile rows mismatch resolver ({len(errors)} row(s))",
+                    _rel(choice_catalogue, root),
+                )
+            )
+        else:
+            checks.append(
+                CheckResult(
+                    Severity.PASS,
+                    "Choice catalogue profile rows match resolved profile deltas",
+                    _rel(choice_catalogue, root),
+                )
+            )
+        if usage:
+            checks.append(
+                CheckResult(
+                    Severity.PASS,
+                    f"Profile usage captured ({sum(usage.values())} profile-mapped choices)",
+                    _rel(choice_catalogue, root),
+                )
+            )
+    except Exception as exc:  # pragma: no cover
+        checks.append(
+            CheckResult(
+                Severity.FAIL,
+                f"Choice catalogue profile validation failed: {exc}",
+                _rel(choice_catalogue, root),
+            )
+        )
+
+    script_lint = _check_script_balance_lint(root)
+    checks.extend(script_lint)
+
+    return checks, usage
+
+
+def _check_script_balance_lint(root: Path) -> list[CheckResult]:
+    try:
+        from validation.balance_profile_lint import lint_release_day_scripts, lint_to_check_results
+
+        result = lint_release_day_scripts()
+        return lint_to_check_results(result, root=root)
+    except Exception as exc:  # pragma: no cover
+        return [
+            CheckResult(
+                Severity.FAIL,
+                f"Script balance profile lint failed: {exc}",
+                "non-prod day scripts",
+            )
+        ]
+
+
 def build_balance_report(
     release: str = DEFAULT_RELEASE_SLUG,
     day_filter: str | None = None,
@@ -607,6 +728,9 @@ def build_balance_report(
     artifact_checks, missing_evidence, recommended_next = _check_framework_artifacts(release_slug, root)
     if day_filter is None:
         report.framework_artifacts = artifact_checks
+        semantic_checks, usage = _check_semantic_profiles(planning_dir() / "balance", root)
+        report.semantic_profile_checks = semantic_checks
+        report.profile_usage_summary = usage
     report.missing_evidence = missing_evidence
     report.recommended_next = recommended_next + [
         "Smoke-test hard fails: skip all writing → `game_over_deadline_1`; Ch1 only → `game_over_deadline_2`; anxiety 100 → `game_over_dismissed`.",

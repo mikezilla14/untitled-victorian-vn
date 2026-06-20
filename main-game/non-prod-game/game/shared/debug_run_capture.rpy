@@ -179,6 +179,27 @@ init -5 python:
                 return
             self.log_event("flag", mutation="apply_effects", kwargs=kwargs, success=success)
 
+        def log_balanced_effect(
+            self,
+            profile,
+            intensity="standard",
+            witness=None,
+            base_witness=False,
+            resolved_kwargs=None,
+            success=True,
+        ):
+            if not self.active:
+                return
+            self.log_event(
+                "balanced_effect",
+                profile=profile,
+                intensity=intensity,
+                witness=witness,
+                base_witness=bool(base_witness),
+                resolved_kwargs=resolved_kwargs or {},
+                success=success,
+            )
+
 
 init python:
     def toggle_debug_grain_overlay():

@@ -23,7 +23,7 @@ $ _capture_run_id = "P4_deadline_1"
 jump debug_capture_start
 ```
 
-Or use overlay **P1** button only for P1; for P2–P7 set `_capture_run_id` in console first.
+Or use overlay **P1**–**P7** buttons (each restarts from `label start`); console still works for custom run IDs.
 
 ### After each run
 
