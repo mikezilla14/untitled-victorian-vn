@@ -198,6 +198,10 @@ init -40 python:
     declare_image_with_fallback("ui_illustration_border", "images/ui/illustration_border.webp", "#5a5a5a")
     declare_image_with_fallback("ui_price_badge", "images/ui/price_badge.png", "#3a1a0a")
 
+    # ── UI: Main menu carousel [1920 × 1080 px] ──────────────────
+    # Register each slide here, then add its alias to MAIN_MENU_SLIDES in menu_carousel.rpy.
+    declare_image_with_fallback("main_menu_sweeney", "images/ui/main_menu_sweeney.png", "#1a120a")
+
     # ── Audio aliases (None when missing; guard before play) ──────
     audio_themes_melancholy = register_audio("themes/melancholy", "audio/themes/melancholy.ogg")
     audio_sfx_train_whistle = register_audio("sfx/train_whistle", "audio/sfx/train_whistle.ogg")
