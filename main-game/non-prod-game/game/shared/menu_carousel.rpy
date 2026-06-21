@@ -18,9 +18,11 @@ init -35 python:
 
     MAIN_MENU_SLIDES = [
         "main_menu_sweeney",
-        "main_menu_bride",
+        "main_menu_jack",
+        "main_menu_jack_ill",
         "main_menu_jekyll",
         "main_menu_carmilla",
+        "main_menu_carmilla_ill",
     ]
     MAIN_MENU_SLIDE_SECONDS = 8.0
     MAIN_MENU_SLIDE_DISSOLVE = 1.5

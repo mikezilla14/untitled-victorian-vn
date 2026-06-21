@@ -1,0 +1,63 @@
+{
+  "mock_input_payload": {
+    "current_day": 101,
+    "chapter_key": "day1_chapter",
+    "player_stats": {
+      "corruption_level": 3,
+      "inspiration": 20,
+      "anxiety": 15
+    },
+    "story_state": {
+      "day1_corridor_state": "predator",
+      "day1_interview_state": "competent",
+      "day1_stern_relation": "complicit",
+      "day1_vance_relation": "intimate",
+      "missy_day1_trust_state": "unsettled",
+      "day1_ledger_focus": "corruption"
+    }
+  },
+  "expected_llm_output": {
+    "metadata": {
+      "resolved_chapter_key": "day1_chapter",
+      "resolved_archetype": "predator",
+      "micro_variants_applied": [
+        "day1_interview_state == competent",
+        "day1_stern_relation == complicit",
+        "day1_vance_relation == intimate",
+        "missy_day1_trust_state == unsettled",
+        "day1_ledger_focus == corruption"
+      ]
+    },
+    "nvl_blocks": [
+      {
+        "lines": [
+          "The air in Alderwood's conservatory was choked with the suffocating steam of the wash-house, smelling of hot tallow, stagnant water, and damp jasmine.",
+          "My hands were raw, chapped red from the caustic touch of lye. I was nothing but a domestic beast to them, a cog in the machine that ground down servants' lives for grease.",
+          "But the machine has eyes. Through the mahogany door, ajar just a finger's width, the silence was broken by the wet, rhythmic sounds of Lady Beatrice's slow slaughter."
+        ],
+        "action_after_block": "clear"
+      },
+      {
+        "lines": [
+          "I nudged Miri ahead of me into the choking steam, her soft form blocking the keyhole. She was my shield, her country decency the perfect screen to absorb whatever wrath lay behind the mahogany paneling.",
+          "Lady Beatrice's eyes, glazed with a dark and heavy heat, locked onto Miri's pale face. The stable groom did not cease his rhythm; he only grinned, drawing Beatrice closer to the edge, matching the girl's terror as if inviting her to the hooks."
+        ],
+        "action_after_block": "clear"
+      },
+      {
+        "lines": [
+          "In Mr. Sterick's study, I matched his gaze, my Sussex drawl flawless and clinical. It was the perfect mask of chalk and starch, hiding the hands that knew the weight of the knife. I was the butcher hiding in plain sight, playing the humble servant while sizing up his neck for the hook.",
+          "We shared the silence of two slaughtermen. Mr. Sterick knew that discretion was the butcher's grease keeping the hotel's gears from screeching, and I was the one who would hold the bucket while he bled their names dry."
+        ],
+        "action_after_block": "clear"
+      },
+      {
+        "lines": [
+          "In the dressing room, my thumb pressed the red pressure mark Lord Caldor's grip had left on Lady Vayne's collarbone. She gasped, her chest arching against my rough hand in a slow, intoxicating surrender. The heat of her skin, the damp unlacing of her corset—she was a high-born beast yielding to the butcher's touch, begging for the collar that commands her.",
+          "I did not write order. My pen wrote want—Beatrice's spit and sweat, Miri's white face, my own hunger outside the door. The ledger is a butcher's book, filled with the grease and blood of our sins, recorded beautifully so they might sell for a penny more."
+        ],
+        "action_after_block": "clear"
+      }
+    ]
+  }
+}

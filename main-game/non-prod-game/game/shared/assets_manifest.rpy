@@ -239,10 +239,11 @@ init -40 python:
     # Register each slide here, then add its alias to MAIN_MENU_SLIDES in menu_carousel.rpy.
     
     declare_image_with_fallback("main_menu_sweeney", "images/ui/main_menu_sweeney.png", "#1a120a")
-    declare_image_with_fallback("main_menu_bride", "images/ui/main_menu_bride.png", "#1a120a")
+    declare_image_with_fallback("main_menu_jack", "images/ui/main_menu_jack.png", "#1a120a")
+    declare_image_with_fallback("main_menu_jack_ill", "images/ui/main_menu_jack_ill.png", "#1a120a")
     declare_image_with_fallback("main_menu_jekyll", "images/ui/main_menu_jekyll.png", "#1a120a")
     declare_image_with_fallback("main_menu_carmilla", "images/ui/main_menu_carmilla.png", "#1a120a")
-
+    declare_image_with_fallback("main_menu_carmilla_ill", "images/ui/main_menu_carmilla_ill.png", "#1a120a")
     # ── Audio aliases (None when missing; guard before play) ──────
     audio_themes_melancholy = register_audio("themes/melancholy", "audio/themes/focus-serious-piano-solo-background-mysterious-SBA-300514033-preview.mp3")
     audio_sfx_train_whistle = register_audio("sfx/train_whistle", "audio/sfx/train-whistle-1-SBA-300283834-preview.mp3")

@@ -1,6 +1,6 @@
 # Daily Asset Manifest & Reconciliation Report
 
-**Generated on:** 2026-06-20
+**Generated on:** 2026-06-21
 **Manifest Sources:**
 - Prod Manifest: [assets_manifest.rpy](file:///C:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/prod-game/game/assets_manifest.rpy)
 - Non-Prod Manifest: [assets_manifest.rpy](file:///C:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/non-prod-game/game/shared/assets_manifest.rpy)
@@ -10,11 +10,11 @@
 | Category | Declared (Union) | In Place (Prod) | In Place (Non-Prod) | Missing from Engine | Status |
 | :--- | :---: | :---: | :---: | :---: | :--- |
 | Backgrounds | 19 | 15 | 4 | 0 | ✅ Complete |
-| Sprites | 50 | 42 | 8 | 0 | ✅ Complete |
-| UI | 14 | 9 | 0 | 5 | ⚠️ Partial |
+| Sprites | 59 | 51 | 8 | 0 | ✅ Complete |
+| UI | 20 | 10 | 6 | 5 | ⚠️ Partial |
 | Event Illustrations (CGs) | 6 | 0 | 0 | 6 | ❌ Missing |
 | Audio | 21 | 5 | 21 | 0 | ✅ Complete |
-| **Total** | **110** | **71** | **33** | **11** | **-** |
+| **Total** | **125** | **81** | **39** | **11** | **-** |
 
 ## 🟢 Assets in Place (Prod / Non-Prod)
 These assets are declared and present on disk in either production or non-production engine environments.
@@ -59,12 +59,21 @@ These assets are declared and present on disk in either production or non-produc
 | `gideon_sprite dominant` | `images/sprites/gideon/dominant.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `gideon_sprite neutral` | `images/sprites/gideon/neutralf.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `gideon_sprite neutralf` | `images/sprites/gideon/neutralf.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
+| `lady_eleanor_sprite composed` | `images/sprites/cora/focused.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
+| `lady_eleanor_sprite furious` | `images/sprites/cora/guarded.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
+| `lady_eleanor_sprite panicked` | `images/sprites/cora/flushed.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
+| `margaret_sprite bold` | `images/sprites/cora/guarded.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
+| `margaret_sprite neutral` | `images/sprites/cora/base.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
+| `margaret_sprite yielding` | `images/sprites/cora/flushed.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `missy_sprite confused` | `images/sprites/missy/confused.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `missy_sprite hesitant` | `images/sprites/missy/hesitant.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `missy_sprite naive` | `images/sprites/missy/naive.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `missy_sprite neutral` | `images/sprites/missy/neutral.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `missy_sprite shocked` | `images/sprites/missy/shocked.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `missy_sprite smiling` | `images/sprites/missy/smiling.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
+| `sir_john_sprite cold` | `images/sprites/cora/focused.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
+| `sir_john_sprite neutral` | `images/sprites/cora/base.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
+| `sir_john_sprite stern` | `images/sprites/cora/guarded.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `stern_sprite accusing` | `images/sprites/stern/accusing.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `stern_sprite angry` | `images/sprites/stern/angry.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `stern_sprite neutral` | `images/sprites/stern/neutral.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
@@ -102,6 +111,12 @@ These assets are declared and present on disk in either production or non-produc
 
 | Asset Alias / Name | Expected Engine Path | Declared In | Prod | Non-Prod | Status |
 | :--- | :--- | :---: | :---: | :---: | :--- |
+| `main_menu_carmilla` | Non-Prod: `images/ui/main_menu_carmilla.png` | Non-Prod Only | - | 🟢 Yes | 🟡 Active (Non-Prod Only) |
+| `main_menu_carmilla_ill` | Non-Prod: `images/ui/main_menu_carmilla_ill.png` | Non-Prod Only | - | 🟢 Yes | 🟡 Active (Non-Prod Only) |
+| `main_menu_jack` | Non-Prod: `images/ui/main_menu_jack.png` | Non-Prod Only | - | 🟢 Yes | 🟡 Active (Non-Prod Only) |
+| `main_menu_jack_ill` | Non-Prod: `images/ui/main_menu_jack_ill.png` | Non-Prod Only | - | 🟢 Yes | 🟡 Active (Non-Prod Only) |
+| `main_menu_jekyll` | Non-Prod: `images/ui/main_menu_jekyll.png` | Non-Prod Only | - | 🟢 Yes | 🟡 Active (Non-Prod Only) |
+| `main_menu_sweeney` | `images/ui/main_menu_sweeney.png` | Both | 🟢 Yes | 🟢 Yes | ✅ Active (Prod & Non-Prod) |
 | `mc_sprite_thought_icon` | `images/sprites/cora/ui/mc_sprite_thought_icon.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `ui_book_cover` | `images/ui/book_cover.webp` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `ui_book_writing_paper` | `images/ui/book_writing_paper.webp` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |

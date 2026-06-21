@@ -22,9 +22,6 @@ init python in book1:
 
     CHAPTER_BLOCKS = {
         "day1_slop_chapter": {
-            "default": "book1_block_day1_slop_core",
-        },
-        "day1_chapter": {
             "ghost": "book1_block_day1_ghost_core",
             "predator": "book1_block_day1_predator_core",
             "prey": "book1_block_day1_prey_core",
@@ -32,6 +29,15 @@ init python in book1:
             "predator_complicit": "book1_block_day1_predator_complicit",
             "prey_resistant": "book1_block_day1_prey_resistant",
             "default": "book1_block_day1_default_core",
+        },
+        "day1_chapter": {
+            "ghost": "book1_block_day1_alt_ghost_core",
+            "predator": "book1_block_day1_alt_predator_core",
+            "prey": "book1_block_day1_alt_prey_core",
+            "ghost_subservient": "book1_block_day1_alt_ghost_subservient",
+            "predator_complicit": "book1_block_day1_alt_predator_complicit",
+            "prey_resistant": "book1_block_day1_alt_prey_resistant",
+            "default": "book1_block_day1_alt_default_core",
         },
         "day2_chapter": {
             "ghost": "book1_block_day2_ghost_core",
@@ -78,34 +84,34 @@ label book1_write_chapter(chapter_key="day1_chapter", current_day=101, word_dela
         play music audio_themes_private_ink fadein 1.0
 
     # [STATE] State/progression update
-    $ _book1_word_delay = word_delay
-    $ _book1_page_line_count = 0
-    $ _book1_page_line_limit = 4
-    $ book1_page_image = "ui_book_cover"
+    $ store._book1_word_delay = word_delay
+    $ store._book1_page_line_count = 0
+    $ store._book1_page_line_limit = 4
+    $ store.book1_page_image = "ui_book_cover"
 
-    if chapter_key == "day1_chapter":
-        call book1_nvl_write_line("Chapter I - The Conservatory Door", word_delay=_book1_word_delay)
+    if chapter_key == "day1_chapter" or chapter_key == "day1_slop_chapter":
+        call book1_nvl_write_line("Chapter I - The Inciting Lever", word_delay=_book1_word_delay)
 
         # [STATE] State/progression update
         $ _combined_theme = "{}_{}".format(story.day1_corridor_state, story.day1_stern_relation)
-        $ _book1_theme = _combined_theme if _combined_theme in book1.CHAPTER_BLOCKS["day1_chapter"] else story.day1_corridor_state
+        $ _book1_theme = _combined_theme if _combined_theme in book1.CHAPTER_BLOCKS[chapter_key] else story.day1_corridor_state
     elif chapter_key == "day2_chapter":
-        call book1_nvl_write_line("Chapter II - The Hatbox Oath", word_delay=_book1_word_delay)
+        call book1_nvl_write_line("Chapter II - The London Train", word_delay=_book1_word_delay)
 
         # [STATE] State/progression update
         $ _book1_theme = story.day2_tea_choice
     elif chapter_key == "day3_chapter":
-        call book1_nvl_write_line("Chapter III - Furnace Parlour", word_delay=_book1_word_delay)
+        call book1_nvl_write_line("Chapter III - The Savoy's Shadows", word_delay=_book1_word_delay)
 
         # [STATE] State/progression update
         $ _book1_theme = story.day3_brush_choice
     elif chapter_key == "day4_triumphant_chapter":
-        call book1_nvl_write_line("Chapter IV - The Sealed Envelope", word_delay=_book1_word_delay)
+        call book1_nvl_write_line("Chapter IV - The Fragile Lord", word_delay=_book1_word_delay)
 
         # [STATE] State/progression update
         $ _book1_theme = story.day2_tea_choice
     elif chapter_key == "day5_reckoning_chapter":
-        call book1_nvl_write_line("Chapter V - Diagnosis At Dawn", word_delay=_book1_word_delay)
+        call book1_nvl_write_line("Chapter V - A Mask Fixed Forever", word_delay=_book1_word_delay)
 
         # [STATE] State/progression update
         $ _book1_theme = story.day5_dynamic
@@ -131,18 +137,18 @@ label book1_write_chapter(chapter_key="day1_chapter", current_day=101, word_dela
 # [DAG_NODE id=book1_nvl_write_line type=write]
 label book1_nvl_write_line(line, word_delay=0.04):
 
-    if _book1_page_line_count >= _book1_page_line_limit:
+    if store._book1_page_line_count >= store._book1_page_line_limit:
         nvl clear
 
         # [STATE] State/progression update
-        $ _book1_page_line_count = 0
+        $ store._book1_page_line_count = 0
 
     # [STATE] State/progression update
     $ _book1_revealed = book1_word_reveal_text(line, word_delay)
     nvl_narrator "[_book1_revealed]"
 
     # [STATE] State/progression update
-    $ _book1_page_line_count += 1
+    $ store._book1_page_line_count += 1
 
     return
 
@@ -151,7 +157,7 @@ label book1_nvl_write_line(line, word_delay=0.04):
 label book1_set_page_image(image_name="ui_book_cover"):
 
     # [ASSET] Right-frame manuscript illustration update
-    $ book1_page_image = image_name
+    $ store.book1_page_image = image_name
     return
 
 # [DAG_NODE id=book1_debug_chapter_route type=write]
@@ -160,7 +166,7 @@ label book1_debug_chapter_route(chapter_key="day2_chapter"):
     nvl clear
     nvl_narrator "DEBUG - Book1 chapter: [chapter_key]"
 
-    if chapter_key == "day1_chapter":
+    if chapter_key == "day1_chapter" or chapter_key == "day1_slop_chapter":
 
         # [STATE] State/progression update
         $ _theme = story.day1_corridor_state
