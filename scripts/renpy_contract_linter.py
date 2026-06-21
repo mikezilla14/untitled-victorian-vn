@@ -21,6 +21,7 @@ ENGINE_SYMBOLS = {
     "False",
     "float",
     "format",
+    "getattr",
     "hasattr",
     "int",
     "isinstance",
@@ -59,6 +60,19 @@ RENPY_KEYWORDS = {
     "show",
     "with",
 }
+
+# Ren'Py block types whose indented bodies are not dialogue script.
+SCREEN_LANGUAGE_BLOCKS = frozenset({"screen", "transform", "style"})
+NON_DIALOGUE_BLOCKS = SCREEN_LANGUAGE_BLOCKS | frozenset({"python", "image"})
+
+BLOCK_START_PATTERNS = (
+    ("screen", re.compile(r"^screen\s+")),
+    ("transform", re.compile(r"^transform\s+")),
+    ("style", re.compile(r"^style\s+")),
+    ("label", re.compile(r"^label\s+")),
+    ("python", re.compile(r"^(?:init\b.*\s+)?python\s*:")),
+    ("image", re.compile(r"^image\s+")),
+)
 
 
 def read_text(path):
@@ -157,13 +171,51 @@ def load_defined_symbols(game_dir):
     return symbols
 
 
+def _image_block_opens(stripped):
+    """True when an image statement continues on following indented lines."""
+    if "(" not in stripped:
+        return False
+    tail = stripped.rstrip()
+    return not tail.endswith(")")
+
+
+def compute_block_contexts(lines):
+    """Return active Ren'Py block types for each line (index matches ``lines``)."""
+    contexts = []
+    stack = []
+
+    for line in lines:
+        stripped = line.lstrip()
+        indent = len(line) - len(stripped)
+
+        if stripped and not stripped.startswith("#"):
+            while stack and indent <= stack[-1][1]:
+                stack.pop()
+
+            for block_type, pattern in BLOCK_START_PATTERNS:
+                if not pattern.match(stripped):
+                    continue
+                if block_type == "image" and not _image_block_opens(stripped):
+                    break
+                stack.append((block_type, indent))
+                break
+
+        contexts.append(frozenset(name for name, _ in stack))
+
+    return contexts
+
+
 def check_speakers(files):
     violations = []
     dialogue = re.compile(r'^\s*([A-Za-z_]\w*)\s+"')
 
     for path in files:
+        lines = read_text(path).splitlines()
+        contexts = compute_block_contexts(lines)
         defined = load_defined_speakers(game_dir_for(path)) | ENGINE_SPEAKERS
-        for idx, line in enumerate(read_text(path).splitlines(), start=1):
+        for idx, line in enumerate(lines, start=1):
+            if contexts[idx - 1] & NON_DIALOGUE_BLOCKS:
+                continue
             match = dialogue.match(line)
             if not match:
                 continue
@@ -209,10 +261,18 @@ def check_callable_symbols(files):
     bare_call = re.compile(r"(?<![\.\w])([A-Za-z_]\w*)\s*\(")
 
     for path in files:
+        lines = read_text(path).splitlines()
+        contexts = compute_block_contexts(lines)
         defined = load_defined_symbols(game_dir_for(path)) | symbols_defined_in(path)
-        for idx, line in enumerate(read_text(path).splitlines(), start=1):
+        for idx, line in enumerate(lines, start=1):
             expr = extract_expression(line)
             if not expr:
+                continue
+            stripped = line.strip()
+            if (
+                contexts[idx - 1] & SCREEN_LANGUAGE_BLOCKS
+                and stripped.startswith(("if ", "elif ", "while "))
+            ):
                 continue
             for symbol in bare_call.findall(expr):
                 if symbol in RENPY_KEYWORDS or symbol in defined:

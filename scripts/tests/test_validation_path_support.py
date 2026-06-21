@@ -81,6 +81,29 @@ class RenPyContractPathTests(unittest.TestCase):
             )
             self.assertTrue(renpy_contract_linter.check_label_naming([path]))
 
+    def test_screen_language_is_not_parsed_as_dialogue(self):
+        path = NON_PROD_GAME / "shared" / "menu_carousel.rpy"
+        source = (
+            'screen main_menu():\n'
+            '    tag menu\n'
+            '    text "Title"\n'
+            '    textbutton _("Start") action Start()\n'
+            '    add "main_menu_carousel":\n'
+            '        xalign 0.5\n'
+            '    if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):\n'
+            '        textbutton _("Help") action ShowMenu("help")\n'
+            '    if CurrentScreenName() == "save":\n'
+            '        textbutton _("Upload") action UploadSync()\n'
+            '    if GamepadExists():\n'
+            '        textbutton _("Gamepad") action SetScreenVariable("device", "gamepad")\n'
+        )
+        with mock.patch.object(renpy_contract_linter, "read_text", return_value=source):
+            self.assertEqual(renpy_contract_linter.check_speakers([path]), [])
+            self.assertEqual(
+                renpy_contract_linter.check_callable_symbols([path]),
+                [],
+            )
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
