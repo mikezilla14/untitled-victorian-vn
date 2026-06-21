@@ -87,7 +87,7 @@ image main_menu_dust_mote = Solid("#efe6d4", xysize=(3, 3))
 
 image main_menu_dust_motes = SnowBlossom(
     At("main_menu_dust_mote", main_menu_dust_twinkle),
-    count=75,
+    count=100,
     border=80,
     xspeed=(-14, 14),
     yspeed=(-10, 10),
