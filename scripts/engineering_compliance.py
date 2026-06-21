@@ -45,7 +45,7 @@ def check_no_new_defaults_outside_variables(files):
         if not full_path.exists():
             continue
         for idx, line in enumerate(read_lines(full_path), start=1):
-            if re.match(r"^\s*default\s+\w+\s*=", line):
+            if re.match(r"^default\s+\w+\s*=", line):
                 violations.append(
                     f"{file}:{idx} new `default` declaration outside variables.rpy"
                 )

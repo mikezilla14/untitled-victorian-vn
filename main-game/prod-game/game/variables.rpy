@@ -17,3 +17,6 @@ default speaking_char = None
 
 # Set by story_window_penance_gate when pending penance consumes the chain slot.
 default _penance_consumed = False
+
+# Background slide used for static game menus (Load, Save, Preferences, etc.).
+default game_menu_background_slide = None

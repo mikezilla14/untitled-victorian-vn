@@ -27,3 +27,6 @@ default _book1_word_delay = 0.04
 default _book1_page_line_count = 0
 default _book1_page_line_limit = 4
 default book1_page_image = "ui_book_cover"
+
+# Background slide used for static game menus (Load, Save, Preferences, etc.).
+default game_menu_background_slide = None

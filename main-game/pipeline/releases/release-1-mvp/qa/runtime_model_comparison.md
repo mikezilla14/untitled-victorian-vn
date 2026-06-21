@@ -1,7 +1,7 @@
 # Runtime vs model comparison
 
 **Release:** `release-1-mvp`
-**Generated:** 2026-06-20 18:21 UTC
+**Generated:** 2026-06-21 13:24 UTC
 **Capture dir:** `main-game/non-prod-game/debug_captures`
 **Rollback policy:** rollback-contaminated captures invalid for balance proof
 

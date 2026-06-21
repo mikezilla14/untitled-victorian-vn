@@ -345,7 +345,7 @@ label day101_1_morning_interview:
 
 
 # ==========================================
-# 011 - VANCE THROWS TOY
+# 011 - VANCE THROWS TOYS
 # ==========================================
 
 # [DAG_NODE id=day101_1_vance_throws_toy type=work day=101]
@@ -359,9 +359,9 @@ label day101_1_vance_throws_toy:
     # [ASSET] Visual/staging command
     with dissolve
 
-    "The grand corridor of the guest wing is all gloss, mahogany, and heavy velvet restraint."
-    "I stand momentarily frozen in the transition between the office and the guest stairs, my arms loaded with clean laundry."
-    "Suddenly, a sharp clatter echoes against the polished wainscoting. A heavy, silver-gilt crystal scent-bottle strikes the floor, spinning across the carpet and spilling amber-colored jasmine oil."
+    "The guest wing corridor gleams—mahogany, gloss, and velvet restraint."
+    "I halt at the threshold between office and stairs, arms laden with clean linen."
+    "A sharp clatter cracks against the wainscoting. A silver-gilt crystal scent-bottle spins across the carpet, spilling amber jasmine oil."
 
     # [ASSET] Visual/staging command
     show vance_sprite angry at right_full_body:
@@ -369,15 +369,15 @@ label day101_1_vance_throws_toy:
         yalign 1.1
         zoom 0.8
 
-    "A footman retreats quickly down the corridor, keeping his eyes lowered as if escaping a blow."
+    "A footman retreats, eyes lowered, as if escaping a blow."
 
     vance "Stupid, useless boy! I said the lavender toilet-water, not this vulgar, suffocating grease!"
 
-    "She paces, her breathing shallow, her cheeks flushed high under her lacquered hair. The spilled scent is already thick and heavy, filling the narrow space with a hot, floral pressure."
+    "She paces, breath shallow, cheeks flushed high under lacquered hair. The spilled scent hangs thick and hot, filling the narrow space with floral pressure."
 
-    "Her gaze swings wildly, landing directly on me. Her chest rises and falls rapidly against the stiff silk of her bodice."
+    "Her gaze swings wildly, landing on me. Her chest rises and falls against stiff silk."
 
-    vance "You. Girl. Don't just stand there like a wooden post. Pick it up before it ruins the master's carpet."
+    vance "You. Girl. Do not stand there like a post. Pick it up before it stains the master's carpet."
 
     # [ASSET] Visual/staging command
     show cora_sprite base_travel at left_full_body:
@@ -388,17 +388,17 @@ label day101_1_vance_throws_toy:
     # [ASSET] Visual/staging command
     with moveinleft
 
-    "Her voice is velvet and grit, arranged for authority but trembling with a petulant irritation."
+    "Her voice is velvet and grit—authority arranged, but trembling with petulant irritation."
 
     cora "Yes, Miss."
 
-    "I take a slow beat. The jasmine oil has pooled on the red wool carpet. I step forward and bend down, my fingers touching the cold, heavy silver of the bottle."
-    "From this close, the hem of her dark violet gown is inches from my hands. I can hear the sharp, quick drag of her breath and see the nervous tapping of her boot."
+    "I pause. The jasmine oil has pooled on the red wool. I step forward, bending low, my fingers finding the cold, heavy silver."
+    "From this proximity, the hem of her violet gown hovers inches from my hands. I hear the sharp drag of her breath, the nervous tap of her boot."
 
     vance "Careful, you clumsy creature! If you chip the crystal, Miss Stern will hear of it."
 
-    cora_inner "I have handled worse than broken glass. Debt. Lies. Men who believed my silence was an agreement."
-    cora_inner "I lift the bottle, feeling the warmth of her proximity. I decide not to list them."
+    cora_inner "I have handled worse than broken glass. Debt. Lies. Men who mistook my silence for consent."
+    cora_inner "I lift the bottle, feeling the warmth of her nearness. I choose not to enumerate them."
 
     # [CHOICE] Decision point
     # [DAG_CHOICE group=day101_1_vance_throws_toy_menu_1]
@@ -415,13 +415,13 @@ label day101_1_vance_throws_toy:
             show cora_sprite guarded_travel at left_full_body
             with dissolve
 
-            cora "My apologies, Miss. I only wish to be of service."
+            cora "My apologies, Miss. I wish to serve."
 
-            "Vance takes the bottle, her fingers brushing mine with a brief, cold swipe. She lifts her chin, her face smoothing as she absorbs the submission."
+            "Vance takes the bottle, her fingers brushing mine with a brief, cold swipe. She lifts her chin, her face smoothing as she absorbs my submission."
 
             vance "At least one of you has some sense of place. Go clean your hands, girl. You smell of the laundry."
 
-            cora_inner "She hears a stupid country maid. Let her keep that version."
+            cora_inner "She sees a stupid country maid. I let her keep that version."
 
         "Stand straight and meet her gaze directly, holding the bottle between us. [[Defiant posture]]":
 
@@ -433,16 +433,16 @@ label day101_1_vance_throws_toy:
             show cora_sprite base_travel at left_full_body
             with dissolve
 
-            cora "It is not chipped, Miss. The crystal is quite sound. It only needs a steady hand."
+            cora "It is not chipped, Miss. It is sound."
 
-            "Vance goes still. Her eyes widen, moving from my cap to my lips, startled by the directness of my tone."
-            "She steps closer, the smell of her jasmine and warm skin pressing into my face. Her breathing is loud in the quiet hall."
+            "Vance goes still. Her eyes widen, traveling from my cap to my lips, startled by the directness of my tone."
+            "She steps closer—jasmine and warm skin pressing into my face. Her breathing is loud in the quiet hall."
 
             vance "You speak with a great deal of confidence for a girl in a borrowed apron."
             vance "Do you want me to tell Miss Stern how you look at guests?"
 
-            cora_inner "She is threatening me, but her hand is shaking as she reaches for the bottle."
-            cora_inner "She is not angry; she is exposed."
+            cora_inner "She threatens me, but her hand shakes as she reaches for the bottle."
+            cora_inner "She is not angry. She is exposed."
 
         "Offer it on my flat palm with a cold, blank face. [[Ghostly posture]]":
 
@@ -456,11 +456,11 @@ label day101_1_vance_throws_toy:
 
             cora "The scent-bottle, Miss."
 
-            "Vance snatches it, her expression turning into a scowl of irritation. The complete lack of reaction from me is a wall she cannot climb."
+            "Vance snatches it, her expression twisting into a scowl of irritation. My complete lack of reaction is a wall she cannot scale."
 
             vance "Useless post. You are like a piece of furniture that has learned to walk."
 
-            cora_inner "A mirror does not apologize when it shows the dust. It only holds the shape."
+            cora_inner "A mirror does not apologize for showing dust. It only holds the shape."
 
     # [ASSET] Visual/staging command
     show gideon_sprite cold at right_full_body:
@@ -489,8 +489,8 @@ label day101_1_vance_throws_toy:
     # [ASSET] Visual/staging command
     with dissolve
 
-    "One word. The corridor changes temperature instantly."
-    "Vance's shoulders drop. Her lips part in a quick, swallowed gasp, the petulant fury folding away into a practiced, submissive compliance."
+    "One word. The corridor temperature drops."
+    "Vance's shoulders fall. Her lips part in a swallowed gasp—petulant fury folding into practiced, submissive compliance."
 
     vance "Gideon. I... I was only correcting the maid. She was careless with the linen."
 
@@ -510,17 +510,17 @@ label day101_1_vance_throws_toy:
 
     gideon "Then learn quickly, Cora. This house rewards discretion. If Ms. Vance cannot manage her temper, I expect you to manage your tongue."
 
-    cora_inner "He does not threaten me with his voice. That is why it feels like an iron collar."
+    cora_inner "He does not threaten with his voice. That is why it feels like an iron collar."
 
     # [ASSET] Visual/staging command
     hide gideon_sprite
     with dissolve
 
     "Mr. Locke turns and walks back toward the Master Suite, his boots striking the floor with quiet, absolute authority."
-    "Vance stays behind for a second, her hands clutching the silver scent-bottle so tightly her knuckles are white."
+    "Vance remains behind a moment, her hands clutching the silver scent-bottle until her knuckles whiten."
     "She turns to me, her voice a low, burning hiss."
 
-    vance "You. Don't think this is finished. Take my lace wrap and bring it to the dressing room. Now."
+    vance "You. Do not think this is finished. Take my lace wrap and bring it to the dressing room. Now."
 
     # [ASSET] Visual/staging command
     hide vance_sprite

@@ -1,0 +1,55 @@
+{
+  "request": {
+    "node_id": "day101_1_morning_interview",
+    "day": 101,
+    "archetype_focus": "prey",
+    "variables": {
+      "player.corruption_level": 1,
+      "player.anxiety": 20
+    }
+  },
+  "response": {
+    "label": "day101_1_morning_interview",
+    "staging": [
+      "scene bg_stern_office_entrance with dissolve",
+      "show stern_sprite neutral at right_full_body with dissolve"
+    ],
+    "dialogue": [
+      {
+        "character": "narration",
+        "text": "Miss Stern stands rather than sits. It is measurement, not courtesy."
+      },
+      {
+        "character": "cora_inner",
+        "text": "Her eyes move from my cap to my boots, weighing every inch for disobedience."
+      },
+      {
+        "character": "stern",
+        "text": "Cora Vale. Sir John's reference speaks to your quiet nature. Your lack of curiosity."
+      }
+    ],
+    "menu": {
+      "question": "How do I survive Stern's inspection?",
+      "options": [
+        {
+          "text": "Lower my eyes. Let her mistake fear for obedience.",
+          "state_effects": [
+            "$ apply_balanced_effect(\"submissive\", intensity=\"standard\")",
+            "$ story.set_day1_interview_state(\"meek\")",
+            "$ apply_archetype_edge(\"prey\", 1)"
+          ],
+          "outcome": "cora \"I can, Ma'am. I only wish to work hard.\""
+        },
+        {
+          "text": "Answer cleanly. Let competence do what meekness cannot.",
+          "state_effects": [
+            "$ apply_balanced_effect(\"defiant\", intensity=\"standard\", witness=\"stern\")",
+            "$ story.set_day1_interview_state(\"competent\")",
+            "$ apply_archetype_edge(\"ghost\", 1)"
+          ],
+          "outcome": "cora \"I can be quiet, quick, and exact. If I err, it will not be from carelessness.\""
+        }
+      ]
+    }
+  }
+}

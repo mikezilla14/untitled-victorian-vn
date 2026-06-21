@@ -11,8 +11,6 @@
 #    3. Append the manifest alias to MAIN_MENU_SLIDES below.
 # ═══════════════════════════════════════════════════════════════
 
-default game_menu_background_slide = None
-
 init -35 python:
     import random
 
