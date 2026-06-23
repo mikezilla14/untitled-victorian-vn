@@ -37,10 +37,12 @@ label day100_main:
     with fade
 
     # [enter:Cora]
+    show cora_sprite base at centre_bust with moveinright # [asset auto]
     show cora_sprite base at centre_bust:
         zoom 1.2
         ypos 0.9
 
+    # [ASSET] Visual/staging command
     show vance_sprite base at left:
         ypos 0.98
         xpos 0.15

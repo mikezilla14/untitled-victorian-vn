@@ -390,6 +390,8 @@ def audit_non_prod_assets() -> dict:
     
     manifest_path = NON_PROD_GAME_DIR / "assets_manifest.rpy"
     if not manifest_path.exists():
+        manifest_path = NON_PROD_GAME_DIR / "shared" / "assets_manifest.rpy"
+    if not manifest_path.exists():
         return results
         
     text = manifest_path.read_text(encoding="utf-8")
@@ -408,15 +410,18 @@ def audit_non_prod_assets() -> dict:
     
     results["declared_count"] = len(images) + len(audios)
     
+    prod_game_dir = ROOT / "main-game" / "prod-game" / "game"
     for img_id, rel_path in images:
         abs_path = NON_PROD_GAME_DIR / rel_path
-        if not abs_path.exists():
+        prod_path = prod_game_dir / rel_path
+        if not abs_path.exists() and not prod_path.exists():
             results["missing_on_disk_count"] += 1
             results["missing_on_disk_details"].append(("Image", img_id, rel_path))
             
     for alias, rel_path in audios:
         abs_path = NON_PROD_GAME_DIR / rel_path
-        if not abs_path.exists():
+        prod_path = prod_game_dir / rel_path
+        if not abs_path.exists() and not prod_path.exists():
             results["missing_on_disk_count"] += 1
             results["missing_on_disk_details"].append(("Audio", alias, rel_path))
             

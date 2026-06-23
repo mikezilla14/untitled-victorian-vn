@@ -134,8 +134,10 @@ label book1_write_chapter(chapter_key="day1_chapter", current_day=101, word_dela
     return
 
 
-# [DAG_NODE id=book1_nvl_write_line type=write]
 label book1_nvl_write_line(line, word_delay=0.04):
+
+    if audio_sfx_ink_scratch:
+        play sound audio_sfx_ink_scratch
 
     if store._book1_page_line_count >= store._book1_page_line_limit:
         nvl clear

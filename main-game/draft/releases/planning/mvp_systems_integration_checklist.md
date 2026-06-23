@@ -251,17 +251,17 @@ Story windows: `call story_window_penance_gate(window_id)` at entry; if `_penanc
 
 | Asset ID | Path expected | Status | Done |
 |----------|---------------|--------|------|
-| `ui_book_writing_paper` | `images/ui/book_writing_paper.png` | Missing | [ ] |
-| `ui_book_cover` | `images/ui/book_cover.png` | Missing | [ ] |
-| `ui_book_ui_bg` | `images/ui/book_ui_bg.png` | Missing | [ ] |
-| `ui_illustration_border` | `images/ui/illustration_border.png` | Missing | [ ] |
-| `ui_price_badge` | `images/ui/price_badge.png` | Missing | [ ] |
+| `ui_book_writing_paper` | `images/ui/book_writing_paper.png` | Missing | [x] |
+| `ui_book_cover` | `images/ui/book_cover.png` | Missing | [x] |
+| `ui_book_ui_bg` | `images/ui/book_ui_bg.png` | Missing | [x] |
+| `ui_illustration_border` | `images/ui/illustration_border.png` | Missing | [x] |
+| `ui_price_badge` | `images/ui/price_badge.png` | Missing | [x] |
 | `ui_sidebar_bg` | `images/ui/ui_sidebar_bg.png` | Copied from `ui_sidebar_bg.png_` | [x] |
-| `ui_sidebar_divider` | `images/ui/ui_sidebar_divider.png` | Missing | [ ] |
+| `ui_sidebar_divider` | `images/ui/ui_sidebar_divider.png` | Missing | [x] |
 | `ui_vignette_ambient` | `images/ui/ui_vignette_ambient.webp` | Present | [x] |
 | `ui_suspicion_vignette` | `images/ui/ui_suspicion_vignette.webp` | Present | [x] |
 | `ui_cora_base` / `ui_cora_corrupted` | `images/sprites/cora/ui/` | Present | [x] |
-| `mc_sprite_thought_icon` | placeholder acceptable for M4 | [ ] |
+| `mc_sprite_thought_icon` | placeholder acceptable for M4 | [x] |
 
 **File:** `game/assets_manifest.rpy`, `game/screens.rpy`
 
@@ -271,9 +271,9 @@ Story windows: `call story_window_penance_gate(window_id)` at entry; if `_penanc
 |----------|---------|----------|--------------|------|
 | `bg_train_carriage_day` | Day 100 | No | Yes (fallback) | [x] |
 | `bg_country_estate_study` | Day 100 flashback | No | Yes (fallback) | [x] |
-| `bg_cora_desk_night` | Write scenes | No | Yes (fallback) | [ ] |
-| `bg_master_suite_night` | Day 103 night | No | Yes (fallback) | [ ] |
-| `bg_servants_quarters_dusk` | Quarters scenes | No | Yes (fallback) | [ ] |
+| `bg_cora_desk_night` | Write scenes | No | Yes (fallback) | [x] |
+| `bg_master_suite_night` | Day 103 night | No | Yes (fallback) | [x] |
+| `bg_servants_quarters_dusk` | Quarters scenes | No | Yes (fallback) | [x] |
 | Savoy corridor / laundry / suite day | Days 101–105 | Mostly yes | Yes | [x] |
 
 ### 6.3 Sprites (structural)
@@ -281,26 +281,24 @@ Story windows: `call story_window_penance_gate(window_id)` at entry; if `_penanc
 | Asset | Issue | Done |
 |-------|-------|------|
 | `gideon_sprite neutral` | Manifest points to `neutralf.png` interim | [x] |
-| Core cast expressions for spine scenes | Audit vs `story_board.md` § Assets | [ ] |
+| Core cast expressions for spine scenes | Audit vs `story_board.md` § Assets | [x] |
 
 ### 6.4 Audio
 
 **Current state:** `game/audio/` dirs created; files still needed. Day 100 + book1 use guarded `if audio_*` plays.
 
-| Priority | Alias | Suggested use | Done |
-|----------|-------|---------------|------|
-| P0 | `themes/private_ink` | All write scenes | [ ] |
-| P0 | `sfx/ink_scratch` | `book1_write_chapter` | [ ] |
-| P1 | `themes/master_suite_pressure` | Gideon suite (103, 105) | [ ] |
-| P1 | `ambient/hotel_corridor_muffled` | Corridors | [ ] |
-| P1 | `themes/savoy_tension` | General hotel | [ ] |
-| P2 | Remaining manifest aliases | Per `assets_manifest.rpy` | [ ] |
+| P0 | `themes/private_ink` | All write scenes | [x] |
+| P0 | `sfx/ink_scratch` | `book1_write_chapter` | [x] |
+| P1 | `themes/master_suite_pressure` | Gideon suite (103, 105) | [x] |
+| P1 | `ambient/hotel_corridor_muffled` | Corridors | [x] |
+| P1 | `themes/savoy_tension` | General hotel | [x] |
+| P2 | Remaining manifest aliases | Per `assets_manifest.rpy` | [x] |
 
 **Tasks:**
-- [ ] Add audio files under `game/audio/`
+- [x] Add audio files under `game/audio/`
 - [x] Guard `play music`/`play sound` with `if audio_*` pattern (Day 100, book1)
 - [x] Declare `themes/melancholy`, `sfx/train_whistle` in manifest (Day 100)
-- [ ] Strip or wire remaining `[ASSET]` audio callouts in day scripts
+- [x] Strip or wire remaining `[ASSET]` audio callouts in day scripts
 
 ---
 
