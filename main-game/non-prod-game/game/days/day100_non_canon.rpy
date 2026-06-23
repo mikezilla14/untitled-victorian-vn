@@ -37,8 +37,15 @@ label day100_main:
     with fade
 
     # [enter:Cora]
-    show cora_sprite base at centre_bust with moveinright # [asset auto]
-    show cora_sprite guarded_travel at left_bust # [asset keep]
+    show cora_sprite base at centre_bust:
+        zoom 1.2
+        ypos 0.9
+
+    show vance_sprite base at left:
+        ypos 0.98
+        xpos 0.15
+        zoom 0.6
+
     # [BEAT] Kinetic start in motion. Cora hunts confiscated manuscript pages before dawn
 
     "Cora had three pages in her hand when the door opened."

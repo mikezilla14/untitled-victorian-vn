@@ -1,7 +1,7 @@
 @echo off
 title Batch Background Removal
 
-set "REMBG_EXE=C:\Users\mikez\AppData\Local\Programs\Python\Python312\Scripts\rembg.exe"
+set "REMBG_EXE=C:\Users\mikez\AppData\Local\Programs\Python\Python311\Scripts\rembg.exe"
 set "INPUT_DIR=%~dp0input"
 set "OUTPUT_DIR=%~dp0output"
 

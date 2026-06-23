@@ -140,6 +140,7 @@ init -40 python:
     declare_image_with_fallback("vance_sprite reaching_dressing_gown", "images/sprites/vance/reaching_dressing_gown.png", "#7b3f98")
     declare_image_with_fallback("vance_sprite smiling", "images/sprites/vance/smiling.png", "#7b3f98")
     declare_image_with_fallback("vance_sprite snide", "images/sprites/vance/snide.png", "#7b3f98")
+    declare_image_with_fallback("vance_sprite base", "images/sprites/vance/base.png", "#7b3f98")
 
     # ── Sprites: Gideon ───────────────────────────────────────────
     # [~700 × 1080 px, transparent background]  (same spec as Stern above)

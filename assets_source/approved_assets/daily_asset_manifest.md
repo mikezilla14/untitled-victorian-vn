@@ -1,6 +1,6 @@
 # Daily Asset Manifest & Reconciliation Report
 
-**Generated on:** 2026-06-21
+**Generated on:** 2026-06-23
 **Manifest Sources:**
 - Prod Manifest: [assets_manifest.rpy](file:///C:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/prod-game/game/assets_manifest.rpy)
 - Non-Prod Manifest: [assets_manifest.rpy](file:///C:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/non-prod-game/game/shared/assets_manifest.rpy)
@@ -10,11 +10,11 @@
 | Category | Declared (Union) | In Place (Prod) | In Place (Non-Prod) | Missing from Engine | Status |
 | :--- | :---: | :---: | :---: | :---: | :--- |
 | Backgrounds | 19 | 15 | 4 | 0 | ✅ Complete |
-| Sprites | 59 | 51 | 8 | 0 | ✅ Complete |
+| Sprites | 60 | 51 | 9 | 0 | ✅ Complete |
 | UI | 20 | 10 | 6 | 5 | ⚠️ Partial |
 | Event Illustrations (CGs) | 6 | 0 | 0 | 6 | ❌ Missing |
 | Audio | 21 | 5 | 21 | 0 | ✅ Complete |
-| **Total** | **125** | **81** | **39** | **11** | **-** |
+| **Total** | **126** | **81** | **40** | **11** | **-** |
 
 ## 🟢 Assets in Place (Prod / Non-Prod)
 These assets are declared and present on disk in either production or non-production engine environments.
@@ -84,6 +84,7 @@ These assets are declared and present on disk in either production or non-produc
 | `vance_sprite angry_dressing_gown_hair_down` | `images/sprites/vance/angry_dressing_gown_hair_down.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `vance_sprite angry_dressing_gown_hair_down_front` | `images/sprites/vance/angry_dressing_gown_hair_down_front.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `vance_sprite angry_pointing` | `images/sprites/vance/angry_pointing.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
+| `vance_sprite base` | Non-Prod: `images/sprites/vance/base.png` | Non-Prod Only | - | 🟢 Yes | 🟡 Active (Non-Prod Only) |
 | `vance_sprite confused` | `images/sprites/vance/confused.png` | Both | 🔴 No | 🟢 Yes | 🟡 Active (Non-Prod Only) |
 | `vance_sprite confused_dressing_gown` | Non-Prod: `images/sprites/vance/confused_dressing_gown.png` | Non-Prod Only | - | 🟢 Yes | 🟡 Active (Non-Prod Only) |
 | `vance_sprite cowed` | `images/sprites/vance/cowed.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
@@ -207,5 +208,8 @@ These files exist in the engine folders but are not declared in `assets_manifest
 | File Path | Status |
 | :--- | :--- |
 | `images/backgrounds/backgrounds_src/bg_train_carriage_day.png` | ⚠️ Needs registration or cleanup |
+| `images/sprites/vance/base confused.png` | ⚠️ Needs registration or cleanup |
+| `images/sprites/vance/input/base confused.png` | ⚠️ Needs registration or cleanup |
+| `images/sprites/vance/input/base.png` | ⚠️ Needs registration or cleanup |
 | `images/ui/ui_price_badge.png` | ⚠️ Needs registration or cleanup |
 
