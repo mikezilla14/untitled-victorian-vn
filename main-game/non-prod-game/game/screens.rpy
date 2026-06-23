@@ -592,3 +592,71 @@ screen debug_grain_overlay():
                     textbutton "Stop" action Function(balance_capture.stop, "overlay_stop") text_size 12
                     textbutton "Hide" action [SetVariable("debug_grain_overlay_visible", False), Hide("debug_grain_overlay")] text_size 12
 
+
+# ── DAY/TIME TRANSITION SCREEN ──────────────────────────────────
+# Centrally styled day/time transition screens.
+style time_transition_day_text:
+    size 40
+    color "#c8a97e"
+    xalign 0.5
+    bold True
+
+style time_transition_period_text:
+    size 28
+    color "#dfcbb5"
+    xalign 0.5
+    italic True
+
+screen time_transition_screen(day, period):
+    modal True
+    zorder 300 # Displays above stats overlay (zorder 100) and say screen
+
+    # Dismiss on keyboard/gamepad dismiss keys
+    key "dismiss" action Return()
+
+    # Dismiss on click anywhere
+    button:
+        action Return()
+        xfill True
+        yfill True
+        background None # Invisible button
+
+    add Solid("#000000") # Full black screen
+
+    vbox:
+        align (0.5, 0.5)
+        spacing 15
+
+        text "DAY [day]" style "time_transition_day_text"
+        
+        # Muted gold horizontal separator
+        add Solid("#9a7e5a"):
+            xalign 0.5
+            xsize 120
+            ysize 2
+
+        text "[period]" style "time_transition_period_text"
+
+label time_transition_label(day, period):
+    # Hide the HUD stats overlay so it doesn't stand out over the black screen
+    hide screen stats_overlay
+    
+    # Show the transition screen
+    show screen time_transition_screen(day, period)
+    
+    # Fade to black
+    with fade
+
+    # Pause for 2.0 seconds (player can click to dismiss)
+    $ renpy.pause(2.0)
+
+    # Hide transition screen
+    hide screen time_transition_screen
+    
+    # Fade back to the game scene
+    with fade
+
+    # Restore the stats overlay HUD
+    show screen stats_overlay
+    return
+

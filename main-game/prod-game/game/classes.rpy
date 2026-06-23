@@ -36,6 +36,8 @@ init -1 python:
         def __init__(self):
             self.current_day = 1
             self._time_of_day = "Morning"
+            self.last_displayed_day = None
+            self.last_displayed_period = None
 
         @property
         def time_of_day(self):

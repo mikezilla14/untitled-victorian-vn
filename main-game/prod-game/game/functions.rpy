@@ -154,8 +154,31 @@ init python:
     def set_time_period(period):
         """
         Centralized time-of-day assignment with TimeManager validation.
+        Also automatically triggers transition screens when day/period changes.
         """
+        # Read old/new values
+        last_day = getattr(time_manager, "last_displayed_day", None)
+        last_period = getattr(time_manager, "last_displayed_period", None)
+
+        # Set time period
         time_manager.set_time_of_day(period)
+
+        new_day = time_manager.current_day
+        new_period = time_manager.time_of_day
+
+        # Skip transition during initial prologue startup
+        if last_day is None and last_period is None:
+            time_manager.last_displayed_day = new_day
+            time_manager.last_displayed_period = new_period
+            return
+
+        # Trigger if day or period changed
+        if new_day != last_day or new_period != last_period:
+            # Prevent triggering transitions in the main menu
+            if not renpy.store.main_menu:
+                time_manager.last_displayed_day = new_day
+                time_manager.last_displayed_period = new_period
+                renpy.call("time_transition_label", new_day, new_period)
 
     def attempt_write(required_insp=30, cost=20, required_corr=3):
         """
