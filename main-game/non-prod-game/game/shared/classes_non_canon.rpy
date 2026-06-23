@@ -109,6 +109,25 @@ init -1 python:
 
         CONFRONTATION_THRESHOLD = 50
 
+        CORRUPTION_XP_THRESHOLDS = {
+            1: 20,
+            2: 25,
+            3: 30,
+            4: 35,
+            5: 40,
+            6: 45,
+            7: 50,
+            8: 55,
+            9: 60,
+            10: 65,
+        }
+        CORRUPTION_DEFAULT_THRESHOLD = 70
+
+        @property
+        def corruption_xp_threshold(self):
+            """Returns the XP required to advance from the current level to the next."""
+            return self.CORRUPTION_XP_THRESHOLDS.get(self.corruption_level, self.CORRUPTION_DEFAULT_THRESHOLD)
+
         @property
         def inspiration_cap(self):
             return 50
@@ -193,8 +212,8 @@ init -1 python:
             # Corruption XP must never be below 0.
             self.corruption_xp = max(0, self.corruption_xp)
 
-            while self.corruption_xp >= 20:
-                self.corruption_xp -= 20
+            while self.corruption_xp >= self.corruption_xp_threshold:
+                self.corruption_xp -= self.corruption_xp_threshold
                 self.corruption_level += 1
 
             # Inspiration must never be below 0 or above the current cap.

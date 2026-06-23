@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-06-19T22:58:13+00:00",
+  "generated_at": "2026-06-23T17:32:31+00:00",
   "repo_root": "untitled-victorian-vn",
   "entries": [
     {
@@ -358,6 +358,14 @@
       "links": [
         {
           "target": "../../docs/specs/writers-desk-agent-framework.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../main-game/draft/releases/planning/balance/effect_profiles.yaml",
+          "status": "ok"
+        },
+        {
+          "target": "../../main-game/draft/releases/planning/balance/profile_migration_worksheet.md",
           "status": "ok"
         }
       ],
@@ -923,7 +931,19 @@
           "status": "ok"
         },
         {
+          "target": "../../../main-game/draft/releases/planning/balance/effect_profiles.yaml",
+          "status": "ok"
+        },
+        {
           "target": "../../rules/chief_architect.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../../main-game/draft/releases/planning/balance/profile_migration_worksheet.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../../docs/specs/semantic-balance-profiles-implementation-plan.md",
           "status": "ok"
         }
       ],
@@ -1271,7 +1291,7 @@
       "kind": "reference",
       "title": "Daily Asset Manifest & Reconciliation Report",
       "area": "assets_source",
-      "summary": "**Generated on:** 2026-06-19",
+      "summary": "**Generated on:** 2026-06-23",
       "links": [
         {
           "target": "file:///C:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/prod-game/game/assets_manifest.rpy",
@@ -2320,6 +2340,79 @@
       "findings": []
     },
     {
+      "path": "docs/book-writing-engine-export/characters_and_locations.md",
+      "kind": "reference",
+      "title": "CHARACTERS & LOCATIONS TRANSPOSITION DATABASE",
+      "area": "docs/book-writing-engine-export",
+      "summary": "This document contains the canonical profiles of the cast and settings, mapping their real-life (IRL) identities at the Savoy Hotel to their fictional transpositions in Cora Hartley's penny dreadful manuscript (`book1`).",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "docs/book-writing-engine-export/integration_guide.md",
+      "kind": "reference",
+      "title": "INTEGRATION & SYNTAX VALIDATION GUIDE",
+      "area": "docs/book-writing-engine-export",
+      "summary": "This guide details the procedure for importing the external LLM's branching code output back into the visual novel's day scripts, and how to validate the syntax and compliance of the integrated code.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "docs/book-writing-engine-export/narrative_summary_and_flag_wiring.md",
+      "kind": "reference",
+      "title": "NARRATIVE SUMMARY & FLAG WIRING MANUAL",
+      "area": "docs/book-writing-engine-export",
+      "summary": "This document lists the real-life (IRL) gameplay timeline at the Savoy Hotel (Days 100 to 105) and acts as the technical mapping schema showing how player decisions and state variables are wired into Cora's branching man",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "docs/book-writing-engine-export/prompt_catalogue.md",
+      "kind": "reference",
+      "title": "LLM PROMPT CATALOGUE: BOOK WRITING ENGINE",
+      "area": "docs/book-writing-engine-export",
+      "summary": "This catalogue contains flag-agnostic prompt templates for generating every Day and Archetype variant combination of Cora Hartley's penny dreadful manuscript (`book1`).",
+      "links": [
+        {
+          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/docs/book-writing-engine-export/system_prompt.md",
+          "status": "external"
+        },
+        {
+          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/docs/book-writing-engine-export/narrative_summary_and_flag_wiring.md",
+          "status": "external"
+        },
+        {
+          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/docs/book-writing-engine-export/style_and_voice_guide.md",
+          "status": "external"
+        },
+        {
+          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/docs/book-writing-engine-export/characters_and_locations.md",
+          "status": "external"
+        }
+      ],
+      "findings": [
+        "Possible stale reference (absolute local file URL): file:///"
+      ]
+    },
+    {
+      "path": "docs/book-writing-engine-export/style_and_voice_guide.md",
+      "kind": "reference",
+      "title": "STYLE & VOICE GUIDE: THE PENNY DREADFUL MANUSCRIPT LAYER",
+      "area": "docs/book-writing-engine-export",
+      "summary": "This guide outlines the linguistic, stylistic, and formatting rules that the external LLM must follow to produce prose matching the tone and aesthetics of Cora Hartley's Holywell Street manuscript (`book1`).",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "docs/book-writing-engine-export/system_prompt.md",
+      "kind": "reference",
+      "title": "SYSTEM PROMPT: Prose-First Branching Gothic Novel Engine",
+      "area": "docs/book-writing-engine-export",
+      "summary": "You are the **Writers' Room / Prose Generation Engine** for a Victorian Gothic visual novel. Your task is to generate branching prose for Cora Hartley's manuscript (written under the pen name *Coralie Vale*). This manusc",
+      "links": [],
+      "findings": []
+    },
+    {
       "path": "docs/compliance_checklist.md",
       "kind": "reference",
       "title": "MVP Compliance Checklist",
@@ -2449,6 +2542,15 @@
       "findings": []
     },
     {
+      "path": "docs/narrative/book_abstraction_registry.md",
+      "kind": "reference",
+      "title": "Book 1 Abstraction and Narrative Variant Registry",
+      "area": "docs/narrative",
+      "summary": "This document serves as the central reference mapping how Cora's manuscript (`book1` - the Holywell Street penny dreadful layer) translates gameplay state, flags, and paths into specific narrative variants, and outlines ",
+      "links": [],
+      "findings": []
+    },
+    {
       "path": "docs/narrative_workflow.md",
       "kind": "workflow",
       "title": "Narrative workflow (MVP)",
@@ -2506,6 +2608,66 @@
           "status": "anchor-only"
         }
       ],
+      "findings": []
+    },
+    {
+      "path": "docs/normal-day-prose-export/integration_guide.md",
+      "kind": "reference",
+      "title": "INTEGRATION & SYNTAX VALIDATION GUIDE: SAVOY HOTEL IRL LAYER",
+      "area": "docs/normal-day-prose-export",
+      "summary": "This guide outlines the procedure for importing and validating external LLM-generated Savoy ADV dialogue scripts back into the project codebase.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "docs/normal-day-prose-export/prompt_catalogue.md",
+      "kind": "reference",
+      "title": "LLM PROMPT CATALOGUE: SAVOY HOTEL ADV LAYER",
+      "area": "docs/normal-day-prose-export",
+      "summary": "This catalogue contains flag-agnostic prompt templates for creating, rewriting, and revising (tuning length/spiciness of) dialogue and staging scripts for the real-life (IRL) Savoy Hotel ADV gameplay layer.",
+      "links": [
+        {
+          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/docs/normal-day-prose-export/system_prompt.md",
+          "status": "external"
+        },
+        {
+          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/docs/normal-day-prose-export/style_and_voice_guide.md",
+          "status": "external"
+        },
+        {
+          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/docs/normal-day-prose-export/variables_and_flag_wiring.md",
+          "status": "external"
+        }
+      ],
+      "findings": [
+        "Possible stale reference (absolute local file URL): file:///"
+      ]
+    },
+    {
+      "path": "docs/normal-day-prose-export/style_and_voice_guide.md",
+      "kind": "reference",
+      "title": "STYLE & VOICE GUIDE: SAVOY HOTEL IRL NARRATIVE LAYER",
+      "area": "docs/normal-day-prose-export",
+      "summary": "This guide outlines the linguistic, stylistic, and technical rules that the external LLM must follow to produce prose matching the tone, staging, and syntax of Cora Hartley's Savoy Hotel ADV gameplay layer.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "docs/normal-day-prose-export/system_prompt.md",
+      "kind": "reference",
+      "title": "SYSTEM PROMPT: Savoy Hotel ADV Prose Generation Engine",
+      "area": "docs/normal-day-prose-export",
+      "summary": "You are the **Writers' Room / ADV Prose Generation Engine** for a Victorian visual novel. Your task is to generate branching dialogue and staging scripts for the real-life (IRL) gameplay layer of the story: Cora Hartley'",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "docs/normal-day-prose-export/variables_and_flag_wiring.md",
+      "kind": "reference",
+      "title": "VARIABLES & FLAG WIRING MANUAL: SAVOY HOTEL IRL LAYER",
+      "area": "docs/normal-day-prose-export",
+      "summary": "This manual lists the variables, stats, and Python state tracking hooks used to track choices and balance profiles in the Savoy Hotel ADV gameplay layer.",
+      "links": [],
       "findings": []
     },
     {
@@ -2571,6 +2733,24 @@
       "title": "Spec: Book Writing Styling & Layout",
       "area": "docs/specs",
       "summary": "Define the visual layout, coordinates, styling guidelines, and asset declarations for the book writing feature. This feature displays in-game chapter manuscript text in NVL mode on the left side of the screen, while show",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "docs/specs/book1-mvp-payload-system-revised.md",
+      "kind": "feature-spec",
+      "title": "Spec: Book1 MVP Payload System",
+      "area": "docs/specs",
+      "summary": "Define Book1 as the primary MVP payoff vehicle for the Victorian VN.",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "docs/specs/book1-mvp-payload-system.md",
+      "kind": "feature-spec",
+      "title": "Spec: Book1 MVP Payload System",
+      "area": "docs/specs",
+      "summary": "Define Book1 as the primary MVP payoff vehicle for the Victorian VN.",
       "links": [],
       "findings": []
     },
@@ -2762,6 +2942,32 @@
       ]
     },
     {
+      "path": "docs/specs/semantic-balance-profiles-implementation-plan.md",
+      "kind": "feature-spec",
+      "title": "Semantic Balance Profiles — Implementation Plan",
+      "area": "docs/specs",
+      "summary": "**Status:** `active-support` (Phase 7 complete — prod framework promoted)",
+      "links": [
+        {
+          "target": "../architecture/feature_lifecycle_registry.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../main-game/draft/releases/planning/balance/profile_migration_worksheet.md",
+          "status": "ok"
+        },
+        {
+          "target": "#lint-severity-policy",
+          "status": "anchor-only"
+        },
+        {
+          "target": "../../main-game/draft/releases/planning/balance/profile_migration_worksheet.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
       "path": "docs/specs/story-chain-routing-refactor.md",
       "kind": "feature-spec",
       "title": "Story Chain Routing Refactor Spec",
@@ -2776,7 +2982,20 @@
       "title": "Writer's Desk Agent & Skill Framework Spec",
       "area": "docs/specs",
       "summary": "Status: **partial** — agent rule, skills, schema, and pipelines scaffolded and registered; workflow",
-      "links": [],
+      "links": [
+        {
+          "target": "../../main-game/draft/releases/planning/balance/effect_profiles.yaml",
+          "status": "ok"
+        },
+        {
+          "target": "../../main-game/draft/releases/planning/balance/profile_migration_worksheet.md",
+          "status": "ok"
+        },
+        {
+          "target": "semantic-balance-profiles-implementation-plan.md",
+          "status": "ok"
+        }
+      ],
       "findings": []
     },
     {
@@ -2793,7 +3012,7 @@
       "kind": "reference",
       "title": "Characters Minor Canon",
       "area": "main-game",
-      "summary": "This file tracks minor characters who appear in specific scenes or days but do not have dedicated character files.",
+      "summary": "Locked supporting cast who appear in specific scenes or days but do not have dedicated full character files. Prologue (Day 100) entries approved 2026-06-20 (`editor-revision-1`).",
       "links": [],
       "findings": []
     },
@@ -2934,6 +3153,15 @@
       "title": "VANCE VOICE GUIDE (CANON LOCK)",
       "area": "main-game",
       "summary": "Canonical source currently derives from:",
+      "links": [],
+      "findings": []
+    },
+    {
+      "path": "main-game/draft/bible/characters_minor_non_canon.md",
+      "kind": "reference",
+      "title": "Characters Minor Non Canon",
+      "area": "main-game",
+      "summary": "**Synced to:** `main-game/canon/characters_minor_canon.md` (2026-06-20)",
       "links": [],
       "findings": []
     },
@@ -3310,18 +3538,18 @@
     },
     {
       "severity": "warning",
+      "path": "docs/book-writing-engine-export/prompt_catalogue.md",
+      "message": "Possible stale reference (absolute local file URL): file:///"
+    },
+    {
+      "severity": "warning",
       "path": "docs/contracts/book_writing_contract.md",
       "message": "Contract document does not link to a machine-readable schema or data file."
     },
     {
-      "severity": "error",
-      "path": "docs/specs/scene-direction-agent.md",
-      "message": "Broken relative link: ../../main-game/non-prod-game/game/characters.rpy"
-    },
-    {
-      "severity": "error",
-      "path": "docs/specs/scene-direction-agent.md",
-      "message": "Broken relative link: ../../main-game/non-prod-game/game/asset_transforms.rpy"
+      "severity": "warning",
+      "path": "docs/normal-day-prose-export/prompt_catalogue.md",
+      "message": "Possible stale reference (absolute local file URL): file:///"
     },
     {
       "severity": "error",
@@ -3332,6 +3560,26 @@
       "severity": "error",
       "path": "docs/specs/scene-direction-agent.md",
       "message": "Broken relative link: ../../main-game/non-prod-game/game/asset_transforms.rpy"
+    },
+    {
+      "severity": "error",
+      "path": "docs/specs/scene-direction-agent.md",
+      "message": "Broken relative link: ../../main-game/non-prod-game/game/characters.rpy"
+    },
+    {
+      "severity": "error",
+      "path": "docs/specs/scene-direction-agent.md",
+      "message": "Broken relative link: ../../main-game/non-prod-game/game/asset_transforms.rpy"
+    },
+    {
+      "severity": "warning",
+      "path": "docs/book-writing-engine-export",
+      "message": "Complex folder has no README.md index."
+    },
+    {
+      "severity": "warning",
+      "path": "docs/normal-day-prose-export",
+      "message": "Complex folder has no README.md index."
     },
     {
       "severity": "warning",
@@ -3341,6 +3589,16 @@
     {
       "severity": "warning",
       "path": "main-game/pipeline/tools",
+      "message": "Complex folder has no README.md index."
+    },
+    {
+      "severity": "warning",
+      "path": "scripts/tests",
+      "message": "Complex folder has no README.md index."
+    },
+    {
+      "severity": "warning",
+      "path": "scripts/validation",
       "message": "Complex folder has no README.md index."
     }
   ]

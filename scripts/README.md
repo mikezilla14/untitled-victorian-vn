@@ -16,6 +16,7 @@ See also: [`docs/architecture/scripts_refactor_map.md`](../docs/architecture/scr
 | `py scripts/documentation_audit.py --write` | Refresh documentation catalogue and audit artifacts. | Documentation steward |
 | `py scripts/documentation_audit.py --check` | Fail when generated documentation catalogue artifacts are stale. | Documentation steward |
 | `py scripts/balance_report.py --release release-1-mvp` | Static testing/balance report for non-prod sandbox (gates, fail states, grain manifest, catalogues). | Chief architect |
+| `py scripts/export_balance_csv.py` | Export resolved balance profile delta values and names to CSV. | Chief architect |
 | `py main-game/pipeline/tools/build_grain_manifest.py --release release-1-mvp` | Extract balance grains and gap report from sandbox `.rpy` files. | Chief architect / dag_tag_update |
 | `py main-game/pipeline/tools/build_choice_catalogue.py --release release-1-mvp` | Import graph choices/effects into `choice_catalogue.csv`. | Chief architect |
 | `py main-game/pipeline/tools/simulate_balance.py --release release-1-mvp` | Abstract policy/gate simulation and fuzz distribution report. | Chief architect |

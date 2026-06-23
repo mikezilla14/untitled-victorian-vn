@@ -28,7 +28,21 @@
       "Bash(git add *)",
       "Bash(git commit *)",
       "Bash(git diff *)",
-      "Bash(\"C:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/prod-game/game/book1.rpy\":*)"
+      "Bash(\"C:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/prod-game/game/book1.rpy\":*)",
+      "Read(//c/Users/AppData/Roaming/**)",
+      "Read(//c/Users/mikez/AppData/Roaming/RenPy/**)",
+      "Bash(python scripts/validate.py --profile changed --files \"main-game/non-prod-game/game/screens.rpy,main-game/non-prod-game/game/days/test_day2_writing_non_canon.rpy,main-game/non-prod-game/game/days/book1_non_canon.rpy,main-game/non-prod-game/game/days/book1_day102_non_canon.rpy\")",
+      "Bash(python scripts/validate.py --profile narrative --files \"main-game/non-prod-game/game/days/test_day2_writing_non_canon.rpy,main-game/non-prod-game/game/days/book1_non_canon.rpy,main-game/non-prod-game/game/days/book1_day102_non_canon.rpy\")",
+      "Bash(python scripts/format_non_canon.py --check \"main-game/non-prod-game/game/days/test_day2_writing_non_canon.rpy\")",
+      "Bash(python scripts/format_non_canon.py --diff \"main-game/non-prod-game/game/days/test_day2_writing_non_canon.rpy\")",
+      "Bash(python scripts/format_non_canon.py --help)",
+      "Bash(python scripts/format_non_canon.py \"main-game/non-prod-game/game/days/test_day2_writing_non_canon.rpy\" \"main-game/non-prod-game/game/days/book1_non_canon.rpy\" \"main-game/non-prod-game/game/days/book1_day102_non_canon.rpy\")",
+      "Bash(python scripts/validate.py --profile changed --files \"main-game/non-prod-game/game/screens.rpy\")",
+      "Bash(python scripts/validate.py --profile changed --files \"main-game/non-prod-game/game/days/book1_non_canon.rpy\")",
+      "Bash(\"C:\\\\Users\\\\mikez\\\\OneDrive\\\\Documents\\\\gh\\\\git\\\\untitled-victorian-vn\\\\main-game\\\\prod-game\\\\game\\\\book1.rpy\":*)",
+      "Bash(python3 -c \":*)",
+      "Bash(python ../scripts/validate.py --profile changed --files \"prod-game/game/book1.rpy,prod-game/game/book1_day102.rpy,prod-game/game/variables.rpy,prod-game/game/screens.rpy,prod-game/game/assets_manifest.rpy\")",
+      "Bash(git commit:*)"
     ]
   }
 }
