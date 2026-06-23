@@ -1,17 +1,7 @@
 # Source of truth for semantic balance profiles (non-prod sandbox).
 # Regenerate runtime tables: py scripts/generate_balance_profiles_rpy.py
 
-stat_units:
-  insp: 50
-  corr: 20
-  susp: 100
-
-intensities:
-  trace: 0.05
-  minor: 0.10
-  standard: 0.25
-  major: 0.40
-  severe: 0.60
+schema_version: 2
 
 valid_witnesses:
   - stern
@@ -19,49 +9,82 @@ valid_witnesses:
   - gideon
   - missy
 
-profiles:
-  safe:
-    insp: trace
+active_intensities:
+  - minor
+  - standard
+  - major
 
-  observant:
-    insp: minor
+migration_mode:
+  allowed_story_intensities:
+    - standard
+
+profiles:
+  creative:
+    active: true
+    deltas:
+      minor:    { insp: 2,  corr: 1,  witness_susp: 0 }
+      standard: { insp: 5,  corr: 3,  witness_susp: 0 }
+      major:    { insp: 12, corr: 6,  witness_susp: 0 }
 
   curious:
-    insp: standard
-    corr: minor
-
-  obedient:
-    corr: minor
-    insp: trace
-
-  submissive:
-    corr: standard
-    insp: minor
-
-  defiant:
-    insp: standard
-    witness_susp: minor
-
-  deceptive:
-    insp: minor
-    witness_susp: standard
+    active: true
+    deltas:
+      minor:    { insp: 1, corr: 2,  witness_susp: 5 }
+      standard: { insp: 3, corr: 6,  witness_susp: 10 }
+      major:    { insp: 6, corr: 12, witness_susp: 15 }
 
   transgressive:
-    corr: standard
-    insp: standard
+    active: true
+    deltas:
+      minor:    { insp: 0, corr: 4,  witness_susp: 10 }
+      standard: { insp: 0, corr: 10, witness_susp: 15 }
+      major:    { insp: 0, corr: 24, witness_susp: 25 }
+
+  observant:
+    active: true
+    deltas:
+      minor:    { insp: 1, corr: 0, witness_susp: 0 }
+      standard: { insp: 2, corr: 0, witness_susp: 0 }
+      major:    { insp: 5, corr: 0, witness_susp: 0 }
+
+  deceptive:
+    active: true
+    deltas:
+      minor:    { insp: 0, corr: 6,  witness_susp: 5 }
+      standard: { insp: 0, corr: 8,  witness_susp: 10 }
+      major:    { insp: 0, corr: 20, witness_susp: 25 }
+
+  safe:
+    active: false
+    legacy_spec: { insp: trace }
+    migration_hint: observant
+
+  obedient:
+    active: false
+    legacy_spec: { corr: minor, insp: trace }
+    migration_hint: observant_or_deceptive
+
+  submissive:
+    active: false
+    legacy_spec: { corr: standard, insp: minor }
+    migration_hint: curious_or_transgressive
+
+  defiant:
+    active: false
+    legacy_spec: { insp: standard, witness_susp: minor }
+    migration_hint: observant_or_deceptive
 
   reckless:
-    corr: major
-    insp: standard
-    witness_susp: standard
+    active: false
+    legacy_spec: { corr: major, insp: standard, witness_susp: standard }
+    migration_hint: transgressive_or_deceptive
 
   predatory:
-    corr: major
-    insp: minor
-    witness_susp: minor
+    active: false
+    legacy_spec: { corr: major, insp: minor, witness_susp: minor }
+    migration_hint: transgressive
 
   self_protective:
-    insp: minor
-
-  creative:
-    insp: standard
+    active: false
+    legacy_spec: { insp: minor }
+    migration_hint: observant

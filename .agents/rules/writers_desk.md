@@ -111,14 +111,13 @@ table in
 resolves profiles to `apply_effects` kwargs at runtime; the Writer never chooses those numbers.
 
 **Closed profile vocabulary (do not extend without Chief Architect):**
-`safe`, `observant`, `curious`, `obedient`, `submissive`, `defiant`, `deceptive`, `transgressive`,
-`reckless`, `predatory`, `self_protective`, `creative`.
+`creative`, `curious`, `transgressive`, `observant`, `deceptive`.
 
 **Desk captures per effect:**
 - `profile` — which emotional/economic mix
-- `intensity` — `trace` | `minor` | `standard` | `major` | `severe` (default `standard`)
-- `witness` — required when profile includes witness suspicion: `stern` | `vance` | `gideon` | `missy`
-- `base_witness` — `true` only for durable base suspicion (rare)
+- `intensity` — `minor` | `standard` | `major` (default `standard`). Only standard is permitted during migration.
+- `witness` — required when profile includes witness suspicion (curious, transgressive, deceptive): `stern` | `vance` | `gideon` | `missy`
+- `base_witness` — forbidden for active profiles during migration pass
 - `narrative_meaning` — one plain sentence of design intent
 
 Emit semantic entries in Authoring Intent `requested_effects`. The code agent writes
@@ -126,7 +125,7 @@ Emit semantic entries in Authoring Intent `requested_effects`. The code agent wr
 
 **Bespoke exceptions** (`kind: bespoke` + `deltas` + `bespoke_reason`): negative suspicion
 recovery, write-gate inspiration spends (`insp` negative), multi-witness recovery mixes, or fixed
-rewards that must not scale with the balance table. Mark script lines `# [STATE bespoke]`.
+rewards that must not scale with the balance table. Mark script lines `# [STATE bespoke: <reason>]`.
 
 **Never:**
 - Ask the Writer for `insp=10` / `corr=5` style numbers for standard choices

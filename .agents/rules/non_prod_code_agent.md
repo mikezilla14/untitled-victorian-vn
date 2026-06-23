@@ -26,10 +26,9 @@ You implement approved drafts and explore new mechanics strictly inside the non-
      `requested_effects` with a `profile`, emit:
      ```renpy
      # [STATE] Semantic balance profile: <narrative_meaning>
-     $ apply_balanced_effect("<profile>", intensity="<intensity>", witness="<witness>")
+     $ apply_balanced_effect("<profile>", intensity="standard", witness="<witness>")
      ```
-     Use `witness=` only when the profile requires it. Use `base_witness=True` only when intent
-     specifies durable base suspicion. For `kind: bespoke` intent entries, emit `# [STATE bespoke]`
+     Use `witness=` only when the profile requires it (curious, transgressive, deceptive). Note that `base_witness` is forbidden for active profiles during migration. For `kind: bespoke` intent entries, emit `# [STATE bespoke: <reason>]`
      and raw `apply_effects(...)` with the documented deltas. Never reconstruct profile kwargs by
      hand and never mutate `player.*` directly.
 5. **Bracket Interpolation Check.** Scan every menu caption and dialogue string in your draft files for `[Word]` patterns where `Word` is a single CamelCase or PascalCase token that is not a defined runtime variable. These must be escaped to `[[Word]]` to prevent runtime `NameError` exceptions.

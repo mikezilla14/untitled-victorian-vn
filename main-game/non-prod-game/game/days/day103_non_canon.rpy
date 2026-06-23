@@ -99,7 +99,7 @@ label day103_1_servants_corridor:
         "She did not need to."
 
         # [STATE] Semantic balance profile: predator tea callback — Vance assigns punitive work
-        $ apply_balanced_effect("defiant", intensity="standard", witness="vance")
+        $ apply_balanced_effect("transgressive", intensity="standard", witness="vance")
 
     elif story.day2_tea_choice == "prey":
 
@@ -115,7 +115,7 @@ label day103_1_servants_corridor:
             "Stern finds nothing and resents the failure."
 
         # [STATE] Semantic balance profile: prey tea callback — Stern's surprise inspection
-        $ apply_balanced_effect("defiant", intensity="major", witness="stern")
+        $ apply_balanced_effect("transgressive", intensity="standard", witness="stern")
 
     else:
 
@@ -157,8 +157,9 @@ label day103_1_corridor_insp_chain:
 
     # [STATE] Cora chooses craft as stabiliser
     $ story.set_day3_corridor_chain("inspiration")
-    # [STATE bespoke] Negative stern suspicion + corridor inspiration reward
-    $ apply_effects(stern_susp=-5, insp=15, corr=0)
+    $ apply_balanced_effect("creative", intensity="standard")
+    # [STATE bespoke: negative_suspicion]
+    $ apply_effects(stern_susp=-5)
 
     cora_inner "I count what can be counted."
     "The bell-pull rhythm. The servant stair's turn. The distance between Stern's office and the Master Suite."
@@ -197,7 +198,7 @@ label day103_1_corridor_corr_chain:
     # [STATE] Cora chooses appetite as stabiliser
     $ story.set_day3_corridor_chain("corruption")
     # [STATE] Semantic balance profile: corruption chain — Cora courts the guest wing
-    $ apply_balanced_effect("transgressive", intensity="major", witness="vance")
+    $ apply_balanced_effect("transgressive", intensity="standard", witness="vance")
 
     cora_inner "I should keep away from the guest wing."
     cora_inner "Instead, I find errands."
@@ -413,7 +414,7 @@ label day103_2_cora_vs_gideon_insp:
     $ story.set_day3_brush_choice("predator")
     $ apply_archetype_edge("predator", 1)
     # [STATE] Semantic balance profile: predator brush — craft answer at the mirror
-    $ apply_balanced_effect("creative", intensity="major")
+    $ apply_balanced_effect("creative", intensity="standard")
 
     cora "Yes, Sir."
 
@@ -463,8 +464,8 @@ label day103_2_cora_vs_gideon_corr:
     # [STATE] Prey/deviant angle. Cora lets desire show and becomes visible
     $ story.set_day3_brush_choice("prey")
     $ apply_archetype_edge("prey", 1)
-    # [STATE bespoke] Prey brush — high corruption visibility beat
-    $ apply_effects(vance_susp=5, insp=5, corr=20)
+    # [STATE] Semantic balance profile: prey brush — high corruption visibility beat
+    $ apply_balanced_effect("transgressive", intensity="standard", witness="vance")
 
     "I look up into the mirror."
     "Not at Vance."
@@ -523,7 +524,7 @@ label day103_2_cora_vs_gideon_ghost:
     $ story.set_day3_brush_choice("ghost")
     $ apply_archetype_edge("ghost", 1)
     # [STATE] Semantic balance profile: ghost brush — apparent panic, real observation
-    $ apply_balanced_effect("defiant", intensity="major", witness="vance")
+    $ apply_balanced_effect("transgressive", intensity="standard", witness="vance")
 
     "The brush catches in a knot."
     "Vance flinches."
@@ -707,7 +708,7 @@ label day103_3_frantic_write:
 
     $ story.set_day3_twilight_action("frantic_write")
     # [STATE] Semantic balance profile: frantic write — inspiration-focused craft sprint
-    $ apply_balanced_effect("creative", intensity="major")
+    $ apply_balanced_effect("creative", intensity="standard")
 
     "I light the candle too early and waste wax with both hands."
     "No time for neatness. No time for the ledger's polite categories."
@@ -742,8 +743,8 @@ label day103_3_prepare_mask:
     with dissolve
 
     $ story.set_day3_twilight_action("prepare_mask")
-    # [STATE bespoke] Prepare mask — large stern suspicion reduction
-    $ apply_effects(stern_susp=-20, insp=0, corr=0)
+    # [STATE bespoke: negative_suspicion]
+    $ apply_effects(stern_susp=-20)
 
     "I force my hands into useful work."
     "Collar pressed. Cuffs scrubbed. Apron inspected for ink, ash, and evidence of having a mind."
@@ -775,7 +776,7 @@ label day103_3_indulge_words:
 
     $ story.set_day3_twilight_action("indulge_words")
     # [STATE] Semantic balance profile: indulge words — transgressive appetite before craft
-    $ apply_balanced_effect("transgressive", intensity="major")
+    $ apply_balanced_effect("transgressive", intensity="standard", witness="stern")
 
     cora_inner "I do not write the chapter."
     cora_inner "I write only what he said."
@@ -837,8 +838,8 @@ label day103_4_room_stern_suspicion:
 
             # [STATE] State/progression update
             $ story.set_day3_stern_response("boring")
-            # [STATE bespoke] Boring answer — large stern suspicion reduction
-            $ apply_effects(stern_susp=-10, insp=0, corr=0)
+            # [STATE bespoke: negative_suspicion]
+            $ apply_effects(stern_susp=-10)
 
             cora "Mr. Locke requested tea, Ma'am. I assumed the kitchen was short-handed."
 
@@ -858,7 +859,7 @@ label day103_4_room_stern_suspicion:
             # [STATE] State/progression update
             $ story.set_day3_stern_response("partial_truth")
             # [STATE] Semantic balance profile: partial truth — Cora admits Gideon unsettles her
-            $ apply_balanced_effect("observant", intensity="standard", witness="stern")
+            $ apply_balanced_effect("observant", intensity="standard")
 
             cora "I don't know, Ma'am. He asks questions in a way that makes answers feel unsafe."
 
@@ -879,7 +880,7 @@ label day103_4_room_stern_suspicion:
             # [STATE] State/progression update
             $ story.set_day3_stern_response("stupid")
             # [STATE] Semantic balance profile: play stupid — Cora performs innocence for Stern
-            $ apply_balanced_effect("defiant", intensity="standard", witness="stern")
+            $ apply_balanced_effect("transgressive", intensity="standard", witness="stern")
 
             cora "I thought gentlemen often wanted tea, Ma'am."
 
@@ -1031,7 +1032,7 @@ label day103_2_night_defy_gideon:
 
     $ story.set_day3_ultimatum("defied")
     # [STATE] Semantic balance profile: defied ultimatum — Cora refuses Gideon's access
-    $ apply_balanced_effect("reckless", intensity="major", witness="vance")
+    $ apply_balanced_effect("transgressive", intensity="standard", witness="vance")
 
     show cora_sprite base at left_bust with moveinleft # [asset auto]
     show gideon_sprite dominant at right_bust with move # [asset auto]
@@ -1140,8 +1141,8 @@ label day103_2_night_surrender_gideon:
     show gideon_sprite dominant at centre_bust
 
     $ story.set_day3_ultimatum("surrendered")
-    # [STATE bespoke] Surrendered — high corruption capitulation beat
-    $ apply_effects(vance_susp=15, insp=10, corr=25)
+    # [STATE] Semantic balance profile: surrendered — high corruption capitulation beat
+    $ apply_balanced_effect("transgressive", intensity="standard", witness="vance")
 
     "I could deny him."
     "I could lie better."
@@ -1253,8 +1254,10 @@ label day103_3_bedroom_final_write:
                 $ story.complete_manuscript_chapter("day3_chapter")
                 call book1_write_chapter(chapter_key="day3_chapter", current_day=103)
 
-                # [STATE bespoke] Chapter 3 completion — fixed manuscript gate cost
-                $ apply_effects(stern_susp=5, insp=-20, corr=0)
+                # [STATE bespoke: write_spend]
+                $ apply_effects(insp=-20)
+                # [STATE bespoke: gate_failure_penalty]
+                $ apply_effects(stern_susp=5)
 
                 "Chapter Three is complete."
                 "I do not feel safer."
@@ -1274,14 +1277,14 @@ label day103_3_bedroom_final_write:
                 # [STATE] State/progression update
                 $ story.set_day3_failed_write(True)
                 # [STATE] Semantic balance profile: failed write — fragments without a chapter
-                $ apply_balanced_effect("curious", intensity="minor")
+                $ apply_balanced_effect("curious", intensity="standard", witness="stern")
 
         "Do not write. Barricade the door and wait for morning. [[Safety over progress]]":
 
             # [STATE] State/progression update
             $ story.set_day3_night_action("barricade")
             # [STATE] Semantic balance profile: barricade — Cora refuses the page for safety
-            $ apply_balanced_effect("defiant", intensity="standard", witness="stern")
+            $ apply_balanced_effect("transgressive", intensity="standard", witness="stern")
 
             "I push the washstand against the door."
             "It is not heavy enough to stop a determined man."

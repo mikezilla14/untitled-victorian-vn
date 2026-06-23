@@ -107,7 +107,7 @@ label day100_1_afternoon_boredom:
         "In the walnut bureau drawer. [[Search the bureau: Careful, corrupting]]":
 
             # [STATE] Semantic balance profile: Cora snoops through Lady Eleanor's private correspondence
-            $ apply_balanced_effect("curious", intensity="major")
+            $ apply_balanced_effect("creative", intensity="standard")
             $ story.set_prologue_found("read_letters")
 
             cora_inner "The bureau is where she locks the letters that make her hands tremble."
@@ -118,7 +118,7 @@ label day100_1_afternoon_boredom:
         "By the private parlour settee. [[Search the parlour entrance: Transgressive]]":
 
             # [STATE] Semantic balance profile: Cora chooses the riskier entrance to eavesdrop
-            $ apply_balanced_effect("transgressive", intensity="major")
+            $ apply_balanced_effect("creative", intensity="standard")
             $ story.set_prologue_found("overheard")
 
             cora_inner "The small parlour. A muffled gasp slips from behind the heavy velvet drapes."
@@ -246,7 +246,7 @@ label day100_2_reconvergence:
         "Deflect — they are my pages. [[Eager posture]]":
 
             # [STATE] Semantic balance profile: Cora asserts herself without full submission
-            $ apply_balanced_effect("observant", intensity="minor")
+            $ apply_balanced_effect("observant", intensity="standard")
             $ story.set_prologue_holywell_posture("eager")
 
             cora "They are my pages, sir."
@@ -257,7 +257,7 @@ label day100_2_reconvergence:
         "Submit — throw myself on his mercy. [[Desperate posture]]":
 
             # [STATE] Semantic balance profile: Cora performs surrender to survive dismissal
-            $ apply_balanced_effect("obedient", intensity="minor")
+            $ apply_balanced_effect("observant", intensity="standard")
             $ story.set_prologue_holywell_posture("desperate")
 
             cora "Forgive me, sir."
@@ -280,7 +280,7 @@ label day100_2_reconvergence:
         "For the shillings home. [[Practical ambition]]":
 
             # [STATE] Semantic balance profile: Cora frames writing as household necessity
-            $ apply_balanced_effect("safe", intensity="minor")
+            $ apply_balanced_effect("observant", intensity="standard")
             $ story.set_prologue_why_write("money_home")
 
             cora_inner "Mother's cough. Father's pride. Shillings are the only language they understand."
@@ -289,7 +289,7 @@ label day100_2_reconvergence:
         "To catalogue what power hides. [[Curious, corrupting]]":
 
             # [STATE] Semantic balance profile: Cora admits she maps power for the manuscript
-            $ apply_balanced_effect("curious", intensity="minor")
+            $ apply_balanced_effect("creative", intensity="standard")
             $ story.set_prologue_why_write("cataloguer")
 
             cora_inner "I want the machine on paper — who kneels, who commands, who pretends."
@@ -298,7 +298,7 @@ label day100_2_reconvergence:
         "Because scandal tastes better than porridge. [[Transgressive]]":
 
             # [STATE] Semantic balance profile: Cora embraces scandal as appetite
-            $ apply_balanced_effect("transgressive", intensity="standard")
+            $ apply_balanced_effect("creative", intensity="standard")
             $ story.set_prologue_why_write("scandal_hungry")
 
             cora_inner "I will not pretend innocence is a meal."

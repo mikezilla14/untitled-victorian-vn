@@ -1,0 +1,118 @@
+source_file,line_number,label,choice_id,old_raw_call,old_insp_delta,old_corr_delta,old_witness_delta,old_profile,old_intensity,new_profile,new_intensity,new_witness,new_insp_delta,new_corr_delta,new_witness_susp_delta,bespoke_reason,allowlist_id,migration_reason
+main-game/non-prod-game/game/days/day100_non_canon.rpy,87,day100_1_afternoon_boredom,search_the_bureau_15_inspiration_10_corruption,"apply_effects(insp=15, corr=10)",15,10,,,,creative,standard,,5,3,,,,Mapped to creative standard (craft/writing focus)
+main-game/non-prod-game/game/days/day100_non_canon.rpy,98,day100_1_afternoon_boredom,search_the_parlour_entrance_15_corruption,apply_effects(corr=15),,15,,,,creative,standard,,5,3,,,,Mapped to creative standard (craft/writing focus)
+main-game/non-prod-game/game/days/day100_non_canon.rpy,182,day100_2_reconvergence,careful_posture,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day100_non_canon.rpy,192,day100_2_reconvergence,eager_posture,apply_effects(insp=5),5,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day100_non_canon.rpy,203,day100_2_reconvergence,desperate_posture,apply_effects(corr=5),,5,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day100_non_canon.rpy,224,day100_2_reconvergence,5_inspiration,apply_effects(insp=5),5,,,,,observant,standard,,2,,,,,Mapped to observant standard (noticing focus)
+main-game/non-prod-game/game/days/day100_non_canon.rpy,233,day100_2_reconvergence,5_inspiration_5_corruption,"apply_effects(insp=5, corr=5)",5,5,,,,observant,standard,,2,,,,,Mapped to observant standard (noticing focus)
+main-game/non-prod-game/game/days/day100_non_canon.rpy,242,day100_2_reconvergence,10_corruption,apply_effects(corr=10),,10,,,,observant,standard,,2,,,,,Mapped to observant standard (noticing focus)
+main-game/non-prod-game/game/days/day100_non_canon.rpy,292,day100_3_night_daydream,ghost_focus_1_ghost,,,,,,,creative,standard,,5,3,,,,Mapped to creative standard (craft/writing focus)
+main-game/non-prod-game/game/days/day100_non_canon.rpy,300,day100_3_night_daydream,prey_focus_1_prey,,,,,,,creative,standard,,5,3,,,,Mapped to creative standard (craft/writing focus)
+main-game/non-prod-game/game/days/day100_non_canon.rpy,308,day100_3_night_daydream,predator_focus_1_predator,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day101_non_canon.rpy,169,day101_1_morning_interview,option_1,"apply_effects(stern_susp=5, insp=5, corr=0)",5,0,5,,,observant,standard,,2,,,,,Mapped to observant standard (noticing focus)
+main-game/non-prod-game/game/days/day101_non_canon.rpy,189,day101_1_morning_interview,option_2,"apply_effects(stern_susp=5, insp=10, corr=0)",10,0,5,,,transgressive,standard,stern,,10,15,,,Mapped to transgressive standard with witness (boundary crossing)
+main-game/non-prod-game/game/days/day101_non_canon.rpy,224,day101_1_morning_interview,option_1,"apply_effects(stern_susp=5, insp=5, corr=0)",5,0,5,,,observant,standard,,2,,,,,Mapped to observant standard (noticing focus)
+main-game/non-prod-game/game/days/day101_non_canon.rpy,241,day101_1_morning_interview,option_2,"apply_effects(stern_susp=5, insp=10, corr=0)",10,0,5,,,transgressive,standard,stern,,10,15,,,Mapped to transgressive standard with witness (boundary crossing)
+main-game/non-prod-game/game/days/day101_non_canon.rpy,259,day101_1_morning_interview,option_3,"apply_effects(stern_susp=20, insp=15, corr=10)",15,10,20,,,transgressive,standard,stern,,10,15,,,Mapped to transgressive standard with witness (boundary crossing)
+main-game/non-prod-game/game/days/day101_non_canon.rpy,292,day101_1_morning_interview,option_1,"apply_effects(stern_susp=5, insp=5, corr=0)",5,0,5,,,observant,standard,,2,,,,,Mapped to observant standard (noticing focus)
+main-game/non-prod-game/game/days/day101_non_canon.rpy,304,day101_1_morning_interview,option_2,"apply_effects(stern_susp=5, insp=10, corr=0)",10,0,5,,,observant,standard,,2,,,,,Mapped to observant standard (noticing focus)
+main-game/non-prod-game/game/days/day101_non_canon.rpy,316,day101_1_morning_interview,option_3,"apply_effects(stern_susp=20, insp=15, corr=10)",15,10,20,,,transgressive,standard,stern,,10,15,,,Mapped to transgressive standard with witness (boundary crossing)
+main-game/non-prod-game/game/days/day101_non_canon.rpy,403,day101_1_vance_throws_toy,subservient_suspicion,"apply_effects(vance_susp=5, insp=5, corr=0)",5,0,5,,,observant,standard,,2,,,,,Mapped to observant standard (noticing focus)
+main-game/non-prod-game/game/days/day101_non_canon.rpy,421,day101_1_vance_throws_toy,defiant_tension_inspiration_corruption,"apply_effects(vance_susp=15, insp=10, corr=5)",10,5,15,,,transgressive,standard,vance,,10,15,,,Mapped to transgressive standard with witness (boundary crossing)
+main-game/non-prod-game/game/days/day101_non_canon.rpy,442,day101_1_vance_throws_toy,ghostly_inspiration,"apply_effects(vance_susp=10, insp=10, corr=0)",10,0,10,,,observant,standard,,2,,,,,Mapped to observant standard (noticing focus)
+main-game/non-prod-game/game/days/day101_non_canon.rpy,585,day101_1_vance_dressing_room,protected_suspicion,"apply_effects(vance_susp=5, insp=10, corr=5)",10,5,5,,,observant,standard,,2,,,,,Mapped to observant standard (noticing focus)
+main-game/non-prod-game/game/days/day101_non_canon.rpy,606,day101_1_vance_dressing_room,intimate_tension_suspicion_corruption,"apply_effects(vance_susp=15, insp=10, corr=10)",10,10,15,,,transgressive,standard,vance,,10,15,,,Mapped to transgressive standard with witness (boundary crossing)
+main-game/non-prod-game/game/days/day101_non_canon.rpy,629,day101_1_vance_dressing_room,observed_inspiration,"apply_effects(vance_susp=5, insp=10, corr=0)",10,0,5,,,observant,standard,,2,,,,,Mapped to observant standard (noticing focus)
+main-game/non-prod-game/game/days/day101_non_canon.rpy,708,day101_1_vance_stairwell_encounter,loyal_witness_suspicion,"apply_effects(vance_susp=5, insp=5, corr=0)",5,0,5,,,observant,standard,,2,,,,,Mapped to observant standard (noticing focus)
+main-game/non-prod-game/game/days/day101_non_canon.rpy,722,day101_1_vance_stairwell_encounter,accomplice_tension_suspicion_corruption,"apply_effects(vance_susp=15, insp=10, corr=10)",10,10,15,,,transgressive,standard,vance,,10,15,,,Mapped to transgressive standard with witness (boundary crossing)
+main-game/non-prod-game/game/days/day101_non_canon.rpy,746,day101_1_vance_stairwell_encounter,silent_observer_inspiration,"apply_effects(vance_susp=5, insp=10, corr=0)",10,0,5,,,observant,standard,,2,,,,,Mapped to observant standard (noticing focus)
+main-game/non-prod-game/game/days/day101_non_canon.rpy,892,day101_2_coras_path_choice,predator_path_inspiration_corruption,"apply_effects(insp=10, corr=5)",10,5,,,,transgressive,standard,vance,,10,15,,,Mapped to transgressive standard with witness (boundary crossing)
+main-game/non-prod-game/game/days/day101_non_canon.rpy,924,day101_2_coras_path_choice,prey_path_inspiration_suspicion,"apply_effects(vance_susp=35, insp=15, corr=5)",15,5,35,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day101_non_canon.rpy,958,day101_2_coras_path_choice,ghost_path_inspiration_suspicion,"apply_effects(stern_susp=-5, vance_susp=-5, missy_susp=-5, insp=10, corr=0)",10,0,-5,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day101_non_canon.rpy,1061,day101_night_story_window,progress_manuscript,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day101_non_canon.rpy,1066,day101_1_morning_interview,option_2,"apply_effects(stern_susp=5, insp=10, corr=0)",10,0,5,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day101_non_canon.rpy,1072,day101_1_morning_interview,option_3,"apply_effects(stern_susp=20, insp=15, corr=10)",15,10,20,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day101_non_canon.rpy,1078,day101_night_story_window,option_4,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day101_non_canon.rpy,1084,day101_night_story_window,rest_and_reflect,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day101_non_canon.rpy,1091,day101_night_story_window,inspiration,"apply_effects(insp=15, corr=0)",15,0,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day101_non_canon.rpy,1107,day101_night_story_window,corruption,"apply_effects(insp=10, corr=0)",10,0,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day101_non_canon.rpy,1161,day101_night_story_window,inspiration,"apply_effects(insp=15, corr=0)",15,0,,,,observant,standard,,2,,,,,Mapped to observant standard (noticing focus)
+main-game/non-prod-game/game/days/day101_non_canon.rpy,1171,day101_night_story_window,corruption,"apply_effects(insp=10, corr=0)",10,0,,,,creative,standard,,5,3,,,,Mapped to creative standard (craft/writing focus)
+main-game/non-prod-game/game/days/day102_non_canon.rpy,309,day102_2_day2_chore_time,inspiration,,,,,,,creative,standard,,5,3,,,,Mapped to creative standard (craft/writing focus)
+main-game/non-prod-game/game/days/day102_non_canon.rpy,314,day102_2_day2_chore_time,corruption,,,,,,,creative,standard,,5,3,,,,Mapped to creative standard (craft/writing focus)
+main-game/non-prod-game/game/days/day102_non_canon.rpy,427,day102_afternoon_story_window,option_1,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day102_non_canon.rpy,433,day102_afternoon_story_window,option_2,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day102_non_canon.rpy,439,day102_afternoon_story_window,option_3,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day102_non_canon.rpy,445,day102_afternoon_story_window,option_4,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day102_non_canon.rpy,598,day102_3_coras_choice,prey_visible_risk_cleanest_conscience,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day102_non_canon.rpy,603,day102_3_coras_choice,predator_controlled_lie,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day102_non_canon.rpy,608,day102_3_coras_choice,ghost_clean_hands_dirty_outcome,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day102_non_canon.rpy,1061,day102_4_night,manuscript_progress,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day102_non_canon.rpy,1066,day102_4_night,indulgence,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day103_non_canon.rpy,136,day103_1_servants_corridor,inspiration,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day103_non_canon.rpy,141,day103_1_servants_corridor,corruption,,,,,,,creative,standard,,5,3,,,,Mapped to creative standard (craft/writing focus)
+main-game/non-prod-game/game/days/day103_non_canon.rpy,244,day103_1_optional_character_chain,option_1,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day103_non_canon.rpy,250,day103_1_optional_character_chain,option_2,,,,,,,observant,standard,,2,,,,,Mapped to observant standard (noticing focus)
+main-game/non-prod-game/game/days/day103_non_canon.rpy,256,day103_1_optional_character_chain,option_3,,,,,,,observant,standard,,2,,,,,Mapped to observant standard (noticing focus)
+main-game/non-prod-game/game/days/day103_non_canon.rpy,262,day103_1_optional_character_chain,option_4,"apply_effects(insp=10, corr=0)",10,0,,,,observant,standard,,2,,,,,Mapped to observant standard (noticing focus)
+main-game/non-prod-game/game/days/day103_non_canon.rpy,377,day103_1_servants_corridor,inspiration,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day103_non_canon.rpy,382,day103_1_servants_corridor,corruption,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day103_non_canon.rpy,387,day103_2_suite_cora_vs_gideon,suspicion_inspiration,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day103_non_canon.rpy,676,day103_3_bedroom_cora_frantic_writing_event,frantic_write,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day103_non_canon.rpy,681,day103_3_bedroom_cora_frantic_writing_event,prepare_mask,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day103_non_canon.rpy,686,day103_3_bedroom_cora_frantic_writing_event,indulge_words,,,,,,,creative,standard,,5,3,,,,Mapped to creative standard (craft/writing focus)
+main-game/non-prod-game/game/days/day103_non_canon.rpy,828,day103_4_room_stern_suspicion,suspicion,"apply_effects(stern_susp=-10, insp=0, corr=0)",0,0,-10,,,,,,,,-10,negative_suspicion,,Bespoke effect: negative_suspicion
+main-game/non-prod-game/game/days/day103_non_canon.rpy,847,day103_4_room_stern_suspicion,inspiration_mixed_risk,"apply_effects(stern_susp=5, insp=10, corr=0)",10,0,5,,,observant,standard,,2,,,,,Mapped to observant standard (noticing focus)
+main-game/non-prod-game/game/days/day103_non_canon.rpy,867,day103_4_room_stern_suspicion,suspicion_if_she_sees_through_it,"apply_effects(stern_susp=10, insp=0, corr=5)",0,5,10,,,transgressive,standard,stern,,10,15,,,Mapped to transgressive standard with witness (boundary crossing)
+main-game/non-prod-game/game/days/day103_non_canon.rpy,992,day103_2_suite_night_tea,defiance,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day103_non_canon.rpy,997,day103_2_suite_night_tea,bargain,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day103_non_canon.rpy,1002,day103_2_suite_night_tea,surrender,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day103_non_canon.rpy,1199,day103_3_bedroom_final_write,chapter_gate,"apply_effects(stern_susp=0, insp=5, corr=5)",5,5,0,,,,,,,,,fixed gate failure penalty,day103_write_penalty_small,Bespoke effect: fixed gate failure penalty
+main-game/non-prod-game/game/days/day103_non_canon.rpy,1257,day103_3_bedroom_final_write,safety_over_progress,"apply_effects(stern_susp=10, insp=0, corr=0)",0,0,10,,,,,,-20,,,fixed gate failure penalty,day103_write_penalty_small,Bespoke effect: fixed gate failure penalty
+main-game/non-prod-game/game/days/day104_non_canon.rpy,197,day104_2_return_early,ghost_escape_high_suspicion,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day104_non_canon.rpy,202,day104_2_return_early,prey_escape_high_visibility,,,,,,,transgressive,standard,stern,,10,15,,,Mapped to transgressive standard with witness (boundary crossing)
+main-game/non-prod-game/game/days/day104_non_canon.rpy,207,day104_2_return_early,predator_escape_low_suspicion_moral_cost,,,,,,,transgressive,standard,stern,,10,15,,,Mapped to transgressive standard with witness (boundary crossing)
+main-game/non-prod-game/game/days/day104_non_canon.rpy,505,day104_3_stern_pressure,suspicion,"apply_effects(stern_susp=-15, insp=0, corr=0)",0,0,-15,,,,,,,,-15,fixed pressure outcome,day104_stern_pressure_conditional_moral_cost,Bespoke effect: fixed pressure outcome
+main-game/non-prod-game/game/days/day104_non_canon.rpy,521,day104_3_stern_pressure,inspiration_small_suspicion,"apply_effects(stern_susp=5, insp=10, corr=0)",10,0,5,,,observant,standard,,2,,,,,Mapped to observant standard (noticing focus)
+main-game/non-prod-game/game/days/day104_non_canon.rpy,537,day104_3_stern_pressure,conditional_moral_cost,"apply_effects(stern_susp=-10, missy_susp=10, insp=0, corr=10)",0,10,-10,,,,,,,10,-10,fixed pressure outcome,day104_stern_pressure_conditional_moral_cost,Bespoke effect: fixed pressure outcome
+main-game/non-prod-game/game/days/day104_non_canon.rpy,605,day104_4_twilight_ledger_false_dawn,atonement,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day104_non_canon.rpy,610,day104_4_twilight_ledger_false_dawn,triumphant_write,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day104_non_canon.rpy,621,day104_4_twilight_ledger_false_dawn,missy_repair,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day104_non_canon.rpy,723,day104_4_missy_repair,tender_romance_path_b_intimacy,"apply_effects(missy_susp=-25, vance_susp=5, insp=15, corr=10)",15,10,-25,,,,,,15,10,5,fixed authored repair beat,day104_missy_repair_partial_truth,Bespoke effect: fixed authored repair beat
+main-game/non-prod-game/game/days/day104_non_canon.rpy,746,day104_4_missy_repair,guarded_distance,"apply_effects(missy_susp=-10, insp=0, corr=5)",0,5,-10,,,creative,standard,,5,3,,,,Mapped to creative standard (craft/writing focus)
+main-game/non-prod-game/game/days/day105_non_canon.rpy,346,day105_4_why_did_you_do_it,observer_muse,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day105_non_canon.rpy,351,day105_4_why_did_you_do_it,predator_protégé,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day105_non_canon.rpy,356,day105_4_why_did_you_do_it,prey_adversary,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/day105_non_canon.rpy,361,day105_4_why_did_you_do_it,ghost_witness,,,,,,,creative,standard,,5,3,,,,Mapped to creative standard (craft/writing focus)
+main-game/non-prod-game/game/days/day105_non_canon.rpy,666,day105_5_gideon_marks_cora,pragmatic_entanglement,"apply_effects(insp=5, corr=10)",5,10,,,,transgressive,standard,gideon,,10,15,,,Mapped to transgressive standard with witness (boundary crossing)
+main-game/non-prod-game/game/days/day105_non_canon.rpy,682,day105_5_gideon_marks_cora,defiant_poverty,"apply_effects(vance_susp=5, insp=10, corr=0)",10,0,5,,,observant,standard,,2,,,,,Mapped to observant standard (noticing focus)
+main-game/non-prod-game/game/days/day105_non_canon.rpy,700,day105_5_gideon_marks_cora,ghost_option,"apply_effects(vance_susp=-5, insp=5, corr=5)",5,5,-5,,,creative,standard,,5,3,,,,Mapped to creative standard (craft/writing focus)
+main-game/non-prod-game/game/days/test_day2_writing_non_canon.rpy,29,test_day2_writing_harness,option_1,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/test_day2_writing_non_canon.rpy,34,test_day2_writing_harness,option_2,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/test_day2_writing_non_canon.rpy,39,test_day2_writing_harness,option_3,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/test_day2_writing_non_canon.rpy,44,test_day2_writing_harness,option_4,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/test_day2_writing_non_canon.rpy,49,test_day2_writing_harness,option_5,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/test_day2_writing_non_canon.rpy,54,test_day2_writing_harness,option_6,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/days/test_day2_writing_non_canon.rpy,59,test_day2_writing_harness,option_7,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,130,stern_chain_1,shed_suspicion_break_chain,"apply_effects(stern_susp=-10, insp=5, corr=0)",5,0,-10,,,creative,standard,,5,3,,,,Mapped to creative standard (craft/writing focus)
+main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,144,stern_chain_1,lean_into_tension_progress_chain,"apply_effects(stern_susp=15, insp=15, corr=5)",15,5,15,,,curious,standard,stern,3,6,10,,,Mapped to curious standard with witness (snooping focus)
+main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,194,stern_chain_1,shed_suspicion_break_chain,"apply_effects(stern_susp=-10, insp=5, corr=0)",5,0,-10,,,creative,standard,,5,3,,,,Mapped to creative standard (craft/writing focus)
+main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,207,stern_chain_2,progress_chain,"apply_effects(stern_susp=20, insp=20, corr=10)",20,10,20,,,curious,standard,stern,3,6,10,,,Mapped to curious standard with witness (snooping focus)
+main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,259,stern_chain_3,shed_suspicion_lost_opportunity_safe_option_but_,"apply_effects(stern_susp=-15, insp=5, corr=0)",5,0,-15,,,creative,standard,,5,3,,,,Mapped to creative standard (craft/writing focus)
+main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,273,stern_chain_3,climax_2_2_spice_spikes_suspicion_25_and_corrupt,"apply_effects(stern_susp=25, insp=20, corr=20)",20,20,25,,,transgressive,standard,stern,,10,15,,,Mapped to transgressive standard with witness (boundary crossing)
+main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,306,stern_chain_3,locked_anxiety_too_high_75_or_suspicion_too_high,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,349,stern_chain_1,shed_suspicion_break_chain,"apply_effects(stern_susp=-10, insp=5, corr=0)",5,0,-10,,,creative,standard,,5,3,,,,Mapped to creative standard (craft/writing focus)
+main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,364,stern_chain_2,progress_chain,"apply_effects(stern_susp=20, insp=20, corr=10)",20,10,20,,,curious,standard,missy,3,6,10,,,Mapped to curious standard with witness (snooping focus)
+main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,412,stern_chain_1,shed_suspicion_break_chain,"apply_effects(stern_susp=-10, insp=5, corr=0)",5,0,-10,,,creative,standard,,5,3,,,,Mapped to creative standard (craft/writing focus)
+main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,425,stern_chain_2,progress_chain,"apply_effects(stern_susp=20, insp=20, corr=10)",20,10,20,,,curious,standard,missy,3,6,10,,,Mapped to curious standard with witness (snooping focus)
+main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,473,stern_chain_3,shed_suspicion_lost_opportunity_safe_option_but_,"apply_effects(stern_susp=-15, insp=5, corr=0)",5,0,-15,,,creative,standard,,5,3,,,,Mapped to creative standard (craft/writing focus)
+main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,487,missy_chain_3,climax_2_2_spice_spikes_suspicion_20_and_corrupt,"apply_effects(missy_susp=20, insp=20, corr=20)",20,20,20,,,transgressive,standard,missy,,10,15,,,Mapped to transgressive standard with witness (boundary crossing)
+main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,513,stern_chain_3,locked_anxiety_too_high_75_or_suspicion_too_high,,,,,,,,,,,,,,,Bespoke effect: 
+main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,554,stern_chain_1,shed_suspicion_break_chain,"apply_effects(stern_susp=-10, insp=5, corr=0)",5,0,-10,,,creative,standard,,5,3,,,,Mapped to creative standard (craft/writing focus)
+main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,569,stern_chain_2,progress_chain,"apply_effects(stern_susp=20, insp=20, corr=10)",20,10,20,,,curious,standard,vance,3,6,10,,,Mapped to curious standard with witness (snooping focus)
+main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,607,stern_chain_1,shed_suspicion_break_chain,"apply_effects(stern_susp=-10, insp=5, corr=0)",5,0,-10,,,creative,standard,,5,3,,,,Mapped to creative standard (craft/writing focus)
+main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,616,stern_chain_2,progress_chain,"apply_effects(stern_susp=20, insp=20, corr=10)",20,10,20,,,curious,standard,vance,3,6,10,,,Mapped to curious standard with witness (snooping focus)
+main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,670,stern_chain_3,shed_suspicion_lost_opportunity_safe_option_but_,"apply_effects(stern_susp=-15, insp=5, corr=0)",5,0,-15,,,creative,standard,,5,3,,,,Mapped to creative standard (craft/writing focus)
+main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,683,missy_chain_3,climax_2_2_spice_spikes_suspicion_20_and_corrupt,"apply_effects(missy_susp=20, insp=20, corr=20)",20,20,20,,,transgressive,standard,vance,,10,15,,,Mapped to transgressive standard with witness (boundary crossing)
+main-game/non-prod-game/game/shared/story_chains_non_canon.rpy,702,stern_chain_3,locked_anxiety_too_high_75_or_suspicion_too_high,,,,,,,,,,,,,,,Bespoke effect: 

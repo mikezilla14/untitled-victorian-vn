@@ -158,7 +158,7 @@ label day104_1_lockbox_evidence:
     # [STATE] Cora has discovered the leverage. She has not necessarily escaped with it yet
     $ story.set_day4_evidence_discovered(True)
     # [STATE] Semantic balance profile: Cora finds the manuscript ending in Gideon's ruin
-    $ apply_balanced_effect("creative", intensity="major")
+    $ apply_balanced_effect("creative", intensity="standard")
 
     "I slide the photograph beneath my bodice."
     "It scratches once against my skin and becomes real."
@@ -226,7 +226,7 @@ label day104_2_escape_fireplace:
     $ story.set_day4_escape_state("fireplace")
     $ story.set_has_photograph(True)
     # [STATE] Semantic balance profile: Cora hides in the hearth and leaves soot Stern will notice
-    $ apply_balanced_effect("reckless", intensity=1.4, witness="stern")
+    $ apply_balanced_effect("transgressive", intensity="standard", witness="stern")
 
     "The hearth is enormous, black, and unlit."
     "A servant could disappear there."
@@ -287,7 +287,7 @@ label day104_2_escape_bold_lie:
     $ story.set_day4_escape_state("bold_lie")
     $ story.set_has_photograph(True)
     # [STATE] Semantic balance profile: Cora lies in plain sight while Vance watches
-    $ apply_balanced_effect("reckless", intensity=1.6, witness="vance")
+    $ apply_balanced_effect("transgressive", intensity="standard", witness="vance")
 
     "I close the lockbox with one hand and seize the dust cloth with the other."
     "By the time the door opens, I am wiping the desk as if mahogany has personally insulted Miss Stern."
@@ -368,7 +368,7 @@ label day104_2_escape_missy_cover:
     $ story.set_day4_escape_state("missy_cover")
     $ story.set_has_photograph(True)
     $ story.set_missy_day4_used_as_cover(True)
-    # [STATE bespoke] Multi-witness mixed deltas: Vance suspicion drops, Missy pays the cost
+    # [STATE bespoke: legacy_exception]
     $ apply_effects(vance_susp=-15, missy_susp=20, insp=5, corr=20)
 
     cora_inner "Panic makes the first decision."
@@ -510,7 +510,8 @@ label day104_3_stern_pressure:
 
             # [STATE bespoke] Negative suspicion relief: boring servant answer lowers Stern's heat
             $ story.set_day4_stern_response("boring")
-            $ apply_effects(stern_susp=-15, insp=0, corr=0)
+            # [STATE bespoke: negative_suspicion]
+            $ apply_effects(stern_susp=-15)
 
             show cora_sprite base at left_bust with moveinleft # [asset auto]
             show stern_sprite stern at right_bust with move # [asset auto]
@@ -526,7 +527,7 @@ label day104_3_stern_pressure:
 
             # [STATE] Semantic balance profile: Cora shows fear without confessing guilt
             $ story.set_day4_stern_response("frightened")
-            $ apply_balanced_effect("submissive", intensity="standard", witness="stern")
+            $ apply_balanced_effect("observant", intensity="standard")
 
             cora "I am trying not to make mistakes, Ma'am. That is making me slower."
 
@@ -542,7 +543,8 @@ label day104_3_stern_pressure:
 
             # [STATE bespoke] Mixed witness deltas: deflect suspicion onto Missy after cover escape
             $ story.set_day4_stern_response("missy_cover")
-            $ apply_effects(stern_susp=-10, missy_susp=10, insp=0, corr=10)
+            # [STATE bespoke: legacy_exception]
+            $ apply_effects(stern_susp=-10, missy_susp=10, corr=10)
 
             cora "Missy was with the suite, Ma'am. I was sent back down after delivering cloth."
 
@@ -650,8 +652,8 @@ label day104_4_atonement:
 
     if story.day4_escape_state == "fireplace":
 
-        # [STATE bespoke] Negative suspicion relief: visible soot penance after fireplace escape
-        $ apply_effects(stern_susp=-30, insp=0, corr=0)
+        # [STATE bespoke: negative_suspicion]
+        $ apply_effects(stern_susp=-30)
 
         "I scrub soot from my apron until the water turns grey, then black, then grey again."
         "My knuckles split."
@@ -659,8 +661,8 @@ label day104_4_atonement:
 
     elif story.day4_escape_state == "bold_lie":
 
-        # [STATE bespoke] Negative suspicion relief: saintly dullness after bold-lie escape
-        $ apply_effects(stern_susp=-25, insp=0, corr=0)
+        # [STATE bespoke: negative_suspicion]
+        $ apply_effects(stern_susp=-25)
 
         "I sit in the laundry corner and mend cuffs with saintly dullness."
         "Anyone watching sees a maid trying very hard to become furniture."
@@ -668,8 +670,8 @@ label day104_4_atonement:
 
     else:
 
-        # [STATE bespoke] Negative suspicion relief: visible usefulness after missy-cover escape
-        $ apply_effects(stern_susp=-10, insp=0, corr=0)
+        # [STATE bespoke: negative_suspicion]
+        $ apply_effects(stern_susp=-10)
 
         "I fold linens."
         "I carry water."
@@ -697,8 +699,9 @@ label day104_4_missy_repair:
     show missy_sprite shocked at centre_bust
 
     $ story.set_day4_twilight_action("missy_repair")
-    # [STATE bespoke] Negative Missy suspicion: opening the repair conversation
-    $ apply_effects(missy_susp=-15, insp=5, corr=0)
+    $ apply_balanced_effect("creative", intensity="standard")
+    # [STATE bespoke: negative_suspicion]
+    $ apply_effects(missy_susp=-15)
 
     "Missy sits on the edge of her narrow iron bed, twisting her linen handkerchief until her knuckles are as white as the cloth."
     "She doesn't look like a simple country girl caught in a mistake tonight. Her eyes are quiet, exceptionally focused, and dangerous with what they have resolved."
@@ -729,6 +732,7 @@ label day104_4_missy_repair:
 
             # [STATE bespoke] Mixed witness repair: romantic truth rebuilds Missy, costs Vance
             $ story.set_missy_day4_repair_state("partial_truth")
+            # [STATE bespoke: legacy_exception]
             $ apply_effects(missy_susp=-25, vance_susp=5, insp=15, corr=10)
 
             cora "Because I was cornered, and I was terrified of losing the only thing that keeps me alive in this place. My writing. My book."
@@ -752,7 +756,9 @@ label day104_4_missy_repair:
 
             # [STATE bespoke] Negative Missy suspicion: coward's comfort without real repair
             $ story.set_missy_day4_repair_state("comfort_lie")
-            $ apply_effects(missy_susp=-10, insp=0, corr=5)
+            $ apply_balanced_effect("creative", intensity="standard")
+            # [STATE bespoke: negative_suspicion]
+            $ apply_effects(missy_susp=-10)
 
             cora "Because I am a coward when cornered, Missy. I saw the door, I saw the threat, and I used what was closest. It was cruel, and I cannot justify it."
 
@@ -900,8 +906,10 @@ label day104_5_triumphant_chapter:
     $ story.complete_manuscript_chapter("day4_triumphant_chapter")
     call book1_write_chapter(chapter_key="day4_triumphant_chapter", current_day=104)
 
-    # [STATE bespoke] Triumphant write cost: inspiration spend with Stern suspicion spike
-    $ apply_effects(stern_susp=15, insp=-15, corr=0)
+    # [STATE bespoke: write_spend]
+    $ apply_effects(insp=-15)
+    # [STATE bespoke: gate_failure_penalty]
+    $ apply_effects(stern_susp=15)
 
     "The final sentence lands just before the candle dies."
     "For a while, I do not move."

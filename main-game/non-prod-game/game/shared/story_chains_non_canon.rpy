@@ -129,8 +129,9 @@ label stern_chain_1:
     menu:
         "Lower my head and act like a simple, stupid country girl. [[Shed Suspicion / Break Chain]]":
 
-            # [STATE] Safe path: closes loop, drops suspicion
-            $ apply_effects(stern_susp=-10, insp=5, corr=0)
+            $ apply_balanced_effect("creative", intensity="standard")
+            # [STATE bespoke: negative_suspicion]
+            $ apply_effects(stern_susp=-10)
             $ story.complete_chain_beat("stern")
 
             show cora_sprite base at left_bust with moveinleft # [asset auto]
@@ -143,8 +144,7 @@ label stern_chain_1:
 
         "Explain the geometry of the fold, meeting her gaze. [[Lean Into Tension / Progress Chain]]":
 
-            # [STATE] Charged path: locks in progression, spikes stats
-            $ apply_effects(stern_susp=15, insp=15, corr=5)
+            $ apply_balanced_effect("curious", intensity="standard", witness="stern")
             $ story.complete_chain_beat("stern")
 
             cora "The outward stitch preserves the line of the silk, Ma'am. It prevents friction against the mahogany frame, keeping the fabric warm to the touch."
@@ -193,8 +193,9 @@ label stern_chain_2:
     menu:
         "Apologize and call it a spelling exercise. [[Shed Suspicion / Break Chain]]":
 
-            # [STATE] Safe path: closes loop
-            $ apply_effects(stern_susp=-10, insp=5, corr=0)
+            $ apply_balanced_effect("creative", intensity="standard")
+            # [STATE bespoke: negative_suspicion]
+            $ apply_effects(stern_susp=-10)
             $ story.complete_chain_beat("stern")
 
             show cora_sprite base at left_bust with moveinleft # [asset auto]
@@ -206,8 +207,7 @@ label stern_chain_2:
 
         "Hold the notebook tight. Read her a scandalous anonymous passage. [[Progress Chain]]":
 
-            # [STATE] Charged path: Level 3/4 tension, high suspicion spike
-            $ apply_effects(stern_susp=20, insp=20, corr=10)
+            $ apply_balanced_effect("curious", intensity="standard", witness="stern")
             $ story.complete_chain_beat("stern")
 
             cora "I was writing about the west corridor, Ma'am."
@@ -258,8 +258,9 @@ label stern_chain_3:
     menu:
         "Play the blind servant, turning away from her gaze. [[Shed Suspicion / Lost Opportunity: Safe option, but you lose this climax forever.]]":
 
-            # [STATE] Safe path: closes loop
-            $ apply_effects(stern_susp=-15, insp=5, corr=0)
+            $ apply_balanced_effect("creative", intensity="standard")
+            # [STATE bespoke: negative_suspicion]
+            $ apply_effects(stern_susp=-15)
             $ story.complete_chain_beat("stern")
 
             show cora_sprite base at left_bust with moveinleft # [asset auto]
@@ -272,8 +273,7 @@ label stern_chain_3:
 
         "Seize the one-time opportunity: Step into her space and audit the stubs. [[Climax: 2.2 Spice. Spikes Suspicion (+25) and Corruption (+20), raising Anxiety. Requires: Anxiety < 75 and Stern Suspicion < 80]]" if player.anxiety < 75 and player.get_total_suspicion("stern") < 80:
 
-            # [STATE] Charged path: Level 4 tease, triggers Penance checkpoint
-            $ apply_effects(stern_susp=25, insp=20, corr=20)
+            $ apply_balanced_effect("transgressive", intensity="standard", witness="stern")
             $ story.complete_chain_beat("stern")
 
             cora "I see a banker's draft stub, Ma'am. And a dry rose from a florist on the Strand that closed last month."
@@ -348,8 +348,9 @@ label missy_chain_1:
     menu:
         "Help her stitch it silently. Comfort her. [[Shed Suspicion / Break Chain]]":
 
-            # [STATE] Safe path: closes loop
-            $ apply_effects(missy_susp=-10, insp=10, corr=0)
+            $ apply_balanced_effect("creative", intensity="standard")
+            # [STATE bespoke: negative_suspicion]
+            $ apply_effects(missy_susp=-10)
             $ story.complete_chain_beat("missy")
 
             show cora_sprite base at left_bust with moveinleft # [asset auto]
@@ -363,8 +364,7 @@ label missy_chain_1:
 
         "Stroke her cheek, questioning her with tender, quiet romance. [[Progress Chain]]":
 
-            # [STATE] Charged path: Level 3 tactile intimacy, builds romantic trust
-            $ apply_effects(missy_susp=10, insp=10, corr=5)
+            $ apply_balanced_effect("curious", intensity="standard", witness="missy")
             $ story.complete_chain_beat("missy")
 
             cora "You shouldn't have to bear his cruelty, Missy. Was it the wine, or is he always that monstrous when the door is closed?"
@@ -411,8 +411,9 @@ label missy_chain_2:
     menu:
         "Tell her to keep quiet for her own safety. [[Shed Suspicion / Break Chain]]":
 
-            # [STATE] Safe path: closes loop
-            $ apply_effects(missy_susp=-15, insp=10, corr=0)
+            $ apply_balanced_effect("creative", intensity="standard")
+            # [STATE bespoke: negative_suspicion]
+            $ apply_effects(missy_susp=-15)
             $ story.complete_chain_beat("missy")
 
             show cora_sprite base at left_bust with moveinleft # [asset auto]
@@ -424,8 +425,7 @@ label missy_chain_2:
 
         "Press her chest-to-chest in the dark, whispering with sensual agency. [[Progress Chain]]":
 
-            # [STATE] Charged path: High intimacy, Level 3 tension, active desire
-            $ apply_effects(missy_susp=15, insp=15, corr=10)
+            $ apply_balanced_effect("curious", intensity="standard", witness="missy")
             $ story.complete_chain_beat("missy")
 
             "The broom closet is tiny, smelling of cedar oil and damp aprons."
@@ -472,8 +472,9 @@ label missy_chain_3:
     menu:
         "Tear the page and beg her forgiveness. [[Shed Suspicion / Lost Opportunity: Safe option, but you lose this climax forever.]]":
 
-            # [STATE] Safe path: closes loop
-            $ apply_effects(missy_susp=-20, insp=5, corr=0)
+            $ apply_balanced_effect("creative", intensity="standard")
+            # [STATE bespoke: negative_suspicion]
+            $ apply_effects(missy_susp=-20)
             $ story.complete_chain_beat("missy")
 
             show cora_sprite base at left_bust with moveinleft # [asset auto]
@@ -486,8 +487,7 @@ label missy_chain_3:
 
         "Seize the one-time opportunity: Defend the writing and unlace her apron. [[Climax: 2.2 Spice. Spikes Suspicion (+20) and Corruption (+20), raising Anxiety. Requires: Anxiety < 75 and Missy Suspicion < 80]]" if player.anxiety < 75 and player.get_total_suspicion("missy") < 80:
 
-            # [STATE] Charged path: Level 3 Erotic Climax, sovereign submission/intimacy
-            $ apply_effects(missy_susp=20, insp=20, corr=20)
+            $ apply_balanced_effect("transgressive", intensity="standard", witness="missy")
             $ story.complete_chain_beat("missy")
 
             cora "It is a story, Missy. A beautiful one. It shows how much better you are than the sheets you wash. And I want to write the ending with you."
@@ -553,8 +553,9 @@ label vance_chain_1:
     menu:
         "Return it silently with a perfect maid's bow. [[Shed Suspicion / Break Chain]]":
 
-            # [STATE] Safe path: closes loop
-            $ apply_effects(vance_susp=-10, insp=5, corr=0)
+            $ apply_balanced_effect("creative", intensity="standard")
+            # [STATE bespoke: negative_suspicion]
+            $ apply_effects(vance_susp=-10)
             $ story.complete_chain_beat("vance")
 
             show cora_sprite base at left_bust with moveinleft # [asset auto]
@@ -568,8 +569,7 @@ label vance_chain_1:
 
         "Cover it with my shoe, sliding it into my apron. [[Progress Chain]]":
 
-            # [STATE] Charged path: Level 3 voyeurism
-            $ apply_effects(vance_susp=15, insp=15, corr=5)
+            $ apply_balanced_effect("curious", intensity="standard", witness="vance")
             $ story.complete_chain_beat("vance")
 
             "I step forward, cover the silk with my shoe, and slide it into my apron pocket."
@@ -606,8 +606,9 @@ label vance_chain_2:
     menu:
         "Slip past silently in the shadows. [[Shed Suspicion / Break Chain]]":
 
-            # [STATE] Safe path: closes loop
-            $ apply_effects(vance_susp=-15, insp=5, corr=0)
+            $ apply_balanced_effect("creative", intensity="standard")
+            # [STATE bespoke: negative_suspicion]
+            $ apply_effects(vance_susp=-15)
             $ story.complete_chain_beat("vance")
 
             "I step back into the shadow of the doorway. I do not breathe."
@@ -615,8 +616,7 @@ label vance_chain_2:
 
         "Confront her. Wipe a tear with my rough thumb. [[Progress Chain]]":
 
-            # [STATE] Charged path: Level 3/4 dominance play
-            $ apply_effects(vance_susp=15, insp=20, corr=10)
+            $ apply_balanced_effect("curious", intensity="standard", witness="vance")
             $ story.complete_chain_beat("vance")
 
             "I step out of the shadow, standing directly before her."
@@ -669,8 +669,9 @@ label vance_chain_3:
     menu:
         "Play the simple country maid to allay her fears. [[Shed Suspicion / Lost Opportunity: Safe option, but you lose this climax forever.]]":
 
-            # [STATE] Safe path: closes loop
-            $ apply_effects(vance_susp=-20, insp=5, corr=0)
+            $ apply_balanced_effect("creative", intensity="standard")
+            # [STATE bespoke: negative_suspicion]
+            $ apply_effects(vance_susp=-20)
             $ story.complete_chain_beat("vance")
 
             show cora_sprite base at left_bust with moveinleft # [asset auto]
@@ -682,8 +683,7 @@ label vance_chain_3:
 
         "Seize the one-time opportunity: Corner her against the vanity and audit her collar marks. [[Climax: 2.2 Spice. Spikes Suspicion (+20) and Corruption (+20), raising Anxiety. Requires: Anxiety < 75 and Vance Suspicion < 80]]" if player.anxiety < 75 and player.get_total_suspicion("vance") < 80:
 
-            # [STATE] Charged path: Level 4 tease, triggers Penance checkpoint
-            $ apply_effects(vance_susp=20, insp=20, corr=20)
+            $ apply_balanced_effect("transgressive", intensity="standard", witness="vance")
             $ story.complete_chain_beat("vance")
 
             cora "I see a lady who is afraid of a key, Miss."
@@ -746,8 +746,8 @@ label confrontation_stern:
 
     # Penance effects: reduces Stern suspicion by 35, but advances time, consuming the slot.
 
-    # [STATE] State/progression update
-    $ apply_effects(stern_susp=-35, insp=0, corr=5)
+    # [STATE bespoke: legacy_exception]
+    $ apply_effects(stern_susp=-35, corr=5)
     return
 
 
@@ -783,8 +783,8 @@ label confrontation_vance:
 
     # Penance effects: reduces Vance suspicion by 35, but advances time, consuming the slot.
 
-    # [STATE] State/progression update
-    $ apply_effects(vance_susp=-35, insp=0, corr=5)
+    # [STATE bespoke: legacy_exception]
+    $ apply_effects(vance_susp=-35, corr=5)
     return
 
 
@@ -802,7 +802,7 @@ label confrontation_missy:
     missy "I know what you are, Cora. You're a spy. You've been using me. You've been watching Vance and Locke and writing it down."
     missy "I won't let you ruin me. If Stern asks, I'll tell her everything."
 
-    # [STATE] State/progression update
+    # [STATE bespoke: legacy_exception]
     $ apply_effects(missy_susp=-35, insp=5)
     show cora_sprite base at left_bust with moveinleft # [asset auto]
     show missy_sprite shocked at right_bust with move # [asset auto]

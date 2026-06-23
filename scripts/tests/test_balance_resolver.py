@@ -6,7 +6,6 @@ import sys
 import unittest
 from pathlib import Path
 
-
 SCRIPTS = Path(__file__).resolve().parents[1]
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
@@ -19,100 +18,108 @@ class BalanceResolverTests(unittest.TestCase):
     def setUpClass(cls) -> None:
         cls.config = balance_resolver.load_profiles()
 
-    def test_submissive_standard(self) -> None:
+    def test_creative_standard(self) -> None:
         result = balance_resolver.resolve_balanced_effect(
-            "submissive",
+            "creative",
             intensity_override="standard",
             config=self.config,
         )
-        self.assertEqual(result, {"corr": 5, "insp": 5})
+        self.assertEqual(result, {"insp": 5, "corr": 3})
 
-    def test_submissive_major_scales_whole_profile(self) -> None:
+    def test_curious_standard_with_witness(self) -> None:
         result = balance_resolver.resolve_balanced_effect(
-            "submissive",
+            "curious",
+            intensity_override="standard",
+            witness="stern",
+            config=self.config,
+        )
+        self.assertEqual(result, {"insp": 3, "corr": 6, "stern_susp": 10})
+
+    def test_transgressive_major_with_witness(self) -> None:
+        result = balance_resolver.resolve_balanced_effect(
+            "transgressive",
             intensity_override="major",
-            config=self.config,
-        )
-        self.assertEqual(result, {"corr": 8, "insp": 8})
-
-    def test_submissive_minor_scales_down(self) -> None:
-        result = balance_resolver.resolve_balanced_effect(
-            "submissive",
-            intensity_override="minor",
-            config=self.config,
-        )
-        self.assertEqual(result, {"corr": 2, "insp": 2})
-
-    def test_defiant_requires_witness(self) -> None:
-        with self.assertRaises(ValueError) as ctx:
-            balance_resolver.resolve_balanced_effect(
-                "defiant",
-                intensity_override="standard",
-                config=self.config,
-            )
-        self.assertIn("requires a named witness", str(ctx.exception))
-
-    def test_defiant_standard_with_stern(self) -> None:
-        result = balance_resolver.resolve_balanced_effect(
-            "defiant",
-            intensity_override="standard",
-            witness="stern",
-            config=self.config,
-        )
-        self.assertEqual(result, {"insp": 12, "stern_susp": 10})
-
-    def test_deceptive_base_witness(self) -> None:
-        result = balance_resolver.resolve_balanced_effect(
-            "deceptive",
-            witness="stern",
-            base_witness=True,
-            config=self.config,
-        )
-        self.assertEqual(result, {"insp": 5, "stern_base": 25})
-
-    def test_unknown_profile(self) -> None:
-        with self.assertRaises(ValueError) as ctx:
-            balance_resolver.resolve_balanced_effect("submisive", config=self.config)
-        self.assertIn("Unknown balance profile", str(ctx.exception))
-
-    def test_unknown_intensity(self) -> None:
-        with self.assertRaises(ValueError) as ctx:
-            balance_resolver.resolve_balanced_effect(
-                "submissive",
-                intensity_override="medium",
-                config=self.config,
-            )
-        self.assertIn("Unknown balance intensity override", str(ctx.exception))
-
-    def test_unknown_witness(self) -> None:
-        with self.assertRaises(ValueError) as ctx:
-            balance_resolver.resolve_balanced_effect(
-                "defiant",
-                witness="john",
-                config=self.config,
-            )
-        self.assertIn("Unknown witness", str(ctx.exception))
-
-    def test_numeric_intensity_multiplier(self) -> None:
-        result = balance_resolver.resolve_balanced_effect(
-            "observant",
-            intensity_override=0.5,
-            config=self.config,
-        )
-        self.assertEqual(result, {"insp": 2})
-
-    def test_safe_trace(self) -> None:
-        result = balance_resolver.resolve_balanced_effect("safe", config=self.config)
-        self.assertEqual(result, {"insp": 2})
-
-    def test_reckless_with_vance(self) -> None:
-        result = balance_resolver.resolve_balanced_effect(
-            "reckless",
-            intensity_override="standard",
             witness="vance",
             config=self.config,
         )
-        self.assertEqual(result, {"corr": 8, "insp": 12, "vance_susp": 25})
+        self.assertEqual(result, {"corr": 24, "vance_susp": 25})
+
+    def test_observant_standard(self) -> None:
+        result = balance_resolver.resolve_balanced_effect(
+            "observant",
+            intensity_override="standard",
+            config=self.config,
+        )
+        self.assertEqual(result, {"insp": 2})
+
+    def test_deceptive_standard_with_witness(self) -> None:
+        result = balance_resolver.resolve_balanced_effect(
+            "deceptive",
+            intensity_override="standard",
+            witness="missy",
+            config=self.config,
+        )
+        self.assertEqual(result, {"corr": 8, "missy_susp": 10})
+
+    def test_safe_is_inactive(self) -> None:
+        with self.assertRaises(ValueError) as ctx:
+            balance_resolver.resolve_balanced_effect("safe", config=self.config)
+        self.assertIn("is inactive", str(ctx.exception))
+
+    def test_obedient_is_inactive(self) -> None:
+        with self.assertRaises(ValueError) as ctx:
+            balance_resolver.resolve_balanced_effect("obedient", config=self.config)
+        self.assertIn("is inactive", str(ctx.exception))
+
+    def test_reckless_is_inactive(self) -> None:
+        with self.assertRaises(ValueError) as ctx:
+            balance_resolver.resolve_balanced_effect("reckless", config=self.config)
+        self.assertIn("is inactive", str(ctx.exception))
+
+    def test_trace_intensity_is_invalid(self) -> None:
+        with self.assertRaises(ValueError) as ctx:
+            balance_resolver.resolve_balanced_effect("creative", intensity_override="trace", config=self.config)
+        self.assertIn("Inactive or unknown intensity", str(ctx.exception))
+
+    def test_severe_intensity_is_invalid(self) -> None:
+        with self.assertRaises(ValueError) as ctx:
+            balance_resolver.resolve_balanced_effect("creative", intensity_override="severe", config=self.config)
+        self.assertIn("Inactive or unknown intensity", str(ctx.exception))
+
+    def test_numeric_intensity_is_invalid(self) -> None:
+        with self.assertRaises(ValueError) as ctx:
+            balance_resolver.resolve_balanced_effect("creative", intensity_override=0.5, config=self.config)
+        self.assertIn("Numeric intensity override not supported", str(ctx.exception))
+
+    def test_unknown_witness_fails(self) -> None:
+        with self.assertRaises(ValueError) as ctx:
+            balance_resolver.resolve_balanced_effect("curious", witness="john", config=self.config)
+        self.assertIn("Unknown witness", str(ctx.exception))
+
+    def test_curious_without_witness_fails(self) -> None:
+        with self.assertRaises(ValueError) as ctx:
+            balance_resolver.resolve_balanced_effect("curious", config=self.config)
+        self.assertIn("requires a named witness parameter", str(ctx.exception))
+
+    def test_transgressive_without_witness_fails(self) -> None:
+        with self.assertRaises(ValueError) as ctx:
+            balance_resolver.resolve_balanced_effect("transgressive", config=self.config)
+        self.assertIn("requires a named witness parameter", str(ctx.exception))
+
+    def test_deceptive_without_witness_fails(self) -> None:
+        with self.assertRaises(ValueError) as ctx:
+            balance_resolver.resolve_balanced_effect("deceptive", config=self.config)
+        self.assertIn("requires a named witness parameter", str(ctx.exception))
+
+    def test_base_witness_fails_for_active_profiles(self) -> None:
+        with self.assertRaises(ValueError) as ctx:
+            balance_resolver.resolve_balanced_effect(
+                "curious",
+                witness="stern",
+                base_witness=True,
+                config=self.config,
+            )
+        self.assertIn("base_witness=True is not allowed", str(ctx.exception))
 
 
 if __name__ == "__main__":

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Semantic balance profile lint for non-prod day scripts."""
+"""Semantic balance profile lint for non-prod scripts."""
 
 from __future__ import annotations
 
@@ -9,12 +9,18 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
+try:
+    import yaml
+except ImportError:
+    yaml = None
+
+ROOT = Path(__file__).resolve().parents[2]
 _SCRIPTS = Path(__file__).resolve().parents[1]
 if str(_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS))
 
+import balance_resolver
 from balance_catalogue import (  # noqa: E402
-    BESPOKE_COMMENT_RE,
     parse_apply_effects_line,
     parse_balanced_effect_line,
 )
@@ -76,10 +82,10 @@ def is_balance_lint_target(path: Path | str) -> bool:
     full_path = Path(path)
     if full_path.name in EXCLUDED_LINT_NAMES:
         return False
-    if not full_path.name.endswith("_non_canon.rpy"):
+    if not full_path.name.endswith("_non_canon.rpy") and not full_path.name.endswith("story_chains_non_canon.rpy"):
         return False
     norm = full_path.as_posix().replace("\\", "/")
-    return "/non-prod-game/game/days/" in norm
+    return "/non-prod-game/game/days/" in norm or "/non-prod-game/game/shared/story_chains_non_canon.rpy" in norm
 
 
 def _rel(path: Path, root: Path) -> str:
@@ -94,12 +100,36 @@ def _is_comment(line: str) -> bool:
     return stripped.startswith("#") or not stripped
 
 
-def _has_bespoke_marker(lines: list[str], line_index: int) -> bool:
-    start = max(0, line_index - BESPOKE_LOOKBACK)
+def _has_intensity_exception_marker(lines: list[str], line_index: int) -> bool:
+    INTENSITY_EXCEPTION_RE = re.compile(r"#\s*\[BALANCE\s+intensity-exception:\s*[^\]]+\]", re.IGNORECASE)
+    start = max(0, line_index - 3)
     for idx in range(start, line_index):
-        if BESPOKE_COMMENT_RE.search(lines[idx]):
+        if INTENSITY_EXCEPTION_RE.search(lines[idx]):
             return True
     return False
+
+
+def _get_bespoke_reason(lines: list[str], line_index: int) -> str | None:
+    BESPOKE_STRICT_COMMENT_RE = re.compile(r"#\s*\[STATE bespoke:\s*([a-zA-Z_]+)\]", re.IGNORECASE)
+    start = max(0, line_index - BESPOKE_LOOKBACK)
+    for idx in range(line_index - 1, start - 1, -1):
+        match = BESPOKE_STRICT_COMMENT_RE.search(lines[idx])
+        if match:
+            return match.group(1)
+    return None
+
+
+def load_bespoke_allowlist() -> dict[str, Any]:
+    allowlist_path = ROOT / "main-game" / "draft" / "releases" / "planning" / "balance" / "bespoke_effect_allowlist.yaml"
+    if not allowlist_path.exists():
+        return {}
+    if yaml is None:
+        return {}
+    try:
+        data = yaml.safe_load(allowlist_path.read_text(encoding="utf-8"))
+        return data if isinstance(data, dict) else {}
+    except Exception:
+        return {}
 
 
 def _validate_balanced_call(
@@ -108,28 +138,49 @@ def _validate_balanced_call(
     config: dict[str, Any],
     rel_file: str,
     line_no: int,
+    lines: list[str],
+    line_index: int,
 ) -> list[str]:
     import balance_resolver
 
     failures: list[str] = []
-    profiles = config["profiles"]
+    profiles = config.get("profiles", {})
     if effect.profile not in profiles:
         failures.append(f"{rel_file}:{line_no} unknown balance profile '{effect.profile}'")
         return failures
 
-    intensity = effect.intensity
-    if isinstance(intensity, str) and intensity not in ("standard",) and intensity not in config["intensities"]:
-        if not str(intensity).replace(".", "", 1).isdigit():
-            failures.append(
-                f"{rel_file}:{line_no} unknown balance intensity '{intensity}' "
-                f"for profile '{effect.profile}'"
-            )
-            return failures
-
     spec = profiles[effect.profile]
-    if "witness_susp" in spec and not effect.witness:
+    if not spec.get("active", False):
+        failures.append(f"{rel_file}:{line_no} inactive balance profile '{effect.profile}'")
+        return failures
+
+    intensity = effect.intensity
+    if isinstance(intensity, (int, float)):
+        failures.append(f"{rel_file}:{line_no} numeric intensity override '{intensity}' is forbidden in schema v2")
+        return failures
+
+    if intensity not in config.get("active_intensities", ()):
         failures.append(
-            f"{rel_file}:{line_no} profile '{effect.profile}' requires a witness parameter"
+            f"{rel_file}:{line_no} unknown or inactive balance intensity '{intensity}' "
+            f"for profile '{effect.profile}'"
+        )
+        return failures
+
+    # Check allowed story intensities (migration mode standard only unless annotated)
+    allowed_intensities = config.get("migration_mode", {}).get("allowed_story_intensities", ())
+    if intensity not in allowed_intensities:
+        if not _has_intensity_exception_marker(lines, line_index):
+            failures.append(
+                f"{rel_file}:{line_no} intensity '{intensity}' blocked during migration pass "
+                f"without explicit '# [BALANCE intensity-exception: ...]' annotation"
+            )
+
+    # Check witness suspension profiles
+    standard_deltas = spec.get("deltas", {}).get("standard", {})
+    is_risky = standard_deltas.get("witness_susp", 0) > 0
+    if is_risky and not effect.witness:
+        failures.append(
+            f"{rel_file}:{line_no} risky profile '{effect.profile}' requires a witness parameter"
         )
 
     if effect.witness and effect.witness not in config["valid_witnesses"]:
@@ -137,6 +188,9 @@ def _validate_balanced_call(
             f"{rel_file}:{line_no} unknown witness '{effect.witness}' "
             f"(valid: {', '.join(config['valid_witnesses'])})"
         )
+
+    if effect.base_witness:
+        failures.append(f"{rel_file}:{line_no} base_witness=True is forbidden for active profiles")
 
     try:
         balance_resolver.resolve_balanced_effect(
@@ -152,16 +206,89 @@ def _validate_balanced_call(
     return failures
 
 
-def lint_file(path: Path, *, config: dict[str, Any] | None = None, root: Path | None = None) -> BalanceProfileLintResult:
+def _validate_bespoke_call(
+    reason: str,
+    kwargs: dict[str, int],
+    allowlist: dict[str, Any],
+    rel_file: str,
+    line_no: int,
+    label: str | None,
+) -> list[str]:
+    failures = []
+    allowed_categories = {
+        "negative_suspicion",
+        "write_spend",
+        "fixed_manuscript_reward",
+        "gate_failure_penalty",
+        "legacy_exception",
+    }
+    if reason not in allowed_categories:
+        failures.append(f"{rel_file}:{line_no} invalid bespoke reason '{reason}'")
+        return failures
+
+    kwargs = {str(k): int(v) for k, v in kwargs.items()}
+
+    if reason == "negative_suspicion":
+        allowed_keys = {"stern_susp", "vance_susp", "missy_susp", "gideon_susp"}
+        for k, v in kwargs.items():
+            if k not in allowed_keys:
+                failures.append(f"{rel_file}:{line_no} negative_suspicion cannot modify '{k}'")
+            elif v >= 0:
+                failures.append(f"{rel_file}:{line_no} negative_suspicion value for '{k}' must be negative (got {v})")
+    elif reason == "write_spend":
+        allowed_keys = {"insp"}
+        for k, v in kwargs.items():
+            if k not in allowed_keys:
+                failures.append(f"{rel_file}:{line_no} write_spend cannot modify '{k}'")
+            elif v >= 0:
+                failures.append(f"{rel_file}:{line_no} write_spend value for '{k}' must be negative (got {v})")
+    else:
+        matched = False
+        allowed_entries = allowlist.get("allowed_bespoke_effects", {})
+        for entry_name, entry in allowed_entries.items():
+            entry_file = entry.get("file", "").replace("\\", "/")
+            norm_rel_file = rel_file.replace("\\", "/")
+            if entry_file != norm_rel_file:
+                continue
+            if "label" in entry and entry["label"] != label:
+                continue
+            entry_kwargs = {str(k): int(v) for k, v in entry.get("allowed_kwargs", {}).items()}
+            if entry_kwargs == kwargs:
+                matched = True
+                break
+
+        if not matched:
+            failures.append(
+                f"{rel_file}:{line_no} mixed bespoke call with reason '{reason}' and kwargs {kwargs} "
+                f"is not allowlisted in bespoke_effect_allowlist.yaml (current label: {label})"
+            )
+    return failures
+
+
+def lint_file(
+    path: Path,
+    *,
+    config: dict[str, Any] | None = None,
+    root: Path | None = None,
+    allowlist: dict[str, Any] | None = None,
+) -> BalanceProfileLintResult:
     import balance_resolver
 
     cfg = config or balance_resolver.load_profiles()
     repo_root = root or Path(__file__).resolve().parents[2]
     rel_file = _rel(path.resolve(), repo_root)
     result = BalanceProfileLintResult()
+    
+    awlist = allowlist or load_bespoke_allowlist()
 
     lines = path.read_text(encoding="utf-8").splitlines()
+    current_label = None
+
     for idx, line in enumerate(lines, start=1):
+        label_match = re.match(r"^\s*label\s+([a-zA-Z0-9_]+)\s*:", line)
+        if label_match:
+            current_label = label_match.group(1)
+
         if _is_comment(line):
             continue
 
@@ -175,36 +302,44 @@ def lint_file(path: Path, *, config: dict[str, Any] | None = None, root: Path | 
         if balanced := parse_balanced_effect_line(line):
             result.profile_calls += 1
             result.failures.extend(
-                _validate_balanced_call(balanced, config=cfg, rel_file=rel_file, line_no=idx)
+                _validate_balanced_call(
+                    balanced,
+                    config=cfg,
+                    rel_file=rel_file,
+                    line_no=idx,
+                    lines=lines,
+                    line_index=idx - 1,
+                )
             )
             continue
 
         if parse_apply_effects_line(line):
-            if _has_bespoke_marker(lines, idx - 1):
+            reason = _get_bespoke_reason(lines, idx - 1)
+            if reason:
                 result.bespoke_calls += 1
+                kwargs = parse_apply_effects_line(line).kwargs or {}
+                result.failures.extend(
+                    _validate_bespoke_call(
+                        reason=reason,
+                        kwargs=kwargs,
+                        allowlist=awlist,
+                        rel_file=rel_file,
+                        line_no=idx,
+                        label=current_label,
+                    )
+                )
             else:
                 result.unmarked_apply_effects += 1
-                result.warnings.append(
-                    f"{rel_file}:{idx} raw `apply_effects(...)` without `# [STATE bespoke]` marker"
+                result.failures.append(
+                    f"{rel_file}:{idx} raw `apply_effects(...)` without strict `# [STATE bespoke: <reason>]` marker"
                 )
 
     return result
 
 
 def finalize_unmarked_severity(result: BalanceProfileLintResult) -> None:
-    """Promote unmarked apply_effects warnings to failures once migration threshold is met."""
-    if not result.unmarked_apply_effects:
-        return
-    unmarked_messages = [
-        item
-        for item in result.warnings
-        if "raw `apply_effects(...)` without `# [STATE bespoke]` marker" in item
-    ]
-    if not unmarked_messages:
-        return
-    if result.migration_ratio >= MIGRATION_FAIL_THRESHOLD:
-        result.warnings = [item for item in result.warnings if item not in unmarked_messages]
-        result.failures.extend(unmarked_messages)
+    """No-op in schema v2 where unmarked apply_effects always fail immediately."""
+    pass
 
 
 def merge_results(target: BalanceProfileLintResult, incoming: BalanceProfileLintResult) -> None:
@@ -224,6 +359,8 @@ def lint_paths(
 ) -> BalanceProfileLintResult:
     merged = BalanceProfileLintResult()
     repo_root = root or Path(__file__).resolve().parents[2]
+    cfg = config or balance_resolver.load_profiles()
+    awlist = load_bespoke_allowlist()
 
     for raw in paths:
         path = Path(raw)
@@ -234,7 +371,7 @@ def lint_paths(
             continue
         if not is_balance_lint_target(path):
             continue
-        merge_results(merged, lint_file(path, config=config, root=repo_root))
+        merge_results(merged, lint_file(path, config=cfg, root=repo_root, allowlist=awlist))
 
     finalize_unmarked_severity(merged)
     return merged
@@ -251,6 +388,10 @@ def default_day_script_paths(release_slug: str = "release-1-mvp") -> list[Path]:
     day100 = non_prod_game_dir() / "game" / "days" / "day100_non_canon.rpy"
     if day100.exists():
         paths.insert(0, day100)
+    # Add story chains non-canon
+    chains = non_prod_game_dir() / "game" / "shared" / "story_chains_non_canon.rpy"
+    if chains.exists():
+        paths.append(chains)
     return paths
 
 
@@ -266,7 +407,7 @@ def lint_to_check_results(
     result: BalanceProfileLintResult,
     *,
     root: Path,
-    evidence_prefix: str = "non-prod day scripts",
+    evidence_prefix: str = "non-prod scripts",
 ) -> list:
     from validation.balance_report_impl import CheckResult, Severity
 
@@ -284,7 +425,7 @@ def lint_to_check_results(
         checks.append(
             CheckResult(
                 Severity.PASS,
-                "No direct player stat mutations in scoped day scripts",
+                "No direct player stat mutations in scoped scripts",
                 evidence_prefix,
             )
         )
@@ -293,9 +434,11 @@ def lint_to_check_results(
         item
         for item in result.failures
         if "unknown balance profile" in item
-        or "unknown balance intensity" in item
+        or "inactive balance profile" in item
+        or "intensity" in item
         or "requires a witness" in item
         or "unknown witness" in item
+        or "base_witness" in item
     ]
     if profile_failures:
         checks.append(
@@ -315,17 +458,10 @@ def lint_to_check_results(
         )
 
     if result.unmarked_apply_effects:
-        severity = (
-            Severity.FAIL
-            if result.migration_ratio >= MIGRATION_FAIL_THRESHOLD
-            else Severity.WARN
-        )
         checks.append(
             CheckResult(
-                severity,
-                f"Unmarked raw apply_effects ({result.unmarked_apply_effects}); "
-                f"migration {result.migration_ratio:.0%} "
-                f"(FAIL threshold {MIGRATION_FAIL_THRESHOLD:.0%})",
+                Severity.FAIL,
+                f"Unmarked raw apply_effects ({result.unmarked_apply_effects})",
                 evidence_prefix,
             )
         )
@@ -354,7 +490,7 @@ def lint_to_check_results(
             )
         )
 
-    if result.warnings and not result.unmarked_apply_effects:
+    if result.warnings:
         checks.append(
             CheckResult(
                 Severity.WARN,
@@ -372,7 +508,7 @@ def lint_to_check_results(
         checks.append(
             CheckResult(
                 Severity.WARN,
-                "No economy effect calls found in scoped day scripts",
+                "No economy effect calls found in scoped scripts",
                 evidence_prefix,
             )
         )

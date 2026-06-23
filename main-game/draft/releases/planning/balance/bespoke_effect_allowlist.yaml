@@ -1,0 +1,86 @@
+allowed_bespoke_effects:
+  day104_missy_repair_partial_truth:
+    file: main-game/non-prod-game/game/days/day104_non_canon.rpy
+    label: day104_4_missy_repair
+    line_hint: tender_romance_path_b_intimacy
+    reason: fixed authored repair beat
+    allowed_kwargs:
+      missy_susp: -25
+      vance_susp: 5
+      insp: 15
+      corr: 10
+    expires_after: balance_compression_pass
+
+  day104_escape_missy_cover:
+    file: main-game/non-prod-game/game/days/day104_non_canon.rpy
+    label: day104_2_escape_missy_cover
+    line_hint: escape_missy_cover
+    reason: fixed cover outcome
+    allowed_kwargs:
+      vance_susp: -15
+      missy_susp: 20
+      insp: 5
+      corr: 20
+    expires_after: balance_compression_pass
+
+  day104_stern_pressure_conditional_moral_cost:
+    file: main-game/non-prod-game/game/days/day104_non_canon.rpy
+    label: day104_3_stern_pressure
+    line_hint: conditional_moral_cost
+    reason: fixed pressure outcome
+    allowed_kwargs:
+      stern_susp: -10
+      missy_susp: 10
+      corr: 10
+    expires_after: balance_compression_pass
+
+  confrontation_stern_outcome:
+    file: main-game/non-prod-game/game/shared/story_chains_non_canon.rpy
+    label: confrontation_stern
+    reason: fixed confrontation outcome
+    allowed_kwargs:
+      stern_susp: -35
+      corr: 5
+    expires_after: balance_compression_pass
+
+  confrontation_vance_outcome:
+    file: main-game/non-prod-game/game/shared/story_chains_non_canon.rpy
+    label: confrontation_vance
+    reason: fixed confrontation outcome
+    allowed_kwargs:
+      vance_susp: -35
+      corr: 5
+    expires_after: balance_compression_pass
+
+  confrontation_missy_outcome:
+    file: main-game/non-prod-game/game/shared/story_chains_non_canon.rpy
+    label: confrontation_missy
+    reason: fixed confrontation outcome
+    allowed_kwargs:
+      missy_susp: -35
+      insp: 5
+    expires_after: balance_compression_pass
+
+  day103_write_penalty_small:
+    file: main-game/non-prod-game/game/days/day103_non_canon.rpy
+    label: day103_3_bedroom_final_write
+    reason: fixed gate failure penalty
+    allowed_kwargs:
+      stern_susp: 5
+    expires_after: balance_compression_pass
+
+  day103_write_penalty_large:
+    file: main-game/non-prod-game/game/days/day103_non_canon.rpy
+    label: day103_3_bedroom_final_write
+    reason: fixed gate failure penalty
+    allowed_kwargs:
+      stern_susp: 10
+    expires_after: balance_compression_pass
+
+  day104_write_penalty:
+    file: main-game/non-prod-game/game/days/day104_non_canon.rpy
+    label: day104_5_triumphant_chapter
+    reason: fixed gate failure penalty
+    allowed_kwargs:
+      stern_susp: 15
+    expires_after: balance_compression_pass

@@ -10,13 +10,11 @@ balance profile** — it never asks her for raw numbers and never invents counte
 2. Interview the **meaning** of the beat (deference, defiance, snooping, surrender, scandal appetite,
    etc.). Pick a profile from the closed vocabulary in
    [`effect_profiles.yaml`](../../../main-game/draft/releases/planning/balance/effect_profiles.yaml):
-   `safe`, `observant`, `curious`, `obedient`, `submissive`, `defiant`, `deceptive`,
-   `transgressive`, `reckless`, `predatory`, `self_protective`, `creative`.
+   `creative`, `curious`, `transgressive`, `observant`, `deceptive`.
 3. Set **intensity** only when the beat is deliberately softer or harsher than typical for that scene
-   (`trace` | `minor` | `standard` | `major` | `severe`; default `standard`).
-4. Set **witness** when the profile raises witness suspicion (`defiant`, `deceptive`, `reckless`,
-   `predatory`): `stern` | `vance` | `gideon` | `missy`. Use `base_witness: true` only for durable
-   recognition, not momentary heat.
+   (`minor` | `standard` | `major`; default `standard`). During the migration pass, standard only is permitted.
+4. Set **witness** when the profile raises witness suspicion (`curious`, `deceptive`, `transgressive`):
+   `stern` | `vance` | `gideon` | `missy`. Note that `base_witness: true` is forbidden for active profiles during the migration pass.
 5. Record the semantic shape in **Authoring Intent** (`requested_effects`) — not raw stat deltas.
 6. Use **bespoke** (`kind: bespoke` + `deltas` + reason) only when profiles cannot express the beat:
    negative suspicion recovery, write-gate inspiration spends, fixed manuscript rewards, or other
@@ -30,11 +28,11 @@ balance profile** — it never asks her for raw numbers and never invents counte
 ```yaml
 requested_effects:
   - trigger: choice_lower_eyes
-    profile: submissive
+    profile: curious
     intensity: standard
     witness: stern
     base_witness: false
-    narrative_meaning: "Cora accepts Stern's authority and learns from surrendering control."
+    narrative_meaning: "Cora searches Stern's response, showing curiosity and risking discovery."
 ```
 
 ## Bespoke shape (exceptional)
@@ -55,13 +53,13 @@ The code agent emits profile effects as:
 
 ```renpy
 # [STATE] Semantic balance profile: <narrative_meaning>
-$ apply_balanced_effect("submissive", intensity="standard", witness="stern")
+$ apply_balanced_effect("curious", intensity="standard", witness="stern")
 ```
 
 Bespoke effects as:
 
 ```renpy
-# [STATE bespoke] <reason>
+# [STATE bespoke: write_spend]
 $ apply_effects(insp=-20)
 ```
 

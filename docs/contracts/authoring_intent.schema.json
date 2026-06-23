@@ -137,23 +137,16 @@
     "balance_profile": {
       "type": "string",
       "enum": [
-        "safe",
-        "observant",
+        "creative",
         "curious",
-        "obedient",
-        "submissive",
-        "defiant",
-        "deceptive",
         "transgressive",
-        "reckless",
-        "predatory",
-        "self_protective",
-        "creative"
+        "observant",
+        "deceptive"
       ]
     },
     "balance_intensity_name": {
       "type": "string",
-      "enum": ["trace", "minor", "standard", "major", "severe"]
+      "enum": ["minor", "standard", "major"]
     },
     "balance_witness": {
       "type": "string",
@@ -167,10 +160,7 @@
         "trigger": { "type": "string", "minLength": 1 },
         "profile": { "$ref": "#/$defs/balance_profile" },
         "intensity": {
-          "oneOf": [
-            { "$ref": "#/$defs/balance_intensity_name" },
-            { "type": "number", "exclusiveMinimum": 0 }
-          ],
+          "$ref": "#/$defs/balance_intensity_name",
           "default": "standard"
         },
         "witness": { "$ref": "#/$defs/balance_witness" },
@@ -188,11 +178,11 @@
         "bespoke_reason": {
           "type": "string",
           "enum": [
-            "write_spend",
             "negative_suspicion",
-            "recovery_mix",
-            "fixed_reward",
-            "other"
+            "write_spend",
+            "fixed_manuscript_reward",
+            "gate_failure_penalty",
+            "legacy_exception"
           ]
         },
         "deltas": {

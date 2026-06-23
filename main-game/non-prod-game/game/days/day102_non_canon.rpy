@@ -157,7 +157,7 @@ label day102_1_cora_takes_the_thing:
 
     $ story.set_day2_contraband_state("stolen_wearing")
     # [STATE] Semantic balance profile: Cora steals and wears the lace beneath her uniform
-    $ apply_balanced_effect("transgressive", intensity="major", witness="vance")
+    $ apply_balanced_effect("transgressive", intensity="standard", witness="vance")
 
     show cora_sprite base at left_bust with moveinleft # [asset auto]
     show missy_sprite confused at right_bust with move # [asset auto]
@@ -216,7 +216,7 @@ label day102_1_cora_deceives_missy:
 
     $ story.set_day2_contraband_state("planted_in_trunk")
     # [STATE] Semantic balance profile: Cora plants the lace in Locke's trunk as misdirection
-    $ apply_balanced_effect("curious", intensity="standard")
+    $ apply_balanced_effect("curious", intensity="standard", witness="missy")
 
     show cora_sprite base at left_bust with moveinleft # [asset auto]
     show missy_sprite confused at right_bust with move # [asset auto]
@@ -329,8 +329,9 @@ label day102_2_day2_insp_choice:
     show missy_sprite smiling at centre_bust
 
     $ story.set_day2_chore_focus("inspiration")
-    # [STATE bespoke] Cora catalogues the morning; Stern's suspicion eases while inspiration rises
-    $ apply_effects(stern_susp=-5, insp=15, corr=0)
+    $ apply_balanced_effect("creative", intensity="standard")
+    # [STATE bespoke: negative_suspicion]
+    $ apply_effects(stern_susp=-5)
 
     cora_inner "I make the morning into inventory."
     cora_inner "The direction of the light in the suite. The scent of Vance's powder. The exact stiffness in Missy's shoulders when she lies badly to herself."
@@ -374,7 +375,7 @@ label day102_2_day2_corr_choice:
 
     $ story.set_day2_chore_focus("corruption")
     # [STATE] Semantic balance profile: Cora lingers near danger and lets the secret sharpen
-    $ apply_balanced_effect("reckless", intensity="minor", witness="vance")
+    $ apply_balanced_effect("transgressive", intensity="standard", witness="vance")
 
     cora_inner "I slow the cart near the guest wing."
     cora_inner "There are always reasons. A folded towel not square enough. A dropped pin. A scuff on polished wood that may or may not exist."
@@ -629,7 +630,7 @@ label day102_3_cora_confesses:
     $ story.set_day2_tea_choice("prey")
     $ apply_archetype_edge("prey", 1)
     # [STATE] Semantic balance profile: Cora confesses enough to control the damage
-    $ apply_balanced_effect("defiant", intensity="major", witness="stern")
+    $ apply_balanced_effect("transgressive", intensity="standard", witness="stern")
 
     cora_inner "The truth is not safe."
     cora_inner "That does not make the lie safer."
@@ -686,7 +687,7 @@ label day102_3_cora_pretends_to_find_it:
     $ story.set_day2_tea_choice("predator")
     $ apply_archetype_edge("predator", 1)
     # [STATE] Semantic balance profile: Cora produces the lace as if discovering it now
-    $ apply_balanced_effect("predatory", intensity="major", witness="stern")
+    $ apply_balanced_effect("transgressive", intensity="standard", witness="stern")
 
     cora_inner "Helpful."
     cora_inner "That is the mask."
@@ -759,7 +760,7 @@ label day102_3_cora_frames_missy:
     $ story.set_missy_day2_trust_break(True)
     $ apply_archetype_edge("ghost", 1)
     # [STATE] Semantic balance profile: Cora lets Missy take the shape of the blame
-    $ apply_balanced_effect("transgressive", intensity="major")
+    $ apply_balanced_effect("transgressive", intensity="standard", witness="missy")
 
     cora_inner "There is a version of me that protects Missy."
     cora_inner "She exists."
@@ -1115,8 +1116,8 @@ label manuscript_slot_ch2_write:
         $ story.complete_manuscript_chapter("day2_chapter")
         call book1_write_chapter(chapter_key="day2_chapter", current_day=time_manager.current_day)
 
-        # [STATE bespoke] Manuscript Chapter Two gate spend
-        $ apply_effects(vance_susp=0, insp=-15, corr=0)
+        # [STATE bespoke: write_spend]
+        $ apply_effects(insp=-15)
 
         cora_inner "By the time the candle shortens, the second chapter exists."
         cora_inner "It is better than the first."
@@ -1162,8 +1163,8 @@ label day102_4_cora_writes_a_chapter:
             $ story.complete_manuscript_chapter("day1_chapter")
             call book1_write_chapter(chapter_key="day1_chapter", current_day=102)
 
-            # [STATE bespoke] Manuscript Chapter One gate spend
-            $ apply_effects(vance_susp=0, insp=-10, corr=0)
+            # [STATE bespoke: write_spend]
+            $ apply_effects(insp=-10)
 
             cora_inner "Chapter One is done."
             cora_inner "Late is not failure."
@@ -1197,7 +1198,7 @@ label day102_4_cora_sneaks_a_feel:
 
     $ story.set_day2_night_action("indulge")
     # [STATE] Semantic balance profile: Cora stays inside the feeling instead of writing
-    $ apply_balanced_effect("transgressive", intensity="major")
+    $ apply_balanced_effect("transgressive", intensity="standard", witness="stern")
 
     cora_inner "I close the notebook."
     cora_inner "The page has asked for discipline."

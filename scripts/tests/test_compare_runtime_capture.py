@@ -31,7 +31,7 @@ class CompareRuntimeCaptureTests(unittest.TestCase):
 
     def _balanced_event(self, **overrides) -> dict:
         kwargs = balance_resolver.resolve_balanced_effect(
-            "submissive",
+            "curious",
             intensity_override="standard",
             witness="stern",
             config=self.config,
@@ -39,7 +39,7 @@ class CompareRuntimeCaptureTests(unittest.TestCase):
         event = {
             "seq": 3,
             "event": "balanced_effect",
-            "profile": "submissive",
+            "profile": "curious",
             "intensity": "standard",
             "witness": "stern",
             "base_witness": False,
