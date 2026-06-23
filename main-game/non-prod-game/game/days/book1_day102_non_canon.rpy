@@ -34,17 +34,63 @@ label book1_block_day2_ghost_core:
 
 
 # [DAG_NODE id=book1_block_day2_predator_core type=write]
+# [BEAT] Predator route: Cora entered the hatbox scene with tactical intent.
+#        She lifted the lace to control the room, not save it.
+#        Hotel trigger: day2 predator tea_choice — Cora leveraged the situation.
+#        Emotional conversion: Risk + Desire -> Carmilla-like intimate contamination.
+#        Prose lens: gloved lie, tactical rescue, class machinery as erotic weapon.
 label book1_block_day2_predator_core:
 
-    call book1_nvl_write_line("Chapter the Second opens upon a lady's hatbox in the conservatory suite, sealed like a coffin for silk and scandal.", word_delay=_book1_word_delay)
-    call book1_nvl_write_line("The tea service steams; every cup rings as if the house itself were counting who shall be ruined before the cakes grow cold.", word_delay=_book1_word_delay)
-    call book1_nvl_write_line("Coralie crosses the salon with helpful hands and a voice trained to rescue propriety from its own carelessness.", word_delay=_book1_word_delay)
-    call book1_nvl_write_line("She lifts the lace as though she had only just discovered it, and the room admires her lie the way great houses admire plausible furnishings.", word_delay=_book1_word_delay)
-    call book1_nvl_write_line("Her pen crowns her the heroine who saved a great lady's honour from sloven packing and worse appetites; even Lord Caldor's stillness seems, by the final stanza, almost courtly.", word_delay=_book1_word_delay)
-    call book1_nvl_write_line("Desire in these pages is never surrender but upholstery — something guests lean upon while arranging whom to ruin next.", word_delay=_book1_word_delay)
+    # Route-provenance cue — must appear within the first screen.
+    call book1_set_chapter_title(
+        title="CHAPTER THE SECOND",
+        subtitle="Derived from a Night of Contraband"
+    )
+
+    # [BEAT] Opening: the hatbox as sealed coffin — the chapter's central image.
+    call book1_write_beat(
+        "Chapter the Second opens upon a lady's hatbox in the conservatory suite, sealed like a coffin for silk and scandal.",
+        thought="Too neat. She would not remember it so cleanly.",
+        page_break=True
+    )
+
+    call book1_write_beat(
+        "The tea service steams; every cup rings as if the house itself were counting who shall be ruined before the cakes grow cold.",
+        thought="Not listened. Witnessed."
+    )
+
+    call book1_write_beat(
+        "Coralie crosses the salon with helpful hands and a voice trained to rescue propriety from its own carelessness.",
+        thought="Rescue is the oldest word for acquisition."
+    )
+
+    # [ASSET] Tableau reveal — original-style CG showing the salon moment.
+    # Falls back to ui_book_cover until the asset is assembled.
+    call book1_show_tableau("cg_book_d2_hatbox_tableau")
+
+    call book1_write_beat(
+        "She lifts the lace as though innocence were a thing one could hold by two fingers, and the room admires her lie the way great houses admire plausible furnishings."
+    )
+
+    call book1_write_beat(
+        "Her pen crowns her the heroine who saved a great lady's honour from sloven packing and worse appetites; even Lord Caldor's stillness seems, by the final stanza, almost courtly.",
+        thought="There. Let the lie wear gloves."
+    )
+
+    # [ASSET] Plate reveal — same tableau rendered through runtime plate treatment.
+    # Tentpole override: book1_show_plate("plate_book_d2_hatbox_curse", caption="...")
+    call book1_show_plate(caption="Plate II — The Hatbox Curse")
+
+    call book1_write_beat(
+        "Desire in these pages is never surrender but upholstery — something guests lean upon while arranging whom to ruin next.",
+        thought="The reader is meant to blush. Then turn the page anyway.",
+        clear_thought=True
+    )
 
     if story.day1_ledger_focus == "corruption":
-        call book1_nvl_write_line("Etiquette wears a jewelled edge; appetite arrives as garnish upon a blade already drawn.", word_delay=_book1_word_delay)
+        call book1_write_beat(
+            "Etiquette wears a jewelled edge; appetite arrives as garnish upon a blade already drawn."
+        )
 
     call book1_block_day2_missy_debt_or_repair
     call book1_block_day2_stern_suspicion_or_diffuse

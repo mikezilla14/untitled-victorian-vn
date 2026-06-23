@@ -236,6 +236,31 @@ init -40 python:
     declare_image_with_fallback("ui_illustration_border", "images/ui/illustration_border.png", "#5a5a5a")
     declare_image_with_fallback("ui_price_badge", "images/ui/price_badge.png", "#3a1a0a")
 
+    # ── UI: Book1 Plate Mode Assets ──────────────────────────────
+    # ui_book_blank
+    #   Size: 748 x 600 px  (fills illustration slot in plate mode)
+    #   Role: plain writing-only mode — paper surface, no illustration
+    #   Art:  aged writing paper, warm cream tone matching manuscript page
+    declare_image_with_fallback("ui_book_blank", "images/ui/book/book_blank.png", "#e8d9c0")
+
+    # ui_book_plate_paper_overlay
+    #   Size: 748 x 600 px  (composited over illustration in plate mode)
+    #   Role: warm paper texture layer — aged foxing, grain, alpha channel
+    #   Art:  cream/ivory grain, subtle foxing spots; multiply or overlay blend
+    declare_image_with_fallback("ui_book_plate_paper_overlay", "images/ui/book/plate_paper_overlay.png", "#e8d0a000")
+
+    # ui_book_plate_hatch_overlay
+    #   Size: 748 x 600 px  (composited over plate_paper_overlay)
+    #   Role: crosshatch / noise layer to sell engraving feel; alpha channel
+    #   Art:  fine diagonal hatch, low opacity, dark ink tone; multiply blend
+    declare_image_with_fallback("ui_book_plate_hatch_overlay", "images/ui/book/plate_hatch_overlay.png", "#00000000")
+
+    # ui_illustration_border_plate
+    #   Size: 768 x 640 px  (slightly larger than slot; border wraps outside content area)
+    #   Role: ornamental plate border used in place of standard illustration_border in plate mode
+    #   Art:  Victorian woodblock-style rule border, dark sepia/charcoal, thin decorative corners
+    declare_image_with_fallback("ui_illustration_border_plate", "images/ui/book/illustration_border_plate.png", "#3a2510")
+
     # ── UI: Main menu carousel [1920 × 1080 px] ──────────────────
     # Register each slide here, then add its alias to MAIN_MENU_SLIDES in menu_carousel.rpy.
     
@@ -281,5 +306,16 @@ init -40 python:
     declare_image_with_fallback("cg_manuscript_retelling_d4_false_dawn", "images/cgs/cg_manuscript_retelling_d4_false_dawn.png", "#2b1c10")
     declare_image_with_fallback("cg_gideon_photograph", "images/cgs/cg_gideon_photograph.png", "#2b1c10")
     declare_image_with_fallback("cg_photograph_burning", "images/cgs/cg_photograph_burning.png", "#2b1c10")
+
+    # ── Book1 Tableau CGs ────────────────────────────────────────
+    # Naming convention: cg_book_d{day}_{beat}_tableau
+    # These are original-style VN CGs used as the source image for runtime plate treatment.
+    # All fall back to ui_book_blank until the asset is assembled and registered.
+    #
+    # cg_book_d2_hatbox_tableau
+    #   Size: 1920 x 1080 px  (full-screen CG, displayed at xysize 748x600 in the slot)
+    #   Scene: conservatory salon — Cora lifts the lace from Lady Vayne's hatbox
+    #   Style: current house CG style; readable pose; clear 2-second read
+    declare_image_with_fallback("cg_book_d2_hatbox_tableau", "images/cgs/book1/cg_book_d2_hatbox_tableau.png", "#e8d9c0")
 
     report_missing_assets()
