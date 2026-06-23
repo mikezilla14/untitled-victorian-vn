@@ -425,7 +425,17 @@ screen thought_overlay(who, what):
 # Applied to the illustration in plate mode.
 # Requires Ren'Py 7.4+ matrixcolor ATL support.
 transform book1_plate_treatment:
-    matrixcolor SepiaMatrix(0.9) * ContrastMatrix(1.12)
+    matrixcolor SepiaMatrix() * ContrastMatrix(1.12)
+
+
+# Author thought reveal: fades in after a short delay so the prose line
+# has time to partially or fully render before the marginalia appears.
+# Even/odd branching on thought_id (see nvl screen) restarts this transform
+# each time a new thought is set.
+transform book1_thought_reveal:
+    alpha 0.0
+    pause 1.0
+    linear 0.5 alpha 1.0
 
 
 screen nvl(dialogue, items=None):
@@ -518,14 +528,6 @@ screen nvl(dialogue, items=None):
         vbox:
             spacing 20
 
-            # Author thought marginalia — sparse pencilled composition notes.
-            # Visible only when book1_author_thought is non-empty.
-            # Rendered above the prose, visually separate from manuscript text.
-            $ _b1_thought = getattr(store, "book1_author_thought", "")
-            if _b1_thought:
-                text "[_b1_thought]" size 18 italic True color "#7a6050" xalign 0.0
-                null height 8
-
             # NVL dialogue text
             for d in dialogue:
                 window:
@@ -547,6 +549,24 @@ screen nvl(dialogue, items=None):
                             color "#261c14"
                             line_leading 6
                             justify True
+
+    # Author thought marginalia — floated to the bottom of the left panel.
+    # Placed outside the scroll window so it stays anchored regardless of page length.
+    # Even/odd branch on thought_id forces a fresh displayable on each change,
+    # restarting book1_thought_reveal so the delay re-triggers on every new thought.
+    $ _b1_thought    = getattr(store, "book1_author_thought", "")
+    $ _b1_thought_id = getattr(store, "book1_author_thought_id", 0)
+    if _b1_thought:
+        frame:
+            xpos 140
+            ypos 940
+            xsize 680
+            background None
+            padding (0, 0)
+            if _b1_thought_id % 2 == 0:
+                text "[_b1_thought]" size 18 italic True color "#7a6050" xalign 0.0 at book1_thought_reveal
+            else:
+                text "[_b1_thought]" size 18 italic True color "#7a6050" xalign 0.0 at book1_thought_reveal
 
 
 # ── BALANCE DEBUG OVERLAY (non-prod only; F10) ─────────────────

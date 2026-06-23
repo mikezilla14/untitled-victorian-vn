@@ -1,19 +1,5 @@
-# FORMAT LEGEND:
-# [ASSET] -> backgrounds, sprites, transitions, CG/UI callouts
-# [STATE] -> variable changes, effects, conditions, jumps
-# [CHOICE] -> menu blocks and inflection points
-# [BEAT] -> narrative intent / scene intent notes
-#
-# SPRITE DIRECTION (managed by scripts/scene_direction.py — how to preserve manual staging):
-# [asset auto]              -> auto-placed sprite line; the agent may rewrite/replace it on re-run
-# [asset keep]              -> on a show line: lock THAT line so the agent never edits it
-# [asset lock:scene]        -> before/after a `scene`: the agent skips the entire scene block
-# [asset pin:Name=slot]     -> force Name into slot for the rest of the scene block
-# [enter:Name] / [exit:Name] -> declare cast changes so auto placement stays correct
-# Full policy: docs/contracts/sprite_layout_policy.yaml | spec: docs/specs/scene-direction-agent.md
-
 # ==========================================================
-# book1_non_canon.rpy
+# book1.rpy
 # Book1 manuscript engine -- routing, rendering, and visual
 # API for the penny dreadful payload layer.
 #
@@ -105,11 +91,9 @@ label book1_write_chapter(chapter_key="day1_chapter", current_day=101, word_dela
     if audio_themes_private_ink:
         play music audio_themes_private_ink fadein 1.0
 
-    # [STATE] Initialise all Book1 presentation state
     # _book1_page_line_limit is a defensive fallback only; page flow
     # is controlled through authored page_break beats, not line counting.
 
-    # [STATE] State/progression update
     $ store._book1_word_delay       = word_delay
     $ store._book1_page_line_count  = 0
     $ store._book1_page_line_limit  = 4
@@ -126,37 +110,30 @@ label book1_write_chapter(chapter_key="day1_chapter", current_day=101, word_dela
 
     call book1_show_cover()
 
-    # [STATE] Resolve theme from hotel state for this chapter key
     # Chapter title is now owned by the block label via book1_set_chapter_title.
     if chapter_key == "day1_chapter" or chapter_key == "day1_slop_chapter":
 
-        # [STATE] State/progression update
         $ _combined_theme = "{}_{}".format(story.day1_corridor_state, story.day1_stern_relation)
         $ _book1_theme = _combined_theme if _combined_theme in book1.CHAPTER_BLOCKS[chapter_key] else story.day1_corridor_state
 
     elif chapter_key == "day2_chapter":
 
-        # [STATE] State/progression update
         $ _book1_theme = story.day2_tea_choice
 
     elif chapter_key == "day3_chapter":
 
-        # [STATE] State/progression update
         $ _book1_theme = story.day3_brush_choice
 
     elif chapter_key == "day4_triumphant_chapter":
 
-        # [STATE] State/progression update
         $ _book1_theme = story.day2_tea_choice
 
     elif chapter_key == "day5_reckoning_chapter":
 
-        # [STATE] State/progression update
         $ _book1_theme = story.day5_dynamic
 
     else:
 
-        # [STATE] State/progression update
         $ _book1_theme = "default"
 
     $ _book1_chapter_map = book1.CHAPTER_BLOCKS.get(chapter_key, {})
@@ -186,13 +163,11 @@ label book1_nvl_write_line(line, word_delay=0.04):
     if store._book1_page_line_count >= store._book1_page_line_limit:
         nvl clear
 
-        # [STATE] State/progression update
         $ store._book1_page_line_count = 0
 
     $ _book1_revealed = book1_word_reveal_text(line, word_delay)
     nvl_narrator "[_book1_revealed]"
 
-    # [STATE] State/progression update
     $ store._book1_page_line_count += 1
     return
 
@@ -204,17 +179,14 @@ label book1_write_beat(text, thought=None, word_delay=None, page_break=False, cl
     if page_break:
         nvl clear
 
-        # [STATE] State/progression update
         $ store._book1_page_line_count = 0
 
     if word_delay is None:
 
-        # [STATE] State/progression update
         $ word_delay = store._book1_word_delay
 
     if thought is not None:
 
-        # [STATE] State/progression update
         $ store.book1_author_thought    = thought
         $ store.book1_author_thought_id += 1
 
@@ -222,7 +194,6 @@ label book1_write_beat(text, thought=None, word_delay=None, page_break=False, cl
 
     if clear_thought:
 
-        # [STATE] State/progression update
         $ store.book1_author_thought = ""
 
     return
@@ -234,7 +205,6 @@ label book1_write_beat(text, thought=None, word_delay=None, page_break=False, cl
 
 label book1_author_thought(text, linger=True):
 
-    # [STATE] State/progression update
     $ store.book1_author_thought    = text
     $ store.book1_author_thought_id += 1
     return
@@ -242,7 +212,6 @@ label book1_author_thought(text, linger=True):
 
 label book1_clear_author_thought():
 
-    # [STATE] State/progression update
     $ store.book1_author_thought = ""
     return
 
@@ -252,7 +221,6 @@ label book1_clear_author_thought():
 # Core visual state setter. Called by all convenience wrappers.
 label book1_set_visual(image_name="ui_book_cover", mode="cover", caption="", transition="dissolve"):
 
-    # [STATE] State/progression update
     $ store.book1_page_image    = image_name
     $ store.book1_page_mode     = mode
     $ store.book1_plate_caption = caption
@@ -272,7 +240,6 @@ label book1_set_page_image(image_name="ui_book_cover"):
 # on the first screen the player sees.
 label book1_set_chapter_title(title="", subtitle=""):
 
-    # [STATE] State/progression update
     $ store.book1_chapter_title    = title
     $ store.book1_chapter_subtitle = subtitle
     return
@@ -297,7 +264,6 @@ label book1_show_tableau(image_name, caption=""):
 label book1_show_plate(image_name=None, caption=""):
     if image_name is None:
 
-        # [STATE] State/progression update
         $ image_name = store.book1_page_image
     # transition="none": plate treatment snaps onto the existing image.
     # "fade" causes a full-screen blackout in NVL context because with fade
@@ -324,57 +290,16 @@ label book1_show_blank(caption=""):
 label book1_apply_visual_transition(transition="dissolve"):
     if transition == "fade":
 
-        # [ASSET] Visual/staging command
         with fade
     elif transition == "dissolve":
 
-        # [ASSET] Visual/staging command
         with dissolve
     # else "none" or unknown: no transition applied
     return
 
-# -- DEBUG / FALLBACK ----------------------------------------------------
 
-# [DAG_NODE id=book1_debug_chapter_route type=write]
-label book1_debug_chapter_route(chapter_key="day2_chapter"):
 
-    nvl clear
-    nvl_narrator "DEBUG - chapter_key: [chapter_key]"
-
-    if chapter_key == "day1_chapter" or chapter_key == "day1_slop_chapter":
-
-        # [STATE] State/progression update
-        $ _theme = story.day1_corridor_state
-    elif chapter_key == "day2_chapter":
-
-        # [STATE] State/progression update
-        $ _theme = story.day2_tea_choice
-    elif chapter_key == "day3_chapter":
-
-        # [STATE] State/progression update
-        $ _theme = story.day3_brush_choice
-    elif chapter_key == "day4_triumphant_chapter":
-
-        # [STATE] State/progression update
-        $ _theme = story.day2_tea_choice
-    elif chapter_key == "day5_reckoning_chapter":
-
-        # [STATE] State/progression update
-        $ _theme = story.day5_dynamic
-    else:
-
-        # [STATE] State/progression update
-        $ _theme = "default"
-
-    $ _chapter_map = book1.CHAPTER_BLOCKS.get(chapter_key, {})
-    $ _label       = _chapter_map.get(_theme, _chapter_map.get("default", "NO_ROUTE"))
-
-    nvl_narrator "Theme: [_theme]"
-    nvl_narrator "Resolved label: [_label]"
-
-    nvl clear
-    return
-
+# -- FALLBACK ----------------------------------------------------
 
 # [DAG_NODE id=book1_block_unknown_chapter type=write]
 label book1_block_unknown_chapter:

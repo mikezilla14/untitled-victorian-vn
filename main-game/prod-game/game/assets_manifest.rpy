@@ -216,6 +216,20 @@ init -40 python:
     declare_image_with_fallback("ui_illustration_border", "images/ui/illustration_border.webp", "#5a5a5a")
     declare_image_with_fallback("ui_price_badge", "images/ui/price_badge.png", "#3a1a0a")
 
+    # -- UI: Book1 plate mode overlays + fallback surfaces --------
+    # ui_book_blank [748x600 px] aged paper surface for writing-only mode
+    declare_image_with_fallback("ui_book_blank", "images/ui/book/book_blank.png", "#e8d9c0")
+    # ui_book_plate_paper_overlay [748x600 px] warm paper texture composited over plate image
+    declare_image_with_fallback("ui_book_plate_paper_overlay", "images/ui/book/plate_paper_overlay.png", "#e8d0a000")
+    # ui_book_plate_hatch_overlay [748x600 px] crosshatch/noise layer for engraving feel
+    declare_image_with_fallback("ui_book_plate_hatch_overlay", "images/ui/book/plate_hatch_overlay.png", "#00000000")
+    # ui_illustration_border_plate [768x640 px] ornamental plate border for plate mode
+    declare_image_with_fallback("ui_illustration_border_plate", "images/ui/book/illustration_border_plate.png", "#3a2510")
+
+    # -- CGs: Book1 chapter illustrations -------------------------
+    # cg_book_d2_hatbox_tableau [748x600 px] day2 predator hatbox salon CG
+    declare_image_with_fallback("cg_book_d2_hatbox_tableau", "images/cgs/book1/cg_book_d2_hatbox_tableau.png", "#e8d9c0")
+
     # ── UI: Main menu carousel [1920 × 1080 px] ──────────────────
     # Register each slide here, then add its alias to MAIN_MENU_SLIDES in menu_carousel.rpy.
     declare_image_with_fallback("main_menu_sweeney", "images/ui/main_menu_sweeney.png", "#1a120a")

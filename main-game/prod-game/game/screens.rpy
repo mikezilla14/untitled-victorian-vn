@@ -409,6 +409,35 @@ screen thought_overlay(who, what):
 
 # ── PENNY DREADFUL BOOK WRITING SCREEN ───────────────────────────
 # Overrides standard NVL mode rendering for chapter writing events.
+#
+# Right-panel layout (1920x1080, right half x:960-1920):
+#   ypos  40-125   Masthead / chapter title
+#   ypos 125-165   Route-provenance subtitle
+#   ypos 165-785   Illustration frame (620px tall)
+#   ypos 800-840   Plate caption / image caption
+#   ypos 850-920   Publisher footer / price badge
+#   (Stats HUD removed — book is emotional escape, not a pressure dashboard)
+#
+# plate mode applies runtime sepia/hatch treatment to the current image.
+# Hand-finished plate_book_* assets bypass the transform entirely.
+
+# Runtime Victorian plate treatment.
+# Applied to the illustration in plate mode.
+# Requires Ren'Py 7.4+ matrixcolor ATL support.
+transform book1_plate_treatment:
+    matrixcolor SepiaMatrix() * ContrastMatrix(1.12)
+
+
+# Author thought reveal: fades in after a short delay so the prose line
+# has time to partially or fully render before the marginalia appears.
+# Even/odd branching on thought_id (see nvl screen) restarts this transform
+# each time a new thought is set.
+transform book1_thought_reveal:
+    alpha 0.0
+    pause 1.0
+    linear 0.5 alpha 1.0
+
+
 screen nvl(dialogue, items=None):
     # Left side: Manuscript Paper
     add "ui_book_writing_paper" xpos 0 ypos 0
@@ -421,99 +450,73 @@ screen nvl(dialogue, items=None):
         background None
         padding (0, 0)
 
-        # 1. Tall Title Block (Stacked Penny Dreadful Masthead)
+        # 1. Masthead — static title, or dynamic chapter title if set
+        $ _b1_chapter_title = getattr(store, "book1_chapter_title", "")
+        $ _b1_subtitle      = getattr(store, "book1_chapter_subtitle", "")
+
         vbox:
             xpos 96
             ypos 40
             xsize 768
             spacing 2
-            
-            text "CORALIE VALE;" size 32 bold True color "#2c1b17" xalign 0.5
-            text "OR," size 18 italic True color "#2c1b17" xalign 0.5
-            text "THE TERROR OF THE SAVOY CORRIDORS." size 22 bold True color "#2c1b17" xalign 0.5
 
-        # 2. Woodcut Illustration Frame
+            if _b1_chapter_title:
+                text "[_b1_chapter_title]" size 28 bold True color "#2c1b17" xalign 0.5
+            else:
+                text "CORALIE VALE;" size 32 bold True color "#2c1b17" xalign 0.5
+                text "OR," size 18 italic True color "#2c1b17" xalign 0.5
+                text "THE TERROR OF THE SAVOY CORRIDORS." size 22 bold True color "#2c1b17" xalign 0.5
+
+            # Route-provenance subtitle (visible when set by book1_set_chapter_title)
+            if _b1_subtitle:
+                null height 6
+                text "— [_b1_subtitle] —" size 16 italic True color "#7a5c3c" xalign 0.5
+
+        # 2. Illustration Frame (expanded to fill space from removed HUD)
+        $ _b1_page_image = getattr(store, "book1_page_image", "ui_book_cover")
+        $ _b1_page_mode  = getattr(store, "book1_page_mode", "cover")
+
         frame:
             xpos 96
-            ypos 200
-            xysize (768, 560)
+            ypos 165
+            xysize (768, 620)
             background Frame("ui_illustration_border", 6, 6)
             padding (10, 10)
-            
-            $ page_image = getattr(store, "book1_page_image", "ui_book_cover")
-            add page_image xalign 0.5 yalign 0.5 xysize (748, 540)
 
-        # 3. Price Banner & Publisher Slug Footer
+            if _b1_page_mode == "plate":
+                # Runtime plate treatment: sepia/contrast matrix + overlay layers
+                add _b1_page_image at book1_plate_treatment xalign 0.5 yalign 0.5 xysize (748, 600)
+                add "ui_book_plate_paper_overlay"      xalign 0.5 yalign 0.5 xysize (748, 600)
+                add "ui_book_plate_hatch_overlay"      xalign 0.5 yalign 0.5 xysize (748, 600)
+                add "ui_illustration_border_plate"     xalign 0.5 yalign 0.5
+            else:
+                add _b1_page_image xalign 0.5 yalign 0.5 xysize (748, 600)
+
+        # 3. Plate / Image Caption (visible when set)
+        $ _b1_caption = getattr(store, "book1_plate_caption", "")
+        if _b1_caption:
+            frame:
+                xpos 96
+                ypos 800
+                xysize (768, 40)
+                background None
+                text "[_b1_caption]" size 16 italic True color "#3a2510" xalign 0.5 yalign 0.5
+
+        # 4. Price Banner & Publisher Slug Footer
         frame:
             xpos 96
-            ypos 780
-            xysize (768, 60)
+            ypos 850
+            xysize (768, 70)
             background None
-            
-            # Diegetic "Price One Penny" cartouche on the left
+
             hbox:
                 xalign 0.1
                 yalign 0.5
                 add "ui_price_badge" xysize (140, 40)
-            
-            # Publisher slug centered at the bottom margin
+
             text "LONDON: PRINTED AND PUBLISHED BY SIR GIDEON LOCKE, SAVOY STRAND." size 14 color "#5f5f5f" xalign 0.5 yalign 0.5
 
-        # 4. Horizontal Stats HUD Bar
-        frame:
-            xpos 96
-            ypos 860
-            xysize (768, 160)
-            background "ui_book_ui_bg"
-            padding (20, 20)
-
-            hbox:
-                spacing 20
-                yalign 0.5
-
-                # Cora Mini Portrait (corruption dependent)
-                if player.corruption_level >= 3:
-                    add "ui_cora_mini_corrupted" xysize (120, 120)
-                else:
-                    add "ui_cora_mini_base" xysize (120, 120)
-
-                # Rescaled Inkwell displaying current inspiration / capacity
-                vbox:
-                    spacing 5
-                    yalign 0.5
-                    add "ui_inkwell_empty" xsize 100 ysize 102
-
-                # Split Horizontal Meters
-                vbox:
-                    spacing 15
-                    yalign 0.5
-                    xsize 480
-
-                    # Corruption Meter
-                    hbox:
-                        spacing 10
-                        text "Corruption" size 20 color "#d4a574" xsize 120
-                        bar:
-                            value player.corruption_level
-                            range 10
-                            xsize 350
-                            ysize 20
-                            left_bar Solid("#8b2942")
-                            right_bar Solid("#1a120a")
-
-                    # Anxiety Meter
-                    hbox:
-                        spacing 10
-                        text "Anxiety" size 20 color "#8b2942" xsize 120
-                        bar:
-                            value player.anxiety
-                            range 100
-                            xsize 350
-                            ysize 20
-                            left_bar Solid("#7a4a10")
-                            right_bar Solid("#1e150a")
-
-    # Manuscript Text Viewport (Left Side padding)
+    # Manuscript Text Viewport (Left Side)
     window:
         id "window"
         background None
@@ -524,13 +527,13 @@ screen nvl(dialogue, items=None):
 
         vbox:
             spacing 20
-            
-            # Iterate and display NVL dialogue text
+
+            # NVL dialogue text
             for d in dialogue:
                 window:
                     id d.window_id
                     background None
-                    
+
                     vbox:
                         if d.who:
                             text d.who:
@@ -546,6 +549,24 @@ screen nvl(dialogue, items=None):
                             color "#261c14"
                             line_leading 6
                             justify True
+
+    # Author thought marginalia — floated to the bottom of the left panel.
+    # Placed outside the scroll window so it stays anchored regardless of page length.
+    # Even/odd branch on thought_id forces a fresh displayable on each change,
+    # restarting book1_thought_reveal so the delay re-triggers on every new thought.
+    $ _b1_thought    = getattr(store, "book1_author_thought", "")
+    $ _b1_thought_id = getattr(store, "book1_author_thought_id", 0)
+    if _b1_thought:
+        frame:
+            xpos 140
+            ypos 940
+            xsize 680
+            background None
+            padding (0, 0)
+            if _b1_thought_id % 2 == 0:
+                text "[_b1_thought]" size 18 italic True color "#7a6050" xalign 0.0 at book1_thought_reveal
+            else:
+                text "[_b1_thought]" size 18 italic True color "#7a6050" xalign 0.0 at book1_thought_reveal
 
 
 # ── DAY/TIME TRANSITION SCREEN ──────────────────────────────────

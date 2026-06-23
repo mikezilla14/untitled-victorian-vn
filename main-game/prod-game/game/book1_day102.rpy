@@ -1,17 +1,3 @@
-# FORMAT LEGEND:
-# [ASSET] -> backgrounds, sprites, transitions, CG/UI callouts
-# [STATE] -> variable changes, effects, conditions, jumps
-# [CHOICE] -> menu blocks and inflection points
-# [BEAT] -> narrative intent / scene intent notes
-#
-# SPRITE DIRECTION (managed by scripts/scene_direction.py — how to preserve manual staging):
-# [asset auto]              -> auto-placed sprite line; the agent may rewrite/replace it on re-run
-# [asset keep]              -> on a show line: lock THAT line so the agent never edits it
-# [asset lock:scene]        -> before/after a `scene`: the agent skips the entire scene block
-# [asset pin:Name=slot]     -> force Name into slot for the rest of the scene block
-# [enter:Name] / [exit:Name] -> declare cast changes so auto placement stays correct
-# Full policy: docs/contracts/sprite_layout_policy.yaml | spec: docs/specs/scene-direction-agent.md
-
 # [DAG_NODE id=book1_block_day2_ghost_core type=write]
 label book1_block_day2_ghost_core:
 
@@ -34,11 +20,6 @@ label book1_block_day2_ghost_core:
 
 
 # [DAG_NODE id=book1_block_day2_predator_core type=write]
-# [BEAT] Predator route: Cora entered the hatbox scene with tactical intent
-#        She lifted the lace to control the room, not save it.
-#        Hotel trigger: day2 predator tea_choice — Cora leveraged the situation.
-#        Emotional conversion: Risk + Desire -> Carmilla-like intimate contamination.
-#        Prose lens: gloved lie, tactical rescue, class machinery as erotic weapon.
 label book1_block_day2_predator_core:
 
     # Route-provenance cue — must appear within the first screen.
@@ -47,7 +28,6 @@ label book1_block_day2_predator_core:
         subtitle="Derived from a Night of Contraband"
     )
 
-    # [BEAT] Opening: the hatbox as sealed coffin — the chapter's central image
     call book1_write_beat(
         "Chapter the Second opens upon a lady's hatbox in the conservatory suite, sealed like a coffin for silk and scandal.",
         thought="Too neat. She would not remember it so cleanly.",
@@ -64,7 +44,6 @@ label book1_block_day2_predator_core:
         thought="Rescue is the oldest word for acquisition."
     )
 
-    # [ASSET] Tableau reveal — original-style CG showing the salon moment
     # Falls back to ui_book_cover until the asset is assembled.
     call book1_show_tableau("cg_book_d2_hatbox_tableau")
 
@@ -77,7 +56,6 @@ label book1_block_day2_predator_core:
         thought="There. Let the lie wear gloves."
     )
 
-    # [ASSET] Plate reveal — same tableau rendered through runtime plate treatment
     # Tentpole override: book1_show_plate("plate_book_d2_hatbox_curse", caption="...")
     call book1_show_plate(caption="Plate II — The Hatbox Curse")
 
