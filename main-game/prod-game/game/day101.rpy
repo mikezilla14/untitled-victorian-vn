@@ -613,20 +613,21 @@ label day101_3_taking_stock_day1:
 
 # [DAG_NODE id=day101_night_story_window type=dynamic_window day=101 period=Night window=story_chain returns_to=day101_3_taking_stock_day1]
 label day101_night_story_window:
+    if not getattr(store, "_day101_night_visited", False):
+        $ _day101_night_visited = True
+        # [STATE] State/progression update
+        $ set_time_period("Night")
 
-    # [STATE] State/progression update
-    $ set_time_period("Night")
-
-    call story_window_penance_gate("day101_night")
-    if _penance_consumed:
-        return
-
+        call story_window_penance_gate("day101_night")
+        if _penance_consumed:
+            $ _day101_night_visited = False
+            return
     # [CHOICE] Decision point - combined Evening / Night choice
     # [DAG_CHOICE group=day101_night_story_window_menu_1]
     menu:
         "I look at my journal, the ink drying on the page. The lay of the land is clear. How do I spend the night?"
 
-        "Write the first chapter of my manuscript. [[Progress manuscript]]" if has_story_fuel(*WRITE_GATE_CH1):
+        "Write the first chapter of my manuscript. [[Progress manuscript]]":
 
             # [STATE] State/progression update
             call day101_4_write_the_chapter
@@ -694,6 +695,7 @@ label day101_night_story_window:
             # [STATE] Apply final reflection effects and end the slot
             $ apply_effects(insp=10, corr=0)
 
+    $ _day101_night_visited = False
     return
 
 
@@ -720,6 +722,13 @@ label day101_4_write_the_chapter:
 
     # [STATE] This is the main Day 1 manuscript progression route
     $ story.set_day1_night_action("write")
+
+    if not has_story_fuel(*WRITE_GATE_CH1):
+        if player.inspiration < WRITE_GATE_CH1[0]:
+            cora_inner "I sit at the desk, pen in hand, but my thoughts are a dry well. I lack the Inspiration (need [WRITE_GATE_CH1[0]]) to form the first sentence."
+        elif player.corruption_level < WRITE_GATE_CH1[1]:
+            cora_inner "I stare at the paper, but the story lacks bite. I need more Corruption/Appetite (need [WRITE_GATE_CH1[1]]) to write the transgressive truth."
+        jump day101_night_story_window
 
     # [CHOICE] Choose writing framing
     # [DAG_CHOICE group=day101_4_write_the_chapter_menu_1]

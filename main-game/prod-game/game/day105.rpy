@@ -67,6 +67,12 @@
 # [DAG_NODE id=day105_1_monster_reemerges type=work day=105]
 label day105_1_monster_reemerges:
 
+    # [STATE] TimeManager initializations
+    $ time_manager.set_current_day(5)
+    $ set_time_period("Morning")
+
+    call day105_morning_consequence_window
+
     # [ASSET] Existing Day 5 / recurring Master Suite background
     scene bg_master_suite_day
     with fade
@@ -103,6 +109,12 @@ label day105_1_monster_reemerges:
 
     # [STATE] State/progression update
     jump day105_2_the_summons
+
+
+# [DAG_NODE id=day105_morning_consequence_window type=dynamic_window day=105 period=Morning window=consequence penance=true returns_to=day105_1_monster_reemerges]
+label day105_morning_consequence_window:
+    call watch_suspicion
+    return
 
 
 # ==========================================
@@ -750,6 +762,11 @@ label day105_5_gideon_marks_cora:
 # [DAG_NODE id=day105_6_manuscript_reckoning type=write]
 label day105_6_manuscript_reckoning:
 
+    # [STATE] TimeManager transitions to Night
+    $ set_time_period("Night")
+
+    call day105_night_consequence_window
+
     if player.corruption_level < WRITE_GATE_CH2[1]:
 
         # [STATE] State/progression update
@@ -881,6 +898,12 @@ label day105_6_manuscript_reckoning:
 
     # [STATE] State/progression update
     jump day105_7_release_one_ending
+
+
+# [DAG_NODE id=day105_night_consequence_window type=dynamic_window day=105 period=Night window=consequence penance=true returns_to=day105_6_manuscript_reckoning]
+label day105_night_consequence_window:
+    call watch_suspicion
+    return
 
 
 # ==========================================

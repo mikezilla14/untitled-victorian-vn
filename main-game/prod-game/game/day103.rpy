@@ -1174,16 +1174,18 @@ label day103_2_night_surrender_gideon:
 
 # [DAG_NODE id=day103_3_bedroom_final_write type=write]
 label day103_3_bedroom_final_write:
-    call day103_night_consequence_window
+    if not getattr(store, "_day103_final_write_visited", False):
+        $ _day103_final_write_visited = True
+        call day103_night_consequence_window
 
-    # [ASSET] Visual/staging command
-    scene bg_cora_desk_night
-    with fade
+        # [ASSET] Visual/staging command
+        scene bg_cora_desk_night
+        with fade
 
-    "I reach my room and close the door with both hands."
-    "The candle is still low."
-    "The page is still there."
-    "So am I, apparently."
+        "I reach my room and close the door with both hands."
+        "The candle is still low."
+        "The page is still there."
+        "So am I, apparently."
 
     if story.day3_ultimatum == "defied":
         "Defiance leaves a clean taste for approximately three breaths."
@@ -1202,61 +1204,125 @@ label day103_3_bedroom_final_write:
 
         "Write until the candle dies. [[Chapter gate]]":
 
-            # [PROMOTION NOTE]
-            # Tune threshold later. Day 3 should be a major writing gate.
-            if has_story_fuel(*WRITE_GATE_CH3) or story.day3_twilight_action == "frantic_write":
+            $ story.set_day3_night_action("write")
 
-                "I write as if the lock is already failing, my fingers hot and quick."
+            if story.manuscript_progress == 1:
 
-                # [MANUSCRIPT PAYOFF - LEVEL 3.5]
+                cora_inner "Chapter Two never left the hatbox."
+                cora_inner "I cannot leap to the mirror scene while the second chapter is still only appetite."
 
-                "The pen becomes a tool of intense reinterpretation, converting parlor constraint into raw physical heat."
+                if has_story_fuel(*WRITE_GATE_CH2):
 
-                if story.day3_ultimatum == "defied":
-                    "The chapter becomes a trap refused. A lord sets the snare beautifully, his fingers unhooking the lady's laces only for her to slip away into the cold, beautiful woods instead."
-                elif story.day3_ultimatum == "bargained":
-                    "The chapter becomes a negotiation conducted with a knife under the table. The master slides his palm over the maid's thigh to check her pulse, while every offered truth hides a hotter one behind it."
+                    cora_inner "Chapter Two begins with a hatbox."
+                    cora_inner "Not the object inside."
+                    cora_inner "The pause before it is opened."
+
+                    if story.day2_tea_choice == "prey":
+                        cora_inner "I write a woman who tells one clean portion of the truth and lets everyone mistake that portion for the whole."
+                        cora_inner "Her honesty does not save her."
+                        cora_inner "It places her exactly where the dangerous man can see her."
+
+                    elif story.day2_tea_choice == "predator":
+                        cora_inner "I write a woman who discovers that a lie told calmly can become furniture."
+                        cora_inner "People walk around it. Lean on it. Arrange the room to suit it."
+                        cora_inner "By the end of the chapter, even the gentleman is using her falsehood as if he ordered it built."
+
+                    else:
+                        cora_inner "I write a woman who survives by leaving fingerprints on other people."
+                        cora_inner "No blood on her cuffs."
+                        cora_inner "No proof in her pocket."
+                        cora_inner "Only a girl in the corridor learning what betrayal sounds like when it does not raise its voice."
+
+                    # [STATE] State/progression update
+                    $ story.complete_manuscript_chapter("day2_chapter")
+                    call book1_write_chapter(chapter_key="day2_chapter", current_day=103)
+
+                    # [STATE] State/progression update
+                    $ apply_effects(vance_susp=0, insp=-15, corr=0)
+
+                    cora_inner "By the time the candle shortens, the second chapter exists."
+                    cora_inner "It is better than the first."
+                    cora_inner "That is not comforting."
+
                 else:
-                    "The chapter becomes a summons. A girl walks toward the dark hearth and discovers that physical surrender can feel like authorship when the master's hand unbuttons her collar in the gold firelight."
 
-                if story.day3_brush_choice == "predator":
-                    "The mirror scene gives it teeth."
-                    "She answered his question like a craftsman: Vance's beauty was in her bones, not her obedience, and her weakness was letting wounds show."
-                    "On the page, that answer is the chapter's real edge. The maid already understood the room before the gentleman arranged it."
-                elif story.day3_brush_choice == "prey":
-                    "The mirror scene gives it heat and a specific peril."
-                    "She looked at him when she should have looked at the lady. He saw her looking."
-                    "On the page, that visibility is the chapter's fulcrum: the maid is most dangerous precisely when she is most readable, because readability assumes the reader knows what to do with her."
-                else:
-                    "The fallen brush gives it the angle no gentleman thinks to check."
-                    "From the floor she saw the polished boot, the clenched slipper, the hem of her own uniform trembling against the carpet."
-                    "On the page, the maid's clumsiness is her method. The view from below has its own authority and he never looked down long enough to claim it."
+                    cora_inner "I write three sentences and cross them out."
+                    cora_inner "The scene is still too close to me."
+                    cora_inner "Vance's fury. Gideon's correction. Missy's face. The lace under cloth or hidden in the trunk."
+                    cora_inner "None of it has become art yet."
+                    cora_inner "It remains appetite and consequence."
 
-                # [STATE] State/progression update
-                $ story.complete_manuscript_chapter("day3_chapter")
-                call book1_write_chapter(chapter_key="day3_chapter", current_day=103)
+                    if player.inspiration < WRITE_GATE_CH2[0]:
+                        cora_inner "My thoughts are too scattered. I lack the Inspiration (need [WRITE_GATE_CH2[0]]) to complete the second chapter."
+                    elif player.corruption_level < WRITE_GATE_CH2[1]:
+                        cora_inner "My pen lacks venom. I need more Corruption/Appetite (need [WRITE_GATE_CH2[1]]) to write the darker corners of the Savoy."
 
-                # [STATE] State/progression update
-                $ apply_effects(stern_susp=5, insp=-20, corr=0)
-
-                "Chapter Three is complete."
-                "I do not feel safer."
-                "I feel more legible, exposed on my own pages."
+                    jump day103_3_bedroom_final_write
 
             else:
 
-                "I try."
-                "That is the most humiliating phrase in the English language."
+                # [PROMOTION NOTE]
+                # Tune threshold later. Day 3 should be a major writing gate.
+                if has_story_fuel(*WRITE_GATE_CH3) or story.day3_twilight_action == "frantic_write":
 
-                "The pen moves, stops, scratches, fails."
-                "The material is too close. Mr. Locke is too close. My own want is too close behind him."
+                    "I write as if the lock is already failing, my fingers hot and quick."
 
-                "No chapter comes."
-                "Only fragments, warm and useless."
+                    # [MANUSCRIPT PAYOFF - LEVEL 3.5]
 
-                # [STATE] State/progression update
-                $ story.set_day3_failed_write(True)
-                $ apply_effects(stern_susp=0, insp=5, corr=5)
+                    "The pen becomes a tool of intense reinterpretation, converting parlor constraint into raw physical heat."
+
+                    if story.day3_ultimatum == "defied":
+                        "The chapter becomes a trap refused. A lord sets the snare beautifully, his fingers unhooking the lady's laces only for her to slip away into the cold, beautiful woods instead."
+                    elif story.day3_ultimatum == "bargained":
+                        "The chapter becomes a negotiation conducted with a knife under the table. The master slides his palm over the maid's thigh to check her pulse, while every offered truth hides a hotter one behind it."
+                    else:
+                        "The chapter becomes a summons. A girl walks toward the dark hearth and discovers that physical surrender can feel like authorship when the master's hand unbuttons her collar in the gold firelight."
+
+                    if story.day3_brush_choice == "predator":
+                        "The mirror scene gives it teeth."
+                        "She answered his question like a craftsman: Vance's beauty was in her bones, not her obedience, and her weakness was letting wounds show."
+                        "On the page, that answer is the chapter's real edge. The maid already understood the room before the gentleman arranged it."
+                    elif story.day3_brush_choice == "prey":
+                        "The mirror scene gives it heat and a specific peril."
+                        "She looked at him when she should have looked at the lady. He saw her looking."
+                        "On the page, that visibility is the chapter's fulcrum: the maid is most dangerous precisely when she is most readable, because readability assumes the reader knows what to do with her."
+                    else:
+                        "The fallen brush gives it the angle no gentleman thinks to check."
+                        "From the floor she saw the polished boot, the clenched slipper, the hem of her own uniform trembling against the carpet."
+                        "On the page, the maid's clumsiness is her method. The view from below has its own authority and he never looked down long enough to claim it."
+
+                    # [STATE] State/progression update
+                    $ story.complete_manuscript_chapter("day3_chapter")
+                    call book1_write_chapter(chapter_key="day3_chapter", current_day=103)
+
+                    # [STATE] State/progression update
+                    $ apply_effects(stern_susp=5, insp=-20, corr=0)
+
+                    "Chapter Three is complete."
+                    "I do not feel safer."
+                    "I feel more legible, exposed on my own pages."
+
+                else:
+
+                    "I try."
+                    "That is the most humiliating phrase in the English language."
+
+                    "The pen moves, stops, scratches, fails."
+                    "The material is too close. Mr. Locke is too close. My own want is too close behind him."
+
+                    "No chapter comes."
+                    "Only fragments, warm and useless."
+
+                    if player.inspiration < WRITE_GATE_CH3[0]:
+                        cora_inner "My thoughts are too scattered. I lack the Inspiration (need [WRITE_GATE_CH3[0]]) to complete the third chapter."
+                    elif player.corruption_level < WRITE_GATE_CH3[1]:
+                        cora_inner "My pen lacks venom. I need more Corruption/Appetite (need [WRITE_GATE_CH3[1]]) to write the darker corners of the Savoy."
+
+                    # [STATE] State/progression update
+                    $ story.set_day3_failed_write(True)
+                    $ apply_effects(stern_susp=0, insp=5, corr=5)
+
+                    jump day103_3_bedroom_final_write
 
         "Do not write. Barricade the door and wait for morning. [[Safety over progress]]":
 
@@ -1277,4 +1343,5 @@ label day103_3_bedroom_final_write:
 
     # [STATE] State/progression update
     $ resolve_turn()
+    $ _day103_final_write_visited = False
     jump day104_1_false_dawn_suite_window

@@ -1031,26 +1031,26 @@ label day102_3_gideon_interrupts_controls_vance:
 
 # [DAG_NODE id=day102_4_night type=work day=102]
 label day102_4_night:
+    if not getattr(store, "_day102_night_visited", False):
+        $ _day102_night_visited = True
+        # [STATE] State/progression update
+        $ set_time_period("Night")
 
-    # [STATE] State/progression update
-    $ set_time_period("Night")
+        call day102_night_consequence_window
 
-    call day102_night_consequence_window
+        # [ASSET] Visual/staging command
+        scene bg_cora_desk_night
+        with dissolve
 
-    # [ASSET] Visual/staging command
-    scene bg_cora_desk_night
-    with dissolve
+        "The candle takes reluctantly."
+        "For a moment the room is only wick, breath, and the small circle of light I can afford."
 
-    "The candle takes reluctantly."
-    "For a moment the room is only wick, breath, and the small circle of light I can afford."
+        cora_inner "My ledger lies open."
+        cora_inner "My page waits beside it."
+        cora_inner "One records appetite. The other pretends to tame it."
 
-    cora_inner "My ledger lies open."
-    cora_inner "My page waits beside it."
-    cora_inner "One records appetite. The other pretends to tame it."
-
-    # [STATE] State/progression update
-    $ show_ledger_ui()
-
+        # [STATE] State/progression update
+        $ show_ledger_ui()
     # [DAG_CHOICE group=day102_4_night_menu_1]
     menu:
         "What do I do with the night?"
@@ -1116,11 +1116,14 @@ label day102_4_cora_writes_a_chapter:
             cora_inner "Then Missy's face."
             cora_inner "Each beginning collapses into accusation."
 
-            cora_inner "I do not yet have enough material."
-            cora_inner "Or I have too much and no discipline."
-            cora_inner "The page does not care which excuse I prefer."
+            if player.inspiration < WRITE_GATE_CH1[0]:
+                cora_inner "My thoughts are a dry well. I lack the Inspiration (need [WRITE_GATE_CH1[0]]) to form the first sentence."
+            elif player.corruption_level < WRITE_GATE_CH1[1]:
+                cora_inner "I stare at the paper, but the story lacks bite. I need more Corruption/Appetite (need [WRITE_GATE_CH1[1]]) to write the transgressive truth."
 
-    else:
+            jump day102_4_night
+
+    elif story.manuscript_progress == 1:
 
         if has_story_fuel(*WRITE_GATE_CH2):
 
@@ -1163,7 +1166,19 @@ label day102_4_cora_writes_a_chapter:
             cora_inner "None of it has become art yet."
             cora_inner "It remains appetite and consequence."
 
+            if player.inspiration < WRITE_GATE_CH2[0]:
+                cora_inner "My thoughts are too scattered. I lack the Inspiration (need [WRITE_GATE_CH2[0]]) to complete the second chapter."
+            elif player.corruption_level < WRITE_GATE_CH2[1]:
+                cora_inner "My pen lacks venom. I need more Corruption/Appetite (need [WRITE_GATE_CH2[1]]) to write the darker corners of the Savoy."
+
+            jump day102_4_night
+
+    else:
+        cora_inner "Both opening chapters exist. I have no more chapters to write tonight."
+        jump day102_4_night
+
     # [STATE] State/progression update
+    $ _day102_night_visited = False
     jump day103_morning
 
 
@@ -1219,4 +1234,5 @@ label day102_4_cora_sneaks_a_feel:
     cora_inner "Waste has consequences."
 
     # [STATE] State/progression update
+    $ _day102_night_visited = False
     jump day103_morning

@@ -60,10 +60,22 @@ label game_over_deadline_1:
     sys_msg "═══ GAME OVER: FIRST DEADLINE FAILED ═══"
     cora "I stare at the blank page."
     cora "Day 2 has ended, and I have not even written the first chapter."
-    cora "Without a single page of progress, my ambition is nothing but a childish delusion."
-    cora "I cannot face the publisher. I cannot face the page."
+
+    if story.has_manuscript_chapter("day1_slop_chapter"):
+        cora "I did write, but it was flavorless slop. Unsellable, bloodless, afraid of its own pulse."
+        cora "My ambition is nothing but a childish delusion if I cannot bring myself to write the transgressive reality of this house."
+        sys_msg "[[GAME OVER. You wrote a slop chapter instead of Chapter 1 because your Corruption level was too low (<= 2). Manage your choices to build appetite before writing.]"
+    elif player.inspiration < 15:
+        cora "My mind was a dry well. I lacked the Inspiration to form the first sentence."
+        sys_msg "[[GAME OVER. You failed to write Chapter 1 because your Inspiration was below 15. Spend your time and choices wisely to gather inspiration before writing.]"
+    elif player.corruption_level < 2:
+        cora "I lacked the appetite, the dark resolve to write the transgressive truth of what I saw."
+        sys_msg "[[GAME OVER. You failed to write Chapter 1 because your Corruption level was below 2. Look through the grates and explore the transgressive paths to build corruption.]"
+    else:
+        cora "I chose to rest, to walk corridors, or to search for company instead of dedicating myself to the page."
+        sys_msg "[[GAME OVER. You failed to write Chapter 1 because you did not use your writing slots to progress the manuscript. Protect your writing slots!]"
+
     cora "I have failed before I even truly began."
-    sys_msg "[[GAME OVER. You failed to write Chapter 1 by Day 2 Night. Manage your time and stats to ensure you have enough inspiration to write.]"
     return
 
 
@@ -74,7 +86,16 @@ label game_over_deadline_2:
     sys_msg "═══ GAME OVER: DRAFT DEADLINE FAILED ═══"
     cora "The night of Day 4 passes into grey dawn."
     cora "My desk is littered with scraps of paper, but the draft is incomplete. I have only one chapter done."
-    cora "The publisher's courier will arrive tomorrow. I have nothing to give him but excuses."
+
+    if player.inspiration < 30:
+        cora "My mind was too scattered, my internal strain too high. I lacked the Inspiration to complete the second chapter."
+        sys_msg "[[GAME OVER. You failed to complete Chapter 2 because your Inspiration was below 30. Ensure you build enough inspiration before the deadline.]"
+    elif player.corruption_level < 3:
+        cora "I lacked the appetite, the dark resolve to write the transgressive truth of the Savoy's corridors."
+        sys_msg "[[GAME OVER. You failed to complete Chapter 2 because your Corruption level was below 3. Build corruption by choosing transgressive actions and observing secrets.]"
+    else:
+        cora "I chose safety, barricaded my door, or sneaked feels instead of committing the ink to the page."
+        sys_msg "[[GAME OVER. You failed to complete Chapter 2 because you did not use your writing slots to finish the second chapter. Protect your writing slots!]"
+
     cora "I have lost my chance. The door is closed."
-    sys_msg "[[GAME OVER. You failed to complete a second chapter/draft by Day 4 Night. Balance your stats and avoid confrontations to protect your writing slots!]"
     return

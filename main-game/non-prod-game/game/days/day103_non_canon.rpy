@@ -1185,16 +1185,20 @@ label day103_2_night_surrender_gideon:
 
 # [DAG_NODE id=day103_3_bedroom_final_write type=write]
 label day103_3_bedroom_final_write:
-    call day103_night_consequence_window
+    if not getattr(store, "_day103_final_write_visited", False):
 
-    # [ASSET] Visual/staging command
-    scene bg_cora_desk_night
-    with fade
+        # [STATE] State/progression update
+        $ _day103_final_write_visited = True
+        call day103_night_consequence_window
 
-    "I reach my room and close the door with both hands."
-    "The candle is still low."
-    "The page is still there."
-    "So am I, apparently."
+        # [ASSET] Visual/staging command
+        scene bg_cora_desk_night
+        with fade
+
+        "I reach my room and close the door with both hands."
+        "The candle is still low."
+        "The page is still there."
+        "So am I, apparently."
 
     if story.day3_ultimatum == "defied":
         "Defiance leaves a clean taste for approximately three breaths."
@@ -1213,12 +1217,19 @@ label day103_3_bedroom_final_write:
 
         "Write until the candle dies. [[Chapter gate]]":
 
+            # [STATE] State/progression update
+            $ story.set_day3_night_action("write")
+
             if not story.has_manuscript_chapter("day2_chapter"):
 
                 cora_inner "Chapter Two never left the hatbox."
                 cora_inner "I cannot leap to the mirror scene while the second chapter is still only appetite."
 
                 call manuscript_slot_ch2_write
+                if not _ch2_write_success:
+
+                    # [STATE] State/progression update
+                    jump day103_3_bedroom_final_write
 
             # [PROMOTION NOTE]
             # Tune threshold later. Day 3 should be a major writing gate.
@@ -1274,10 +1285,17 @@ label day103_3_bedroom_final_write:
                 "No chapter comes."
                 "Only fragments, warm and useless."
 
+                if player.inspiration < WRITE_GATE_CH3[0]:
+                    cora_inner "My thoughts are too scattered. I lack the Inspiration (need [WRITE_GATE_CH3[0]]) to complete the third chapter."
+                elif player.corruption_level < WRITE_GATE_CH3[1]:
+                    cora_inner "My pen lacks venom. I need more Corruption/Appetite (need [WRITE_GATE_CH3[1]]) to write the darker corners of the Savoy."
+
                 # [STATE] State/progression update
                 $ story.set_day3_failed_write(True)
                 # [STATE] Semantic balance profile: failed write — fragments without a chapter
                 $ apply_balanced_effect("curious", intensity="standard", witness="stern")
+
+                jump day103_3_bedroom_final_write
 
         "Do not write. Barricade the door and wait for morning. [[Safety over progress]]":
 
@@ -1299,4 +1317,5 @@ label day103_3_bedroom_final_write:
 
     # [STATE] State/progression update
     $ resolve_turn()
+    $ _day103_final_write_visited = False
     jump day104_morning
