@@ -2982,9 +2982,9 @@ show {imagename}""".format(imagename=child)
         renpy.store._window = False
         _skipping_org = renpy.store._skipping
         renpy.store._skipping = False
+        _quick_menu_exists = hasattr(renpy.store, "quick_menu")
         _quick_menu_org = getattr(renpy.store, "quick_menu", None)
-        if _quick_menu_org is not None:
-            renpy.store.quick_menu = False
+        renpy.store.quick_menu = False
 
         change_time(0)
         if persistent._viewer_legacy_gui:
@@ -2994,8 +2994,11 @@ show {imagename}""".format(imagename=child)
 
         renpy.store._skipping = _skipping_org
         renpy.store._window = _window_org
-        if _quick_menu_org is not None:
+        if _quick_menu_exists:
             renpy.store.quick_menu = _quick_menu_org
+        else:
+            if hasattr(renpy.store, "quick_menu"):
+                del renpy.store.quick_menu
 
 
     def get_transition_delay(tran):

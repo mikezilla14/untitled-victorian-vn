@@ -989,6 +989,7 @@ label day101_2_coras_path_choice:
 
         "Pull Missy away. [[Ghost path]]":
 
+            # [STATE] State/progression update
             $ apply_balanced_effect("creative", intensity="standard")
             # [STATE bespoke: negative_suspicion]
             $ apply_effects(stern_susp=-5, vance_susp=-5, missy_susp=-5)

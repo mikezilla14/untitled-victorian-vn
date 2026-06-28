@@ -107,7 +107,14 @@ init -1 python:
                 "missy": 0.90    # Instant decay: The Teflon Slate, eager for a friend
             }
 
+            # Anxiety Warnings & Threshold tracking
+            self.has_reached_70_before = False
+            self.has_reached_75_before = False
+            self.anxiety_70_warning_shown = False
+            self.anxiety_75_warning_shown = False
+
         CONFRONTATION_THRESHOLD = 50
+        ANXIETY_THRESHOLD = 70
 
         @property
         def inspiration_cap(self):
@@ -269,6 +276,36 @@ init -1 python:
         def is_confrontation_ready(self, char):
             """Returns True if char's total suspicion has reached the confrontation threshold."""
             return self.get_total_suspicion(char) >= self.CONFRONTATION_THRESHOLD
+
+        def is_anxiety_ready(self):
+            """Returns True if Cora's anxiety has reached or exceeded the dangerous threshold."""
+            return self.anxiety >= self.ANXIETY_THRESHOLD
+
+        def relieve_downtime_anxiety(self):
+            """
+            Relieves anxiety by dynamically decreasing suspicion for all characters
+            based on their profile (decay rates and current suspicion levels).
+            """
+            for char in self.tracked_characters:
+                current_acute = getattr(self, "{}_acute_susp".format(char), 0)
+                if current_acute > 0:
+                    if char == "stern":
+                        rate = 0.30
+                        min_drop = 12
+                    elif char == "vance":
+                        rate = 0.70
+                        min_drop = 20
+                    elif char == "missy":
+                        rate = 0.95
+                        min_drop = 25
+                    else:  # gideon / fallback
+                        rate = 0.60
+                        min_drop = 15
+
+                    reduction = max(min_drop, int(round(current_acute * rate)))
+                    new_acute = max(0, current_acute - reduction)
+                    setattr(self, "{}_acute_susp".format(char), new_acute)
+            self.update_stats()
 
         def has_story_fuel(self, required_insp=30, required_corr=3):
             """
@@ -660,9 +697,19 @@ init -1 python:
             return len(self.pending_penance) > 0
 
         def consume_penance_at_window(self, window_id):
-            """Pop the next queued penance label for a dynamic window. Clears penance_triggered when queue empties."""
+            """Pop the next queued penance label for a dynamic window. Character confrontations take precedence."""
             if not self.pending_penance:
                 return None
+            
+            # Enforce character confrontation precedence
+            for label in self.pending_penance:
+                if label.startswith("confrontation_"):
+                    self.pending_penance.remove(label)
+                    if not self.pending_penance:
+                        self.set_penance_triggered(False)
+                    return label
+
+            # Fallback to popping the first available label (e.g., anxiety breakdown)
             penance_label = self.pending_penance.pop(0)
             if not self.pending_penance:
                 self.set_penance_triggered(False)

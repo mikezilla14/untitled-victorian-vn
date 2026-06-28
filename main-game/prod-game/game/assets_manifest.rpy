@@ -85,6 +85,7 @@ init -40 python:
     declare_image_with_fallback("bg_country_estate_corridor_night", "images/backgrounds/bg_country_estate_corridor_night.webp", "#141210")
     declare_image_with_fallback("bg_train_carriage_day", "images/backgrounds/bg_train_carriage_day.webp", "#2a2520")
     declare_image_with_fallback("bg_country_estate_study", "images/backgrounds/bg_country_estate_study.webp", "#1e1810")
+    declare_image_with_fallback("bg_country_estate_study_desk", "images/backgrounds/bg_country_estate_study_desk.webp", "#1e1810")
 
     # ── Sprites: Stern ────────────────────────────────────────────
     # [~700 × 1080 px, transparent background]

@@ -100,6 +100,8 @@ init -40 python:
     declare_image_with_fallback("bg_country_estate_corridor_night", "images/backgrounds/bg_country_estate_corridor_night.webp", "#141210")
     declare_image_with_fallback("bg_train_carriage_day", "images/backgrounds/bg_train_carriage_day.webp", "#2a2520")
     declare_image_with_fallback("bg_country_estate_study", "images/backgrounds/bg_country_estate_study.webp", "#1e1810")
+    declare_image_with_fallback("bg_country_estate_study_desk", "images/backgrounds/bg_country_estate_study_desk.webp", "#1e1810")
+    declare_image_with_fallback("bg_country_estate_study desk", "images/backgrounds/bg_country_estate_study_desk.webp", "#1e1810")
 
     # ── Sprites: Stern ────────────────────────────────────────────
     # [~700 × 1080 px, transparent background]
@@ -172,9 +174,10 @@ init -40 python:
 
     # ── Sprites: Lady Eleanor Wiltshire (Day 100 prologue) ─────────
     # PLACEHOLDER: Cora art pass until bespoke Wiltshire mistress sprites.
-    declare_image_with_fallback("lady_eleanor_sprite panicked", "images/sprites/cora/flushed.png", "#c9a0dc")
-    declare_image_with_fallback("lady_eleanor_sprite furious", "images/sprites/cora/guarded.png", "#c9a0dc")
+    declare_image_with_fallback("lady_eleanor_sprite panicked", "images/sprites/eleanore/base.png", "#c9a0dc")
+    declare_image_with_fallback("lady_eleanor_sprite furious", "images/sprites/cora/angry.png", "#c9a0dc")
     declare_image_with_fallback("lady_eleanor_sprite composed", "images/sprites/cora/focused.png", "#c9a0dc")
+    declare_image_with_fallback("lady_eleanor_sprite sitting", "images/sprites/Eleanore/sitting.png", "#c9a0dc")
 
     # ── Sprites: Margaret Pryce (Day 100 prologue) ─────────────────
     # PLACEHOLDER: Cora art pass until bespoke under-housemaid sprites.

@@ -289,3 +289,60 @@ init python:
             )
 
         return success
+
+    # ═══════════════════════════════════════════════════════════════
+    #  Narrative Pressure & Manuscript System Stubs (Lint Compliance)
+    # ═══════════════════════════════════════════════════════════════
+
+    def add_material(material_id):
+        pass
+
+    def spend_focus(amount):
+        pass
+
+    def check_assignment_readiness():
+        pass
+
+    def update_available_variants(assignment_id):
+        pass
+
+    def complete_assignment(assignment_id, selected_variant):
+        pass
+
+    def expire_chapter_material(chapter_id):
+        pass
+
+    def add_stat_delta(stat_name, amount, character=None, source=None):
+        pass
+
+    def activate_objective(obj_id):
+        pass
+
+    def complete_objective(obj_id):
+        pass
+
+    def fail_objective(obj_id):
+        pass
+
+    def expire_objective(obj_id):
+        pass
+
+    def set_scene_context(location=None, present=None, relevant=None):
+        pass
+
+    def get_hud_risk_character():
+        pass
+
+    def begin_notification_bundle():
+        pass
+
+    def flush_notification_bundle():
+        pass
+
+    def initialize_narrative_pressure_states():
+        pass
+
+    def transition_prologue_to_main_game():
+        pass
+
+

@@ -41,6 +41,44 @@ label watch_suspicion:
 
         # [STATE] State/progression update
         $ story.queue_penance("confrontation_missy")
+
+    # Queue anxiety breakdown on first-time crossing of 70%
+    if player.is_anxiety_ready():
+        if not player.has_reached_70_before:
+
+            # [STATE] State/progression update
+            $ story.queue_penance("anxiety_breakdown_downtime")
+            $ player.has_reached_70_before = True
+        elif not player.anxiety_70_warning_shown:
+            cora "My chest feels tight, and the air in the Savoy feels suffocatingly thin. The shadow of discovery is closing in. If I let my nerves fray any further, I will lose my grip entirely."
+            sys_msg "[[WARNING: Cora's anxiety has reached 70%% again. High anxiety will restrict her choices and lead to complete writing paralysis at 85%%. Manage her stress carefully.]]"
+
+            # [STATE] State/progression update
+            $ player.anxiety_70_warning_shown = True
+
+    # Set warning flags and process second-time 75% warnings
+    if player.anxiety >= 75:
+        if not player.has_reached_75_before:
+
+            # [STATE] State/progression update
+            $ player.has_reached_75_before = True
+        elif not player.anxiety_75_warning_shown:
+            cora "My hands shake so much I can barely hold the pen. The threat is no longer a distant worry; it is a physical wall. I cannot risk another mistake."
+            sys_msg "[[WARNING: Cora's anxiety has reached 75%% again. Her choices are locked. Reaching 85%% will cause complete writing paralysis.]]"
+
+            # [STATE] State/progression update
+            $ player.anxiety_75_warning_shown = True
+
+    # Reset warning flags when anxiety drops back down
+    if player.anxiety < 70:
+
+        # [STATE] State/progression update
+        $ player.anxiety_70_warning_shown = False
+    if player.anxiety < 75:
+
+        # [STATE] State/progression update
+        $ player.anxiety_75_warning_shown = False
+
     return
 
 
@@ -64,6 +102,9 @@ label consume_pending_penance(window_id):
 # [DAG_NODE id=story_window_penance_gate type=penance_consume]
 label story_window_penance_gate(window_id):
     # Sacrifices the optional chain menu when penance is queued
+
+    # Run the suspicion and anxiety check first to ensure any pending penance is queued
+    call watch_suspicion
 
     # [STATE] State/progression update
     $ _penance_consumed = False
@@ -129,6 +170,7 @@ label stern_chain_1:
     menu:
         "Lower my head and act like a simple, stupid country girl. [[Shed Suspicion / Break Chain]]":
 
+            # [STATE] State/progression update
             $ apply_balanced_effect("creative", intensity="standard")
             # [STATE bespoke: negative_suspicion]
             $ apply_effects(stern_susp=-10)
@@ -144,6 +186,7 @@ label stern_chain_1:
 
         "Explain the geometry of the fold, meeting her gaze. [[Lean Into Tension / Progress Chain]]":
 
+            # [STATE] State/progression update
             $ apply_balanced_effect("curious", intensity="standard", witness="stern")
             $ story.complete_chain_beat("stern")
 
@@ -193,6 +236,7 @@ label stern_chain_2:
     menu:
         "Apologize and call it a spelling exercise. [[Shed Suspicion / Break Chain]]":
 
+            # [STATE] State/progression update
             $ apply_balanced_effect("creative", intensity="standard")
             # [STATE bespoke: negative_suspicion]
             $ apply_effects(stern_susp=-10)
@@ -207,6 +251,7 @@ label stern_chain_2:
 
         "Hold the notebook tight. Read her a scandalous anonymous passage. [[Progress Chain]]":
 
+            # [STATE] State/progression update
             $ apply_balanced_effect("curious", intensity="standard", witness="stern")
             $ story.complete_chain_beat("stern")
 
@@ -258,6 +303,7 @@ label stern_chain_3:
     menu:
         "Play the blind servant, turning away from her gaze. [[Shed Suspicion / Lost Opportunity: Safe option, but you lose this climax forever.]]":
 
+            # [STATE] State/progression update
             $ apply_balanced_effect("creative", intensity="standard")
             # [STATE bespoke: negative_suspicion]
             $ apply_effects(stern_susp=-15)
@@ -273,6 +319,7 @@ label stern_chain_3:
 
         "Seize the one-time opportunity: Step into her space and audit the stubs. [[Climax: 2.2 Spice. Spikes Suspicion (+25) and Corruption (+20), raising Anxiety. Requires: Anxiety < 75 and Stern Suspicion < 80]]" if player.anxiety < 75 and player.get_total_suspicion("stern") < 80:
 
+            # [STATE] State/progression update
             $ apply_balanced_effect("transgressive", intensity="standard", witness="stern")
             $ story.complete_chain_beat("stern")
 
@@ -348,6 +395,7 @@ label missy_chain_1:
     menu:
         "Help her stitch it silently. Comfort her. [[Shed Suspicion / Break Chain]]":
 
+            # [STATE] State/progression update
             $ apply_balanced_effect("creative", intensity="standard")
             # [STATE bespoke: negative_suspicion]
             $ apply_effects(missy_susp=-10)
@@ -364,6 +412,7 @@ label missy_chain_1:
 
         "Stroke her cheek, questioning her with tender, quiet romance. [[Progress Chain]]":
 
+            # [STATE] State/progression update
             $ apply_balanced_effect("curious", intensity="standard", witness="missy")
             $ story.complete_chain_beat("missy")
 
@@ -411,6 +460,7 @@ label missy_chain_2:
     menu:
         "Tell her to keep quiet for her own safety. [[Shed Suspicion / Break Chain]]":
 
+            # [STATE] State/progression update
             $ apply_balanced_effect("creative", intensity="standard")
             # [STATE bespoke: negative_suspicion]
             $ apply_effects(missy_susp=-15)
@@ -425,6 +475,7 @@ label missy_chain_2:
 
         "Press her chest-to-chest in the dark, whispering with sensual agency. [[Progress Chain]]":
 
+            # [STATE] State/progression update
             $ apply_balanced_effect("curious", intensity="standard", witness="missy")
             $ story.complete_chain_beat("missy")
 
@@ -472,6 +523,7 @@ label missy_chain_3:
     menu:
         "Tear the page and beg her forgiveness. [[Shed Suspicion / Lost Opportunity: Safe option, but you lose this climax forever.]]":
 
+            # [STATE] State/progression update
             $ apply_balanced_effect("creative", intensity="standard")
             # [STATE bespoke: negative_suspicion]
             $ apply_effects(missy_susp=-20)
@@ -487,6 +539,7 @@ label missy_chain_3:
 
         "Seize the one-time opportunity: Defend the writing and unlace her apron. [[Climax: 2.2 Spice. Spikes Suspicion (+20) and Corruption (+20), raising Anxiety. Requires: Anxiety < 75 and Missy Suspicion < 80]]" if player.anxiety < 75 and player.get_total_suspicion("missy") < 80:
 
+            # [STATE] State/progression update
             $ apply_balanced_effect("transgressive", intensity="standard", witness="missy")
             $ story.complete_chain_beat("missy")
 
@@ -553,6 +606,7 @@ label vance_chain_1:
     menu:
         "Return it silently with a perfect maid's bow. [[Shed Suspicion / Break Chain]]":
 
+            # [STATE] State/progression update
             $ apply_balanced_effect("creative", intensity="standard")
             # [STATE bespoke: negative_suspicion]
             $ apply_effects(vance_susp=-10)
@@ -569,6 +623,7 @@ label vance_chain_1:
 
         "Cover it with my shoe, sliding it into my apron. [[Progress Chain]]":
 
+            # [STATE] State/progression update
             $ apply_balanced_effect("curious", intensity="standard", witness="vance")
             $ story.complete_chain_beat("vance")
 
@@ -606,6 +661,7 @@ label vance_chain_2:
     menu:
         "Slip past silently in the shadows. [[Shed Suspicion / Break Chain]]":
 
+            # [STATE] State/progression update
             $ apply_balanced_effect("creative", intensity="standard")
             # [STATE bespoke: negative_suspicion]
             $ apply_effects(vance_susp=-15)
@@ -616,6 +672,7 @@ label vance_chain_2:
 
         "Confront her. Wipe a tear with my rough thumb. [[Progress Chain]]":
 
+            # [STATE] State/progression update
             $ apply_balanced_effect("curious", intensity="standard", witness="vance")
             $ story.complete_chain_beat("vance")
 
@@ -669,6 +726,7 @@ label vance_chain_3:
     menu:
         "Play the simple country maid to allay her fears. [[Shed Suspicion / Lost Opportunity: Safe option, but you lose this climax forever.]]":
 
+            # [STATE] State/progression update
             $ apply_balanced_effect("creative", intensity="standard")
             # [STATE bespoke: negative_suspicion]
             $ apply_effects(vance_susp=-20)
@@ -683,6 +741,7 @@ label vance_chain_3:
 
         "Seize the one-time opportunity: Corner her against the vanity and audit her collar marks. [[Climax: 2.2 Spice. Spikes Suspicion (+20) and Corruption (+20), raising Anxiety. Requires: Anxiety < 75 and Vance Suspicion < 80]]" if player.anxiety < 75 and player.get_total_suspicion("vance") < 80:
 
+            # [STATE] State/progression update
             $ apply_balanced_effect("transgressive", intensity="standard", witness="vance")
             $ story.complete_chain_beat("vance")
 
@@ -823,4 +882,24 @@ label confrontation_missy:
     "My ambition is buried under wet cotton. I cannot write a single line."
 
     # Penance effects: reduces Missy suspicion by 35, but advances time, consuming the slot.
+    return
+
+
+# [DAG_NODE id=anxiety_breakdown_downtime type=penance]
+label anxiety_breakdown_downtime:
+    # Staging/acting
+
+    # [ASSET] Visual/staging command
+    scene bg_servants_quarters_dusk
+    with fade
+
+    "My hands shake so violently I can barely hold the brass key ring. The walls of the Savoy seem to press closer, the hum of the gas lamps sounding like a chorus of whispers."
+    "Every step in the corridor, every rustle of silk, feels like an accusation. I cannot push further. I cannot ask questions."
+    "Tonight, I keep my head low. I speak only when spoken to, fold the linen with double-stitch seams, and scrub the floors until the wood is clean."
+    "By the time the dawn shift begins, my muscles ache, but the immediate panic has receded. The eyes watching me have drifted back to their own concerns."
+
+    # Relieve anxiety by dynamically decreasing suspicion across the board
+
+    # [STATE] State/progression update
+    $ player.relieve_downtime_anxiety()
     return

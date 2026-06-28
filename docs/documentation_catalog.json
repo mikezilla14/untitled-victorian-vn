@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-06-23T17:32:31+00:00",
+  "generated_at": "2026-06-28T12:20:10+00:00",
   "repo_root": "untitled-victorian-vn",
   "entries": [
     {
@@ -1291,7 +1291,7 @@
       "kind": "reference",
       "title": "Daily Asset Manifest & Reconciliation Report",
       "area": "assets_source",
-      "summary": "**Generated on:** 2026-06-23",
+      "summary": "**Generated on:** 2026-06-28",
       "links": [
         {
           "target": "file:///C:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/prod-game/game/assets_manifest.rpy",
@@ -2728,6 +2728,15 @@
       "findings": []
     },
     {
+      "path": "docs/specs/balance-economy-compression-pass.md",
+      "kind": "feature-spec",
+      "title": "Balance Economy Compression Pass",
+      "area": "docs/specs",
+      "summary": "**Status:** `draft`",
+      "links": [],
+      "findings": []
+    },
+    {
       "path": "docs/specs/book-writing-styling.md",
       "kind": "feature-spec",
       "title": "Spec: Book Writing Styling & Layout",
@@ -2801,6 +2810,72 @@
       "findings": []
     },
     {
+      "path": "docs/specs/narrative-pressure-system-implementation-plan.md",
+      "kind": "feature-spec",
+      "title": "Narrative Pressure UI, Objective Journal, and Manuscript Readiness System Implementation Plan",
+      "area": "docs/specs",
+      "summary": "Status: `planned`",
+      "links": [
+        {
+          "target": "narrative-pressure-system.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "docs/specs/narrative-pressure-system.md",
+      "kind": "feature-spec",
+      "title": "Narrative Pressure UI, Objective Journal, and Manuscript Readiness System Spec",
+      "area": "docs/specs",
+      "summary": "The game should not present Cora’s progress as raw numerical stat management. The player is not “levelling up a maid.” They are guiding Cora through scandal, risk, compromise, discovery, and authorship.",
+      "links": [
+        {
+          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/non-prod-game/game/shared/narrative_pressure_data.rpy",
+          "status": "external"
+        },
+        {
+          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/non-prod-game/game/shared/narrative_pressure_system.rpy",
+          "status": "external"
+        },
+        {
+          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/non-prod-game/game/shared/narrative_notification_screen.rpy",
+          "status": "external"
+        },
+        {
+          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/non-prod-game/game/shared/journal_screen.rpy",
+          "status": "external"
+        },
+        {
+          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/non-prod-game/game/shared/hud_screen.rpy",
+          "status": "external"
+        },
+        {
+          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/prod-game/game/narrative_pressure_data.rpy",
+          "status": "external"
+        },
+        {
+          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/prod-game/game/narrative_pressure_system.rpy",
+          "status": "external"
+        },
+        {
+          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/prod-game/game/narrative_notification_screen.rpy",
+          "status": "external"
+        },
+        {
+          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/prod-game/game/journal_screen.rpy",
+          "status": "external"
+        },
+        {
+          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/prod-game/game/hud_screen.rpy",
+          "status": "external"
+        }
+      ],
+      "findings": [
+        "Possible stale reference (absolute local file URL): file:///"
+      ]
+    },
+    {
       "path": "docs/specs/README.md",
       "kind": "readme",
       "title": "Feature specs",
@@ -2825,6 +2900,14 @@
         },
         {
           "target": "character-specific-suspicion-implementation-plan.md",
+          "status": "ok"
+        },
+        {
+          "target": "narrative-pressure-system.md",
+          "status": "ok"
+        },
+        {
+          "target": "narrative-pressure-system-implementation-plan.md",
           "status": "ok"
         },
         {
@@ -3258,9 +3341,9 @@
     {
       "path": "main-game/non-prod-game/game/AEditor/README.md",
       "kind": "readme",
-      "title": "ActionEditor",
+      "title": "Readme",
       "area": "main-game",
-      "summary": "This folder contains Ren'Py ActionEditor/dev tooling for in-engine animation or staging support.",
+      "summary": "本ライブラリでは、GUI上で設定できる演出エディターおよび画像ビューワーとサウンドビューワー、さらにATLのfunctionステートメントでの使用を意図した便利な関数群と多数のワーパー関数を追加します。",
       "links": [],
       "findings": []
     },
@@ -3552,6 +3635,11 @@
       "message": "Possible stale reference (absolute local file URL): file:///"
     },
     {
+      "severity": "warning",
+      "path": "docs/specs/narrative-pressure-system.md",
+      "message": "Possible stale reference (absolute local file URL): file:///"
+    },
+    {
       "severity": "error",
       "path": "docs/specs/scene-direction-agent.md",
       "message": "Broken relative link: ../../main-game/non-prod-game/game/characters.rpy"
@@ -3579,6 +3667,16 @@
     {
       "severity": "warning",
       "path": "docs/normal-day-prose-export",
+      "message": "Complex folder has no README.md index."
+    },
+    {
+      "severity": "warning",
+      "path": "main-game/non-prod-game/game/AEditor/tl/chinese",
+      "message": "Complex folder has no README.md index."
+    },
+    {
+      "severity": "warning",
+      "path": "main-game/non-prod-game/game/AEditor/tl/japanese",
       "message": "Complex folder has no README.md index."
     },
     {

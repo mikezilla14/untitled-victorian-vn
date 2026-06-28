@@ -29,6 +29,14 @@
 
 # [DAG_NODE id=day100_main type=work day=100]
 label day100_main:
+    # Initialize variables for the prologue and show HUD
+
+    # [STATE] State/progression update
+    $ initialize_narrative_pressure_states()
+    $ hud_enabled = True
+    $ begin_notification_bundle()
+    $ activate_objective("obj_prologue_retrieve_pages")
+    $ flush_notification_bundle()
 
     # [STATE] State/progression update
     $ set_time_period("Night")
@@ -36,17 +44,16 @@ label day100_main:
     scene bg_country_estate_corridor_night
     with fade
 
+    "TUTORIAL: Welcome to Untitled Victorian VN."
+    "The Narrative Pressure HUD is now visible in the top-left corner of the screen. Look there to track Cora's standing."
+    "• ANXIETY: Internal strain. Complete tasks or rest to manage this; a full bar triggers a critical breakdown."
+    "• CORRUPTION: Growth in transgression. Higher levels unlock bolder choices and dark manuscript variants."
+    "• MANUSCRIPT: Gathered materials. The squares display progress toward the current assignment threshold."
+    "To view active quests, click the '📋 Journal' button in the top-right corner."
+
     # [enter:Cora]
     show cora_sprite base at centre_bust with moveinright # [asset auto]
-    show cora_sprite base at centre_bust:
-        zoom 1.2
-        ypos 0.9
-
     # [ASSET] Visual/staging command
-    show vance_sprite base at left:
-        ypos 0.98
-        xpos 0.15
-        zoom 0.6
 
     # [BEAT] Kinetic start in motion. Cora hunts confiscated manuscript pages before dawn
 
@@ -91,7 +98,6 @@ label day100_1_afternoon_boredom:
 
     # [enter:Cora]
     show cora_sprite base at centre_bust with moveinright # [asset auto]
-    show cora_sprite guarded_travel at left_bust # [asset keep]
     # [BEAT] Entering Lady Eleanor's private study to retrieve confiscated pages
 
     cora_inner "Lady Eleanor's withdrawing room. The door stands open by a finger's width."
@@ -109,8 +115,15 @@ label day100_1_afternoon_boredom:
             # [STATE] Semantic balance profile: Cora snoops through Lady Eleanor's private correspondence
             $ apply_balanced_effect("creative", intensity="standard")
             $ story.set_prologue_found("read_letters")
+            $ begin_notification_bundle()
+            $ add_material("mat_prologue_letters")
+            $ flush_notification_bundle()
 
             cora_inner "The bureau is where she locks the letters that make her hands tremble."
+
+            "TUTORIAL: Inspiration Material Gained"
+            "You have collected a snoop observation note. Collecting snoop details or performing chores increases Cora's manuscript material inventory, unlocking draft variants."
+            "Open your '📋 Journal' to see the details of this note under the Collected Notes section!"
 
             # [STATE] State/progression update
             jump day100_2_evening_flashback
@@ -120,8 +133,19 @@ label day100_1_afternoon_boredom:
             # [STATE] Semantic balance profile: Cora chooses the riskier entrance to eavesdrop
             $ apply_balanced_effect("creative", intensity="standard")
             $ story.set_prologue_found("overheard")
+            $ begin_notification_bundle()
+            $ add_material("mat_prologue_encounter")
+            $ add_stat_delta("suspicion", 20, character="stern")
+            $ flush_notification_bundle()
 
             cora_inner "The small parlour. A muffled gasp slips from behind the heavy velvet drapes."
+
+            "TUTORIAL: Improper Discovery Gained"
+            "You have collected an improper discovery note. Transgressive choices award higher-tier snoop material but carry scrutiny and suspicion risks."
+            "Open your '📋 Journal' to view the newly collected note in the Collected Notes section!"
+
+            "TUTORIAL: Suspicion & Scrutiny"
+            "Scandalous actions draw attention. Suspicion is tracked per-character. Higher suspicion increases the threat level on the HUD and makes future interactions riskier."
 
             # [STATE] State/progression update
             jump day100_2_evening_flashback
@@ -143,10 +167,17 @@ label day100_2_evening_flashback:
 # [DAG_NODE id=day100_2_parlour_branch type=work day=100]
 label day100_2_parlour_branch:
 
+    # [ASSET] Visual/staging command
+    hide cora_sprite collar_travel
     # [BEAT] Erotic/Tension: Cora witnesses Lady Eleanor's illicit encounter with the under-housemaid Margaret
+    show lady_eleanor_sprite sitting at left:
+        zoom 0.55
+        xpos 0.45
+        ypos 0.85
+        crop (0.0, 0.0, 0.7, 0.8)
 
-    show cora_sprite flushed at left_bust # [asset keep]
-
+    # [ASSET] Visual/staging command
+    show bg_country_estate_study_desk
     "I press my forehead to the cold paneling, my eye aligned with the keyhole's narrow slit."
     "The air through the wood is hot — damp skin, crushed violets, the iron sweetness of fear."
 
@@ -208,7 +239,7 @@ label day100_2_reconvergence:
     "She has my three missing manuscript pages clutched in her hand. She knows what I have seen."
 
     # [enter:Lady_eleanor]
-    show lady_eleanor_sprite panicked at right_bust with moveinright # [asset auto]
+
     lady_eleanor "You... you Irish guttersnipe."
     lady_eleanor "You dare search my rooms? You dare write this filth about flesh and touch?"
 
@@ -221,7 +252,7 @@ label day100_2_reconvergence:
     "He takes the manuscript pages from his wife's shaking hand. His gaze finds me."
 
     # [enter:Sir_john]
-    show lady_eleanor_sprite panicked at centre_bust with move # [asset auto]
+    show lady_eleanor_sprite sitting at centre_bust with move # [asset auto]
     show sir_john_sprite cold at right_bust with moveinright # [asset auto]
     sir_john "Come out, Vale."
 
@@ -237,8 +268,14 @@ label day100_2_reconvergence:
 
             # [STATE] State/progression update
             $ story.set_prologue_holywell_posture("careful")
+            $ add_stat_delta("anxiety", -10)
+            $ begin_notification_bundle()
+            $ flush_notification_bundle()
 
             cora "There was a draft, sir."
+
+            "TUTORIAL: Anxiety Decreased"
+            "Choosing careful, low-risk responses reduces Cora's internal Anxiety, keeping her calm."
 
             cora_inner "My voice is level, country-flat. Let him hear a simpleton."
             cora_inner "I must protect my secrets. A careful posture is the safest mask."
@@ -248,8 +285,14 @@ label day100_2_reconvergence:
             # [STATE] Semantic balance profile: Cora asserts herself without full submission
             $ apply_balanced_effect("observant", intensity="standard")
             $ story.set_prologue_holywell_posture("eager")
+            $ add_stat_delta("anxiety", 15)
+            $ begin_notification_bundle()
+            $ flush_notification_bundle()
 
             cora "They are my pages, sir."
+
+            "TUTORIAL: Anxiety Increased"
+            "Assertive or defensive responses heighten Cora's tension, increasing internal Anxiety."
 
             cora_inner "A dangerous word from a maid in a borrowed apron. I will not cower."
             cora_inner "My writing is mine. I want a publisher before my courage fails."
@@ -259,6 +302,9 @@ label day100_2_reconvergence:
             # [STATE] Semantic balance profile: Cora performs surrender to survive dismissal
             $ apply_balanced_effect("observant", intensity="standard")
             $ story.set_prologue_holywell_posture("desperate")
+            $ add_stat_delta("anxiety", 5)
+            $ begin_notification_bundle()
+            $ flush_notification_bundle()
 
             cora "Forgive me, sir."
 
@@ -291,8 +337,15 @@ label day100_2_reconvergence:
             # [STATE] Semantic balance profile: Cora admits she maps power for the manuscript
             $ apply_balanced_effect("creative", intensity="standard")
             $ story.set_prologue_why_write("cataloguer")
+            $ add_stat_delta("corruption", 1)
+            $ begin_notification_bundle()
+            $ flush_notification_bundle()
 
             cora_inner "I want the machine on paper — who kneels, who commands, who pretends."
+
+            "TUTORIAL: Corruption level increased!"
+            "Cora's Corruption level rises as she embraces transgressive desires or maps out forbidden secrets. Higher levels unlock new options."
+
             cora_inner "Truth is a weapon even when I am too small to swing it."
 
         "Because scandal tastes better than porridge. [[Transgressive]]":
@@ -300,6 +353,9 @@ label day100_2_reconvergence:
             # [STATE] Semantic balance profile: Cora embraces scandal as appetite
             $ apply_balanced_effect("creative", intensity="standard")
             $ story.set_prologue_why_write("scandal_hungry")
+            $ add_stat_delta("corruption", 2)
+            $ begin_notification_bundle()
+            $ flush_notification_bundle()
 
             cora_inner "I will not pretend innocence is a meal."
             cora_inner "Wiltshire taught me appetite. London will teach me price."
@@ -427,6 +483,7 @@ label day100_3_arrival:
     cora_inner "Very well. Let it try."
 
     # [STATE] Handoff to Day 101 Morning
+    $ transition_prologue_to_main_game()
     $ time_manager.set_current_day(1)
     $ set_time_period("Morning")
 

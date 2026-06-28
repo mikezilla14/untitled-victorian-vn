@@ -41,6 +41,32 @@ label watch_suspicion:
 
         # [STATE] State/progression update
         $ story.queue_penance("confrontation_missy")
+
+    # Queue anxiety breakdown on first-time crossing of 70%
+    if player.is_anxiety_ready():
+        if not player.has_reached_70_before:
+            $ story.queue_penance("anxiety_breakdown_downtime")
+            $ player.has_reached_70_before = True
+        elif not player.anxiety_70_warning_shown:
+            cora "My chest feels tight, and the air in the Savoy feels suffocatingly thin. The shadow of discovery is closing in. If I let my nerves fray any further, I will lose my grip entirely."
+            sys_msg "[[WARNING: Cora's anxiety has reached 70%% again. High anxiety will restrict her choices and lead to complete writing paralysis at 85%%. Manage her stress carefully.]]"
+            $ player.anxiety_70_warning_shown = True
+
+    # Set warning flags and process second-time 75% warnings
+    if player.anxiety >= 75:
+        if not player.has_reached_75_before:
+            $ player.has_reached_75_before = True
+        elif not player.anxiety_75_warning_shown:
+            cora "My hands shake so much I can barely hold the pen. The threat is no longer a distant worry; it is a physical wall. I cannot risk another mistake."
+            sys_msg "[[WARNING: Cora's anxiety has reached 75%% again. Her choices are locked. Reaching 85%% will cause complete writing paralysis.]]"
+            $ player.anxiety_75_warning_shown = True
+
+    # Reset warning flags when anxiety drops back down
+    if player.anxiety < 70:
+        $ player.anxiety_70_warning_shown = False
+    if player.anxiety < 75:
+        $ player.anxiety_75_warning_shown = False
+
     return
 
 
@@ -64,6 +90,9 @@ label consume_pending_penance(window_id):
 # [DAG_NODE id=story_window_penance_gate type=penance_consume]
 label story_window_penance_gate(window_id):
     # Sacrifices the optional chain menu when penance is queued
+
+    # Run the suspicion and anxiety check first to ensure any pending penance is queued
+    call watch_suspicion
 
     # [STATE] State/progression update
     $ _penance_consumed = False
@@ -823,4 +852,20 @@ label confrontation_missy:
     "My ambition is buried under wet cotton. I cannot write a single line."
 
     # Penance effects: reduces Missy suspicion by 35, but advances time, consuming the slot.
+    return
+
+
+# [DAG_NODE id=anxiety_breakdown_downtime type=penance]
+label anxiety_breakdown_downtime:
+    # Staging/acting
+    scene bg_servants_quarters_dusk
+    with fade
+
+    "My hands shake so violently I can barely hold the brass key ring. The walls of the Savoy seem to press closer, the hum of the gas lamps sounding like a chorus of whispers."
+    "Every step in the corridor, every rustle of silk, feels like an accusation. I cannot push further. I cannot ask questions."
+    "Tonight, I keep my head low. I speak only when spoken to, fold the linen with double-stitch seams, and scrub the floors until the wood is clean."
+    "By the time the dawn shift begins, my muscles ache, but the immediate panic has receded. The eyes watching me have drifted back to their own concerns."
+
+    # Relieve anxiety by dynamically decreasing suspicion across the board
+    $ player.relieve_downtime_anxiety()
     return

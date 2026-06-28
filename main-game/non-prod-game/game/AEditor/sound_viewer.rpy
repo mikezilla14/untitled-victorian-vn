@@ -8,7 +8,7 @@ screen _sound_selector(default=""):
     on "hide" action Stop("music")
     zorder 20
     frame:
-        style_group "sound_selecter"
+        style_prefix "sound_selecter"
         vbox:
             label _("type filenames(ex: variable, '<silence 2.>' or [[variable, variable])") style "sound_selecter_input"
             label _("Tab: completion") style "sound_selecter_input"

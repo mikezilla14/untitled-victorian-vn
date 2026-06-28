@@ -5,7 +5,7 @@
     "**/*.rpymc": true,
     "**/cache/": true
   },
-  "renpyWarp.sdkPath": "f:\\Installs\\renpy-8.5.2-sdk",
+  "renpyWarp.sdkPath": "d:\\Installs\\renpy-8.5.2-sdk",
   "branchpy.projects": [
     "c:\\Users\\mikez\\OneDrive\\Documents\\gh\\git\\untitled-victorian-vn\\main-game\\non-prod-game"
   ],

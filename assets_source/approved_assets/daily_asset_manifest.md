@@ -1,6 +1,6 @@
 # Daily Asset Manifest & Reconciliation Report
 
-**Generated on:** 2026-06-23
+**Generated on:** 2026-06-28
 **Manifest Sources:**
 - Prod Manifest: [assets_manifest.rpy](file:///C:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/prod-game/game/assets_manifest.rpy)
 - Non-Prod Manifest: [assets_manifest.rpy](file:///C:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/non-prod-game/game/shared/assets_manifest.rpy)
@@ -9,12 +9,12 @@
 
 | Category | Declared (Union) | In Place (Prod) | In Place (Non-Prod) | Missing from Engine | Status |
 | :--- | :---: | :---: | :---: | :---: | :--- |
-| Backgrounds | 19 | 15 | 4 | 0 | ✅ Complete |
-| Sprites | 60 | 51 | 9 | 0 | ✅ Complete |
-| UI | 20 | 10 | 6 | 5 | ⚠️ Partial |
-| Event Illustrations (CGs) | 6 | 0 | 0 | 6 | ❌ Missing |
+| Backgrounds | 21 | 16 | 6 | 0 | ✅ Complete |
+| Sprites | 61 | 55 | 10 | 0 | ✅ Complete |
+| UI | 24 | 14 | 10 | 5 | ⚠️ Partial |
+| Event Illustrations (CGs) | 7 | 0 | 0 | 7 | ❌ Missing |
 | Audio | 21 | 5 | 21 | 0 | ✅ Complete |
-| **Total** | **126** | **81** | **40** | **11** | **-** |
+| **Total** | **134** | **90** | **47** | **12** | **-** |
 
 ## 🟢 Assets in Place (Prod / Non-Prod)
 These assets are declared and present on disk in either production or non-production engine environments.
@@ -26,9 +26,11 @@ These assets are declared and present on disk in either production or non-produc
 | `bg_cora_desk_night` | `images/backgrounds/bg_cora_desk_night.webp` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `bg_country_estate_corridor_night` | `images/backgrounds/bg_country_estate_corridor_night.webp` | Both | 🔴 No | 🟢 Yes | 🟡 Active (Non-Prod Only) |
 | `bg_country_estate_study` | `images/backgrounds/bg_country_estate_study.webp` | Both | 🔴 No | 🟢 Yes | 🟡 Active (Non-Prod Only) |
+| `bg_country_estate_study desk` | Non-Prod: `images/backgrounds/bg_country_estate_study_desk.webp` | Non-Prod Only | - | 🟢 Yes | 🟡 Active (Non-Prod Only) |
+| `bg_country_estate_study_desk` | `images/backgrounds/bg_country_estate_study_desk.webp` | Both | 🔴 No | 🟢 Yes | 🟡 Active (Non-Prod Only) |
 | `bg_laundry_room_day` | `images/backgrounds/bg_laundry_room_day.webp` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `bg_master_suite_day` | `images/backgrounds/bg_master_suite_day.webp` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
-| `bg_master_suite_night` | `images/backgrounds/bg_master_suite_night.webp` | Both | 🔴 No | 🟢 Yes | 🟡 Active (Non-Prod Only) |
+| `bg_master_suite_night` | `images/backgrounds/bg_master_suite_night.webp` | Both | 🟢 Yes | 🟢 Yes | ✅ Active (Prod & Non-Prod) |
 | `bg_master_suite_tea` | `images/backgrounds/bg_master_suite_tea.webp` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `bg_savoy_corridor_morning` | `images/backgrounds/bg_savoy_corridor_morning.webp` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `bg_savoy_corridor_right_morning` | `images/backgrounds/bg_savoy_corridor_right_morning.webp` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
@@ -60,8 +62,9 @@ These assets are declared and present on disk in either production or non-produc
 | `gideon_sprite neutral` | `images/sprites/gideon/neutralf.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `gideon_sprite neutralf` | `images/sprites/gideon/neutralf.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `lady_eleanor_sprite composed` | `images/sprites/cora/focused.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
-| `lady_eleanor_sprite furious` | `images/sprites/cora/guarded.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
-| `lady_eleanor_sprite panicked` | `images/sprites/cora/flushed.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
+| `lady_eleanor_sprite furious` | Prod: `images/sprites/cora/guarded.png`<br>Non-Prod: `images/sprites/cora/angry.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
+| `lady_eleanor_sprite panicked` | Prod: `images/sprites/cora/flushed.png`<br>Non-Prod: `images/sprites/eleanore/base.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
+| `lady_eleanor_sprite sitting` | Non-Prod: `images/sprites/Eleanore/sitting.png` | Non-Prod Only | - | 🟢 Yes | 🟡 Active (Non-Prod Only) |
 | `margaret_sprite bold` | `images/sprites/cora/guarded.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `margaret_sprite neutral` | `images/sprites/cora/base.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `margaret_sprite yielding` | `images/sprites/cora/flushed.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
@@ -85,24 +88,24 @@ These assets are declared and present on disk in either production or non-produc
 | `vance_sprite angry_dressing_gown_hair_down_front` | `images/sprites/vance/angry_dressing_gown_hair_down_front.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `vance_sprite angry_pointing` | `images/sprites/vance/angry_pointing.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `vance_sprite base` | Non-Prod: `images/sprites/vance/base.png` | Non-Prod Only | - | 🟢 Yes | 🟡 Active (Non-Prod Only) |
-| `vance_sprite confused` | `images/sprites/vance/confused.png` | Both | 🔴 No | 🟢 Yes | 🟡 Active (Non-Prod Only) |
+| `vance_sprite confused` | `images/sprites/vance/confused.png` | Both | 🟢 Yes | 🟢 Yes | ✅ Active (Prod & Non-Prod) |
 | `vance_sprite confused_dressing_gown` | Non-Prod: `images/sprites/vance/confused_dressing_gown.png` | Non-Prod Only | - | 🟢 Yes | 🟡 Active (Non-Prod Only) |
 | `vance_sprite cowed` | `images/sprites/vance/cowed.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `vance_sprite defeated` | `images/sprites/vance/defeated.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
-| `vance_sprite indignant` | `images/sprites/vance/indignant.png` | Both | 🔴 No | 🟢 Yes | 🟡 Active (Non-Prod Only) |
+| `vance_sprite indignant` | `images/sprites/vance/indignant.png` | Both | 🟢 Yes | 🟢 Yes | ✅ Active (Prod & Non-Prod) |
 | `vance_sprite indignant_dressing_gown` | Non-Prod: `images/sprites/vance/indignant_dressing_gown.png` | Non-Prod Only | - | 🟢 Yes | 🟡 Active (Non-Prod Only) |
 | `vance_sprite kneeling_cowed_dressing_gown` | `images/sprites/vance/kneeling_cowed_dressing_gown.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `vance_sprite kneeling_dressing_gown_modern` | `images/sprites/vance/kneeling_dressing_gown_modern.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `vance_sprite kneeling_dressing_ground_skin` | `images/sprites/vance/kneeling_dressing_ground_skin.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `vance_sprite lounging_dressing_gown` | `images/sprites/vance/lounging_dressing_gown.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
-| `vance_sprite mirror_watch_terror` | `images/sprites/vance/mirror_watch_terror.png` | Both | 🔴 No | 🟢 Yes | 🟡 Active (Non-Prod Only) |
+| `vance_sprite mirror_watch_terror` | `images/sprites/vance/mirror_watch_terror.png` | Both | 🟢 Yes | 🟢 Yes | ✅ Active (Prod & Non-Prod) |
 | `vance_sprite mirror_watch_terror_dressing_gown` | Non-Prod: `images/sprites/vance/mirror_watch_terror_dressing_gown.png` | Non-Prod Only | - | 🟢 Yes | 🟡 Active (Non-Prod Only) |
 | `vance_sprite neutral` | `images/sprites/vance/neutral.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `vance_sprite neutral_dressing_gown` | `images/sprites/vance/neutral_dressing_gown.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `vance_sprite neutral_dressing_gown_dark` | `images/sprites/vance/neutral_dressing_gown_dark.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `vance_sprite neutral_kneeling_dressing_gown` | `images/sprites/vance/neutral_kneeling_dressing_gown.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `vance_sprite reaching_dressing_gown` | `images/sprites/vance/reaching_dressing_gown.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
-| `vance_sprite shocked` | `images/sprites/vance/shocked.png` | Both | 🔴 No | 🟢 Yes | 🟡 Active (Non-Prod Only) |
+| `vance_sprite shocked` | `images/sprites/vance/shocked.png` | Both | 🟢 Yes | 🟢 Yes | ✅ Active (Prod & Non-Prod) |
 | `vance_sprite shocked_gown` | Non-Prod: `images/sprites/vance/shocked_dressing_gown.png` | Non-Prod Only | - | 🟢 Yes | 🟡 Active (Non-Prod Only) |
 | `vance_sprite smiling` | `images/sprites/vance/smiling.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `vance_sprite snide` | `images/sprites/vance/snide.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
@@ -120,13 +123,17 @@ These assets are declared and present on disk in either production or non-produc
 | `main_menu_sweeney` | `images/ui/main_menu_sweeney.png` | Both | 🟢 Yes | 🟢 Yes | ✅ Active (Prod & Non-Prod) |
 | `mc_sprite_thought_icon` | `images/sprites/cora/ui/mc_sprite_thought_icon.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `ui_book_cover` | `images/ui/book_cover.webp` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
+| `ui_book_ui_bg` | Prod: `images/ui/book_ui_bg.webp`<br>Non-Prod: `images/ui/book_ui_bg.png` | Both | 🟢 Yes | 🟢 Yes | ✅ Active (Prod & Non-Prod) |
 | `ui_book_writing_paper` | `images/ui/book_writing_paper.webp` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `ui_cora_base` | `images/sprites/cora/ui/ui_cora_base.webp` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `ui_cora_corrupted` | `images/sprites/cora/ui/ui_cora_corrupted.webp` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `ui_cora_mini_base` | `images/sprites/cora/ui/ui_cora_mini_base.webp` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `ui_cora_mini_corrupted` | `images/sprites/cora/ui/ui_cora_mini_corrupted.webp` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
+| `ui_illustration_border` | Prod: `images/ui/illustration_border.webp`<br>Non-Prod: `images/ui/illustration_border.png` | Both | 🟢 Yes | 🟢 Yes | ✅ Active (Prod & Non-Prod) |
 | `ui_inkwell_empty` | `images/ui/ui_inkwell_empty.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `ui_inkwell_full` | `images/ui/ui_inkwell_full.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
+| `ui_price_badge` | `images/ui/price_badge.png` | Both | 🟢 Yes | 🟢 Yes | ✅ Active (Prod & Non-Prod) |
+| `ui_sidebar_divider` | `images/ui/ui_sidebar_divider.png` | Both | 🟢 Yes | 🟢 Yes | ✅ Active (Prod & Non-Prod) |
 
 ### 🎬 Event Illustrations (CGs)
 
@@ -173,16 +180,17 @@ These assets are declared in the manifest files but are missing from both produc
 
 | Asset Alias / Name | Expected Engine Path | Declared In | Status |
 | :--- | :--- | :---: | :--- |
-| `ui_book_ui_bg` | Prod: `images/ui/book_ui_bg.webp`<br>Non-Prod: `images/ui/book_ui_bg.png` | Both | ❌ Missing from both |
-| `ui_illustration_border` | Prod: `images/ui/illustration_border.webp`<br>Non-Prod: `images/ui/illustration_border.png` | Both | ❌ Missing from both |
-| `ui_price_badge` | `images/ui/price_badge.png` | Both | ❌ Missing from both |
+| `ui_book_blank` | `images/ui/book/book_blank.png` | Both | ❌ Missing from both |
+| `ui_book_plate_hatch_overlay` | `images/ui/book/plate_hatch_overlay.png` | Both | ❌ Missing from both |
+| `ui_book_plate_paper_overlay` | `images/ui/book/plate_paper_overlay.png` | Both | ❌ Missing from both |
+| `ui_illustration_border_plate` | `images/ui/book/illustration_border_plate.png` | Both | ❌ Missing from both |
 | `ui_sidebar_bg` | `images/ui/ui_sidebar_bg.webp` | Both | ❌ Missing from both |
-| `ui_sidebar_divider` | `images/ui/ui_sidebar_divider.png` | Both | ❌ Missing from both |
 
 ### 🎬 Event Illustrations (CGs)
 
 | Asset Alias / Name | Expected Engine Path | Declared In | Status |
 | :--- | :--- | :---: | :--- |
+| `cg_book_d2_hatbox_tableau` | `images/cgs/book1/cg_book_d2_hatbox_tableau.png` | Both | ❌ Missing from both |
 | `cg_gideon_photograph` | `images/cgs/cg_gideon_photograph.png` | Both | ❌ Missing from both |
 | `cg_manuscript_retelling_d1_corridor` | `images/cgs/cg_manuscript_retelling_d1_corridor.png` | Both | ❌ Missing from both |
 | `cg_manuscript_retelling_d2_lace` | `images/cgs/cg_manuscript_retelling_d2_lace.png` | Both | ❌ Missing from both |
@@ -208,6 +216,11 @@ These files exist in the engine folders but are not declared in `assets_manifest
 | File Path | Status |
 | :--- | :--- |
 | `images/backgrounds/backgrounds_src/bg_train_carriage_day.png` | ⚠️ Needs registration or cleanup |
+| `images/sprites/Eleanore/angry.png` | ⚠️ Needs registration or cleanup |
+| `images/sprites/Eleanore/base.png` | ⚠️ Needs registration or cleanup |
+| `images/sprites/Eleanore/input/ChatGPT Image Jun 24, 2026, 07_06_16 PM.png` | ⚠️ Needs registration or cleanup |
+| `images/sprites/Eleanore/input/ChatGPT Image Jun 24, 2026, 07_06_21 PM.png` | ⚠️ Needs registration or cleanup |
+| `images/sprites/Eleanore/input/ChatGPT Image Jun 24, 2026, 07_06_30 PM.png` | ⚠️ Needs registration or cleanup |
 | `images/sprites/vance/base confused.png` | ⚠️ Needs registration or cleanup |
 | `images/sprites/vance/input/base confused.png` | ⚠️ Needs registration or cleanup |
 | `images/sprites/vance/input/base.png` | ⚠️ Needs registration or cleanup |

@@ -8,7 +8,7 @@ screen _image_selecter(default=""):
     key "game_menu" action Return("")
     zorder 20
     frame:
-        style_group "image_selecter"
+        style_prefix "image_selecter"
         vbox:
             label _("Type a image name") style "image_selecter_input"
             label _("Tab: completion") style "image_selecter_input"
