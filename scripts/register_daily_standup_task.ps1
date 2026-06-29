@@ -52,7 +52,7 @@ Register-ScheduledTask `
 
 Write-Host ("Registered scheduled task '{0}' daily at {1} (local time)." -f $TaskName, $Time)
 Write-Host "Runner: $RunnerScript"
-Write-Host "Reports: narrative/draft/releases/planning/standups/daily_standup_YYYY-MM-DD.md"
+Write-Host "Reports: main-game/draft/releases/planning/standups/daily_standup_YYYY-MM-DD.md"
 Write-Host ""
 Write-Host "Test now: .\scripts\run_daily_standup.ps1"
 Write-Host 'Remove:   .\scripts\register_daily_standup_task.ps1 -Unregister'

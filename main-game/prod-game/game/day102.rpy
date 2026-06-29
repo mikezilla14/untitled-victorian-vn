@@ -12,10 +12,9 @@
 # [enter:Name] / [exit:Name] -> declare cast changes so auto placement stays correct
 # Full policy: docs/contracts/sprite_layout_policy.yaml | spec: docs/specs/scene-direction-agent.md
 
-# day102_non_canon.rpy
-# Release 1 / Day 02 non-canon Ren'Py-shaped draft
-# Source: promoted main-game/prod-game/game/day102.rpy + writers' room divergent pool (day102)
-# Spine: story_board.md Day 102; time-period routing via explicit day labels and dynamic windows
+# day102.rpy
+# Release 1 / Day 02 — promoted runtime canon
+# Spine: time-period routing via explicit day labels and dynamic windows
 
 # ==========================================
 # DAY 2 NODE MAP
@@ -29,12 +28,21 @@
 
 # ── 021: CORA + MISSY FIRST SHIFT ───────────────────────────────
 
-# [DAG_NODE id=day102_1_cora_missy_first_shift type=work day=102]
-label day102_1_cora_missy_first_shift:
 
-    # [STATE] State/progression update
+# [DAG_NODE id=day102 type=time_period day=102 period=Morning]
+label day102:
+    jump day102_morning
+
+
+# [DAG_NODE id=day102_morning type=time_period day=102 period=Morning]
+label day102_morning:
     $ time_manager.set_current_day(2)
     $ set_time_period("Morning")
+    jump day102_1_cora_missy_first_shift
+
+
+# [DAG_NODE id=day102_1_cora_missy_first_shift type=work day=102]
+label day102_1_cora_missy_first_shift:
 
     scene bg_master_suite_day:
         xysize (1920, 1080)
@@ -156,7 +164,8 @@ label day102_1_cora_takes_the_thing:
     show missy_sprite confused at centre_bust
 
     $ story.set_day2_contraband_state("stolen_wearing")
-    $ apply_effects(vance_susp=5, insp=0, corr=15)
+    # [STATE] Semantic balance profile: Cora steals and wears the lace beneath her uniform
+    $ apply_balanced_effect("transgressive", intensity="standard", witness="vance")
 
     show cora_sprite base at left_bust with moveinleft # [asset auto]
     show missy_sprite confused at right_bust with move # [asset auto]
@@ -214,7 +223,8 @@ label day102_1_cora_deceives_missy:
     show missy_sprite confused at centre_bust
 
     $ story.set_day2_contraband_state("planted_in_trunk")
-    $ apply_effects(vance_susp=0, insp=5, corr=10)
+    # [STATE] Semantic balance profile: Cora plants the lace in Locke's trunk as misdirection
+    $ apply_balanced_effect("curious", intensity="standard", witness="missy")
 
     show cora_sprite base at left_bust with moveinleft # [asset auto]
     show missy_sprite confused at right_bust with move # [asset auto]
@@ -306,12 +316,12 @@ label day102_2_day2_chore_time:
     menu:
         "How do I carry the morning?"
 
-        "Work fast. Catalogue the room, the people, the risk. [[Inspiration]]":
+        "Work fast. Catalogue the room, the people, the risk. [[Observant focus]]":
 
             # [STATE] State/progression update
             jump day102_2_day2_insp_choice
 
-        "Linger near the danger. Let the secret sharpen itself. [[Corruption]]":
+        "Linger near the danger. Let the secret sharpen itself. [[Reckless linger]]":
 
             # [STATE] State/progression update
             jump day102_2_day2_corr_choice
@@ -327,7 +337,9 @@ label day102_2_day2_insp_choice:
     show missy_sprite smiling at centre_bust
 
     $ story.set_day2_chore_focus("inspiration")
-    $ apply_effects(stern_susp=-5, insp=15, corr=0)
+    $ apply_balanced_effect("creative", intensity="standard")
+    # [STATE bespoke: negative_suspicion]
+    $ apply_effects(stern_susp=-5)
 
     cora_inner "I make the morning into inventory."
     cora_inner "The direction of the light in the suite. The scent of Vance's powder. The exact stiffness in Missy's shoulders when she lies badly to herself."
@@ -370,7 +382,8 @@ label day102_2_day2_corr_choice:
     show missy_sprite smiling at centre_bust
 
     $ story.set_day2_chore_focus("corruption")
-    $ apply_effects(vance_susp=10, insp=0, corr=15)
+    # [STATE] Semantic balance profile: Cora lingers near danger and lets the secret sharpen
+    $ apply_balanced_effect("transgressive", intensity="standard", witness="vance")
 
     cora_inner "I slow the cart near the guest wing."
     cora_inner "There are always reasons. A folded towel not square enough. A dropped pin. A scuff on polished wood that may or may not exist."
@@ -623,7 +636,9 @@ label day102_3_cora_confesses:
     show vance_sprite angry at right_bust
 
     $ story.set_day2_tea_choice("prey")
-    $ apply_effects(stern_susp=20, insp=15, corr=0)
+    $ apply_archetype_edge("prey", 1)
+    # [STATE] Semantic balance profile: Cora confesses enough to control the damage
+    $ apply_balanced_effect("transgressive", intensity="standard", witness="stern")
 
     cora_inner "The truth is not safe."
     cora_inner "That does not make the lie safer."
@@ -678,7 +693,9 @@ label day102_3_cora_pretends_to_find_it:
     show vance_sprite angry at right_bust
 
     $ story.set_day2_tea_choice("predator")
-    $ apply_effects(stern_susp=10, insp=5, corr=15)
+    $ apply_archetype_edge("predator", 1)
+    # [STATE] Semantic balance profile: Cora produces the lace as if discovering it now
+    $ apply_balanced_effect("transgressive", intensity="standard", witness="stern")
 
     cora_inner "Helpful."
     cora_inner "That is the mask."
@@ -749,7 +766,9 @@ label day102_3_cora_frames_missy:
 
     $ story.set_day2_tea_choice("ghost")
     $ story.set_missy_day2_trust_break(True)
-    $ apply_effects(vance_susp=0, insp=0, corr=20)
+    $ apply_archetype_edge("ghost", 1)
+    # [STATE] Semantic balance profile: Cora lets Missy take the shape of the blame
+    $ apply_balanced_effect("transgressive", intensity="standard", witness="missy")
 
     cora_inner "There is a version of me that protects Missy."
     cora_inner "She exists."
@@ -942,6 +961,9 @@ label day102_3_gideon_interrupts_controls_vance:
 
     cora_inner "The corridor receives us like a throat swallowing something sharp."
 
+    if story.missy_chain_was_abandoned():
+        cora_inner "I chose the safe path with her once. That does not make this easier."
+
     if story.day2_tea_choice == "ghost":
         missy "How could you?"
 
@@ -1017,11 +1039,14 @@ label day102_3_gideon_interrupts_controls_vance:
     cora_inner "The heavy atmosphere of the house seems to cling to my throat like soot."
     cora_inner "There is a dark, heavy chapter in that—the invisible chains that bind the prey and the protector in this building."
 
-    if story.manuscript_progress == 0:
+    if not story.has_manuscript_chapter("day1_chapter"):
         cora_inner "Tonight I must write."
         cora_inner "Two days inside the machine and not a single finished chapter would be its own kind of defeat."
+    elif not story.has_manuscript_chapter("day2_chapter"):
+        cora_inner "Tonight the fuel is finally high enough for something better than survival prose."
+        cora_inner "Chapter Two cannot wait for a braver version of me."
     else:
-        cora_inner "Tonight I must decide whether the second chapter deserves the truth or the better lie."
+        cora_inner "Both opening chapters exist. Tonight I can afford to choose what the third will cost."
 
     # [STATE] State/progression update
     jump day102_4_night
@@ -1032,6 +1057,8 @@ label day102_3_gideon_interrupts_controls_vance:
 # [DAG_NODE id=day102_4_night type=work day=102]
 label day102_4_night:
     if not getattr(store, "_day102_night_visited", False):
+
+        # [STATE] State/progression update
         $ _day102_night_visited = True
         # [STATE] State/progression update
         $ set_time_period("Night")
@@ -1073,6 +1100,64 @@ label day102_night_consequence_window:
     return
 
 
+# [DAG_NODE id=manuscript_slot_ch2_write type=write]
+label manuscript_slot_ch2_write:
+
+    if has_story_fuel(*WRITE_GATE_CH2):
+
+        cora_inner "Chapter Two begins with a hatbox."
+        cora_inner "Not the object inside."
+        cora_inner "The pause before it is opened."
+
+        if story.day2_tea_choice == "prey":
+            cora_inner "I write a woman who tells one clean portion of the truth and lets everyone mistake that portion for the whole."
+            cora_inner "Her honesty does not save her."
+            cora_inner "It places her exactly where the dangerous man can see her."
+
+        elif story.day2_tea_choice == "predator":
+            cora_inner "I write a woman who discovers that a lie told calmly can become furniture."
+            cora_inner "People walk around it. Lean on it. Arrange the room to suit it."
+            cora_inner "By the end of the chapter, even the gentleman is using her falsehood as if he ordered it built."
+
+        else:
+            cora_inner "I write a woman who survives by leaving fingerprints on other people."
+            cora_inner "No blood on her cuffs."
+            cora_inner "No proof in her pocket."
+            cora_inner "Only a girl in the corridor learning what betrayal sounds like when it does not raise its voice."
+
+        # [STATE] State/progression update
+        $ story.complete_manuscript_chapter("day2_chapter")
+        call book1_write_chapter(chapter_key="day2_chapter", current_day=time_manager.current_day)
+
+        # [STATE bespoke: write_spend]
+        $ apply_effects(insp=-15)
+
+        cora_inner "By the time the candle shortens, the second chapter exists."
+        cora_inner "It is better than the first."
+        cora_inner "That is not comforting."
+
+        # [STATE] State/progression update
+        $ _ch2_write_success = True
+
+    else:
+
+        cora_inner "I write three sentences and cross them out."
+        cora_inner "The scene is still too close to me."
+        cora_inner "Vance's fury. Gideon's correction. Missy's face. The lace under cloth or hidden in the trunk."
+        cora_inner "None of it has become art yet."
+        cora_inner "It remains appetite and consequence."
+
+        if player.inspiration < WRITE_GATE_CH2[0]:
+            cora_inner "My thoughts are too scattered. I lack the Inspiration (need [WRITE_GATE_CH2[0]]) to complete this draft."
+        elif player.corruption_level < WRITE_GATE_CH2[1]:
+            cora_inner "My pen lacks venom. I need more Corruption/Appetite (need [WRITE_GATE_CH2[1]]) to write the darker corners of the Savoy."
+
+        # [STATE] State/progression update
+        $ _ch2_write_success = False
+
+    return
+
+
 # [DAG_NODE id=day102_4_cora_writes_a_chapter type=write]
 label day102_4_cora_writes_a_chapter:
 
@@ -1082,7 +1167,7 @@ label day102_4_cora_writes_a_chapter:
 
     $ story.set_day2_night_action("write")
 
-    if story.manuscript_progress == 0:
+    if not story.has_manuscript_chapter("day1_chapter"):
 
         if has_story_fuel(*WRITE_GATE_CH1):
 
@@ -1102,8 +1187,8 @@ label day102_4_cora_writes_a_chapter:
             $ story.complete_manuscript_chapter("day1_chapter")
             call book1_write_chapter(chapter_key="day1_chapter", current_day=102)
 
-            # [STATE] State/progression update
-            $ apply_effects(vance_susp=0, insp=-10, corr=0)
+            # [STATE bespoke: write_spend]
+            $ apply_effects(insp=-10)
 
             cora_inner "Chapter One is done."
             cora_inner "Late is not failure."
@@ -1121,61 +1206,16 @@ label day102_4_cora_writes_a_chapter:
             elif player.corruption_level < WRITE_GATE_CH1[1]:
                 cora_inner "I stare at the paper, but the story lacks bite. I need more Corruption/Appetite (need [WRITE_GATE_CH1[1]]) to write the transgressive truth."
 
+            # [STATE] State/progression update
             jump day102_4_night
 
-    elif story.manuscript_progress == 1:
+    if not story.has_manuscript_chapter("day2_chapter"):
 
-        if has_story_fuel(*WRITE_GATE_CH2):
-
-            cora_inner "Chapter Two begins with a hatbox."
-            cora_inner "Not the object inside."
-            cora_inner "The pause before it is opened."
-
-            if story.day2_tea_choice == "prey":
-                cora_inner "I write a woman who tells one clean portion of the truth and lets everyone mistake that portion for the whole."
-                cora_inner "Her honesty does not save her."
-                cora_inner "It places her exactly where the dangerous man can see her."
-
-            elif story.day2_tea_choice == "predator":
-                cora_inner "I write a woman who discovers that a lie told calmly can become furniture."
-                cora_inner "People walk around it. Lean on it. Arrange the room to suit it."
-                cora_inner "By the end of the chapter, even the gentleman is using her falsehood as if he ordered it built."
-
-            else:
-                cora_inner "I write a woman who survives by leaving fingerprints on other people."
-                cora_inner "No blood on her cuffs."
-                cora_inner "No proof in her pocket."
-                cora_inner "Only a girl in the corridor learning what betrayal sounds like when it does not raise its voice."
+        call manuscript_slot_ch2_write
+        if not _ch2_write_success:
 
             # [STATE] State/progression update
-            $ story.complete_manuscript_chapter("day2_chapter")
-            call book1_write_chapter(chapter_key="day2_chapter", current_day=102)
-
-            # [STATE] State/progression update
-            $ apply_effects(vance_susp=0, insp=-15, corr=0)
-
-            cora_inner "By the time the candle shortens, the second chapter exists."
-            cora_inner "It is better than the first."
-            cora_inner "That is not comforting."
-
-        else:
-
-            cora_inner "I write three sentences and cross them out."
-            cora_inner "The scene is still too close to me."
-            cora_inner "Vance's fury. Gideon's correction. Missy's face. The lace under cloth or hidden in the trunk."
-            cora_inner "None of it has become art yet."
-            cora_inner "It remains appetite and consequence."
-
-            if player.inspiration < WRITE_GATE_CH2[0]:
-                cora_inner "My thoughts are too scattered. I lack the Inspiration (need [WRITE_GATE_CH2[0]]) to complete the second chapter."
-            elif player.corruption_level < WRITE_GATE_CH2[1]:
-                cora_inner "My pen lacks venom. I need more Corruption/Appetite (need [WRITE_GATE_CH2[1]]) to write the darker corners of the Savoy."
-
             jump day102_4_night
-
-    else:
-        cora_inner "Both opening chapters exist. I have no more chapters to write tonight."
-        jump day102_4_night
 
     # [STATE] State/progression update
     $ _day102_night_visited = False
@@ -1190,7 +1230,8 @@ label day102_4_cora_sneaks_a_feel:
     with dissolve
 
     $ story.set_day2_night_action("indulge")
-    $ apply_effects(insp=5, corr=15)
+    # [STATE] Semantic balance profile: Cora stays inside the feeling instead of writing
+    $ apply_balanced_effect("transgressive", intensity="standard", witness="stern")
 
     cora_inner "I close the notebook."
     cora_inner "The page has asked for discipline."

@@ -192,7 +192,10 @@ label book1_block_day1_alt_predator_core:
     call book1_nvl_write_line("The conservatory at Alderwood was a mausoleum of green; damp jasmine choked the glass, and the steam from the adjoining wash-house hung in the air like hot tallow-breath. I had seen Lady Beatrice's hand press against the misted pane, her palm leaving a print that told me every sin writ small in the heat of her skin.")
     
     call book1_nvl_write_line("I catalogued the room as I would a battlefield. The mahogany door, ajar a finger's width. The shadow of Lord Caldor's figure beyond the curtain. The wet, rhythmic whisper of Lady Beatrice's scandal, still humming through the corridor like a confession I had not yet been paid to hear.")
-    
+
+    call book1_show_tableau("cg_manuscript_retelling_d1_corridor")
+    call book1_show_plate(caption="Plate I — The Service Door")
+
     call book1_nvl_write_line("A chambermaid is a clockwork thing in the upper houses—an automaton wound by lye-soap and leather heels—but I had learned to watch the gears before I learned to polish the brass. I watched the levers. And I saw, clear as the gas-lamp on her throat, that Lady Vayne was the one who would break first.")
     
     nvl clear

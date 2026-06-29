@@ -1,47 +1,43 @@
-# Management: Daily Standup Ceremony
+# Management: Daily Automated Health Check
 
-Simulates a daily check-in ceremony to refocus on the MVP systems integration checklist, project backlog, and codebase health. It coordinates the reports and letter grades of the **Chief Architect**, **Adult Market Reviewer**, and **Lead Narrative Editor** to align work with the weekly sprint and 5-week epic cadence.
+Runs **live automated validation** at the start of a session or on a daily schedule. Reports only checks that execute fresh each run — no stale `errors.txt`, checklist narration, or specialist grades.
 
-Use this daily at the start of a session or whenever you want to refocus and reprioritize.
+For checklist progress, backlog, and Adult Market / narrative planning lenses, use [`integration_review`](../integration_review/SKILL.md) (weekly or ad-hoc).
 
 ## What to do
 
-1. **Calculate the Sprint Timeline**:
-   Check where the project is within the 5-week epic release cadence:
-   * **Week 1 (Sprint 1)**: Spine Routing & Fuel Gates (M1, M3)
-   * **Week 2 (Sprint 2)**: Dynamic Systems, Story Chains & Fail States (M2)
-   * **Week 3 (Sprint 3)**: UI & Structural Assets Integration (M4)
-   * **Week 4 (Sprint 4)**: Full-fidelity Verification & Prose Drop (M5)
-   * **Week 5 (Sprint 5)**: Soft Launch to Subscribers, Next Release Planning, & Playtest Bug Fixes (M6 / Ship)
+1. **Run the daily check**:
 
-2. **Execute the Standup Audit**:
-   Run the daily standup script to automatically query the codebase status, parse checklists, and inspect the backlog:
    ```powershell
-   # Console report only
+   # Console report only (exit code 1 if any check failed)
    py scripts/daily_standup.py
 
    # Write dated markdown (also updates planning/daily_standup_report.md)
    py scripts/daily_standup.py --report
    ```
+
    Dated artifacts: `main-game/draft/releases/planning/standups/daily_standup_YYYY-MM-DD.md`
 
    **Scheduled (Windows, daily 6:00 AM local):**
+
    ```powershell
    ./scripts/register_daily_standup_task.ps1
    ./scripts/run_daily_standup.ps1   # smoke test
    ```
 
-3. **Align Specialist Tasks & Grades**:
-   Evaluate the status of the three distinct domains:
-   * **Chief Architect (`@.agents/rules/chief_architect.md`)**: Analyzes compilation errors in the non-prod project (via `errors.txt`), linter issues, and missing asset declarations.
-   * **Adult Market Reviewer (`@.agents/rules/adult_market_reviewer.md`)**: Focuses on erotic pacing, spicier story chains rewrite (Task `[N-6]`), and book chapters slots.
-   * **Lead Narrative Editor (`@.agents/rules/lead_narrative_editor.md`)**: Audits character voice lock, historical linting sweep (Task `[N-1]`), and day gate verdicts.
+2. **What runs each day** (all live — nothing read from cache files):
 
-4. **Action Today's Checklist**:
-   Prioritize "Today's Critical Actions" printed by the script, beginning with compile blockers and high-priority backlog tasks.
+   | Check | Script |
+   |-------|--------|
+   | Ren'Py contract lint (non-prod) | `renpy_contract_linter.py` |
+   | Engineering compliance (non-prod) | `engineering_compliance.py` |
+   | Scene direction | `scene_direction.py --check` |
+   | Non-canon formatting | `format_non_canon.py --check` |
+   | Historical linter | `historical_linter.py` |
+   | Asset manifest disk sync | manifest vs disk |
+   | `renpy lint` | `renpy_sdk.py` discovers newest SDK on PATH, `RENPY_SDK`, or `Documents/Renpy` |
 
-5. **Hand off to code / prose agents**:
-   Reports include an **Agent work queue** (JSON). Agents use [`.agents/skills/action_from_standup/SKILL.md`](../action_from_standup/SKILL.md):
+3. **Action queue**: Failed checks only. Point agents at the report and use [action_from_standup](../action_from_standup/SKILL.md):
 
    ```powershell
    py scripts/resolve_work_item.py --from-standup --next
@@ -50,9 +46,12 @@ Use this daily at the start of a session or whenever you want to refocus and rep
    Registry: [`docs/backlog/task_registry.json`](../../../docs/backlog/task_registry.json)  
    Contract: [`planning/standup_agent_contract.md`](../../../main-game/draft/releases/planning/standup_agent_contract.md)
 
+4. **Planning / specialist review** (not daily): when you need checklist bars, backlog grades, or Adult Market Reviewer lens:
+
+   ```powershell
+   py scripts/integration_review.py --report
+   ```
+
 ## Customization
 
-To initialize or shift the Epic start date, modify `main-game/draft/releases/planning/epic_schedule.json` or pass the `--start-date` argument:
-```powershell
-py scripts/daily_standup.py --start-date 2026-05-18
-```
+Epic start date: `main-game/draft/releases/planning/epic_schedule.json` or `--start-date YYYY-MM-DD`.

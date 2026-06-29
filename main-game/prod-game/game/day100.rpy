@@ -421,4 +421,4 @@ label day100_3_arrival:
     $ time_manager.set_current_day(1)
     $ set_time_period("Morning")
 
-    jump day101_main
+    jump day101

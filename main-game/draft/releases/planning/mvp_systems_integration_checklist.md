@@ -324,7 +324,7 @@ Story windows: `call story_window_penance_gate(window_id)` at entry; if `_penanc
 | 8.1 | Merge prose — no label/menu/routing changes without your review | [ ] |
 | 8.2 | Re-run narrative gates if branch structure changed | [ ] |
 | 8.3 | Scan new `[ASSET]` / `scene` / `show` lines for manifest entries | [ ] |
-| 8.4 | Add manuscript CGs: `cg_manuscript_retelling_d1`–`d4` per `story_board.md` | [ ] |
+| 8.4 | Add manuscript CGs: `cg_manuscript_retelling_d1`–`d4` per `story_board.md` | [x] interim placeholders + Ch1/Ch2/Ch4 tableau wired (2026-06-29) |
 | 8.5 | Add `cg_gideon_photograph`, `cg_photograph_burning` — uncomment show lines in Day 104–105 | [ ] |
 | 8.6 | Set `book1_page_image` per branch for NVL illustration frame | [ ] |
 | 8.7 | Final playthrough matrix (below) all green | [ ] |

@@ -1,7 +1,7 @@
 # Testing and balance report
 
 **Release:** `release-1-mvp`
-**Generated:** 2026-06-20 11:40 UTC
+**Generated:** 2026-06-28 21:09 UTC
 
 ## Verdict
 
@@ -114,7 +114,7 @@
 - ✓ **PASS** — Simulation output present: gate_results (`main-game/pipeline/releases/release-1-mvp/balance/gate_results.csv`)
 - ✓ **PASS** — Runtime capture harness present: debug_run_capture (`main-game/non-prod-game/game/shared/debug_run_capture.rpy`)
 - ✓ **PASS** — Runtime capture overlay screens present in screens.rpy (`main-game/non-prod-game/game/screens.rpy`)
-- ✓ **PASS** — Runtime JSONL captures present (1/7) (`P1_corruption_forward`)
+- ✓ **PASS** — Runtime JSONL captures present (3/7) (`P1_corruption_forward, P2_cautious, P4_deadline_1`)
 - ✓ **PASS** — Runtime/model comparison report present (`main-game/pipeline/releases/release-1-mvp/qa/runtime_model_comparison.md`)
 - ✓ **PASS** — Runtime comparison tool present (`main-game/pipeline/tools/compare_runtime_to_model.py`)
 
@@ -123,31 +123,17 @@
 - ✓ **PASS** — Effect profile source file present (`main-game/draft/releases/planning/balance/effect_profiles.yaml`)
 - ✓ **PASS** — Runtime balance profile file present (`main-game/non-prod-game/game/shared/balance_profiles_non_canon.rpy`)
 - ✓ **PASS** — Choice catalogue profile rows match resolved profile deltas (`main-game/draft/releases/planning/balance/choice_catalogue.csv`)
-- ✓ **PASS** — Profile usage captured (45 profile-mapped choices) (`main-game/draft/releases/planning/balance/choice_catalogue.csv`)
-- ✓ **PASS** — No direct player stat mutations in scoped day scripts (`non-prod day scripts`)
-- ✓ **PASS** — Semantic profile calls valid (62 call(s)) (`non-prod day scripts`)
-- ✓ **PASS** — Bespoke apply_effects marked (23 call(s)) (`non-prod day scripts`)
+- ✓ **PASS** — Profile usage captured (62 profile-mapped choices) (`main-game/draft/releases/planning/balance/choice_catalogue.csv`)
+- ✓ **PASS** — No direct player stat mutations in scoped scripts (`non-prod scripts`)
+- ✓ **PASS** — Semantic profile calls valid (89 call(s)) (`non-prod scripts`)
+- ✓ **PASS** — Bespoke apply_effects marked (35 call(s)) (`non-prod scripts`)
 
 ## Profile usage summary
 
-- `creative_major`: 5
-- `curious_major`: 1
-- `curious_minor`: 1
-- `defiant_major`: 2
-- `defiant_standard`: 4
-- `obedient_minor`: 1
-- `obedient_standard`: 2
-- `observant_minor`: 1
-- `observant_standard`: 8
-- `predatory_standard`: 1
-- `reckless_1.4`: 3
-- `reckless_major`: 1
-- `reckless_standard`: 1
-- `safe_minor`: 1
-- `self_protective_standard`: 1
-- `submissive_standard`: 5
-- `transgressive_major`: 3
-- `transgressive_standard`: 4
+- `creative_standard`: 21
+- `curious_standard`: 6
+- `observant_standard`: 20
+- `transgressive_standard`: 15
 
 ## Required day files
 

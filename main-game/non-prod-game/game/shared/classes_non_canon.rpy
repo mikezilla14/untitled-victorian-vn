@@ -388,7 +388,21 @@ init -1 python:
 
         # ── PROMOTE: Optional character grind chains (Release 1 REFLECT) ──
         VALID_CHAIN_CHARACTERS     = ("stern", "missy", "vance")
+        VALID_CHAIN_PATHS          = ("safe_progress", "climax")
         MAX_CHARACTER_CHAIN_LEVEL  = 3
+        VALID_STERN_CHAIN_OUTCOMES = ("none", "abandoned", "cautious", "marked", "climax")
+        VALID_MISSY_CHAIN_OUTCOMES = ("none", "abandoned", "pact", "entangled", "climax")
+        VALID_VANCE_CHAIN_OUTCOMES = ("none", "abandoned", "voyeur", "collusion", "climax")
+        CHAIN_PROGRESS_OUTCOMES    = {
+            "stern": {1: "cautious", 2: "cautious"},
+            "missy": {1: "pact", 2: "entangled"},
+            "vance": {1: "voyeur", 2: "voyeur"},
+        }
+        CHAIN_CLIMAX_OUTCOMES      = {
+            "stern": "marked",
+            "missy": "climax",
+            "vance": "collusion",
+        }
 
         # Maps (day, time_of_day) → (next_day, next_time, next_label).
         # Used by advance_after_confrontation. Add one entry per new day/slot.
@@ -396,7 +410,7 @@ init -1 python:
         # New time-period routing uses explicit day labels plus dynamic windows
         # that call optional content and return to the day spine.
         POST_PENANCE_ROUTES = {
-            (1, "Morning"):   (1, "Night",     "day101_4_writing_or_visiting"),
+            (1, "Morning"):   (1, "Night",     "day101_4_write_the_chapter"),
             (1, "Evening"):   (2, "Morning",   "day102_1_cora_missy_first_shift"),
             (1, "Night"):     (2, "Morning",   "day102_1_cora_missy_first_shift"),
             (2, "Morning"):   (2, "Evening",   "day102_3_stern_fetches_cora"),
@@ -501,11 +515,17 @@ init -1 python:
             self.release2_missy_status      = "none"
 
             # ── PROMOTE: Optional character grind chains ───────────────
-            self.stern_chain_level  = 0
-            self.missy_chain_level  = 0
-            self.vance_chain_level  = 0
-            self.penance_triggered  = False
-            self.pending_penance    = []
+            self.stern_chain_level   = 0
+            self.missy_chain_level   = 0
+            self.vance_chain_level   = 0
+            self.stern_chain_outcome = "none"
+            self.missy_chain_outcome = "none"
+            self.vance_chain_outcome = "none"
+            self.stern_chain_closed  = False
+            self.missy_chain_closed  = False
+            self.vance_chain_closed  = False
+            self.penance_triggered   = False
+            self.pending_penance     = []
 
         # ── Internal helpers ───────────────────────────────────────────
 
@@ -721,6 +741,67 @@ init -1 python:
         def set_vance_chain_level(self, value):
             self._set_chain_level("vance_chain_level", value)
 
+        def set_stern_chain_outcome(self, value):
+            self._set_string_state("stern_chain_outcome", value, self.VALID_STERN_CHAIN_OUTCOMES)
+
+        def set_missy_chain_outcome(self, value):
+            self._set_string_state("missy_chain_outcome", value, self.VALID_MISSY_CHAIN_OUTCOMES)
+
+        def set_vance_chain_outcome(self, value):
+            self._set_string_state("vance_chain_outcome", value, self.VALID_VANCE_CHAIN_OUTCOMES)
+
+        def _chain_outcome_field(self, character):
+            return "{}_chain_outcome".format(character)
+
+        def _chain_closed_field(self, character):
+            return "{}_chain_closed".format(character)
+
+        def _valid_chain_outcomes(self, character):
+            return {
+                "stern": self.VALID_STERN_CHAIN_OUTCOMES,
+                "missy": self.VALID_MISSY_CHAIN_OUTCOMES,
+                "vance": self.VALID_VANCE_CHAIN_OUTCOMES,
+            }[character]
+
+        def _set_chain_outcome(self, character, value):
+            self._set_string_state(
+                self._chain_outcome_field(character),
+                value,
+                self._valid_chain_outcomes(character),
+            )
+
+        def _set_chain_closed(self, character, value):
+            self._set_boolean_flag(self._chain_closed_field(character), value)
+
+        def is_chain_closed(self, character):
+            if character not in self.VALID_CHAIN_CHARACTERS:
+                raise ValueError(
+                    "Invalid chain character '{}'. Must be one of: {}".format(
+                        character, ", ".join(self.VALID_CHAIN_CHARACTERS)
+                    )
+                )
+            return getattr(self, self._chain_closed_field(character))
+
+        def stern_chain_penance_echo(self):
+            """True when Stern chain progress should colour confrontation prose."""
+            return self.stern_chain_outcome in ("cautious", "marked", "climax")
+
+        def stern_chain_spine_echo(self):
+            """True when Day 103 Stern summons should reference chain intimacy."""
+            return self.stern_chain_outcome in ("marked", "climax")
+
+        def vance_chain_penance_echo(self):
+            return self.vance_chain_outcome in ("voyeur", "collusion")
+
+        def vance_chain_spine_echo(self):
+            return self.vance_chain_outcome == "collusion"
+
+        def missy_chain_penance_echo_betrayal(self):
+            return self.missy_chain_outcome in ("entangled", "climax")
+
+        def missy_chain_was_abandoned(self):
+            return self.missy_chain_outcome == "abandoned"
+
         def set_penance_triggered(self, value):
             """DEPRECATED compatibility bridge; use pending_penance queue helpers."""
             self._set_boolean_flag("penance_triggered", value)
@@ -769,19 +850,58 @@ init -1 python:
             return getattr(self, "{}_chain_level".format(character))
 
         def chain_available(self, character):
+            if self.is_chain_closed(character):
+                return False
             return self.get_character_chain_level(character) < self.MAX_CHARACTER_CHAIN_LEVEL
 
         def resolve_chain_label(self, character):
-            level = self.get_character_chain_level(character)
-            if level >= self.MAX_CHARACTER_CHAIN_LEVEL:
+            if not self.chain_available(character):
                 return None
+            level = self.get_character_chain_level(character)
             return "{}_chain_{}".format(character, level + 1)
 
-        def complete_chain_beat(self, character):
-            """Advance a character's chain level by one. Call once at the end of any chain scene."""
+        def abandon_chain_beat(self, character):
+            """Close optional chain track without advancing level (safe / break path)."""
+            if character not in self.VALID_CHAIN_CHARACTERS:
+                raise ValueError(
+                    "Invalid chain character '{}'. Must be one of: {}".format(
+                        character, ", ".join(self.VALID_CHAIN_CHARACTERS)
+                    )
+                )
+            self._set_chain_closed(character, True)
+            self._set_chain_outcome(character, "abandoned")
+
+        def complete_chain_beat(self, character, path=None):
+            """Advance chain level and record outcome. path: safe_progress | climax."""
+            if character not in self.VALID_CHAIN_CHARACTERS:
+                raise ValueError(
+                    "Invalid chain character '{}'. Must be one of: {}".format(
+                        character, ", ".join(self.VALID_CHAIN_CHARACTERS)
+                    )
+                )
+            if path is not None and path not in self.VALID_CHAIN_PATHS:
+                raise ValueError(
+                    "Invalid chain path '{}'. Must be one of: {}".format(
+                        path, ", ".join(self.VALID_CHAIN_PATHS)
+                    )
+                )
+            if self.is_chain_closed(character):
+                return
+
             current = self.get_character_chain_level(character)
-            if current < self.MAX_CHARACTER_CHAIN_LEVEL:
-                self._set_chain_level("{}_chain_level".format(character), current + 1)
+            if current >= self.MAX_CHARACTER_CHAIN_LEVEL:
+                return
+
+            next_level = current + 1
+            if path == "climax":
+                outcome = self.CHAIN_CLIMAX_OUTCOMES[character]
+            else:
+                outcome = self.CHAIN_PROGRESS_OUTCOMES[character].get(next_level, "none")
+
+            self._set_chain_outcome(character, outcome)
+            self._set_chain_level("{}_chain_level".format(character), next_level)
+            if next_level >= self.MAX_CHARACTER_CHAIN_LEVEL:
+                self._set_chain_closed(character, True)
 
         def get_post_penance_target(self, current_day, time_of_day):
             """Pure query — returns (next_day, next_time, next_label). No side effects."""

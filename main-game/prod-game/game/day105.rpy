@@ -12,10 +12,9 @@
 # [enter:Name] / [exit:Name] -> declare cast changes so auto placement stays correct
 # Full policy: docs/contracts/sprite_layout_policy.yaml | spec: docs/specs/scene-direction-agent.md
 
-# day105_non_canon.rpy
-# Release 1 / Day 05 non-canon Ren'Py-shaped draft
-# Source intent: rewritten from legacy Day 5 confrontation script and aligned to updated Day 4 false-dawn ending.
-# Conceptual role: slam the door back in Cora's face after Day 4's false dawn.
+# day105.rpy
+# Release 1 / Day 05 — promoted runtime canon
+# Spine: time-period routing via explicit day labels and dynamic windows
 # Core thesis: Gideon is not the true antagonist; he is the first visible instrument of the structural power protecting men like him.
 # Release function: close the MVP arc while opening the series arc — Cora has written, survived, and been noticed.
 # Promotion note: replace story/player helper calls with exact runtime method names during implementation.
@@ -220,8 +219,9 @@ label day105_3_leverage_collapses:
         cora_inner "Not because I want to."
         cora_inner "Because keeping it hidden has already failed."
 
-        # [ASSET] Optional CG callout retained from legacy concept
-        # show cg_gideon_photograph
+        # [ASSET] CG — photograph on the table
+        show cg_gideon_photograph
+        with dissolve
 
         cora_inner "I should not place anything on his table without permission."
         "I place the photograph face up on the polished table between us."
@@ -581,8 +581,9 @@ label day105_5_gideon_marks_cora:
     if story.has_photograph:
         "He carries the photograph to the fireplace."
 
-        # [ASSET] Optional object/CG callout
-        # show cg_photograph_burning
+        # [ASSET] CG — photograph burning
+        show cg_photograph_burning
+        with dissolve
 
         "He holds the match near my face before he strikes it."
         "I feel the heat on my cheek before the paper curls."

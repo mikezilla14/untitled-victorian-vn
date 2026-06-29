@@ -24,7 +24,8 @@ For feature status and deprecation decisions, use [`feature_lifecycle_registry.m
 | Scene direction | `scene_direction` | `[asset auto]` show/hide lines only | Sprite layout policy and manual staging locks |
 | Promotion | `chief_architect` + `prod_code_agent` | Production day/framework files | MVP checklist, gates, validation, promotion handoff |
 | Documentation hygiene | `documentation_steward` | Docs, READMEs, catalogues/audits | Feature lifecycle registry before catalogue regeneration |
-| Planning standup | `daily_standup` / `action_from_standup` | Reports/spec routing only | Any execution must chain into an active process above |
+| Planning standup | `daily_standup` / `action_from_standup` | Daily automated check reports | Live validation only; routes failures to active processes |
+| Integration review | `integration_review` | Weekly/ad-hoc planning reports | Checklist, backlog, specialist grades — not daily |
 
 ## Feature creation rule
 

@@ -89,7 +89,7 @@
   },
   "tasks": {
     "COMPILE_ERROR": {
-      "title": "Resolve non-prod Ren'Py compile error",
+      "title": "Resolve non-prod Ren'Py script error (live check)",
       "lane": "code",
       "agent": "non_prod_code_agent",
       "skill": "implement_spec",
@@ -100,11 +100,57 @@
         "main-game/draft/releases/planning/mvp_systems_integration_checklist.md",
         "docs/agents/CONTRACTS.md"
       ],
-      "files": [
-        "main-game/non-prod-game/errors.txt"
-      ],
+      "files": [],
       "verify": [
-        "py scripts/validate.py --profile code"
+        "py scripts/daily_standup.py",
+        "renpy lint main-game/non-prod-game/"
+      ]
+    },
+    "RENPY_CONTRACT_FAIL": {
+      "title": "Fix Ren'Py contract lint violations (non-prod)",
+      "lane": "code",
+      "agent": "non_prod_code_agent",
+      "skill": "implement_spec",
+      "pipeline": "implement-spec",
+      "pipeline_stage": 1,
+      "standup_kind": "blocked",
+      "verify": [
+        "py scripts/renpy_contract_linter.py --files \"main-game/non-prod-game/game\""
+      ]
+    },
+    "ENGINEERING_COMPLIANCE_FAIL": {
+      "title": "Fix engineering compliance violations (non-prod)",
+      "lane": "code",
+      "agent": "non_prod_code_agent",
+      "skill": "implement_spec",
+      "pipeline": "implement-spec",
+      "pipeline_stage": 1,
+      "standup_kind": "blocked",
+      "verify": [
+        "py scripts/engineering_compliance.py --files \"main-game/non-prod-game/game\""
+      ]
+    },
+    "RENPY_LINT_FAIL": {
+      "title": "Fix renpy lint errors on non-prod project",
+      "lane": "code",
+      "agent": "non_prod_code_agent",
+      "skill": "implement_spec",
+      "pipeline": "implement-spec",
+      "pipeline_stage": 1,
+      "standup_kind": "blocked",
+      "verify": [
+        "renpy lint main-game/non-prod-game/"
+      ]
+    },
+    "ASSET_DISK_FAIL": {
+      "title": "Resolve missing declared assets on disk",
+      "lane": "audit",
+      "agent": "chief_architect",
+      "skill": "check_assets",
+      "standup_kind": "blocked",
+      "verify": [
+        "py scripts/daily_asset_manifest.py",
+        "py scripts/daily_standup.py"
       ]
     },
     "N-1": {

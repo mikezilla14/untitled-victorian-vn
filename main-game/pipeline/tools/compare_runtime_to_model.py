@@ -62,6 +62,17 @@ def _coerce_int(value: Any) -> int:
     return int(value)
 
 
+def normalize_release_day(day: int | None, expected_floor: int) -> int | None:
+    """Map runtime slot index (1–5) to file-id day (101–105) when assertions use file ids."""
+    if day is None:
+        return None
+    slot = int(day)
+    floor = int(expected_floor)
+    if floor >= 100 and slot < 20:
+        return slot + 100
+    return slot
+
+
 def validate_balanced_effect_events(
     events: list[dict],
     *,
@@ -196,8 +207,9 @@ def evaluate_assertions(run_id: str, events: list[dict], assertions: list) -> li
                     if "current_day" in flags:
                         day = flags["current_day"]
                         break
-            passed = day is not None and day >= value
-            detail = f"day={day}"
+            normalized = normalize_release_day(day, value)
+            passed = normalized is not None and normalized >= value
+            detail = f"day={day} (normalized={normalized})"
         elif key == "assert_event_seen":
             if value == "confrontation":
                 passed = confrontation_seen

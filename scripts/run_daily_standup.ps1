@@ -3,7 +3,7 @@
 
 $ErrorActionPreference = "Stop"
 $RepoRoot = Split-Path -Parent $PSScriptRoot
-$LogDir = Join-Path $RepoRoot "narrative\draft\releases\release-1-mvp\planning\standups"
+$LogDir = Join-Path $RepoRoot "main-game\draft\releases\planning\standups"
 $LogFile = Join-Path $LogDir "scheduler.log"
 
 New-Item -ItemType Directory -Force -Path $LogDir | Out-Null

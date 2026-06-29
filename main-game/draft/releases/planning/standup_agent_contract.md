@@ -41,5 +41,12 @@ If still ambiguous, the agent must ask — not invent scope.
 ## 5. Done means
 
 - Verify commands from the packet pass.
-- Checklist box marked `[x]` or backlog item noted complete.
-- `py scripts/daily_standup.py --report` refreshed.
+- Checklist box marked `[x]` or backlog item noted complete (integration review tracks these).
+- `py scripts/daily_standup.py --report` refreshed (failed automated checks cleared).
+
+## 6. Daily vs integration review
+
+| Report | Command | Cadence | Contents |
+|--------|---------|---------|----------|
+| Daily health check | `py scripts/daily_standup.py --report` | Daily | Live linter/validation results only |
+| Integration review | `py scripts/integration_review.py --report` | Weekly / ad-hoc | Checklist, backlog, specialist grades |

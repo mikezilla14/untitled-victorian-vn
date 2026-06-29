@@ -27,7 +27,7 @@ This document is split into two parts:
 - New mechanics require explicit approval before implementation.
 
 ### 3) Ways of Work
-- Writing/design happens in non-canon Ren'Py drafts (`main-game/draft/dayrdd_non_canon.rpy`).
+- Writing/design happens in sandbox Ren'Py drafts (`main-game/non-prod-game/game/days/dayNNN_non_canon.rpy`).
 - Historical checks run through `scripts/historical_linter.py`.
 - Code implementation happens in `main-game/prod-game/game/*.rpy`.
 - Chief Architect enforces code methodology and consistency.

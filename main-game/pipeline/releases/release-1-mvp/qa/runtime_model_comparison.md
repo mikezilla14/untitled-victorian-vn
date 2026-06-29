@@ -1,7 +1,7 @@
 # Runtime vs model comparison
 
 **Release:** `release-1-mvp`
-**Generated:** 2026-06-21 13:24 UTC
+**Generated:** 2026-06-29 17:20 UTC
 **Capture dir:** `main-game/non-prod-game/debug_captures`
 **Rollback policy:** rollback-contaminated captures invalid for balance proof
 
@@ -10,7 +10,7 @@
 | Run | Capture | Structure | Assertions | Rollback | Balance proof | Notes |
 |---|---|---|---|---|---|---|
 | `P1_corruption_forward` | present | PASS | PASS | no | PASS | ending=day105_7_release_one_ending |
-| `P2_cautious` | present | PASS | FAIL | no | PASS | ending=day105_7_release_one_ending |
+| `P2_cautious` | present | PASS | PASS | no | PASS | ending=day105_7_release_one_ending |
 | `P3_low_corruption` | missing | — | — | — | — | No JSONL file |
 | `P4_deadline_1` | present | PASS | PASS | no | PASS | ending=game_over_deadline_1 |
 | `P5_deadline_2` | missing | — | — | — | — | No JSONL file |
@@ -23,7 +23,7 @@
 |---|---|---|---|---|
 | `P1_corruption_forward` | `assert_ending` | `"day105_7_release_one_ending"` | yes | endings=['day105_7_release_one_ending'] |
 | `P1_corruption_forward` | `assert_stat_floor` | `{"manuscript_progress": 5}` | yes | stats={'anxiety': 45, 'corruption_level': 8, 'corruption_xp': 5, 'inspiration': 50, 'inspiration_cap': 50, 'manuscript_progress': 5} |
-| `P2_cautious` | `assert_reaches_day_at_least` | `105` | no | day=5 |
+| `P2_cautious` | `assert_reaches_day_at_least` | `105` | yes | day=5 (normalized=105) |
 | `P4_deadline_1` | `assert_ending` | `"game_over_deadline_1"` | yes | endings=['game_over_deadline_1'] |
 
 ## Missing captures

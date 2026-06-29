@@ -72,14 +72,30 @@ def extract_standup_body(markdown: str) -> str:
     return match.group(1) if match else markdown
 
 
+_FAIL_REGISTRY_MAP = (
+    ("renpy contract lint", "RENPY_CONTRACT_FAIL"),
+    ("engineering compliance", "ENGINEERING_COMPLIANCE_FAIL"),
+    ("renpy lint", "RENPY_LINT_FAIL"),
+    ("asset manifest disk", "ASSET_DISK_FAIL"),
+)
+
+
+def _fail_registry_id(summary: str) -> str:
+    lower = summary.lower()
+    for needle, registry_id in _FAIL_REGISTRY_MAP:
+        if needle in lower:
+            return registry_id
+    return "COMPILE_ERROR"
+
+
 def parse_standup_actions(standup_text: str) -> list[dict[str, Any]]:
-    """Parse TODAY'S CRITICAL ACTIONS from standup plain-text body."""
+    """Parse ACTION QUEUE (or legacy TODAY'S CRITICAL ACTIONS) from standup body."""
     items: list[dict[str, Any]] = []
     in_actions = False
     priority = 0
 
     for line in standup_text.splitlines():
-        if "TODAY'S CRITICAL ACTIONS" in line:
+        if "ACTION QUEUE" in line or "TODAY'S CRITICAL ACTIONS" in line:
             in_actions = True
             continue
         if in_actions and line.strip().startswith("===="):
@@ -88,7 +104,7 @@ def parse_standup_actions(standup_text: str) -> list[dict[str, Any]]:
             continue
 
         stripped = line.strip()
-        if not stripped or stripped.startswith("🎉"):
+        if not stripped or stripped.startswith("🎉") or stripped.startswith("For checklist"):
             continue
 
         # Numbered action lines: "   1. ..."
@@ -111,13 +127,14 @@ def parse_standup_actions(standup_text: str) -> list[dict[str, Any]]:
             )
             continue
 
-        if "[BLOCKED]" in body:
+        if "[BLOCKED]" in body or "[FAIL]" in body:
+            fail_summary = body.split("[FAIL]", 1)[-1].split("[BLOCKED]", 1)[-1].strip()
             items.append(
                 {
                     "priority": priority,
                     "kind": "blocked",
-                    "registry_id": "COMPILE_ERROR",
-                    "summary": body,
+                    "registry_id": _fail_registry_id(fail_summary),
+                    "summary": fail_summary,
                 }
             )
             continue

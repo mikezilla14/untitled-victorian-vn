@@ -12,10 +12,9 @@
 # [enter:Name] / [exit:Name] -> declare cast changes so auto placement stays correct
 # Full policy: docs/contracts/sprite_layout_policy.yaml | spec: docs/specs/scene-direction-agent.md
 
-# day103_non_canon.rpy
-# Release 1 / Day 03 non-canon Ren'Py-shaped draft
-# Erotic and dramatic heightening at Spice Level 3.5 (Dramatic Middle Ground + Restrained Heat).
-# Verified and synchronized with baseline variable structure and runtime APIs.
+# day103.rpy
+# Release 1 / Day 03 — promoted runtime canon
+# Spine: time-period routing via explicit day labels and dynamic windows
 
 # ==========================================
 # DAY 3 NODE MAP
@@ -582,6 +581,9 @@ label day103_2_suite_gideon_beat:
 
     gideon "You observe too much."
 
+    if story.vance_chain_spine_echo():
+        cora_inner "I have already stood too close to Miss Vance in his shadow. He will know what kind of observer I am becoming."
+
     # [ASSET] Visual/staging command
     show cora_sprite base at left_bust with moveinleft # [asset auto]
     show vance_sprite submissive at centre_bust with move # [asset auto]
@@ -805,6 +807,9 @@ label day103_4_room_stern_suspicion:
     cora_inner "A knock comes at my door."
     cora_inner "Not Mr. Locke's."
     cora_inner "Worse."
+
+    if story.stern_chain_spine_echo():
+        cora_inner "She has already put her hands where a housekeeper should not. Tonight she will read that in my face."
 
     # [ASSET] Visual/staging command
     show stern_sprite stern at centre_bust

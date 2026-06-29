@@ -138,7 +138,8 @@ label day104_1_lockbox_evidence:
     "Inside: bank notes, a theatre programme, two folded letters, and an envelope stiff with photographic paper."
 
     # [ASSET] CG callout retained from legacy draft
-    # show cg_gideon_photograph
+    show cg_gideon_photograph
+    with dissolve
 
     cora_inner "The photograph is not large."
     cora_inner "That feels obscene somehow."

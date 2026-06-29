@@ -74,3 +74,21 @@ To protect existing creative scripts and menu branches from breaking, the follow
 
 - **Interactive Evasion**: When writing standard choice outcomes, adjust acute suspicion using `apply_effects(stern_susp=15)` to give immediate heat, allowing the player to manage or decay it.
 - **Narrative Milestones**: At major day transitions, plot intersections, or calculated branch outcomes, apply permanent base suspicion deltas using `apply_effects(stern_base=stern_base_delta)`.
+
+---
+
+## 5. Chain Outcome and Abandon API (2026-06-28)
+
+Optional story chains now distinguish **safe abandon** from **charged progress**:
+
+| Helper | Effect |
+|--------|--------|
+| `story.abandon_chain_beat(character)` | Sets `*_chain_closed = True`, `*_chain_outcome = "abandoned"`, does **not** increment `*_chain_level`. |
+| `story.complete_chain_beat(character, path="safe_progress")` | Increments level, sets tier outcome (`cautious` / `pact` / `voyeur` at T1–T2). |
+| `story.complete_chain_beat(character, path="climax")` | Increments to tier 3 completion; sets `marked` (Stern), `climax` (Missy), or `collusion` (Vance). |
+
+`story.chain_available(character)` returns `False` when `*_chain_closed` is True or level ≥ `MAX_CHARACTER_CHAIN_LEVEL`.
+
+Public setters: `set_stern_chain_outcome`, `set_missy_chain_outcome`, `set_vance_chain_outcome` (whitelisted strings in `StoryState`).
+
+**Promotion note:** Mirror these fields and methods in `main-game/prod-game/game/classes.rpy` before prod promotion.

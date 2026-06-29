@@ -19,6 +19,8 @@ import balance_resolver  # noqa: E402
 from compare_runtime_to_model import (  # noqa: E402
     ROLLBACK_CONTAMINATED,
     RESOLVER_MISMATCH,
+    evaluate_assertions,
+    normalize_release_day,
     summarize_capture,
     validate_balanced_effect_events,
 )
@@ -88,6 +90,31 @@ class CompareRuntimeCaptureTests(unittest.TestCase):
         summary = summarize_capture("test", events, config=self.config)
         self.assertFalse(summary["balance_proof_valid"])
         self.assertIn(RESOLVER_MISMATCH, summary["balance_proof_blockers"])
+
+    def test_normalize_release_day_slot_to_file_id(self) -> None:
+        self.assertEqual(normalize_release_day(5, 105), 105)
+        self.assertEqual(normalize_release_day(105, 105), 105)
+        self.assertEqual(normalize_release_day(3, 3), 3)
+
+    def test_assert_reaches_day_accepts_runtime_slot_index(self) -> None:
+        events = [
+            {"seq": 1, "event": "run_start", "snapshot": {}},
+            {"seq": 2, "event": "grain_enter", "label": "day105_7_release_one_ending", "snapshot": {}},
+            {
+                "seq": 3,
+                "event": "run_end",
+                "contains_rollback": False,
+                "snapshot": {"stats": {"current_day": 5}},
+            },
+        ]
+        rows = evaluate_assertions(
+            "P2_cautious",
+            events,
+            [{"assert_reaches_day_at_least": 105}],
+        )
+        self.assertEqual(len(rows), 1)
+        self.assertTrue(rows[0]["passed"])
+        self.assertIn("normalized=105", rows[0]["detail"])
 
 
 if __name__ == "__main__":

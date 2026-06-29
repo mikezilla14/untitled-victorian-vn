@@ -1,0 +1,52 @@
+{
+  "contract_version": "1",
+  "day_id": "day102",
+  "release": "release-1-mvp",
+  "status": "CLOSED",
+  "scale": "M",
+  "invoked_by": "lead_narrative_editor",
+  "affected_labels": [
+    "stern_chain_1",
+    "stern_chain_2",
+    "stern_chain_3",
+    "missy_chain_1",
+    "missy_chain_2",
+    "missy_chain_3",
+    "vance_chain_1",
+    "vance_chain_2",
+    "vance_chain_3",
+    "confrontation_stern",
+    "confrontation_missy",
+    "confrontation_vance",
+    "anxiety_breakdown_downtime",
+    "day103_4_room_stern_suspicion",
+    "day103_2_suite_gideon_beat",
+    "day104_4_twilight_ledger_false_dawn",
+    "day102_3_coras_choice"
+  ],
+  "affected_setters": [
+    "story.abandon_chain_beat",
+    "story.complete_chain_beat",
+    "story.set_stern_chain_outcome",
+    "story.set_missy_chain_outcome",
+    "story.set_vance_chain_outcome"
+  ],
+  "story_board_rows": [
+    "Global State Tracking — stern_chain_level, missy_chain_level, vance_chain_level, penance_triggered",
+    "Two-Step Slot Integration — optional story windows Days 101–103",
+    "check_confrontations entry points — penance consumption",
+    "Adult Payoff Structure — IRL chains restrained vs manuscript layer"
+  ],
+  "personas": [
+    "tension",
+    "class",
+    "erotic",
+    "thematic",
+    "mystery"
+  ],
+  "return_to": {
+    "agent": "non_prod_code_agent",
+    "pipeline": "revise-narrative"
+  },
+  "markdown_brief_path": "main-game/draft/releases/release-1-mvp/story_chains_narrative_change_brief.md"
+}

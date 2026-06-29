@@ -84,7 +84,7 @@ agents to run in what order, and define what each agent should receive and retur
 - "Documentation audit — sync READMEs and refresh the catalogue."
 - "Refresh sprite staging on day 104." (`scene_direction` skill — not a pipeline)
 
-**Sandbox day path (MVP):** `main-game/draft/releases/<release>/non_prod_main-game/prod-game/game/days/dayrdd_non_canon.rpy`
+**Sandbox day path (MVP):** `main-game/non-prod-game/game/days/dayrdd_non_canon.rpy`
 
 ---
 

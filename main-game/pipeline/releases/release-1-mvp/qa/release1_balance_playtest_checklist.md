@@ -4,7 +4,8 @@ Use this to finish **P2–P7** runtime captures and close the end-to-end balanci
 
 **Already done:** P1 (`P1_corruption_forward.jsonl`) — PASS, MS 5, MVP ending.
 
-**Record results in:** [`release1_route_matrix_results.md`](release1_route_matrix_results.md)
+**Record results in:** [`release1_route_matrix_results.md`](release1_route_matrix_results.md)  
+**Detailed test spec:** [`release1_route_matrix_test_plan.md`](release1_route_matrix_test_plan.md)
 
 ---
 
@@ -139,7 +140,7 @@ Fail paths first (quick, validates deadlines), then sim-gap routes, then P7 last
 
 ### Pass criteria
 
-- [ ] Reaches day **105** (`assert_reaches_day_at_least: 105`) — MVP ending **or** weak but complete path
+- [x] Reaches day **105** (`assert_reaches_day_at_least: 105`) — validated 2026-06-29 on `P2_cautious.jsonl` (`current_day` slot **5** normalized to file id **105** in compare tool)
 - [ ] Note final MS, corruption level, and whether feedback felt clear for cautious players
 - [ ] Compare to abstract sim (expected gap: sim stopped day 104)
 - [ ] Matrix row → **PASS** or **FAIL** with notes for tuning

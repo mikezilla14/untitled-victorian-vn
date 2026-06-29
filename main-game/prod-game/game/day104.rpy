@@ -12,10 +12,9 @@
 # [enter:Name] / [exit:Name] -> declare cast changes so auto placement stays correct
 # Full policy: docs/contracts/sprite_layout_policy.yaml | spec: docs/specs/scene-direction-agent.md
 
-# day104_non_canon.rpy
-# Release 1 / Day 04 non-canon Ren'Py-shaped draft
-# Source intent: parsed from legacy Day 4 heist script and reframed as the false dawn / tension-release day.
-# Conceptual role: Cora survives the monster's house in daylight, finishes the manuscript, and believes she has gained decisive leverage.
+# day104.rpy
+# Release 1 / Day 04 — promoted runtime canon
+# Spine: time-period routing via explicit day labels and dynamic windows
 # Day 5 should puncture that belief: Gideon is not the true invulnerable enemy; the society protecting him is.
 # Asset constraint: uses assets already present in the supplied Day 4 draft plus recurring character sprites from earlier Day drafts.
 # Promotion note: replace story/player helper calls with exact runtime method names during implementation.
@@ -137,8 +136,9 @@ label day104_1_lockbox_evidence:
 
     "Inside: bank notes, a theatre programme, two folded letters, and an envelope stiff with photographic paper."
 
-    # [ASSET] CG callout retained from legacy draft
-    # show cg_gideon_photograph
+    # [ASSET] CG — discovered photograph (interim placeholder art; replace in art pass)
+    show cg_gideon_photograph
+    with dissolve
 
     cora_inner "The photograph is not large."
     cora_inner "That feels obscene somehow."

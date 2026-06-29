@@ -174,8 +174,8 @@ init -40 python:
 
     # ── Sprites: Lady Eleanor Wiltshire (Day 100 prologue) ─────────
     # PLACEHOLDER: Cora art pass until bespoke Wiltshire mistress sprites.
-    declare_image_with_fallback("lady_eleanor_sprite panicked", "images/sprites/eleanore/base.png", "#c9a0dc")
-    declare_image_with_fallback("lady_eleanor_sprite furious", "images/sprites/cora/angry.png", "#c9a0dc")
+    declare_image_with_fallback("lady_eleanor_sprite panicked", "images/sprites/cora/flushed.png", "#c9a0dc")
+    declare_image_with_fallback("lady_eleanor_sprite furious", "images/sprites/cora/guarded.png", "#c9a0dc")
     declare_image_with_fallback("lady_eleanor_sprite composed", "images/sprites/cora/focused.png", "#c9a0dc")
     declare_image_with_fallback("lady_eleanor_sprite sitting", "images/sprites/Eleanore/sitting.png", "#c9a0dc")
 
@@ -209,7 +209,7 @@ init -40 python:
     #   [300 × 1080 px]  Full sidebar at canvas height.
     #   Aged dark-leather or near-black parchment texture. Warm near-black with subtle
     #   grain/wear. Semi-opaque (~95%) so the scene bleeds through faintly.
-    declare_image_with_fallback("ui_sidebar_bg", "images/ui/ui_sidebar_bg.webp", "#1a120af2")
+    declare_image_with_fallback("ui_sidebar_bg", "images/ui/ui_sidebar_bg.png", "#1a120af2")
     #
     # ui_sidebar_divider:
     #   [268 × 10 px]  Exact display size (HUD_SIDEBAR_WIDTH - 32 × 10).

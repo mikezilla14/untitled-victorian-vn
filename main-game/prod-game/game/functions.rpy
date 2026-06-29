@@ -13,12 +13,8 @@
 # Full policy: docs/contracts/sprite_layout_policy.yaml | spec: docs/specs/scene-direction-agent.md
 
 # ═══════════════════════════════════════════════════════════════
-#  functions_non_canon.rpy
-#  Writers' Room — promotion source for main-game/prod-game/game/functions.rpy
-#
-#  NOT loaded at runtime. During Release 1 promotion, merge this file into
-#  functions.rpy (or diff-merge the marked sections).
-#  Baseline synced from main-game/prod-game/game/functions.rpy at promotion time.
+#  functions.rpy
+#  Shared Python helper logic (suspicion, balance, writing gates).
 # ═══════════════════════════════════════════════════════════════
 
 init python:

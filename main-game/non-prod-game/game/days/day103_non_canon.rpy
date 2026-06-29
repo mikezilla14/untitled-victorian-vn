@@ -585,6 +585,9 @@ label day103_2_suite_gideon_beat:
 
     gideon "You observe too much."
 
+    if story.vance_chain_spine_echo():
+        cora_inner "I have already stood too close to Miss Vance in his shadow. He will know what kind of observer I am becoming."
+
     # [ASSET] Visual/staging command
     show cora_sprite base at left_bust with moveinleft # [asset auto]
     show gideon_sprite dominant at right_bust with move # [asset auto]
@@ -810,6 +813,9 @@ label day103_4_room_stern_suspicion:
     cora_inner "A knock comes at my door."
     cora_inner "Not Mr. Locke's."
     cora_inner "Worse."
+
+    if story.stern_chain_spine_echo():
+        cora_inner "She has already put her hands where a housekeeper should not. Tonight she will read that in my face."
 
     # [ASSET] Visual/staging command
     show stern_sprite stern at centre_bust

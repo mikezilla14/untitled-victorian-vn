@@ -41,7 +41,7 @@ jobs:
         run: |
           FILES="${{ steps.changes.outputs.files }}"
           if [ -z "$FILES" ]; then
-            echo "No changed files found. Skipping validation."
+            echo "No changed files found. Skipping changed-file validation."
             exit 0
           fi
 
@@ -51,3 +51,46 @@ jobs:
       - name: Check documentation catalogue
         shell: bash
         run: python scripts/documentation_audit.py --check
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install pytest
+        shell: bash
+        run: python -m pip install pytest
+
+      - name: Run Python unit tests
+        shell: bash
+        run: python -m pytest scripts/tests/ -q
+
+  validate-full:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run full validation profile
+        shell: bash
+        run: python scripts/validate.py --profile full
+
+      - name: Install pytest
+        shell: bash
+        run: python -m pip install pytest
+
+      - name: Run Python unit tests
+        shell: bash
+        run: python -m pytest scripts/tests/ -q

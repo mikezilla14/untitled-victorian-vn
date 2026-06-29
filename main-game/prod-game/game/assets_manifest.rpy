@@ -187,7 +187,7 @@ init -40 python:
     #   [300 × 1080 px]  Full sidebar at canvas height.
     #   Aged dark-leather or near-black parchment texture. Warm near-black with subtle
     #   grain/wear. Semi-opaque (~95%) so the scene bleeds through faintly.
-    declare_image_with_fallback("ui_sidebar_bg", "images/ui/ui_sidebar_bg.webp", "#1a120af2")
+    declare_image_with_fallback("ui_sidebar_bg", "images/ui/ui_sidebar_bg.png", "#1a120af2")
     #
     # ui_sidebar_divider:
     #   [268 × 10 px]  Exact display size (HUD_SIDEBAR_WIDTH - 32 × 10).
@@ -236,29 +236,29 @@ init -40 python:
     declare_image_with_fallback("main_menu_sweeney", "images/ui/main_menu_sweeney.png", "#1a120a")
 
     # ── Audio aliases (None when missing; guard before play) ──────
-    audio_themes_melancholy = register_audio("themes/melancholy", "audio/themes/melancholy.ogg")
-    audio_sfx_train_whistle = register_audio("sfx/train_whistle", "audio/sfx/train_whistle.ogg")
+    audio_themes_melancholy = register_audio("themes/melancholy", "audio/themes/focus-serious-piano-solo-background-mysterious-SBA-300514033-preview.mp3")
+    audio_sfx_train_whistle = register_audio("sfx/train_whistle", "audio/sfx/train-whistle-1-SBA-300283834-preview.mp3")
     audio_themes_savoy_tension = register_audio("themes/savoy_tension", "audio/themes/intrigue-and-mystery-SBA-300554190-preview.mp3")
     audio_themes_servants_floor_unease = register_audio("themes/servants_floor_unease", "audio/themes/intrigue-and-mystery-slow-SBA-352126014-preview.mp3")
     audio_themes_private_ink = register_audio("themes/private_ink", "audio/themes/hidden-corridors-SBA-346515348-preview.mp3")
     audio_themes_master_suite_pressure = register_audio("themes/master_suite_pressure", "audio/themes/book-of-secrets-mysterious-and-magical-orchestra-fantasy-SBA-347739672-preview.mp3")
-    audio_themes_predator_game = register_audio("themes/predator_game", "audio/themes/predator_game.ogg")
+    audio_themes_predator_game = register_audio("themes/predator_game", "audio/themes/somethings-happening-uneasy-chamber-strings-SBA-352568742-preview.mp3")
     audio_themes_defiance_and_dread = register_audio("themes/defiance_and_dread", "audio/themes/missteps-plucked-string-quartet-murder-mystery-podcast-secretive-quirky-and-ee-SBA-347666668-preview.mp3")
 
-    audio_ambient_laundry_steam = register_audio("ambient/laundry_steam", "audio/ambient/laundry_steam.ogg")
-    audio_ambient_hotel_corridor_muffled = register_audio("ambient/hotel_corridor_muffled", "audio/ambient/hotel_corridor_muffled.ogg")
-    audio_ambient_servants_quarters_dusk = register_audio("ambient/servants_quarters_dusk", "audio/ambient/servants_quarters_dusk.ogg")
-    audio_ambient_master_suite_quiet = register_audio("ambient/master_suite_quiet", "audio/ambient/master_suite_quiet.ogg")
-    audio_ambient_fireplace_low = register_audio("ambient/fireplace_low", "audio/ambient/fireplace_low.ogg")
+    audio_ambient_laundry_steam = register_audio("ambient/laundry_steam", "audio/ambient/steam-rise-fall-SBA-300024143-preview.mp3")
+    audio_ambient_hotel_corridor_muffled = register_audio("ambient/hotel_corridor_muffled", "audio/ambient/footsteps-soft-sole-shoes-carpet-walking-SBA-300082366-preview.mp3")
+    audio_ambient_servants_quarters_dusk = register_audio("ambient/servants_quarters_dusk", "audio/ambient/footsteps-soft-sole-shoes-carpet-walking-SBA-300082366-preview.mp3")
+    audio_ambient_master_suite_quiet = register_audio("ambient/master_suite_quiet", "audio/ambient/fireplace-crackling-ambience-01-SBA-300282371-preview.mp3")
+    audio_ambient_fireplace_low = register_audio("ambient/fireplace_low", "audio/ambient/fireplace-crackling-ambience-01-SBA-300282371-preview.mp3")
 
-    audio_sfx_corridor_slap_muffled = register_audio("sfx/corridor_slap_muffled", "audio/sfx/corridor_slap_muffled.ogg")
-    audio_sfx_floorboard_creak = register_audio("sfx/floorboard_creak", "audio/sfx/floorboard_creak.ogg")
-    audio_sfx_ink_scratch = register_audio("sfx/ink_scratch", "audio/sfx/ink_scratch.ogg")
-    audio_sfx_washbasin_clatter = register_audio("sfx/washbasin_clatter", "audio/sfx/washbasin_clatter.ogg")
-    audio_sfx_lockpick_tension = register_audio("sfx/lockpick_tension", "audio/sfx/lockpick_tension.ogg")
-    audio_sfx_key_in_door = register_audio("sfx/key_in_door", "audio/sfx/key_in_door.ogg")
-    audio_sfx_brush_drop_clatter = register_audio("sfx/brush_drop_clatter", "audio/sfx/brush_drop_clatter.ogg")
-    audio_sfx_door_handle_jiggle = register_audio("sfx/door_handle_jiggle", "audio/sfx/door_handle_jiggle.ogg")
+    audio_sfx_corridor_slap_muffled = register_audio("sfx/corridor_slap_muffled", "audio/sfx/slap-SBA-300025105-preview.mp3")
+    audio_sfx_floorboard_creak = register_audio("sfx/floorboard_creak", "audio/sfx/floor-creak-2-SBA-300025818-preview.mp3")
+    audio_sfx_ink_scratch = register_audio("sfx/ink_scratch", "audio/sfx/pencil-writing-words-on-paper-2-SBA-300421138-preview.mp3")
+    audio_sfx_washbasin_clatter = register_audio("sfx/washbasin_clatter", "audio/sfx/sink-clatter-1-SBA-300021334-preview.mp3")
+    audio_sfx_lockpick_tension = register_audio("sfx/lockpick_tension", "audio/sfx/wire-cutters-drop-slide-metal-surface-SBA-300148274-preview.mp3")
+    audio_sfx_key_in_door = register_audio("sfx/key_in_door", "audio/sfx/key-door-entrance-SBA-300020884-preview.mp3")
+    audio_sfx_brush_drop_clatter = register_audio("sfx/brush_drop_clatter", "audio/sfx/wire-cutters-drop-slide-metal-surface-SBA-300148274-preview.mp3")
+    audio_sfx_door_handle_jiggle = register_audio("sfx/door_handle_jiggle", "audio/sfx/locked-wooden-door-handle-moves-SBA-300055693-preview.mp3")
 
     # Thought overlay UI — mc_sprite_thought_icon is a placeholder until final art is created.
     declare_image_with_fallback("mc_sprite_thought_icon", "images/sprites/cora/ui/mc_sprite_thought_icon.png", "#d4a574")

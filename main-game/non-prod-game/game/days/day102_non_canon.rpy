@@ -953,6 +953,9 @@ label day102_3_gideon_interrupts_controls_vance:
 
     cora_inner "The corridor receives us like a throat swallowing something sharp."
 
+    if story.missy_chain_was_abandoned():
+        cora_inner "I chose the safe path with her once. That does not make this easier."
+
     if story.day2_tea_choice == "ghost":
         missy "How could you?"
 

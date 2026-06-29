@@ -1,0 +1,24 @@
+{
+  "contract_version": "1",
+  "day_id": "day102",
+  "release": "release-1-mvp",
+  "gate": "lead_narrative",
+  "verdict": "PASS",
+  "blocking": false,
+  "reviewed_at": "2026-06-28",
+  "reviewed_files": [
+    "main-game/non-prod-game/game/shared/story_chains_non_canon.rpy",
+    "main-game/non-prod-game/game/shared/classes_non_canon.rpy",
+    "main-game/non-prod-game/game/days/day102_non_canon.rpy",
+    "main-game/non-prod-game/game/days/day103_non_canon.rpy"
+  ],
+  "markdown_verdict_path": "main-game/pipeline/releases/release-1-mvp/shared/gates/story_chains_gate_lead_narrative.md",
+  "follow_up": {
+    "writers_room": false,
+    "lead_narrative_editor": false,
+    "forensic_psychology_consultant": true,
+    "victorian_consultant": false,
+    "profile_update": false
+  },
+  "notes": "code-revision-1 story chains; defer historical cool-line to Victorian gate"
+}
