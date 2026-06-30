@@ -14,6 +14,8 @@ if str(SCRIPTS) not in sys.path:
 
 import renpy_sdk  # noqa: E402
 
+_RENPY_EXE = "renpy.exe" if sys.platform == "win32" else "renpy.sh"
+
 
 class RenpySdkDiscoveryTests(unittest.TestCase):
     def test_picks_highest_version_sdk(self):
@@ -23,8 +25,8 @@ class RenpySdkDiscoveryTests(unittest.TestCase):
             new = root / "renpy-8.5.3-sdk"
             old.mkdir()
             new.mkdir()
-            (old / "renpy.exe").write_text("", encoding="utf-8")
-            (new / "renpy.exe").write_text("", encoding="utf-8")
+            (old / _RENPY_EXE).write_text("", encoding="utf-8")
+            (new / _RENPY_EXE).write_text("", encoding="utf-8")
 
             with mock.patch.object(renpy_sdk, "_search_roots", return_value=[root]):
                 self.assertEqual(renpy_sdk.find_renpy_sdk_root(), new.resolve())
@@ -33,7 +35,7 @@ class RenpySdkDiscoveryTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             sdk = Path(tmp) / "renpy-8.5.3-sdk"
             sdk.mkdir()
-            exe = sdk / "renpy.exe"
+            exe = sdk / _RENPY_EXE
             exe.write_text("", encoding="utf-8")
             project = Path(tmp) / "game-project"
             project.mkdir()
@@ -47,7 +49,7 @@ class RenpySdkDiscoveryTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             sdk = Path(tmp) / "custom-sdk"
             sdk.mkdir()
-            (sdk / "renpy.exe").write_text("", encoding="utf-8")
+            (sdk / _RENPY_EXE).write_text("", encoding="utf-8")
 
             with mock.patch.dict("os.environ", {"RENPY_SDK": str(sdk)}):
                 self.assertEqual(renpy_sdk.find_renpy_sdk_root(), sdk.resolve())

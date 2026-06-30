@@ -27,9 +27,18 @@ jobs:
         id: changes
         shell: bash
         run: |
-          BASE_REF="origin/${{ github.base_ref }}"
-          git fetch origin "${{ github.base_ref }}" --depth=1
-          CHANGED_FILES="$(git diff --name-only "$BASE_REF"...HEAD)"
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE_REF="origin/${{ github.base_ref }}"
+            git fetch origin "${{ github.base_ref }}" --depth=1
+            CHANGED_FILES="$(git diff --name-only "$BASE_REF"...HEAD)"
+          else
+            BEFORE="${{ github.event.before }}"
+            if [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+              CHANGED_FILES="$(git diff --name-only HEAD~1 HEAD)"
+            else
+              CHANGED_FILES="$(git diff --name-only "$BEFORE" HEAD)"
+            fi
+          fi
           {
             echo "files<<EOF"
             echo "$CHANGED_FILES"
@@ -45,7 +54,7 @@ jobs:
             exit 0
           fi
 
-          FILES_CSV="$(echo "$FILES" | tr '/n' ',' | sed 's/,$//')"
+          FILES_CSV="$(echo "$FILES" | tr '\n' ',' | sed 's/,$//')"
           python scripts/validate.py --profile changed --agent human --files "$FILES_CSV"
 
       - name: Check documentation catalogue

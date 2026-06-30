@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-06-28T12:20:10+00:00",
+  "generated_at": "2026-06-30T06:32:13+00:00",
   "repo_root": "untitled-victorian-vn",
   "entries": [
     {
@@ -56,6 +56,18 @@
         },
         {
           "target": "../.agents/skills/scene_direction/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": "skills/daily_standup/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": "skills/integration_review/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": "skills/action_from_standup/SKILL.md",
           "status": "ok"
         },
         {
@@ -536,10 +548,14 @@
     {
       "path": ".agents/skills/daily_standup/SKILL.md",
       "kind": "agent-skill",
-      "title": "Management: Daily Standup Ceremony",
+      "title": "Management: Daily Automated Health Check",
       "area": ".agents/skills/daily_standup",
-      "summary": "Simulates a daily check-in ceremony to refocus on the MVP systems integration checklist, project backlog, and codebase health. It coordinates the reports and letter grades of the **Chief Architect**, **Adult Market Revie",
+      "summary": "Runs **live automated validation** at the start of a session or on a daily schedule. Reports only checks that execute fresh each run — no stale `errors.txt`, checklist narration, or specialist grades.",
       "links": [
+        {
+          "target": "../integration_review/SKILL.md",
+          "status": "ok"
+        },
         {
           "target": "../action_from_standup/SKILL.md",
           "status": "ok"
@@ -626,6 +642,24 @@
         },
         {
           "target": "../../rules/chief_architect.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": ".agents/skills/integration_review/SKILL.md",
+      "kind": "agent-skill",
+      "title": "Management: Integration Review (weekly / ad-hoc)",
+      "area": ".agents/skills/integration_review",
+      "summary": "Planning review for items that **do not have clear daily automated tests** or that change slowly: MVP checklist progress, backlog status, and specialist lens notes (Chief Architect, Adult Market Reviewer, Lead Narrative ",
+      "links": [
+        {
+          "target": "../../../main-game/draft/releases/planning/mvp_full_review_2026-06-28.md",
+          "status": "ok"
+        },
+        {
+          "target": "../daily_standup/SKILL.md",
           "status": "ok"
         }
       ],
@@ -1244,6 +1278,18 @@
           "status": "ok"
         },
         {
+          "target": "main-game/draft/releases/planning/daily_standup_report.md",
+          "status": "ok"
+        },
+        {
+          "target": "main-game/draft/releases/planning/integration_review_report.md",
+          "status": "ok"
+        },
+        {
+          "target": ".agents/skills/integration_review/SKILL.md",
+          "status": "ok"
+        },
+        {
           "target": "docs/backlog/task_registry.json",
           "status": "ok"
         },
@@ -1291,7 +1337,7 @@
       "kind": "reference",
       "title": "Daily Asset Manifest & Reconciliation Report",
       "area": "assets_source",
-      "summary": "**Generated on:** 2026-06-28",
+      "summary": "**Generated on:** 2026-06-30",
       "links": [
         {
           "target": "file:///C:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/prod-game/game/assets_manifest.rpy",
@@ -2013,6 +2059,10 @@
           "status": "ok"
         },
         {
+          "target": "../../.agents/skills/integration_review/SKILL.md",
+          "status": "ok"
+        },
+        {
           "target": "../../.agents/skills/action_from_standup/SKILL.md",
           "status": "ok"
         },
@@ -2374,25 +2424,77 @@
       "summary": "This catalogue contains flag-agnostic prompt templates for generating every Day and Archetype variant combination of Cora Hartley's penny dreadful manuscript (`book1`).",
       "links": [
         {
-          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/docs/book-writing-engine-export/system_prompt.md",
-          "status": "external"
+          "target": "system_prompt.md",
+          "status": "ok"
         },
         {
-          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/docs/book-writing-engine-export/narrative_summary_and_flag_wiring.md",
-          "status": "external"
+          "target": "narrative_summary_and_flag_wiring.md",
+          "status": "ok"
         },
         {
-          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/docs/book-writing-engine-export/style_and_voice_guide.md",
-          "status": "external"
+          "target": "style_and_voice_guide.md",
+          "status": "ok"
         },
         {
-          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/docs/book-writing-engine-export/characters_and_locations.md",
-          "status": "external"
+          "target": "characters_and_locations.md",
+          "status": "ok"
         }
       ],
-      "findings": [
-        "Possible stale reference (absolute local file URL): file:///"
-      ]
+      "findings": []
+    },
+    {
+      "path": "docs/book-writing-engine-export/README.md",
+      "kind": "readme",
+      "title": "Book writing engine export",
+      "area": "docs/book-writing-engine-export",
+      "summary": "Self-contained export pack for **external LLM** generation of Cora Hartley's Book1 manuscript (`book1_*` labels). These files are reference documentation — not runtime game source.",
+      "links": [
+        {
+          "target": "system_prompt.md",
+          "status": "ok"
+        },
+        {
+          "target": "style_and_voice_guide.md",
+          "status": "ok"
+        },
+        {
+          "target": "characters_and_locations.md",
+          "status": "ok"
+        },
+        {
+          "target": "narrative_summary_and_flag_wiring.md",
+          "status": "ok"
+        },
+        {
+          "target": "prompt_catalogue.md",
+          "status": "ok"
+        },
+        {
+          "target": "integration_guide.md",
+          "status": "ok"
+        },
+        {
+          "target": "engine_payload_example.json",
+          "status": "ok"
+        },
+        {
+          "target": "../../.agents/skills/book_writing_engine/SKILL.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../docs/contracts/book_writing_contract.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../docs/contracts/book_writing_contract.schema.json",
+          "status": "ok"
+        },
+        {
+          "target": "../../docs/contracts/book1_chapter_routing.json",
+          "status": "ok"
+        }
+      ],
+      "findings": []
     },
     {
       "path": "docs/book-writing-engine-export/style_and_voice_guide.md",
@@ -2434,13 +2536,19 @@
       "summary": "This contract defines how Book1 manuscript prose is authored in the non-canon Ren'Py draft.",
       "links": [
         {
-          "target": "../backlog/narrative-json-beat-pipeline.md",
+          "target": "book_writing_contract.schema.json",
+          "status": "ok"
+        },
+        {
+          "target": "book1_chapter_routing.json",
+          "status": "ok"
+        },
+        {
+          "target": "examples/book_writing_context.example.json",
           "status": "ok"
         }
       ],
-      "findings": [
-        "Contract document does not link to a machine-readable schema or data file."
-      ]
+      "findings": []
     },
     {
       "path": "docs/contracts/examples/README.md",
@@ -2481,6 +2589,14 @@
         },
         {
           "target": "promotion_handoff.schema.json",
+          "status": "ok"
+        },
+        {
+          "target": "book_writing_contract.schema.json",
+          "status": "ok"
+        },
+        {
+          "target": "book1_chapter_routing.json",
           "status": "ok"
         },
         {
@@ -2627,21 +2743,57 @@
       "summary": "This catalogue contains flag-agnostic prompt templates for creating, rewriting, and revising (tuning length/spiciness of) dialogue and staging scripts for the real-life (IRL) Savoy Hotel ADV gameplay layer.",
       "links": [
         {
-          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/docs/normal-day-prose-export/system_prompt.md",
-          "status": "external"
+          "target": "system_prompt.md",
+          "status": "ok"
         },
         {
-          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/docs/normal-day-prose-export/style_and_voice_guide.md",
-          "status": "external"
+          "target": "style_and_voice_guide.md",
+          "status": "ok"
         },
         {
-          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/docs/normal-day-prose-export/variables_and_flag_wiring.md",
-          "status": "external"
+          "target": "variables_and_flag_wiring.md",
+          "status": "ok"
         }
       ],
-      "findings": [
-        "Possible stale reference (absolute local file URL): file:///"
-      ]
+      "findings": []
+    },
+    {
+      "path": "docs/normal-day-prose-export/README.md",
+      "kind": "readme",
+      "title": "Normal day prose export",
+      "area": "docs/normal-day-prose-export",
+      "summary": "Self-contained export pack for **external LLM** generation of Savoy Hotel IRL ADV layer prose (`dayNNN_*` labels). These files are reference documentation — not runtime game source.",
+      "links": [
+        {
+          "target": "system_prompt.md",
+          "status": "ok"
+        },
+        {
+          "target": "style_and_voice_guide.md",
+          "status": "ok"
+        },
+        {
+          "target": "variables_and_flag_wiring.md",
+          "status": "ok"
+        },
+        {
+          "target": "prompt_catalogue.md",
+          "status": "ok"
+        },
+        {
+          "target": "integration_guide.md",
+          "status": "ok"
+        },
+        {
+          "target": "payload_example.json",
+          "status": "ok"
+        },
+        {
+          "target": "../../.agents/skills/scene_direction/SKILL.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
     },
     {
       "path": "docs/normal-day-prose-export/style_and_voice_guide.md",
@@ -2831,49 +2983,27 @@
       "summary": "The game should not present Cora’s progress as raw numerical stat management. The player is not “levelling up a maid.” They are guiding Cora through scandal, risk, compromise, discovery, and authorship.",
       "links": [
         {
-          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/non-prod-game/game/shared/narrative_pressure_data.rpy",
-          "status": "external"
+          "target": "../../main-game/non-prod-game/game/shared/narrative_pressure_data.rpy",
+          "status": "ok"
         },
         {
-          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/non-prod-game/game/shared/narrative_pressure_system.rpy",
-          "status": "external"
+          "target": "../../main-game/non-prod-game/game/shared/narrative_pressure_system.rpy",
+          "status": "ok"
         },
         {
-          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/non-prod-game/game/shared/narrative_notification_screen.rpy",
-          "status": "external"
+          "target": "../../main-game/non-prod-game/game/shared/narrative_notification_screen.rpy",
+          "status": "ok"
         },
         {
-          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/non-prod-game/game/shared/journal_screen.rpy",
-          "status": "external"
+          "target": "../../main-game/non-prod-game/game/shared/journal_screen.rpy",
+          "status": "ok"
         },
         {
-          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/non-prod-game/game/shared/hud_screen.rpy",
-          "status": "external"
-        },
-        {
-          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/prod-game/game/narrative_pressure_data.rpy",
-          "status": "external"
-        },
-        {
-          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/prod-game/game/narrative_pressure_system.rpy",
-          "status": "external"
-        },
-        {
-          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/prod-game/game/narrative_notification_screen.rpy",
-          "status": "external"
-        },
-        {
-          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/prod-game/game/journal_screen.rpy",
-          "status": "external"
-        },
-        {
-          "target": "file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/prod-game/game/hud_screen.rpy",
-          "status": "external"
+          "target": "../../main-game/non-prod-game/game/shared/hud_screen.rpy",
+          "status": "ok"
         }
       ],
-      "findings": [
-        "Possible stale reference (absolute local file URL): file:///"
-      ]
+      "findings": []
     },
     {
       "path": "docs/specs/README.md",
@@ -2933,16 +3063,16 @@
       "summary": "Add a **deterministic sprite-placement post-processor** to the production pipeline. After the",
       "links": [
         {
-          "target": "../../main-game/non-prod-game/game/characters.rpy",
-          "status": "missing"
+          "target": "../../main-game/non-prod-game/game/shared/characters.rpy",
+          "status": "ok"
         },
         {
           "target": "../../main-game/non-prod-game/game/days/day101_non_canon.rpy",
           "status": "ok"
         },
         {
-          "target": "../../main-game/non-prod-game/game/asset_transforms.rpy",
-          "status": "missing"
+          "target": "../../main-game/non-prod-game/game/shared/asset_transforms.rpy",
+          "status": "ok"
         },
         {
           "target": "#open-decisions",
@@ -2961,16 +3091,16 @@
           "status": "ok"
         },
         {
-          "target": "../../main-game/non-prod-game/game/characters.rpy",
-          "status": "missing"
+          "target": "../../main-game/non-prod-game/game/shared/characters.rpy",
+          "status": "ok"
         },
         {
           "target": "../../docs/contracts/README.md",
           "status": "ok"
         },
         {
-          "target": "../../main-game/non-prod-game/game/asset_transforms.rpy",
-          "status": "missing"
+          "target": "../../main-game/non-prod-game/game/shared/asset_transforms.rpy",
+          "status": "ok"
         },
         {
           "target": "../../.agents/README.md",
@@ -3017,12 +3147,7 @@
           "status": "ok"
         }
       ],
-      "findings": [
-        "Broken relative link: ../../main-game/non-prod-game/game/characters.rpy",
-        "Broken relative link: ../../main-game/non-prod-game/game/asset_transforms.rpy",
-        "Broken relative link: ../../main-game/non-prod-game/game/characters.rpy",
-        "Broken relative link: ../../main-game/non-prod-game/game/asset_transforms.rpy"
-      ]
+      "findings": []
     },
     {
       "path": "docs/specs/semantic-balance-profiles-implementation-plan.md",
@@ -3348,6 +3473,60 @@
       "findings": []
     },
     {
+      "path": "main-game/non-prod-game/game/AEditor/tl/chinese/README.md",
+      "kind": "readme",
+      "title": "ActionEditor — Chinese translations",
+      "area": "main-game",
+      "summary": "Ren'Py translation strings for the third-party **ActionEditor** dev tool (`../..`).",
+      "links": [
+        {
+          "target": "../../README.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../../../../../docs/architecture/feature_lifecycle_registry.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "main-game/non-prod-game/game/AEditor/tl/japanese/README.md",
+      "kind": "readme",
+      "title": "ActionEditor — Japanese translations",
+      "area": "main-game",
+      "summary": "Ren'Py translation strings for the third-party **ActionEditor** dev tool (`../..`).",
+      "links": [
+        {
+          "target": "../../README.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../../../../../docs/architecture/feature_lifecycle_registry.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "main-game/non-prod-game/game/audio/README.md",
+      "kind": "readme",
+      "title": "Non-prod audio (preview files)",
+      "area": "main-game",
+      "summary": "Preview MP3 assets for the **non-prod sandbox** (`main-game/non-prod-game/`). Ren'Py auto-discovers files here; logical names are registered in [`../shared/assets_manifest.rpy`](../shared/assets_manifest.rpy).",
+      "links": [
+        {
+          "target": "../shared/assets_manifest.rpy",
+          "status": "ok"
+        },
+        {
+          "target": "../../../../.agents/skills/check_assets/SKILL.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
       "path": "main-game/non-prod-game/game/days/README.md",
       "kind": "readme",
       "title": "Day drafts",
@@ -3519,7 +3698,38 @@
       "title": "Narrative pipeline (pre-draft exploration)",
       "area": "main-game",
       "summary": "Everything here is **non-canon** and supports the writers' room before and during gate review. Nothing in `pipeline/` ships in the game.",
-      "links": [],
+      "links": [
+        {
+          "target": "tools/README.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../docs/architecture/path_contract.md",
+          "status": "ok"
+        }
+      ],
+      "findings": []
+    },
+    {
+      "path": "main-game/pipeline/tools/README.md",
+      "kind": "readme",
+      "title": "Pipeline tools",
+      "area": "main-game",
+      "summary": "Release-scoped analysis and balance tooling for the non-prod sandbox. Nothing here ships in the playable game; outputs land under `main-game/pipeline/releases/<release>/`.",
+      "links": [
+        {
+          "target": "../README.md",
+          "status": "ok"
+        },
+        {
+          "target": "../../../scripts/balance_report.py",
+          "status": "ok"
+        },
+        {
+          "target": "../../../docs/architecture/feature_lifecycle_registry.md",
+          "status": "ok"
+        }
+      ],
       "findings": []
     },
     {
@@ -3618,86 +3828,6 @@
       "severity": "warning",
       "path": "assets_source/approved_assets/daily_asset_manifest.md",
       "message": "Possible stale reference (absolute local file URL): file:///"
-    },
-    {
-      "severity": "warning",
-      "path": "docs/book-writing-engine-export/prompt_catalogue.md",
-      "message": "Possible stale reference (absolute local file URL): file:///"
-    },
-    {
-      "severity": "warning",
-      "path": "docs/contracts/book_writing_contract.md",
-      "message": "Contract document does not link to a machine-readable schema or data file."
-    },
-    {
-      "severity": "warning",
-      "path": "docs/normal-day-prose-export/prompt_catalogue.md",
-      "message": "Possible stale reference (absolute local file URL): file:///"
-    },
-    {
-      "severity": "warning",
-      "path": "docs/specs/narrative-pressure-system.md",
-      "message": "Possible stale reference (absolute local file URL): file:///"
-    },
-    {
-      "severity": "error",
-      "path": "docs/specs/scene-direction-agent.md",
-      "message": "Broken relative link: ../../main-game/non-prod-game/game/characters.rpy"
-    },
-    {
-      "severity": "error",
-      "path": "docs/specs/scene-direction-agent.md",
-      "message": "Broken relative link: ../../main-game/non-prod-game/game/asset_transforms.rpy"
-    },
-    {
-      "severity": "error",
-      "path": "docs/specs/scene-direction-agent.md",
-      "message": "Broken relative link: ../../main-game/non-prod-game/game/characters.rpy"
-    },
-    {
-      "severity": "error",
-      "path": "docs/specs/scene-direction-agent.md",
-      "message": "Broken relative link: ../../main-game/non-prod-game/game/asset_transforms.rpy"
-    },
-    {
-      "severity": "warning",
-      "path": "docs/book-writing-engine-export",
-      "message": "Complex folder has no README.md index."
-    },
-    {
-      "severity": "warning",
-      "path": "docs/normal-day-prose-export",
-      "message": "Complex folder has no README.md index."
-    },
-    {
-      "severity": "warning",
-      "path": "main-game/non-prod-game/game/AEditor/tl/chinese",
-      "message": "Complex folder has no README.md index."
-    },
-    {
-      "severity": "warning",
-      "path": "main-game/non-prod-game/game/AEditor/tl/japanese",
-      "message": "Complex folder has no README.md index."
-    },
-    {
-      "severity": "warning",
-      "path": "main-game/non-prod-game/game/audio",
-      "message": "Complex folder has no README.md index."
-    },
-    {
-      "severity": "warning",
-      "path": "main-game/pipeline/tools",
-      "message": "Complex folder has no README.md index."
-    },
-    {
-      "severity": "warning",
-      "path": "scripts/tests",
-      "message": "Complex folder has no README.md index."
-    },
-    {
-      "severity": "warning",
-      "path": "scripts/validation",
-      "message": "Complex folder has no README.md index."
     }
   ]
 }
