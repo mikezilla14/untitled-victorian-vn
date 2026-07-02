@@ -22,6 +22,8 @@ When a markdown gate file exists, the matching `.json` **must** exist and `verdi
 | Authoring intent (Writer's Desk) | [`authoring_intent.schema.json`](authoring_intent.schema.json) |
 | Profile delta | [`profile_delta.schema.json`](profile_delta.schema.json) |
 | Promotion handoff | [`promotion_handoff.schema.json`](promotion_handoff.schema.json) |
+| Book1 writing engine | [`book_writing_contract.schema.json`](book_writing_contract.schema.json) |
+| Book1 chapter routing | [`book1_chapter_routing.json`](book1_chapter_routing.json) |
 | Sprite layout policy | [`sprite_layout_policy.schema.json`](sprite_layout_policy.schema.json) |
 | Documentation catalogue | [`documentation_catalog.schema.json`](documentation_catalog.schema.json) |
 

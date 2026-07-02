@@ -21,6 +21,7 @@ from contract_schemas import (  # noqa: E402
     GATE_VERDICTS,
     check_gate_json_sidecar,
     load_json_file,
+    validate_book_writing_context,
     validate_gate_verdict,
     validate_narrative_change_brief,
     validate_profile_delta,
@@ -125,6 +126,11 @@ def validate_single_file(path_str: str) -> int:
         errs = validate_profile_delta(data)
     elif "promotion_handoff" in name:
         errs = validate_promotion_handoff(data)
+    elif "book_writing_context" in name or data.get("kind") in (
+        "book_writing_context",
+        "book_import_header",
+    ):
+        errs = validate_book_writing_context(data)
     else:
         print(f"Unknown contract file type: {name}")
         return 1

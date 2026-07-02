@@ -3,10 +3,10 @@
 This catalogue contains flag-agnostic prompt templates for generating every Day and Archetype variant combination of Cora Hartley's penny dreadful manuscript (`book1`).
 
 To ensure these prompts remain robust as variables or balancing details evolve over time, **all flag names, values, and narrative wiring are decoupled from the prompt text**. The prompts direct the LLM to actively lookup current flag metadata from the companion export files:
-- [system_prompt.md](file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/docs/book-writing-engine-export/system_prompt.md)
-- [narrative_summary_and_flag_wiring.md](file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/docs/book-writing-engine-export/narrative_summary_and_flag_wiring.md)
-- [style_and_voice_guide.md](file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/docs/book-writing-engine-export/style_and_voice_guide.md)
-- [characters_and_locations.md](file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/docs/book-writing-engine-export/characters_and_locations.md)
+- [system_prompt.md](system_prompt.md)
+- [narrative_summary_and_flag_wiring.md](narrative_summary_and_flag_wiring.md)
+- [style_and_voice_guide.md](style_and_voice_guide.md)
+- [characters_and_locations.md](characters_and_locations.md)
 
 ---
 

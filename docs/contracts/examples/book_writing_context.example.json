@@ -1,0 +1,34 @@
+{
+  "contract_version": "1",
+  "kind": "book_writing_context",
+  "release": "release-1-mvp",
+  "day_id": "day101",
+  "chapter_key": "day1_chapter",
+  "route_bucket": "predator",
+  "target_label": "book1_block_day1_alt_predator_core",
+  "target_file": "main-game/non-prod-game/game/days/book1_day101_non_canon.rpy",
+  "story_so_far_summary": "Cora survived Day 1 at the Savoy with a predator corridor read, complicit Stern interview, and intimate Vance contact. Miri remains unsettled.",
+  "style_lenses": ["Sweeney Todd"],
+  "available_story_state": {
+    "day1_corridor_state": "predator",
+    "day1_interview_state": "competent",
+    "day1_stern_relation": "complicit",
+    "day1_vance_relation": "intimate",
+    "missy_day1_trust_state": "unsettled",
+    "day1_ledger_focus": "corruption"
+  },
+  "available_player_state": {
+    "corruption_level": 3,
+    "inspiration": 20,
+    "suspicion": 15
+  },
+  "existing_labels": [
+    "book1_block_day1_alt_predator_core",
+    "book1_block_day1_alt_prey_core",
+    "book1_block_day1_alt_ghost_core"
+  ],
+  "approved_images": [
+    "cg_manuscript_retelling_d1_corridor"
+  ],
+  "compiled_by": "non_prod_code_agent"
+}

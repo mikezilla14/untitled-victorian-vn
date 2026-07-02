@@ -82,6 +82,16 @@ Repo-wide index: [`../AGENTS.md`](../AGENTS.md) · Skill catalogue: [`../docs/ag
 
 
 
+## Planning skills (not pipelines)
+
+| Skill | When |
+|-------|------|
+| [`daily_standup`](skills/daily_standup/SKILL.md) | Daily live validation → `daily_standup_report.md` |
+| [`integration_review`](skills/integration_review/SKILL.md) | Weekly/ad-hoc checklist, backlog, specialist lenses |
+| [`action_from_standup`](skills/action_from_standup/SKILL.md) | Route a standup queue item via `task_registry.json` |
+
+
+
 ## Agent registry
 
 

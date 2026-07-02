@@ -103,7 +103,7 @@ Skills under [`.agents/skills/`](.agents/skills/) are thin wrappers: each loads 
 | **Pipeline (1:1)** | `produce_day`, `writer_write_scene`, `promote_day`, `review_scene`, `revise_narrative`, `rewrite_narrative`, `implement_spec`, `market_review`, `spiciness_tuner`, `historical_check`, `storyboard_sync`, `dag_tag_update` |
 | **Writer's Desk** | `writer_rewrite_scene`, `writer_add_flag`, `writer_add_effect`, `writer_add_branch`, `writer_write_book`, `writer_contract_check`, `writer_log_exception`, `writer_status` |
 | **Cross-cutting** | `scene_direction`, `check_assets`, `branch_handoff`, `divergent_writer`, `convergent_writer` |
-| **Planning** | `daily_standup`, `action_from_standup` |
+| **Planning** | `daily_standup`, `integration_review`, `action_from_standup` |
 | **Specialist** | `book_writing_engine`, `art_production` |
 
 ## Pipeline helper (manual chaining)
@@ -117,7 +117,11 @@ py scripts/agent_next_step.py --pipeline produce-day --stage 1 --day 105 --relea
 
 ## Standup → action (code & prose agents)
 
-Point agents at `main-game/draft/releases/planning/daily_standup_report.md`, then:
+**Daily:** `py scripts/daily_standup.py` → [`daily_standup_report.md`](main-game/draft/releases/planning/daily_standup_report.md) (live validation only).
+
+**Weekly/ad-hoc:** `py scripts/integration_review.py --report` → [`integration_review_report.md`](main-game/draft/releases/planning/integration_review_report.md) (checklist, backlog, specialist lenses). See [`integration_review`](.agents/skills/integration_review/SKILL.md).
+
+Point agents at the daily report, then:
 
 ```powershell
 py scripts/resolve_work_item.py --from-standup --next

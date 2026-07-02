@@ -1,0 +1,51 @@
+{
+  "contract_version": "1",
+  "release": "release-1-mvp",
+  "source_of_truth": "main-game/non-prod-game/game/days/book1_non_canon.rpy",
+  "notes": "Mirror of book1.CHAPTER_BLOCKS. Update when routing table changes in book1_non_canon.rpy.",
+  "chapter_blocks": {
+    "day1_slop_chapter": {
+      "ghost": "book1_block_day1_ghost_core",
+      "predator": "book1_block_day1_predator_core",
+      "prey": "book1_block_day1_prey_core",
+      "ghost_subservient": "book1_block_day1_ghost_subservient",
+      "predator_complicit": "book1_block_day1_predator_complicit",
+      "prey_resistant": "book1_block_day1_prey_resistant",
+      "default": "book1_block_day1_default_core"
+    },
+    "day1_chapter": {
+      "ghost": "book1_block_day1_alt_ghost_core",
+      "predator": "book1_block_day1_alt_predator_core",
+      "prey": "book1_block_day1_alt_prey_core",
+      "ghost_subservient": "book1_block_day1_alt_ghost_subservient",
+      "predator_complicit": "book1_block_day1_alt_predator_complicit",
+      "prey_resistant": "book1_block_day1_alt_prey_resistant",
+      "default": "book1_block_day1_alt_default_core"
+    },
+    "day2_chapter": {
+      "ghost": "book1_block_day2_ghost_core",
+      "predator": "book1_block_day2_predator_core",
+      "prey": "book1_block_day2_prey_core",
+      "default": "book1_block_day2_default_core"
+    },
+    "day3_chapter": {
+      "ghost": "book1_block_day3_ghost_core",
+      "predator": "book1_block_day3_predator_core",
+      "prey": "book1_block_day3_prey_core",
+      "default": "book1_block_day3_default_core"
+    },
+    "day4_triumphant_chapter": {
+      "ghost": "book1_block_day4_ghost_core",
+      "predator": "book1_block_day4_predator_core",
+      "prey": "book1_block_day4_prey_core",
+      "default": "book1_block_day4_default_core"
+    },
+    "day5_reckoning_chapter": {
+      "muse": "book1_block_day5_muse_core",
+      "protege": "book1_block_day5_protege_core",
+      "adversary": "book1_block_day5_adversary_core",
+      "witness": "book1_block_day5_witness_core",
+      "default": "book1_block_day5_default_core"
+    }
+  }
+}

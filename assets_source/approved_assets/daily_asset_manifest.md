@@ -1,6 +1,6 @@
 # Daily Asset Manifest & Reconciliation Report
 
-**Generated on:** 2026-06-29
+**Generated on:** 2026-07-02
 **Manifest Sources:**
 - Prod Manifest: [assets_manifest.rpy](file:///C:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/prod-game/game/assets_manifest.rpy)
 - Non-Prod Manifest: [assets_manifest.rpy](file:///C:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/non-prod-game/game/shared/assets_manifest.rpy)
@@ -11,10 +11,10 @@
 | :--- | :---: | :---: | :---: | :---: | :--- |
 | Backgrounds | 21 | 20 | 6 | 0 | ✅ Complete |
 | Sprites | 61 | 55 | 10 | 0 | ✅ Complete |
-| UI | 24 | 19 | 10 | 0 | ✅ Complete |
-| Event Illustrations (CGs) | 7 | 7 | 0 | 0 | ✅ Complete |
+| UI | 24 | 19 | 14 | 0 | ✅ Complete |
+| Event Illustrations (CGs) | 7 | 7 | 7 | 0 | ✅ Complete |
 | Audio | 21 | 21 | 21 | 0 | ✅ Complete |
-| **Total** | **134** | **122** | **47** | **0** | **-** |
+| **Total** | **134** | **122** | **58** | **0** | **-** |
 
 ## 🟢 Assets in Place (Prod / Non-Prod)
 These assets are declared and present on disk in either production or non-production engine environments.
@@ -62,8 +62,8 @@ These assets are declared and present on disk in either production or non-produc
 | `gideon_sprite neutral` | `images/sprites/gideon/neutralf.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `gideon_sprite neutralf` | `images/sprites/gideon/neutralf.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `lady_eleanor_sprite composed` | `images/sprites/cora/focused.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
-| `lady_eleanor_sprite furious` | Prod: `images/sprites/cora/guarded.png`<br>Non-Prod: `images/sprites/cora/angry.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
-| `lady_eleanor_sprite panicked` | Prod: `images/sprites/cora/flushed.png`<br>Non-Prod: `images/sprites/eleanore/base.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
+| `lady_eleanor_sprite furious` | `images/sprites/cora/guarded.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
+| `lady_eleanor_sprite panicked` | `images/sprites/cora/flushed.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `lady_eleanor_sprite sitting` | Non-Prod: `images/sprites/Eleanore/sitting.png` | Non-Prod Only | - | 🟢 Yes | 🟡 Active (Non-Prod Only) |
 | `margaret_sprite bold` | `images/sprites/cora/guarded.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `margaret_sprite neutral` | `images/sprites/cora/base.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
@@ -122,10 +122,10 @@ These assets are declared and present on disk in either production or non-produc
 | `main_menu_jekyll` | Non-Prod: `images/ui/main_menu_jekyll.png` | Non-Prod Only | - | 🟢 Yes | 🟡 Active (Non-Prod Only) |
 | `main_menu_sweeney` | `images/ui/main_menu_sweeney.png` | Both | 🟢 Yes | 🟢 Yes | ✅ Active (Prod & Non-Prod) |
 | `mc_sprite_thought_icon` | `images/sprites/cora/ui/mc_sprite_thought_icon.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
-| `ui_book_blank` | `images/ui/book/book_blank.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
+| `ui_book_blank` | `images/ui/book/book_blank.png` | Both | 🟢 Yes | 🟢 Yes | ✅ Active (Prod & Non-Prod) |
 | `ui_book_cover` | `images/ui/book_cover.webp` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
-| `ui_book_plate_hatch_overlay` | `images/ui/book/plate_hatch_overlay.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
-| `ui_book_plate_paper_overlay` | `images/ui/book/plate_paper_overlay.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
+| `ui_book_plate_hatch_overlay` | `images/ui/book/plate_hatch_overlay.png` | Both | 🟢 Yes | 🟢 Yes | ✅ Active (Prod & Non-Prod) |
+| `ui_book_plate_paper_overlay` | `images/ui/book/plate_paper_overlay.png` | Both | 🟢 Yes | 🟢 Yes | ✅ Active (Prod & Non-Prod) |
 | `ui_book_ui_bg` | Prod: `images/ui/book_ui_bg.webp`<br>Non-Prod: `images/ui/book_ui_bg.png` | Both | 🟢 Yes | 🟢 Yes | ✅ Active (Prod & Non-Prod) |
 | `ui_book_writing_paper` | `images/ui/book_writing_paper.webp` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `ui_cora_base` | `images/sprites/cora/ui/ui_cora_base.webp` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
@@ -133,24 +133,24 @@ These assets are declared and present on disk in either production or non-produc
 | `ui_cora_mini_base` | `images/sprites/cora/ui/ui_cora_mini_base.webp` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `ui_cora_mini_corrupted` | `images/sprites/cora/ui/ui_cora_mini_corrupted.webp` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `ui_illustration_border` | Prod: `images/ui/illustration_border.webp`<br>Non-Prod: `images/ui/illustration_border.png` | Both | 🟢 Yes | 🟢 Yes | ✅ Active (Prod & Non-Prod) |
-| `ui_illustration_border_plate` | `images/ui/book/illustration_border_plate.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
+| `ui_illustration_border_plate` | `images/ui/book/illustration_border_plate.png` | Both | 🟢 Yes | 🟢 Yes | ✅ Active (Prod & Non-Prod) |
 | `ui_inkwell_empty` | `images/ui/ui_inkwell_empty.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `ui_inkwell_full` | `images/ui/ui_inkwell_full.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `ui_price_badge` | `images/ui/price_badge.png` | Both | 🟢 Yes | 🟢 Yes | ✅ Active (Prod & Non-Prod) |
-| `ui_sidebar_bg` | Prod: `images/ui/ui_sidebar_bg.png`<br>Non-Prod: `images/ui/ui_sidebar_bg.webp` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
+| `ui_sidebar_bg` | `images/ui/ui_sidebar_bg.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
 | `ui_sidebar_divider` | `images/ui/ui_sidebar_divider.png` | Both | 🟢 Yes | 🟢 Yes | ✅ Active (Prod & Non-Prod) |
 
 ### 🎬 Event Illustrations (CGs)
 
 | Asset Alias / Name | Expected Engine Path | Declared In | Prod | Non-Prod | Status |
 | :--- | :--- | :---: | :---: | :---: | :--- |
-| `cg_book_d2_hatbox_tableau` | `images/cgs/book1/cg_book_d2_hatbox_tableau.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
-| `cg_gideon_photograph` | `images/cgs/cg_gideon_photograph.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
-| `cg_manuscript_retelling_d1_corridor` | `images/cgs/cg_manuscript_retelling_d1_corridor.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
-| `cg_manuscript_retelling_d2_lace` | `images/cgs/cg_manuscript_retelling_d2_lace.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
-| `cg_manuscript_retelling_d3_brush` | `images/cgs/cg_manuscript_retelling_d3_brush.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
-| `cg_manuscript_retelling_d4_false_dawn` | `images/cgs/cg_manuscript_retelling_d4_false_dawn.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
-| `cg_photograph_burning` | `images/cgs/cg_photograph_burning.png` | Both | 🟢 Yes | 🔴 No | ✅ Active (Prod Only) |
+| `cg_book_d2_hatbox_tableau` | `images/cgs/book1/cg_book_d2_hatbox_tableau.png` | Both | 🟢 Yes | 🟢 Yes | ✅ Active (Prod & Non-Prod) |
+| `cg_gideon_photograph` | `images/cgs/cg_gideon_photograph.png` | Both | 🟢 Yes | 🟢 Yes | ✅ Active (Prod & Non-Prod) |
+| `cg_manuscript_retelling_d1_corridor` | `images/cgs/cg_manuscript_retelling_d1_corridor.png` | Both | 🟢 Yes | 🟢 Yes | ✅ Active (Prod & Non-Prod) |
+| `cg_manuscript_retelling_d2_lace` | `images/cgs/cg_manuscript_retelling_d2_lace.png` | Both | 🟢 Yes | 🟢 Yes | ✅ Active (Prod & Non-Prod) |
+| `cg_manuscript_retelling_d3_brush` | `images/cgs/cg_manuscript_retelling_d3_brush.png` | Both | 🟢 Yes | 🟢 Yes | ✅ Active (Prod & Non-Prod) |
+| `cg_manuscript_retelling_d4_false_dawn` | `images/cgs/cg_manuscript_retelling_d4_false_dawn.png` | Both | 🟢 Yes | 🟢 Yes | ✅ Active (Prod & Non-Prod) |
+| `cg_photograph_burning` | `images/cgs/cg_photograph_burning.png` | Both | 🟢 Yes | 🟢 Yes | ✅ Active (Prod & Non-Prod) |
 
 ### 🎬 Audio
 

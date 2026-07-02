@@ -24,9 +24,9 @@ must use the project's real conventions, not the brief's literal examples.
 
 | Brief assumes | This repo actually uses | Resolution |
 |---------------|--------------------------|------------|
-| `show cora neutral at left_bust` | `show cora_sprite base_travel at left_bust` (`_sprite` suffix on the image tag) | Agent maps **speaker name → sprite tag** via a registry (`cora` → `cora_sprite`). See [characters.rpy](../../main-game/non-prod-game/game/characters.rpy) and existing `show` lines. |
+| `show cora neutral at left_bust` | `show cora_sprite base_travel at left_bust` (`_sprite` suffix on the image tag) | Agent maps **speaker name → sprite tag** via a registry (`cora` → `cora_sprite`). See [characters.rpy](../../main-game/non-prod-game/game/shared/characters.rpy) and existing `show` lines. |
 | Single-line `show` statements only | Some `show` lines are **block form** with a trailing `:` and an indented ATL block (e.g. [day101_non_canon.rpy:263](../../main-game/non-prod-game/game/days/day101_non_canon.rpy)) | Block-form `show` is treated as **implicitly locked** (never rewritten); only single-line `show` lines are candidates for `[asset auto]` management. |
-| `left_bust4`, `centre_left_bust4`, `centre_right_bust4`, `right_bust4` slots exist | Only `left_bust`, `centre_bust`, `right_bust` are defined in [asset_transforms.rpy](../../main-game/non-prod-game/game/asset_transforms.rpy) | **Prerequisite step:** define the four 4-character transforms (+ the two aliases) before the agent can emit 4-up layouts. |
+| `left_bust4`, `centre_left_bust4`, `centre_right_bust4`, `right_bust4` slots exist | Only `left_bust`, `centre_bust`, `right_bust` are defined in [asset_transforms.rpy](../../main-game/non-prod-game/game/shared/asset_transforms.rpy) | **Prerequisite step:** define the four 4-character transforms (+ the two aliases) before the agent can emit 4-up layouts. |
 | Expression token always present | Many lines omit expression (`show gideon_sprite at right_bust`) | Expression preservation must tolerate a missing expression and fall back to a per-character safe default (§12). |
 
 These are the main open decisions — see [Open decisions](#open-decisions) at the end.
@@ -96,7 +96,7 @@ Algorithm (from §10) implemented as discrete, testable functions:
 6. Overflow: >4 visible → emit `# [asset warning: ...]` and leave layout for manual review (§14).
 
 **Speaker→sprite-tag registry:** **derived from
-[characters.rpy](../../main-game/non-prod-game/game/characters.rpy)**
+[characters.rpy](../../main-game/non-prod-game/game/shared/characters.rpy)**
 at runtime (parse the `define <name> = Character(...)` declarations and the corresponding sprite image
 tags) so `cora` → `cora_sprite`. The policy YAML carries no hardcoded tag map; if a derived tag has no
 declared image, the speaker is skipped with a warning rather than guessed.
@@ -120,7 +120,7 @@ Register it in `docs/contracts/README.md` (new row in the schemas table) and hav
 Add the four 4-character slot transforms and route the two aliases. This is a **non-prod draft** edit
 (the file lives under `non_prod_main-game/prod-game/`), so it is in-domain for `non_prod_code_agent`; the
 matching production change is later carried by `promote-framework`. Target slots (interpolating the
-existing `vp_x` fractions in [asset_transforms.rpy](../../main-game/non-prod-game/game/asset_transforms.rpy)):
+existing `vp_x` fractions in [asset_transforms.rpy](../../main-game/non-prod-game/game/shared/asset_transforms.rpy)):
 
 ```renpy
 transform left_bust4:          # ~vp_x(0.12)

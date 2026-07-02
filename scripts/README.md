@@ -22,6 +22,8 @@ See also: [`docs/architecture/scripts_refactor_map.md`](../docs/architecture/scr
 | `py main-game/pipeline/tools/simulate_balance.py --release release-1-mvp` | Abstract policy/gate simulation and fuzz distribution report. | Chief architect |
 | `py main-game/pipeline/tools/compare_runtime_to_model.py --release release-1-mvp` | Compare JSONL playtest captures to balance_targets matrix. | Chief architect |
 | `py scripts/agent_next_step.py --pipeline <name> --stage <n>` | Print the next agent/rule for a pipeline stage. | Orchestrator |
+| `py scripts/daily_standup.py` | Live validation checks; writes `daily_standup_report.md`. | Daily standup |
+| `py scripts/integration_review.py --report` | Weekly/ad-hoc checklist, backlog, and specialist lens review. | Integration review |
 | `py scripts/resolve_work_item.py --from-standup --next` | Turn a standup work item into the next routed task. | Daily standup / action-from-standup |
 
 ## Categories

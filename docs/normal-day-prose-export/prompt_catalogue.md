@@ -3,9 +3,9 @@
 This catalogue contains flag-agnostic prompt templates for creating, rewriting, and revising (tuning length/spiciness of) dialogue and staging scripts for the real-life (IRL) Savoy Hotel ADV gameplay layer.
 
 To ensure these prompts remain robust as variables or balance traits evolve over time, **all flag names and narrative wiring are decoupled from the prompt text**. The prompts direct the LLM to actively lookup current flag metadata from the companion export files:
-- [system_prompt.md](file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/docs/normal-day-prose-export/system_prompt.md)
-- [style_and_voice_guide.md](file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/docs/normal-day-prose-export/style_and_voice_guide.md)
-- [variables_and_flag_wiring.md](file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/docs/normal-day-prose-export/variables_and_flag_wiring.md)
+- [system_prompt.md](system_prompt.md)
+- [style_and_voice_guide.md](style_and_voice_guide.md)
+- [variables_and_flag_wiring.md](variables_and_flag_wiring.md)
 
 ---
 

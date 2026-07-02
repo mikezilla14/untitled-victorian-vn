@@ -39,6 +39,25 @@ BLOCKING_VERDICTS = frozenset(
 
 DAY_ID_RE = re.compile(r"^day[0-9]{3}$")
 
+BOOK1_CHAPTER_KEYS = frozenset(
+    {
+        "day1_slop_chapter",
+        "day1_chapter",
+        "day2_chapter",
+        "day3_chapter",
+        "day4_triumphant_chapter",
+        "day5_reckoning_chapter",
+    }
+)
+
+BOOK1_LABEL_RE = re.compile(r"^book1_block_[a-z0-9_]+$")
+BOOK1_TARGET_FILE_RE = re.compile(
+    r"^main-game/non-prod-game/game/days/book1_day[0-9]{3}_non_canon\.rpy$"
+)
+BOOK1_ROUTE_BUCKET_RE = re.compile(r"^[a-z][a-z0-9_]*$")
+BOOK1_GENERATION_MODES = frozenset({"multi_branch_code", "single_label", "beat_label"})
+BOOK1_CONTEXT_COMPILERS = frozenset({"non_prod_code_agent", "writers_room", "human"})
+
 
 def _err(path: str, message: str) -> str:
     return f"{path}: {message}"
@@ -242,6 +261,108 @@ def validate_promotion_handoff(data: Any, *, path: str = "promotion") -> list[st
         errors.append(_err(f"{path}.creative_text_preserved", "must be boolean"))
     elif data["creative_text_preserved"] is False:
         errors.append(_err(f"{path}.creative_text_preserved", "must be true for promotion"))
+
+    return errors
+
+
+def validate_book_writing_context(data: Any, *, path: str = "book_writing") -> list[str]:
+    errors: list[str] = []
+    if not isinstance(data, dict):
+        return [_err(path, "must be a JSON object")]
+
+    version = _require_str(data, "contract_version", errors, path)
+    if version and version != CONTRACT_VERSION:
+        errors.append(_err(f"{path}.contract_version", f"must be {CONTRACT_VERSION!r}"))
+
+    kind = _require_str(data, "kind", errors, path)
+    if kind == "book_import_header":
+        return _validate_book_import_header(data, errors, path)
+    if kind != "book_writing_context":
+        errors.append(
+            _err(
+                f"{path}.kind",
+                "must be 'book_writing_context' or 'book_import_header'",
+            )
+        )
+        return errors
+
+    _require_str(data, "release", errors, path)
+    day_id = _require_str(data, "day_id", errors, path)
+    if day_id and not DAY_ID_RE.match(day_id):
+        errors.append(_err(f"{path}.day_id", "must match dayNNN"))
+
+    chapter_key = _require_str(data, "chapter_key", errors, path)
+    if chapter_key and chapter_key not in BOOK1_CHAPTER_KEYS:
+        errors.append(_err(f"{path}.chapter_key", f"must be one of {sorted(BOOK1_CHAPTER_KEYS)}"))
+
+    target_file = _require_str(data, "target_file", errors, path)
+    if target_file and not BOOK1_TARGET_FILE_RE.match(target_file):
+        errors.append(_err(f"{path}.target_file", "must match book1_dayNNN_non_canon.rpy path"))
+
+    _require_str(data, "story_so_far_summary", errors, path)
+
+    route_bucket = data.get("route_bucket")
+    if route_bucket is not None:
+        if not isinstance(route_bucket, str) or not BOOK1_ROUTE_BUCKET_RE.match(route_bucket):
+            errors.append(_err(f"{path}.route_bucket", "must be a lowercase snake_case token"))
+
+    target_label = data.get("target_label")
+    if target_label is not None:
+        if not isinstance(target_label, str) or not BOOK1_LABEL_RE.match(target_label):
+            errors.append(_err(f"{path}.target_label", "must match book1_block_*"))
+
+    approved = data.get("approved_images")
+    if not isinstance(approved, list) or not approved:
+        errors.append(_err(f"{path}.approved_images", "must be a non-empty array"))
+    elif not all(isinstance(item, str) and item.strip() for item in approved):
+        errors.append(_err(f"{path}.approved_images", "must contain non-empty strings"))
+
+    existing = data.get("existing_labels")
+    if existing is not None:
+        if not isinstance(existing, list):
+            errors.append(_err(f"{path}.existing_labels", "must be an array"))
+        else:
+            for i, label in enumerate(existing):
+                if not isinstance(label, str) or not BOOK1_LABEL_RE.match(label):
+                    errors.append(_err(f"{path}.existing_labels[{i}]", "must match book1_block_*"))
+
+    compiled_by = data.get("compiled_by")
+    if compiled_by is not None and compiled_by not in BOOK1_CONTEXT_COMPILERS:
+        errors.append(
+            _err(
+                f"{path}.compiled_by",
+                f"must be one of {sorted(BOOK1_CONTEXT_COMPILERS)}",
+            )
+        )
+
+    return errors
+
+
+def _validate_book_import_header(data: dict, errors: list[str], path: str) -> list[str]:
+    target_file = _require_str(data, "target_file", errors, path)
+    if target_file and not BOOK1_TARGET_FILE_RE.match(target_file):
+        errors.append(_err(f"{path}.target_file", "must match book1_dayNNN_non_canon.rpy path"))
+
+    target_label = _require_str(data, "target_label", errors, path)
+    if target_label and not BOOK1_LABEL_RE.match(target_label):
+        errors.append(_err(f"{path}.target_label", "must match book1_block_*"))
+
+    chapter = _require_str(data, "target_chapter", errors, path)
+    if chapter and chapter not in BOOK1_CHAPTER_KEYS:
+        errors.append(_err(f"{path}.target_chapter", f"must be one of {sorted(BOOK1_CHAPTER_KEYS)}"))
+
+    archetype = _require_str(data, "target_archetype", errors, path)
+    if archetype and not BOOK1_ROUTE_BUCKET_RE.match(archetype):
+        errors.append(_err(f"{path}.target_archetype", "must be a lowercase snake_case token"))
+
+    mode = _require_str(data, "generation_mode", errors, path)
+    if mode and mode not in BOOK1_GENERATION_MODES:
+        errors.append(
+            _err(
+                f"{path}.generation_mode",
+                f"must be one of {sorted(BOOK1_GENERATION_MODES)}",
+            )
+        )
 
     return errors
 

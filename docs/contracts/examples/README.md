@@ -7,5 +7,5 @@ example in the same change and run:
 
 ```powershell
 py scripts/documentation_audit.py --write
-py scripts/contract_validate.py --help
+py scripts/contract_validate.py --file docs/contracts/examples/book_writing_context.example.json
 ```

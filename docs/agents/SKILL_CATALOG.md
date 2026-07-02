@@ -80,6 +80,7 @@ Desk-owned pipelines: **`writer-author`**, **`flag-wiring-only`**.
 | Skill | Agent / doc | Output | Then |
 |-------|-------------|--------|------|
 | [`daily_standup`](../../.agents/skills/daily_standup/SKILL.md) | standup contract | `daily_standup_report.md` | human triage |
+| [`integration_review`](../../.agents/skills/integration_review/SKILL.md) | planning lenses + checklist | `integration_review_report.md` | sprint / promotion planning |
 | [`action_from_standup`](../../.agents/skills/action_from_standup/SKILL.md) | `resolve_work_item.py` | spec from `task_registry.json` | pipeline skill above |
 
 ---
@@ -100,6 +101,7 @@ Desk-owned pipelines: **`writer-author`**, **`flag-wiring-only`**.
 | Gate verdict | `dayrdd_gate_<gate>.md` | `gate_verdict.schema.json` |
 | Narrative change brief | `dayrdd_narrative_change_brief.md` | `narrative_change_brief.schema.json` |
 | Authoring intent (Desk) | `intents/dayrdd_authoring_intent.md` | `authoring_intent.schema.json` |
+| Book1 writing context | optional JSON sidecar | `book_writing_contract.schema.json` |
 | Promotion handoff | PR note | `promotion_handoff.schema.json` |
 | Profile delta | profile report `.md` | `profile_delta.schema.json` |
 | Documentation catalogue | `DOCUMENTATION_CATALOG.md` | `documentation_catalog.schema.json` |

@@ -110,6 +110,7 @@ domains:
       - .agents/**
       - .guardrails.yml
       - scripts/README.md
+      - scripts/**/README.md
       - scripts/agent_next_step.py
       - scripts/documentation_audit.py
       - .github/workflows/**

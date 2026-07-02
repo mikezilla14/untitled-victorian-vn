@@ -2,9 +2,21 @@
 
 This contract defines how Book1 manuscript prose is authored in the non-canon Ren'Py draft.
 
-Machine-readable schema: not defined. Track future executable schema work in
-[../backlog/narrative-json-beat-pipeline.md](../backlog/narrative-json-beat-pipeline.md) if this
-contract becomes executable.
+Machine-readable artifacts:
+
+| Artifact | Purpose |
+|----------|---------|
+| [`book_writing_contract.schema.json`](book_writing_contract.schema.json) | JSON Schema for writer context packets and import-header sidecars |
+| [`book1_chapter_routing.json`](book1_chapter_routing.json) | Route-bucket → `book1_block_*` label map (mirror of `book1.CHAPTER_BLOCKS`) |
+| [`examples/book_writing_context.example.json`](examples/book_writing_context.example.json) | Sample writer context packet |
+
+Validate a context packet or import-header JSON file:
+
+```powershell
+py scripts/contract_validate.py --file docs/contracts/examples/book_writing_context.example.json
+```
+
+Deferred beat-level JSON prose (`docs/backlog/narrative-json-beat-pipeline.md`) remains out of scope for MVP handoffs.
 
 ## 1. Active Authoring Model
 

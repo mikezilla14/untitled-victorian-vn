@@ -27,18 +27,18 @@ Status: `planned`
 ## Source-of-Truth Files
 
 Non-prod files:
-- [narrative_pressure_data.rpy](file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/non-prod-game/game/shared/narrative_pressure_data.rpy)
-- [narrative_pressure_system.rpy](file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/non-prod-game/game/shared/narrative_pressure_system.rpy)
-- [narrative_notification_screen.rpy](file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/non-prod-game/game/shared/narrative_notification_screen.rpy)
-- [journal_screen.rpy](file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/non-prod-game/game/shared/journal_screen.rpy)
-- [hud_screen.rpy](file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/non-prod-game/game/shared/hud_screen.rpy)
+- [narrative_pressure_data.rpy](../../main-game/non-prod-game/game/shared/narrative_pressure_data.rpy)
+- [narrative_pressure_system.rpy](../../main-game/non-prod-game/game/shared/narrative_pressure_system.rpy)
+- [narrative_notification_screen.rpy](../../main-game/non-prod-game/game/shared/narrative_notification_screen.rpy)
+- [journal_screen.rpy](../../main-game/non-prod-game/game/shared/journal_screen.rpy)
+- [hud_screen.rpy](../../main-game/non-prod-game/game/shared/hud_screen.rpy)
 
-Production files (promoted after validation):
-- [narrative_pressure_data.rpy](file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/prod-game/game/narrative_pressure_data.rpy)
-- [narrative_pressure_system.rpy](file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/prod-game/game/narrative_pressure_system.rpy)
-- [narrative_notification_screen.rpy](file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/prod-game/game/narrative_notification_screen.rpy)
-- [journal_screen.rpy](file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/prod-game/game/journal_screen.rpy)
-- [hud_screen.rpy](file:///c:/Users/mikez/OneDrive/Documents/gh/git/untitled-victorian-vn/main-game/prod-game/game/hud_screen.rpy)
+Production files (promoted after validation — not yet in tree):
+- `main-game/prod-game/game/narrative_pressure_data.rpy`
+- `main-game/prod-game/game/narrative_pressure_system.rpy`
+- `main-game/prod-game/game/narrative_notification_screen.rpy`
+- `main-game/prod-game/game/journal_screen.rpy`
+- `main-game/prod-game/game/hud_screen.rpy`
 
 ---
 

@@ -1,0 +1,120 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/untitled-victorian-vn/contracts/book_writing_contract.schema.json",
+  "title": "BookWritingContract",
+  "description": "Machine-readable facets of the Book1 label-based writing engine. Human contract: docs/contracts/book_writing_contract.md. Routing table: book1_chapter_routing.json.",
+  "oneOf": [
+    { "$ref": "#/$defs/BookWritingContext" },
+    { "$ref": "#/$defs/BookImportHeader" }
+  ],
+  "$defs": {
+    "chapter_key": {
+      "type": "string",
+      "enum": [
+        "day1_slop_chapter",
+        "day1_chapter",
+        "day2_chapter",
+        "day3_chapter",
+        "day4_triumphant_chapter",
+        "day5_reckoning_chapter"
+      ]
+    },
+    "route_bucket": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "book1_label": {
+      "type": "string",
+      "pattern": "^book1_block_[a-z0-9_]+$"
+    },
+    "BookWritingContext": {
+      "type": "object",
+      "description": "Writer-facing context packet compiled before Book1 prose work.",
+      "required": [
+        "contract_version",
+        "kind",
+        "release",
+        "day_id",
+        "chapter_key",
+        "target_file",
+        "story_so_far_summary",
+        "approved_images"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": { "type": "string", "const": "1" },
+        "kind": { "type": "string", "const": "book_writing_context" },
+        "release": { "type": "string", "minLength": 1 },
+        "day_id": { "type": "string", "pattern": "^day[0-9]{3}$" },
+        "chapter_key": { "$ref": "#/$defs/chapter_key" },
+        "route_bucket": { "$ref": "#/$defs/route_bucket" },
+        "target_label": { "$ref": "#/$defs/book1_label" },
+        "target_file": {
+          "type": "string",
+          "pattern": "^main-game/non-prod-game/game/days/book1_day[0-9]{3}_non_canon\\.rpy$"
+        },
+        "story_so_far_summary": { "type": "string", "minLength": 1 },
+        "style_lenses": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "available_story_state": {
+          "type": "object",
+          "additionalProperties": {
+            "oneOf": [
+              { "type": "string" },
+              { "type": "boolean" },
+              { "type": "number" }
+            ]
+          }
+        },
+        "available_player_state": {
+          "type": "object",
+          "additionalProperties": { "type": "number" }
+        },
+        "existing_labels": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/book1_label" }
+        },
+        "approved_images": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "compiled_by": {
+          "type": "string",
+          "enum": ["non_prod_code_agent", "writers_room", "human"]
+        }
+      }
+    },
+    "BookImportHeader": {
+      "type": "object",
+      "description": "JSON mirror of the Ren'Py BOOK ENGINE IMPORT HEADER comment block for tooling.",
+      "required": [
+        "contract_version",
+        "kind",
+        "target_file",
+        "target_label",
+        "target_chapter",
+        "target_archetype",
+        "generation_mode"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "contract_version": { "type": "string", "const": "1" },
+        "kind": { "type": "string", "const": "book_import_header" },
+        "target_file": {
+          "type": "string",
+          "pattern": "^main-game/non-prod-game/game/days/book1_day[0-9]{3}_non_canon\\.rpy$"
+        },
+        "target_label": { "$ref": "#/$defs/book1_label" },
+        "target_chapter": { "$ref": "#/$defs/chapter_key" },
+        "target_archetype": { "$ref": "#/$defs/route_bucket" },
+        "style_lens": { "type": "string" },
+        "generation_mode": {
+          "type": "string",
+          "enum": ["multi_branch_code", "single_label", "beat_label"]
+        }
+      }
+    }
+  }
+}

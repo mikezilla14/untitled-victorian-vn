@@ -249,7 +249,7 @@ flowchart TD
   Q17 -->|no| Unclear[Ask human one question]
 ```
 
-**Not pipelines:** Cursor skills such as `daily_standup` and `action_from_standup` resolve backlog items via [`docs/backlog/task_registry.json`](../../docs/backlog/task_registry.json); they chain into the pipelines above when execution starts.
+**Not pipelines:** Cursor skills such as `daily_standup`, `integration_review`, and `action_from_standup` support planning and backlog triage. `daily_standup` runs live validation; `integration_review` covers checklist/backlog/specialist lenses weekly or ad-hoc. `action_from_standup` resolves items via [`docs/backlog/task_registry.json`](../../docs/backlog/task_registry.json); all three chain into the pipelines above when execution starts.
 
 ## Pipelines
 

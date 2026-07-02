@@ -37,4 +37,6 @@ Ad-hoc spice comparisons and throwaway tries: `main-game/pipeline/experiments/` 
 
 Approved prose lives in `main-game/non-prod-game/game/days/dayrdd_non_canon.rpy`. Runtime canon: `main-game/prod-game/game/dayrdd.rpy`.
 
+Balance and graph tooling: [`tools/README.md`](tools/README.md).
+
 See also [`docs/architecture/path_contract.md`](../../docs/architecture/path_contract.md).
